@@ -1,5 +1,7 @@
 # Headgate
 
+**Live: https://headgate-water-rights.netlify.app**
+
 An AI-assisted diligence wizard for buying land with water rights, built around a
 single premise: **most land deals go wrong in the water, not the dirt.**
 
@@ -103,8 +105,27 @@ npm run dev                    # http://localhost:3000
 | --- | --- |
 | `ANTHROPIC_API_KEY` | Enables model-authored plans. Without it, templated prose; the analysis is identical. |
 | `ANTHROPIC_MODEL` | Defaults to `claude-opus-5`. |
-| `PORTFOLIO_PASSPHRASE` | Gates `/portfolio`. Unset leaves the dashboard open. |
-| `DATA_DIR` | JSON store location. Defaults to `.data`. |
+| `PORTFOLIO_PASSPHRASE` | Gates `/portfolio`. **Unset leaves the dashboard and its write API open to anyone.** Always set it on a public deployment. |
+| `DATA_DIR` | JSON store location for the file backend. Defaults to `.data`. Ignored when Netlify Blobs is active. |
+
+## Deployment
+
+Deployed on Netlify. `netlify.toml` pins Node 22 and the Next.js runtime plugin;
+no other configuration is required.
+
+Persistence switches backend automatically. Locally the portfolio writes to a
+JSON file; on Netlify it uses Blobs, which needs no provisioning. Production
+uses the global blob store and every other deploy context gets a deploy-scoped
+one, so a holding added from a preview URL cannot contaminate the live roll-up.
+
+To redeploy from a working copy:
+
+```bash
+npx -y @netlify/mcp@latest --site-id <site-id>
+```
+
+Environment variables are set in the Netlify dashboard under Site
+configuration → Environment variables, and take effect on the next deploy.
 
 ```bash
 npm test        # 30 engine + registry tests
@@ -141,10 +162,12 @@ src/lib/portfolio/           JSON store and goal/runway math
 - **The passphrase gate is a door, not an identity system.** One shared secret,
   hashed into a cookie. Fine for a single operator; replace it before this holds
   anything of value to anyone else.
-- **The JSON store assumes one server process.** Writes are serialized in-process
-  and use write-then-rename, which is safe for a single node and wrong for a
-  horizontally scaled deployment. Swapping in Postgres touches only
-  `src/lib/portfolio/store.ts`.
+- **The JSON file backend assumes one server process.** Writes are serialized
+  in-process and use write-then-rename, which is safe for a single node and
+  wrong for a horizontally scaled one. The Blobs backend has no such limit —
+  it keys one record per holding precisely so concurrent instances cannot
+  clobber each other — but Blobs offers no compare-and-swap, so two
+  simultaneous edits to *the same* holding are still last-write-wins.
 - **The registry is a routing aid, not a legal database.** Statutory periods
   change and basin-level facts vary within a state. Every checklist routes the
   buyer back to the agency of record for confirmation.
