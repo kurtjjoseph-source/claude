@@ -12,6 +12,8 @@ dist/
 next-env.d.ts
 
 .data/
+.data-test/
+.netlify/
 *.log
 npm-debug.log*
 
