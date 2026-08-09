@@ -1,0 +1,231 @@
+@import "tailwindcss";
+
+/*
+  Headgate design tokens.
+
+  The palette is deliberately dry — ink, stone and a single water accent. This
+  is a tool people use to talk themselves out of bad deals, so the visual
+  language stays closer to a survey plat than to a real estate listing.
+*/
+
+@theme {
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-serif: ui-serif, "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  --font-mono: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace;
+
+  --color-ink-50: #f6f7f8;
+  --color-ink-100: #eceef1;
+  --color-ink-200: #d6dae1;
+  --color-ink-300: #b2b9c6;
+  --color-ink-400: #8791a4;
+  --color-ink-500: #667287;
+  --color-ink-600: #505a6d;
+  --color-ink-700: #414959;
+  --color-ink-800: #2b3140;
+  --color-ink-900: #1b202b;
+  --color-ink-950: #10131b;
+
+  --color-water-50: #eef8fa;
+  --color-water-100: #d3eef3;
+  --color-water-200: #a9dde8;
+  --color-water-300: #71c4d7;
+  --color-water-400: #3ea4bd;
+  --color-water-500: #2586a1;
+  --color-water-600: #1e6b87;
+  --color-water-700: #1d576e;
+  --color-water-800: #1e485b;
+  --color-water-900: #1c3d4d;
+
+  --color-sage-400: #7fa07a;
+  --color-sage-600: #4f7150;
+  --color-sage-700: #3e5a41;
+
+  --color-ochre-300: #e8c479;
+  --color-ochre-500: #c9962f;
+  --color-ochre-600: #a67722;
+
+  --color-rust-400: #e08268;
+  --color-rust-500: #cf5f42;
+  --color-rust-600: #b04730;
+  --color-rust-700: #8d3623;
+}
+
+:root {
+  --bg: var(--color-ink-50);
+  --bg-raised: #ffffff;
+  --bg-sunken: var(--color-ink-100);
+  --fg: var(--color-ink-900);
+  --fg-muted: var(--color-ink-500);
+  --fg-subtle: var(--color-ink-400);
+  --line: var(--color-ink-200);
+  --line-strong: var(--color-ink-300);
+  --accent: var(--color-water-600);
+  --accent-fg: #ffffff;
+  --accent-soft: var(--color-water-50);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: var(--color-ink-950);
+    --bg-raised: var(--color-ink-900);
+    --bg-sunken: #0a0d13;
+    --fg: var(--color-ink-100);
+    --fg-muted: var(--color-ink-400);
+    --fg-subtle: var(--color-ink-500);
+    --line: #2a3140;
+    --line-strong: #3a4354;
+    --accent: var(--color-water-400);
+    --accent-fg: var(--color-ink-950);
+    --accent-soft: rgba(62, 164, 189, 0.12);
+  }
+}
+
+* {
+  border-color: var(--line);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* --- Reusable primitives -------------------------------------------------- */
+
+.surface {
+  background: var(--bg-raised);
+  border: 1px solid var(--line);
+  border-radius: 0.75rem;
+}
+
+.hairline {
+  border-bottom: 1px solid var(--line);
+}
+
+.label {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--fg-subtle);
+}
+
+.field {
+  width: 100%;
+  background: var(--bg);
+  border: 1px solid var(--line-strong);
+  border-radius: 0.5rem;
+  padding: 0.55rem 0.7rem;
+  font-size: 0.9375rem;
+  color: var(--fg);
+  transition: border-color 120ms ease, box-shadow 120ms ease;
+}
+
+.field:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.field::placeholder {
+  color: var(--fg-subtle);
+}
+
+select.field {
+  appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, var(--fg-muted) 50%),
+    linear-gradient(135deg, var(--fg-muted) 50%, transparent 50%);
+  background-position: calc(100% - 18px) calc(50% + 2px), calc(100% - 13px) calc(50% + 2px);
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+  padding-right: 2rem;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 0.5rem;
+  padding: 0.6rem 1.1rem;
+  font-size: 0.9375rem;
+  font-weight: 550;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background-color 120ms ease, border-color 120ms ease, opacity 120ms ease;
+}
+
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: var(--accent-fg);
+}
+
+.btn-primary:not(:disabled):hover {
+  filter: brightness(1.08);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--fg);
+  border-color: var(--line-strong);
+}
+
+.btn-ghost:not(:disabled):hover {
+  background: var(--bg-sunken);
+}
+
+/* Choice cards — used throughout the wizard for enum inputs. */
+.choice {
+  display: block;
+  width: 100%;
+  text-align: left;
+  border: 1px solid var(--line-strong);
+  border-radius: 0.625rem;
+  padding: 0.7rem 0.85rem;
+  background: var(--bg);
+  cursor: pointer;
+  transition: border-color 120ms ease, background-color 120ms ease;
+}
+
+.choice:hover {
+  border-color: var(--accent);
+}
+
+.choice[data-selected="true"] {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.prose-tight p {
+  margin-bottom: 0.75rem;
+  line-height: 1.65;
+}
+
+.prose-tight p:last-child {
+  margin-bottom: 0;
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background: #fff;
+    color: #000;
+  }
+  .surface {
+    border-color: #ccc;
+    break-inside: avoid;
+  }
+}
