@@ -1,0 +1,8 @@
+{"data":{"business":"The Freelance Desk","operator":"vom","throttle":"single"},"kind":"init","ts":"2026-08-05T21:29:46Z"}
+{"data":{"classified":"operator","confidence":"explicit","core":["analytics_reporting","booking","checkout_payments","crm","documents_contracts","finance_admin","lead_capture","web_presence"],"org_type":"service_business","overrides":{"added":[],"removed":[]},"platform":"wordpress","platform_source":"engine","wordpress_used":true},"kind":"blueprint","ts":"2026-08-06T01:50:18Z"}
+{"data":{"actor":"VOM","consent":"de23651af840ccdf","target":"vercel"},"kind":"forge_authorized","ts":"2026-08-06T01:50:18Z"}
+{"data":{"archetype":"prelaunch","elapsed":14.38,"fingerprint":"sha256:36d09d9bf42eabc24ea3771b3478fcce","outcome":"launched","run":"20260806-015018","target":"vercel","url":"https://the-freelance-desk-prelaunch-76zulghav.vercel.app"},"kind":"forge_run","ts":"2026-08-06T01:50:33Z"}
+{"data":{"actor":"VOM","consent":"a4c5c0a4f7488016","target":"vercel"},"kind":"forge_authorized","ts":"2026-08-06T06:55:50Z"}
+{"data":{"archetype":"prelaunch","elapsed":14.64,"fingerprint":"sha256:772602d8e017bc2b00ed214130a5ccd2","outcome":"launched","run":"20260806-065550","target":"vercel","url":"https://the-freelance-desk-prelaunch-l53zjqce3.vercel.app"},"kind":"forge_run","ts":"2026-08-06T06:56:05Z"}
+{"data":{"actor":"VOM","consent":"f7e0172e0eea61c8","target":"vercel"},"kind":"forge_authorized","ts":"2026-08-07T07:50:49Z"}
+{"data":{"archetype":"prelaunch","elapsed":14.1,"fingerprint":"sha256:c53c4b64cd59dd1e741cefd8f2385591","outcome":"launched","run":"20260807-075049","target":"vercel","url":"https://the-freelance-desk-prelaunch-eroltlsa5.vercel.app"},"kind":"forge_run","ts":"2026-08-07T07:51:03Z"}

@@ -1,0 +1,50 @@
+# The hosted Platform Factory, as a Render Blueprint.
+#
+# `orchestrator/engine/serve.py` has been runnable for a while and had never run anywhere
+# but a laptop, because the last step was a form in somebody's dashboard. A form is not a
+# deployment procedure — it is a thing to get wrong at 23:00 and not notice. This file is
+# the procedure, in the repository, next to the code it deploys.
+#
+#   Render -> New -> Blueprint -> this repo. Render reads this file and asks only for the
+#   three secrets marked `sync: false`, which are the three things that must never be in
+#   a repository.
+#
+# Two of those secrets are the whole security model:
+#   FACTORY_PASSWORD  the only thing between the internet and a token that can deploy
+#   VERCEL_TOKEN      that token
+# ANTHROPIC_API_KEY is optional: without it the "describe it" box is disabled and the
+# manual form still works, which is the honest failure rather than a broken button.
+#
+# The disk is not optional. A container's own filesystem is wiped on every deploy, so a
+# factory writing businesses outside a mounted disk loses them at the next restart —
+# silently, and only visibly much later.
+
+services:
+  - type: web
+    name: turnkey-factory
+    runtime: python
+    region: frankfurt          # the businesses are Dutch; so is the data
+    plan: starter              # a persistent disk requires a paid instance type
+    rootDir: orchestrator/engine
+    buildCommand: pip install -r requirements.txt
+    startCommand: python3 serve.py
+    autoDeploy: false          # a factory that can publish should not redeploy on a push
+    disk:
+      name: ideas
+      mountPath: /data
+      sizeGB: 1
+    envVars:
+      # --- the three that are asked for at deploy time -------------------
+      - key: FACTORY_PASSWORD
+        sync: false
+      - key: VERCEL_TOKEN
+        sync: false
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      # --- the rest are not secret and belong in the repo ----------------
+      - key: IDEAS_ROOT
+        value: /data/ideas     # must sit on the disk above
+      - key: VERCEL_TEAM_ID
+        value: team_IJCVimnyQpzdln44DdE6KtVy
+      - key: PYTHON_VERSION
+        value: "3.11"

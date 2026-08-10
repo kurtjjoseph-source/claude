@@ -1,0 +1,47 @@
+{
+  "integrations": [
+    {
+      "key": "payments",
+      "provider": "stripe",
+      "purpose": "online giving, one-off and recurring",
+      "mode": "stub",
+      "env_required": [
+        "STRIPE_PUBLISHABLE_KEY",
+        "STRIPE_SECRET_KEY"
+      ],
+      "env_present": [],
+      "note": "the interface is built and labelled; it goes live when the operator supplies the credentials — an agent never holds them"
+    },
+    {
+      "key": "email",
+      "provider": "brevo",
+      "purpose": "newsletter and reply-from-inbox",
+      "mode": "stub",
+      "env_required": [
+        "BREVO_API_KEY",
+        "BREVO_SENDER_EMAIL"
+      ],
+      "env_present": [],
+      "note": "the interface is built and labelled; it goes live when the operator supplies the credentials — an agent never holds them"
+    },
+    {
+      "key": "analytics",
+      "provider": "engage_ai",
+      "purpose": "presence benchmark across 8 channels",
+      "mode": "stub",
+      "env_required": [
+        "ENGAGE_AI_BASE_URL"
+      ],
+      "env_present": [],
+      "note": "the interface is built and labelled; it goes live when the operator supplies the credentials — an agent never holds them"
+    }
+  ],
+  "env_required": [
+    "BREVO_API_KEY",
+    "BREVO_SENDER_EMAIL",
+    "ENGAGE_AI_BASE_URL",
+    "STRIPE_PUBLISHABLE_KEY",
+    "STRIPE_SECRET_KEY"
+  ],
+  "note": "Credentials are the operator's. The builder never holds them; each rail is built and labelled, and goes live when its variables are set."
+}

@@ -1,0 +1,260 @@
+<title>The Business Model — VOM Turnkey Launches</title>
+<style>
+  :root {
+    --paper:#F0F2F1; --card:#FBFCFB; --ink:#1A2430; --ink-soft:#54646F; --line:#D6DCD9;
+    --client:#2F5D7C; --client-soft:#E3ECF1; --client-ink:#FFFFFF;
+    --vom:#A2701A; --vom-soft:#F4ECD8; --vom-ink:#FFFFFF;
+    --warn:#A9531E; --warn-soft:#F6E7DC;
+    --shadow:0 1px 2px rgba(26,36,48,.05), 0 10px 30px rgba(26,36,48,.07);
+  }
+  @media (prefers-color-scheme:dark){:root{
+    --paper:#101619; --card:#18211F; --ink:#E5ECE9; --ink-soft:#93A5A0; --line:#28332F;
+    --client:#7DB2D2; --client-soft:#152B39; --client-ink:#0E1518;
+    --vom:#D8AC55; --vom-soft:#332812; --vom-ink:#1A1206;
+    --warn:#D68A55; --warn-soft:#341F12;
+    --shadow:0 1px 2px rgba(0,0,0,.3), 0 12px 32px rgba(0,0,0,.38);
+  }}
+  :root[data-theme="dark"]{
+    --paper:#101619; --card:#18211F; --ink:#E5ECE9; --ink-soft:#93A5A0; --line:#28332F;
+    --client:#7DB2D2; --client-soft:#152B39; --client-ink:#0E1518;
+    --vom:#D8AC55; --vom-soft:#332812; --vom-ink:#1A1206;
+    --warn:#D68A55; --warn-soft:#341F12;
+    --shadow:0 1px 2px rgba(0,0,0,.3), 0 12px 32px rgba(0,0,0,.38);
+  }
+  :root[data-theme="light"]{
+    --paper:#F0F2F1; --card:#FBFCFB; --ink:#1A2430; --ink-soft:#54646F; --line:#D6DCD9;
+    --client:#2F5D7C; --client-soft:#E3ECF1; --client-ink:#FFFFFF;
+    --vom:#A2701A; --vom-soft:#F4ECD8; --vom-ink:#FFFFFF;
+    --warn:#A9531E; --warn-soft:#F6E7DC;
+    --shadow:0 1px 2px rgba(26,36,48,.05), 0 10px 30px rgba(26,36,48,.07);
+  }
+
+  *{box-sizing:border-box;}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;}}
+  body{margin:0;background:var(--paper);color:var(--ink);
+    font:16px/1.62 "Iowan Old Style","Palatino Linotype",Palatino,Charter,Georgia,serif;}
+  .sans{font-family:"Avenir Next","Segoe UI",-apple-system,system-ui,sans-serif;}
+  .mono{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;font-variant-numeric:tabular-nums;}
+
+  .wrap{max-width:940px;margin:0 auto;padding:44px 22px 96px;display:flex;flex-direction:column;gap:60px;}
+  section{display:flex;flex-direction:column;gap:20px;}
+
+  /* hero */
+  .hero{display:flex;flex-direction:column;gap:20px;}
+  .eyebrow{font-family:ui-monospace,Menlo,monospace;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--vom);font-weight:700;}
+  .hero h1{margin:0;font-size:clamp(34px,6.5vw,58px);line-height:1.02;font-weight:600;letter-spacing:-.01em;text-wrap:balance;max-width:16ch;}
+  .hero .thesis{margin:0;font-size:clamp(17px,2.3vw,20px);color:var(--ink-soft);max-width:60ch;}
+  .key{display:flex;flex-wrap:wrap;gap:10px;margin-top:2px;}
+  .keychip{display:inline-flex;align-items:center;gap:8px;font-family:ui-monospace,Menlo,monospace;font-size:12px;font-weight:600;
+    padding:5px 13px;border-radius:999px;border:1px solid var(--line);background:var(--card);}
+  .sw{width:11px;height:11px;border-radius:3px;flex:none;}
+  .sw.client{background:var(--client);} .sw.vom{background:var(--vom);}
+
+  .sec-head{display:flex;align-items:baseline;gap:14px;border-bottom:2px solid var(--ink);padding-bottom:9px;}
+  .sec-head .n{font-family:ui-monospace,Menlo,monospace;font-size:13px;font-weight:700;color:var(--vom);}
+  .sec-head h2{margin:0;font-size:clamp(23px,3.4vw,30px);font-weight:600;letter-spacing:-.01em;}
+  .lede{margin:0;color:var(--ink-soft);max-width:68ch;font-size:16.5px;}
+
+  /* three layers */
+  .layers{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  @media (max-width:740px){.layers{grid-template-columns:1fr;}}
+  .layer{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:9px;position:relative;overflow:hidden;}
+  .layer .tag{font-family:ui-monospace,Menlo,monospace;font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;font-weight:700;color:var(--vom);}
+  .layer h3{margin:0;font-size:19px;font-weight:600;line-height:1.15;}
+  .layer p{margin:0;font-size:14px;color:var(--ink-soft);line-height:1.55;}
+  .layer .stripe{position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--vom);}
+
+  /* money flow */
+  .flow{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:26px 24px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:22px;}
+  .lane-label{font-family:ui-monospace,Menlo,monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;margin-bottom:2px;}
+  .lane-label.client{color:var(--client);} .lane-label.vom{color:var(--vom);}
+  .lane{display:flex;align-items:stretch;gap:8px;flex-wrap:wrap;}
+  .node{flex:1;min-width:130px;border-radius:10px;padding:13px 15px;display:flex;flex-direction:column;gap:3px;justify-content:center;}
+  .node b{font-family:"Avenir Next",sans-serif;font-size:14.5px;font-weight:600;line-height:1.2;}
+  .node span{font-size:12.5px;line-height:1.4;}
+  .node.client{background:var(--client-soft);border:1px solid var(--client);}
+  .node.client b{color:var(--client);} .node.client span{color:var(--ink-soft);}
+  .node.vom{background:var(--vom-soft);border:1px solid var(--vom);}
+  .node.vom b{color:var(--vom);} .node.vom span{color:var(--ink-soft);}
+  .node.hero-node{background:var(--client);border-color:var(--client);}
+  .node.hero-node b{color:var(--client-ink);font-size:16px;} .node.hero-node span{color:var(--client-ink);opacity:.9;}
+  .arw{align-self:center;font-size:22px;flex:none;color:var(--ink-soft);}
+  .flow-note{font-size:14px;color:var(--ink-soft);border-top:1px dashed var(--line);padding-top:16px;margin:0;max-width:76ch;}
+  .flow-note b{color:var(--ink);}
+
+  /* ownership split */
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  @media (max-width:740px){.split{grid-template-columns:1fr;}}
+  .panel{border-radius:12px;padding:20px 22px;display:flex;flex-direction:column;gap:12px;}
+  .panel.owns{background:var(--client-soft);border:1px solid var(--client);}
+  .panel.att{background:var(--vom-soft);border:1px solid var(--vom);}
+  .panel .ph{font-family:ui-monospace,Menlo,monospace;font-size:11px;letter-spacing:.13em;text-transform:uppercase;font-weight:700;}
+  .panel.owns .ph{color:var(--client);} .panel.att .ph{color:var(--vom);}
+  .panel h3{margin:0;font-size:20px;font-weight:600;line-height:1.15;}
+  .assetlist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;}
+  .assetlist li{display:flex;gap:10px;align-items:baseline;font-size:15px;}
+  .assetlist li::before{content:"";width:8px;height:8px;border-radius:2px;flex:none;transform:translateY(1px);}
+  .panel.owns .assetlist li::before{background:var(--client);}
+  .panel.att .assetlist li::before{background:var(--vom);}
+  .panel .kicker{margin:2px 0 0;font-size:14px;font-weight:600;}
+  .panel.owns .kicker{color:var(--client);} .panel.att .kicker{color:var(--vom);}
+
+  /* tethers */
+  .tethers{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
+  @media (max-width:640px){.tethers{grid-template-columns:1fr;}}
+  .tether{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px;box-shadow:var(--shadow);display:flex;gap:15px;align-items:flex-start;}
+  .tether .num{font-family:ui-monospace,Menlo,monospace;font-size:22px;font-weight:700;color:var(--vom);line-height:1;flex:none;width:34px;}
+  .tether h4{margin:0 0 4px;font-size:16.5px;font-weight:600;}
+  .tether p{margin:0;font-size:13.5px;color:var(--ink-soft);line-height:1.5;}
+
+  /* manifesto */
+  .manifesto{background:var(--ink);color:var(--paper);border-radius:16px;padding:40px 34px;text-align:center;display:flex;flex-direction:column;gap:14px;}
+  .manifesto q, .manifesto .q{font-size:clamp(24px,4.4vw,38px);font-weight:600;line-height:1.14;letter-spacing:-.01em;text-wrap:balance;}
+  .manifesto .q b{color:var(--vom);font-style:normal;}
+  .manifesto .sub{font-size:16px;opacity:.82;max-width:60ch;margin:0 auto;font-family:"Avenir Next",sans-serif;}
+
+  /* risk / defense */
+  .rd{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:stretch;}
+  @media (max-width:740px){.rd{grid-template-columns:1fr;}}
+  .rdbox{border-radius:12px;padding:20px 22px;display:flex;flex-direction:column;gap:8px;}
+  .rdbox.risk{background:var(--warn-soft);border:1px solid var(--warn);}
+  .rdbox.def{background:var(--client-soft);border:1px solid var(--client);}
+  .rdbox .rh{font-family:ui-monospace,Menlo,monospace;font-size:11px;letter-spacing:.13em;text-transform:uppercase;font-weight:700;}
+  .rdbox.risk .rh{color:var(--warn);} .rdbox.def .rh{color:var(--client);}
+  .rdbox p{margin:0;font-size:15px;line-height:1.5;}
+  .rdbox p b{font-weight:600;}
+
+  footer{border-top:1px solid var(--line);padding-top:18px;color:var(--ink-soft);font-size:13px;}
+  footer .mono{font-size:12px;}
+</style>
+
+<div class="wrap">
+
+  <header class="hero">
+    <span class="eyebrow">Vision Outreach Media (VOM) · Internal strategy — operator &amp; partner briefing</span>
+    <h1>The business model, on one page.</h1>
+    <p class="thesis">How launching and running businesses <em>for</em> others becomes a durable, scalable business of its own — one where the client owns everything, and stays anyway.</p>
+    <div class="key">
+      <span class="keychip"><span class="sw client"></span>CLIENT — owns the assets</span>
+      <span class="keychip"><span class="sw vom"></span>VOM — operates &amp; earns</span>
+    </div>
+  </header>
+
+  <!-- 1 · WHAT VOM SELLS -->
+  <section>
+    <div class="sec-head"><span class="n">01</span><h2>What VOM actually sells</h2></div>
+    <p class="lede">Three distinct layers of "business" hide behind the same machine. The launcher is not just internal tooling — it is the product.</p>
+    <div class="layers">
+      <div class="layer"><div class="stripe"></div>
+        <span class="tag">The product</span>
+        <h3>The launcher is what's sold</h3>
+        <p>VOM sells the done-for-you service itself — <em>"we launch and run a turnkey business for you."</em> The €999 assessment and the membership academy are examples of what it produces, not the ceiling.</p>
+      </div>
+      <div class="layer"><div class="stripe"></div>
+        <span class="tag">VOM's own instance</span>
+        <h3>VOM runs operator-run</h3>
+        <p>VOM builds its own site, payments and leads through the same workstreams — but as the platform <em>root</em>, holding the keys. It can never be a tenant of its own platform.</p>
+      </div>
+      <div class="layer"><div class="stripe"></div>
+        <span class="tag">Every client</span>
+        <h3>Clients run on tenancy</h3>
+        <p>Each client business runs on the tenancy model: Stripe Connect, a delegated DNS zone, phone-only approvals. Sovereign assets, VOM-operated.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 · MONEY FLOW -->
+  <section>
+    <div class="sec-head"><span class="n">02</span><h2>Where the money goes</h2></div>
+    <p class="lede">VOM never holds the client's money. The bulk of every sale lands in the client's own bank; VOM earns a thin, recurring slice on top.</p>
+    <div class="flow">
+      <div>
+        <div class="lane-label client">The client's money — straight through</div>
+        <div class="lane">
+          <div class="node client"><b>A member gives / a customer buys</b><span>payment initiated (iDEAL, card)</span></div>
+          <span class="arw">→</span>
+          <div class="node client"><b>Client's Stripe (Connect)</b><span>the connected account is theirs</span></div>
+          <span class="arw">→</span>
+          <div class="node hero-node"><b>Client's own IBAN</b><span>the sale settles to their bank — automatic payout</span></div>
+        </div>
+      </div>
+      <div>
+        <div class="lane-label vom">What VOM earns — thin &amp; recurring</div>
+        <div class="lane">
+          <div class="node vom"><b>Platform fee</b><span>a small % of every transaction, deducted at the platform — grows with the client's success</span></div>
+          <div class="node vom"><b>Monthly retainer</b><span>for operating the business — the recurring back-end, not a one-time launch fee</span></div>
+        </div>
+      </div>
+      <p class="flow-note"><b>The structural point:</b> the fee and the retainer both earn <em>only while the business runs on the platform</em> — so revenue is tied to ongoing operation, not to holding the client captive. The platform fee even improves margin as the client grows, at zero extra operator effort.</p>
+    </div>
+  </section>
+
+  <!-- 3 · OWNERSHIP != ATTACHMENT -->
+  <section>
+    <div class="sec-head"><span class="n">03</span><h2>Ownership ≠ attachment</h2></div>
+    <p class="lede">The apparent paradox — <em>"if the client owns everything, won't they just leave?"</em> — dissolves once you separate the two axes. The client is sovereign over the assets and dependent on VOM for the operation. On purpose.</p>
+    <div class="split">
+      <div class="panel owns">
+        <span class="ph">The client owns — outright</span>
+        <h3>Sovereign over every asset</h3>
+        <ul class="assetlist">
+          <li>Their domain — in their name from day one</li>
+          <li>Their Stripe account &amp; all funds</li>
+          <li>Their content and manuals</li>
+          <li>Their customer &amp; member relationships</li>
+        </ul>
+        <p class="kicker">No hostage lever — by design.</p>
+      </div>
+      <div class="panel att">
+        <span class="ph">Attached by value — not lock-in</span>
+        <h3>Four tethers hold them</h3>
+        <ul class="assetlist">
+          <li>Operational dependency</li>
+          <li>Recurring-revenue model</li>
+          <li>Platform fee per transaction</li>
+          <li>Genuine switching cost</li>
+        </ul>
+        <p class="kicker">Retention through service, never captivity.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 · THE FOUR TETHERS -->
+  <section>
+    <div class="sec-head"><span class="n">04</span><h2>The four tethers</h2></div>
+    <div class="tethers">
+      <div class="tether"><span class="num">1</span><div><h4>Operational dependency</h4><p>A non-technical owner can't run the hosting, DNS, automations, social swarm, follow-ups or monthly optimization themselves. Leaving means the business stops being <em>operated</em>.</p></div></div>
+      <div class="tether"><span class="num">2</span><div><h4>Recurring-revenue model</h4><p>A retainer / membership back-end, not a one-time launch fee. VOM earns by <em>running</em> the business every month — so the relationship is built to continue.</p></div></div>
+      <div class="tether"><span class="num">3</span><div><h4>Platform fee per transaction</h4><p>A cut of every sale, for as long as the business runs on the platform. It needs no captivity, and it grows with the client's own success.</p></div></div>
+      <div class="tether"><span class="num">4</span><div><h4>Genuine switching cost</h4><p>Tuned automations, the running inventory and benchmark history all live on the platform. Migrating out is real effort — and automated operation is cheaper than hiring a human to replace it.</p></div></div>
+    </div>
+  </section>
+
+  <!-- 5 · MANIFESTO -->
+  <section>
+    <div class="manifesto">
+      <div class="q sans">“We launch and run your business — and it is <b>genuinely yours.</b>”</div>
+      <p class="sub">The pitch is sovereignty, not lock-in. For churches and faith organizations especially, trust beats capture — the client's ownership is the selling point, not a cost to VOM.</p>
+    </div>
+  </section>
+
+  <!-- 6 · RISK & DEFENSE -->
+  <section>
+    <div class="sec-head"><span class="n">05</span><h2>The one real risk — and its defense</h2></div>
+    <div class="rd">
+      <div class="rdbox risk">
+        <span class="rh">The risk</span>
+        <p>Clients don't walk because they're trapped — they walk because they stop <b>seeing</b> the value. If VOM operates too invisibly, the owner under-perceives it and considers taking it in-house or hiring cheaper.</p>
+      </div>
+      <div class="rdbox def">
+        <span class="rh">The defense — built in</span>
+        <p><b>Visible recurring value.</b> The monthly Engage AI report and the per-client running inventory exist to be the monthly proof that justifies the retainer. They are retention infrastructure, not just features.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span class="mono">business-model-explainer.html</span> · Internal strategy — not client-facing. Derived from <span class="mono">onboarding-plan.md §0</span>. Vision Outreach Media (VOM), 2026-07-22.
+  </footer>
+
+</div>

@@ -1,0 +1,31 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pip3 show *)",
+      "Bash(brew list *)",
+      "Bash(pip3 install *)",
+      "Bash(/Users/kurtjoseph/Library/Python/3.9/bin/yt-dlp --skip-download --write-auto-sub --write-sub --sub-lang en --sub-format vtt -o \"video\" \"https://www.youtube.com/watch?v=VzhY_-IYwoU\")",
+      "Bash(/Users/kurtjoseph/Library/Python/3.9/bin/yt-dlp --skip-download --write-auto-sub --write-sub --sub-lang en --sub-format vtt --extractor-args \"youtube:player_client=android\" -o \"video\" \"https://www.youtube.com/watch?v=VzhY_-IYwoU\")",
+      "Bash(python3)",
+      "Bash(python3 -c ' *)",
+      "Bash(cat \"/Users/kurtjoseph/Library/Application Support/Claude/local-agent-mode-sessions/skills-plugin/0fc014b4-e0bb-4113-a7e7-3c184e3fd042/c62bb8fd-7e38-4584-8b68-072f6c84f4f4/skills/pptx/pptxgenjs.md\")",
+      "Bash(npm list *)",
+      "Bash(which node; which npm; node -v 2>&1; ls /usr/local/bin | grep -i node; ls /opt/homebrew/bin 2>/dev/null | grep -i node)",
+      "Bash(python3 -c \"import pptx; print\\(pptx.__version__\\)\")",
+      "Bash(python3 -c \"import pptx; print\\('pptx ok', pptx.__version__\\)\")",
+      "Bash(python3 -c \"import PIL; print\\('PIL ok'\\)\")",
+      "Bash(python3 -c \"import matplotlib\")",
+      "Bash(mdfind \"kMDItemKind == 'Application'\")",
+      "Bash(python3 build_deck.py)",
+      "Bash(which extract-text *)",
+      "Bash(python3 -)",
+      "mcp__visualize__read_me",
+      "Bash(ls /System/Library/Fonts/Supplemental/ 2>/dev/null | grep -iE \"arial|helvetica|verdana\" ; ls /System/Library/Fonts/ 2>/dev/null | head -30)",
+      "Bash(python3 build_infographic.py)",
+      "Bash(qlmanage -t -s 1600 -o . \"/Users/kurtjoseph/Downloads/claude/ai strategy/8-claude-ai-side-hustles.pptx\")",
+      "Bash(ls -la ~/Downloads/engage-ai-cloud-api 2>&1 | head -30)",
+      "Bash(python3 -c \"import fastapi\")",
+      "Bash(mkdir -p ~/Downloads/agent-cloud-api/app/db ~/Downloads/agent-cloud-api/app/models ~/Downloads/agent-cloud-api/app/routers ~/Downloads/agent-cloud-api/app/services *)"
+    ]
+  }
+}

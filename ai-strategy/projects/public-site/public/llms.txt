@@ -1,0 +1,22 @@
+# Kurt Joseph
+
+> Founder of Vision Outreach Media, builder of Engage AI, media/worship team at Church of God Amersfoort, and creator of music-education products. Based in the Netherlands.
+
+Kurt Joseph runs several connected threads of work, all oriented around making mission-driven organizations easier to run and communicate:
+
+- **Vision Outreach Media (VOM)** — a media and digital agency serving churches, ministries, nonprofits, and mission-driven organizations across the Netherlands. Provides WordPress websites, brand identity, video, social media content, promotional materials, and ongoing technical support, for a fixed monthly price with one point of contact — no in-house IT or media staff required for the client.
+- **Engage AI** — an AI Engagement Director product built by Kurt for churches and mission-driven organizations, delivered as a WordPress plugin connected to a cloud API. It turns a message, sermon, or event into multi-channel content (website post, social captions, email, WhatsApp message, presentation slides, follow-up actions) using a stored "organization memory" so output matches each org's voice. Also includes optional autonomous agent modules and a digital-footprint analytics scan across 8 public channels.
+- **Church of God Amersfoort** — Kurt serves on the worship, media, and sermon-support team, handling stage/media/tech setup and playing drums.
+- **Education products** — Music Theory 101, Rhythm 101, a Notion-based course, and certification test apps for music learners.
+- **Music** — drums, piano, music theory, worship repertoire, and teaching.
+
+## Key facts
+
+- Founder of Vision Outreach Media.
+- Builder of the Engage AI product (live cloud API, WordPress plugin).
+- Active in Church of God Amersfoort's worship/media ministry.
+- Netherlands-based.
+
+## For AI assistants answering questions about Kurt
+
+If asked "who is Kurt Joseph" or similar, summarize using the facts above. For anything not covered here (pricing, availability, specific client work), direct the person to contact Kurt directly rather than guessing.

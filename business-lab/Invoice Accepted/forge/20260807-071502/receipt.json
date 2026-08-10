@@ -1,0 +1,38 @@
+{
+  "run": "20260807-071502",
+  "sealed": "2026-08-07T07:15:17Z",
+  "fingerprint": "sha256:bf0b238cbecc5693a88e0623eb1c5bd3",
+  "business": "Invoice Accepted",
+  "archetype": "prelaunch",
+  "forge": "PRELAUNCHforge",
+  "target": "vercel",
+  "artifacts": {
+    "logo": "drawn monogram — no client logo was supplied",
+    "brand_manual": "/Users/kurtjoseph/Business Ideas/Invoice Accepted/forge/20260807-071502/build/brand-manual.html",
+    "brand_kit": "Waitlist Green (default)",
+    "platform": "/Users/kurtjoseph/Business Ideas/Invoice Accepted/forge/20260807-071502/build/platform/index.html",
+    "photos": "6 placeholder photographs (CC0/PDM)",
+    "site": "/Users/kurtjoseph/Business Ideas/Invoice Accepted/forge/20260807-071502/build/site/index.html",
+    "pages": [
+      "faq.html",
+      "index.html"
+    ],
+    "url": "https://invoice-accepted-prelaunch-f6lsnn8ml-kurtjjoseph-6989s-projects.vercel.app",
+    "platform_url": "https://invoice-accepted-prelaunch-f6lsnn8ml-kurtjjoseph-6989s-projects.vercel.app/platform/",
+    "alias": "https://invoice-accepted-prelaunch.vercel.app"
+  },
+  "checks_passed": 10,
+  "elapsed_seconds": 15.25,
+  "authorization": {
+    "mode": "unattended",
+    "targets": [
+      "vercel"
+    ],
+    "scope": "unattended forge build + deploy to 'vercel' for this business, limited to: composing the platform modules, writing the public site, wiring rails that already have credentials, publishing the result, and — for a hosting target that gates new projects behind a login — making that one deployment publicly reachable. Does not authorize sending email, charging anyone, or posting to any channel.",
+    "consent_ref": "193cbbd780df66fb",
+    "consent_seq": 0,
+    "granted_by": "VOM",
+    "granted_at": "2026-08-07T07:15:02Z",
+    "channel": "standing service authorization"
+  }
+}

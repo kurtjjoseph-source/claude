@@ -1,0 +1,416 @@
+[
+  {
+    "slug": "hundred",
+    "repo": "vom-hundred",
+    "name": "Hundred",
+    "flagship": false,
+    "accent": "#2f9e63",
+    "accentDark": "#38d07f",
+    "type": "Growth OS · Operators",
+    "alt": "Runway",
+    "positioning": "The operating system for your first $100K month — the map and the machine in one product.",
+    "tagline": "Do the math backwards. Build the month forwards.",
+    "parts": [
+      {
+        "role": "The OS",
+        "desc": "the whole thing in one flow — the map, the five moves, the pipeline, and the upgrade to Turnkey",
+        "name": "Hundred OS",
+        "url": "https://claude.ai/code/artifact/cb7efb35-9ed0-417d-8b8b-f8201749d72d"
+      },
+      {
+        "role": "The Map",
+        "desc": "the five moves, taught visually; orients a new operator",
+        "name": "$100K Blueprint",
+        "url": "https://claude.ai/code/artifact/702717b4-da1a-49f8-a966-cba9a27724b8"
+      },
+      {
+        "role": "The Engine",
+        "desc": "interactive wizard that fills every prompt & asset",
+        "name": "$100K Workflow",
+        "url": "https://claude.ai/code/artifact/dbcf62cd-e198-4da9-b839-30d6a752b171",
+        "gated": true
+      },
+      {
+        "role": "The Pipeline",
+        "desc": "the close-and-track layer — a CRM board plus a \"100 no's a day\" tracker that keeps the $100K math honest",
+        "name": "100-Deal Pipeline",
+        "url": "https://claude.ai/code/artifact/62cb9e6f-14da-458d-a803-e9e4c6bc62e1",
+        "gated": true
+      }
+    ],
+    "who": "Solo operators & small-business owners going 0 → $100K/month.",
+    "promise": "A named, repeatable path to $100K/month — no more guessing what to sell, to whom, or how.",
+    "prices": [
+      {
+        "label": "Self-serve",
+        "value": "€99",
+        "checkout": "https://buy.stripe.com/4gM8wQdq1a2XgFH5sRa7C01"
+      },
+      {
+        "label": "Core",
+        "value": "$1K/mo",
+        "core": true
+      },
+      {
+        "label": "Done-with-you",
+        "value": "$10K/mo"
+      }
+    ],
+    "whyName": "Owns the outcome in one word people already whisper as a goal — the product name and the promise become identical."
+  },
+  {
+    "slug": "turnkey",
+    "repo": "vom-turnkey",
+    "name": "Turnkey",
+    "flagship": true,
+    "accent": "#c47716",
+    "accentDark": "#f0a24b",
+    "type": "Flagship · Launch OS",
+    "alt": "Foundry",
+    "positioning": "VOM's flagship operating system: idea in, launched business out — the factory that manufactures turnkey businesses.",
+    "tagline": "Idea in. Launched business out.",
+    "parts": [
+      {
+        "role": "The Thesis",
+        "desc": "why it works + unit economics",
+        "name": "The Business Model",
+        "url": "https://claude.ai/code/artifact/a59cded3-5ee9-4af3-9dcc-317b94243168"
+      },
+      {
+        "role": "The Intake",
+        "desc": "how a raw idea enters production",
+        "name": "Onboarding System",
+        "url": "https://claude.ai/code/artifact/68462135-6d23-4713-862a-acc9009b766b"
+      },
+      {
+        "role": "The Blueprint",
+        "desc": "reads the org type and decides what the business actually needs built — CRM, finance, product catalog, giving, booking, membership — and whether the site runs on WordPress or a custom app, with the reasoning written down",
+        "name": "Business Function Blueprint"
+      },
+      {
+        "role": "The Cockpit",
+        "desc": "the console you run every launch from — now the gated Launch OS at /os",
+        "name": "Launch Console",
+        "url": "https://claude.ai/code/artifact/eedc93e5-5131-47a0-ba0a-b4c7341166e3"
+      },
+      {
+        "role": "The Engine",
+        "desc": "the /onboard-business orchestrator skill + biz-* subagents that actually execute the pipeline — governance gates, append-only consent log, crash-resumable state, and a deterministic blueprint that scopes every build (registers into .claude)",
+        "name": "Onboarding Orchestrator"
+      },
+      {
+        "role": "The Trust Layer",
+        "desc": "security that lets you sell to serious clients",
+        "name": "Compliance Dashboard",
+        "url": "https://claude.ai/code/artifact/b584fbe6-89af-469d-bce6-07f1c79e3dc6"
+      },
+      {
+        "role": "The First Win",
+        "desc": "a productized delivery that proves value fast",
+        "name": "Presence Sprint",
+        "url": "https://claude.ai/code/artifact/f62dfc28-ae4b-42e9-8583-cdd0786f2dea"
+      },
+      {
+        "role": "The Localization Kit",
+        "desc": "channel setup, NL-market ready",
+        "name": "Kanalen instellen",
+        "url": "https://claude.ai/code/artifact/66448728-5143-49e7-8180-4f1abfe9f5ff"
+      }
+    ],
+    "who": "VOM itself — and partners/operators who license the launch system.",
+    "promise": "A governed pipeline that turns any validated idea into a launched, running business — built to what that kind of organization actually needs.",
+    "prices": [
+      {
+        "label": "Licence",
+        "value": "$2K/mo"
+      },
+      {
+        "label": "Done-for-you",
+        "value": "$10K+",
+        "core": true
+      },
+      {
+        "label": "Equity / rev-share",
+        "value": "deal"
+      }
+    ],
+    "whyName": "Already lives in your language (\"VOM Turnkey Launches\") and states the whole promise — turn one key and it runs. Use Foundry for a more ownable, evocative mark.",
+    "os": {
+      "name": "Turnkey Launch OS",
+      "path": "/os",
+      "desc": "The cockpit you actually work in: every launch you have started, where each one stopped, the gates waiting on you or the client, the consent trail, and each business's blueprint. Pause a launch, close the tab, pick it up next month on another machine.",
+      "note": "Separate from this page on purpose. The explainer is public; the OS is the product — it opens with a licence key and never renders to an unauthenticated request.",
+      "source": "turnkey-os.html",
+      "gate": "turnkey-gate.html",
+      "catalog": "turnkey-catalog.json"
+    }
+  },
+  {
+    "slug": "church-media-academy",
+    "repo": "vom-church-media-academy",
+    "name": "Church Media Academy",
+    "flagship": false,
+    "accent": "#6b56d6",
+    "accentDark": "#a48cf5",
+    "type": "Vertical System · Faith",
+    "alt": "Sanctuary Media",
+    "positioning": "A done-in-90-days system that gives any church a media operation that runs itself.",
+    "tagline": "90 days to a media ministry that runs itself.",
+    "parts": [
+      {
+        "role": "The Front Door",
+        "desc": "a free diagnostic that scores presence & creates urgency",
+        "name": "AI Ministry Assessment",
+        "url": "https://claude.ai/code/artifact/f08718c8-eb05-45ef-a1cf-b16230f4a1f3"
+      },
+      {
+        "role": "The Program",
+        "desc": "the 13-week curriculum the team executes, week by week, with copy-ready SOPs & templates",
+        "name": "90-Day Program",
+        "url": "https://claude.ai/code/artifact/2299de00-0346-43ce-bc93-43bf3274b3d1"
+      },
+      {
+        "role": "The Proof",
+        "desc": "the ROI / business case the decision-maker needs",
+        "name": "Owner's Report",
+        "url": "https://claude.ai/code/artifact/6a01dffe-c14d-4cda-8621-df77a84d9284"
+      }
+    ],
+    "who": "Churches & ministries — pastors and media directors.",
+    "promise": "From ad-hoc volunteers to a repeatable, owned media system in one quarter.",
+    "prices": [
+      {
+        "label": "Assessment",
+        "value": "Free"
+      },
+      {
+        "label": "Cohort",
+        "value": "$1K/mo",
+        "core": true
+      },
+      {
+        "label": "Done-for-you",
+        "value": "$10K"
+      }
+    ],
+    "whyName": "Already carries equity — descriptive, trusted, category-defining. Don't rename what's working; just formalize the funnel → program → proof."
+  },
+  {
+    "slug": "ministry-ai",
+    "repo": "vom-ministry-ai",
+    "name": "Ministry AI",
+    "flagship": false,
+    "accent": "#2f6fb5",
+    "accentDark": "#6ea6e6",
+    "type": "AI Assessment · Faith",
+    "alt": "keep as-is",
+    "positioning": "A productized AI assessment that gives any church back 5–10 hours a week — the tripwire into an ongoing AI Concierge.",
+    "tagline": "Give your ministry back 5–10 hours a week.",
+    "parts": [
+      {
+        "role": "The Front Door",
+        "desc": "a free 2-minute mini-audit that shows one AI tool a church can use this week",
+        "name": "Ministry AI mini-audit"
+      },
+      {
+        "role": "The Assessment",
+        "desc": "a recorded 45-min call → a plain-English plan prescribing 3–7 off-the-shelf AI tools, with a money-back promise",
+        "name": "Ministry AI Assessment",
+        "url": "https://vom-ministry-ai.vercel.app"
+      },
+      {
+        "role": "The Concierge",
+        "desc": "two 45-min working sessions a month + async access, running the audit→optimize→automate loop — the recurring value",
+        "name": "AI Concierge"
+      }
+    ],
+    "who": "Churches & ministries — pastors, admins, and media/comms leads drowning in weekly busywork.",
+    "promise": "A concrete plan and 5–10 hours a week back — then a partner that compounds it, month after month.",
+    "prices": [
+      {
+        "label": "Founding assessment",
+        "value": "€295"
+      },
+      {
+        "label": "AI Concierge",
+        "value": "€350/mo",
+        "core": true
+      },
+      {
+        "label": "Founding church",
+        "value": "Free forever"
+      }
+    ],
+    "whyName": "\"Ministry AI\" says exactly what it is to the church that needs it — the assessment is the door, the concierge is the business."
+  },
+  {
+    "slug": "operators-academy",
+    "repo": "vom-operators-academy",
+    "name": "The Operator's Academy",
+    "flagship": false,
+    "accent": "#2b86bd",
+    "accentDark": "#5fb9e8",
+    "type": "Front Door · Education",
+    "alt": "Leverage School",
+    "positioning": "The learning brand that teaches the leverage behind every VOM system — and feeds all of them.",
+    "tagline": "Learn the leverage before you need it.",
+    "parts": [
+      {
+        "role": "Core Curriculum",
+        "desc": "the flagship interactive study guide",
+        "name": "Automate Your Business With Claude",
+        "url": "https://claude.ai/code/artifact/6703264d-ab93-4266-ae80-d57cc000a7dd"
+      },
+      {
+        "role": "The Leverage Module",
+        "desc": "the four leverage layers, the audit→optimize→automate loop, and cost-tier routing every VOM system runs on",
+        "name": "The Leverage Stack",
+        "url": "https://claude.ai/code/artifact/065494b1-9f23-447d-b7d3-8cb8ba7471c1"
+      },
+      {
+        "role": "Growth Module",
+        "desc": "7 distribution plays that get customers to anything you build — the leverage every system needs; pick two, ship this week",
+        "name": "The Distribution Console",
+        "url": "https://claude.ai/code/artifact/635f9c97-8b53-40b4-ad77-16921c0275b2"
+      },
+      {
+        "role": "The Cohort",
+        "desc": "a community + one lesson drawn from each other brand",
+        "future": true
+      }
+    ],
+    "who": "Aspiring operators — the top of the funnel for the whole house.",
+    "promise": "The mental models & AI workflows that make every other system click.",
+    "prices": [
+      {
+        "label": "Taster",
+        "value": "Free"
+      },
+      {
+        "label": "Course",
+        "value": "$199",
+        "core": true
+      },
+      {
+        "label": "Cohort",
+        "value": "$29/mo"
+      }
+    ],
+    "whyName": "A lone study guide has no gravity. Reframed as an Academy it becomes the cheap, high-trust front door — an email list and a next step into every paid system."
+  },
+  {
+    "slug": "launch-kits",
+    "repo": "vom-launch-kits",
+    "name": "Launch Kits",
+    "flagship": false,
+    "accent": "#d1522f",
+    "accentDark": "#f2765c",
+    "type": "Vertical Kits · Productized",
+    "alt": "Playbooks",
+    "positioning": "Pre-built, vertical launch systems — Turnkey packaged for one specific business you can start this week.",
+    "tagline": "Pick your vertical. Launch this week.",
+    "parts": [
+      {
+        "role": "Book Kit",
+        "desc": "publish & launch a Kindle book, end to end",
+        "name": "KDP Ebook Launch Wizard",
+        "url": "https://claude.ai/code/artifact/554c1990-0786-47ec-b7ad-a385fd7ee553",
+        "gated": true
+      },
+      {
+        "role": "Course Kit",
+        "desc": "launch & sell an online course, end to end",
+        "name": "Course Launch Kit",
+        "url": "https://claude.ai/code/artifact/d63c831f-28bb-4a8d-b676-1132c1880eac",
+        "gated": true
+      },
+      {
+        "role": "Newsletter Kit",
+        "desc": "launch & grow a paid newsletter, end to end",
+        "name": "Newsletter Launch Kit",
+        "url": "https://claude.ai/code/artifact/5c713e17-c3ff-4025-9203-b48d6e24fd7d",
+        "gated": true
+      },
+      {
+        "role": "Club Kit",
+        "desc": "run a recurring membership club, end to end",
+        "name": "Membership Club Ops Wizard",
+        "url": "https://claude.ai/code/artifact/d89993c2-74f5-493c-9a8c-edfadb92738c",
+        "gated": true
+      },
+      {
+        "role": "More Kits",
+        "desc": "each a vertical instance of Turnkey — the shelf grows",
+        "future": true
+      }
+    ],
+    "who": "Operators who want a ready-made lane, not a blank canvas.",
+    "promise": "A specific business, pre-assembled — skip the strategy, run the wizard.",
+    "prices": [
+      {
+        "label": "Single kit",
+        "value": "€99"
+      },
+      {
+        "label": "Bundle · all kits",
+        "value": "€199",
+        "core": true,
+        "checkout": "https://buy.stripe.com/7sY14o0Df6QL61308xa7C02"
+      },
+      {
+        "label": "Pro",
+        "value": "€499"
+      }
+    ],
+    "whyName": "\"Kits\" frames a grab-bag of wizards as complete, buildable products on a shelf — and creates a naming pattern (Book Kit, Club Kit, Course Kit) so every future wizard has a home."
+  },
+  {
+    "slug": "vital",
+    "repo": "vom-vital",
+    "name": "vital.",
+    "flagship": false,
+    "accent": "#0f9f8f",
+    "accentDark": "#3fd0c0",
+    "type": "Consumer Spin-off · Wellness",
+    "alt": "keep as-is",
+    "positioning": "A consumer health OS: learn, build and track holistic recovery across the six systems of the body.",
+    "tagline": "Learn it. Build it. Track it.",
+    "parts": [
+      {
+        "role": "App + Academy",
+        "desc": "already one coherent product",
+        "name": "vital. training site & companion",
+        "url": "https://claude.ai/code/artifact/c0df87f8-e618-4a50-8d1b-f7317977a396"
+      },
+      {
+        "role": "Track it",
+        "desc": "the working tracker — a local profile, the six systems as daily protocols, streaks, and a vitality score that builds over time",
+        "name": "vital. Tracker",
+        "url": "https://claude.ai/code/artifact/eb9e85cc-65ce-4b05-8961-aca0dd5a652f"
+      },
+      {
+        "role": "The Science Spine",
+        "desc": "the credibility the whole product rests on",
+        "name": "6-body-systems research trilogy"
+      }
+    ],
+    "who": "Consumers pursuing holistic recovery — a different audience from the operator house.",
+    "promise": "A structured, science-backed path to rebuild your health, system by system.",
+    "prices": [
+      {
+        "label": "Free",
+        "value": "Trial"
+      },
+      {
+        "label": "Plus",
+        "value": "$9/mo"
+      },
+      {
+        "label": "Full",
+        "value": "$29/mo",
+        "core": true
+      }
+    ],
+    "whyName": "Already a short, ownable, lowercase consumer mark with a strong feeling. Keep it — just name it explicitly as the house's consumer arm so it never gets diluted by B2B messaging."
+  }
+]

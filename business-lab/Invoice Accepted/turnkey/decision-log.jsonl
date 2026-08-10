@@ -1,0 +1,4 @@
+{"data":{"business":"Invoice Accepted","operator":"vom","throttle":"single"},"kind":"init","ts":"2026-08-07T07:14:49Z"}
+{"data":{"classified":"operator","confidence":"explicit","core":["analytics_reporting","booking","checkout_payments","crm","documents_contracts","finance_admin","lead_capture","web_presence"],"org_type":"service_business","overrides":{"added":[],"removed":[]},"platform":"wordpress","platform_source":"engine","wordpress_used":true},"kind":"blueprint","ts":"2026-08-07T07:15:02Z"}
+{"data":{"actor":"VOM","consent":"193cbbd780df66fb","target":"vercel"},"kind":"forge_authorized","ts":"2026-08-07T07:15:02Z"}
+{"data":{"archetype":"prelaunch","elapsed":15.25,"fingerprint":"sha256:bf0b238cbecc5693a88e0623eb1c5bd3","outcome":"launched","run":"20260807-071502","target":"vercel","url":"https://invoice-accepted-prelaunch-f6lsnn8ml-kurtjjoseph-6989s-projects.vercel.app"},"kind":"forge_run","ts":"2026-08-07T07:15:17Z"}

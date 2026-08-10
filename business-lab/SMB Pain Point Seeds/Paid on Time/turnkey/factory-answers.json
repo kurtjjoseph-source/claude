@@ -1,0 +1,16 @@
+{
+  "name": "Paid on Time",
+  "who": "Owner-run service businesses invoicing other businesses — installers, agencies, consultants, contractors — with more than €5,000 sitting unpaid past 30 days.",
+  "problem": "\"There's money out there I've already earned. Chasing it makes me feel like a debt collector with my own customers, so I put it off, and then it's ninety days.\"",
+  "solution": "We take over the chasing. Every invoice gets a polite, systematic sequence of email and SMS reminders with a payment link in each one, escalating on a schedule the owner approves. Once a month they get a one-page cash position: what came in, what is late, what needs a phone call.",
+  "promise": "There is money you have already earned sitting in invoices you hate chasing. We chase every overdue invoice for you, politely and on schedule, so it arrives without you having to ask for it.",
+  "gets": "A reminder sequence per invoice — email and SMS, with a one-tap payment link\nAn escalation ladder you approve once, then never have to think about\nA monthly one-page cash position: paid, late, and who needs a call",
+  "price": 125,
+  "target": 3000,
+  "city": "Amersfoort",
+  "positioning": "Invoicing software already has reminders and almost nobody configures them. This is the configuration and the follow-through, done by someone who is not the owner and does not feel awkward about it.",
+  "voice": "Calm and businesslike. Money words used plainly — overdue, paid, outstanding — and never an apology for asking.",
+  "channels": "Bookkeepers and accountants as referrers, Exact/Moneybird/e-Boekhouden user communities, LinkedIn to owner-operators",
+  "org_type": "service_business",
+  "email": "info@visionoutreachmedia.nl"
+}

@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 -c \"import youtube_transcript_api; print\\('has yta'\\)\")",
+      "Bash(pip3 install *)",
+      "Bash(python3 -m http.server 8788)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:8788/compliance-dashboard.html)",
+      "Read(//Users/kurtjoseph/Downloads/engage-ai-cloud-api/**)",
+      "Bash(sqlite3 engage_ai.db \".tables\")",
+      "Bash(sqlite3 engage_ai.db \".schema analytics_snapshots\")",
+      "Bash(sqlite3 engage_ai.db \"select organization_id, count\\(*\\), min\\(created_at\\), max\\(created_at\\) from analytics_snapshots group by organization_id;\")",
+      "Bash(sed -E 's/\\(KEY|SECRET|TOKEN|PASSWORD\\)=.*/\\\\1=<redacted>/I' .env)",
+      "Bash(python3 -c \"import json; d=json.load\\(open\\('artifacts.json'\\)\\); print\\(len\\(d\\), 'entries OK'\\)\")"
+    ]
+  }
+}

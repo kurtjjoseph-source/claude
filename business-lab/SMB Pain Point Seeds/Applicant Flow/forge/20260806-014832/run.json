@@ -1,0 +1,233 @@
+{
+  "schema": 1,
+  "run": "20260806-014832",
+  "outcome": "launched",
+  "started": "2026-08-06T01:48:32Z",
+  "elapsed": 14.33,
+  "business": "Applicant Flow",
+  "archetype": {
+    "id": "prelaunch",
+    "label": "Prelaunch validation funnel",
+    "curated": true,
+    "forge": {
+      "name": "PRELAUNCHforge",
+      "scheme": "dark",
+      "base": "#0A0A0B",
+      "base_soft": "#141416",
+      "accent": "#38D07F",
+      "accent_2": "#7BE3AC",
+      "accent_site": "#2f9e63",
+      "on_accent": "#0A0A0B",
+      "line": "Building a validation funnel."
+    }
+  },
+  "target": "vercel",
+  "fingerprint": "sha256:fc005e35ffa4f0a81ed2611845f2eac5",
+  "progress": {
+    "done": 11,
+    "total": 11
+  },
+  "stages": [
+    {
+      "id": "resolve",
+      "title": "Read the spec",
+      "cue": "◇",
+      "detail": "load the blueprint, verify the fingerprint, refuse if anything is unresolved",
+      "state": "ok",
+      "started": 0.001,
+      "ended": 0.003,
+      "ms": 2,
+      "note": "",
+      "optional": false
+    },
+    {
+      "id": "scaffold",
+      "title": "Lay out the build",
+      "cue": "▢",
+      "detail": "create the output tree this run writes into",
+      "state": "ok",
+      "started": 0.005,
+      "ended": 0.011,
+      "ms": 5,
+      "note": "",
+      "optional": false
+    },
+    {
+      "id": "brand",
+      "title": "Apply the brand · Waitlist Green",
+      "cue": "◐",
+      "detail": "grotesk type on a light ground, accent #278453, logo embedded, and the manual written for the owner",
+      "state": "ok",
+      "started": 0.012,
+      "ended": 0.016,
+      "ms": 4,
+      "note": "",
+      "optional": false
+    },
+    {
+      "id": "platform",
+      "title": "Build the platform · 5 modules",
+      "cue": "▣",
+      "detail": "the operating app the owner works in, seeded so it opens with something in it",
+      "state": "ok",
+      "started": 0.017,
+      "ended": 0.023,
+      "ms": 5,
+      "note": "",
+      "optional": false
+    },
+    {
+      "id": "site",
+      "title": "Write the site · 2 pages",
+      "cue": "▤",
+      "detail": "the public pages, in this archetype's voice",
+      "state": "ok",
+      "started": 0.026,
+      "ended": 0.038,
+      "ms": 12,
+      "note": "",
+      "optional": false
+    },
+    {
+      "id": "wire",
+      "title": "Wire the rails",
+      "cue": "◈",
+      "detail": "payments, email and analytics — live where credentials exist, labelled where not",
+      "state": "ok",
+      "started": 0.042,
+      "ended": 0.046,
+      "ms": 3,
+      "note": "",
+      "optional": false
+    },
+    {
+      "id": "package",
+      "title": "Package",
+      "cue": "▥",
+      "detail": "manifest, readme, deployment config",
+      "state": "ok",
+      "started": 0.047,
+      "ended": 0.062,
+      "ms": 15,
+      "note": "",
+      "optional": false
+    },
+    {
+      "id": "verify",
+      "title": "Check the work",
+      "cue": "◎",
+      "detail": "run every check in the spec against what was actually written",
+      "state": "ok",
+      "started": 0.064,
+      "ended": 0.07,
+      "ms": 6,
+      "note": "",
+      "optional": false
+    },
+    {
+      "id": "deploy",
+      "title": "Deploy · vercel",
+      "cue": "▲",
+      "detail": "a Vercel deployment — a public URL",
+      "state": "ok",
+      "started": 0.072,
+      "ended": 13.56,
+      "ms": 13488,
+      "note": "",
+      "optional": false
+    },
+    {
+      "id": "smoke",
+      "title": "Prove it is up",
+      "cue": "◉",
+      "detail": "fetch what was deployed and confirm it answers",
+      "state": "ok",
+      "started": 13.562,
+      "ended": 14.318,
+      "ms": 756,
+      "note": "",
+      "optional": false
+    },
+    {
+      "id": "seal",
+      "title": "Seal the run",
+      "cue": "●",
+      "detail": "record the fingerprint, artifacts and outcome",
+      "state": "ok",
+      "started": 14.32,
+      "ended": 14.323,
+      "ms": 3,
+      "note": "",
+      "optional": false
+    }
+  ],
+  "artifacts": {
+    "logo": "drawn monogram — no client logo was supplied",
+    "brand_manual": "/Users/kurtjoseph/Business Ideas/SMB Pain Point Seeds/Applicant Flow/forge/20260806-014832/build/brand-manual.html",
+    "brand_kit": "Waitlist Green (default)",
+    "platform": "/Users/kurtjoseph/Business Ideas/SMB Pain Point Seeds/Applicant Flow/forge/20260806-014832/build/platform/index.html",
+    "photos": "6 placeholder photographs (CC0/PDM)",
+    "site": "/Users/kurtjoseph/Business Ideas/SMB Pain Point Seeds/Applicant Flow/forge/20260806-014832/build/site/index.html",
+    "pages": [
+      "faq.html",
+      "index.html"
+    ],
+    "url": "https://applicant-flow-prelaunch-rlvj6e1xr-kurtjjoseph-6989s-projects.vercel.app",
+    "platform_url": "https://applicant-flow-prelaunch-rlvj6e1xr-kurtjjoseph-6989s-projects.vercel.app/platform/",
+    "alias": "https://applicant-flow-prelaunch.vercel.app",
+    "receipt": "/Users/kurtjoseph/Business Ideas/SMB Pain Point Seeds/Applicant Flow/forge/20260806-014832/receipt.json"
+  },
+  "checks": [
+    {
+      "id": "spec_fingerprint",
+      "ok": true,
+      "detail": "spec fingerprint matches its contents"
+    },
+    {
+      "id": "no_placeholders",
+      "ok": true,
+      "detail": "no unresolved token reached a page"
+    },
+    {
+      "id": "pages_written",
+      "ok": true,
+      "detail": "2/2 present and non-trivial"
+    },
+    {
+      "id": "platform_written",
+      "ok": true,
+      "detail": "2/2 present and non-trivial"
+    },
+    {
+      "id": "nav_resolves",
+      "ok": true,
+      "detail": "every nav link points at a written page"
+    },
+    {
+      "id": "module_titles_unique",
+      "ok": true,
+      "detail": "every module has its own name"
+    },
+    {
+      "id": "brand_kit_applied",
+      "ok": true,
+      "detail": "Waitlist Green — #278453 is in the stylesheet"
+    },
+    {
+      "id": "waitlist_present",
+      "ok": true,
+      "detail": "module 'lead_capture'"
+    },
+    {
+      "id": "ask_on_first_screen",
+      "ok": true,
+      "detail": "The ask is reachable without leaving the first page."
+    },
+    {
+      "id": "no_payment_rail",
+      "ok": true,
+      "detail": "module 'crm'"
+    }
+  ],
+  "dir": "/Users/kurtjoseph/Business Ideas/SMB Pain Point Seeds/Applicant Flow/forge/20260806-014832"
+}

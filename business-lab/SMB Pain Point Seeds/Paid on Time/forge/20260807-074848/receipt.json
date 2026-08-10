@@ -1,0 +1,38 @@
+{
+  "run": "20260807-074848",
+  "sealed": "2026-08-07T07:49:03Z",
+  "fingerprint": "sha256:2d046e8b01e96e5738d94ee6c63d45e0",
+  "business": "Paid on Time",
+  "archetype": "prelaunch",
+  "forge": "PRELAUNCHforge",
+  "target": "vercel",
+  "artifacts": {
+    "logo": "drawn monogram — no client logo was supplied",
+    "brand_manual": "/Users/kurtjoseph/Business Ideas/SMB Pain Point Seeds/Paid on Time/forge/20260807-074848/build/brand-manual.html",
+    "brand_kit": "Waitlist Green (default)",
+    "platform": "/Users/kurtjoseph/Business Ideas/SMB Pain Point Seeds/Paid on Time/forge/20260807-074848/build/platform/index.html",
+    "photos": "6 placeholder photographs (CC0/PDM)",
+    "site": "/Users/kurtjoseph/Business Ideas/SMB Pain Point Seeds/Paid on Time/forge/20260807-074848/build/site/index.html",
+    "pages": [
+      "faq.html",
+      "index.html"
+    ],
+    "url": "https://paid-on-time-prelaunch-nz6qcll3r-kurtjjoseph-6989s-projects.vercel.app",
+    "platform_url": "https://paid-on-time-prelaunch-nz6qcll3r-kurtjjoseph-6989s-projects.vercel.app/platform/",
+    "alias": "https://paid-on-time-prelaunch.vercel.app"
+  },
+  "checks_passed": 10,
+  "elapsed_seconds": 14.96,
+  "authorization": {
+    "mode": "unattended",
+    "targets": [
+      "vercel"
+    ],
+    "scope": "unattended forge build + deploy to 'vercel' for this business, limited to: composing the platform modules, writing the public site, wiring rails that already have credentials, publishing the result, and — for a hosting target that gates new projects behind a login — making that one deployment publicly reachable. Does not authorize sending email, charging anyone, or posting to any channel.",
+    "consent_ref": "eba7fd0b8d6f8c68",
+    "consent_seq": 2,
+    "granted_by": "VOM",
+    "granted_at": "2026-08-07T07:48:48Z",
+    "channel": "standing service authorization"
+  }
+}

@@ -1,0 +1,544 @@
+<title>Business Onboarding System — Visual Overview</title>
+<style>
+  :root {
+    --paper: #F4F6F8;
+    --card: #FFFFFF;
+    --ink: #1C2733;
+    --ink-soft: #596B7D;
+    --line: #D8DFE6;
+    --accent: #2E5AA4;
+    --accent-soft: #E7EDF7;
+    --ok: #2E7D4F;      --ok-soft: #E2EFE7;
+    --warn: #B45309;    --warn-soft: #F7ECDA;
+    --stop: #B3372E;    --stop-soft: #F7E3E1;
+    --dim: #8A97A3;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #0F161E; --card: #17212C; --ink: #E4EBF2; --ink-soft: #97A7B6;
+      --line: #2A3746; --accent: #82A9E6; --accent-soft: #1D2B40;
+      --ok: #6DBA8C; --ok-soft: #17301F; --warn: #D99A4E; --warn-soft: #33270F;
+      --stop: #D97C72; --stop-soft: #3A1B17; --dim: #647383;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #0F161E; --card: #17212C; --ink: #E4EBF2; --ink-soft: #97A7B6;
+    --line: #2A3746; --accent: #82A9E6; --accent-soft: #1D2B40;
+    --ok: #6DBA8C; --ok-soft: #17301F; --warn: #D99A4E; --warn-soft: #33270F;
+    --stop: #D97C72; --stop-soft: #3A1B17; --dim: #647383;
+  }
+  :root[data-theme="light"] {
+    --paper: #F4F6F8; --card: #FFFFFF; --ink: #1C2733; --ink-soft: #596B7D;
+    --line: #D8DFE6; --accent: #2E5AA4; --accent-soft: #E7EDF7;
+    --ok: #2E7D4F; --ok-soft: #E2EFE7; --warn: #B45309; --warn-soft: #F7ECDA;
+    --stop: #B3372E; --stop-soft: #F7E3E1; --dim: #8A97A3;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--paper); color: var(--ink);
+    font: 15.5px/1.6 "Avenir Next", Seravek, "Segoe UI", -apple-system, sans-serif;
+  }
+  .mono, .num, td.min, .tier { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-variant-numeric: tabular-nums; }
+
+  .shell { max-width: 980px; margin: 0 auto; padding: 40px 20px 90px; display: flex; flex-direction: column; gap: 48px; }
+
+  /* ---------- hero ---------- */
+  header.hero { display: flex; flex-direction: column; gap: 18px; border-bottom: 2px solid var(--ink); padding-bottom: 28px; }
+  .hero .eyebrow { font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
+  .hero h1 { margin: 0; font-size: clamp(28px, 5vw, 42px); font-weight: 600; line-height: 1.12; text-wrap: balance; max-width: 22ch; }
+  .hero p.lede { margin: 0; color: var(--ink-soft); max-width: 62ch; }
+  .statrow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  @media (max-width: 720px) { .statrow { grid-template-columns: 1fr 1fr; } }
+  .stat { background: var(--card); border: 1px solid var(--line); border-radius: 6px; padding: 14px 16px; }
+  .stat .v { font-size: 26px; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .stat .k { font-size: 11.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-soft); font-weight: 600; margin-top: 2px; }
+
+  /* ---------- sections ---------- */
+  section { display: flex; flex-direction: column; gap: 16px; }
+  .sec-head { display: flex; align-items: baseline; gap: 12px; border-bottom: 1px solid var(--line); padding-bottom: 8px; }
+  .sec-head .idx { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 13px; color: var(--accent); font-weight: 700; }
+  .sec-head h2 { margin: 0; font-size: 21px; font-weight: 600; }
+  .sec-note { color: var(--ink-soft); max-width: 68ch; margin: 0; }
+
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 6px; padding: 18px 20px; }
+  .scroll { overflow-x: auto; }
+  pre.mermaid { background: var(--card); border: 1px solid var(--line); border-radius: 6px; padding: 14px; overflow-x: auto; margin: 0; }
+
+  /* ---------- legend / pills ---------- */
+  .legend { display: flex; flex-wrap: wrap; gap: 10px; }
+  .pill {
+    display: inline-flex; align-items: center; gap: 7px; font-size: 12.5px; font-weight: 600;
+    padding: 4px 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--card);
+  }
+  .dot { width: 9px; height: 9px; border-radius: 50%; flex: none; }
+  .dot.ok { background: var(--ok); } .dot.warn { background: var(--warn); } .dot.stop { background: var(--stop); }
+  .badge { display: inline-block; font-size: 11.5px; font-weight: 700; padding: 2px 9px; border-radius: 999px; white-space: nowrap; }
+  .badge.ok { background: var(--ok-soft); color: var(--ok); }
+  .badge.warn { background: var(--warn-soft); color: var(--warn); }
+  .badge.stop { background: var(--stop-soft); color: var(--stop); }
+  .badge.dim { background: var(--paper); color: var(--dim); border: 1px solid var(--line); }
+
+  /* ---------- tables ---------- */
+  table { border-collapse: collapse; width: 100%; font-size: 13.5px; }
+  th, td { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { font-size: 11.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-soft); white-space: nowrap; }
+  tr.done td { color: var(--dim); }
+  tr.done td:first-child { text-decoration: none; }
+  td.min { white-space: nowrap; color: var(--ink-soft); font-size: 12.5px; }
+
+  /* ---------- donut ---------- */
+  .donut-wrap { display: flex; gap: 26px; align-items: center; flex-wrap: wrap; }
+  .donut-wrap figcaption { color: var(--ink-soft); font-size: 13.5px; max-width: 46ch; }
+  figure { margin: 0; }
+
+  /* ---------- payment cards ---------- */
+  .cardrow { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  @media (max-width: 760px) { .cardrow { grid-template-columns: 1fr; } }
+  .pay { position: relative; background: var(--card); border: 1px solid var(--line); border-radius: 6px; padding: 16px 18px; display: flex; flex-direction: column; gap: 8px; }
+  .pay h3 { margin: 0; font-size: 16px; }
+  .pay .ribbon { position: absolute; top: 12px; right: 12px; }
+  .pay ul { margin: 0; padding-left: 18px; color: var(--ink-soft); font-size: 13.5px; display: flex; flex-direction: column; gap: 4px; }
+  .pay .fit { margin-top: auto; font-size: 12.5px; font-weight: 600; color: var(--accent); }
+
+  /* ---------- hosting matrix ---------- */
+  .cell-yes { color: var(--ok); font-weight: 700; }
+  .cell-maybe { color: var(--ink-soft); }
+  .cell-no { color: var(--dim); }
+  .callout {
+    border: 1px solid var(--stop); border-left-width: 4px; border-radius: 6px;
+    background: var(--stop-soft); padding: 14px 18px; font-size: 14px;
+  }
+  .callout strong { color: var(--stop); }
+  .callout.note { border-color: var(--accent); background: var(--accent-soft); }
+  .callout.note strong { color: var(--accent); }
+  .callout.note ol { margin: 8px 0 0; padding-left: 20px; display: flex; flex-direction: column; gap: 4px; }
+
+  /* ---------- roles ---------- */
+  .roles { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+  @media (max-width: 860px) { .roles { grid-template-columns: repeat(2, 1fr); } }
+  .role { background: var(--card); border: 1px solid var(--line); border-radius: 6px; padding: 14px; display: flex; flex-direction: column; gap: 6px; }
+  .role h4 { margin: 0; font-size: 14.5px; }
+  .role p { margin: 0; font-size: 12.5px; color: var(--ink-soft); }
+  .tier { font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: 2px 8px; border-radius: 4px; align-self: flex-start; }
+  .tier.hi { background: var(--accent-soft); color: var(--accent); }
+  .tier.mid { background: var(--warn-soft); color: var(--warn); }
+  .tier.lo { background: var(--paper); color: var(--ink-soft); border: 1px solid var(--line); }
+
+  /* ---------- score strip ---------- */
+  .scores { display: flex; flex-direction: column; gap: 8px; }
+  .scorebar { display: grid; grid-template-columns: 130px 1fr 44px; gap: 12px; align-items: center; font-size: 13px; }
+  .scorebar .track { height: 10px; background: var(--paper); border: 1px solid var(--line); border-radius: 5px; overflow: hidden; }
+  .scorebar .fill { height: 100%; width: 0%; background: var(--accent); border-radius: 5px; }
+  .scorebar .val { text-align: right; color: var(--dim); font-family: ui-monospace, Menlo, monospace; }
+
+  /* ---------- exit criteria ---------- */
+  ul.exit { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 9px; }
+  ul.exit li { display: flex; gap: 11px; align-items: flex-start; font-size: 14.5px; }
+  ul.exit .box { width: 16px; height: 16px; flex: none; margin-top: 3px; border: 1.5px solid var(--ink-soft); border-radius: 3px; }
+
+  footer { border-top: 1px solid var(--line); padding-top: 18px; color: var(--ink-soft); font-size: 13px; }
+  footer code { font-size: 12px; background: var(--card); border: 1px solid var(--line); border-radius: 4px; padding: 1px 6px; }
+  a { color: var(--accent); }
+</style>
+
+<div class="shell">
+
+  <header class="hero">
+    <span class="eyebrow">Business Onboarding System · Vision Outreach Media · v2.1 — 2026-07-20 · now with gate minimization</span>
+    <h1>From idea to a running business, agent-executed</h1>
+    <p class="lede">Thirteen workstreams in four layers take any idea folder to production — deployed, taking payments, generating leads, operating. Agents do the work end-to-end; the platform-tenancy model (§05) shrinks a non-technical client's involvement to a handful of WhatsApp taps, and Vision Outreach Media (VOM) clears only the gates no agent may touch: accounts, KYC, credentials, money.</p>
+    <div class="statrow">
+      <div class="stat"><div class="v">13</div><div class="k">Workstreams</div></div>
+      <div class="stat"><div class="v">4</div><div class="k">Layers</div></div>
+      <div class="stat"><div class="v">5 / 10</div><div class="k">One-time gates cleared</div></div>
+      <div class="stat"><div class="v">5 steps</div><div class="k">Critical path to first euro</div></div>
+    </div>
+  </header>
+
+  <!-- ============ 1 · PIPELINE ============ -->
+  <section>
+    <div class="sec-head"><span class="idx">01</span><h2>The layer pipeline</h2></div>
+    <p class="sec-note">Layers run in sequence; workstreams inside a layer run in parallel. 🔴 marks workstreams containing at least one human gate.</p>
+    <div class="legend">
+      <span class="pill"><span class="dot ok"></span>AUTO — agent end-to-end</span>
+      <span class="pill"><span class="dot warn"></span>PREP+GATE — agent preps, VOM executes minutes-scale step</span>
+      <span class="pill"><span class="dot stop"></span>HUMAN — VOM only, never automatable</span>
+    </div>
+    <pre class="mermaid">
+flowchart TD
+    subgraph L0["Layer 0 · FOUNDATION"]
+        W1["W1 Business profile"]
+        W2["W2 Legal & financial 🔴"]
+        W3["W3 Domain & email 🔴"]
+    end
+    subgraph L1["Layer 1 · BUILD"]
+        W4["W4 Website & deployment 🔴"]
+        W5["W5 Payments 🔴"]
+        W6["W6 Digital products"]
+    end
+    subgraph L2["Layer 2 · MARKET"]
+        W7["W7 Presence & Engage AI loop 🔴"]
+        W8["W8 Social delivery team 🔴"]
+        W9["W9 Leads & distribution 🔴"]
+    end
+    subgraph L3["Layer 3 · OPERATE"]
+        W10["W10 CRM"]
+        W11["W11 Follow-ups 🔴"]
+        W12["W12 Delivery SOPs"]
+        W13["W13 Finance ops 🔴"]
+    end
+    L0 --> L1 --> L2 --> L3
+    </pre>
+  </section>
+
+  <!-- ============ 2 · TIMELINE ============ -->
+  <section>
+    <div class="sec-head"><span class="idx">02</span><h2>Indicative six-week journey</h2></div>
+    <p class="sec-note">A realistic single-business run. Gates (milestones) sit inside the flow — only dependent workstreams pause while VOM clears one.</p>
+    <pre class="mermaid">
+gantt
+    dateFormat  YYYY-MM-DD
+    axisFormat  wk %W
+    section Foundation
+    W1 Profile + sign-off        :w1, 2026-08-03, 3d
+    W2 Legal & financial         :w2, after w1, 5d
+    W3 Domain & email            :w3, after w1, 4d
+    section Build
+    W4 Website & deploy          :w4, after w3, 8d
+    W5 Payments (iDEAL, catalog) :w5, after w2, 5d
+    W6 Products & delivery       :w6, after w1, 10d
+    section Market
+    W7 Presence + baseline benchmark :w7, after w4, 5d
+    W8 Social team + first batch :w8, after w4, 7d
+    W9 Leads + first 10 invites  :milestone, m1, after w4, 0d
+    W9 Outreach running          :w9, after w4, 8d
+    section Operate
+    W10 CRM                      :w10, after w1, 4d
+    W11 Follow-up routine        :w11, after w10, 3d
+    W12 Delivery SOPs            :w12, after w6, 4d
+    W13 Finance ops handoff      :w13, after w5, 4d
+    </pre>
+  </section>
+
+  <!-- ============ 3 · GATE PROTOCOL ============ -->
+  <section>
+    <div class="sec-head"><span class="idx">03</span><h2>The human-gate protocol</h2></div>
+    <p class="sec-note">Every gate arrives as a numbered "do this now" script — exact URLs, exact values, what to paste back. Example shown: enabling iDEAL on the existing Stripe account.</p>
+    <pre class="mermaid">
+sequenceDiagram
+    participant A as Workstream agent
+    participant O as Orchestrator
+    participant K as VOM
+    A->>O: Gate reached (W5 - iDEAL not enabled)
+    O->>K: "Do this now" script - numbered steps, exact URLs and values
+    Note over K: dashboard.stripe.com → Settings → Payment methods → enable iDEAL + SEPA (~5 min)
+    K->>O: Done - confirmation pasted back
+    O->>A: Dependent steps resume
+    Note over A,O: Only dependent workstreams pause - the rest keep running
+    </pre>
+  </section>
+
+  <!-- ============ 4 · AUTOMATION MATRIX ============ -->
+  <section>
+    <div class="sec-head"><span class="idx">04</span><h2>Prerequisites & automation matrix</h2></div>
+    <div class="card donut-wrap">
+      <figure aria-label="Automation class distribution: 5 auto, 11 prep plus gate, 15 human">
+        <svg width="150" height="150" viewBox="0 0 42 42" role="img">
+          <circle cx="21" cy="21" r="15.9" fill="none" stroke="var(--line)" stroke-width="5"></circle>
+          <!-- 31 rows: 5 ok (16.1%), 11 warn (35.5%), 15 stop (48.4%) of circumference 100 -->
+          <circle cx="21" cy="21" r="15.9" fill="none" stroke="var(--ok)" stroke-width="5"
+                  stroke-dasharray="16.1 83.9" stroke-dashoffset="25" transform="rotate(0 21 21)"></circle>
+          <circle cx="21" cy="21" r="15.9" fill="none" stroke="var(--warn)" stroke-width="5"
+                  stroke-dasharray="35.5 64.5" stroke-dashoffset="8.9"></circle>
+          <circle cx="21" cy="21" r="15.9" fill="none" stroke="var(--stop)" stroke-width="5"
+                  stroke-dasharray="48.4 51.6" stroke-dashoffset="-26.6"></circle>
+          <text x="21" y="20" text-anchor="middle" font-size="7" font-weight="700" fill="var(--ink)">31</text>
+          <text x="21" y="27" text-anchor="middle" font-size="3.2" fill="var(--ink-soft)">PREREQUISITES</text>
+        </svg>
+      </figure>
+      <figcaption>
+        <strong>5</strong> fully automatic · <strong>11</strong> agent-prepped with a minutes-scale gate · <strong>15</strong> human-only.<br><br>
+        Of the ten one-time-ever gates, <strong>five are already cleared</strong> by business #1 (KVK entity*, bank*, one.com, Vercel, Stripe — *verify) and five remain (iDEAL toggle, bookkeeping tool, CRM tool, inbox connector, bookkeeping feeds). <strong>Business #2 onboards with roughly half the human work of the first.</strong><br><br>
+        This matrix describes the operator-run model (VOM executes the gates). For businesses run <em>for clients</em>, §05 re-assigns every gate under the platform-tenancy model.
+      </figcaption>
+    </div>
+    <div class="card scroll">
+      <table>
+        <thead><tr><th>W#</th><th>Prerequisite</th><th>Class</th><th>Gate action (VOM)</th><th>Reusable?</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td>W1</td><td>Idea folder + business-idea.md</td><td><span class="badge ok">AUTO</span></td><td class="min">—</td><td>per-business</td><td><span class="badge dim">pattern exists</span></td></tr>
+          <tr><td>W1</td><td>Profile sign-off</td><td><span class="badge stop">HUMAN</span></td><td class="min">read + approve · ~10 min</td><td>per-business</td><td><span class="badge dim">per run</span></td></tr>
+          <tr class="done"><td>W2</td><td>KVK entity</td><td><span class="badge stop">HUMAN</span></td><td class="min">verify existing</td><td><strong>one-time-ever</strong></td><td><span class="badge ok">existing*</span></td></tr>
+          <tr><td>W2</td><td>Trade name / SBI activity</td><td><span class="badge warn">PREP+GATE</span></td><td class="min">DigiD filing · ~15 min</td><td>per-business</td><td><span class="badge dim">per run</span></td></tr>
+          <tr><td>W2</td><td>BTW / OSS position</td><td><span class="badge ok">AUTO</span></td><td class="min">—</td><td>per-business</td><td><span class="badge dim">per run</span></td></tr>
+          <tr class="done"><td>W2</td><td>Business bank account</td><td><span class="badge stop">HUMAN</span></td><td class="min">verify existing</td><td>one-time-ever</td><td><span class="badge ok">existing*</span></td></tr>
+          <tr><td>W2</td><td>Bookkeeping tool</td><td><span class="badge warn">PREP+GATE</span></td><td class="min">create account · ~15 min</td><td>one-time-ever</td><td><span class="badge warn">pending</span></td></tr>
+          <tr><td>W2</td><td>Terms / privacy sign-off</td><td><span class="badge stop">HUMAN</span></td><td class="min">approve drafts · ~10 min</td><td>per-business</td><td><span class="badge dim">per run</span></td></tr>
+          <tr class="done"><td>W3</td><td>Registrar account (one.com)</td><td><span class="badge stop">HUMAN</span></td><td class="min">—</td><td><strong>one-time-ever</strong></td><td><span class="badge ok">done</span></td></tr>
+          <tr><td>W3</td><td>Domain or subdomain</td><td><span class="badge warn">PREP+GATE</span></td><td class="min">buy · ~10 min (subdomain €0)</td><td>per-business</td><td><span class="badge dim">precedent: cma.</span></td></tr>
+          <tr><td>W3</td><td>DNS records placed</td><td><span class="badge warn">PREP+GATE</span></td><td class="min">paste in one.com panel · ~5 min</td><td>per-business</td><td><span class="badge dim">precedent done</span></td></tr>
+          <tr class="done"><td>W3</td><td>Mail (Brevo) + aliases</td><td><span class="badge warn">PREP+GATE</span></td><td class="min">minor panel edits</td><td>mostly one-time-ever</td><td><span class="badge ok">Brevo live</span></td></tr>
+          <tr class="done"><td>W4</td><td>Hosting account (Vercel)</td><td><span class="badge stop">HUMAN</span></td><td class="min">—</td><td><strong>one-time-ever</strong></td><td><span class="badge ok">done · CLI authed</span></td></tr>
+          <tr><td>W4</td><td>Channel choice (§ hosting matrix)</td><td><span class="badge ok">AUTO</span></td><td class="min">—</td><td>per-business</td><td><span class="badge dim">per run</span></td></tr>
+          <tr><td>W4</td><td>Domain connect + SSL</td><td><span class="badge warn">PREP+GATE</span></td><td class="min">confirm in dashboards · ~5 min</td><td>per-business</td><td><span class="badge dim">precedent done</span></td></tr>
+          <tr class="done"><td>W5</td><td>Stripe account + KYC</td><td><span class="badge stop">HUMAN</span></td><td class="min">—</td><td><strong>one-time-ever</strong></td><td><span class="badge ok">done · live links</span></td></tr>
+          <tr><td>W5</td><td>iDEAL + SEPA enabled</td><td><span class="badge warn">PREP+GATE</span></td><td class="min">dashboard toggle · ~5 min</td><td>one-time-ever</td><td><span class="badge warn">pending</span></td></tr>
+          <tr><td>W5</td><td>Product / price catalog</td><td><span class="badge warn">PREP+GATE</span></td><td class="min">click in per spec, or restricted API key → auto</td><td>per-business</td><td><span class="badge dim">per run</span></td></tr>
+          <tr><td>W5</td><td>Live test purchase + refund</td><td><span class="badge stop">HUMAN</span></td><td class="min">one €29 charge + refund · ~10 min</td><td>per-business</td><td><span class="badge dim">per run</span></td></tr>
+          <tr><td>W6</td><td>Content sign-off</td><td><span class="badge stop">HUMAN</span></td><td class="min">review · ~30 min/product</td><td>per-product</td><td><span class="badge dim">per run</span></td></tr>
+          <tr><td>W7</td><td>Google Business verification</td><td><span class="badge stop">HUMAN</span></td><td class="min">postcard/phone · days of lead time</td><td>per-business</td><td><span class="badge dim">per run</span></td></tr>
+          <tr><td>W7</td><td>Baseline + monthly benchmark</td><td><span class="badge ok">AUTO</span></td><td class="min">—</td><td>per-business</td><td><span class="badge ok">skills installed</span></td></tr>
+          <tr><td>W8</td><td>Social accounts</td><td><span class="badge stop">HUMAN</span></td><td class="min">create per platform · ~15 min each</td><td>per-business</td><td><span class="badge dim">per run</span></td></tr>
+          <tr><td>W8</td><td>Batch publish approval</td><td><span class="badge stop">HUMAN</span></td><td class="min">review batch · ~15 min/week</td><td>ongoing</td><td><span class="badge dim">per run</span></td></tr>
+          <tr><td>W9</td><td>Prospect list + sequences</td><td><span class="badge ok">AUTO</span></td><td class="min">—</td><td>per-business</td><td><span class="badge dim">per run</span></td></tr>
+          <tr><td>W9</td><td>Outreach sending</td><td><span class="badge stop">HUMAN</span></td><td class="min">send / approve batches</td><td>ongoing</td><td><span class="badge dim">per run</span></td></tr>
+          <tr><td>W10</td><td>CRM tool account</td><td><span class="badge warn">PREP+GATE</span></td><td class="min">create if new · ~10 min</td><td>one-time-ever</td><td><span class="badge warn">pending</span></td></tr>
+          <tr><td>W11</td><td>Inbox connector auth</td><td><span class="badge warn">PREP+GATE</span></td><td class="min">authorize once · ~5 min</td><td>one-time-ever</td><td><span class="badge warn">pending</span></td></tr>
+          <tr><td>W11</td><td>Reply approvals</td><td><span class="badge stop">HUMAN</span></td><td class="min">daily skim</td><td>ongoing</td><td><span class="badge dim">per run</span></td></tr>
+          <tr><td>W13</td><td>Bookkeeping feeds authorized</td><td><span class="badge warn">PREP+GATE</span></td><td class="min">authorize · ~10 min</td><td>one-time-ever</td><td><span class="badge warn">pending</span></td></tr>
+          <tr><td>W13</td><td>BTW returns</td><td><span class="badge stop">HUMAN</span></td><td class="min">file quarterly</td><td>ongoing</td><td><span class="badge dim">per run</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============ 5 · GATE MINIMIZATION ============ -->
+  <section>
+    <div class="sec-head"><span class="idx">05</span><h2>Serving non-technical clients — gate minimization</h2></div>
+    <p class="sec-note">For clients who only use a phone, WhatsApp, and email: their business runs as a tenant on Vision Outreach Media's own infrastructure — Vercel projects under VOM's account, a Cloudflare-delegated <span class="mono">clients.visionoutreachmedia.nl</span> zone, Brevo senders, Stripe Connect Express. The client never sees a dashboard, password, or account signup. Full design in <span class="mono">gate-minimization/</span>.</p>
+    <div class="statrow">
+      <div class="stat"><div class="v">5–6</div><div class="k">Client approval moments</div></div>
+      <div class="stat"><div class="v">1</div><div class="k">Stripe-hosted ID flow</div></div>
+      <div class="stat"><div class="v">10</div><div class="k">Gates now platform-auto</div></div>
+      <div class="stat"><div class="v">0</div><div class="k">Client logins, ever</div></div>
+    </div>
+    <div class="card scroll">
+      <table>
+        <thead><tr><th>Actor</th><th>Rows</th><th>Meaning</th></tr></thead>
+        <tbody>
+          <tr><td><strong>PLATFORM-AUTO</strong></td><td class="min">10</td><td>Agents via API under VOM's accounts — subdomain DNS, hosting, SSL, email, Stripe catalog, benchmarks, prospect lists</td></tr>
+          <tr><td><strong>VOM-ONCE</strong></td><td class="min">10</td><td>One-time-ever platform setup (most already cleared by business #1); new: Connect enablement, Cloudflare zone bootstrap + NS paste</td></tr>
+          <tr><td><strong>VOM-RECURRING</strong></td><td class="min">6</td><td>Per-client or ongoing: KYB verification, custom-domain purchase approval, refunds, test purchases, BTW returns</td></tr>
+          <tr><td><strong>CLIENT-PHONE</strong></td><td class="min">6</td><td>Magic-link WhatsApp approvals, each ≤5 min: profile + terms (one screen), content, GBP code, weekly post &amp; outreach digest</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <pre class="mermaid">
+flowchart LR
+    P["Agents provision the tenant<br/>site · DNS · email · catalog<br/>(API only, zero client touch)"] --> A1["Client taps WhatsApp link:<br/>profile + terms — one YES"]
+    A1 --> K["Client opens Stripe-hosted link:<br/>ID photo + IBAN on phone"]
+    K --> A2["Client approves content — one YES"]
+    A2 --> L["Business live<br/>payouts go to client's IBAN"]
+    L --> D["Weekly WhatsApp digest:<br/>posts + outreach, one YES"]
+    D --> L
+    </pre>
+    <div class="callout note">
+      <strong>Pending VOM's sign-off</strong> — the security threat model (security.md) leaves five decisions to ratify before rollout:
+      <ol>
+        <li>Mandatory per-client KYB verification (non-removable gate)</li>
+        <li>OTP or verbal second factor for publish / pricing / refund / domain / payout changes</li>
+        <li>Blast-radius cap on automated runs (proposed max 5 tenants)</li>
+        <li>Domain-ownership contract clause — WHOIS registrant = client, transfer-out right</li>
+        <li>Restricted Stripe keys, zone-scoped Cloudflare tokens, MFA everywhere</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============ 6 · PAYMENTS ============ -->
+  <section>
+    <div class="sec-head"><span class="idx">06</span><h2>Payment channels</h2></div>
+    <p class="sec-note">Stripe is live and KYC'd from business #1 — per-business payment work shrinks to catalog setup and one pending toggle. PayPal is only ever an add-on rail; Mollie enters only if Stripe's iDEAL path blocks.</p>
+    <div class="cardrow">
+      <div class="pay">
+        <span class="ribbon badge ok">LIVE · iDEAL pending</span>
+        <h3>Stripe</h3>
+        <ul>
+          <li>3 production Payment Links on CMA (€29 founding / €39 mo / €390 yr)</li>
+          <li>Card, Apple Pay, Google Pay, Link enabled</li>
+          <li>Upgrade path: Checkout + webhooks — required for automated delivery (W6)</li>
+          <li>🟡 Enable iDEAL + SEPA Direct Debit — one 5-minute toggle</li>
+        </ul>
+        <span class="fit">Primary rail — every business</span>
+      </div>
+      <div class="pay">
+        <span class="ribbon badge dim">fallback</span>
+        <h3>Mollie</h3>
+        <ul>
+          <li>NL-native, iDEAL ~€0.29 flat per transaction</li>
+          <li>Full subscription + webhook support</li>
+          <li>Costs a fresh 🔴 account + KYC</li>
+        </ul>
+        <span class="fit">Only if Stripe iDEAL blocks</span>
+      </div>
+      <div class="pay">
+        <span class="ribbon badge dim">add-on</span>
+        <h3>PayPal</h3>
+        <ul>
+          <li>Trust badge for international consumers</li>
+          <li>Higher fees, dated automation (IPN)</li>
+          <li>New business account = 🔴 gate</li>
+        </ul>
+        <span class="fit">Secondary rail, never primary</span>
+      </div>
+    </div>
+    <pre class="mermaid">
+flowchart TD
+    S([New business needs payments]) --> Q1{NL consumer audience?}
+    Q1 -- "yes" --> IDEAL["🟡 Enable iDEAL on existing Stripe first<br/>(one-time-ever, ~5 min)"]
+    Q1 -- "no" --> Q2
+    IDEAL --> Q2{Automated fulfillment needed?<br/>member access, file delivery, invites}
+    Q2 -- "no" --> PL["Stripe Payment Links<br/>fastest — live precedent: CMA"]
+    Q2 -- "yes" --> CW["Stripe Checkout + webhooks<br/>required before W6 auto-delivery"]
+    PL --> Q3{International consumer trust needed?}
+    CW --> Q3
+    Q3 -- "yes" --> PP["Add PayPal as secondary rail 🔴"]
+    Q3 -- "no" --> DONE([Record choice in business-profile.md])
+    PP --> DONE
+    IDEAL -. "iDEAL blocked or pricing issue" .-> MOLLIE["Mollie fallback<br/>(new account 🔴)"]
+    </pre>
+  </section>
+
+  <!-- ============ 7 · HOSTING ============ -->
+  <section>
+    <div class="sec-head"><span class="idx">07</span><h2>Delivery &amp; hosting channels</h2></div>
+    <p class="sec-note">Vercel is the proven default — <span class="mono">vercel deploy --prod --yes</span>, live precedent <a href="https://cma.visionoutreachmedia.nl">cma.visionoutreachmedia.nl</a>. The agent's first W4 step is classifying the site archetype against this matrix.</p>
+    <div class="card scroll">
+      <table>
+        <thead><tr><th>Site archetype</th><th>Vercel</th><th>Render</th><th>WordPress</th><th>Cloudflare</th></tr></thead>
+        <tbody>
+          <tr><td>Static landing / brochure</td><td class="cell-yes">✅ proven, seconds to deploy</td><td class="cell-maybe">◻ works, less tooling</td><td class="cell-no">✕ overkill</td><td class="cell-maybe">◻ Pages ok, DNS constraint</td></tr>
+          <tr><td>Membership / app platform</td><td class="cell-yes">✅ + functions + Supabase</td><td class="cell-yes">✅ long-running server + DB</td><td class="cell-no">✕ plugin fragility</td><td class="cell-no">✕ not a fit</td></tr>
+          <tr><td>Content / blog site</td><td class="cell-maybe">◻ SSG if agent-maintained</td><td class="cell-maybe">◻</td><td class="cell-yes">✅ editorial workflows, SEO</td><td class="cell-no">✕</td></tr>
+          <tr><td>App with heavy backend</td><td class="cell-maybe">◻ serverless limits</td><td class="cell-yes">✅ persistent processes, cron</td><td class="cell-no">✕</td><td class="cell-no">✕</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout"><strong>DNS guard:</strong> the <span class="mono">visionoutreachmedia.nl</span> zone stays on one.com nameservers with Brevo mail records preserved verbatim. Cloudflare is deliberately not in the chain — any nameserver migration is itself a 🔴 human gate, never an agent suggestion acted on silently.</div>
+    <pre class="mermaid">
+flowchart TD
+    S([New site to ship]) --> Q1{Site archetype?}
+    Q1 -- "Static landing / brochure" --> V1["Vercel ✅<br/>vercel deploy --prod --yes"]
+    Q1 -- "Membership / app platform" --> Q2{Backend shape?}
+    Q2 -- "Serverless fits" --> V2["Vercel + functions + Supabase"]
+    Q2 -- "Long-running server / heavy DB" --> R["Render ✅"]
+    Q1 -- "Content / blog site" --> WP["WordPress ✅<br/>editorial workflows, SEO plugins"]
+    V1 --> G
+    V2 --> G
+    R --> G
+    WP --> G
+    G["⚠️ DNS GUARD — zone stays on one.com<br/>Brevo mail records preserved verbatim<br/>NO Cloudflare migration without an explicit 🔴 gate"]
+    style G stroke:#c0392b,stroke-width:2px
+    </pre>
+  </section>
+
+  <!-- ============ 8 · SOCIAL TEAM ============ -->
+  <section>
+    <div class="sec-head"><span class="idx">08</span><h2>Social media delivery team</h2></div>
+    <p class="sec-note">A dedicated marketing &amp; distribution swarm per business, mirroring the devops-scrum-orchestrator's tiered model routing: cheapest-capable model per role, escalation on failure. Nothing is ever auto-posted — every batch passes VOM's approval gate.</p>
+    <div class="roles">
+      <div class="role"><span class="tier hi">high tier</span><h4>Strategist</h4><p>Content pillars, weekly themes, channel briefs. Shared across channels.</p></div>
+      <div class="role"><span class="tier mid">mid tier</span><h4>Copywriter</h4><p>Drafts posts in VOM's voice per brief. One per channel.</p></div>
+      <div class="role"><span class="tier lo">low tier</span><h4>Designer</h4><p>Visual prompts, image specs, templates.</p></div>
+      <div class="role"><span class="tier lo">low tier</span><h4>Scheduler</h4><p>Assembles and queues the batch per platform format.</p></div>
+      <div class="role"><span class="tier hi">high tier</span><h4>Analyst</h4><p>Reads performance, feeds pivots back to the Strategist. Shared.</p></div>
+    </div>
+    <pre class="mermaid">
+flowchart LR
+    ST["Strategist<br/>high tier · shared"] --> CP
+    subgraph CH["Per channel (e.g. Instagram, LinkedIn)"]
+        CP["Copywriter<br/>mid tier"] --> DS["Designer<br/>low tier"] --> SC["Scheduler<br/>low tier"]
+    end
+    SC --> GATE{"🔴 VOM approves batch"}
+    GATE -- "approved" --> PUB["Publish / queue"]
+    GATE -- "changes" --> CP
+    PUB --> AN["Analyst<br/>high tier · shared"]
+    AN -- "performance feedback" --> ST
+    </pre>
+  </section>
+
+  <!-- ============ 9 · ENGAGE AI LOOP ============ -->
+  <section>
+    <div class="sec-head"><span class="idx">09</span><h2>Website optimization — the Engage AI loop</h2></div>
+    <p class="sec-note">Not a one-shot audit: the installed engage-ai-benchmark skill scores eight channels 0–100 at launch, fixes route to the workstream that owns them, and a monthly re-benchmark measures the delta.</p>
+    <pre class="mermaid">
+flowchart TD
+    B["Baseline engage-ai-benchmark<br/>8 channels scored 0–100"] --> P["Prioritize lowest-scoring channels"]
+    P --> C["Classify fixes 🟢🟡🔴 →<br/>marketing/optimization-backlog.md"]
+    C --> R1["Site fixes → W4 pipeline"]
+    C --> R2["Social fixes → W8 team"]
+    C --> R3["Profile / listing fixes → gate scripts"]
+    R1 --> M["Monthly re-benchmark<br/>(schedule skill)"]
+    R2 --> M
+    R3 --> M
+    M --> H["Score deltas →<br/>marketing/benchmark-history.md"]
+    H --> P
+    </pre>
+    <div class="card scores" aria-label="Benchmark score slots, empty until baseline runs">
+      <div class="scorebar"><span>Website</span><div class="track"><div class="fill"></div></div><span class="val">—</span></div>
+      <div class="scorebar"><span>Google Business</span><div class="track"><div class="fill"></div></div><span class="val">—</span></div>
+      <div class="scorebar"><span>Facebook</span><div class="track"><div class="fill"></div></div><span class="val">—</span></div>
+      <div class="scorebar"><span>Instagram</span><div class="track"><div class="fill"></div></div><span class="val">—</span></div>
+      <div class="scorebar"><span>YouTube</span><div class="track"><div class="fill"></div></div><span class="val">—</span></div>
+      <div class="scorebar"><span>LinkedIn</span><div class="track"><div class="fill"></div></div><span class="val">—</span></div>
+      <div class="scorebar"><span>X / Twitter</span><div class="track"><div class="fill"></div></div><span class="val">—</span></div>
+      <div class="scorebar"><span>News mentions</span><div class="track"><div class="fill"></div></div><span class="val">—</span></div>
+      <p class="sec-note" style="font-size:12.5px">Run the baseline benchmark to populate — scores land here after the first W7 pass.</p>
+    </div>
+  </section>
+
+  <!-- ============ 10 · DEPENDENCIES ============ -->
+  <section>
+    <div class="sec-head"><span class="idx">10</span><h2>Dependency graph &amp; critical path</h2></div>
+    <p class="sec-note">Highlighted nodes are the critical path to the first euro: profile → legal → domain → website + payments → warm outreach. Everything else follows the first customers.</p>
+    <pre class="mermaid">
+flowchart LR
+    W1["W1 profile"] --> W2["W2 legal/financial"]
+    W1 --> W3["W3 domain/email"]
+    W1 --> W6["W6 products"]
+    W1 --> W8["W8 social team"]
+    W1 --> W9["W9 leads"]
+    W1 --> W10["W10 CRM"]
+    W2 --> W5["W5 payments"]
+    W3 --> W4["W4 website"]
+    W5 --> W4
+    W6 --> W4
+    W2 --> W13["W13 finance ops"]
+    W5 --> W13
+    W4 --> W7["W7 presence loop"]
+    W4 --> W8
+    W4 --> W9
+    W3 --> W11["W11 follow-ups"]
+    W10 --> W11
+    W6 --> W12["W12 delivery"]
+    W10 --> W12
+    classDef crit fill:#b45309,stroke:#92400e,color:#fff,font-weight:bold
+    class W1,W2,W3,W4,W5,W9 crit
+    </pre>
+  </section>
+
+  <!-- ============ 11 · EXIT CRITERIA ============ -->
+  <section>
+    <div class="sec-head"><span class="idx">11</span><h2>Definition of "onboarded"</h2></div>
+    <div class="card">
+      <ul class="exit">
+        <li><span class="box"></span>Legal entity/activity registered; business bank account live; bookkeeping connected</li>
+        <li><span class="box"></span>Domain live with working, deliverability-tested email</li>
+        <li><span class="box"></span>Website deployed with SSL, analytics, monitoring — hosting channel recorded per the matrix</li>
+        <li><span class="box"></span>Payment channel recorded; iDEAL enabled for NL-consumer ICPs; real test purchase completed and refunded with correct VAT</li>
+        <li><span class="box"></span>At least one digital product delivered automatically end-to-end</li>
+        <li><span class="box"></span>Google Business + 2 social channels live with first content</li>
+        <li><span class="box"></span>Engage AI baseline run; monthly re-benchmark scheduled; optimization backlog started</li>
+        <li><span class="box"></span>Social delivery team spec written; first approved batch published</li>
+        <li><span class="box"></span>Prospect list ≥ 50; outreach sequence running; first 10 warm invites sent</li>
+        <li><span class="box"></span>CRM live with pipeline; daily follow-up routine scheduled</li>
+        <li><span class="box"></span>Delivery SOP per product; finance calendar + monthly review scheduled</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    Rendered from <code>Business Ideas/Business Onboarding System/onboarding-plan.md</code> and <code>gate-minimization/gate-minimization.md</code> (sources of truth) · v2.1 · 2026-07-20. Regenerate this page whenever either changes.
+  </footer>
+
+</div>

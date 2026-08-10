@@ -1,0 +1,982 @@
+<title>Membership Club Ops Wizard</title>
+<style>
+  /* ---------- tokens ---------- */
+  :root {
+    --paper: #F3F5EF;        /* green-biased ivory */
+    --card: #FBFCF9;
+    --ink: #1E2B24;          /* deep club-green ink */
+    --ink-soft: #4A5A50;
+    --line: #D5DCD2;
+    --brass: #99781E;        /* accent */
+    --brass-soft: #EDE6D2;
+    --good: #3E7A54;
+    --warn: #A9750F;
+    --crit: #A54334;
+    --shadow: 0 1px 2px rgba(30,43,36,.06), 0 8px 24px rgba(30,43,36,.07);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #131B16;
+      --card: #1B2620;
+      --ink: #E7ECE3;
+      --ink-soft: #9FB0A4;
+      --line: #2E3C34;
+      --brass: #C9A84C;
+      --brass-soft: #2C2A1B;
+      --good: #6FB388;
+      --warn: #D3A544;
+      --crit: #D07A6B;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #131B16; --card: #1B2620; --ink: #E7ECE3; --ink-soft: #9FB0A4;
+    --line: #2E3C34; --brass: #C9A84C; --brass-soft: #2C2A1B;
+    --good: #6FB388; --warn: #D3A544; --crit: #D07A6B;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.35);
+  }
+  :root[data-theme="light"] {
+    --paper: #F3F5EF; --card: #FBFCF9; --ink: #1E2B24; --ink-soft: #4A5A50;
+    --line: #D5DCD2; --brass: #99781E; --brass-soft: #EDE6D2;
+    --good: #3E7A54; --warn: #A9750F; --crit: #A54334;
+    --shadow: 0 1px 2px rgba(30,43,36,.06), 0 8px 24px rgba(30,43,36,.07);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--paper); color: var(--ink);
+    font: 15px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+  .serif { font-family: Palatino, "Palatino Linotype", "Book Antiqua", P052, Georgia, serif; }
+  code, pre, .mono, textarea.prompt-out {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  }
+
+  /* ---------- shell ---------- */
+  .shell { max-width: 1080px; margin: 0 auto; padding: 28px 20px 80px; }
+  header.top {
+    display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-end;
+    justify-content: space-between; padding-bottom: 20px;
+    border-bottom: 2px solid var(--ink); margin-bottom: 24px;
+  }
+  .wordmark { display: flex; flex-direction: column; gap: 2px; }
+  .wordmark .eyebrow {
+    font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--brass); font-weight: 600;
+  }
+  .wordmark h1 {
+    margin: 0; font-size: clamp(26px, 4vw, 36px); line-height: 1.1; text-wrap: balance; font-weight: 600;
+  }
+  .wordmark .sub { color: var(--ink-soft); font-size: 13.5px; max-width: 52ch; }
+  .top-actions { display: flex; gap: 10px; align-items: center; }
+
+  /* ---------- progress ---------- */
+  .progress-wrap { display: flex; align-items: center; gap: 10px; min-width: 190px; }
+  .progress-track { flex: 1; height: 6px; background: var(--line); border-radius: 3px; overflow: hidden; }
+  .progress-fill { height: 100%; width: 0%; background: var(--brass); border-radius: 3px; transition: width .35s ease; }
+  .progress-num { font-size: 12px; color: var(--ink-soft); font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+  /* ---------- layout ---------- */
+  .layout { display: grid; grid-template-columns: 232px 1fr; gap: 28px; align-items: start; }
+  @media (max-width: 780px) { .layout { grid-template-columns: 1fr; } }
+
+  /* ---------- phase rail ---------- */
+  nav.rail { position: sticky; top: 16px; display: flex; flex-direction: column; gap: 4px; }
+  @media (max-width: 780px) {
+    nav.rail { position: static; flex-direction: row; overflow-x: auto; padding-bottom: 6px; }
+  }
+  .rail button {
+    display: flex; align-items: center; gap: 10px; width: 100%;
+    border: 1px solid transparent; background: none; color: var(--ink-soft);
+    font: inherit; font-size: 14px; text-align: left; padding: 9px 10px;
+    border-radius: 8px; cursor: pointer; white-space: nowrap;
+  }
+  .rail button:hover { background: var(--card); }
+  .rail button:focus-visible, .btn:focus-visible, .copy-btn:focus-visible {
+    outline: 2px solid var(--brass); outline-offset: 2px;
+  }
+  .rail button.active { background: var(--card); border-color: var(--line); color: var(--ink); box-shadow: var(--shadow); }
+  .rail .num {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 22px; height: 22px; flex: none; border-radius: 50%;
+    border: 1.5px solid var(--ink-soft); font-size: 11.5px; font-variant-numeric: tabular-nums;
+  }
+  .rail button.active .num { border-color: var(--brass); color: var(--brass); font-weight: 700; }
+  .rail button.done .num { background: var(--good); border-color: var(--good); color: var(--paper); }
+  .rail .pct { margin-left: auto; font-size: 11px; color: var(--ink-soft); font-variant-numeric: tabular-nums; }
+
+  /* ---------- cards / phases ---------- */
+  .phase { display: none; }
+  .phase.active { display: block; }
+  .phase-head { margin: 0 0 4px; font-size: 24px; font-weight: 600; }
+  .phase-lede { margin: 0 0 20px; color: var(--ink-soft); max-width: 62ch; }
+  .card {
+    background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+    padding: 18px 20px; margin-bottom: 16px; box-shadow: var(--shadow);
+  }
+  .card h3 { margin: 0 0 12px; font-size: 15px; }
+  .card h3 .hint { font-weight: 400; color: var(--ink-soft); font-size: 13px; }
+
+  /* ---------- fields ---------- */
+  .field { margin-bottom: 14px; }
+  .field:last-child { margin-bottom: 0; }
+  .field label { display: block; font-size: 12.5px; font-weight: 600; margin-bottom: 5px; }
+  .field .why { font-weight: 400; color: var(--ink-soft); }
+  input[type="text"], input[type="number"], input[type="date"], select, textarea {
+    width: 100%; padding: 9px 11px; border: 1px solid var(--line); border-radius: 8px;
+    background: var(--paper); color: var(--ink); font: inherit;
+  }
+  textarea { resize: vertical; min-height: 68px; }
+  input:focus, select:focus, textarea:focus { outline: 2px solid var(--brass); outline-offset: 0; border-color: var(--brass); }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  @media (max-width: 640px) { .grid2, .grid3 { grid-template-columns: 1fr; } }
+
+  /* checklists */
+  ul.checks { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+  ul.checks li { display: flex; gap: 10px; align-items: flex-start; }
+  ul.checks input[type="checkbox"] { width: 17px; height: 17px; margin-top: 2px; accent-color: var(--brass); flex: none; }
+  ul.checks label { font-size: 14px; }
+  ul.checks li.checked > label { color: var(--ink-soft); text-decoration: line-through; }
+
+  /* buttons */
+  .btn {
+    display: inline-flex; align-items: center; gap: 7px;
+    border: 1px solid var(--ink); background: var(--ink); color: var(--paper);
+    font: inherit; font-size: 13.5px; font-weight: 600; padding: 9px 16px;
+    border-radius: 8px; cursor: pointer;
+  }
+  .btn:hover { opacity: .88; }
+  .btn.secondary { background: none; color: var(--ink); }
+  .btn.brass { background: var(--brass); border-color: var(--brass); color: #fff; }
+  :root[data-theme="dark"] .btn.brass, :root:not([data-theme="light"]) .btn.brass { color: #14201A; }
+  @media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) .btn.brass { color: #fff; } }
+  .btn.small { padding: 6px 11px; font-size: 12.5px; }
+
+  /* prompt output */
+  .prompt-block { margin-top: 14px; }
+  .prompt-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+  .prompt-bar .tag { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--brass); font-weight: 700; }
+  textarea.prompt-out {
+    width: 100%; min-height: 180px; font-size: 12.5px; line-height: 1.5;
+    background: var(--brass-soft); border: 1px solid var(--line); border-radius: 8px; padding: 12px;
+    color: var(--ink);
+  }
+  .copy-btn {
+    border: 1px solid var(--line); background: var(--card); color: var(--ink);
+    font: inherit; font-size: 12px; padding: 5px 10px; border-radius: 6px; cursor: pointer;
+  }
+  .copy-btn:hover { border-color: var(--brass); color: var(--brass); }
+
+  /* ---------- ops dashboard ---------- */
+  .stat-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 4px; }
+  @media (max-width: 700px) { .stat-row { grid-template-columns: 1fr 1fr; } }
+  .stat { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; }
+  .stat .k { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-soft); font-weight: 600; }
+  .stat .v { font-size: 24px; font-weight: 700; font-variant-numeric: tabular-nums; margin-top: 2px; }
+  .stat .v.good { color: var(--good); } .stat .v.warn { color: var(--warn); } .stat .v.crit { color: var(--crit); }
+  .stat .d { font-size: 11.5px; color: var(--ink-soft); }
+
+  .note { font-size: 12.5px; color: var(--ink-soft); margin-top: 8px; }
+  .phase-footer { display: flex; justify-content: space-between; gap: 10px; margin-top: 20px; }
+  .toast {
+    position: fixed; left: 50%; bottom: 26px; transform: translateX(-50%) translateY(80px);
+    background: var(--ink); color: var(--paper); font-size: 13px; padding: 9px 18px;
+    border-radius: 999px; box-shadow: var(--shadow); transition: transform .3s ease; z-index: 50;
+  }
+  .toast.show { transform: translateX(-50%) translateY(0); }
+  @media (prefers-reduced-motion: reduce) {
+    .toast, .progress-fill { transition: none; }
+  }
+</style>
+
+<div class="shell">
+  <header class="top">
+    <div class="wordmark">
+      <span class="eyebrow serif">Est. 2026 · Built with Claude Code</span>
+      <h1 class="serif">Membership Club Operations Wizard</h1>
+      <span class="sub">Six phases from idea to a running paid membership club — define the offer, build the platform, launch to founding members, and operate it week by week.</span>
+    </div>
+    <div class="top-actions">
+      <div class="progress-wrap">
+        <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+        <span class="progress-num" id="progressNum">0%</span>
+      </div>
+      <button class="btn brass" id="exportBtn" type="button">Export ops pack</button>
+      <button class="btn secondary small" id="resetBtn" type="button">Reset</button>
+    </div>
+  </header>
+
+  <div class="layout">
+    <nav class="rail" id="rail" aria-label="Phases"></nav>
+    <main id="phases">
+
+      <!-- ============ PHASE 1 · FOUNDATION ============ -->
+      <section class="phase" data-phase="0">
+        <h2 class="phase-head serif">Foundation</h2>
+        <p class="phase-lede">Who the club is for and why they'll pay. The episode's core lesson: the moat isn't building the platform — it's the audience and the promise.</p>
+
+        <div class="card">
+          <h3>Start from a preset <span class="hint">— or build from scratch</span></h3>
+          <div class="grid2">
+            <div class="field">
+              <label for="preset">Niche preset</label>
+              <select id="preset" data-save>
+                <option value="">Custom (blank)</option>
+                <option value="church">Church Media Academy — church media &amp; comms teams</option>
+                <option value="creator">Creator Club — digital creators &amp; solopreneurs</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>&nbsp;</label>
+              <button class="btn secondary" id="applyPreset" type="button">Apply preset</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>The club</h3>
+          <div class="grid2">
+            <div class="field">
+              <label for="clubName">Club name</label>
+              <input type="text" id="clubName" data-save placeholder="e.g. Church Media Academy">
+            </div>
+            <div class="field">
+              <label for="audience">Who it's for <span class="why">— one specific person</span></label>
+              <input type="text" id="audience" data-save placeholder="e.g. church media volunteers & comms staff">
+            </div>
+          </div>
+          <div class="field">
+            <label for="promise">The promise <span class="why">— what changes for a member in 90 days</span></label>
+            <textarea id="promise" data-save placeholder="e.g. Your livestream, socials and online reach run on a repeatable system — with a community that answers questions the same day."></textarea>
+          </div>
+          <div class="field">
+            <label for="story">Your founder credibility <span class="why">— why you</span></label>
+            <textarea id="story" data-save placeholder="e.g. I run Vision Outreach Media, benchmark churches with Engage AI, and run a church livestream every Sunday."></textarea>
+          </div>
+          <div class="field">
+            <label for="assets">Existing assets to seed from <span class="why">— content, tools, contacts you already have</span></label>
+            <textarea id="assets" data-save placeholder="e.g. livestream SOPs, Engage AI benchmark playbooks, €999 assessment offer, church contact list"></textarea>
+          </div>
+        </div>
+        <div class="phase-footer"><span></span><button class="btn" data-next type="button">Next: Offer &amp; pricing →</button></div>
+      </section>
+
+      <!-- ============ PHASE 2 · OFFER & PRICING ============ -->
+      <section class="phase" data-phase="1">
+        <h2 class="phase-head serif">Offer &amp; Pricing</h2>
+        <p class="phase-lede">Don't launch free — the price tag is the quality filter. Oliur's one regret was not pricing <em>higher</em>.</p>
+
+        <div class="card">
+          <h3>What members get</h3>
+          <ul class="checks" id="perksList">
+            <li><input type="checkbox" id="perk0" data-save><label for="perk0">Content library / manuals (playbooks, SOPs, templates)</label></li>
+            <li><input type="checkbox" id="perk1" data-save><label for="perk1">Private community (Discord / WhatsApp / Slack)</label></li>
+            <li><input type="checkbox" id="perk2" data-save><label for="perk2">Monthly report per member (the retention perk)</label></li>
+            <li><input type="checkbox" id="perk3" data-save><label for="perk3">Monthly live office hours / Q&amp;A call</label></li>
+            <li><input type="checkbox" id="perk4" data-save><label for="perk4">Member directory &amp; membership card</label></li>
+            <li><input type="checkbox" id="perk5" data-save><label for="perk5">Discounts on your paid services</label></li>
+          </ul>
+          <div class="field" style="margin-top:12px">
+            <label for="flagship">Flagship perk <span class="why">— the one thing that keeps people subscribed</span></label>
+            <input type="text" id="flagship" data-save placeholder="e.g. automated monthly Engage AI engagement report per church, as a branded PDF">
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Pricing</h3>
+          <div class="grid3">
+            <div class="field">
+              <label for="currency">Currency</label>
+              <select id="currency" data-save>
+                <option value="€">EUR (€)</option>
+                <option value="$">USD ($)</option>
+                <option value="£">GBP (£)</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="priceMonthly">Monthly price</label>
+              <input type="number" id="priceMonthly" data-save min="0" placeholder="39">
+            </div>
+            <div class="field">
+              <label for="priceYearly">Yearly price <span class="why">(≈10× monthly)</span></label>
+              <input type="number" id="priceYearly" data-save min="0" placeholder="390">
+            </div>
+          </div>
+          <div class="grid2">
+            <div class="field">
+              <label for="foundingPrice">Founding-member price <span class="why">— locked for life</span></label>
+              <input type="number" id="foundingPrice" data-save min="0" placeholder="29">
+            </div>
+            <div class="field">
+              <label for="foundingCap">Founding cohort cap</label>
+              <input type="number" id="foundingCap" data-save min="1" placeholder="10">
+            </div>
+          </div>
+          <p class="note">Rule from the episode: after the founding cohort fills, <strong>raise the price</strong>. Each raise lifts the bar of entry and the quality of the room.</p>
+        </div>
+        <div class="phase-footer"><button class="btn secondary" data-prev type="button">← Back</button><button class="btn" data-next type="button">Next: Build →</button></div>
+      </section>
+
+      <!-- ============ PHASE 3 · BUILD ============ -->
+      <section class="phase" data-phase="2">
+        <h2 class="phase-head serif">Build the Platform</h2>
+        <p class="phase-lede">A weekend build, not a $50K project. Scope v1 to payments, login, content, and the community invite — nothing else until the first ten members are in.</p>
+
+        <div class="card">
+          <h3>Stack choices</h3>
+          <div class="grid3">
+            <div class="field">
+              <label for="payments">Payments</label>
+              <select id="payments" data-save>
+                <option>Stripe</option><option>Mollie (EU/iDEAL)</option><option>Lemon Squeezy</option><option>PayPal</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="community">Community home</label>
+              <select id="community" data-save>
+                <option>Discord</option><option>WhatsApp group</option><option>Slack</option><option>Circle</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="hosting">Hosting</label>
+              <select id="hosting" data-save>
+                <option>Vercel</option><option>Railway</option><option>Netlify</option><option>Own VPS</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>v1 build checklist <span class="hint">— ship all six, then stop</span></h3>
+          <ul class="checks">
+            <li><input type="checkbox" id="b0" data-save><label for="b0">Landing page: promise, perks, testimonial slot, join button</label></li>
+            <li><input type="checkbox" id="b1" data-save><label for="b1">Checkout with founding-member price</label></li>
+            <li><input type="checkbox" id="b2" data-save><label for="b2">Member login &amp; account page (billing management)</label></li>
+            <li><input type="checkbox" id="b3" data-save><label for="b3">Members-only content area with first manuals</label></li>
+            <li><input type="checkbox" id="b4" data-save><label for="b4">Auto-invite to community on purchase + welcome email</label></li>
+            <li><input type="checkbox" id="b5" data-save><label for="b5">Cancel flow that works (trust = retention)</label></li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>AI build prompt</h3>
+          <p class="note" style="margin-top:0">Generates a complete Claude Code prompt from everything you've entered. Paste it into a fresh Claude Code session in an empty folder.</p>
+          <button class="btn brass" data-gen="build" type="button">Generate build prompt</button>
+          <div class="prompt-block" id="out-build" hidden>
+            <div class="prompt-bar"><span class="tag">Claude Code prompt</span><button class="copy-btn" data-copy="build" type="button">Copy</button></div>
+            <textarea class="prompt-out" id="prompt-build" readonly aria-label="Generated build prompt"></textarea>
+          </div>
+        </div>
+        <div class="phase-footer"><button class="btn secondary" data-prev type="button">← Back</button><button class="btn" data-next type="button">Next: Content →</button></div>
+      </section>
+
+      <!-- ============ PHASE 4 · CONTENT ============ -->
+      <section class="phase" data-phase="3">
+        <h2 class="phase-head serif">Seed the Content</h2>
+        <p class="phase-lede">Five to ten manuals from material you already have. A member who lands inside on day one should find something worth the price immediately.</p>
+
+        <div class="card">
+          <h3>Seed manuals <span class="hint">— working titles</span></h3>
+          <div class="field"><input type="text" id="m0" data-save placeholder="Manual 1 — e.g. The Sunday Livestream Playbook"></div>
+          <div class="field"><input type="text" id="m1" data-save placeholder="Manual 2 — e.g. YouTube Growth for Churches"></div>
+          <div class="field"><input type="text" id="m2" data-save placeholder="Manual 3 — e.g. Reading Your Engagement Benchmark"></div>
+          <div class="field"><input type="text" id="m3" data-save placeholder="Manual 4"></div>
+          <div class="field"><input type="text" id="m4" data-save placeholder="Manual 5"></div>
+        </div>
+
+        <div class="card">
+          <h3>AI content prompt</h3>
+          <p class="note" style="margin-top:0">Generates a prompt that turns your raw material into structured member manuals with a consistent format.</p>
+          <button class="btn brass" data-gen="content" type="button">Generate content prompt</button>
+          <div class="prompt-block" id="out-content" hidden>
+            <div class="prompt-bar"><span class="tag">Claude prompt</span><button class="copy-btn" data-copy="content" type="button">Copy</button></div>
+            <textarea class="prompt-out" id="prompt-content" readonly aria-label="Generated content prompt"></textarea>
+          </div>
+        </div>
+        <div class="phase-footer"><button class="btn secondary" data-prev type="button">← Back</button><button class="btn" data-next type="button">Next: Launch →</button></div>
+      </section>
+
+      <!-- ============ PHASE 5 · LAUNCH ============ -->
+      <section class="phase" data-phase="4">
+        <h2 class="phase-head serif">Launch to Founding Members</h2>
+        <p class="phase-lede">Personal outreach before broadcast. Ten founding members from people who already know you beats a hundred cold impressions.</p>
+
+        <div class="card">
+          <h3>Launch plan</h3>
+          <div class="grid2">
+            <div class="field">
+              <label for="launchDate">Target launch date</label>
+              <input type="date" id="launchDate" data-save>
+            </div>
+            <div class="field">
+              <label for="outreachCount">Personal invitations to send</label>
+              <input type="number" id="outreachCount" data-save min="1" placeholder="30">
+            </div>
+          </div>
+          <div class="field">
+            <label for="warmList">Warm list sources</label>
+            <textarea id="warmList" data-save placeholder="e.g. past assessment leads, Church of God Amersfoort network, Engage AI scan contacts, newsletter list"></textarea>
+          </div>
+          <ul class="checks">
+            <li><input type="checkbox" id="l0" data-save><label for="l0">Founding offer written (price locked for life + name on founders wall)</label></li>
+            <li><input type="checkbox" id="l1" data-save><label for="l1">Personal invite message drafted (not a broadcast)</label></li>
+            <li><input type="checkbox" id="l2" data-save><label for="l2">First 10 invitations sent</label></li>
+            <li><input type="checkbox" id="l3" data-save><label for="l3">Launch announcement posted on main channels</label></li>
+            <li><input type="checkbox" id="l4" data-save><label for="l4">Every founding member welcomed personally inside</label></li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>AI launch kit</h3>
+          <p class="note" style="margin-top:0">Generates a prompt that produces your personal invite, launch post, and welcome email in your voice.</p>
+          <button class="btn brass" data-gen="launch" type="button">Generate launch-kit prompt</button>
+          <div class="prompt-block" id="out-launch" hidden>
+            <div class="prompt-bar"><span class="tag">Claude prompt</span><button class="copy-btn" data-copy="launch" type="button">Copy</button></div>
+            <textarea class="prompt-out" id="prompt-launch" readonly aria-label="Generated launch prompt"></textarea>
+          </div>
+        </div>
+        <div class="phase-footer"><button class="btn secondary" data-prev type="button">← Back</button><button class="btn" data-next type="button">Next: Operate →</button></div>
+      </section>
+
+      <!-- ============ PHASE 6 · OPERATE ============ -->
+      <section class="phase" data-phase="5">
+        <h2 class="phase-head serif">Operate</h2>
+        <p class="phase-lede">The weekly rhythm that keeps members paying. Update the numbers each Monday; the wizard computes your run-rate and flags churn.</p>
+
+        <div class="card">
+          <h3>Import real numbers <span class="hint">— Stripe or Mollie subscriptions CSV</span></h3>
+          <p class="note" style="margin-top:0">Stripe: Billing → Subscriptions → Export. Mollie: Subscriptions → Export. The file is read locally in your browser — nothing is uploaded anywhere.</p>
+          <input type="file" id="csvFile" accept=".csv,text/csv" hidden>
+          <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap">
+            <button class="btn secondary" id="importBtn" type="button">Import CSV…</button>
+            <button class="btn secondary small" id="clearImport" type="button" hidden>Clear import</button>
+          </div>
+          <p class="note" id="importSummary"></p>
+        </div>
+
+        <div class="card">
+          <h3>This month's numbers</h3>
+          <div class="grid3">
+            <div class="field"><label for="opMembers">Active members</label><input type="number" id="opMembers" data-save min="0" placeholder="0"></div>
+            <div class="field"><label for="opNew">Joined this month</label><input type="number" id="opNew" data-save min="0" placeholder="0"></div>
+            <div class="field"><label for="opLost">Cancelled this month</label><input type="number" id="opLost" data-save min="0" placeholder="0"></div>
+          </div>
+          <div class="stat-row">
+            <div class="stat"><div class="k">MRR</div><div class="v" id="statMrr">—</div><div class="d">members × monthly price</div></div>
+            <div class="stat"><div class="k">Annual run-rate</div><div class="v" id="statArr">—</div><div class="d">MRR × 12</div></div>
+            <div class="stat"><div class="k">Churn</div><div class="v" id="statChurn">—</div><div class="d">cancelled ÷ members</div></div>
+            <div class="stat"><div class="k">Net growth</div><div class="v" id="statNet">—</div><div class="d">joined − cancelled</div></div>
+          </div>
+          <p class="note" id="churnNote"></p>
+        </div>
+
+        <div class="card">
+          <h3>Weekly ops checklist <span class="hint">— resets are manual; it's a rhythm, not a one-off</span></h3>
+          <ul class="checks">
+            <li><input type="checkbox" id="w0" data-save><label for="w0">Post one discussion starter in the community</label></li>
+            <li><input type="checkbox" id="w1" data-save><label for="w1">Answer every open member question</label></li>
+            <li><input type="checkbox" id="w2" data-save><label for="w2">Publish or improve one manual</label></li>
+            <li><input type="checkbox" id="w3" data-save><label for="w3">Personally check in with one quiet member</label></li>
+            <li><input type="checkbox" id="w4" data-save><label for="w4">Send flagship perk deliverables (monthly reports)</label></li>
+            <li><input type="checkbox" id="w5" data-save><label for="w5">Update the numbers above</label></li>
+          </ul>
+          <div style="margin-top:12px"><button class="btn secondary small" id="resetWeek" type="button">Start new week</button></div>
+        </div>
+
+        <div class="card">
+          <h3>AI monthly report prompt</h3>
+          <p class="note" style="margin-top:0">Generates a prompt that turns your numbers into a monthly member-facing update and an internal review with actions.</p>
+          <button class="btn brass" data-gen="ops" type="button">Generate report prompt</button>
+          <div class="prompt-block" id="out-ops" hidden>
+            <div class="prompt-bar"><span class="tag">Claude prompt</span><button class="copy-btn" data-copy="ops" type="button">Copy</button></div>
+            <textarea class="prompt-out" id="prompt-ops" readonly aria-label="Generated ops report prompt"></textarea>
+          </div>
+        </div>
+        <div class="phase-footer"><button class="btn secondary" data-prev type="button">← Back</button><button class="btn brass" id="exportBtn2" type="button">Export ops pack</button></div>
+      </section>
+
+    </main>
+  </div>
+</div>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+(function () {
+  "use strict";
+  var LS_KEY = "membership-ops-wizard-v1";
+
+  /* ---------- state ---------- */
+  function loadState() {
+    try { return JSON.parse(localStorage.getItem(LS_KEY)) || {}; } catch (e) { return {}; }
+  }
+  var state = loadState();
+  function saveState() {
+    try { localStorage.setItem(LS_KEY, JSON.stringify(state)); } catch (e) {}
+  }
+
+  var saveEls = Array.prototype.slice.call(document.querySelectorAll("[data-save]"));
+  saveEls.forEach(function (el) {
+    var k = el.id;
+    if (el.type === "checkbox") {
+      if (state[k]) el.checked = true;
+      el.addEventListener("change", function () { state[k] = el.checked; onCheck(el); saveState(); refresh(); });
+      onCheck(el);
+    } else {
+      if (state[k] !== undefined) el.value = state[k];
+      el.addEventListener("input", function () { state[k] = el.value; saveState(); refresh(); });
+    }
+  });
+  function onCheck(el) {
+    var li = el.closest("li");
+    if (li) li.classList.toggle("checked", el.checked);
+  }
+
+  function v(id, fallback) {
+    var el = document.getElementById(id);
+    var val = el ? String(el.value || "").trim() : "";
+    return val || fallback || "";
+  }
+  function num(id) { var n = parseFloat(v(id)); return isNaN(n) ? 0 : n; }
+  function checked(id) { var el = document.getElementById(id); return !!(el && el.checked); }
+
+  /* ---------- phases / rail ---------- */
+  var PHASES = [
+    { name: "Foundation", fields: ["clubName", "audience", "promise", "story", "assets"] },
+    { name: "Offer & pricing", fields: ["flagship", "priceMonthly", "foundingPrice", "foundingCap"], checks: ["perk0","perk1","perk2","perk3","perk4","perk5"] },
+    { name: "Build", fields: [], checks: ["b0","b1","b2","b3","b4","b5"] },
+    { name: "Content", fields: ["m0","m1","m2"], checks: [] },
+    { name: "Launch", fields: ["launchDate","outreachCount","warmList"], checks: ["l0","l1","l2","l3","l4"] },
+    { name: "Operate", fields: ["opMembers"], checks: ["w0","w1","w2","w3","w4","w5"] }
+  ];
+  var current = state.__phase || 0;
+  var rail = document.getElementById("rail");
+  PHASES.forEach(function (p, i) {
+    var b = document.createElement("button");
+    b.type = "button";
+    b.innerHTML = '<span class="num">' + (i + 1) + '</span><span>' + p.name + '</span><span class="pct"></span>';
+    b.addEventListener("click", function () { go(i); });
+    rail.appendChild(b);
+  });
+  function go(i) {
+    current = Math.max(0, Math.min(PHASES.length - 1, i));
+    state.__phase = current; saveState();
+    Array.prototype.forEach.call(document.querySelectorAll(".phase"), function (s, idx) {
+      s.classList.toggle("active", idx === current);
+    });
+    refresh();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+  Array.prototype.forEach.call(document.querySelectorAll("[data-next]"), function (b) {
+    b.addEventListener("click", function () { go(current + 1); });
+  });
+  Array.prototype.forEach.call(document.querySelectorAll("[data-prev]"), function (b) {
+    b.addEventListener("click", function () { go(current - 1); });
+  });
+
+  /* ---------- progress ---------- */
+  function phasePct(p) {
+    var total = 0, done = 0;
+    (p.fields || []).forEach(function (f) { total++; if (v(f)) done++; });
+    (p.checks || []).forEach(function (c) { total++; if (checked(c)) done++; });
+    return total ? Math.round((done / total) * 100) : 0;
+  }
+  function refresh() {
+    var sum = 0;
+    Array.prototype.forEach.call(rail.children, function (b, i) {
+      var pct = phasePct(PHASES[i]);
+      sum += pct;
+      b.classList.toggle("active", i === current);
+      b.classList.toggle("done", pct === 100);
+      b.querySelector(".pct").textContent = pct > 0 && pct < 100 ? pct + "%" : "";
+    });
+    var overall = Math.round(sum / PHASES.length);
+    document.getElementById("progressFill").style.width = overall + "%";
+    document.getElementById("progressNum").textContent = overall + "%";
+    updateStats();
+  }
+
+  /* ---------- ops stats ---------- */
+  function money(n) {
+    var cur = v("currency", "€");
+    return cur + Math.round(n).toLocaleString("en-US");
+  }
+  function updateStats() {
+    var members = num("opMembers"), joined = num("opNew"), lost = num("opLost");
+    var price = num("priceMonthly") || num("foundingPrice");
+    var mrr = state.importMrr != null ? state.importMrr : members * price;
+    var churn = members > 0 ? (lost / members) * 100 : 0;
+    var net = joined - lost;
+
+    var haveMrr = state.importMrr != null || (price && members);
+    var mrrStat = document.getElementById("statMrr");
+    mrrStat.textContent = haveMrr ? money(mrr) : "—";
+    mrrStat.parentNode.querySelector(".d").textContent =
+      state.importMrr != null ? "from imported data" : "members × monthly price";
+    document.getElementById("statArr").textContent = haveMrr ? money(mrr * 12) : "—";
+    var churnEl = document.getElementById("statChurn");
+    churnEl.textContent = members ? churn.toFixed(1) + "%" : "—";
+    churnEl.className = "v " + (churn > 8 ? "crit" : churn > 4 ? "warn" : "good");
+    var netEl = document.getElementById("statNet");
+    netEl.textContent = (net > 0 ? "+" : "") + net;
+    netEl.className = "v " + (net > 0 ? "good" : net < 0 ? "crit" : "");
+
+    var note = document.getElementById("churnNote");
+    if (members && churn > 8) note.textContent = "Churn above 8% — prioritise the flagship perk and personal check-ins this month.";
+    else if (members && churn > 4) note.textContent = "Churn creeping up — talk to the last two members who cancelled and find the pattern.";
+    else note.textContent = "";
+  }
+
+  /* ---------- shared prompt context ---------- */
+  function clubContext() {
+    var perkLabels = [];
+    ["perk0","perk1","perk2","perk3","perk4","perk5"].forEach(function (id) {
+      if (checked(id)) perkLabels.push(document.querySelector('label[for="' + id + '"]').textContent);
+    });
+    var cur = v("currency", "€");
+    return [
+      "CLUB: " + v("clubName", "(unnamed membership club)"),
+      "AUDIENCE: " + v("audience", "(audience not defined yet)"),
+      "PROMISE: " + v("promise", "(promise not defined yet)"),
+      "FOUNDER CREDIBILITY: " + v("story", "(not provided)"),
+      "EXISTING ASSETS: " + v("assets", "(not provided)"),
+      "PERKS: " + (perkLabels.length ? perkLabels.join("; ") : "(none selected yet)"),
+      "FLAGSHIP PERK: " + v("flagship", "(not defined)"),
+      "PRICING: " + cur + v("priceMonthly", "?") + "/month, " + cur + v("priceYearly", "?") + "/year, founding price " + cur + v("foundingPrice", "?") + " (cap " + v("foundingCap", "10") + " members)"
+    ].join("\n");
+  }
+
+  /* ---------- prompt generators ---------- */
+  var GENERATORS = {
+    build: function () {
+      return "You are building v1 of a paid membership platform. Work in this empty folder.\n\n" +
+        clubContext() + "\n\n" +
+        "STACK:\n- Payments: " + v("payments", "Stripe") + " (subscriptions: monthly + yearly + a founding-member price)\n" +
+        "- Community: " + v("community", "Discord") + " (auto-invite on successful payment)\n" +
+        "- Deploy target: " + v("hosting", "Vercel") + "\n" +
+        "- Keep the stack boring and maintainable: Next.js (or plain Node + templates if simpler), a hosted Postgres (e.g. Supabase) for members/subscriptions, transactional email for welcome + invite mails.\n\n" +
+        "BUILD EXACTLY THIS SCOPE, NOTHING MORE:\n" +
+        "1. Landing page: headline from the PROMISE above, perks list, one testimonial slot, pricing section with the founding-member offer, join button into checkout.\n" +
+        "2. Checkout wired to " + v("payments", "Stripe") + " test mode.\n" +
+        "3. Member auth (magic-link email login) + account page: subscription status, manage billing, cancel flow that actually works.\n" +
+        "4. Members-only content area listing manuals (markdown files in /content rendered server-side).\n" +
+        "5. On successful payment: create member record, send welcome email, send " + v("community", "Discord") + " invite link.\n\n" +
+        "WORKING RULES:\n- Ask me clarifying questions before scaffolding if anything above is ambiguous.\n" +
+        "- After scaffolding, show me a preview and iterate in small steps; do not one-shot the whole build.\n" +
+        "- Explain anything I need to configure manually (API keys, webhook URLs, DNS) as a checklist at the end.\n" +
+        "- Write a README with how to run locally and how to deploy to " + v("hosting", "Vercel") + ".";
+    },
+    content: function () {
+      var manuals = ["m0","m1","m2","m3","m4"].map(function (id) { return v(id); }).filter(Boolean);
+      return "You are the content editor for my paid membership club.\n\n" +
+        clubContext() + "\n\n" +
+        "SEED MANUALS TO PRODUCE:\n" + (manuals.length ? manuals.map(function (m, i) { return (i + 1) + ". " + m; }).join("\n") : "(I'll give you titles — propose 5 based on the assets above)") + "\n\n" +
+        "TASK:\nFor each manual, interview me first: ask me the 5–8 questions you need to extract what I already know and do (my SOPs, examples, numbers, mistakes). Then write the manual in this fixed format:\n" +
+        "- Who this is for and the outcome (2 sentences)\n- The system, as numbered steps with my real examples\n- Templates/checklists the member can copy\n- Common mistakes and fixes\n- A 15-minute quick start\n\n" +
+        "VOICE: practical, first person, no filler. A member should be able to act on each manual the same day. One manual at a time; wait for my answers before writing.";
+    },
+    launch: function () {
+      return "You are helping me launch my membership club to founding members.\n\n" +
+        clubContext() + "\n\n" +
+        "LAUNCH PLAN:\n- Target launch date: " + v("launchDate", "(not set)") + "\n" +
+        "- Personal invitations to send: " + v("outreachCount", "30") + "\n" +
+        "- Warm list sources: " + v("warmList", "(not provided)") + "\n\n" +
+        "PRODUCE, in my voice (drafts, then refine with me):\n" +
+        "1. A PERSONAL INVITE message (email + WhatsApp variant, under 120 words each). It must read as one-to-one, name the founding price locked for life and the cap of " + v("foundingCap", "10") + " founding members, and end with a yes/no question — not a link dump.\n" +
+        "2. A LAUNCH POST for my main channels announcing the club (one long-form, one short variant).\n" +
+        "3. A WELCOME EMAIL for new founding members: what to do first inside, where the community lives, and a personal note asking their #1 goal.\n" +
+        "4. A simple OUTREACH TRACKER table (name, source, invited on, replied, joined) I can keep in the project folder.\n\n" +
+        "Ask me for a sample of my writing first so you can match my voice. Personal outreach beats broadcast — optimise every word for one reader.";
+    },
+    ops: function () {
+      var cur = v("currency", "€");
+      var price = v("priceMonthly") || v("foundingPrice") || "?";
+      return "You are my membership club operations analyst. Produce this month's review.\n\n" +
+        clubContext() + "\n\n" +
+        "THIS MONTH'S NUMBERS" + (state.importMeta ? " (real data imported from " + state.importMeta.file + " on " + state.importMeta.when + ")" : "") + ":\n" +
+        "- Active members: " + v("opMembers", "0") + "\n- Joined: " + v("opNew", "0") + "\n- Cancelled: " + v("opLost", "0") + "\n" +
+        (state.importMrr != null ? "- Measured MRR: " + cur + state.importMrr + "\n" : "- Effective monthly price: " + cur + price + "\n") + "\n" +
+        "PRODUCE TWO DOCUMENTS:\n" +
+        "1. MEMBER-FACING monthly update (under 250 words): what shipped this month (ask me), what's coming, a member win to celebrate (ask me), and one question to spark community discussion.\n" +
+        "2. INTERNAL review: MRR, annual run-rate, churn % with a verdict (healthy under 4%, watch 4–8%, act above 8%), the single biggest retention risk, and the top 3 actions for next month ranked by effort vs impact. If churn is above 4%, include a win-back message draft for recently cancelled members.\n\n" +
+        "Ask me your questions first, then write both documents.";
+    }
+  };
+
+  Array.prototype.forEach.call(document.querySelectorAll("[data-gen]"), function (b) {
+    b.addEventListener("click", function () {
+      var kind = b.getAttribute("data-gen");
+      document.getElementById("prompt-" + kind).value = GENERATORS[kind]();
+      document.getElementById("out-" + kind).hidden = false;
+    });
+  });
+  Array.prototype.forEach.call(document.querySelectorAll("[data-copy]"), function (b) {
+    b.addEventListener("click", function () {
+      var kind = b.getAttribute("data-copy");
+      var ta = document.getElementById("prompt-" + kind);
+      ta.select();
+      var ok = false;
+      try { ok = document.execCommand("copy"); } catch (e) {}
+      if (!ok && navigator.clipboard) {
+        navigator.clipboard.writeText(ta.value).then(function () { toast("Copied"); });
+      } else { toast(ok ? "Copied" : "Select the text and copy manually"); }
+      if (ok) toast("Copied");
+    });
+  });
+
+  /* ---------- preset ---------- */
+  var PRESETS = {
+    church: {
+      clubName: "Church Media Academy",
+      audience: "church media volunteers and communications staff",
+      promise: "In 90 days your livestream, socials and online reach run on a repeatable weekly system — with a community of church media people who answer your questions the same day.",
+      story: "I run Vision Outreach Media, benchmark churches' digital presence with Engage AI, and run Church of God Amersfoort's livestream every Sunday.",
+      assets: "Livestream setup SOPs, YouTube stream automation scripts, Engage AI benchmark playbooks, the €999 AI Ministry Assessment, church contact list",
+      flagship: "Automated monthly Engage AI engagement report for each member church, delivered as a branded PDF",
+      currency: "€", priceMonthly: "39", priceYearly: "390", foundingPrice: "29", foundingCap: "10",
+      m0: "The Sunday Livestream Playbook", m1: "YouTube Growth for Churches", m2: "Reading Your Engagement Benchmark",
+      m3: "The Volunteer Media Team Handbook", m4: "Social Posts from One Sunday Sermon",
+      warmList: "Past assessment leads, Church of God Amersfoort network, Engage AI scan contacts",
+      perk0: true, perk1: true, perk2: true, perk3: true
+    },
+    creator: {
+      clubName: "The Builders' Club",
+      audience: "digital creators and solopreneurs shipping products with AI",
+      promise: "Ship one real digital product in your first 60 days, with builders around you who review your work and share what's selling.",
+      story: "",
+      assets: "",
+      flagship: "Monthly teardown of one member's product with a concrete improvement plan",
+      currency: "€", priceMonthly: "29", priceYearly: "290", foundingPrice: "19", foundingCap: "20",
+      m0: "Your First Product in a Weekend", m1: "Pricing Digital Products", m2: "The Launch Checklist",
+      m3: "", m4: "", warmList: "",
+      perk0: true, perk1: true, perk3: true
+    }
+  };
+  document.getElementById("applyPreset").addEventListener("click", function () {
+    var key = v("preset");
+    var p = PRESETS[key];
+    if (!p) { toast("Choose a preset first"); return; }
+    Object.keys(p).forEach(function (k) {
+      var el = document.getElementById(k);
+      if (!el) return;
+      if (el.type === "checkbox") { el.checked = !!p[k]; state[k] = !!p[k]; onCheck(el); }
+      else { el.value = p[k]; state[k] = p[k]; }
+    });
+    saveState(); refresh(); toast("Preset applied — adjust anything");
+  });
+
+  /* ---------- export ops pack ---------- */
+  function buildPack() {
+    var cur = v("currency", "€");
+    var manuals = ["m0","m1","m2","m3","m4"].map(function (id) { return v(id); }).filter(Boolean);
+    var lines = [
+      "# " + v("clubName", "Membership Club") + " — Business Ops Pack",
+      "",
+      "_Generated " + new Date().toISOString().slice(0, 10) + " by the Membership Club Ops Wizard_",
+      "",
+      "## Foundation",
+      "- **Audience:** " + v("audience", "—"),
+      "- **Promise:** " + v("promise", "—"),
+      "- **Founder credibility:** " + v("story", "—"),
+      "- **Existing assets:** " + v("assets", "—"),
+      "",
+      "## Offer & pricing",
+      "- **Flagship perk:** " + v("flagship", "—"),
+      "- **Pricing:** " + cur + v("priceMonthly", "?") + "/mo · " + cur + v("priceYearly", "?") + "/yr · founding " + cur + v("foundingPrice", "?") + " (cap " + v("foundingCap", "10") + ")",
+      "",
+      "## Build",
+      "- **Stack:** " + v("payments", "Stripe") + " · " + v("community", "Discord") + " · " + v("hosting", "Vercel"),
+      "",
+      "## Seed manuals",
+      manuals.length ? manuals.map(function (m, i) { return (i + 1) + ". " + m; }).join("\n") : "_none yet_",
+      "",
+      "## Launch",
+      "- **Date:** " + v("launchDate", "—") + " · **Invites:** " + v("outreachCount", "—"),
+      "- **Warm list:** " + v("warmList", "—"),
+      "",
+      "## Current numbers" + (state.importMeta ? " (imported from " + state.importMeta.file + ", " + state.importMeta.when + ")" : ""),
+      "- Members: " + v("opMembers", "0") + " · joined " + v("opNew", "0") + " · cancelled " + v("opLost", "0") +
+        (state.importMrr != null ? " · measured MRR " + cur + state.importMrr : ""),
+      "",
+      "## AI prompts",
+      "", "### Build prompt", "```", GENERATORS.build(), "```",
+      "", "### Content prompt", "```", GENERATORS.content(), "```",
+      "", "### Launch-kit prompt", "```", GENERATORS.launch(), "```",
+      "", "### Monthly report prompt", "```", GENERATORS.ops(), "```", ""
+    ];
+    return lines.join("\n");
+  }
+  function exportPack() {
+    var name = (v("clubName", "membership-club").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || "membership-club") + "-ops-pack.md";
+    var data = buildPack();
+    if (window.claude && window.claude.downloads) {
+      window.claude.downloads.save({ filename: name, data: data }).then(function () {
+        toast("Ops pack saved");
+      }).catch(function (err) {
+        if (err && err.code === "declined") return;
+        if (err && err.code === "rate_limited") { toast("A save prompt is already open"); return; }
+        copyFallback(data);
+      });
+    } else {
+      copyFallback(data);
+    }
+  }
+  function copyFallback(data) {
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(data).then(
+        function () { toast("Saving unavailable — ops pack copied to clipboard instead"); },
+        function () { toast("Could not save or copy — select text in the prompts and copy manually"); }
+      );
+    } else { toast("Saving unavailable in this view"); }
+  }
+  document.getElementById("exportBtn").addEventListener("click", exportPack);
+  document.getElementById("exportBtn2").addEventListener("click", exportPack);
+
+  /* ---------- CSV import (Stripe / Mollie subscription exports) ---------- */
+  function parseCSV(text) {
+    var rows = [], row = [], cell = "", inQ = false;
+    for (var i = 0; i < text.length; i++) {
+      var c = text[i];
+      if (inQ) {
+        if (c === '"') {
+          if (text[i + 1] === '"') { cell += '"'; i++; } else inQ = false;
+        } else cell += c;
+      } else if (c === '"') inQ = true;
+      else if (c === ",") { row.push(cell); cell = ""; }
+      else if (c === "\n" || c === "\r") {
+        if (c === "\r" && text[i + 1] === "\n") i++;
+        row.push(cell); cell = "";
+        if (row.length > 1 || row[0] !== "") rows.push(row);
+        row = [];
+      } else cell += c;
+    }
+    row.push(cell);
+    if (row.length > 1 || row[0] !== "") rows.push(row);
+    return rows;
+  }
+  function findCol(headers, needles, avoid) {
+    for (var n = 0; n < needles.length; n++) {
+      for (var h = 0; h < headers.length; h++) {
+        var name = headers[h].toLowerCase();
+        if (name.indexOf(needles[n]) !== -1 && (!avoid || name.indexOf(avoid) === -1)) return h;
+      }
+    }
+    return -1;
+  }
+  function parseAmount(raw) {
+    if (!raw) return NaN;
+    var s = String(raw).replace(/[^\d.,-]/g, "");
+    if (s.indexOf(",") !== -1 && s.indexOf(".") !== -1) s = s.replace(/,/g, "");
+    else s = s.replace(",", ".");
+    return parseFloat(s);
+  }
+  function parseDate(raw) {
+    if (!raw) return null;
+    var t = Date.parse(raw);
+    if (isNaN(t)) t = Date.parse(String(raw).replace(" ", "T"));
+    return isNaN(t) ? null : new Date(t);
+  }
+  function analyzeSubscriptions(rows) {
+    if (rows.length < 2) return { error: "The file has no data rows." };
+    var headers = rows[0];
+    var col = {
+      status: findCol(headers, ["status"]),
+      created: findCol(headers, ["created", "start", "signup", "date"], "cancel"),
+      canceled: findCol(headers, ["cancel", "ended", "end date"]),
+      amount: findCol(headers, ["amount", "price", "value", "mrr"]),
+      interval: findCol(headers, ["interval", "frequency", "period", "billing"])
+    };
+    if (col.status === -1 && col.canceled === -1) {
+      return { error: "No status or cancel column found. Headers seen: " + headers.join(", ") };
+    }
+    var now = new Date(), active = 0, joined = 0, lost = 0, mrr = 0, hasAmount = false;
+    function sameMonth(d) { return d && d.getFullYear() === now.getFullYear() && d.getMonth() === now.getMonth(); }
+    for (var r = 1; r < rows.length; r++) {
+      var row = rows[r];
+      var status = col.status !== -1 ? String(row[col.status] || "").toLowerCase() : "";
+      var canceledAt = col.canceled !== -1 ? parseDate(row[col.canceled]) : null;
+      var isActive = col.status !== -1
+        ? (status.indexOf("active") !== -1 || status.indexOf("trial") !== -1 || status.indexOf("actief") !== -1)
+        : !canceledAt;
+      if (isActive) {
+        active++;
+        if (col.amount !== -1) {
+          var amt = parseAmount(row[col.amount]);
+          if (!isNaN(amt)) {
+            hasAmount = true;
+            var iv = col.interval !== -1 ? String(row[col.interval] || "").toLowerCase() : "";
+            if (iv.indexOf("year") !== -1 || iv.indexOf("annual") !== -1 || iv.indexOf("jaar") !== -1) amt = amt / 12;
+            else if (iv.indexOf("week") !== -1) amt = amt * 4.33;
+            mrr += amt;
+          }
+        }
+      }
+      if (col.created !== -1 && sameMonth(parseDate(row[col.created]))) joined++;
+      if (canceledAt && sameMonth(canceledAt)) lost++;
+    }
+    return { active: active, joined: joined, lost: lost, mrr: hasAmount ? Math.round(mrr * 100) / 100 : null, rows: rows.length - 1 };
+  }
+  function setNum(id, val) {
+    var el = document.getElementById(id);
+    el.value = String(val); state[id] = el.value;
+  }
+  function renderImportSummary() {
+    var m = state.importMeta;
+    var sum = document.getElementById("importSummary");
+    var clr = document.getElementById("clearImport");
+    if (m) {
+      sum.textContent = m.file + " — " + m.rows + " subscriptions read on " + m.when +
+        ". Active, joined, cancelled" + (state.importMrr != null ? " and MRR" : "") + " filled from real data.";
+      clr.hidden = false;
+    } else { sum.textContent = ""; clr.hidden = true; }
+  }
+  document.getElementById("importBtn").addEventListener("click", function () {
+    document.getElementById("csvFile").click();
+  });
+  document.getElementById("csvFile").addEventListener("change", function () {
+    var file = this.files && this.files[0];
+    if (!file) return;
+    var reader = new FileReader();
+    reader.onload = function () {
+      var res = analyzeSubscriptions(parseCSV(String(reader.result)));
+      if (res.error) { toast(res.error); return; }
+      setNum("opMembers", res.active); setNum("opNew", res.joined); setNum("opLost", res.lost);
+      state.importMrr = res.mrr;
+      state.importMeta = { file: file.name, rows: res.rows, when: new Date().toISOString().slice(0, 10) };
+      saveState(); renderImportSummary(); refresh();
+      toast("Imported " + res.rows + " subscriptions");
+    };
+    reader.onerror = function () { toast("Could not read that file"); };
+    reader.readAsText(file);
+    this.value = "";
+  });
+  document.getElementById("clearImport").addEventListener("click", function () {
+    delete state.importMrr; delete state.importMeta;
+    saveState(); renderImportSummary(); refresh(); toast("Import cleared — back to manual numbers");
+  });
+  renderImportSummary();
+
+  /* ---------- misc ---------- */
+  document.getElementById("resetWeek").addEventListener("click", function () {
+    ["w0","w1","w2","w3","w4","w5"].forEach(function (id) {
+      var el = document.getElementById(id);
+      el.checked = false; state[id] = false; onCheck(el);
+    });
+    saveState(); refresh(); toast("New week started");
+  });
+  document.getElementById("resetBtn").addEventListener("click", function () {
+    if (!confirm("Clear everything and start over? This wipes all saved answers.")) return;
+    try { localStorage.removeItem(LS_KEY); } catch (e) {}
+    location.reload();
+  });
+
+  var toastTimer;
+  function toast(msg) {
+    var t = document.getElementById("toast");
+    t.textContent = msg; t.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { t.classList.remove("show"); }, 2400);
+  }
+
+  go(current);
+})();
+</script>

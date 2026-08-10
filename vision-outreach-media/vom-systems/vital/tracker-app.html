@@ -1,0 +1,846 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>vital. Tracker — Track it</title>
+<meta name="description" content="A real single-user health tracker for the six systems of the body. Set your protocol, log each day, watch your vitality build over time. All data stays on this device.">
+<style>
+  :root{
+    --c:#0f9f8f; --c-ink:#08554c;
+    --bg:#f4f3ee; --surface:#ffffff; --surface-2:#efeee7; --surface-3:#e9e7dd;
+    --line:#e1dfd4; --line-soft:#eae8de;
+    --ink:#1a1d1b; --ink-dim:#535b56; --ink-faint:#8a938d;
+    --good:#3f9e6b; --warn:#d98a2b; --bad:#d9536b;
+    --track:#e3e1d6;
+    /* six systems */
+    --s-rest:#6d63d6; --s-fuel:#d98a2b; --s-move:#d9536b; --s-build:#7a9b3c; --s-defend:#2f9e6b; --s-center:#3d7fd6;
+    --mono:ui-monospace,"SF Mono","Cascadia Code",Menlo,monospace;
+    --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    --serif:"Iowan Old Style",ui-serif,Georgia,"Times New Roman",serif;
+    --sh:0 1px 2px rgba(20,30,25,.04),0 6px 20px -12px rgba(20,30,25,.18);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --c:#3fd0c0; --c-ink:#0c1615;
+      --bg:#0d100f; --surface:#161a18; --surface-2:#1b201d; --surface-3:#222824;
+      --line:#2a322d; --line-soft:#232a26;
+      --ink:#eef2ef; --ink-dim:#a6b1aa; --ink-faint:#6c7772;
+      --good:#63c78d; --warn:#e6a64d; --bad:#ef7d92;
+      --track:#28302b;
+      --s-rest:#9a90f0; --s-fuel:#e6a64d; --s-move:#ef7d92; --s-build:#a6c766; --s-defend:#55c78d; --s-center:#6aa6f0;
+    }
+  }
+  :root[data-theme="light"]{
+    --c:#0f9f8f; --c-ink:#08554c; --bg:#f4f3ee; --surface:#ffffff; --surface-2:#efeee7; --surface-3:#e9e7dd;
+    --line:#e1dfd4; --line-soft:#eae8de; --ink:#1a1d1b; --ink-dim:#535b56; --ink-faint:#8a938d;
+    --good:#3f9e6b; --warn:#d98a2b; --bad:#d9536b; --track:#e3e1d6;
+    --s-rest:#6d63d6; --s-fuel:#d98a2b; --s-move:#d9536b; --s-build:#7a9b3c; --s-defend:#2f9e6b; --s-center:#3d7fd6;
+  }
+  :root[data-theme="dark"]{
+    --c:#3fd0c0; --c-ink:#0c1615; --bg:#0d100f; --surface:#161a18; --surface-2:#1b201d; --surface-3:#222824;
+    --line:#2a322d; --line-soft:#232a26; --ink:#eef2ef; --ink-dim:#a6b1aa; --ink-faint:#6c7772;
+    --good:#63c78d; --warn:#e6a64d; --bad:#ef7d92; --track:#28302b;
+    --s-rest:#9a90f0; --s-fuel:#e6a64d; --s-move:#ef7d92; --s-build:#a6c766; --s-defend:#55c78d; --s-center:#6aa6f0;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ overflow-x:hidden; }
+  body{ margin:0; background:var(--bg); color:var(--ink); font-family:var(--sans); line-height:1.55;
+    -webkit-font-smoothing:antialiased; -webkit-text-size-adjust:100%; }
+  button{ font:inherit; color:inherit; cursor:pointer; }
+  :focus-visible{ outline:2.5px solid var(--c); outline-offset:2px; border-radius:6px; }
+  .tnum{ font-variant-numeric:tabular-nums; font-family:var(--mono); }
+
+  /* ---- top bar ---- */
+  header{ position:sticky; top:0; z-index:20; background:color-mix(in srgb,var(--bg) 86%,transparent);
+    backdrop-filter:saturate(1.4) blur(12px); border-bottom:1px solid var(--line); }
+  .bar{ max-width:1040px; margin:0 auto; padding:12px 18px; display:flex; align-items:center; gap:14px; }
+  .brand{ font-family:var(--serif); font-weight:600; font-size:24px; letter-spacing:-.02em; color:var(--c); line-height:1; }
+  .brand span{ color:var(--ink); }
+  .kicker{ font-family:var(--mono); font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:var(--ink-faint);
+    padding:3px 8px; border:1px solid var(--line); border-radius:20px; margin-left:2px; }
+  .bar .spacer{ flex:1; }
+  .hello{ font-size:13px; color:var(--ink-dim); }
+  .hello b{ color:var(--ink); font-weight:650; }
+  @media(max-width:600px){ .hello{ display:none; } .bar{ padding:12px 14px; gap:10px; } }
+  .icobtn{ border:1px solid var(--line); background:var(--surface); border-radius:9px; padding:7px 11px;
+    font-size:12.5px; font-weight:600; color:var(--ink-dim); display:inline-flex; align-items:center; gap:6px; }
+  .icobtn:hover{ color:var(--ink); border-color:var(--ink-faint); }
+
+  /* ---- nav ---- */
+  nav.tabs{ max-width:1040px; margin:0 auto; padding:0 18px; display:flex; gap:2px; }
+  .tab{ background:none; border:none; padding:12px 4px; margin-right:20px; font-size:14px; font-weight:600;
+    color:var(--ink-faint); border-bottom:2px solid transparent; letter-spacing:-.01em; }
+  .tab[aria-current="true"]{ color:var(--ink); border-bottom-color:var(--c); }
+  .tab:hover{ color:var(--ink-dim); }
+
+  main{ max-width:1040px; margin:0 auto; padding:22px 18px 120px; }
+  @media(max-width:600px){ main{ padding-bottom:96px; } }
+
+  .eyebrow{ font-family:var(--mono); font-size:11px; letter-spacing:.15em; text-transform:uppercase; color:var(--ink-faint); margin:0 0 4px; }
+  h2.page{ font-family:var(--serif); font-weight:600; font-size:clamp(24px,4.5vw,32px); letter-spacing:-.02em; margin:0 0 3px; text-wrap:balance; }
+  .sub{ color:var(--ink-dim); font-size:14.5px; margin:0 0 22px; max-width:60ch; }
+
+  .card{ background:var(--surface); border:1px solid var(--line); border-radius:16px; box-shadow:var(--sh); }
+
+  /* ---- today: hero rollup ---- */
+  .datebar{ display:flex; align-items:center; justify-content:center; gap:10px; margin:0 0 18px; }
+  .datebar button{ border:1px solid var(--line); background:var(--surface); border-radius:8px; width:34px; height:34px; font-size:16px; color:var(--ink-dim); line-height:1; }
+  .datebar button:disabled{ opacity:.3; cursor:not-allowed; }
+  .datelabel{ font-weight:650; font-size:14.5px; min-width:150px; text-align:center; }
+  .datelabel small{ display:block; font-family:var(--mono); font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-faint); font-weight:500; }
+  .today-btn{ font-family:var(--mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--c); background:none; border:none; padding:6px; }
+
+  .rollup{ display:grid; grid-template-columns:auto 1fr; gap:26px; align-items:center; padding:24px 26px; margin-bottom:22px; }
+  .rollup .num{ font-family:var(--mono); font-weight:700; font-size:34px; letter-spacing:-.02em; }
+  .rollup .state{ font-family:var(--serif); font-size:22px; font-weight:600; letter-spacing:-.01em; margin:0 0 4px; }
+  .rollup .say{ font-size:13.5px; color:var(--ink-dim); margin:0 0 14px; }
+  .chips{ display:flex; flex-wrap:wrap; gap:8px; }
+  .chip{ display:inline-flex; align-items:center; gap:6px; font-size:12px; font-weight:600; padding:5px 10px; border-radius:20px;
+    background:var(--surface-2); border:1px solid var(--line); color:var(--ink-dim); }
+  .chip b{ color:var(--ink); font-family:var(--mono); }
+  .chip.flame{ color:var(--warn); border-color:color-mix(in srgb,var(--warn) 40%,var(--line)); background:color-mix(in srgb,var(--warn) 12%,var(--surface)); }
+  @media(max-width:520px){ .rollup{ gap:18px; padding:18px; } .rollup .num{ font-size:28px; } }
+  @media(max-width:460px){ .rollup{ grid-template-columns:1fr; justify-items:center; text-align:center; gap:14px; }
+    .rollup .chips{ justify-content:center; } .rollup svg{ width:132px; height:132px; } }
+
+  /* ---- system cards ---- */
+  .sysgrid{ display:grid; grid-template-columns:repeat(2,1fr); gap:16px; }
+  @media(max-width:760px){ .sysgrid{ grid-template-columns:1fr; } }
+  .sys{ padding:18px 18px 8px; }
+  .sys .head{ display:flex; align-items:center; gap:14px; margin-bottom:14px; }
+  .sys .title{ flex:1; min-width:0; }
+  .sys .title h3{ font-family:var(--serif); font-size:19px; font-weight:600; letter-spacing:-.01em; margin:0; display:flex; align-items:center; gap:8px; }
+  .dot{ width:9px; height:9px; border-radius:50%; background:var(--sys); flex:none; box-shadow:0 0 0 3px color-mix(in srgb,var(--sys) 22%,transparent); }
+  .sys .title p{ font-family:var(--mono); font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-faint); margin:2px 0 0; }
+  .habits{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; }
+  .habit{ display:flex; align-items:center; gap:12px; padding:9px 0; border-top:1px solid var(--line-soft); }
+  .habit:first-child{ border-top:none; }
+  .habit .hl{ flex:1; font-size:14px; color:var(--ink); }
+  .habit.met .hl{ color:var(--ink-dim); }
+  .check{ width:26px; height:26px; border-radius:8px; border:2px solid var(--line); background:var(--surface); flex:none;
+    display:grid; place-items:center; color:transparent; transition:transform .12s ease, background .12s ease; }
+  .check:hover{ border-color:var(--sys); }
+  .check[aria-pressed="true"]{ background:var(--sys); border-color:var(--sys); color:#fff; }
+  :root[data-theme="dark"] .check[aria-pressed="true"], .check[aria-pressed="true"]{ }
+  .check svg{ width:15px; height:15px; }
+  .counter{ display:inline-flex; align-items:center; gap:2px; flex:none; }
+  .counter button{ width:28px; height:28px; border:1px solid var(--line); background:var(--surface); border-radius:8px; font-size:17px; color:var(--ink-dim); line-height:1; }
+  .counter button:hover{ border-color:var(--sys); color:var(--ink); }
+  .counter .cval{ min-width:64px; text-align:center; font-size:13px; font-weight:600; }
+  .counter .cval b{ color:var(--sys); }
+  .counter .cval.met b{ color:var(--sys); }
+  .sysfoot{ display:flex; align-items:center; gap:10px; padding:12px 0 8px; margin-top:4px; border-top:1px solid var(--line-soft); }
+  .prog{ flex:1; height:7px; border-radius:6px; background:var(--track); overflow:hidden; }
+  .prog i{ display:block; height:100%; background:var(--sys); border-radius:6px; transition:width .3s ease; }
+  .sysfoot .pct{ font-family:var(--mono); font-size:12px; font-weight:600; color:var(--ink-dim); min-width:52px; text-align:right; }
+
+  /* ---- progress ---- */
+  .statrow{ display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-bottom:22px; }
+  @media(max-width:560px){ .statrow{ grid-template-columns:1fr 1fr; } }
+  .stat{ padding:16px 18px; }
+  .stat .k{ font-family:var(--mono); font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-faint); margin-bottom:8px; }
+  .stat .v{ font-family:var(--mono); font-weight:700; font-size:26px; letter-spacing:-.02em; line-height:1; }
+  .stat .v small{ font-size:14px; color:var(--ink-faint); font-weight:600; }
+  .stat .cap{ font-size:11.5px; color:var(--ink-dim); margin-top:6px; }
+  .panel{ padding:20px 22px; margin-bottom:22px; }
+  .panel h3{ font-family:var(--serif); font-size:19px; font-weight:600; margin:0 0 2px; letter-spacing:-.01em; }
+  .panel .ph{ display:flex; align-items:baseline; justify-content:space-between; gap:12px; margin-bottom:16px; }
+  .panel .ph p{ font-size:12.5px; color:var(--ink-faint); margin:0; }
+  .barwrap{ width:100%; overflow-x:auto; }
+  .spark-grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  @media(max-width:640px){ .spark-grid{ grid-template-columns:1fr; } }
+  .srow{ display:flex; align-items:center; gap:14px; padding:12px 14px; border:1px solid var(--line); border-radius:12px; background:var(--surface); }
+  .srow .si{ flex:0 1 auto; min-width:0; }
+  .srow .si svg{ width:100%; max-width:150px; height:38px; display:block; }
+  @media(max-width:520px){ .srow{ gap:10px; padding:11px 12px; } .srow .si{ max-width:88px; } }
+  .srow .sname{ flex:1; min-width:0; }
+  .srow .sname h4{ font-size:14.5px; font-weight:650; margin:0; display:flex; align-items:center; gap:7px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .srow .sname p{ font-family:var(--mono); font-size:10px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-faint); margin:2px 0 0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .srow .sval{ text-align:right; flex:none; }
+  .srow .sval .pv{ font-family:var(--mono); font-weight:700; font-size:18px; }
+  .srow .sval .pl{ font-size:10.5px; color:var(--ink-faint); }
+
+  .legend{ display:flex; gap:16px; flex-wrap:wrap; font-size:11.5px; color:var(--ink-dim); margin-top:12px; }
+  .legend span{ display:inline-flex; align-items:center; gap:6px; }
+  .swatch{ width:10px; height:10px; border-radius:3px; }
+
+  /* ---- build (protocol editor) ---- */
+  .buildsys{ padding:18px 20px; margin-bottom:16px; }
+  .buildsys .bh{ display:flex; align-items:center; gap:12px; margin-bottom:6px; }
+  .buildsys .bh h3{ font-family:var(--serif); font-size:19px; font-weight:600; margin:0; flex:1; }
+  .brow{ display:flex; align-items:center; gap:10px; padding:10px 0; border-top:1px solid var(--line-soft); }
+  .brow .bname{ flex:1; font-size:14px; }
+  .brow .btype{ font-family:var(--mono); font-size:10px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-faint); }
+  .brow input.tgt{ width:64px; padding:5px 8px; border:1px solid var(--line); border-radius:7px; background:var(--surface-2); color:var(--ink); font:inherit; font-size:13px; text-align:right; }
+  .toggle-sw{ width:40px; height:24px; border-radius:20px; border:none; background:var(--track); position:relative; flex:none; transition:background .15s ease; }
+  .toggle-sw::after{ content:""; position:absolute; top:3px; left:3px; width:18px; height:18px; border-radius:50%; background:#fff; box-shadow:0 1px 3px rgba(0,0,0,.3); transition:transform .15s ease; }
+  .toggle-sw[aria-pressed="true"]{ background:var(--sys); }
+  .toggle-sw[aria-pressed="true"]::after{ transform:translateX(16px); }
+  .rm{ border:none; background:none; color:var(--ink-faint); font-size:18px; padding:4px 8px; line-height:1; }
+  .rm:hover{ color:var(--bad); }
+  .addrow{ display:flex; gap:8px; flex-wrap:wrap; align-items:center; padding:12px 0 2px; border-top:1px solid var(--line-soft); margin-top:4px; }
+  .addrow input[type=text]{ flex:1; min-width:140px; padding:8px 10px; border:1px solid var(--line); border-radius:8px; background:var(--surface-2); color:var(--ink); font:inherit; font-size:13.5px; }
+  .addrow select{ padding:8px 10px; border:1px solid var(--line); border-radius:8px; background:var(--surface-2); color:var(--ink); font:inherit; font-size:13px; }
+  .addrow button{ border:1px solid var(--sys); color:var(--sys); background:color-mix(in srgb,var(--sys) 10%,var(--surface)); border-radius:8px; padding:8px 14px; font-size:13px; font-weight:650; }
+
+  /* ---- you / settings ---- */
+  .field{ margin-bottom:18px; }
+  .field label{ display:block; font-family:var(--mono); font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-faint); margin-bottom:7px; }
+  .field input, .field textarea{ width:100%; padding:11px 13px; border:1px solid var(--line); border-radius:10px; background:var(--surface-2); color:var(--ink); font:inherit; font-size:15px; }
+  .field textarea{ resize:vertical; min-height:64px; line-height:1.5; }
+  .btnrow{ display:flex; gap:10px; flex-wrap:wrap; }
+  .btn{ border-radius:10px; padding:11px 18px; font-size:14px; font-weight:650; border:1px solid var(--line); background:var(--surface); color:var(--ink); }
+  .btn.primary{ background:var(--c); border-color:var(--c); color:var(--c-ink); }
+  .btn.danger{ color:var(--bad); border-color:color-mix(in srgb,var(--bad) 45%,var(--line)); }
+  .btn.danger:hover{ background:color-mix(in srgb,var(--bad) 12%,var(--surface)); }
+  .note{ font-size:12.5px; color:var(--ink-faint); margin-top:14px; line-height:1.6; }
+  .divider{ height:1px; background:var(--line); margin:26px 0; border:none; }
+
+  .empty{ text-align:center; padding:40px 20px; color:var(--ink-faint); }
+  .empty .big{ font-family:var(--serif); font-size:20px; color:var(--ink-dim); margin-bottom:6px; }
+
+  /* ---- onboarding overlay ---- */
+  .overlay{ position:fixed; inset:0; z-index:60; background:color-mix(in srgb,var(--bg) 70%,rgba(10,14,12,.6)); backdrop-filter:blur(6px);
+    display:grid; place-items:center; padding:20px; }
+  .modal{ width:100%; max-width:440px; background:var(--surface); border:1px solid var(--line); border-radius:20px; box-shadow:0 30px 80px -30px rgba(0,0,0,.5); padding:32px 30px; }
+  .modal .brand{ font-size:30px; margin-bottom:4px; }
+  .modal h2{ font-family:var(--serif); font-weight:600; font-size:22px; letter-spacing:-.01em; margin:16px 0 6px; }
+  .modal p.lede{ color:var(--ink-dim); font-size:14px; margin:0 0 22px; }
+  .goalpick{ display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:6px; }
+  .goalpick button{ text-align:left; border:1px solid var(--line); background:var(--surface-2); border-radius:11px; padding:11px 13px; font-size:13.5px; font-weight:600; color:var(--ink-dim); }
+  .goalpick button[aria-pressed="true"]{ border-color:var(--c); background:color-mix(in srgb,var(--c) 12%,var(--surface)); color:var(--ink); }
+  .goalpick button small{ display:block; font-weight:500; font-size:11px; color:var(--ink-faint); margin-top:2px; }
+
+  @media(prefers-reduced-motion:reduce){ *{ transition:none!important; animation:none!important; scroll-behavior:auto!important; } }
+  .fade{ animation:fade .28s ease both; }
+  @keyframes fade{ from{ opacity:0; transform:translateY(6px); } to{ opacity:1; transform:none; } }
+</style>
+</head>
+<body>
+<header>
+  <div class="bar">
+    <div class="brand">vital<span>.</span></div>
+    <span class="kicker">Tracker</span>
+    <div class="spacer"></div>
+    <span class="hello" id="hello"></span>
+    <button class="icobtn" id="themeBtn" aria-label="Switch color theme">◐ Theme</button>
+  </div>
+  <nav class="tabs" id="tabs" role="tablist">
+    <button class="tab" role="tab" data-act="nav" data-view="today">Today</button>
+    <button class="tab" role="tab" data-act="nav" data-view="progress">Progress</button>
+    <button class="tab" role="tab" data-act="nav" data-view="build">Build</button>
+    <button class="tab" role="tab" data-act="nav" data-view="you">You</button>
+  </nav>
+</header>
+<main id="app"></main>
+
+<script>
+"use strict";
+(function(){
+  var KEY = "vital.tracker.v1";
+  var CHECK_SVG = '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5l4 4 8-9"/></svg>';
+
+  /* ---------- system definitions & default protocols ---------- */
+  var SYSTEMS = [
+    { key:"rest",   name:"Rest",   organ:"Nervous system & sleep" },
+    { key:"fuel",   name:"Fuel",   organ:"Digestion & nutrition" },
+    { key:"move",   name:"Move",   organ:"Heart & circulation" },
+    { key:"build",  name:"Build",  organ:"Muscle & bone" },
+    { key:"defend", name:"Defend", organ:"Immunity & detox" },
+    { key:"center", name:"Center", organ:"Mind & hormones" }
+  ];
+  function defaultProtocols(){
+    return {
+      rest:[
+        h("sleep7","7+ hours of sleep","check"),
+        h("winddown","Screen-free wind-down","check"),
+        h("amlight","Morning daylight","check")
+      ],
+      fuel:[
+        c("water","Water","glasses",8,1),
+        h("whole","Whole-food meals","check"),
+        h("nolate","No late-night eating","check")
+      ],
+      move:[
+        h("moveday","20 min of movement","check"),
+        c("steps","Steps","steps",7000,1000),
+        h("sweat","Break a real sweat","check")
+      ],
+      build:[
+        h("strength","Strength session","check"),
+        h("mobility","Mobility / stretch","check"),
+        h("posture","Posture breaks","check")
+      ],
+      defend:[
+        c("veg","Veg & fruit servings","servings",5,1),
+        h("ferment","Fermented or fiber-rich food","check"),
+        h("thermal","Sauna or cold exposure","check")
+      ],
+      center:[
+        h("breath","10 min breath or meditation","check"),
+        h("gratitude","Note one gratitude","check"),
+        h("connect","Meaningful connection","check")
+      ]
+    };
+    function h(id,label,type){ return {id:id,label:label,type:"check",enabled:true}; }
+    function c(id,label,unit,target,step){ return {id:id,label:label,type:"count",unit:unit,target:target,step:step,enabled:true}; }
+  }
+
+  /* ---------- state ---------- */
+  var state = null;
+  var ui = { view:"today", offset:0, newGoal:null }; // offset = days back from today for Today view
+
+  function freshState(){
+    return { v:1, profile:null, protocols:defaultProtocols(), logs:{}, theme:null };
+  }
+  function load(){
+    try{
+      var raw = localStorage.getItem(KEY);
+      if(raw){ state = JSON.parse(raw); }
+    }catch(e){ state = null; }
+    if(!state || !state.protocols){ state = freshState(); }
+    // migrate: ensure every default system exists
+    var d = defaultProtocols();
+    for(var k in d){ if(!state.protocols[k]) state.protocols[k] = d[k]; }
+    if(state.theme){ document.documentElement.setAttribute("data-theme", state.theme); }
+  }
+  function save(){ try{ localStorage.setItem(KEY, JSON.stringify(state)); }catch(e){} }
+
+  /* ---------- date helpers ---------- */
+  function pad(n){ return n<10 ? "0"+n : ""+n; }
+  function keyFor(d){ return d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate()); }
+  function today(){ var d=new Date(); d.setHours(0,0,0,0); return d; }
+  function dateAt(offset){ var d=today(); d.setDate(d.getDate()-offset); return d; }
+  var WD=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"], MO=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+
+  /* ---------- completion math ---------- */
+  function enabledHabits(sysKey){ return (state.protocols[sysKey]||[]).filter(function(x){return x.enabled;}); }
+  function logVal(dateKey, sysKey, habitId){
+    var d=state.logs[dateKey]; if(!d) return undefined;
+    var s=d[sysKey]; if(!s) return undefined;
+    return s[habitId];
+  }
+  function habitMet(hb, val){
+    if(hb.type==="check") return val===true;
+    return typeof val==="number" && val >= hb.target;
+  }
+  // completion fraction for a system on a date (partial credit; counts scaled)
+  function sysFrac(dateKey, sysKey){
+    var hs = enabledHabits(sysKey);
+    if(!hs.length) return 0;
+    var sum=0;
+    for(var i=0;i<hs.length;i++){
+      var hb=hs[i], v=logVal(dateKey,sysKey,hb.id);
+      if(hb.type==="check"){ sum += v===true ? 1 : 0; }
+      else{ var n=(typeof v==="number")?v:0; sum += Math.max(0, Math.min(1, n/hb.target)); }
+    }
+    return sum/hs.length;
+  }
+  function sysComplete(dateKey, sysKey){
+    var hs=enabledHabits(sysKey); if(!hs.length) return false;
+    for(var i=0;i<hs.length;i++){ if(!habitMet(hs[i], logVal(dateKey,sysKey,hs[i].id))) return false; }
+    return true;
+  }
+  function vitality(dateKey){
+    var t=0,n=0;
+    for(var i=0;i<SYSTEMS.length;i++){ t+=sysFrac(dateKey, SYSTEMS[i].key); n++; }
+    return n? t/n : 0;
+  }
+  function dayHasLog(dateKey){
+    var d=state.logs[dateKey]; if(!d) return false;
+    for(var s in d){ for(var hid in d[s]){ var v=d[s][hid]; if(v===true || (typeof v==="number"&&v>0)) return true; } }
+    return false;
+  }
+  // overall streak: consecutive days (ending today, or yesterday if today untouched) with vitality >= .6
+  function overallStreak(){
+    var run=0, i=0;
+    // allow today to not break streak if not yet logged
+    if(!dayHasLog(keyFor(dateAt(0))) ){ i=1; }
+    for(; i<400; i++){
+      var k=keyFor(dateAt(i));
+      if(vitality(k) >= 0.6){ run++; } else { break; }
+    }
+    return run;
+  }
+  function bestStreak(){
+    // scan up to 365 days back
+    var best=0, run=0;
+    for(var i=364;i>=0;i--){
+      var k=keyFor(dateAt(i));
+      if(vitality(k)>=0.6){ run++; if(run>best)best=run; } else { run=0; }
+    }
+    return best;
+  }
+  function systemStreak(sysKey){
+    var run=0, i=0;
+    if(!dayHasLog(keyFor(dateAt(0)))){ i=1; }
+    for(; i<400; i++){ if(sysComplete(keyFor(dateAt(i)), sysKey)) run++; else break; }
+    return run;
+  }
+  function avgVitality(days){
+    var t=0;
+    for(var i=0;i<days;i++){ t+=vitality(keyFor(dateAt(i))); }
+    return t/days;
+  }
+  function activeDays(days){
+    var n=0; for(var i=0;i<days;i++){ if(dayHasLog(keyFor(dateAt(i)))) n++; } return n;
+  }
+
+  /* ---------- mutations ---------- */
+  function ensureLog(dateKey, sysKey){
+    if(!state.logs[dateKey]) state.logs[dateKey]={};
+    if(!state.logs[dateKey][sysKey]) state.logs[dateKey][sysKey]={};
+    return state.logs[dateKey][sysKey];
+  }
+  function toggleCheck(dateKey, sysKey, habitId){
+    var s=ensureLog(dateKey,sysKey);
+    s[habitId] = !(s[habitId]===true);
+    save();
+  }
+  function bumpCount(dateKey, sysKey, habitId, dir, step, target){
+    var s=ensureLog(dateKey,sysKey);
+    var v=(typeof s[habitId]==="number")?s[habitId]:0;
+    v += dir*step;
+    if(v<0) v=0;
+    if(v> target*3) v=target*3;
+    s[habitId]=v;
+    save();
+  }
+
+  /* ---------- small render helpers ---------- */
+  function esc(s){ return String(s==null?"":s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];}); }
+  function pct(f){ return Math.round(f*100); }
+  function fmtNum(n){ return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ","); }
+  // SVG progress ring
+  function ring(frac, size, sw, color){
+    var r=(size-sw)/2, cx=size/2, cy=size/2, C=2*Math.PI*r;
+    var off = C*(1-Math.max(0,Math.min(1,frac)));
+    var mid = pct(frac);
+    return '<svg width="'+size+'" height="'+size+'" viewBox="0 0 '+size+' '+size+'" role="img" aria-label="'+mid+'% complete">'+
+      '<circle cx="'+cx+'" cy="'+cy+'" r="'+r+'" fill="none" stroke="var(--track)" stroke-width="'+sw+'"/>'+
+      '<circle cx="'+cx+'" cy="'+cy+'" r="'+r+'" fill="none" stroke="'+color+'" stroke-width="'+sw+'" stroke-linecap="round" '+
+        'stroke-dasharray="'+C.toFixed(1)+'" stroke-dashoffset="'+off.toFixed(1)+'" transform="rotate(-90 '+cx+' '+cy+')" style="transition:stroke-dashoffset .4s ease"/>'+
+      '</svg>';
+  }
+  // multi-arc vitality ring: six segments
+  function vitalRing(size){
+    var sw=13, r=(size-sw)/2, cx=size/2, cy=size/2, C=2*Math.PI*r;
+    var seg=C/6, gap=seg*0.10, len=seg-gap;
+    var out='<svg width="'+size+'" height="'+size+'" viewBox="0 0 '+size+' '+size+'" role="img" aria-label="Vitality by system">';
+    out+='<circle cx="'+cx+'" cy="'+cy+'" r="'+r+'" fill="none" stroke="var(--track)" stroke-width="'+sw+'"/>';
+    var dateKey=keyFor(dateAt(ui.offset));
+    for(var i=0;i<6;i++){
+      var f=sysFrac(dateKey, SYSTEMS[i].key);
+      var start=i*seg;
+      var dash = (len*f).toFixed(2)+" "+ (C-len*f).toFixed(2);
+      var offset = -(start).toFixed(2);
+      out+='<circle cx="'+cx+'" cy="'+cy+'" r="'+r+'" fill="none" stroke="var(--s-'+SYSTEMS[i].key+')" stroke-width="'+sw+'" stroke-linecap="round" '+
+        'stroke-dasharray="'+dash+'" stroke-dashoffset="'+offset+'" transform="rotate(-90 '+cx+' '+cy+')" style="transition:stroke-dasharray .4s ease"/>';
+    }
+    var v=pct(vitality(dateKey));
+    out+='<text x="'+cx+'" y="'+(cy-2)+'" text-anchor="middle" font-family="var(--mono)" font-weight="700" font-size="30" fill="var(--ink)">'+v+'</text>';
+    out+='<text x="'+cx+'" y="'+(cy+18)+'" text-anchor="middle" font-family="var(--mono)" font-size="10" letter-spacing="2" fill="var(--ink-faint)">VITALITY</text>';
+    out+='</svg>';
+    return out;
+  }
+  function stateName(v){
+    if(v>=.85) return ["Thriving","Six systems firing. This is what compounding looks like."];
+    if(v>=.65) return ["Steady","Strong, balanced day. Keep the rhythm."];
+    if(v>=.40) return ["Building","Momentum is forming. Close one more system."];
+    if(v>0)    return ["Getting started","A few marks on the board. Every log counts."];
+    return ["Rest day","Nothing logged yet. Pick one small thing to begin."];
+  }
+
+  /* ---------- VIEWS ---------- */
+  function view_today(){
+    var offset=ui.offset;
+    var d=dateAt(offset), dateKey=keyFor(d);
+    var isToday = offset===0;
+    var v=vitality(dateKey), sn=stateName(v);
+    var strk=overallStreak(), active=activeDays(7);
+
+    var dl = isToday ? "Today" : (offset===1 ? "Yesterday" : WD[d.getDay()]);
+    var html='';
+    html+='<p class="eyebrow">Daily log</p>';
+    html+='<h2 class="page">'+esc(greetName())+'</h2>';
+    html+='<p class="sub">Check off your protocol as you move through the day. Your six systems roll up into one vitality score.</p>';
+
+    // date nav
+    html+='<div class="datebar">'+
+      '<button data-act="date" data-dir="-1" aria-label="Previous day">‹</button>'+
+      '<div class="datelabel">'+esc(dl)+'<small>'+WD[d.getDay()]+" "+MO[d.getMonth()]+" "+d.getDate()+'</small></div>'+
+      '<button data-act="date" data-dir="1" aria-label="Next day" '+(isToday?'disabled':'')+'>›</button>'+
+      '</div>';
+    if(!isToday){ html+='<div style="text-align:center;margin-top:-10px;margin-bottom:8px"><button class="today-btn" data-act="gotoday">↩ back to today</button></div>'; }
+
+    // rollup
+    html+='<div class="card rollup fade">'+
+      '<div>'+vitalRing(150)+'</div>'+
+      '<div>'+
+        '<p class="state">'+esc(sn[0])+'</p>'+
+        '<p class="say">'+esc(sn[1])+'</p>'+
+        '<div class="chips">'+
+          '<span class="chip flame">🔥 <b>'+strk+'</b> day streak</span>'+
+          '<span class="chip"><b>'+active+'</b>/7 active this week</span>'+
+        '</div>'+
+      '</div>'+
+    '</div>';
+
+    // system cards
+    html+='<div class="sysgrid">';
+    for(var i=0;i<SYSTEMS.length;i++){
+      html+=systemCard(SYSTEMS[i], dateKey);
+    }
+    html+='</div>';
+    return html;
+  }
+  function systemCard(sys, dateKey){
+    var hs=enabledHabits(sys.key);
+    var frac=sysFrac(dateKey, sys.key);
+    var out='<div class="card sys fade" style="--sys:var(--s-'+sys.key+')">';
+    out+='<div class="head"><div class="title"><h3><span class="dot"></span>'+esc(sys.name)+'</h3><p>'+esc(sys.organ)+'</p></div>'+
+         '<div>'+ring(frac,46,6,"var(--s-"+sys.key+")")+'</div></div>';
+    if(!hs.length){
+      out+='<p style="font-size:13px;color:var(--ink-faint);padding:4px 0 12px">No habits enabled — add some in <b>Build</b>.</p>';
+    } else {
+      out+='<ul class="habits">';
+      for(var i=0;i<hs.length;i++){
+        var hb=hs[i], v=logVal(dateKey,sys.key,hb.id), met=habitMet(hb,v);
+        out+='<li class="habit'+(met?' met':'')+'">';
+        if(hb.type==="check"){
+          out+='<button class="check" data-act="check" data-sys="'+sys.key+'" data-hid="'+hb.id+'" aria-pressed="'+(v===true)+'" aria-label="'+esc(hb.label)+'">'+CHECK_SVG+'</button>';
+          out+='<span class="hl">'+esc(hb.label)+'</span>';
+        } else {
+          var n=(typeof v==="number")?v:0;
+          var mc = n>=hb.target;
+          out+='<span class="hl">'+esc(hb.label)+'</span>';
+          out+='<span class="counter">'+
+            '<button data-act="count" data-dir="-1" data-sys="'+sys.key+'" data-hid="'+hb.id+'" aria-label="Decrease '+esc(hb.label)+'">−</button>'+
+            '<span class="cval tnum'+(mc?' met':'')+'"><b>'+fmtNum(n)+'</b> / '+fmtNum(hb.target)+'</span>'+
+            '<button data-act="count" data-dir="1" data-sys="'+sys.key+'" data-hid="'+hb.id+'" aria-label="Increase '+esc(hb.label)+'">+</button>'+
+          '</span>';
+        }
+        out+='</li>';
+      }
+      out+='</ul>';
+      out+='<div class="sysfoot"><div class="prog"><i style="width:'+pct(frac)+'%"></i></div><span class="pct tnum">'+pct(frac)+'%</span></div>';
+    }
+    out+='</div>';
+    return out;
+  }
+
+  function view_progress(){
+    var html='';
+    html+='<p class="eyebrow">Over time</p>';
+    html+='<h2 class="page">Your progress</h2>';
+    html+='<p class="sub">This is what "Track it" means — the record only you can build. Everything here is computed from your own daily logs.</p>';
+
+    var strk=overallStreak(), best=bestStreak(), avg30=avgVitality(30), act30=activeDays(30);
+
+    // stat row
+    html+='<div class="statrow">';
+    html+=stat("Current streak", strk, "days", strk>0?"consecutive on-track days":"log a strong day to start one");
+    html+=stat("Best streak", best, "days", "your longest run so far");
+    html+=stat("30-day vitality", pct(avg30), "%", "average across all six systems");
+    html+='</div>';
+
+    // vitality history
+    if(act30===0){
+      html+='<div class="card panel"><div class="empty"><div class="big">No history yet</div>Log a few days on the <b>Today</b> tab and your vitality trend will grow here.</div></div>';
+      return html;
+    }
+    html+='<div class="card panel"><div class="ph"><div><h3>Vitality, last 30 days</h3></div><p>'+act30+' active days</p></div>'+
+      '<div class="barwrap">'+vitalityBars(30)+'</div>'+
+      '<div class="legend">'+
+        '<span><span class="swatch" style="background:var(--good)"></span>On track (65%+)</span>'+
+        '<span><span class="swatch" style="background:var(--warn)"></span>Building (40–64%)</span>'+
+        '<span><span class="swatch" style="background:var(--track)"></span>Quiet day</span>'+
+      '</div></div>';
+
+    // per-system, 14-day sparklines
+    html+='<div class="card panel"><div class="ph"><div><h3>By system</h3><p style="margin-top:2px">14-day trend · completion · streak</p></div></div>';
+    html+='<div class="spark-grid">';
+    for(var i=0;i<SYSTEMS.length;i++){ html+=systemSpark(SYSTEMS[i]); }
+    html+='</div></div>';
+    return html;
+  }
+  function stat(k,v,u,cap){
+    return '<div class="card stat"><div class="k">'+esc(k)+'</div><div class="v tnum">'+v+' <small>'+esc(u)+'</small></div><div class="cap">'+esc(cap)+'</div></div>';
+  }
+  function vitalityBars(days){
+    var W=Math.max(days*11, 300), H=110, pad=18, bw=(W-2)/days;
+    var out='<svg width="'+W+'" height="'+H+'" viewBox="0 0 '+W+' '+H+'" preserveAspectRatio="none" style="display:block;min-width:100%">';
+    // baseline grid at 65% and 40%
+    var base=H-16;
+    [ [0.65,"var(--line)"], [0.40,"var(--line-soft)"] ].forEach(function(g){
+      var y=base-(base-6)*g[0];
+      out+='<line x1="0" y1="'+y.toFixed(1)+'" x2="'+W+'" y2="'+y.toFixed(1)+'" stroke="'+g[1]+'" stroke-width="1" stroke-dasharray="2 4"/>';
+    });
+    for(var i=0;i<days;i++){
+      var off=days-1-i; // oldest left
+      var k=keyFor(dateAt(off));
+      var f=vitality(k), h=Math.max(f>0?3:0,(base-6)*f);
+      var x=i*bw+1, y=base-h;
+      var col = f>=.65?"var(--good)": f>=.40?"var(--warn)": (dayHasLog(k)?"var(--bad)":"var(--track)");
+      out+='<rect x="'+x.toFixed(1)+'" y="'+y.toFixed(1)+'" width="'+(bw-2).toFixed(1)+'" height="'+(h||1).toFixed(1)+'" rx="2" fill="'+col+'"><title>'+k+" · "+pct(f)+'%</title></rect>';
+    }
+    out+='<line x1="0" y1="'+base+'" x2="'+W+'" y2="'+base+'" stroke="var(--line)" stroke-width="1"/>';
+    out+='</svg>';
+    return out;
+  }
+  function systemSpark(sys){
+    var days=14, vals=[];
+    for(var i=days-1;i>=0;i--){ vals.push(sysFrac(keyFor(dateAt(i)), sys.key)); }
+    var W=150,H=40,step=W/(days-1);
+    var pts=vals.map(function(f,i){ return [i*step, H-4-(H-8)*f]; });
+    var poly=pts.map(function(p){return p[0].toFixed(1)+","+p[1].toFixed(1);}).join(" ");
+    var area="0,"+(H-1)+" "+poly+" "+W+","+(H-1);
+    var col="var(--s-"+sys.key+")";
+    var last=pts[pts.length-1];
+    var svg='<svg width="'+W+'" height="'+H+'" viewBox="0 0 '+W+' '+H+'" preserveAspectRatio="none" aria-hidden="true" style="width:100%;height:38px">'+
+      '<polygon points="'+area+'" fill="'+col+'" opacity="0.12"/>'+
+      '<polyline points="'+poly+'" fill="none" stroke="'+col+'" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>'+
+      '<circle cx="'+last[0].toFixed(1)+'" cy="'+last[1].toFixed(1)+'" r="3" fill="'+col+'"/>'+
+      '</svg>';
+    var comp=pct(avgSysFrac(sys.key,14)), strk=systemStreak(sys.key);
+    return '<div class="srow" style="--sys:'+col+'">'+
+      '<div class="si">'+svg+'</div>'+
+      '<div class="sname"><h4><span class="dot" style="width:8px;height:8px"></span>'+esc(sys.name)+'</h4><p>'+esc(sys.organ)+'</p></div>'+
+      '<div class="sval"><div class="pv tnum" style="color:'+col+'">'+comp+'%</div><div class="pl">'+strk+'d streak</div></div>'+
+    '</div>';
+  }
+  function avgSysFrac(sysKey,days){ var t=0; for(var i=0;i<days;i++){ t+=sysFrac(keyFor(dateAt(i)),sysKey); } return t/days; }
+
+  function view_build(){
+    var html='';
+    html+='<p class="eyebrow">Your protocol</p>';
+    html+='<h2 class="page">Build your protocol</h2>';
+    html+='<p class="sub">Sensible defaults are already set for all six systems. Turn habits on or off, adjust targets, or add your own. This is the "Build it" step — make it yours.</p>';
+    for(var i=0;i<SYSTEMS.length;i++){ html+=buildSystem(SYSTEMS[i]); }
+    html+='<div class="btnrow" style="margin-top:8px"><button class="btn" data-act="resetproto">↺ Restore default protocol</button></div>';
+    html+='<p class="note">Restoring defaults replaces your habit list for all six systems. Your daily logs are kept.</p>';
+    return html;
+  }
+  function buildSystem(sys){
+    var list=state.protocols[sys.key]||[];
+    var out='<div class="card buildsys" style="--sys:var(--s-'+sys.key+')">';
+    out+='<div class="bh"><span class="dot"></span><h3>'+esc(sys.name)+'</h3><span class="btype">'+esc(sys.organ)+'</span></div>';
+    for(var i=0;i<list.length;i++){
+      var hb=list[i];
+      out+='<div class="brow">';
+      out+='<button class="toggle-sw" data-act="toggleh" data-sys="'+sys.key+'" data-hid="'+hb.id+'" aria-pressed="'+(!!hb.enabled)+'" aria-label="Enable '+esc(hb.label)+'"></button>';
+      out+='<span class="bname">'+esc(hb.label)+'</span>';
+      if(hb.type==="count"){
+        out+='<input class="tgt tnum" type="number" min="1" data-act="target" data-sys="'+sys.key+'" data-hid="'+hb.id+'" value="'+hb.target+'" aria-label="Target for '+esc(hb.label)+'">';
+        out+='<span class="btype">'+esc(hb.unit||"")+'</span>';
+      } else {
+        out+='<span class="btype">check</span>';
+      }
+      out+='<button class="rm" data-act="rmh" data-sys="'+sys.key+'" data-hid="'+hb.id+'" aria-label="Remove '+esc(hb.label)+'">×</button>';
+      out+='</div>';
+    }
+    out+='<div class="addrow">'+
+      '<input type="text" placeholder="Add a habit for '+esc(sys.name)+'…" data-addlabel="'+sys.key+'" aria-label="New habit for '+esc(sys.name)+'">'+
+      '<select data-addtype="'+sys.key+'" aria-label="Habit type"><option value="check">Check off</option><option value="count">Count to target</option></select>'+
+      '<button data-act="addh" data-sys="'+sys.key+'">Add</button>'+
+      '</div>';
+    out+='</div>';
+    return out;
+  }
+
+  function view_you(){
+    var p=state.profile||{name:"",goal:""};
+    var totalDays=Object.keys(state.logs).length;
+    var html='';
+    html+='<p class="eyebrow">Profile</p>';
+    html+='<h2 class="page">You</h2>';
+    html+='<p class="sub">A local profile — no account, no server. It lives only in this browser on this device.</p>';
+    html+='<div class="card panel" style="max-width:560px">';
+    html+='<div class="field"><label for="pn">Your name</label><input id="pn" type="text" value="'+esc(p.name)+'" data-act="pname" placeholder="What should we call you?"></div>';
+    html+='<div class="field"><label for="pg">Your goal</label><textarea id="pg" data-act="pgoal" placeholder="What are you rebuilding toward?">'+esc(p.goal||"")+'</textarea></div>';
+    html+='<div class="btnrow"><button class="btn primary" data-act="saveprofile">Save profile</button></div>';
+    html+='<hr class="divider">';
+    html+='<div class="k" style="font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:10px">Your data</div>';
+    html+='<p class="note" style="margin-top:0">You have <b class="tnum" style="color:var(--ink)">'+totalDays+'</b> day'+(totalDays===1?"":"s")+' of logs saved locally. Nothing is uploaded anywhere. Clearing your browser data will erase it.</p>';
+    html+='<div class="btnrow" style="margin-top:14px"><button class="btn" data-act="export">⤓ Export my data (JSON)</button><button class="btn danger" data-act="reset">Reset everything</button></div>';
+    html+='</div>';
+    html+='<p class="note" style="max-width:560px">vital. Tracker keeps your record on-device so it works offline and stays private. Multi-device sync and accounts would need a backend — this is the local, honest version of "Track it."</p>';
+    return html;
+  }
+
+  /* ---------- onboarding ---------- */
+  var GOALS=[
+    ["Rebuild energy","Beat fatigue, feel awake"],
+    ["Recover fully","Come back from a setback"],
+    ["Build strength","Get stronger, move better"],
+    ["Find calm","Lower stress, sleep deeper"],
+    ["Lose weight","Sustainable, system-wide"],
+    ["Just feel human","Small steps, steady wins"]
+  ];
+  function showOnboarding(){
+    ui.newGoal = GOALS[0][0];
+    var box=document.createElement("div");
+    box.className="overlay"; box.id="onboard";
+    box.innerHTML='<div class="modal" role="dialog" aria-modal="true" aria-labelledby="obh">'+
+      '<div class="brand">vital<span style="color:var(--ink)">.</span></div>'+
+      '<h2 id="obh">Let\'s make "Track it" real.</h2>'+
+      '<p class="lede">Two quick things and you\'re logging. No account, no email — everything stays on this device.</p>'+
+      '<div class="field"><label for="obn">First, your name</label><input id="obn" type="text" placeholder="e.g. Sam" autocomplete="off"></div>'+
+      '<div class="field"><label>What are you rebuilding toward?</label><div class="goalpick" id="obgoals">'+
+        GOALS.map(function(g,i){ return '<button type="button" data-goal="'+esc(g[0])+'" aria-pressed="'+(i===0)+'">'+esc(g[0])+'<small>'+esc(g[1])+'</small></button>'; }).join('')+
+      '</div></div>'+
+      '<div class="btnrow" style="margin-top:10px"><button class="btn primary" id="obstart" style="flex:1">Start tracking →</button></div>'+
+      '<p class="note" style="text-align:center;margin-top:14px">Your six systems come pre-loaded with sensible protocols. Tweak them anytime.</p>'+
+    '</div>';
+    document.body.appendChild(box);
+    var input=box.querySelector("#obn");
+    setTimeout(function(){ input.focus(); },50);
+    box.querySelector("#obgoals").addEventListener("click", function(e){
+      var b=e.target.closest("[data-goal]"); if(!b) return;
+      ui.newGoal=b.getAttribute("data-goal");
+      Array.prototype.forEach.call(box.querySelectorAll("[data-goal]"), function(x){ x.setAttribute("aria-pressed", x===b); });
+    });
+    function start(){
+      var nm=input.value.trim() || "friend";
+      state.profile={ name:nm, goal:ui.newGoal, created:keyFor(today()) };
+      save();
+      box.remove();
+      render();
+    }
+    box.querySelector("#obstart").addEventListener("click", start);
+    input.addEventListener("keydown", function(e){ if(e.key==="Enter") start(); });
+  }
+
+  function greetName(){
+    var h=new Date().getHours();
+    var g = h<12?"Good morning":h<18?"Good afternoon":"Good evening";
+    var nm = state.profile && state.profile.name ? state.profile.name : "friend";
+    return g+", "+nm+".";
+  }
+
+  /* ---------- main render ---------- */
+  function render(){
+    // hello + tabs
+    var hel=document.getElementById("hello");
+    if(state.profile){ hel.innerHTML="Hi, <b>"+esc(state.profile.name)+"</b>"; } else { hel.textContent=""; }
+    Array.prototype.forEach.call(document.querySelectorAll(".tab"), function(t){
+      t.setAttribute("aria-current", t.getAttribute("data-view")===ui.view);
+    });
+    var app=document.getElementById("app");
+    var html;
+    if(ui.view==="today") html=view_today();
+    else if(ui.view==="progress") html=view_progress();
+    else if(ui.view==="build") html=view_build();
+    else html=view_you();
+    app.innerHTML=html;
+    if(!document.getElementById("onboard")){ window.scrollTo({top:0,behavior: prefersReduce()?"auto":"smooth"}); }
+  }
+  function prefersReduce(){ return matchMedia("(prefers-reduced-motion: reduce)").matches; }
+
+  function partialRerender(){
+    // re-render current view without scroll (for checkbox toggles staying in place)
+    var app=document.getElementById("app");
+    var y=window.scrollY;
+    if(ui.view==="today") app.innerHTML=view_today();
+    else if(ui.view==="progress") app.innerHTML=view_progress();
+    else if(ui.view==="build") app.innerHTML=view_build();
+    else app.innerHTML=view_you();
+    window.scrollTo(0,y);
+  }
+
+  /* ---------- events ---------- */
+  document.addEventListener("click", function(e){
+    var el=e.target.closest("[data-act]"); if(!el) return;
+    var act=el.getAttribute("data-act");
+    var dateKey=keyFor(dateAt(ui.offset));
+    switch(act){
+      case "nav": ui.view=el.getAttribute("data-view"); render(); break;
+      case "date":{
+        var dir=+el.getAttribute("data-dir");
+        var next=ui.offset - dir; // dir 1 = forward(newer)=offset-1
+        if(next<0) next=0; if(next>364) next=364;
+        ui.offset=next; render(); break;
+      }
+      case "gotoday": ui.offset=0; render(); break;
+      case "check": toggleCheck(dateKey, el.getAttribute("data-sys"), el.getAttribute("data-hid")); partialRerender(); break;
+      case "count": bumpCountEl(el, dateKey); partialRerender(); break;
+      case "theme": break;
+      case "toggleh": toggleHabit(el.getAttribute("data-sys"), el.getAttribute("data-hid")); partialRerender(); break;
+      case "rmh": removeHabit(el.getAttribute("data-sys"), el.getAttribute("data-hid")); partialRerender(); break;
+      case "addh": addHabit(el.getAttribute("data-sys")); partialRerender(); break;
+      case "resetproto":
+        if(confirm("Restore default habits for all six systems? Your daily logs stay.")){ state.protocols=defaultProtocols(); save(); render(); } break;
+      case "saveprofile": saveProfileFromForm(); flash(el,"Saved ✓"); break;
+      case "export": exportData(); break;
+      case "reset":
+        if(confirm("Erase your profile, protocol and all logs from this device? This cannot be undone.")){
+          state=freshState(); save(); ui.view="today"; ui.offset=0; render(); showOnboarding();
+        } break;
+    }
+  });
+  function bumpCountEl(el, dateKey){
+    var sys=el.getAttribute("data-sys"), hid=el.getAttribute("data-hid"), dir=+el.getAttribute("data-dir");
+    var hb=(state.protocols[sys]||[]).filter(function(x){return x.id===hid;})[0]; if(!hb) return;
+    bumpCount(dateKey, sys, hid, dir, hb.step||1, hb.target||1);
+  }
+  document.addEventListener("change", function(e){
+    var el=e.target.closest("[data-act]"); if(!el) return;
+    if(el.getAttribute("data-act")==="target"){
+      var sys=el.getAttribute("data-sys"), hid=el.getAttribute("data-hid");
+      var val=parseInt(el.value,10); if(isNaN(val)||val<1) val=1;
+      var hb=(state.protocols[sys]||[]).filter(function(x){return x.id===hid;})[0];
+      if(hb){ hb.target=val; save(); }
+    }
+  });
+  // theme button (separate, keeps its own logic)
+  document.getElementById("themeBtn").addEventListener("click", function(){
+    var cur=document.documentElement.getAttribute("data-theme");
+    var next = cur==="dark" ? "light" : (cur==="light" ? "dark" : (matchMedia("(prefers-color-scheme: dark)").matches ? "light":"dark"));
+    document.documentElement.setAttribute("data-theme", next);
+    state.theme=next; save();
+    if(document.getElementById("app").innerHTML) partialRerender();
+  });
+
+  function toggleHabit(sys,hid){ var h=find(sys,hid); if(h){ h.enabled=!h.enabled; save(); } }
+  function removeHabit(sys,hid){ state.protocols[sys]=(state.protocols[sys]||[]).filter(function(x){return x.id!==hid;}); save(); }
+  function find(sys,hid){ return (state.protocols[sys]||[]).filter(function(x){return x.id===hid;})[0]; }
+  function addHabit(sys){
+    var labelEl=document.querySelector('[data-addlabel="'+sys+'"]');
+    var typeEl=document.querySelector('[data-addtype="'+sys+'"]');
+    if(!labelEl) return;
+    var label=labelEl.value.trim(); if(!label) return;
+    var type=typeEl.value;
+    var id="u"+Date.now().toString(36)+Math.floor(Math.random()*1000).toString(36);
+    var hb={ id:id, label:label, type:type, enabled:true };
+    if(type==="count"){ hb.unit=""; hb.target=1; hb.step=1; }
+    state.protocols[sys].push(hb); save();
+  }
+  function saveProfileFromForm(){
+    var nm=document.querySelector('[data-act="pname"]');
+    var gl=document.querySelector('[data-act="pgoal"]');
+    if(!state.profile) state.profile={created:keyFor(today())};
+    state.profile.name=(nm&&nm.value.trim())||"friend";
+    state.profile.goal=(gl&&gl.value.trim())||"";
+    save();
+    document.getElementById("hello").innerHTML="Hi, <b>"+esc(state.profile.name)+"</b>";
+  }
+  function flash(btn, txt){ var o=btn.textContent; btn.textContent=txt; setTimeout(function(){ btn.textContent=o; },1400); }
+  function exportData(){
+    try{
+      var blob=new Blob([JSON.stringify(state,null,2)],{type:"application/json"});
+      var url=URL.createObjectURL(blob);
+      var a=document.createElement("a"); a.href=url; a.download="vital-tracker-"+keyFor(today())+".json";
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(function(){ URL.revokeObjectURL(url); },1000);
+    }catch(e){ alert("Export not available in this browser."); }
+  }
+
+  /* ---------- boot ---------- */
+  load();
+  render();
+  if(!state.profile){ showOnboarding(); }
+})();
+</script>
+</body>
+</html>

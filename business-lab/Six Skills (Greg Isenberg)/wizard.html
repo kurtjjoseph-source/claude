@@ -1,0 +1,1101 @@
+<title>The Skill Stack — implementation wizard</title>
+
+<style>
+html{font-size:17px}
+:root[data-fs="l"]{font-size:19px}
+:root[data-fs="xl"]{font-size:21px}
+
+:root{
+  --paper:#E4E6E0; --sheet:#F2F3EE; --sheet-2:#EAEBE5; --sheet-3:#DBDDD5;
+  --ink:#14161B; --ink-soft:#545861; --ink-faint:#898D95;
+  --line:#C7C9C1; --line-soft:#DADCD3;
+  --blue:#2743C8; --red:#D63A16; --teal:#0A6D62; --violet:#6A33B4; --ochre:#8F6404; --forest:#2C6A27;
+  --blue-w:#DBDFF6; --red-w:#F7DED6; --teal-w:#D3E7E4; --violet-w:#E5DAF6; --ochre-w:#EEE3C7; --forest-w:#D9E8D6;
+  --plate:var(--blue); --plate-w:var(--blue-w); --plate-on:#FFFFFF;
+  --grain:rgba(20,22,27,.055); --misreg:multiply;
+  --mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --shadow:0 1px 1px rgba(20,22,27,.05), 0 8px 24px rgba(20,22,27,.07);
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --paper:#111219; --sheet:#181A21; --sheet-2:#1E2028; --sheet-3:#262932;
+    --ink:#E8E9E3; --ink-soft:#9BA0A8; --ink-faint:#6B7078;
+    --line:#2C2F38; --line-soft:#23262E;
+    --blue:#8397FF; --red:#FF7C58; --teal:#3EC0AE; --violet:#B78EF6; --ochre:#DCA93F; --forest:#6ABC5F;
+    --blue-w:#1B2140; --red-w:#3A1D14; --teal-w:#0F2C2A; --violet-w:#271B3D; --ochre-w:#2E2411; --forest-w:#152A15;
+    --plate-on:#0C0D12;
+    --grain:rgba(232,233,227,.05); --misreg:screen; --misreg:screen;
+    --shadow:0 1px 1px rgba(0,0,0,.4), 0 10px 30px rgba(0,0,0,.42);
+  }
+}
+:root[data-theme="light"]{
+  --paper:#E4E6E0; --sheet:#F2F3EE; --sheet-2:#EAEBE5; --sheet-3:#DBDDD5;
+  --ink:#14161B; --ink-soft:#545861; --ink-faint:#898D95;
+  --line:#C7C9C1; --line-soft:#DADCD3;
+  --blue:#2743C8; --red:#D63A16; --teal:#0A6D62; --violet:#6A33B4; --ochre:#8F6404; --forest:#2C6A27;
+  --blue-w:#DBDFF6; --red-w:#F7DED6; --teal-w:#D3E7E4; --violet-w:#E5DAF6; --ochre-w:#EEE3C7; --forest-w:#D9E8D6;
+  --plate-on:#FFFFFF;
+  --grain:rgba(20,22,27,.055); --misreg:multiply;
+  --shadow:0 1px 1px rgba(20,22,27,.05), 0 8px 24px rgba(20,22,27,.07);
+}
+:root[data-theme="dark"]{
+  --paper:#111219; --sheet:#181A21; --sheet-2:#1E2028; --sheet-3:#262932;
+  --ink:#E8E9E3; --ink-soft:#9BA0A8; --ink-faint:#6B7078;
+  --line:#2C2F38; --line-soft:#23262E;
+  --blue:#8397FF; --red:#FF7C58; --teal:#3EC0AE; --violet:#B78EF6; --ochre:#DCA93F; --forest:#6ABC5F;
+  --blue-w:#1B2140; --red-w:#3A1D14; --teal-w:#0F2C2A; --violet-w:#271B3D; --ochre-w:#2E2411; --forest-w:#152A15;
+  --plate-on:#0C0D12;
+  --grain:rgba(232,233,227,.05); --misreg:screen;
+  --shadow:0 1px 1px rgba(0,0,0,.4), 0 10px 30px rgba(0,0,0,.42);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0; color:var(--ink); background:var(--paper);
+  background-image:radial-gradient(var(--grain) .5px, transparent .5px);
+  background-size:4px 4px;
+  font-family:var(--sans); font-size:1.03125rem; line-height:1.55; -webkit-font-smoothing:antialiased;
+}
+button,input,select,textarea{font:inherit; color:inherit}
+:focus-visible{outline:2px solid var(--plate); outline-offset:2px}
+@media (prefers-reduced-motion:reduce){ *{transition:none !important; animation:none !important} }
+
+/* ---------- chrome ---------- */
+.bar{position:sticky; top:0; z-index:60; background:color-mix(in srgb,var(--paper) 88%,transparent); backdrop-filter:saturate(1.4) blur(10px); border-bottom:1px solid var(--line)}
+.bar-in{max-width:1380px; margin:0 auto; padding:0 clamp(12px,2.4vw,24px); height:56px; display:flex; align-items:center; gap:14px}
+.brand{display:flex; align-items:center; gap:9px; font-family:var(--mono); font-size:0.8125rem; letter-spacing:.16em; text-transform:uppercase; white-space:nowrap}
+.brand i{width:7px; height:7px; background:var(--blue); border-radius:50%; flex:none; box-shadow:2px 0 0 var(--red)}
+.brand span{color:var(--ink-faint)}
+.bar .grow{flex:1; min-width:0}
+.sname{font-family:var(--mono); font-size:0.875rem; background:transparent; border:1px solid transparent; border-radius:2px; padding:5px 8px; width:100%; max-width:320px}
+.sname:hover{border-color:var(--line)}
+.sname:focus{border-color:var(--blue); background:var(--sheet)}
+.prog{display:flex; align-items:center; gap:9px; font-family:var(--mono); font-size:0.84375rem; letter-spacing:.1em; color:var(--ink-faint); white-space:nowrap; font-variant-numeric:tabular-nums}
+.track{width:88px; height:5px; background:var(--sheet-3); border-radius:99px; overflow:hidden}
+.fill{height:100%; width:0; background:var(--blue); transition:width .45s cubic-bezier(.2,.7,.2,1)}
+.btn{font-family:var(--mono); font-size:0.84375rem; letter-spacing:.11em; text-transform:uppercase; background:transparent; border:1px solid var(--line); color:var(--ink-soft); padding:8px 12px; border-radius:2px; cursor:pointer; transition:.15s; white-space:nowrap}
+.btn:hover{color:var(--ink); border-color:var(--plate)}
+.btn.primary{background:var(--plate); border-color:var(--plate); color:var(--plate-on)}
+.btn.primary:hover{filter:brightness(1.1)}
+.btn.ghost{border-color:transparent; color:var(--ink-faint)}
+.btn.ghost:hover{color:var(--ink); border-color:var(--line)}
+.btn[disabled]{opacity:.34; cursor:not-allowed}
+.btn.sm{padding:5px 9px; font-size:0.75rem}
+.hide-sm{display:none}
+@media(min-width:900px){ .hide-sm{display:inline} }
+
+.rail{display:flex; gap:4px; overflow-x:auto; padding:9px clamp(12px,2.4vw,24px); border-bottom:1px solid var(--line); background:color-mix(in srgb,var(--paper) 72%,transparent); position:sticky; top:56px; z-index:50; scrollbar-width:thin}
+.rail button{font-family:var(--mono); font-size:0.8125rem; letter-spacing:.09em; text-transform:uppercase; background:transparent; border:1px solid transparent; color:var(--ink-faint); padding:6px 10px; border-radius:2px; cursor:pointer; white-space:nowrap; transition:.15s}
+.rail button:hover{color:var(--ink)}
+.rail button[aria-current="true"]{color:var(--plate-on); background:var(--plate); border-color:var(--plate)}
+.rail button.done{color:var(--plate)}
+.rail button.done::before{content:"✓ "}
+
+/* ---------- layout ---------- */
+.stage{max-width:1380px; margin:0 auto; padding:clamp(16px,2.8vw,30px) clamp(12px,2.4vw,24px) 90px; display:grid; gap:20px; align-items:start}
+@media(min-width:1060px){ .stage{grid-template-columns:minmax(0,1fr) minmax(370px,38%)} .col-side{position:sticky; top:112px} }
+
+.panel{background:var(--sheet); border:1px solid var(--line); border-radius:3px; box-shadow:var(--shadow); overflow:hidden}
+.panel-head{padding:15px 20px; border-bottom:1px solid var(--line-soft); background:var(--sheet-2); display:flex; align-items:baseline; gap:12px; flex-wrap:wrap}
+.panel-head .sno{font-family:var(--mono); font-size:0.84375rem; letter-spacing:.14em; color:var(--plate)}
+.panel-head h2{font-family:var(--mono); font-size:1rem; letter-spacing:.01em; text-transform:uppercase; margin:0; font-weight:600}
+.panel-head .hint{margin-left:auto; font-family:var(--mono); font-size:0.8125rem; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-faint)}
+.panel-body{padding:clamp(16px,2.4vw,24px); display:flex; flex-direction:column; gap:18px}
+.nav{display:flex; align-items:center; gap:8px; padding:13px 20px; border-top:1px solid var(--line-soft); background:var(--sheet-2)}
+.nav .sp{flex:1}
+
+.lede{font-family:var(--serif); font-size:1.15625rem; line-height:1.5; color:var(--ink-soft); margin:0; max-width:62ch; text-wrap:pretty}
+.lede strong{color:var(--ink); font-weight:600}
+h3.sec{font-family:var(--mono); font-size:0.8125rem; letter-spacing:.13em; text-transform:uppercase; color:var(--ink-faint); margin:6px 0 -4px; font-weight:600}
+
+/* ---------- the six plates ---------- */
+.plates{display:grid; gap:10px; grid-template-columns:1fr}
+@media(min-width:560px){ .plates{grid-template-columns:1fr 1fr} }
+.plate{position:relative; text-align:left; background:var(--sheet-2); border:1px solid var(--line); border-radius:3px; padding:14px 15px 15px 56px; cursor:pointer; transition:.16s; display:block; width:100%}
+.plate:hover{border-color:var(--plate); background:var(--sheet)}
+.plate[aria-pressed="true"]{border-color:var(--plate); background:var(--plate-w); box-shadow:inset 3px 0 0 var(--plate)}
+.plate .no{position:absolute; left:13px; top:11px; font-family:var(--mono); font-size:1.78125rem; font-weight:700; line-height:1; letter-spacing:-.04em; color:var(--plate); font-variant-numeric:tabular-nums}
+.plate .no::after{content:attr(data-n); position:absolute; left:2px; top:2px; color:var(--red); opacity:.32; mix-blend-mode:var(--misreg)}
+.plate h4{margin:0 0 3px; font-size:1.03125rem; font-weight:650; letter-spacing:-.01em}
+.plate p{margin:0; font-size:0.96875rem; color:var(--ink-soft); line-height:1.45}
+.plate .tick{position:absolute; right:12px; top:12px; font-family:var(--mono); font-size:0.75rem; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-faint)}
+.plate[aria-pressed="true"] .tick{color:var(--plate)}
+
+/* ---------- fields ---------- */
+.f{display:flex; flex-direction:column; gap:6px}
+.f > label, .f > .lab{font-family:var(--mono); font-size:0.84375rem; letter-spacing:.11em; text-transform:uppercase; color:var(--ink-soft)}
+.f .help{font-size:0.9375rem; color:var(--ink-faint); line-height:1.45; margin:-1px 0 0}
+input[type=text], textarea, select{
+  width:100%; background:var(--sheet-2); border:1px solid var(--line); border-radius:2px;
+  padding:9px 11px; font-size:0.96875rem; color:var(--ink); transition:.14s; resize:vertical;
+}
+input[type=text]:hover, textarea:hover, select:hover{border-color:var(--ink-faint)}
+input[type=text]:focus, textarea:focus, select:focus{border-color:var(--plate); background:var(--sheet); outline:none; box-shadow:0 0 0 3px var(--plate-w)}
+::placeholder{color:var(--ink-faint); opacity:.85}
+textarea{min-height:76px; line-height:1.5; font-family:var(--sans)}
+
+.chips{display:flex; flex-wrap:wrap; gap:6px}
+.chip{font-family:var(--mono); font-size:0.84375rem; letter-spacing:.06em; background:var(--sheet-2); border:1px solid var(--line); color:var(--ink-soft); padding:7px 11px; border-radius:99px; cursor:pointer; transition:.14s}
+.chip:hover{border-color:var(--plate); color:var(--ink)}
+.chip[aria-pressed="true"]{background:var(--plate); border-color:var(--plate); color:var(--plate-on)}
+
+.checks{display:flex; flex-direction:column; gap:7px}
+.ck{display:flex; gap:9px; align-items:flex-start; font-size:1rem; color:var(--ink-soft); cursor:pointer; line-height:1.45}
+.ck input{margin:3px 0 0; accent-color:var(--plate); width:15px; height:15px; flex:none}
+.ck b{color:var(--ink); font-weight:600}
+
+.rows{display:flex; flex-direction:column; gap:7px}
+.row{display:grid; gap:6px; align-items:center}
+.row .x{font-family:var(--mono); font-size:0.8125rem; background:transparent; border:1px solid var(--line); color:var(--ink-faint); width:28px; height:32px; border-radius:2px; cursor:pointer; flex:none}
+.row .x:hover{color:var(--red); border-color:var(--red)}
+.row .n{font-family:var(--mono); font-size:0.8125rem; color:var(--ink-faint); width:20px; text-align:right; font-variant-numeric:tabular-nums}
+
+.count{font-family:var(--mono); font-size:0.84375rem; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-faint); display:flex; align-items:center; gap:8px; font-variant-numeric:tabular-nums}
+.count b{color:var(--plate); font-weight:600}
+.meter{flex:1; max-width:180px; height:4px; background:var(--sheet-3); border-radius:99px; overflow:hidden}
+.meter i{display:block; height:100%; background:var(--plate); width:0; transition:width .3s}
+
+.note{background:var(--sheet-2); border:1px solid var(--line-soft); border-left:3px solid var(--plate); border-radius:2px; padding:12px 14px; font-size:1rem; color:var(--ink-soft); line-height:1.5}
+.note b{display:block; color:var(--ink); font-family:var(--mono); font-size:0.84375rem; letter-spacing:.11em; text-transform:uppercase; margin-bottom:5px}
+.note.warn{border-left-color:var(--red)}
+.note.warn b{color:var(--red)}
+.note code{font-family:var(--mono); font-size:0.875rem; background:var(--sheet-3); padding:1px 5px; border-radius:2px; color:var(--ink)}
+#manualtx{font-family:var(--mono); font-size:0.84375rem; line-height:1.6}
+.q{font-family:var(--serif); font-style:italic; font-size:1.09375rem; color:var(--ink); line-height:1.5}
+
+.grid2{display:grid; gap:14px; grid-template-columns:1fr}
+@media(min-width:640px){ .grid2{grid-template-columns:1fr 1fr} }
+
+/* ---------- side card ---------- */
+.card-head{padding:15px 18px; border-bottom:1px solid var(--line-soft); background:var(--plate-w); display:flex; align-items:center; gap:10px}
+.card-head .no{font-family:var(--mono); font-size:1.5rem; font-weight:700; color:var(--plate); line-height:1; letter-spacing:-.04em}
+.card-head h3{margin:0; font-size:1rem; font-weight:650; letter-spacing:-.01em}
+.card-head .sub{font-family:var(--mono); font-size:0.75rem; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-faint); display:block; margin-top:2px}
+.card-body{padding:16px 18px; display:flex; flex-direction:column; gap:14px}
+.spec{display:flex; flex-direction:column; gap:3px}
+.spec .k{font-family:var(--mono); font-size:0.75rem; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-faint)}
+.spec .v{font-size:1rem; color:var(--ink); line-height:1.5}
+.tags{display:flex; flex-wrap:wrap; gap:5px}
+.tag{font-family:var(--mono); font-size:0.75rem; letter-spacing:.06em; background:var(--sheet-2); border:1px solid var(--line-soft); color:var(--ink-soft); padding:4px 8px; border-radius:2px}
+.out{background:var(--sheet-2); border:1px solid var(--line-soft); border-radius:2px; padding:12px 13px; font-family:var(--mono); font-size:0.84375rem; line-height:1.65; color:var(--ink-soft); white-space:pre-wrap; word-break:break-word; max-height:340px; overflow:auto}
+.out em{color:var(--ink-faint); font-style:normal; opacity:.7}
+.outbar{display:flex; align-items:center; gap:8px; flex-wrap:wrap}
+.outbar .t{font-family:var(--mono); font-size:0.8125rem; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-faint); margin-right:auto}
+
+.stacklist{display:flex; flex-direction:column; gap:8px}
+.si{display:flex; align-items:center; gap:10px; padding:9px 11px; background:var(--sheet-2); border:1px solid var(--line-soft); border-left:3px solid var(--plate); border-radius:2px}
+.si .n{font-family:var(--mono); font-size:0.96875rem; font-weight:700; color:var(--plate); font-variant-numeric:tabular-nums}
+.si .t{flex:1; font-size:1rem; font-weight:600}
+.si .s{font-family:var(--mono); font-size:0.75rem; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-faint)}
+.si .s.ok{color:var(--plate)}
+
+.verdict{font-family:var(--serif); font-size:1.125rem; line-height:1.5; color:var(--ink)}
+.verdict b{font-weight:700}
+
+table.sched{width:100%; border-collapse:collapse; font-size:0.96875rem}
+table.sched th{font-family:var(--mono); font-size:0.75rem; letter-spacing:.11em; text-transform:uppercase; color:var(--ink-faint); text-align:left; font-weight:600; padding:6px 8px; border-bottom:1px solid var(--line)}
+table.sched td{padding:7px 8px; border-bottom:1px solid var(--line-soft); vertical-align:top}
+table.sched td:first-child{font-family:var(--mono); font-size:0.8125rem; color:var(--ink-faint); white-space:nowrap}
+.scroll-x{overflow-x:auto}
+
+.foot{max-width:1380px; margin:0 auto; padding:0 clamp(12px,2.4vw,24px) 60px; font-size:0.9375rem; color:var(--ink-faint); line-height:1.6}
+.foot a{color:var(--ink-soft)}
+
+@media print{
+  .bar,.rail,.nav,.col-side .outbar,.btn{display:none !important}
+  body{background:#fff}
+  .panel{box-shadow:none; border-color:#ccc}
+}
+</style>
+
+<div class="bar">
+  <div class="bar-in">
+    <div class="brand"><i></i>Skill Stack<span class="hide-sm">&nbsp;/ implementation wizard</span></div>
+    <div class="grow"><input class="sname" id="sname" aria-label="Plan name" placeholder="Untitled stack"></div>
+    <div class="prog"><span id="progtxt">0 / 2</span><span class="track"><span class="fill" id="progfill"></span></span></div>
+    <button class="btn ghost" id="themebtn" type="button">Theme</button>
+  </div>
+</div>
+
+<div class="rail" id="rail"></div>
+
+<div class="stage">
+  <div class="col-main">
+    <div class="panel">
+      <div class="panel-head">
+        <span class="sno" id="stepno">00</span>
+        <h2 id="steptitle">The premise</h2>
+        <span class="hint" id="stephint"></span>
+      </div>
+      <div class="panel-body" id="stepbody"></div>
+      <div class="nav">
+        <button class="btn" id="prev" type="button">← Back</button>
+        <span class="sp"></span>
+        <button class="btn ghost sm" id="resetbtn" type="button">Clear plan</button>
+        <button class="btn primary" id="next" type="button">Next →</button>
+      </div>
+    </div>
+  </div>
+  <aside class="col-side">
+    <div class="panel" id="side"></div>
+  </aside>
+</div>
+
+<div class="foot">
+  Built from <em>“Learn AI” Is Bad Advice. Learn This Instead</em> — Greg Isenberg, The Startup Ideas Podcast, 25 June 2026 ·
+  <a href="https://www.youtube.com/watch?v=jJIOA4GroBw" target="_blank" rel="noopener">watch the episode</a>.
+  Everything you type stays in this browser (localStorage) — nothing is sent anywhere.
+</div>
+
+<script>
+"use strict";
+
+/* ============================================================
+   the six plates
+   ============================================================ */
+var SKILLS = [
+{
+  key:"agents", no:"01", ink:"blue", name:"Agent operator",
+  rail:"01 Agents",
+  line:"Set agents up properly, manage them, run local models.",
+  why:"Most companies are about to own ten AI tools, fifty workflows and a pile of half-working automations, with nobody who can turn that into an operating system. The person who can say <em>here is the support agent, here is what it may do, here is where it needs approval, here is how we know it works</em> is hard to replace.",
+  rep:"Build a daily briefing agent for yourself.",
+  repLong:"Three sources. One goal. Two hard rules. Scheduled. With a success test you can actually fail.",
+  teaches:["context","retrieval","tool use","permissions","evals"],
+  test:"Did it save ten minutes, catch something you'd have missed, or produce something you actually used?",
+  trap:"Trying to build the all-knowing agent first. Build something small, make it genuinely valuable, schedule it, then grow it.",
+  fields:[
+    {t:"note", b:"The shape", h:"A briefing agent sounds like a boring first build. It is also the exact shape of every serious agent inside a company: context in, tools available, permissions bounded, work checked before it reaches a human."},
+    {t:"h", v:"Three sources"},
+    {t:"text", k:"a_s1", l:"Source 1 — your calendar", p:"e.g. Google Calendar, work + personal, next 48 hours"},
+    {t:"text", k:"a_s2", l:"Source 2 — a folder of notes", p:"e.g. ~/Notes/active, Obsidian vault, Notion 'Current' database"},
+    {t:"text", k:"a_s3", l:"Source 3 — a few saved links", p:"e.g. 5 dashboards + the two newsletters I actually read"},
+    {t:"h", v:"The job"},
+    {t:"area", k:"a_goal", l:"What it tells you every morning", rows:3,
+     p:"What matters today, what decisions are waiting on me, what follow-ups I owe people.", help:"Keep it to three answers. An agent with one clear job beats an agent with five vague ones."},
+    {t:"h", v:"The rules"},
+    {t:"check", k:"a_r1", l:"<b>It must show its sources.</b> Every claim points back to a calendar entry, a note or a link."},
+    {t:"check", k:"a_r2", l:"<b>It must ask before sending anything.</b> Drafting is automatic; sending is a decision you make."},
+    {t:"text", k:"a_r3", l:"One more rule of your own", p:"e.g. never quote a number it can't cite · flag anything older than 7 days"},
+    {t:"h", v:"Where it runs"},
+    {t:"multi", k:"a_local", l:"Which parts stay on your machine", opts:["Reading private notes","Summarising","Drafting replies","Search / retrieval","Nothing — all cloud for now"],
+     help:"Privacy, cost, latency and control are the four reasons to keep something local. Ollama and LM Studio are the usual way in. Even if local models keep shrinking, you learn which jobs need a giant brain and which just need a reliable worker that never sleeps."},
+    {t:"pick", k:"a_when", l:"When it runs", opts:["06:30 daily","08:00 weekdays","Every morning before my first meeting","Twice daily — morning and 16:00"]},
+    {t:"h", v:"The success test"},
+    {t:"pick", k:"a_metric", l:"How you'll judge week one", opts:["It saved me 10 minutes","It caught something I would have missed","It produced something I actually used"]},
+    {t:"text", k:"a_check", l:"How you'll check that honestly", p:"e.g. keep a one-line log each morning: used / ignored / and why"}
+  ],
+  req:["a_s1","a_goal","a_metric"]
+},
+{
+  key:"distribution", no:"02", ink:"red", name:"Distribution marketer",
+  rail:"02 Distribution",
+  line:"Know where attention already lives — not where to post.",
+  why:"Anyone can ship a landing page now, so the bottleneck moved from building the thing to making people care. Distribution is knowing what people are already anxious about, the words they use for it, and how to earn trust before you ask for anything.",
+  rep:"Draw a distribution map, then write twenty hooks.",
+  repLong:"One niche. Twenty places their attention already goes. One sentence they'd actually say out loud. Then twenty hooks pointed at it.",
+  teaches:["research","positioning","copy","channel sense"],
+  test:"Can you name the desire before you name the product?",
+  trap:"Asking “how do I promote this?” after the product is done, instead of “what existing desire am I pointing this at?” before you build.",
+  fields:[
+    {t:"text", k:"d_niche", l:"Your niche", p:"e.g. dentists using AI · solo consultants · real estate agents · Shopify operators",
+     help:"Pick one you care about — a business you're building, or one you want to start."},
+    {t:"h", v:"The map — twenty places their attention already goes"},
+    {t:"note", h:"Not “where should I post.” Where are they <em>already</em> reading, lurking, arguing and paying? Add them under the right heading, one per line."},
+    {t:"lines", k:"d_news", l:"Newsletters they open", p:"one per line"},
+    {t:"lines", k:"d_creators", l:"Creators they follow", p:"one per line"},
+    {t:"lines", k:"d_comm", l:"Communities — subreddits, Slack, Discord, forums", p:"one per line"},
+    {t:"lines", k:"d_pods", l:"Podcasts & YouTube channels", p:"one per line"},
+    {t:"lines", k:"d_events", l:"Events they attend", p:"one per line"},
+    {t:"lines", k:"d_search", l:"Search terms they type", p:"one per line"},
+    {t:"lines", k:"d_tools", l:"Tools they already pay for", p:"one per line"},
+    {t:"counter", of:["d_news","d_creators","d_comm","d_pods","d_events","d_search","d_tools"], target:20, l:"places mapped"},
+    {t:"h", v:"The painful sentence"},
+    {t:"area", k:"d_pain", l:"One sentence they would actually say out loud", rows:3,
+     p:"I know I should follow up with leads faster, but by the time I sit down to do it, half of them are cold.",
+     help:"In their words, not yours. This sentence is where distribution starts, because writing it forces you into their shoes."},
+    {t:"h", v:"Twenty hooks for the same idea"},
+    {t:"lines", k:"h_cur", l:"Curiosity hooks", p:"one per line"},
+    {t:"lines", k:"h_fear", l:"Fear hooks", p:"one per line"},
+    {t:"lines", k:"h_status", l:"Status hooks", p:"one per line"},
+    {t:"lines", k:"h_money", l:"Money hooks", p:"one per line"},
+    {t:"lines", k:"h_wish", l:"“I wish I knew this earlier” hooks", p:"one per line"},
+    {t:"counter", of:["h_cur","h_fear","h_status","h_money","h_wish"], target:20, l:"hooks written"}
+  ],
+  req:["d_niche","d_pain"]
+},
+{
+  key:"robotics", no:"03", ink:"teal", name:"Robotics builder",
+  rail:"03 Robotics",
+  line:"Build the hardware, wire in the AI, source the manufacturing.",
+  why:"The last decade rewarded people who moved pixels. The next one also rewards people who can move atoms. Cheap arms, open robot-learning projects, cheap cameras and small vision-language-action models took this out of PhD territory — and almost nobody in software has crossed over.",
+  rep:"One cheap arm, one camera, one boring task — and a failure log.",
+  repLong:"Make a robot repeat one useful thing. Then write down every single way it broke.",
+  teaches:["hardware","data collection","fine-tuning","sourcing"],
+  test:"Does it repeat the task when you move the object two inches?",
+  trap:"Skipping the failure log. Robotics teaches humility fast, and that humility is the expertise you're actually buying.",
+  fields:[
+    {t:"note", b:"The three-part loop", h:"Get a cheap arm on the desk. Mount the camera. Collect demonstrations. Train or fine-tune. Make it repeat one useful task. Then look at a supplier listing and judge whether the thing is actually manufacturable. Rare, because software people avoid hardware and hardware people avoid AI and distribution."},
+    {t:"pick", k:"r_arm", l:"The arm", opts:["SO-100","SO-101","Other low-cost arm","Still choosing"],
+     help:"The SO-100 / SO-101 ecosystem is the usual low-cost entry point. Hugging Face's LeRobot is where the open robot-learning work lives; SmolVLA is a small vision-language-action model you can run without an industrial setup."},
+    {t:"text", k:"r_cam", l:"The camera", p:"e.g. a £20 USB webcam clamped to a desk arm"},
+    {t:"pick", k:"r_task", l:"The one boring task", opts:["Sort three objects","Press a button","Move an item from one tray to another","Something else"]},
+    {t:"text", k:"r_task_other", l:"If something else — what?", p:"Keep it boring. Boring is the point."},
+    {t:"h", v:"Failure log"},
+    {t:"note", h:"Camera angle. Lighting changed. Gripper slipped. Dataset too small. Looked smart in one setup, fell apart when the object moved. Log every one — this file is the deliverable, not the demo."},
+    {t:"rows", k:"r_fail", cols:[{k:"what",p:"What failed"},{k:"why",p:"Why you think it failed"},{k:"fix",p:"What you changed"}], add:"Add a failure"},
+    {t:"h", v:"Sourcing — the second language"},
+    {t:"text", k:"r_part", l:"The component you're pricing", p:"e.g. 12V servo with metal gearbox, 25 kg·cm"},
+    {t:"check", k:"r_q1", l:"<b>Sample before bulk.</b> Ask for one unit before any conversation about quantity."},
+    {t:"check", k:"r_q2", l:"Motor specs"},
+    {t:"check", k:"r_q3", l:"Controller board details"},
+    {t:"check", k:"r_q4", l:"CAD files, if they exist"},
+    {t:"check", k:"r_q5", l:"Replacement parts"},
+    {t:"check", k:"r_q6", l:"Lead times"},
+    {t:"check", k:"r_q7", l:"Minimum order quantity"},
+    {t:"check", k:"r_q8", l:"Shipping terms"},
+    {t:"check", k:"r_q9", l:"<b>A short video of the part doing the exact thing you need.</b>"},
+    {t:"note", b:"The only question that matters", h:"Can this actually be made, shipped, repaired, and used by a normal person?"}
+  ],
+  req:["r_arm","r_task"]
+},
+{
+  key:"curator", no:"04", ink:"violet", name:"Curator",
+  rail:"04 Curation",
+  line:"Make sense of a niche in public, on camera, with a take.",
+  why:"The internet is drowning in information and the timeline is filling with slop, so the algorithms are rewarding raw, opinionated, human explanation. You don't need net-new content or millions of followers — fifty thousand of the right people is a business.",
+  rep:"A seven-day curation sprint.",
+  repLong:"One lane. Three finds a day. One short video a day, always in the same four-part structure.",
+  teaches:["taste","point of view","short-form","consistency"],
+  test:"Would someone in your niche say “I feel like I know this person”?",
+  trap:"Forwarding links without a take. The people who are good at this are visibly pro-something or anti-something.",
+  fields:[
+    {t:"text", k:"c_lane", l:"Your lane", p:"e.g. AI agents for real estate · robotics for small businesses · local models for clinics",
+     help:"Narrow enough that three interesting things happen in it every day."},
+    {t:"h", v:"The structure — use it every single time"},
+    {t:"note", b:"Four lines", h:"<em>I saw this.</em> → <em>Most people will think it means this.</em> → <em>I think it actually means this.</em> → <em>Here's the move.</em><br>The third line is the whole job. That's what separates curation from a link dump."},
+    {t:"h", v:"Day one, written out"},
+    {t:"text", k:"c_saw", l:"I saw this", p:"The thing — a model demo, a launch, a pricing change, a clip"},
+    {t:"text", k:"c_think", l:"Most people will think it means…", p:"The obvious read"},
+    {t:"area", k:"c_actually", l:"I think it actually means…", rows:2, p:"Your take. Be pro-something or anti-something."},
+    {t:"text", k:"c_move", l:"Here's the move", p:"What someone in your lane should do this week because of it"},
+    {t:"h", v:"The other six days"},
+    {t:"rows", k:"c_days", cols:[{k:"thing",p:"The thing you found"},{k:"move",p:"The move"}], add:"Add a day", seed:6},
+    {t:"h", v:"Your taste file"},
+    {t:"note", h:"Curators are only as good as their inputs. Generic inputs, generic outputs. Weird, specific, high-signal inputs and people start coming to you because you find things before they do."},
+    {t:"text", k:"c_file", l:"Where the file lives", p:"e.g. a single Apple Note · Notion database · one long text file"},
+    {t:"check", k:"c_f1", l:"Great hooks"},
+    {t:"check", k:"c_f2", l:"Great analogies"},
+    {t:"check", k:"c_f3", l:"Great titles"},
+    {t:"check", k:"c_f4", l:"Weird use cases"},
+    {t:"check", k:"c_f5", l:"<b>Comments that reveal what people are genuinely confused about</b>"}
+  ],
+  req:["c_lane","c_actually"]
+},
+{
+  key:"builder", no:"05", ink:"ochre", name:"Builder distributor",
+  rail:"05 Builder",
+  line:"Ship the product and win the attention — same person, one loop.",
+  why:"For years it was Wozniak builds, Jobs sells. AI compressed the split: one person can prototype, write the landing page, cut the clips, DM the first hundred users and iterate — with no handoff, so nothing gets lost in translation. This is what the one-person company actually looks like.",
+  rep:"The 48-hour loop.",
+  repLong:"One tiny problem you personally understand. The ugliest working version. Then ten pieces of distribution before you feel ready.",
+  teaches:["scoping","shipping","launch craft","feedback loops"],
+  test:"Did you earn a real reaction from a stranger inside two days?",
+  trap:"Doing half the loop forever — building in private, or talking in public and never shipping.",
+  fields:[
+    {t:"area", k:"b_prob", l:"One tiny problem you personally understand", rows:2,
+     p:"Not a market. A problem you have had yourself, this month.", help:"Personal understanding is what lets you cut scope correctly under time pressure."},
+    {t:"pick", k:"b_form", l:"The smallest version", opts:["A script","A form","A simple web app","An automation","A single page with a button"],
+     help:"It can be ugly. Ugly and in front of someone beats polished and private."},
+    {t:"text", k:"b_deadline", l:"Your 48 hours start and end", p:"e.g. Fri 18:00 → Sun 18:00"},
+    {t:"h", v:"Ten pieces of distribution — written before you feel ready"},
+    {t:"note", h:"AI made the building part fast, so the marketing part can start much earlier. You are training yourself to stop separating the product from the market."},
+    {t:"dist", k:"b_dist"},
+    {t:"h", v:"The loop after the loop"},
+    {t:"note", b:"Audience → community → product", h:"Attention turns into product feedback, product feedback turns into better attention. Build the audience, convert it into a community, build the product from inside it — then keep the loop turning."},
+    {t:"text", k:"b_watch", l:"Where you'll watch people get confused", p:"e.g. 5 recorded sessions · the first 20 replies · support inbox"}
+  ],
+  req:["b_prob","b_form"]
+},
+{
+  key:"irl", no:"06", ink:"forest", name:"IRL community builder",
+  rail:"06 Rooms",
+  line:"Small rooms, one sharp question, a recap that turns them into a network.",
+  why:"AI makes content, software and advice abundant — so scarcity moves to belonging, trust and context. Who would answer your text, help you hire, introduce you to a customer, tell you the honest version of their market? Nobody wants giant conferences any more; the opportunity is small and bespoke.",
+  rep:"Six to eight people around one sharp question.",
+  repLong:"A dinner, a walk, a hike, a breakfast. Then a recap that gives the room a memory.",
+  teaches:["curation of people","hosting","ritual","follow-through"],
+  test:"Does anyone ask when the next one is — without you prompting?",
+  trap:"Starting with a big event. And skipping the recap, which is the thing that turns a room into a network.",
+  fields:[
+    {t:"pick", k:"i_format", l:"The format", opts:["Dinner","Breakfast","A walk","A hike","Coffee, standing"],
+     help:"A great community is more like a habit than an event: same time, same kind of people, same promise, better conversations each time."},
+    {t:"text", k:"i_q", l:"The one sharp question", p:"e.g. What skill are you learning because of AI?",
+     help:"Other good ones: What are you automating in your company right now? · What do you think everything in tech is missing?"},
+    {t:"text", k:"i_when", l:"Date, time and place", p:"e.g. Thu 12 Feb, 19:00 — the back table at Café Central"},
+    {t:"h", v:"The guest list — six to eight people who can actually answer it"},
+    {t:"rows", k:"i_guests", cols:[{k:"who",p:"Name"},{k:"why",p:"Why they can answer the question"}], add:"Add a guest", seed:6},
+    {t:"h", v:"The ritual"},
+    {t:"text", k:"i_ritual", l:"Same time, same kind of people, same promise", p:"e.g. second Thursday, operators only, one question, home by 21:30"},
+    {t:"h", v:"The recap — sent within 24 hours"},
+    {t:"note", h:"The recap is what creates memory, gives people a reason to forward it, and makes the next invite easier. Over time the room becomes a media asset, a recruiting asset, a deal-flow asset — and honestly a life asset."},
+    {t:"check", k:"i_c1", l:"<b>The best quotes</b> — attributed"},
+    {t:"check", k:"i_c2", l:"The inside jokes"},
+    {t:"check", k:"i_c3", l:"The ideas that came up"},
+    {t:"check", k:"i_c4", l:"<b>One follow-up everyone should do</b>"},
+    {t:"text", k:"i_follow", l:"The one follow-up you'll ask for", p:"e.g. everyone intros one person to someone else in the room this week"}
+  ],
+  req:["i_format","i_q"]
+}
+];
+
+var BYKEY = {}; for(var _i=0;_i<SKILLS.length;_i++) BYKEY[SKILLS[_i].key]=SKILLS[_i];
+
+var DIST_PIECES = [
+  ["Demo video","One take, screen + voice, under 2 minutes"],
+  ["Short clip 1","The problem, said in their words"],
+  ["Short clip 2","The moment it works"],
+  ["Short clip 3","The take nobody else has"],
+  ["Post 1","The build, in public"],
+  ["Post 2","The painful sentence, quoted"],
+  ["Post 3","What surprised you"],
+  ["DM 1","Someone who has the problem"],
+  ["DM 2","Someone who has the problem"],
+  ["Landing page","One promise, one button"]
+];
+
+/* ============================================================
+   state
+   ============================================================ */
+var KEY = "skillstack.v1";
+var store = load();
+
+function blank(){ return { name:"", picked:[], step:0, d:{} }; }
+function load(){
+  try{
+    var raw = localStorage.getItem(KEY);
+    if(raw){ var s = JSON.parse(raw); if(s && typeof s==="object"){ s.d = s.d||{}; s.picked=s.picked||[]; return s; } }
+  }catch(e){}
+  return blank();
+}
+function save(){ try{ localStorage.setItem(KEY, JSON.stringify(store)); }catch(e){} }
+
+function V(k){ var v = store.d[k]; return v===undefined ? "" : v; }
+function setV(k,v){ store.d[k]=v; save(); }
+function arr(k){ var v=store.d[k]; return Array.isArray(v)?v:[]; }
+
+function steps(){ return ["premise"].concat(store.picked).concat(["stack"]); }
+function curStep(){ var s=steps(); return s[Math.min(store.step, s.length-1)]; }
+
+/* ============================================================
+   helpers
+   ============================================================ */
+function esc(s){ return String(s==null?"":s).replace(/[&<>"']/g,function(c){
+  return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); }
+function lines(k){
+  return String(V(k)||"").split("\n").map(function(x){return x.trim();}).filter(Boolean);
+}
+function countOf(keys){ var n=0; for(var i=0;i<keys.length;i++) n+=lines(keys[i]).length; return n; }
+function plateVars(ink){ return "--plate:var(--"+ink+"); --plate-w:var(--"+ink+"-w)"; }
+
+function skillDone(sk){
+  for(var i=0;i<sk.req.length;i++){ var v=V(sk.req[i]); if(!v || (typeof v==="string" && !v.trim())) return false; }
+  return true;
+}
+
+/* ============================================================
+   field rendering
+   ============================================================ */
+function renderFields(fields){
+  var out = "";
+  for(var i=0;i<fields.length;i++){
+    var f = fields[i];
+    if(f.t==="h"){ out += '<h3 class="sec">'+esc(f.v)+'</h3>'; continue; }
+    if(f.t==="note"){
+      out += '<div class="note'+(f.warn?" warn":"")+'">'+(f.b?"<b>"+esc(f.b)+"</b>":"")+f.h+'</div>'; continue;
+    }
+    if(f.t==="text"){
+      out += '<div class="f"><label for="fld_'+f.k+'">'+esc(f.l)+'</label>'+
+             (f.help?'<p class="help">'+f.help+'</p>':'')+
+             '<input type="text" id="fld_'+f.k+'" data-k="'+f.k+'" value="'+esc(V(f.k))+'" placeholder="'+esc(f.p||"")+'"></div>';
+      continue;
+    }
+    if(f.t==="area" || f.t==="lines"){
+      var rows = f.rows || (f.t==="lines" ? 3 : 3);
+      out += '<div class="f"><label for="fld_'+f.k+'">'+esc(f.l)+'</label>'+
+             (f.help?'<p class="help">'+f.help+'</p>':'')+
+             '<textarea id="fld_'+f.k+'" data-k="'+f.k+'" rows="'+rows+'" placeholder="'+esc(f.p||"")+'">'+esc(V(f.k))+'</textarea></div>';
+      continue;
+    }
+    if(f.t==="counter"){
+      var n = countOf(f.of), pct = Math.min(100, Math.round(n/f.target*100));
+      out += '<div class="count"><b>'+n+'</b> / '+f.target+' '+esc(f.l)+
+             '<span class="meter"><i style="width:'+pct+'%"></i></span></div>';
+      continue;
+    }
+    if(f.t==="pick"){
+      out += '<div class="f"><span class="lab">'+esc(f.l)+'</span>'+
+             (f.help?'<p class="help">'+f.help+'</p>':'')+'<div class="chips">';
+      for(var j=0;j<f.opts.length;j++){
+        var on = V(f.k)===f.opts[j];
+        out += '<button type="button" class="chip" data-pick="'+f.k+'" data-val="'+esc(f.opts[j])+'" aria-pressed="'+on+'">'+esc(f.opts[j])+'</button>';
+      }
+      out += '</div></div>'; continue;
+    }
+    if(f.t==="multi"){
+      var sel = arr(f.k);
+      out += '<div class="f"><span class="lab">'+esc(f.l)+'</span>'+
+             (f.help?'<p class="help">'+f.help+'</p>':'')+'<div class="chips">';
+      for(var m=0;m<f.opts.length;m++){
+        var onm = sel.indexOf(f.opts[m])>=0;
+        out += '<button type="button" class="chip" data-multi="'+f.k+'" data-val="'+esc(f.opts[m])+'" aria-pressed="'+onm+'">'+esc(f.opts[m])+'</button>';
+      }
+      out += '</div></div>'; continue;
+    }
+    if(f.t==="check"){
+      out += '<label class="ck"><input type="checkbox" data-check="'+f.k+'"'+(V(f.k)?" checked":"")+'><span>'+f.l+'</span></label>';
+      continue;
+    }
+    if(f.t==="rows"){ out += renderRows(f); continue; }
+    if(f.t==="dist"){ out += renderDist(f.k); continue; }
+  }
+  return out;
+}
+
+function renderRows(f){
+  var data = arr(f.k);
+  if(!data.length){ var seed = f.seed || 3; data = []; for(var s=0;s<seed;s++){ data.push({}); } store.d[f.k]=data; }
+  var cols = f.cols, gridCols = cols.map(function(){return "1fr";}).join(" ");
+  var out = '<div class="rows">';
+  for(var i=0;i<data.length;i++){
+    out += '<div class="row" style="grid-template-columns:20px '+gridCols+' 28px">';
+    out += '<span class="n">'+(i+1)+'</span>';
+    for(var c=0;c<cols.length;c++){
+      out += '<input type="text" data-rk="'+f.k+'" data-ri="'+i+'" data-rc="'+cols[c].k+'" value="'+esc(data[i][cols[c].k]||"")+'" placeholder="'+esc(cols[c].p)+'" aria-label="'+esc(cols[c].p)+'">';
+    }
+    out += '<button type="button" class="x" data-rdel="'+f.k+'" data-ri="'+i+'" aria-label="Remove row '+(i+1)+'">×</button>';
+    out += '</div>';
+  }
+  out += '</div><div><button type="button" class="btn sm" data-radd="'+f.k+'">'+esc(f.add)+'</button></div>';
+  return out;
+}
+
+function renderDist(k){
+  var data = arr(k);
+  var out = '<div class="rows">';
+  for(var i=0;i<DIST_PIECES.length;i++){
+    var row = data[i] || {};
+    out += '<div class="row" style="grid-template-columns:20px 1fr">'+
+           '<span class="n">'+(i+1)+'</span>'+
+           '<div>'+
+             '<label class="ck" style="margin-bottom:4px"><input type="checkbox" data-dck="'+k+'" data-ri="'+i+'"'+(row.done?" checked":"")+'>'+
+             '<span><b>'+esc(DIST_PIECES[i][0])+'</b> — '+esc(DIST_PIECES[i][1])+'</span></label>'+
+             '<input type="text" data-rk="'+k+'" data-ri="'+i+'" data-rc="angle" value="'+esc(row.angle||"")+'" placeholder="The angle" aria-label="Angle for '+esc(DIST_PIECES[i][0])+'">'+
+           '</div></div>';
+  }
+  return out + '</div>';
+}
+
+/* ============================================================
+   step bodies
+   ============================================================ */
+function premiseBody(){
+  var out = '<p class="lede">Imagine it is a few years from now and AI can build almost anything, write almost anything, and do most of the tasks people used to get paid for. <strong>What is still valuable?</strong> Six answers. None of them need a degree or connections, all of them can be started this weekend, and every one of them gets <em>more</em> valuable as the models get better.</p>';
+  out += '<h3 class="sec">Pick your stack</h3>';
+  out += '<p class="help" style="margin-top:-6px">One is enough to start. Choose the ones you will actually do reps in — the wizard builds a card for each.</p>';
+  out += '<div class="plates">';
+  for(var i=0;i<SKILLS.length;i++){
+    var s = SKILLS[i], on = store.picked.indexOf(s.key)>=0;
+    out += '<button type="button" class="plate" style="'+plateVars(s.ink)+'" data-plate="'+s.key+'" aria-pressed="'+on+'">'+
+           '<span class="no" data-n="'+s.no+'">'+s.no+'</span>'+
+           '<span class="tick">'+(on?"in stack":"add")+'</span>'+
+           '<h4>'+esc(s.name)+'</h4><p>'+esc(s.line)+'</p></button>';
+  }
+  out += '</div>';
+  out += '<div class="note"><b>How many</b>Pick one and get dangerous. Pick two and you have leverage. Pick three and you become the kind of person everyone wants on the team, in the room, or building the company. There are too many tools to know all of them — the advantage goes to people who know how the pieces fit together.</div>';
+  out += '<div class="f"><label for="fld_why">What are you building this stack for?</label>'+
+         '<p class="help">Optional, but it makes the export read like a plan instead of a list.</p>'+
+         '<input type="text" id="fld_why" data-k="why" value="'+esc(V("why"))+'" placeholder="e.g. so my agency can sell agent operations by Q2"></div>';
+  return out;
+}
+
+function skillBody(sk){
+  var out = '<p class="lede">'+sk.why+'</p>';
+  out += '<div class="note" style="border-left-color:var(--plate)"><b>The first rep</b>'+esc(sk.rep)+' — '+esc(sk.repLong)+'</div>';
+  out += renderFields(sk.fields);
+  out += '<div class="note warn"><b>The trap</b>'+esc(sk.trap)+'</div>';
+  return out;
+}
+
+function stackBody(){
+  var out = '';
+  if(!store.picked.length){
+    return '<p class="lede">No skills picked yet. Go back to <strong>the premise</strong> and choose at least one — the plan is built from your cards.</p>';
+  }
+  out += '<p class="lede">Skill is the shield. Nobody knows what the next ten years do to the job market, but the person who can combine several of these is the one who stays useful. Here is your stack, your reps, and a two-week schedule to run them.</p>';
+  out += '<h3 class="sec">Your stack</h3><div class="stacklist">';
+  for(var i=0;i<store.picked.length;i++){
+    var s = BYKEY[store.picked[i]], done = skillDone(s);
+    out += '<div class="si" style="'+plateVars(s.ink)+'"><span class="n">'+s.no+'</span><span class="t">'+esc(s.name)+'</span>'+
+           '<span class="s'+(done?" ok":"")+'">'+(done?"rep defined":"incomplete")+'</span></div>';
+  }
+  out += '</div>';
+
+  out += '<div class="grid2">'+
+    '<div class="f"><label for="fld_start">Start date</label><input type="text" id="fld_start" data-k="start" value="'+esc(V("start"))+'" placeholder="e.g. Monday 9 Feb"></div>'+
+    '<div class="f"><label for="fld_hours">Hours a week you actually have</label><input type="text" id="fld_hours" data-k="hours" value="'+esc(V("hours"))+'" placeholder="e.g. 6"></div>'+
+  '</div>';
+
+  out += '<h3 class="sec">Two weeks</h3><div class="scroll-x">'+schedTable()+'</div>';
+
+  out += '<div class="note"><b>The rule that makes this work</b>Every rep here has a success test you can fail. Run it, judge it honestly, and either keep going or drop the skill and put the hours into another one. A rep you never grade is a hobby.</div>';
+
+  out += '<h3 class="sec">Take it with you</h3>'+
+    '<div class="outbar">'+
+      '<span class="t">One markdown file with every card, every field and the schedule</span>'+
+      '<button class="btn primary" id="dl" type="button">Download plan.md</button>'+
+      '<button class="btn" id="copyall" type="button">Copy</button>'+
+      '<button class="btn" id="printbtn" type="button">Print</button>'+
+    '</div>'+
+    '<div id="manual" class="f"></div>';
+
+  out += '<div class="verdict" style="margin-top:6px">Pick one and get <b>dangerous</b>. Pick two and you have <b>leverage</b>. Pick three and you are the person everyone wants on the team.</div>';
+  return out;
+}
+
+var SCHED = {
+  agents:[["Days 1–2","Wire the three sources. Nothing clever — just get them readable."],["Days 3–4","Write the goal and the two rules. Run it manually and read the output."],["Days 5–7","Schedule it. Start the one-line daily log: used / ignored / why."],["Week 2","Move one part local. Grade it against your success test."]],
+  distribution:[["Days 1–3","The map. Twenty places, filled honestly."],["Day 4","The painful sentence. Rewrite it until it sounds like them, not you."],["Days 5–7","Twenty hooks across the five types."],["Week 2","Put the three best hooks where the attention already is. Watch what happens."]],
+  robotics:[["Days 1–3","Arm on the desk, camera mounted."],["Days 4–5","Collect demonstrations for the one boring task."],["Days 6–7","Train or fine-tune. Start the failure log."],["Week 2","Move the object two inches. Log every failure. Send one supplier enquiry."]],
+  curator:[["Day 1","Lane picked. First video shot in the four-part structure."],["Days 2–7","Three finds a day, one video a day, same structure."],["Throughout","Taste file open in a second window — every good hook goes in."],["Week 2","Read the comments for what people are confused about. Make those next week's videos."]],
+  builder:[["48 hours","Problem → ugliest working version. Stop building when it works once."],["Immediately after","All ten distribution pieces, written before you feel ready."],["Days 3–7","Ship them. DM the people who have the problem."],["Week 2","Watch where people get confused. Change the product, change the story, go again."]],
+  irl:[["Days 1–2","The question. Then the list of six to eight who can answer it."],["Days 3–5","Invites out. Keep it small on purpose."],["Week 2","Host it. Send the recap within 24 hours."],["After","Set the ritual — same time, same kind of people, same promise."]]
+};
+
+function schedTable(){
+  var out = '<table class="sched"><thead><tr><th>When</th><th>Skill</th><th>What you do</th></tr></thead><tbody>';
+  for(var i=0;i<store.picked.length;i++){
+    var s = BYKEY[store.picked[i]], rows = SCHED[s.key];
+    for(var r=0;r<rows.length;r++){
+      out += '<tr><td>'+esc(rows[r][0])+'</td><td style="color:var(--'+s.ink+');font-weight:600;white-space:nowrap">'+esc(s.name)+'</td><td>'+esc(rows[r][1])+'</td></tr>';
+    }
+  }
+  return out + '</tbody></table>';
+}
+
+/* ============================================================
+   the side card
+   ============================================================ */
+function sideHTML(){
+  var st = curStep();
+  if(st==="premise" || st==="stack") return sideSummary();
+  var sk = BYKEY[st];
+  var out = '<div class="card-head" style="'+plateVars(sk.ink)+'"><span class="no">'+sk.no+'</span>'+
+            '<div><h3>'+esc(sk.name)+'</h3><span class="sub">the card</span></div></div>'+
+            '<div class="card-body" style="'+plateVars(sk.ink)+'">';
+  out += '<div class="spec"><span class="k">First rep</span><span class="v">'+esc(sk.rep)+'</span></div>';
+  out += '<div class="spec"><span class="k">Teaches</span><div class="tags">';
+  for(var i=0;i<sk.teaches.length;i++) out += '<span class="tag">'+esc(sk.teaches[i])+'</span>';
+  out += '</div></div>';
+  out += '<div class="spec"><span class="k">Success test</span><span class="v">'+esc(sk.test)+'</span></div>';
+  out += '<div class="outbar"><span class="t">'+esc(outTitle(sk.key))+'</span>'+
+         '<button class="btn sm" data-copy="out">Copy</button></div>'+
+         '<div class="out" id="outbox">'+esc(genFor(sk.key))+'</div>';
+  out += '</div>';
+  return out;
+}
+
+function sideSummary(){
+  var out = '<div class="card-head"><span class="no">∑</span><div><h3>Your stack</h3><span class="sub">'+store.picked.length+' of 6 picked</span></div></div><div class="card-body">';
+  if(!store.picked.length){
+    out += '<p class="help" style="font-size:1rem">Nothing picked yet. The six plates on the left are the whole map — choose the ones you will actually do reps in.</p>';
+  } else {
+    out += '<div class="stacklist">';
+    for(var i=0;i<store.picked.length;i++){
+      var s = BYKEY[store.picked[i]], done = skillDone(s);
+      out += '<div class="si" style="'+plateVars(s.ink)+'"><span class="n">'+s.no+'</span><span class="t">'+esc(s.name)+'</span>'+
+             '<span class="s'+(done?" ok":"")+'">'+(done?"ready":"todo")+'</span></div>';
+    }
+    out += '</div>';
+    var n = store.picked.length;
+    var verdict = n===1 ? "One skill, done properly, makes you <b>dangerous</b>."
+                : n===2 ? "Two skills is where <b>leverage</b> starts."
+                : "Three or more and you are the person everyone wants <b>on the team, in the room, or building the company</b>.";
+    out += '<div class="verdict">'+verdict+'</div>';
+  }
+  if(store.picked.length){
+    out += '<div class="outbar"><span class="t">Plan so far</span><button class="btn sm" data-copy="out">Copy</button></div>'+
+           '<div class="out" id="outbox">'+esc(markdown())+'</div>';
+  }
+  return out + '</div>';
+}
+
+function outTitle(k){
+  return {agents:"Agent brief — paste into your builder", distribution:"Positioning sheet",
+          robotics:"Supplier enquiry — ready to send", curator:"Video script — day one",
+          builder:"48-hour launch checklist", irl:"Invite + recap skeleton"}[k];
+}
+
+/* ============================================================
+   generated outputs
+   ============================================================ */
+function or(v, alt){ v = String(V(v)||"").trim(); return v || alt; }
+
+function genFor(k){
+  if(k==="agents"){
+    var loc = arr("a_local");
+    return "AGENT: daily briefing\n"+
+      "\nSOURCES\n  1. "+or("a_s1","‹calendar›")+"\n  2. "+or("a_s2","‹notes folder›")+"\n  3. "+or("a_s3","‹saved links›")+
+      "\n\nGOAL\n  "+or("a_goal","‹what matters today, decisions waiting, follow-ups owed›")+
+      "\n\nRULES\n"+
+      "  1. "+(V("a_r1")?"Show sources for every claim.":"‹show sources — not yet accepted›")+"\n"+
+      "  2. "+(V("a_r2")?"Draft only. Ask for approval before sending anything.":"‹ask before sending — not yet accepted›")+"\n"+
+      (V("a_r3")?"  3. "+V("a_r3")+"\n":"")+
+      "\nRUNS\n  "+or("a_when","‹unscheduled›")+
+      "\n\nLOCAL\n  "+(loc.length?loc.join(", "):"‹not decided›")+
+      "\n\nSUCCESS TEST\n  "+or("a_metric","‹pick one›")+"\n  Checked by: "+or("a_check","‹how?›")+
+      "\n\nSTOP CONDITION\n  If it fails the test for five days running, change one thing — not five.";
+  }
+  if(k==="distribution"){
+    var places = ["d_news","d_creators","d_comm","d_pods","d_events","d_search","d_tools"];
+    var labels = ["Newsletters","Creators","Communities","Podcasts","Events","Search terms","Pays for"];
+    var s = "NICHE\n  "+or("d_niche","‹pick one›")+"\n\nTHE SENTENCE THEY SAY\n  \""+or("d_pain","‹in their words›")+"\"\n\nWHERE THE ATTENTION IS ("+countOf(places)+"/20)\n";
+    for(var i=0;i<places.length;i++){
+      var L = lines(places[i]);
+      if(L.length) s += "  "+labels[i]+": "+L.join(" · ")+"\n";
+    }
+    var hk = ["h_cur","h_fear","h_status","h_money","h_wish"], hl=["Curiosity","Fear","Status","Money","Wish I knew"];
+    s += "\nHOOKS ("+countOf(hk)+"/20)\n";
+    for(var j=0;j<hk.length;j++){
+      var H = lines(hk[j]);
+      for(var x=0;x<H.length;x++) s += "  ["+hl[j]+"] "+H[x]+"\n";
+    }
+    s += "\nTEST\n  Point each hook at the sentence above. If it doesn't answer that sentence, cut it.";
+    return s;
+  }
+  if(k==="robotics"){
+    var asks = [["r_q2","Full motor specs"],["r_q3","Controller board details"],["r_q4","CAD files, if they exist"],["r_q5","Replacement parts availability"],["r_q6","Lead time"],["r_q7","Minimum order quantity"],["r_q8","Shipping terms"],["r_q9","A short video of the part doing exactly this"]];
+    var body = "Hello,\n\nI'm evaluating "+or("r_part","‹component›")+" for a small robotics build ("+or("r_arm","‹arm›")+", "+
+      (V("r_task")==="Something else"?or("r_task_other","one repeated task"):or("r_task","one repeated task")).toLowerCase()+").\n\n";
+    body += V("r_q1") ? "Before discussing quantities I'd like to buy one sample unit.\n\n" : "";
+    body += "Could you send:\n";
+    var any=false;
+    for(var a=0;a<asks.length;a++) if(V(asks[a][0])){ body += "  - "+asks[a][1]+"\n"; any=true; }
+    if(!any) body += "  ‹tick the questions on the left and they appear here›\n";
+    body += "\nThe question I'm actually answering is whether this can be made, shipped, repaired and used by a normal person.\n\nThank you.";
+    var fails = arr("r_fail").filter(function(r){ return r && (r.what||r.why||r.fix); });
+    if(fails.length){
+      body += "\n\n— — —\nFAILURE LOG ("+fails.length+")\n";
+      for(var f=0;f<fails.length;f++) body += "  "+(f+1)+". "+(fails[f].what||"?")+" → "+(fails[f].why||"?")+" → fixed by: "+(fails[f].fix||"open")+"\n";
+    }
+    return body;
+  }
+  if(k==="curator"){
+    var s2 = "LANE: "+or("c_lane","‹pick one›")+"\n\n— DAY 1 SCRIPT —\n\n"+
+      "I saw this.\n  "+or("c_saw","‹the thing›")+"\n\n"+
+      "Most people will think it means this.\n  "+or("c_think","‹the obvious read›")+"\n\n"+
+      "I think it actually means this.\n  "+or("c_actually","‹your take — be pro or anti something›")+"\n\n"+
+      "Here's the move.\n  "+or("c_move","‹what they should do this week›")+"\n";
+    var days = arr("c_days").filter(function(r){ return r && (r.thing||r.move); });
+    if(days.length){
+      s2 += "\n— THE REST OF THE WEEK —\n";
+      for(var d=0;d<days.length;d++) s2 += "  Day "+(d+2)+": "+(days[d].thing||"?")+" → "+(days[d].move||"?")+"\n";
+    }
+    s2 += "\nSame structure every day. The third line is the job.";
+    return s2;
+  }
+  if(k==="builder"){
+    var rows = arr("b_dist");
+    var s3 = "48-HOUR LOOP\n\nPROBLEM\n  "+or("b_prob","‹one you personally have›")+
+      "\n\nSMALLEST VERSION\n  "+or("b_form","‹script / form / app / automation›")+
+      "\n\nWINDOW\n  "+or("b_deadline","‹start → end›")+
+      "\n\nTEN PIECES\n";
+    var doneN = 0;
+    for(var p=0;p<DIST_PIECES.length;p++){
+      var r = rows[p]||{};
+      if(r.done) doneN++;
+      s3 += "  ["+(r.done?"x":" ")+"] "+DIST_PIECES[p][0]+" — "+(r.angle||DIST_PIECES[p][1])+"\n";
+    }
+    s3 += "\n"+doneN+"/10 shipped.\n\nWATCHING FOR CONFUSION AT\n  "+or("b_watch","‹where?›")+
+      "\n\nTHEN\n  Change the product. Change the story. Go again.";
+    return s3;
+  }
+  if(k==="irl"){
+    var g = arr("i_guests").filter(function(r){ return r && (r.who||r.why); });
+    var s4 = "INVITE\n\n  "+or("i_format","‹format›")+" — "+or("i_when","‹when and where›")+"\n"+
+      "  One question: "+or("i_q","‹the sharp question›")+"\n"+
+      "  Six to eight people who can actually answer it. No panel, no name tags.\n\n"+
+      "GUEST LIST ("+g.length+")\n";
+    if(g.length){ for(var q=0;q<g.length;q++) s4 += "  - "+(g[q].who||"?")+" — "+(g[q].why||"")+"\n"; }
+    else s4 += "  ‹add six to eight›\n";
+    s4 += "\nRITUAL\n  "+or("i_ritual","‹same time, same people, same promise›")+
+      "\n\nRECAP — within 24 hours\n"+
+      "  ["+(V("i_c1")?"x":" ")+"] The best quotes, attributed\n"+
+      "  ["+(V("i_c2")?"x":" ")+"] The inside jokes\n"+
+      "  ["+(V("i_c3")?"x":" ")+"] The ideas that came up\n"+
+      "  ["+(V("i_c4")?"x":" ")+"] One follow-up: "+or("i_follow","‹the ask›")+"\n"+
+      "\nThe recap is what turns the room into a network.";
+    return s4;
+  }
+  return "";
+}
+
+/* ============================================================
+   markdown export
+   ============================================================ */
+function markdown(){
+  var t = (store.name||"Untitled stack");
+  var out = "# "+t+"\n\n";
+  if(V("why")) out += "**Built for:** "+V("why")+"\n\n";
+  out += "**Stack:** "+(store.picked.length ? store.picked.map(function(k){ return BYKEY[k].no+" "+BYKEY[k].name; }).join(" · ") : "nothing picked yet")+"\n";
+  if(V("start")) out += "**Starts:** "+V("start")+(V("hours")?" · "+V("hours")+" h/week":"")+"\n";
+  out += "\n> Pick one and get dangerous. Pick two and you have leverage. Pick three and you are the person everyone wants on the team, in the room, or building the company.\n";
+  for(var i=0;i<store.picked.length;i++){
+    var s = BYKEY[store.picked[i]];
+    out += "\n---\n\n## "+s.no+" — "+s.name+"\n\n"+s.line+"\n\n";
+    out += "**First rep:** "+s.rep+" "+s.repLong+"\n\n";
+    out += "**Teaches:** "+s.teaches.join(", ")+"  \n";
+    out += "**Success test:** "+s.test+"  \n";
+    out += "**The trap:** "+s.trap+"\n\n";
+    out += "```\n"+genFor(s.key)+"\n```\n";
+  }
+  if(store.picked.length){
+    out += "\n---\n\n## Two weeks\n\n| When | Skill | What you do |\n|---|---|---|\n";
+    for(var j=0;j<store.picked.length;j++){
+      var sk = BYKEY[store.picked[j]], rows = SCHED[sk.key];
+      for(var r=0;r<rows.length;r++) out += "| "+rows[r][0]+" | "+sk.name+" | "+rows[r][1]+" |\n";
+    }
+  }
+  out += "\n---\n\nSource: “Learn AI” Is Bad Advice. Learn This Instead — Greg Isenberg, The Startup Ideas Podcast, 25 June 2026. https://www.youtube.com/watch?v=jJIOA4GroBw\n";
+  return out;
+}
+
+function slug(s){ return String(s||"skill-stack").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"") || "skill-stack"; }
+
+/* ============================================================
+   paint
+   ============================================================ */
+var body = document.getElementById("stepbody");
+var side = document.getElementById("side");
+
+function paint(){
+  var st = curStep(), s = steps();
+  var sk = BYKEY[st];
+  document.documentElement.style.setProperty("--plate", sk ? "var(--"+sk.ink+")" : "var(--blue)");
+  document.documentElement.style.setProperty("--plate-w", sk ? "var(--"+sk.ink+"-w)" : "var(--blue-w)");
+
+  document.getElementById("stepno").textContent = st==="premise" ? "00" : (st==="stack" ? "∑" : sk.no);
+  document.getElementById("steptitle").textContent = st==="premise" ? "The premise" : (st==="stack" ? "Your plan" : sk.name);
+  document.getElementById("stephint").textContent = st==="premise" ? "pick your stack" : (st==="stack" ? "schedule + export" : "the first rep");
+
+  body.innerHTML = st==="premise" ? premiseBody() : (st==="stack" ? stackBody() : skillBody(sk));
+  side.innerHTML = sideHTML();
+
+  document.getElementById("prev").disabled = store.step===0;
+  var nx = document.getElementById("next");
+  nx.disabled = store.step >= s.length-1;
+  nx.textContent = store.step >= s.length-2 ? "Finish →" : "Next →";
+
+  paintRail();
+  var doneN = 0;
+  for(var i=0;i<store.picked.length;i++) if(skillDone(BYKEY[store.picked[i]])) doneN++;
+  var total = Math.max(1, store.picked.length);
+  document.getElementById("progtxt").textContent = doneN+" / "+total+" reps";
+  document.getElementById("progfill").style.width = (doneN/total*100)+"%";
+  save();
+}
+
+function paintRail(){
+  var rail = document.getElementById("rail"), s = steps(), html = "";
+  for(var i=0;i<s.length;i++){
+    var label = s[i]==="premise" ? "00 Premise" : (s[i]==="stack" ? "∑ Plan" : BYKEY[s[i]].rail);
+    var done = s[i]!=="premise" && s[i]!=="stack" && skillDone(BYKEY[s[i]]);
+    html += '<button type="button" data-go="'+i+'" aria-current="'+(i===store.step)+'"'+(done?' class="done"':'')+'>'+esc(label)+'</button>';
+  }
+  rail.innerHTML = html;
+}
+
+function repaintSide(){ side.innerHTML = sideHTML(); }
+
+/* ============================================================
+   events
+   ============================================================ */
+document.addEventListener("input", function(e){
+  var t = e.target;
+  if(t.dataset.k){ setV(t.dataset.k, t.value); if(t.dataset.k==="why"){} repaintSide(); syncCounters(); return; }
+  if(t.dataset.rk){
+    var a = arr(t.dataset.rk).slice(), i = +t.dataset.ri;
+    while(a.length<=i) a.push({});
+    a[i] = Object.assign({}, a[i]); a[i][t.dataset.rc] = t.value;
+    setV(t.dataset.rk, a); repaintSide(); return;
+  }
+});
+
+document.addEventListener("change", function(e){
+  var t = e.target;
+  if(t.dataset.check){ setV(t.dataset.check, t.checked); repaintSide(); paintRail(); return; }
+  if(t.dataset.dck){
+    var a = arr(t.dataset.dck).slice(), i = +t.dataset.ri;
+    while(a.length<=i) a.push({});
+    a[i] = Object.assign({}, a[i]); a[i].done = t.checked;
+    setV(t.dataset.dck, a); repaintSide(); return;
+  }
+});
+
+document.addEventListener("click", function(e){
+  var t = e.target.closest ? e.target.closest("[data-plate],[data-pick],[data-multi],[data-go],[data-radd],[data-rdel],[data-copy],#dl,#copyall,#manualcopy,#printbtn,#next,#prev,#resetbtn,#themebtn") : null;
+  if(!t) return;
+
+  if(t.dataset.plate){
+    var k = t.dataset.plate, ix = store.picked.indexOf(k);
+    if(ix>=0) store.picked.splice(ix,1);
+    else { store.picked.push(k); store.picked.sort(function(a,b){ return BYKEY[a].no.localeCompare(BYKEY[b].no); }); }
+    save(); paint(); return;
+  }
+  if(t.dataset.pick){ setV(t.dataset.pick, V(t.dataset.pick)===t.dataset.val ? "" : t.dataset.val); paint(); return; }
+  if(t.dataset.multi){
+    var a = arr(t.dataset.multi).slice(), j = a.indexOf(t.dataset.val);
+    if(j>=0) a.splice(j,1); else a.push(t.dataset.val);
+    setV(t.dataset.multi, a); paint(); return;
+  }
+  if(t.dataset.go !== undefined){ store.step = +t.dataset.go; paint(); window.scrollTo({top:0,behavior:"smooth"}); return; }
+  if(t.dataset.radd){
+    var arr2 = arr(t.dataset.radd).slice(); arr2.push({}); setV(t.dataset.radd, arr2); paint();
+    var inputs = body.querySelectorAll('[data-rk="'+t.dataset.radd+'"]');
+    if(inputs.length) inputs[inputs.length-1].focus();
+    return;
+  }
+  if(t.dataset.rdel){
+    var arr3 = arr(t.dataset.rdel).slice(); arr3.splice(+t.dataset.ri,1); setV(t.dataset.rdel, arr3); paint(); return;
+  }
+  if(t.dataset.copy){ copy(document.getElementById("outbox").textContent, t); return; }
+
+  switch(t.id){
+    case "next": store.step = Math.min(steps().length-1, store.step+1); paint(); window.scrollTo({top:0,behavior:"smooth"}); break;
+    case "prev": store.step = Math.max(0, store.step-1); paint(); window.scrollTo({top:0,behavior:"smooth"}); break;
+    case "dl": download(); break;
+    case "copyall": copy(markdown(), t); break;
+    case "manualcopy": copy(document.getElementById("manualtx").value, t); break;
+    case "printbtn": window.print(); break;
+    case "themebtn": toggleTheme(); break;
+    case "resetbtn":
+      if(confirm("Clear this plan? Everything you typed is deleted from this browser.")){
+        store = blank(); save(); document.getElementById("sname").value=""; paint();
+      }
+      break;
+  }
+});
+
+function syncCounters(){
+  var st = curStep(); if(st!=="distribution") return;
+  var sk = BYKEY.distribution;
+  var idx = 0;
+  var nodes = body.querySelectorAll(".count");
+  for(var i=0;i<sk.fields.length;i++){
+    var f = sk.fields[i];
+    if(f.t!=="counter") continue;
+    var node = nodes[idx++]; if(!node) continue;
+    var n = countOf(f.of), pct = Math.min(100, Math.round(n/f.target*100));
+    node.querySelector("b").textContent = n;
+    node.querySelector(".meter i").style.width = pct+"%";
+  }
+}
+
+function copy(text, btn){
+  var done = function(){ var o = btn.textContent; btn.textContent = "Copied"; setTimeout(function(){ btn.textContent = o; }, 1400); };
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(done, function(){ fallback(text); done(); });
+  } else { fallback(text); done(); }
+}
+function fallback(text){
+  var ta = document.createElement("textarea");
+  ta.value = text; ta.style.position="fixed"; ta.style.opacity="0";
+  document.body.appendChild(ta); ta.select();
+  try{ document.execCommand("copy"); }catch(e){}
+  document.body.removeChild(ta);
+}
+function download(){
+  var md = markdown(), name = slug(store.name||"skill-stack")+".md", worked = false;
+  try{
+    var blob = new Blob([md], {type:"text/markdown;charset=utf-8"});
+    var url = URL.createObjectURL(blob), a = document.createElement("a");
+    a.href = url; a.download = name; a.rel = "noopener";
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 2000);
+    worked = true;
+  }catch(e){ worked = false; }
+  /* Embedded pages block file downloads, and the block is silent — always offer the manual path there. */
+  if(!worked || window.self !== window.top) manualSave(md, name);
+}
+
+function manualSave(md, name){
+  var host = document.getElementById("manual");
+  if(!host) return;
+  host.innerHTML =
+    '<div class="note warn"><b>If nothing saved</b>This page is embedded, and browsers block file downloads inside an embedded page. '+
+    'Copy the text below and save it as <code>'+esc(name)+'</code> — it is the same file.</div>'+
+    '<textarea id="manualtx" rows="10" readonly aria-label="Your plan in markdown"></textarea>'+
+    '<div class="outbar"><span class="t">'+md.length+' characters</span>'+
+    '<button class="btn primary" id="manualcopy" type="button">Copy the plan</button></div>';
+  var tx = document.getElementById("manualtx");
+  tx.value = md; tx.focus(); tx.select();
+}
+function toggleTheme(){
+  var r = document.documentElement;
+  var cur = r.getAttribute("data-theme");
+  var sysDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+  var next = cur ? (cur==="dark" ? "light" : "dark") : (sysDark ? "light" : "dark");
+  r.setAttribute("data-theme", next);
+  try{ localStorage.setItem(KEY+".theme", next); }catch(e){}
+}
+
+/* ---------- boot ---------- */
+(function(){
+  try{ var th = localStorage.getItem(KEY+".theme"); if(th) document.documentElement.setAttribute("data-theme", th); }catch(e){}
+  var nameEl = document.getElementById("sname");
+  nameEl.value = store.name || "";
+  nameEl.addEventListener("input", function(){ store.name = nameEl.value; save(); repaintSide(); });
+  paint();
+})();
+</script>
+
+<script>
+/* ---------- text size ----------------------------------------------------
+   One root font-size knob; every font-size in this file is rem, so the whole
+   page scales together. Added 2026-08-06 at the operator's request.
+------------------------------------------------------------------------- */
+(function(){
+  var SIZES = ["m","l","xl"];
+  var K = (typeof KEY === "string" ? KEY : location.pathname) + ".fs";
+  var host = document.querySelector(".bar-in") || document.querySelector(".topbar .wrap") ||
+             document.querySelector(".bar") || document.querySelector("header") || document.body;
+  var b = document.createElement("button");
+  b.type = "button";
+  b.className = "btn ghost sm";
+  b.title = "Text size";
+  b.setAttribute("aria-label", "Text size");
+  /* no margin — the bar is a flex row with its own gap, and at the largest
+     text size an extra 8px is what tips it into a horizontal scrollbar */
+  b.style.cssText = "flex:none;font-family:var(--mono,monospace);cursor:pointer";
+  if(host === document.body){
+    b.style.cssText += ";position:fixed;top:10px;right:12px;z-index:999;background:var(--sheet,#fff);border:1px solid var(--line,#ccc);border-radius:2px;padding:6px 10px";
+  }
+  function apply(v){
+    if(v === "m") document.documentElement.removeAttribute("data-fs");
+    else document.documentElement.setAttribute("data-fs", v);
+    b.textContent = v === "m" ? "A" : (v === "l" ? "A+" : "A++");
+  }
+  b.addEventListener("click", function(){
+    var cur = document.documentElement.getAttribute("data-fs") || "m";
+    var next = SIZES[(SIZES.indexOf(cur) + 1) % SIZES.length];
+    apply(next);
+    try{ localStorage.setItem(K, next); }catch(e){}
+  });
+  var saved = "m";
+  try{ saved = localStorage.getItem(K) || "m"; }catch(e){}
+  apply(saved);
+  host.appendChild(b);
+})();
+</script>

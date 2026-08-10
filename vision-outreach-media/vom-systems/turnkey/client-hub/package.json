@@ -1,0 +1,14 @@
+{
+  "name": "vom-client-hub",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Client Business Hub backend: passwordless magic-link auth + per-tenant state storage, as Vercel Node functions behind a pluggable storage adapter (in-memory by default, Upstash/Vercel KV when configured).",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "check": "for f in api/*.js api/**/*.js; do node --check \"$f\" || exit 1; done"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

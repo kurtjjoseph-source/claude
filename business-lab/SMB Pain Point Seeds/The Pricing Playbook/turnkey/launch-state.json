@@ -1,0 +1,288 @@
+{
+  "schema": 1,
+  "business": "The Pricing Playbook",
+  "idea_folder": "/Users/kurtjoseph/Business Ideas/SMB Pain Point Seeds/The Pricing Playbook",
+  "operator": {
+    "id": "vom",
+    "name": "Vision Outreach Media",
+    "short": "VOM",
+    "author_as": "Vision Outreach Media (VOM)",
+    "voice": "Mission-driven, plain-spoken, trust-first, and (for the church niche) faith-friendly. Never hype, never jargon. Speak like a helpful expert, not a salesperson. Deliverables say \"Vision Outreach Media (VOM)\" or \"the operator\" — never a personal name.",
+    "model": "operator-run",
+    "profile_source": "/Users/kurtjoseph/Business Ideas/vom-systems/turnkey/orchestrator/operator.json"
+  },
+  "started": "2026-08-05T21:29:46Z",
+  "updated": "2026-08-07T07:51:03Z",
+  "stage": "intake",
+  "throttle": "single",
+  "gate_matrix": {
+    "stripe_connect": "done",
+    "cloudflare_delegation": "pending",
+    "credential_baseline": "pending",
+    "dutch_lawyer_terms": "pending",
+    "registrar_nl": "pending",
+    "provisioned_accounts": "done"
+  },
+  "workstreams": {
+    "intake": {
+      "status": "not_started",
+      "actor_waiting": null,
+      "blocked_by": [],
+      "note": null,
+      "updated": "2026-08-05T21:29:46Z"
+    },
+    "W1_profile": {
+      "status": "not_started",
+      "actor_waiting": null,
+      "blocked_by": [],
+      "note": null,
+      "updated": "2026-08-05T21:29:46Z"
+    },
+    "W2_legal": {
+      "status": "not_started",
+      "actor_waiting": null,
+      "blocked_by": [],
+      "note": null,
+      "updated": "2026-08-05T21:29:46Z"
+    },
+    "W3_domain": {
+      "status": "not_started",
+      "actor_waiting": null,
+      "blocked_by": [],
+      "note": null,
+      "updated": "2026-08-05T21:29:46Z"
+    },
+    "W4_website": {
+      "status": "not_started",
+      "actor_waiting": null,
+      "blocked_by": [],
+      "note": null,
+      "updated": "2026-08-05T21:29:46Z"
+    },
+    "W5_payments": {
+      "status": "not_started",
+      "actor_waiting": null,
+      "blocked_by": [],
+      "note": null,
+      "updated": "2026-08-05T21:29:46Z"
+    },
+    "W6_products": {
+      "status": "not_started",
+      "actor_waiting": null,
+      "blocked_by": [],
+      "note": null,
+      "updated": "2026-08-05T21:29:46Z"
+    },
+    "W7_presence": {
+      "status": "not_started",
+      "actor_waiting": null,
+      "blocked_by": [],
+      "note": null,
+      "updated": "2026-08-05T21:29:46Z"
+    },
+    "W8_social": {
+      "status": "not_started",
+      "actor_waiting": null,
+      "blocked_by": [],
+      "note": null,
+      "updated": "2026-08-05T21:29:46Z"
+    },
+    "W9_leads": {
+      "status": "not_started",
+      "actor_waiting": null,
+      "blocked_by": [],
+      "note": null,
+      "updated": "2026-08-05T21:29:46Z"
+    },
+    "W10_crm": {
+      "status": "not_started",
+      "actor_waiting": null,
+      "blocked_by": [],
+      "note": null,
+      "updated": "2026-08-05T21:29:46Z"
+    },
+    "W11_followups": {
+      "status": "not_started",
+      "actor_waiting": null,
+      "blocked_by": [],
+      "note": null,
+      "updated": "2026-08-05T21:29:46Z"
+    }
+  },
+  "blueprint": {
+    "schema": 1,
+    "org_type": "digital_products",
+    "org_label": "Digital products",
+    "classified": {
+      "source": "operator",
+      "confidence": "explicit"
+    },
+    "platform": {
+      "decision": "vercel_app",
+      "label": "Custom app (Vercel)",
+      "wordpress_used": false,
+      "hosting": "Vercel (scope kurtjjoseph-6989)",
+      "confidence": "medium",
+      "scores": {
+        "wordpress": 3.0,
+        "vercel_app": 5.0
+      },
+      "headline": "A custom app — the offer needs logic and speed more than it needs a CMS.",
+      "source": "engine"
+    },
+    "functions": {
+      "web_presence": {
+        "tier": "core",
+        "workstream": "W4_website",
+        "title": "Public web presence",
+        "gated": true,
+        "implementation": "Next.js site on Vercel — home, offer, about, contact"
+      },
+      "crm": {
+        "tier": "core",
+        "workstream": "W10_crm",
+        "title": "CRM — contacts, pipeline, running inventory",
+        "gated": false,
+        "implementation": "Operator-side CRM; app forms feed it"
+      },
+      "finance_admin": {
+        "tier": "core",
+        "workstream": "W2_legal",
+        "title": "Finance & admin (invoicing, VAT, bookkeeping)",
+        "gated": false,
+        "implementation": "NL bookkeeping tool + Stripe payouts reconciled monthly"
+      },
+      "analytics_reporting": {
+        "tier": "core",
+        "workstream": "W7_presence",
+        "title": "Analytics & presence reporting",
+        "gated": false,
+        "implementation": "Analytics + the Engage AI server-side website probe"
+      },
+      "lead_capture": {
+        "tier": "recommended",
+        "workstream": "W9_leads",
+        "title": "Lead capture (forms, lead magnet, CTA)",
+        "gated": false,
+        "implementation": "Form route → CRM + Brevo list"
+      },
+      "email_marketing": {
+        "tier": "recommended",
+        "workstream": "W9_leads",
+        "title": "Email list & broadcasts",
+        "gated": true,
+        "implementation": "Brevo list + form route; broadcasts sent from Brevo"
+      },
+      "social_publishing": {
+        "tier": "recommended",
+        "workstream": "W8_social",
+        "title": "Social content production & scheduling",
+        "gated": true,
+        "implementation": "Content produced operator-side; owner approves the weekly digest"
+      },
+      "product_catalog": {
+        "tier": "core",
+        "workstream": "W6_products",
+        "title": "Product catalog (what is for sale, at what price)",
+        "gated": false,
+        "implementation": "Catalog defined in Stripe products/prices, rendered from the API"
+      },
+      "checkout_payments": {
+        "tier": "core",
+        "workstream": "W5_payments",
+        "title": "Checkout & payments",
+        "gated": true,
+        "implementation": "Stripe Checkout / Payment Links; iDEAL enabled for NL"
+      },
+      "digital_fulfillment": {
+        "tier": "core",
+        "workstream": "W6_products",
+        "title": "Digital fulfilment (deliver the file / grant the access)",
+        "gated": true,
+        "implementation": "Stripe webhook → signed download link + buyer email (Brevo)"
+      },
+      "content_publishing": {
+        "tier": "recommended",
+        "workstream": "W4_website",
+        "title": "Content publishing (blog / news / articles)",
+        "gated": false,
+        "implementation": "MDX content collection — every edit is a code deploy"
+      },
+      "membership_access": {
+        "tier": "optional",
+        "workstream": "W6_products",
+        "title": "Member area & access control",
+        "gated": false,
+        "implementation": "Auth + entitlement check per route"
+      },
+      "courses_lms": {
+        "tier": "optional",
+        "workstream": "W6_products",
+        "title": "Course delivery (LMS)",
+        "gated": false,
+        "implementation": "Course routes + progress store, or an external LMS embed"
+      },
+      "subscriptions": {
+        "tier": "optional",
+        "workstream": "W5_payments",
+        "title": "Subscriptions / recurring billing",
+        "gated": true,
+        "implementation": "Stripe Billing + customer portal"
+      },
+      "support_inbox": {
+        "tier": "optional",
+        "workstream": "W11_followups",
+        "title": "Support inbox & FAQ",
+        "gated": true,
+        "implementation": "Shared mailbox + FAQ routes; replies drafted, human-approved"
+      }
+    },
+    "workstream_scope": {
+      "W4_website": [
+        "web_presence",
+        "content_publishing"
+      ],
+      "W10_crm": [
+        "crm"
+      ],
+      "W2_legal": [
+        "finance_admin"
+      ],
+      "W7_presence": [
+        "analytics_reporting"
+      ],
+      "W9_leads": [
+        "lead_capture",
+        "email_marketing"
+      ],
+      "W8_social": [
+        "social_publishing"
+      ],
+      "W6_products": [
+        "product_catalog",
+        "digital_fulfillment"
+      ],
+      "W5_payments": [
+        "checkout_payments"
+      ]
+    },
+    "overrides": {
+      "added": [],
+      "removed": []
+    },
+    "doc": "turnkey/blueprint.md",
+    "decided": "2026-08-06T01:50:33Z"
+  },
+  "forge_authorization": {
+    "mode": "unattended",
+    "targets": [
+      "vercel"
+    ],
+    "scope": "unattended forge build + deploy to 'vercel' for this business, limited to: composing the platform modules, writing the public site, wiring rails that already have credentials, publishing the result, and — for a hosting target that gates new projects behind a login — making that one deployment publicly reachable. Does not authorize sending email, charging anyone, or posting to any channel.",
+    "consent_ref": "540a6729f77f467f",
+    "consent_seq": 2,
+    "granted_by": "VOM",
+    "granted_at": "2026-08-07T07:51:03Z",
+    "channel": "standing service authorization"
+  }
+}

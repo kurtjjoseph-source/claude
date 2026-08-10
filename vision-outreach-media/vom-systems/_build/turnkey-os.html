@@ -1,0 +1,809 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Turnkey — Launch OS</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/jpeg" href="{{LOGO}}">
+<style>
+  :root{
+    --navy:#1B2A4A; --orange:#E8843C; --teal:#2FA8A0;
+    --bg:#f7f6f3; --surface:#ffffff; --surface-2:#f0efe9; --line:#e2e0d6; --line-soft:#eceade;
+    --ink:#1B2233; --ink-dim:#535b66; --ink-faint:#868f99;
+    --ok:#2FA8A0; --warn:#E8843C; --stop:#c0553f;
+    --mono:ui-monospace,"SF Mono","Cascadia Code",Menlo,monospace;
+    --sans:"Manrope",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    --radius:12px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --bg:#0d1117; --surface:#151b24; --surface-2:#1b2330; --line:#28323f; --line-soft:#212a35;
+      --ink:#eef2f7; --ink-dim:#a4b0bd; --ink-faint:#6d7987; --navy:#c9d8f0; }
+  }
+  :root[data-theme="dark"]{ --bg:#0d1117; --surface:#151b24; --surface-2:#1b2330; --line:#28323f; --line-soft:#212a35;
+      --ink:#eef2f7; --ink-dim:#a4b0bd; --ink-faint:#6d7987; --navy:#c9d8f0; }
+  :root[data-theme="light"]{ --bg:#f7f6f3; --surface:#ffffff; --surface-2:#f0efe9; --line:#e2e0d6; --line-soft:#eceade;
+      --ink:#1B2233; --ink-dim:#535b66; --ink-faint:#868f99; --navy:#1B2A4A; }
+
+  *{ box-sizing:border-box; }
+  body{ margin:0; background:var(--bg); color:var(--ink); font-family:var(--sans);
+        font-size:15px; line-height:1.55; -webkit-font-smoothing:antialiased; }
+  a{ color:var(--teal); }
+  code,kbd{ font-family:var(--mono); font-size:.9em; }
+  button{ font:inherit; cursor:pointer; }
+  h1,h2,h3{ letter-spacing:-.015em; }
+
+  /* ---------- chrome ---------- */
+  .top{ position:sticky; top:0; z-index:20; display:flex; align-items:center; gap:14px;
+        padding:11px 20px; background:var(--surface); border-bottom:1px solid var(--line); flex-wrap:wrap; }
+  .top .logo{ width:34px; height:34px; border-radius:8px; background:#fff; border:1px solid var(--line);
+              object-fit:cover; flex-shrink:0; }
+  .brand{ font-weight:800; letter-spacing:-.02em; }
+  .brand span{ color:var(--ink-faint); font-weight:600; }
+  .spacer{ flex:1; }
+  .badge{ font-family:var(--mono); font-size:11px; letter-spacing:.04em; text-transform:uppercase;
+          padding:4px 9px; border-radius:999px; border:1px solid var(--line); color:var(--ink-dim);
+          background:var(--surface-2); white-space:nowrap; }
+  .badge.good{ color:var(--teal); border-color:color-mix(in srgb, var(--teal) 40%, var(--line)); }
+  .badge.warn{ color:var(--warn); border-color:color-mix(in srgb, var(--warn) 45%, var(--line)); }
+  .btn{ border:1px solid var(--line); background:var(--surface); color:var(--ink);
+        padding:7px 13px; border-radius:9px; font-weight:600; font-size:13.5px; }
+  .btn:hover{ border-color:var(--ink-faint); }
+  .btn.primary{ background:var(--orange); border-color:var(--orange); color:#1b1206; }
+  .btn.primary:hover{ filter:brightness(1.06); }
+  .btn.ghost{ background:transparent; }
+  .btn.sm{ padding:4px 9px; font-size:12.5px; border-radius:7px; }
+  .btn[disabled]{ opacity:.45; cursor:not-allowed; }
+
+  .tabs{ display:flex; gap:4px; padding:0 20px; background:var(--surface);
+         border-bottom:1px solid var(--line); position:sticky; top:57px; z-index:19; }
+  .tab{ border:0; background:none; padding:11px 15px; font-weight:700; font-size:14px;
+        color:var(--ink-faint); border-bottom:2px solid transparent; }
+  .tab[aria-selected="true"]{ color:var(--ink); border-bottom-color:var(--orange); }
+
+  .wrap{ max-width:1180px; margin:0 auto; padding:22px 20px 70px; }
+  .panel{ display:none; } .panel.on{ display:block; }
+
+  /* ---------- console layout ---------- */
+  .console{ display:grid; grid-template-columns:340px 1fr; gap:20px; align-items:start; }
+  @media (max-width:900px){ .console{ grid-template-columns:1fr; } }
+
+  .card{ background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); }
+  .card + .card{ margin-top:14px; }
+  .card .hd{ padding:12px 15px; border-bottom:1px solid var(--line-soft); display:flex;
+             align-items:center; gap:10px; flex-wrap:wrap; }
+  .card .hd h2, .card .hd h3{ margin:0; font-size:14px; letter-spacing:.02em; text-transform:uppercase;
+                              color:var(--ink-dim); font-weight:800; }
+  .card .bd{ padding:15px; }
+  .card .bd.tight{ padding:0; }
+
+  .filters{ display:flex; gap:5px; flex-wrap:wrap; }
+  .chip{ border:1px solid var(--line); background:var(--surface-2); color:var(--ink-dim);
+         border-radius:999px; padding:3px 10px; font-size:12.5px; font-weight:600; }
+  .chip[aria-pressed="true"]{ background:var(--navy); border-color:var(--navy); color:#fff; }
+  @media (prefers-color-scheme: dark){ .chip[aria-pressed="true"]{ color:#0d1117; } }
+  :root[data-theme="dark"] .chip[aria-pressed="true"]{ color:#0d1117; }
+  :root[data-theme="light"] .chip[aria-pressed="true"]{ color:#ffffff; }
+
+  .lrow{ display:block; width:100%; text-align:left; border:0; border-bottom:1px solid var(--line-soft);
+         background:none; padding:12px 15px; color:inherit; }
+  .lrow:last-child{ border-bottom:0; }
+  .lrow:hover{ background:var(--surface-2); }
+  .lrow[aria-current="true"]{ background:var(--surface-2); box-shadow:inset 3px 0 0 var(--orange); }
+  .lrow .nm{ font-weight:750; letter-spacing:-.01em; }
+  .lrow .mt{ font-size:12.5px; color:var(--ink-faint); font-family:var(--mono); margin-top:3px; }
+
+  .st{ display:inline-block; font-size:11px; font-family:var(--mono); text-transform:uppercase;
+       letter-spacing:.05em; padding:2px 7px; border-radius:5px; border:1px solid var(--line);
+       color:var(--ink-dim); background:var(--surface-2); }
+  .st.in_progress{ color:var(--warn); border-color:color-mix(in srgb,var(--warn) 40%,var(--line)); }
+  .st.live{ color:var(--teal); border-color:color-mix(in srgb,var(--teal) 45%,var(--line)); }
+  .st.paused{ color:var(--ink-faint); }
+  .st.archived{ opacity:.65; }
+
+  /* ---------- stage rail ---------- */
+  .rail{ display:flex; gap:0; flex-wrap:wrap; margin:2px 0 4px; }
+  .rail .sg{ flex:1; min-width:88px; text-align:center; font-size:11.5px; font-family:var(--mono);
+             text-transform:uppercase; letter-spacing:.06em; color:var(--ink-faint);
+             padding:7px 4px; border-top:3px solid var(--line); }
+  .rail .sg.done{ color:var(--teal); border-top-color:var(--teal); }
+  .rail .sg.now{ color:var(--ink); border-top-color:var(--orange); font-weight:800; }
+
+  table{ width:100%; border-collapse:collapse; font-size:13.5px; }
+  th,td{ text-align:left; padding:9px 15px; border-bottom:1px solid var(--line-soft); vertical-align:top; }
+  th{ font-size:11px; text-transform:uppercase; letter-spacing:.07em; color:var(--ink-faint);
+      font-weight:800; background:var(--surface-2); }
+  tr:last-child td{ border-bottom:0; }
+  td.mono, .mono{ font-family:var(--mono); font-size:12.5px; }
+
+  .kv{ display:grid; grid-template-columns:auto 1fr; gap:5px 14px; font-size:13.5px; }
+  .kv dt{ color:var(--ink-faint); font-family:var(--mono); font-size:12px; text-transform:uppercase;
+          letter-spacing:.05em; padding-top:2px; }
+  .kv dd{ margin:0; }
+
+  .drop{ border:1.5px dashed var(--line); border-radius:var(--radius); padding:22px 16px;
+         text-align:center; color:var(--ink-dim); background:var(--surface-2); }
+  .drop.over{ border-color:var(--orange); color:var(--ink); }
+  textarea, input[type=text], input[type=password], select{
+    width:100%; background:var(--surface); color:var(--ink); border:1px solid var(--line);
+    border-radius:9px; padding:9px 11px; font-family:var(--mono); font-size:13px; }
+  textarea{ min-height:110px; resize:vertical; }
+  label.fl{ display:block; font-size:11.5px; text-transform:uppercase; letter-spacing:.06em;
+            color:var(--ink-faint); font-weight:700; margin:10px 0 4px; }
+
+  .empty{ text-align:center; color:var(--ink-faint); padding:48px 20px; }
+  .empty h3{ color:var(--ink-dim); margin:0 0 6px; }
+
+  .fn{ display:flex; gap:10px; align-items:baseline; padding:8px 0; border-bottom:1px solid var(--line-soft); }
+  .fn:last-child{ border-bottom:0; }
+  .fn .tier{ font-family:var(--mono); font-size:11px; width:104px; flex-shrink:0; letter-spacing:.04em; }
+  .tier.core{ color:var(--teal); } .tier.recommended{ color:var(--warn); } .tier.optional{ color:var(--ink-faint); }
+  .fn .ttl{ font-weight:650; }
+  .fn .imp{ color:var(--ink-dim); font-size:12.5px; }
+
+  pre{ background:var(--surface-2); border:1px solid var(--line-soft); border-radius:9px;
+       padding:11px 13px; overflow-x:auto; font-family:var(--mono); font-size:12.5px; margin:8px 0; }
+  .note{ font-size:13px; color:var(--ink-dim); }
+  .warnbar{ border:1px solid color-mix(in srgb,var(--warn) 45%,var(--line));
+            background:color-mix(in srgb,var(--warn) 8%,var(--surface));
+            border-radius:10px; padding:11px 14px; font-size:13.5px; margin-bottom:16px; }
+  .row{ display:flex; gap:9px; flex-wrap:wrap; align-items:center; }
+  .grid2{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  @media (max-width:760px){ .grid2{ grid-template-columns:1fr; } }
+  .toast{ position:fixed; bottom:18px; left:50%; transform:translateX(-50%);
+          background:var(--navy); color:#fff; padding:9px 16px; border-radius:999px;
+          font-size:13.5px; font-weight:600; opacity:0; pointer-events:none; transition:opacity .18s; z-index:60; }
+  .toast.on{ opacity:1; }
+  .sr{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); }
+</style>
+</head>
+<body>
+
+<div class="top">
+  <img class="logo" src="{{LOGO}}" alt="Vision Outreach Media" width="68" height="68">
+  <div class="brand">Turnkey <span>· Launch OS</span></div>
+  <span class="badge" id="opLabel">…</span>
+  <span class="badge" id="storeBadge" title="Where your launches are stored">…</span>
+  <div class="spacer"></div>
+  <button class="btn ghost sm" id="themeBtn" title="Light / dark">◐</button>
+  <button class="btn ghost sm" id="lockBtn">Lock</button>
+</div>
+
+<div class="tabs" role="tablist">
+  <button class="tab" id="tab-console" role="tab" aria-selected="true" aria-controls="p-console">Console</button>
+  <button class="tab" id="tab-operate" role="tab" aria-selected="false" aria-controls="p-operate">Operate</button>
+</div>
+
+<div class="wrap">
+
+<!-- ============================ CONSOLE ============================ -->
+<section class="panel on" id="p-console" role="tabpanel" aria-labelledby="tab-console">
+  <div id="persistWarn"></div>
+  <div class="console">
+    <div>
+      <div class="card">
+        <div class="hd">
+          <h2>Launches</h2>
+          <div class="spacer"></div>
+          <button class="btn primary sm" id="importBtn">+ Import</button>
+        </div>
+        <div class="bd" style="padding-bottom:10px">
+          <div class="filters" id="filters">
+            <button class="chip" data-f="in_progress" aria-pressed="false">In progress</button>
+            <button class="chip" data-f="paused" aria-pressed="false">Paused</button>
+            <button class="chip" data-f="live" aria-pressed="false">Live</button>
+            <button class="chip" data-f="all" aria-pressed="true">All</button>
+          </div>
+        </div>
+        <div class="bd tight" id="launchList"></div>
+      </div>
+      <div class="card" id="importCard" style="display:none">
+        <div class="hd"><h3>Import a launch</h3><div class="spacer"></div>
+          <button class="btn ghost sm" id="importClose">Close</button></div>
+        <div class="bd">
+          <div class="drop" id="drop">
+            <b>Drop <code>launch-state.json</code></b><br>
+            <span class="note">…and optionally <code>consent-log.jsonl</code></span><br><br>
+            <button class="btn sm" id="pickBtn">Choose files</button>
+            <input type="file" id="picker" multiple accept=".json,.jsonl,application/json" class="sr">
+          </div>
+          <label class="fl" for="pasteBox">…or paste the JSON</label>
+          <textarea id="pasteBox" placeholder='{ "business": "…", "stage": "build", "workstreams": { … } }'></textarea>
+          <div class="row" style="margin-top:10px">
+            <button class="btn primary sm" id="pasteBtn">Import pasted state</button>
+            <span class="note" id="importMsg"></span>
+          </div>
+          <p class="note" style="margin:14px 0 0">
+            The business folder stays the source of truth for state — the engine writes it. This
+            registry is the source of truth for <b>what you are running and where you left it</b>.
+            Re-import the same business any time to bring it up to date; its history is kept.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div id="detail"></div>
+  </div>
+</section>
+
+<!-- ============================ OPERATE ============================ -->
+<section class="panel" id="p-operate" role="tabpanel" aria-labelledby="tab-operate">
+  <div class="grid2">
+    <div>
+      <div class="card">
+        <div class="hd"><h2>Install the engine</h2></div>
+        <div class="bd">
+          <p class="note">The OS you are looking at is the cockpit. The pipeline itself runs in
+          Claude Code: one skill, five subagents, one deterministic engine.</p>
+          <pre id="installCmd">git clone git@github.com:kurtjjoseph/vom-turnkey.git
+cp -R vom-turnkey/orchestrator/agents/*.md   ~/.claude/agents/
+mkdir -p ~/.claude/skills/onboard-business
+cp -R vom-turnkey/orchestrator/SKILL.md      ~/.claude/skills/onboard-business/
+cp -R vom-turnkey/orchestrator/agents        ~/.claude/skills/onboard-business/
+python3 vom-turnkey/orchestrator/engine/turnkey.py selftest</pre>
+          <button class="btn sm" data-copy="#installCmd">Copy</button>
+          <p class="note" style="margin-top:12px">Then, in any validated idea folder:</p>
+          <pre id="runCmd">TK="python3 .../orchestrator/engine/turnkey.py"; IDEA="/path/to/Idea Folder"
+$TK init "$IDEA"        # scaffold + seed state
+$TK status "$IDEA"      # the frontier — always read this first
+$TK blueprint "$IDEA" --save   # org type -> functions + WordPress-or-app</pre>
+          <button class="btn sm" data-copy="#runCmd">Copy</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="hd"><h2>Command reference</h2></div>
+        <div class="bd tight"><table id="cmdTable"></table></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="card">
+        <div class="hd"><h2>Gate &amp; consent commands</h2></div>
+        <div class="bd">
+          <p class="note">Nothing publishes, sends or charges without a logged YES. Build the exact
+          command here, run it in the folder, then move the workstream.</p>
+          <label class="fl" for="genLaunch">Launch</label>
+          <select id="genLaunch"></select>
+          <label class="fl" for="genWs">Workstream</label>
+          <select id="genWs"></select>
+          <div class="grid2">
+            <div><label class="fl" for="genActor">Actor</label>
+              <select id="genActor"><option>VOM</option><option>CLIENT</option></select></div>
+            <div><label class="fl" for="genChannel">Channel</label>
+              <select id="genChannel"><option>in-session</option><option>magic-link</option><option>whatsapp</option><option>phone</option><option>email</option></select></div>
+          </div>
+          <label class="fl" for="genAction">Action (exactly what is being approved)</label>
+          <input type="text" id="genAction" placeholder="promote the site to its live public URL">
+          <div class="grid2">
+            <div><label class="fl" for="genEvidence">Evidence</label>
+              <input type="text" id="genEvidence" placeholder="operator said go, 2026-08-01 14:02"></div>
+            <div><label class="fl" for="genScope">Scope</label>
+              <input type="text" id="genScope" placeholder="this deploy only"></div>
+          </div>
+          <div class="row" style="margin-top:12px">
+            <button class="btn sm" data-gen="gate">Build gate command</button>
+            <button class="btn sm" data-gen="yes">Build consent YES</button>
+            <button class="btn sm" data-gen="no">Build consent NO</button>
+          </div>
+          <pre id="genOut">…</pre>
+          <button class="btn sm" data-copy="#genOut">Copy</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="hd"><h2>Blueprint catalog</h2>
+          <div class="spacer"></div>
+          <select id="orgPick" style="width:auto"></select></div>
+        <div class="bd" id="orgDetail"></div>
+      </div>
+
+      <div class="card">
+        <div class="hd"><h2>Function catalog</h2></div>
+        <div class="bd tight"><table id="fnTable"></table></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+"use strict";
+const CATALOG = {{CATALOG}};
+const STAGES = ["intake","foundation","build","market","operate","launched"];
+const STATUS_LABEL = { in_progress:"In progress", paused:"Paused", live:"Live", archived:"Archived" };
+const LOCAL_KEY = "vom_turnkey_os_v1";
+
+const CMDS = [
+  ["init","Scaffold turnkey/ and seed launch-state.json. Idempotent — re-running resumes."],
+  ["status","The frontier: stage, every workstream, next actions. Read first on every resume."],
+  ["blueprint","Org type → business functions + the WordPress-or-app decision. --save makes it the build order."],
+  ["orgtypes","The catalog: what each kind of organization gets built."],
+  ["functions","List or override this launch's function set (cumulative, logged)."],
+  ["platform","Read or override the site platform. An override needs --reason."],
+  ["set","Move a workstream. Refuses `done` on publish/send/money without a logged YES."],
+  ["gate","Open a human gate → gate_pending, with the do-this-now script."],
+  ["consent","Append a hash-chained YES/NO. Before the action, never after."],
+  ["verify","Recompute the consent chain — proves the log was not edited."],
+  ["advance","Next stage, only if the criteria hold. --force logs an override."],
+  ["check","Definition-of-done audit, including core-function delivery."],
+  ["matrix","The one-time platform bootstrap gates (Stripe, DNS, registrar…)."],
+  ["operator","The operator identity this run is branded under (white-label)."],
+  ["rebrand","Scaffold a fresh operator profile for a franchisee."],
+  ["dispatch","Record a subagent dispatch + model tier (routing audit)."],
+  ["selftest","Run every invariant in a temp dir. Run after any engine edit."]
+];
+
+/* ------------------------------------------------------------------ state */
+let LAUNCHES = [];
+let SELECTED = null;
+let FILTER = "all";
+let PERSISTED = false;
+
+const $ = (s, r) => (r || document).querySelector(s);
+const $$ = (s, r) => Array.from((r || document).querySelectorAll(s));
+const esc = (s) => String(s == null ? "" : s).replace(/[&<>"]/g, (c) =>
+  ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;" }[c]));
+
+function toast(msg){
+  const t = $("#toast"); t.textContent = msg; t.classList.add("on");
+  clearTimeout(t._h); t._h = setTimeout(() => t.classList.remove("on"), 2200);
+}
+function saveLocal(){
+  try { localStorage.setItem(LOCAL_KEY, JSON.stringify({ launches: LAUNCHES, at: Date.now() })); }
+  catch(e){}
+}
+function loadLocal(){
+  try { const r = JSON.parse(localStorage.getItem(LOCAL_KEY) || "null");
+        return (r && Array.isArray(r.launches)) ? r.launches : []; } catch(e){ return []; }
+}
+
+/* ------------------------------------------------------------------ api */
+async function api(method, body, qs){
+  const r = await fetch("/api/launches" + (qs || ""), {
+    method, headers: body ? { "Content-Type":"application/json" } : undefined,
+    body: body ? JSON.stringify(body) : undefined, credentials:"same-origin" });
+  if (r.status === 401){ location.reload(); throw new Error("locked"); }
+  return r.json();
+}
+
+async function refresh(){
+  try {
+    const d = await api("GET");
+    PERSISTED = !!d.persisted;
+    LAUNCHES = d.launches || [];
+    // A launch only ever known locally (server was ephemeral) is kept, not dropped.
+    const seen = new Set(LAUNCHES.map(l => l.id));
+    loadLocal().forEach(l => { if (!seen.has(l.id)) LAUNCHES.push(l); });
+    $("#opLabel").textContent = d.label || "Licensed operator";
+    $("#storeBadge").textContent = PERSISTED ? "● persisted" : "● not persisted";
+    $("#storeBadge").className = "badge " + (PERSISTED ? "good" : "warn");
+    $("#persistWarn").innerHTML = PERSISTED ? "" :
+      '<div class="warnbar"><b>Launches are not being persisted.</b> This deployment has no KV store '
+      + 'configured, so the server forgets everything on its next cold start — your launches are being '
+      + 'kept in <i>this browser</i> only. Set <code>KV_REST_API_URL</code> and '
+      + '<code>KV_REST_API_TOKEN</code> on the Vercel project to make pausing and resuming real.</div>';
+  } catch(e){
+    LAUNCHES = loadLocal();
+    $("#opLabel").textContent = "this browser only";
+    $("#storeBadge").textContent = "● offline"; $("#storeBadge").className = "badge warn";
+    $("#persistWarn").innerHTML = '<div class="warnbar"><b>Working offline.</b> The gate did not '
+      + 'answer, so these launches are the copy held in this browser. Reload once you are back on '
+      + 'the network to sync with the registry.</div>';
+  }
+  saveLocal();
+  renderList(); renderDetail(); fillGenLaunch();
+}
+
+async function persist(launch){
+  const i = LAUNCHES.findIndex(l => l.id === launch.id);
+  if (i >= 0) LAUNCHES[i] = launch; else LAUNCHES.unshift(launch);
+  saveLocal();
+  try {
+    const d = await api("PUT", { launch });
+    if (d && d.ok && d.launch){
+      const j = LAUNCHES.findIndex(l => l.id === d.launch.id);
+      if (j >= 0) LAUNCHES[j] = d.launch;
+      saveLocal();
+    }
+  } catch(e){ /* keep the local copy; the badge already says we are offline */ }
+  renderList(); renderDetail(); fillGenLaunch();
+}
+
+async function removeLaunch(id){
+  LAUNCHES = LAUNCHES.filter(l => l.id !== id);
+  if (SELECTED === id) SELECTED = null;
+  saveLocal();
+  try { await api("DELETE", null, "?id=" + encodeURIComponent(id)); } catch(e){}
+  renderList(); renderDetail(); fillGenLaunch();
+}
+
+/* ------------------------------------------------------------------ import */
+function slug(s){
+  return String(s || "launch").toLowerCase().replace(/[^a-z0-9]+/g,"-")
+    .replace(/^-|-$/g,"").slice(0,60) || "launch";
+}
+function parseConsent(text){
+  return text.split(/\r?\n/).map(l => l.trim()).filter(Boolean)
+    .map(l => { try { return JSON.parse(l); } catch(e){ return null; } }).filter(Boolean);
+}
+function ingest(stateObj, consentLines, msgEl){
+  if (!stateObj || typeof stateObj !== "object" || !stateObj.workstreams){
+    if (msgEl) msgEl.textContent = "That doesn't look like a launch-state.json.";
+    return null;
+  }
+  const id = slug(stateObj.business);
+  const existing = LAUNCHES.find(l => l.id === id);
+  const rec = {
+    id,
+    business: stateObj.business || id,
+    status: existing ? existing.status : (stateObj.stage === "launched" ? "live" : "in_progress"),
+    state: stateObj,
+    consent: consentLines && consentLines.length ? consentLines : (existing ? existing.consent : []),
+    notes: existing ? existing.notes : [],
+  };
+  persist(rec);
+  SELECTED = id;
+  $("#importCard").style.display = "none";
+  toast(existing ? "Launch updated" : "Launch imported");
+  return rec;
+}
+async function ingestFiles(files){
+  let state = null, consent = null;
+  for (const f of files){
+    const text = await f.text();
+    if (/\.jsonl$/i.test(f.name) || /consent/i.test(f.name)) consent = parseConsent(text);
+    else { try { state = JSON.parse(text); } catch(e){} }
+  }
+  if (!state){
+    const cur = LAUNCHES.find(l => l.id === SELECTED);
+    if (consent && cur){ cur.consent = consent; persist(cur); toast("Consent log attached"); return; }
+  }
+  ingest(state, consent, $("#importMsg"));
+}
+
+/* Summary computed from state, so the console never depends on the server having
+   pre-computed one (imports, offline records and hand-pasted state all render right). */
+function summarize(l){
+  const st = (l && l.state) || {};
+  const ws = st.workstreams || {};
+  const names = Object.keys(ws);
+  const bp = st.blueprint;
+  return {
+    stage: st.stage || null,
+    done: names.filter(n => ws[n].status === "done").length,
+    total: names.length,
+    gates: names.filter(n => ws[n].status === "gate_pending")
+      .map(n => ({ workstream:n, actor:ws[n].actor_waiting || null,
+                   action:(ws[n].gate && ws[n].gate.action) || ws[n].note || "" })),
+    blueprint: bp ? { org_type:bp.org_type, org_label:bp.org_label,
+      platform:(bp.platform||{}).label, wordpress:!!(bp.platform||{}).wordpress_used,
+      core:Object.keys(bp.functions||{}).filter(k => bp.functions[k].tier === "core").length } : null,
+  };
+}
+
+/* ------------------------------------------------------------------ render: list */
+function renderList(){
+  const box = $("#launchList");
+  const rows = LAUNCHES.filter(l => FILTER === "all" ? true : l.status === FILTER);
+  if (!rows.length){
+    box.innerHTML = '<div class="empty" style="padding:26px 16px"><h3>Nothing here yet</h3>'
+      + '<p class="note">Import a <code>launch-state.json</code> to put a launch in the registry.</p></div>';
+    return;
+  }
+  box.innerHTML = rows.map(l => {
+    const s = summarize(l);
+    const gates = (s.gates || []).length;
+    return '<button class="lrow" data-id="' + esc(l.id) + '" aria-current="' + (l.id === SELECTED) + '">'
+      + '<div class="row" style="gap:8px"><span class="nm">' + esc(l.business) + '</span>'
+      + '<span class="spacer"></span><span class="st ' + esc(l.status) + '">' + esc(STATUS_LABEL[l.status] || l.status) + '</span></div>'
+      + '<div class="mt">' + esc((l.state && l.state.stage) || "—") + ' · '
+      + (s.done || 0) + '/' + (s.total || 0) + ' done'
+      + (gates ? ' · ' + gates + ' gate' + (gates > 1 ? 's' : '') + ' waiting' : '')
+      + (s.blueprint ? ' · ' + esc(s.blueprint.org_type) : '') + '</div></button>';
+  }).join("");
+  $$(".lrow", box).forEach(b => b.onclick = () => { SELECTED = b.dataset.id; renderList(); renderDetail(); });
+}
+
+/* ------------------------------------------------------------------ render: detail */
+function stageRail(stage){
+  const at = STAGES.indexOf(stage);
+  return '<div class="rail">' + STAGES.map((s, i) =>
+    '<div class="sg ' + (i < at ? "done" : (i === at ? "now" : "")) + '">' + s + '</div>').join("") + '</div>';
+}
+
+function blueprintCard(bp){
+  if (!bp) return '<div class="card"><div class="hd"><h3>Blueprint</h3></div><div class="bd">'
+    + '<p class="note">No blueprint yet — this launch has not decided its org type, its business '
+    + 'functions, or whether the site runs on WordPress. The engine refuses to enter Build without '
+    + 'one: <code>turnkey blueprint "$IDEA" --save</code></p></div></div>';
+  const p = bp.platform || {};
+  const fns = bp.functions || {};
+  const byTier = t => Object.keys(fns).filter(k => fns[k].tier === t)
+    .sort((a,b) => (fns[a].title||a).localeCompare(fns[b].title||b));
+  const row = k => '<div class="fn"><div class="tier ' + esc(fns[k].tier) + '">'
+    + (fns[k].tier === "core" ? "● core" : fns[k].tier === "recommended" ? "◐ recommended" : "○ optional")
+    + '</div><div><div class="ttl">' + esc(fns[k].title || k)
+    + (fns[k].gated ? ' <span title="publish / send / money gate">🔒</span>' : '')
+    + ' <span class="mono" style="color:var(--ink-faint)">' + esc(fns[k].workstream) + '</span></div>'
+    + '<div class="imp">' + esc(fns[k].implementation || "") + '</div></div></div>';
+  return '<div class="card"><div class="hd"><h3>Blueprint</h3><div class="spacer"></div>'
+    + '<span class="badge ' + (p.wordpress_used ? "good" : "") + '">'
+    + (p.wordpress_used ? "WordPress" : "Custom app") + '</span></div><div class="bd">'
+    + '<dl class="kv">'
+    + '<dt>Org type</dt><dd><b>' + esc(bp.org_label || bp.org_type) + '</b> <span class="note">('
+    + esc((bp.classified && bp.classified.source) || "engine") + ', confidence '
+    + esc((bp.classified && bp.classified.confidence) || "—") + ')</span></dd>'
+    + '<dt>Site</dt><dd><b>' + esc(p.label || "—") + '</b> — ' + esc(p.headline || "") + '</dd>'
+    + '<dt>Hosting</dt><dd>' + esc(p.hosting || "—") + '</dd>'
+    + '</dl><div style="margin-top:12px">'
+    + ["core","recommended","optional"].map(t => byTier(t).map(row).join("")).join("")
+    + '</div></div></div>';
+}
+
+function workstreamTable(state){
+  const ws = state.workstreams || {};
+  const names = Object.keys(ws);
+  const bp = state.blueprint;
+  const fnFor = n => !bp ? [] : Object.keys(bp.functions || {})
+    .filter(k => bp.functions[k].workstream === n && bp.functions[k].tier !== "optional")
+    .map(k => bp.functions[k].title);
+  return '<table><thead><tr><th>Workstream</th><th>Status</th><th>Waiting</th>'
+    + '<th>Delivers</th></tr></thead><tbody>'
+    + names.map(n => {
+        const w = ws[n];
+        const fns = fnFor(n);
+        return '<tr><td class="mono">' + esc(n) + '</td>'
+          + '<td><span class="st ' + (w.status === "done" ? "live" : w.status === "gate_pending" ? "in_progress" : "") + '">'
+          + esc(w.status) + '</span></td>'
+          + '<td class="mono">' + esc(w.actor_waiting || (w.blocked_by && w.blocked_by.length ? "blocked" : "—")) + '</td>'
+          + '<td class="note">' + (fns.length ? esc(fns.join(", ")) : "—") + '</td></tr>';
+      }).join("") + '</tbody></table>';
+}
+
+function gatesCard(state){
+  const ws = state.workstreams || {};
+  const open = Object.keys(ws).filter(n => ws[n].status === "gate_pending");
+  if (!open.length) return "";
+  return '<div class="card"><div class="hd"><h3>Gates waiting</h3><div class="spacer"></div>'
+    + '<span class="badge warn">' + open.length + '</span></div><div class="bd tight"><table><tbody>'
+    + open.map(n => {
+        const g = ws[n].gate || {};
+        return '<tr><td class="mono" style="width:130px">' + esc(n) + '</td>'
+          + '<td><b>' + esc(g.actor || ws[n].actor_waiting || "?") + '</b> — ' + esc(g.action || ws[n].note || "action not recorded")
+          + (g.script ? '<div class="note mono">' + esc(g.script) + '</div>' : "")
+          + '</td></tr>';
+      }).join("") + '</tbody></table></div></div>';
+}
+
+/* Canonical JSON identical to the engine's: keys sorted, no spaces, non-ASCII kept. */
+function canonical(v){
+  if (v === null || typeof v !== "object") return JSON.stringify(v);
+  if (Array.isArray(v)) return "[" + v.map(canonical).join(",") + "]";
+  return "{" + Object.keys(v).sort().map(k => JSON.stringify(k) + ":" + canonical(v[k])).join(",") + "}";
+}
+async function sha256Hex(text){
+  const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(text));
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,"0")).join("");
+}
+async function verifyChain(lines, businessFolderName){
+  if (!lines.length) return { ok:true, msg:"consent log empty" };
+  let prev = "GENESIS:" + businessFolderName;
+  for (let i = 0; i < lines.length; i++){
+    const rec = lines[i];
+    if (rec.seq !== i) return { ok:false, msg:"line " + i + ": sequence mismatch" };
+    if (rec.prev_hash !== prev) return { ok:false, msg:"line " + i + ": chain broken" };
+    const body = {}; Object.keys(rec).forEach(k => { if (k !== "hash") body[k] = rec[k]; });
+    if (await sha256Hex(canonical(body)) !== rec.hash)
+      return { ok:false, msg:"line " + i + ": content was edited after signing" };
+    prev = rec.hash;
+  }
+  return { ok:true, msg:lines.length + " entries · chain intact" };
+}
+
+function consentCard(l){
+  const lines = l.consent || [];
+  return '<div class="card"><div class="hd"><h3>Consent log</h3><div class="spacer"></div>'
+    + '<span class="badge" id="chainBadge">' + (lines.length ? "checking…" : "empty") + '</span></div>'
+    + (lines.length ? '<div class="bd tight"><table><thead><tr><th>#</th><th>Workstream</th>'
+        + '<th>Decision</th><th>Action</th></tr></thead><tbody>'
+        + lines.map(c => '<tr><td class="mono">' + esc(c.seq) + '</td><td class="mono">' + esc(c.workstream) + '</td>'
+            + '<td><span class="st ' + (c.decision === "YES" ? "live" : "archived") + '">' + esc(c.decision) + '</span> '
+            + '<span class="note">' + esc(c.actor) + ' · ' + esc(c.channel || "") + '</span></td>'
+            + '<td>' + esc(c.action) + (c.scope ? '<div class="note">scope: ' + esc(c.scope) + '</div>' : "") + '</td></tr>').join("")
+        + '</tbody></table></div>'
+      : '<div class="bd"><p class="note">No consent lines imported. Drop the launch\'s '
+        + '<code>consent-log.jsonl</code> onto the import panel to audit the chain here.</p></div>')
+    + '</div>';
+}
+
+function renderDetail(){
+  const box = $("#detail");
+  const l = LAUNCHES.find(x => x.id === SELECTED);
+  if (!l){
+    box.innerHTML = '<div class="card"><div class="empty"><h3>No launch selected</h3>'
+      + '<p class="note">Pick one on the left, or import a <code>launch-state.json</code>.<br>'
+      + 'Everything you import stays here — pause a launch and come back to it later.</p></div></div>';
+    return;
+  }
+  const st = l.state || {};
+  box.innerHTML =
+    '<div class="card"><div class="bd">'
+      + '<div class="row"><h1 style="margin:0;font-size:22px">' + esc(l.business) + '</h1>'
+      + '<span class="st ' + esc(l.status) + '">' + esc(STATUS_LABEL[l.status] || l.status) + '</span>'
+      + '<div class="spacer"></div>'
+      + '<select id="statusSel" style="width:auto">'
+        + Object.keys(STATUS_LABEL).map(k => '<option value="' + k + '"' + (k === l.status ? " selected" : "") + '>'
+            + STATUS_LABEL[k] + '</option>').join("")
+      + '</select>'
+      + '<button class="btn sm" id="exportBtn">Export state</button>'
+      + '<button class="btn sm ghost" id="deleteBtn">Remove</button></div>'
+      + '<div class="note mono" style="margin:6px 0 12px">'
+        + esc((st.operator && st.operator.name) || "operator —") + ' · updated ' + esc((l.updated_at || "").slice(0,16).replace("T"," ")) + '</div>'
+      + stageRail(st.stage)
+    + '</div></div>'
+    + gatesCard(st)
+    + blueprintCard(st.blueprint)
+    + '<div class="card"><div class="hd"><h3>Workstreams</h3></div><div class="bd tight">'
+      + workstreamTable(st) + '</div></div>'
+    + consentCard(l)
+    + '<div class="card"><div class="hd"><h3>Operator notes</h3></div><div class="bd">'
+      + ((l.notes || []).length
+          ? (l.notes.map(n => '<div class="fn"><div class="tier mono">' + esc((n.ts||"").slice(0,10))
+              + '</div><div>' + esc(n.text) + '</div></div>').join(""))
+          : '<p class="note">Nothing noted yet. Leave yourself the reason you paused — it is what you '
+            + 'will want when you come back.</p>')
+      + '<label class="fl" for="noteBox">Add a note</label>'
+      + '<textarea id="noteBox" style="min-height:70px" placeholder="Waiting on the client\'s Stripe ID flow; picked back up after their holiday."></textarea>'
+      + '<div class="row" style="margin-top:8px"><button class="btn sm" id="noteBtn">Save note</button></div>'
+    + '</div></div>';
+
+  $("#statusSel").onchange = (e) => { l.status = e.target.value; persist(l); toast("Marked " + STATUS_LABEL[l.status]); };
+  $("#deleteBtn").onclick = () => { if (confirm("Remove " + l.business + " from the registry? The business folder is untouched.")) removeLaunch(l.id); };
+  $("#exportBtn").onclick = () => {
+    const blob = new Blob([JSON.stringify(l.state, null, 2)], { type:"application/json" });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob); a.download = "launch-state.json"; a.click();
+    URL.revokeObjectURL(a.href);
+  };
+  $("#noteBtn").onclick = () => {
+    const t = $("#noteBox").value.trim(); if (!t) return;
+    l.notes = (l.notes || []).concat([{ ts:new Date().toISOString(), text:t }]);
+    persist(l); toast("Note saved");
+  };
+  if ((l.consent || []).length){
+    verifyChain(l.consent, (st.idea_folder || l.business || "").split("/").pop() || l.business)
+      .then(r => { const b = $("#chainBadge"); if (!b) return;
+        b.textContent = (r.ok ? "● " : "✕ ") + r.msg; b.className = "badge " + (r.ok ? "good" : "warn"); });
+  }
+}
+
+/* ------------------------------------------------------------------ operate tab */
+function renderOperate(){
+  $("#cmdTable").innerHTML = '<thead><tr><th>Command</th><th>What it does</th></tr></thead><tbody>'
+    + CMDS.map(([c,d]) => '<tr><td class="mono">' + esc(c) + '</td><td class="note">' + esc(d) + '</td></tr>').join("")
+    + '</tbody>';
+
+  const orgs = Object.keys(CATALOG.org_types || {});
+  $("#orgPick").innerHTML = orgs.map(o => '<option value="' + esc(o) + '">'
+    + esc(CATALOG.org_types[o].label) + '</option>').join("");
+  const paintOrg = () => {
+    const o = CATALOG.org_types[$("#orgPick").value]; if (!o) return;
+    const list = (keys, tier) => (keys || []).map(k => '<div class="fn"><div class="tier ' + tier + '">'
+      + (tier === "core" ? "● core" : tier === "recommended" ? "◐ rec." : "○ opt.") + '</div><div class="ttl">'
+      + esc((CATALOG.functions[k] || {}).title || k) + '</div></div>').join("");
+    $("#orgDetail").innerHTML = '<p class="note">' + esc(o.summary) + '</p>'
+      + '<dl class="kv"><dt>Revenue</dt><dd>' + esc(o.revenue) + '</dd>'
+      + '<dt>Site lean</dt><dd><b>' + esc(o.site_bias[0]) + '</b> (+' + esc(o.site_bias[1]) + ') — '
+      + esc(o.site_bias[2]) + '</dd></dl>'
+      + '<div style="margin-top:10px">'
+      + list(CATALOG.universal_core, "core") + list(o.core, "core")
+      + list(CATALOG.universal_recommended, "recommended") + list(o.recommended, "recommended")
+      + list(o.optional, "optional") + '</div>';
+  };
+  $("#orgPick").onchange = paintOrg; paintOrg();
+
+  $("#fnTable").innerHTML = '<thead><tr><th>Function</th><th>Workstream</th><th>WordPress fit</th>'
+    + '<th>How it gets built</th></tr></thead><tbody>'
+    + Object.keys(CATALOG.functions).map(k => { const f = CATALOG.functions[k];
+        return '<tr><td><b>' + esc(f.title) + '</b>' + (f.gated ? " 🔒" : "")
+          + '<div class="note mono">' + esc(k) + '</div></td>'
+          + '<td class="mono">' + esc(f.workstream) + '</td>'
+          + '<td class="mono">' + esc(f.wp_fit) + '</td>'
+          + '<td class="note"><b>WP:</b> ' + esc(f.wp) + '<br><b>App:</b> ' + esc(f.app) + '</td></tr>';
+      }).join("") + '</tbody>';
+}
+
+function fillGenLaunch(){
+  const sel = $("#genLaunch"); if (!sel) return;
+  sel.innerHTML = LAUNCHES.map(l => '<option value="' + esc(l.id) + '">' + esc(l.business) + '</option>').join("")
+    || '<option value="">(no launches yet)</option>';
+  if (SELECTED) sel.value = SELECTED;
+  fillGenWs();
+  sel.onchange = fillGenWs;
+}
+function fillGenWs(){
+  const l = LAUNCHES.find(x => x.id === $("#genLaunch").value);
+  const ws = (l && l.state && l.state.workstreams) ? Object.keys(l.state.workstreams)
+    : ["intake","W1_profile","W2_legal","W3_domain","W4_website","W5_payments","W6_products",
+       "W7_presence","W8_social","W9_leads","W10_crm","W11_followups"];
+  $("#genWs").innerHTML = ws.map(w => '<option>' + esc(w) + '</option>').join("");
+}
+function buildCommand(kind){
+  const l = LAUNCHES.find(x => x.id === $("#genLaunch").value);
+  const folder = (l && l.state && l.state.idea_folder) || "/path/to/Idea Folder";
+  const q = (s) => '"' + String(s || "").replace(/"/g,'\\"') + '"';
+  const ws = $("#genWs").value, actor = $("#genActor").value, ch = $("#genChannel").value;
+  const action = $("#genAction").value || "describe exactly what is being approved";
+  const TK = '$TK';
+  if (kind === "gate"){
+    return TK + ' gate ' + q(folder) + ' --workstream ' + ws + ' --actor ' + actor
+      + ' --action ' + q(action) + ' --channel ' + ch
+      + ' --script-file ' + q("turnkey/gates/" + ws + "-1.md");
+  }
+  return TK + ' consent ' + q(folder) + ' --workstream ' + ws + ' --action ' + q(action)
+    + ' --actor ' + actor + ' --channel ' + ch + ' --decision ' + (kind === "yes" ? "YES" : "NO")
+    + ' --evidence ' + q($("#genEvidence").value || "how the YES was given")
+    + ' --scope ' + q($("#genScope").value || "this action only");
+}
+
+/* ------------------------------------------------------------------ wiring */
+function initTabs(){
+  $$(".tab").forEach(t => t.onclick = () => {
+    $$(".tab").forEach(x => x.setAttribute("aria-selected", String(x === t)));
+    $$(".panel").forEach(p => p.classList.toggle("on", p.id === "p-" + t.id.split("-")[1]));
+  });
+}
+function initFilters(){
+  $$("#filters .chip").forEach(c => c.onclick = () => {
+    FILTER = c.dataset.f;
+    $$("#filters .chip").forEach(x => x.setAttribute("aria-pressed", String(x === c)));
+    renderList();
+  });
+}
+function initImport(){
+  const card = $("#importCard"), drop = $("#drop"), picker = $("#picker");
+  $("#importBtn").onclick = () => { card.style.display = card.style.display === "none" ? "" : "none"; };
+  $("#importClose").onclick = () => card.style.display = "none";
+  $("#pickBtn").onclick = () => picker.click();
+  picker.onchange = () => ingestFiles(Array.from(picker.files || []));
+  ["dragenter","dragover"].forEach(ev => drop.addEventListener(ev, e => {
+    e.preventDefault(); drop.classList.add("over"); }));
+  ["dragleave","drop"].forEach(ev => drop.addEventListener(ev, e => {
+    e.preventDefault(); drop.classList.remove("over"); }));
+  drop.addEventListener("drop", e => ingestFiles(Array.from(e.dataTransfer.files || [])));
+  $("#pasteBtn").onclick = () => {
+    let obj = null;
+    try { obj = JSON.parse($("#pasteBox").value); }
+    catch(e){ $("#importMsg").textContent = "That isn't valid JSON."; return; }
+    if (ingest(obj, null, $("#importMsg"))) $("#pasteBox").value = "";
+  };
+}
+function initMisc(){
+  $$("[data-copy]").forEach(b => b.onclick = () => {
+    const el = $(b.dataset.copy); if (!el) return;
+    navigator.clipboard.writeText(el.textContent).then(() => toast("Copied"));
+  });
+  $$("[data-gen]").forEach(b => b.onclick = () => { $("#genOut").textContent = buildCommand(b.dataset.gen); });
+  $("#lockBtn").onclick = async () => {
+    await fetch("/api/unlock", { method:"POST", headers:{ "Content-Type":"application/json" },
+      body: JSON.stringify({ lock:true }), credentials:"same-origin" });
+    location.reload();
+  };
+  const t = $("#themeBtn");
+  t.onclick = () => {
+    const cur = document.documentElement.getAttribute("data-theme");
+    const next = cur === "dark" ? "light" : "dark";
+    document.documentElement.setAttribute("data-theme", next);
+    try { localStorage.setItem("vom_os_theme", next); } catch(e){}
+  };
+  try { const s = localStorage.getItem("vom_os_theme");
+        if (s) document.documentElement.setAttribute("data-theme", s); } catch(e){}
+}
+
+initTabs(); initFilters(); initImport(); initMisc(); renderOperate(); refresh();
+</script>
+</body>
+</html>

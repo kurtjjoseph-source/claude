@@ -1,0 +1,11 @@
+# Never commit secrets, environments, the upscaler binary, or generated output.
+.venv/
+tooling/upscale/
+**/__pycache__/
+*.pyc
+*.env
+.env
+.DS_Store
+# generated runs (large print files)
+tooling/digital-product-research/
+artwork-runs/

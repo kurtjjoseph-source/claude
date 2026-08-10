@@ -1,0 +1,887 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The 90-Day Program — Church Media Academy</title>
+<meta name="description" content="The 13-week interactive curriculum a church media team works through to build a media operation that runs itself.">
+<style>
+  :root{
+    --c:#6b56d6; --c-soft:color-mix(in srgb,var(--c) 12%,transparent);
+    --bg:#f6f5f1; --surface:#ffffff; --surface-2:#efeee7; --line:#e1dfd4; --line-soft:#ece9df;
+    --ink:#1a1d1b; --ink-dim:#535b56; --ink-faint:#868f89;
+    --ok:#2e7d5b; --ok-soft:color-mix(in srgb,var(--ok) 12%,transparent);
+    --warn:#b26a15;
+    --mono:ui-monospace,"SF Mono","Cascadia Code",Menlo,monospace;
+    --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    --serif:"Iowan Old Style",ui-serif,Georgia,"Times New Roman",serif;
+    --shadow:0 1px 2px rgba(20,18,30,.05),0 8px 24px -14px rgba(20,18,30,.18);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --c:#a48cf5; --bg:#0e100f; --surface:#161a18; --surface-2:#1c211e; --line:#2a322d; --line-soft:#212824;
+      --ink:#eef2ef; --ink-dim:#a6b1aa; --ink-faint:#6c7772; --ok:#4bbd8b; --warn:#d99a4e;
+      --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 28px -16px rgba(0,0,0,.6); }
+  }
+  :root[data-theme="light"]{ --c:#6b56d6; --bg:#f6f5f1;--surface:#ffffff;--surface-2:#efeee7;--line:#e1dfd4;--line-soft:#ece9df;--ink:#1a1d1b;--ink-dim:#535b56;--ink-faint:#868f89;--ok:#2e7d5b;--warn:#b26a15;
+    --shadow:0 1px 2px rgba(20,18,30,.05),0 8px 24px -14px rgba(20,18,30,.18); }
+  :root[data-theme="dark"]{ --c:#a48cf5; --bg:#0e100f;--surface:#161a18;--surface-2:#1c211e;--line:#2a322d;--line-soft:#212824;--ink:#eef2ef;--ink-dim:#a6b1aa;--ink-faint:#6c7772;--ok:#4bbd8b;--warn:#d99a4e;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 28px -16px rgba(0,0,0,.6); }
+
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{ margin:0; background:var(--bg); color:var(--ink); font-family:var(--sans); line-height:1.6; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
+  ::selection{ background:color-mix(in srgb,var(--c) 30%,transparent); }
+  a{ color:var(--c); }
+  :focus-visible{ outline:2px solid var(--c); outline-offset:2px; border-radius:4px; }
+  button{ font:inherit; }
+
+  /* ---------- top bar ---------- */
+  .bar{ position:sticky; top:0; z-index:20; background:color-mix(in srgb,var(--bg) 86%,transparent); backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line); }
+  .bar-in{ max-width:1180px; margin:0 auto; padding:11px 22px; display:flex; align-items:center; gap:16px; }
+  .brand{ display:flex; flex-direction:column; gap:1px; min-width:0; flex:none; }
+  .brand .k{ font-family:var(--mono); font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:var(--c); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .brand .n{ font-family:var(--serif); font-weight:600; font-size:17px; letter-spacing:-.01em; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .bar-prog{ flex:1; display:flex; align-items:center; gap:12px; min-width:0; }
+  .track{ flex:1; height:7px; border-radius:20px; background:var(--surface-2); overflow:hidden; border:1px solid var(--line-soft); min-width:60px; }
+  .track > i{ display:block; height:100%; width:0; background:linear-gradient(90deg,var(--c),color-mix(in srgb,var(--c) 55%,var(--ok))); transition:width .4s ease; }
+  .pct{ font-family:var(--mono); font-size:12px; font-variant-numeric:tabular-nums; color:var(--ink-dim); white-space:nowrap; }
+  .toggle{ font-size:12.5px; font-weight:650; cursor:pointer; border:1px solid var(--line); background:var(--surface); color:var(--ink); border-radius:9px; padding:7px 11px; white-space:nowrap; }
+  .toggle:hover{ border-color:var(--c); }
+
+  /* ---------- masthead ---------- */
+  header.hero{ border-bottom:1px solid var(--line);
+    background:radial-gradient(120% 100% at 85% -30%, var(--c-soft), transparent 55%); }
+  .hero-in{ max-width:1180px; margin:0 auto; padding:44px 22px 34px; }
+  .eyebrow{ font-family:var(--mono); font-size:11.5px; letter-spacing:.2em; text-transform:uppercase; color:var(--c); margin:0 0 14px; display:flex; align-items:center; gap:12px; }
+  .eyebrow::after{ content:""; flex:1; height:1px; background:linear-gradient(90deg,var(--line),transparent); max-width:280px; }
+  h1{ font-family:var(--serif); font-weight:600; font-size:clamp(32px,5.4vw,52px); line-height:1.02; margin:0 0 12px; letter-spacing:-.025em; text-wrap:balance; }
+  .lede{ font-family:var(--serif); font-size:clamp(16px,2.1vw,20px); color:var(--ink-dim); max-width:60ch; margin:0; }
+  .lede em{ color:var(--ink); font-style:italic; }
+  .hero-meta{ display:flex; flex-wrap:wrap; gap:10px 26px; margin-top:22px; }
+  .hero-meta div{ display:flex; flex-direction:column; }
+  .hero-meta .l{ font-family:var(--mono); font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-faint); }
+  .hero-meta .v{ font-size:14px; color:var(--ink); font-weight:600; }
+
+  /* ---------- app layout ---------- */
+  .app{ max-width:1180px; margin:0 auto; padding:0 22px 90px; display:grid; grid-template-columns:288px 1fr; gap:34px; align-items:start; }
+
+  /* rail */
+  .rail{ position:sticky; top:74px; align-self:start; max-height:calc(100vh - 92px); overflow-y:auto; padding:22px 0 12px; }
+  .phase-h{ font-family:var(--mono); font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-faint); margin:20px 0 9px; display:flex; align-items:center; gap:8px; }
+  .phase-h:first-child{ margin-top:0; }
+  .phase-h .dot{ width:9px; height:9px; border-radius:50%; background:var(--c); opacity:.4; flex:none; }
+  .phase-h .pn{ color:var(--c); opacity:.85; }
+  .wk{ display:flex; align-items:center; gap:11px; width:100%; text-align:left; border:none; background:none; cursor:pointer; padding:8px 10px; border-radius:9px; color:var(--ink-dim); }
+  .wk:hover{ background:var(--surface-2); color:var(--ink); }
+  .wk.active{ background:var(--c-soft); color:var(--ink); }
+  .wk.active .wk-t{ color:var(--c); font-weight:650; }
+  .wk-num{ flex:none; width:26px; height:26px; border-radius:8px; border:1px solid var(--line); background:var(--surface); display:grid; place-items:center;
+    font-family:var(--mono); font-size:11px; font-variant-numeric:tabular-nums; color:var(--ink-dim); position:relative; }
+  .wk.active .wk-num{ border-color:var(--c); color:var(--c); }
+  .wk-num.done{ background:var(--ok); border-color:var(--ok); color:#fff; }
+  :root[data-theme="dark"] .wk-num.done,@media (prefers-color-scheme:dark){ }
+  .wk-body{ min-width:0; display:flex; flex-direction:column; gap:2px; }
+  .wk-t{ font-size:13.5px; line-height:1.25; }
+  .wk-frac{ font-family:var(--mono); font-size:10px; color:var(--ink-faint); font-variant-numeric:tabular-nums; }
+
+  /* main */
+  main{ min-width:0; padding-top:22px; }
+  .wk-panel{ animation:fade .35s ease; }
+  @keyframes fade{ from{ opacity:0; transform:translateY(6px); } to{ opacity:1; transform:none; } }
+  .wk-head{ border-bottom:1px solid var(--line); padding-bottom:20px; margin-bottom:26px; }
+  .crumb{ font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-faint); margin:0 0 10px; display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+  .crumb .phase-pill{ color:var(--c); }
+  h2.wk-title{ font-family:var(--serif); font-weight:600; font-size:clamp(24px,3.6vw,34px); letter-spacing:-.02em; margin:0 0 14px; line-height:1.08; text-wrap:balance; }
+  .outcome{ display:flex; gap:12px; background:var(--surface-2); border:1px solid var(--line-soft); border-left:3px solid var(--c); border-radius:12px; padding:14px 18px; }
+  .outcome .ol{ font-family:var(--mono); font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--c); flex:none; padding-top:3px; }
+  .outcome .ov{ font-family:var(--serif); font-size:16.5px; color:var(--ink); }
+
+  .task{ border:1px solid var(--line); background:var(--surface); border-radius:14px; padding:0; margin:16px 0; box-shadow:var(--shadow); overflow:hidden; }
+  .task-top{ display:flex; gap:14px; padding:18px 20px; align-items:flex-start; }
+  .cbx{ flex:none; margin-top:2px; }
+  .cbx input{ position:absolute; opacity:0; width:0; height:0; }
+  .cbx label{ display:grid; place-items:center; width:22px; height:22px; border:1.5px solid var(--line); border-radius:7px; cursor:pointer; background:var(--surface); transition:background .15s,border-color .15s; }
+  .cbx label:hover{ border-color:var(--c); }
+  .cbx svg{ width:13px; height:13px; opacity:0; transform:scale(.6); transition:opacity .15s,transform .15s; color:#fff; }
+  .cbx input:checked + label{ background:var(--ok); border-color:var(--ok); }
+  .cbx input:checked + label svg{ opacity:1; transform:scale(1); }
+  .cbx input:focus-visible + label{ outline:2px solid var(--c); outline-offset:2px; }
+  .task-body{ min-width:0; flex:1; }
+  .task-body h3{ font-family:var(--sans); font-weight:650; font-size:16.5px; margin:0 0 6px; letter-spacing:-.01em; }
+  .task.done h3{ color:var(--ink-dim); }
+  .task-body p{ font-family:var(--serif); font-size:15.5px; color:var(--ink-dim); margin:0 0 4px; max-width:66ch; }
+  .task-body p b{ color:var(--ink); font-weight:600; }
+
+  /* template block */
+  .tpl{ margin:14px 20px 20px; border:1px solid var(--line); border-radius:11px; background:var(--surface-2); overflow:hidden; }
+  .tpl-bar{ display:flex; align-items:center; justify-content:space-between; gap:10px; padding:9px 13px; border-bottom:1px solid var(--line-soft); background:color-mix(in srgb,var(--c) 6%,var(--surface-2)); }
+  .tpl-bar .tt{ font-family:var(--mono); font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--c); }
+  .copy{ cursor:pointer; border:1px solid var(--line); background:var(--surface); color:var(--ink-dim); border-radius:7px; padding:4px 10px; font-size:11px; font-family:var(--mono); letter-spacing:.04em; }
+  .copy:hover{ border-color:var(--c); color:var(--c); }
+  .copy.ok{ color:var(--ok); border-color:var(--ok); }
+  .tpl-in{ padding:14px 16px; }
+  .tpl-scroll{ overflow-x:auto; }
+  table.grid{ border-collapse:collapse; width:100%; min-width:520px; font-size:13px; }
+  table.grid th,table.grid td{ border:1px solid var(--line); padding:7px 10px; text-align:left; vertical-align:top; }
+  table.grid th{ background:var(--surface); font-family:var(--mono); font-size:10.5px; letter-spacing:.05em; text-transform:uppercase; color:var(--ink-faint); font-weight:600; }
+  table.grid td{ color:var(--ink-dim); }
+  table.grid td.fill{ color:var(--ink-faint); font-style:italic; }
+  .tpl ol,.tpl ul{ margin:0; padding-left:20px; }
+  .tpl li{ font-size:14px; color:var(--ink-dim); margin:4px 0; }
+  .tpl li b,.tpl li strong{ color:var(--ink); }
+  .tpl code{ font-family:var(--mono); font-size:12.5px; background:var(--surface); border:1px solid var(--line-soft); border-radius:5px; padding:1px 6px; color:var(--ink); }
+  .checklist{ list-style:none; padding-left:0; }
+  .checklist li{ display:flex; gap:9px; align-items:flex-start; }
+  .checklist li::before{ content:"\2610"; color:var(--c); font-size:15px; line-height:1.3; flex:none; }
+  .timed li{ display:grid; grid-template-columns:64px 1fr; gap:10px; }
+  .timed li .t{ font-family:var(--mono); font-size:11.5px; color:var(--c); font-variant-numeric:tabular-nums; }
+
+  /* definition of done */
+  .dod{ margin-top:26px; border:1px dashed var(--c); border-radius:14px; padding:0; background:var(--c-soft); overflow:hidden; }
+  .dod-in{ display:flex; gap:14px; padding:18px 20px; align-items:flex-start; }
+  .dod .lbl{ font-family:var(--mono); font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--c); margin:0 0 5px; }
+  .dod .txt{ font-family:var(--serif); font-size:16px; color:var(--ink); }
+  .dod.done{ border-style:solid; border-color:var(--ok); background:var(--ok-soft); }
+  .dod.done .lbl{ color:var(--ok); }
+
+  /* week nav */
+  .wk-nav{ display:flex; justify-content:space-between; gap:12px; margin-top:34px; }
+  .nav-btn{ display:flex; flex-direction:column; gap:2px; text-align:left; border:1px solid var(--line); background:var(--surface); border-radius:11px; padding:11px 16px; cursor:pointer; color:var(--ink); max-width:47%; }
+  .nav-btn:hover:not(:disabled){ border-color:var(--c); }
+  .nav-btn:disabled{ opacity:.35; cursor:default; }
+  .nav-btn.next{ text-align:right; align-items:flex-end; }
+  .nav-btn .d{ font-family:var(--mono); font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-faint); }
+  .nav-btn .w{ font-size:14px; font-weight:600; }
+
+  footer{ border-top:1px solid var(--line); margin-top:10px; }
+  .foot{ max-width:1180px; margin:0 auto; padding:22px; font-size:12.5px; color:var(--ink-faint); display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; }
+  .foot a{ color:var(--c); }
+
+  .toast{ position:fixed; bottom:22px; left:50%; transform:translateX(-50%) translateY(20px); background:var(--ink); color:var(--bg); font-size:13px; font-weight:600; padding:9px 16px; border-radius:9px; opacity:0; pointer-events:none; transition:opacity .25s,transform .25s; z-index:50; }
+  .toast.show{ opacity:1; transform:translateX(-50%) translateY(0); }
+
+  /* mobile rail = horizontal chips */
+  .rail-mobile{ display:none; }
+  @media (max-width:860px){
+    .app{ grid-template-columns:1fr; gap:0; padding-bottom:60px; }
+    .rail{ display:none; }
+    .rail-mobile{ display:block; position:sticky; top:57px; z-index:15; background:color-mix(in srgb,var(--bg) 90%,transparent); backdrop-filter:blur(8px); margin:0 -22px; padding:10px 0 11px; border-bottom:1px solid var(--line); }
+    .chips{ display:flex; gap:7px; overflow-x:auto; padding:0 22px; scrollbar-width:thin; }
+    .chip{ flex:none; width:38px; height:38px; border-radius:10px; border:1px solid var(--line); background:var(--surface); cursor:pointer;
+      font-family:var(--mono); font-size:12px; color:var(--ink-dim); font-variant-numeric:tabular-nums; position:relative; }
+    .chip.active{ border-color:var(--c); color:var(--c); background:var(--c-soft); }
+    .chip.done{ background:var(--ok); border-color:var(--ok); color:#fff; }
+    .chip .ph{ position:absolute; top:-1px; right:-1px; width:7px; height:7px; border-radius:50%; }
+    main{ padding-top:20px; }
+    .nav-btn{ max-width:48%; }
+    .hero-in{ padding:34px 22px 26px; }
+  }
+  @media (max-width:640px){
+    .bar-in{ gap:12px; padding:10px 18px; }
+    .brand .n{ font-size:15px; }
+    .bar-prog .track{ display:none; }
+    .bar-prog{ flex:none; }
+    .toggle{ padding:7px 10px; }
+  }
+  @media (max-width:520px){
+    .task-top{ padding:15px 15px; } .tpl{ margin:12px 15px 16px; }
+    .hero-meta{ gap:10px 20px; }
+    .brand .k{ font-size:9px; }
+  }
+  @media (prefers-reduced-motion:reduce){ *{ transition:none!important; animation:none!important; scroll-behavior:auto!important; } }
+</style>
+</head>
+<body>
+<div class="bar">
+  <div class="bar-in">
+    <div class="brand">
+      <span class="k">Church Media Academy</span>
+      <span class="n">The 90-Day Program</span>
+    </div>
+    <div class="bar-prog">
+      <div class="track"><i id="barFill"></i></div>
+      <span class="pct" id="barPct">0%</span>
+    </div>
+    <button class="toggle" id="themeBtn" aria-label="Toggle colour theme">◐ Theme</button>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="hero-in">
+    <p class="eyebrow">The delivery · 13 weeks · 3 phases</p>
+    <h1>Build a media ministry that runs itself.</h1>
+    <p class="lede">This is the program your team executes after enrolment — <em>not</em> a plan to admire, but a quarter of concrete weekly work that turns ad-hoc volunteers into an owned, repeatable system. Check off each task as you go; your progress saves on this device.</p>
+    <div class="hero-meta">
+      <div><span class="l">Cadence</span><span class="v">1 focused week at a time</span></div>
+      <div><span class="l">Team</span><span class="v">Any size, volunteer-friendly</span></div>
+      <div><span class="l">End state</span><span class="v">A documented, self-running operation</span></div>
+      <div><span class="l">Delivered by</span><span class="v">Vision Outreach Media</span></div>
+    </div>
+  </div>
+</header>
+
+<div class="app">
+  <nav class="rail" id="rail" aria-label="Program weeks"></nav>
+  <main>
+    <div class="rail-mobile"><div class="chips" id="chips"></div></div>
+    <div id="panel"></div>
+    <div class="wk-nav">
+      <button class="nav-btn prev" id="prevBtn"><span class="d">◂ Previous</span><span class="w" id="prevW"></span></button>
+      <button class="nav-btn next" id="nextBtn"><span class="d">Next ▸</span><span class="w" id="nextW"></span></button>
+    </div>
+  </main>
+</div>
+
+<footer><div class="foot">
+  <span>The 90-Day Program — part of the Church Media Academy, a Vision Outreach Media operating system.</span>
+  <span><a href="https://vom-systems.vercel.app" target="_blank" rel="noopener">The house →</a></span>
+</div></footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+"use strict";
+/* ------------------------------------------------------------------ *
+ * The 90-Day Program — curriculum data
+ * Each week: { n, title, outcome, tasks:[{t, body, tpl?}], dod }
+ * Templates (tpl) are copy-ready HTML strings; the Copy button lifts
+ * their plain text so a team can paste into their own docs.
+ * ------------------------------------------------------------------ */
+var PHASES = [
+  { name:"Phase 1", label:"Foundations", blurb:"Know where you stand, who does what, and what you own.", weeks:[1,2,3,4] },
+  { name:"Phase 2", label:"Build the Machine", blurb:"Stand up the production pipelines that carry every week.", weeks:[5,6,7,8,9] },
+  { name:"Phase 3", label:"Make it Run Itself", blurb:"Automate, document, and hand the system to a named owner.", weeks:[10,11,12,13] }
+];
+
+var WEEKS = [
+/* ===================== PHASE 1 ===================== */
+{
+  n:1, title:"Take stock & set the destination",
+  outcome:"A shared, honest picture of where your media ministry stands today — and one measurable goal for the quarter.",
+  tasks:[
+    { t:"Run the Media Reality Audit",
+      body:"Before you build anything, list what already exists. Walk every channel — website, YouTube, Facebook, Instagram, the email list, even the WhatsApp broadcast — and record who touches it, when it last had a pulse, and <b>who actually holds the login</b>. Most churches discover a page nobody can get into or an account tied to a volunteer who left two years ago. Name those gaps now; you'll close them in Week 3.",
+      tpl:{ title:"Media Reality Audit", html:
+        '<div class="tpl-scroll"><table class="grid"><thead><tr><th>Channel</th><th>Who touches it</th><th>Last active</th><th>Login held by</th><th>Health</th></tr></thead><tbody>'+
+        '<tr><td>Website</td><td class="fill">name…</td><td class="fill">date…</td><td class="fill">email…</td><td class="fill">🟢 / 🟡 / 🔴</td></tr>'+
+        '<tr><td>YouTube</td><td class="fill">name…</td><td class="fill">date…</td><td class="fill">email…</td><td class="fill">🟢 / 🟡 / 🔴</td></tr>'+
+        '<tr><td>Facebook</td><td class="fill">name…</td><td class="fill">date…</td><td class="fill">email…</td><td class="fill">🟢 / 🟡 / 🔴</td></tr>'+
+        '<tr><td>Instagram</td><td class="fill">name…</td><td class="fill">date…</td><td class="fill">email…</td><td class="fill">🟢 / 🟡 / 🔴</td></tr>'+
+        '<tr><td>Email list</td><td class="fill">name…</td><td class="fill">date…</td><td class="fill">email…</td><td class="fill">🟢 / 🟡 / 🔴</td></tr>'+
+        '<tr><td>Livestream</td><td class="fill">name…</td><td class="fill">date…</td><td class="fill">email…</td><td class="fill">🟢 / 🟡 / 🔴</td></tr>'+
+        '</tbody></table></div>' }
+    },
+    { t:"Name the One Number",
+      body:"A media ministry that measures everything steers by nothing. Pick a <b>single primary metric</b> that means people are being reached and coming back — returning livestream viewers, email open rate, sermon-clip views, or new connect cards from online. One number the whole team can rally around and check monthly. Everything else is supporting evidence.",
+      tpl:{ title:"The One Number", html:
+        '<ul><li><b>Our One Number:</b> <code>_______________________</code></li>'+
+        '<li><b>Where we read it:</b> <code>_______________________</code></li>'+
+        '<li><b>Today’s baseline:</b> <code>__________</code> (measured <code>__/__/____</code>)</li></ul>' }
+    },
+    { t:"Write the 90-day goal statement",
+      body:"Turn the number into a sentence the team can repeat. Keep it outcome-first and tie it to ministry, not vanity. Post it where every volunteer sees it — you will measure against it in Week 13.",
+      tpl:{ title:"Goal statement", html:
+        '<ul><li><b>By</b> <code>[end date]</code>, <b>we will</b> <code>[measurable outcome]</code> <b>so that</b> <code>[ministry reason]</code>.</li>'+
+        '<li style="list-style:none;margin-left:-8px;color:var(--ink-faint)"><em>e.g. “By Oct 31 we will grow returning online viewers from 40 to 90 a week so that more of our shut-in members stay connected to the body.”</em></li></ul>' }
+    }
+  ],
+  dod:"The audit table is filled for every channel, the One Number is chosen with a baseline recorded, and the goal statement is written and posted where the team can see it."
+},
+{
+  n:2, title:"Who does what — roles & the team",
+  outcome:"Every recurring media task has a named owner, and no critical role sits on a single person.",
+  tasks:[
+    { t:"Define the four core roles",
+      body:"Every church media operation, however small, needs four jobs covered. On a two-person team one person may hold two of them — that's fine — but each role must have a name attached, not a vague “whoever's around.”",
+      tpl:{ title:"Role & responsibility list", html:
+        '<div class="tpl-scroll"><table class="grid"><thead><tr><th>Role</th><th>Owns</th><th>Primary</th><th>Backup</th></tr></thead><tbody>'+
+        '<tr><td><b>Coordinator</b></td><td>the schedule, approvals, the calendar</td><td class="fill">name…</td><td class="fill">name…</td></tr>'+
+        '<tr><td><b>Capture</b></td><td>camera, photos, recording the room</td><td class="fill">name…</td><td class="fill">name…</td></tr>'+
+        '<tr><td><b>Live / Tech</b></td><td>audio, the stream, slides</td><td class="fill">name…</td><td class="fill">name…</td></tr>'+
+        '<tr><td><b>Publish</b></td><td>clips, social posts, email, bulletin</td><td class="fill">name…</td><td class="fill">name…</td></tr>'+
+        '</tbody></table></div>' }
+    },
+    { t:"Fill a Volunteer Role Card for each person",
+      body:"For every volunteer, capture their role, their actual gifts (a natural writer is wasted on cables), realistic availability, and one thing they want to learn. This is how you keep people from quietly burning out — and how you place the right person in the right seat.",
+      tpl:{ title:"Volunteer Role Card", html:
+        '<ul><li><b>Name:</b> <code>________</code> &nbsp; <b>Role:</b> <code>________</code></li>'+
+        '<li><b>Gifts / strengths:</b> <code>________________</code></li>'+
+        '<li><b>Available:</b> <code>which Sundays / which evenings</code></li>'+
+        '<li><b>Backs up:</b> <code>which role</code> &nbsp; <b>Wants to learn:</b> <code>________</code></li></ul>' }
+    },
+    { t:"Set the two-deep rule",
+      body:"The fastest way a volunteer media ministry collapses is one person being irreplaceable, then leaving or getting sick. Adopt a simple rule: <b>every Sunday-critical role has a trained backup</b> before you consider it “covered.” Mark any role that is still one-person-deep as a red risk to close during Phase 2.",
+      tpl:null
+    }
+  ],
+  dod:"A roles chart is posted, every person has a Role Card, and each Sunday-critical role shows both a primary and a backup — with any one-deep gaps flagged."
+},
+{
+  n:3, title:"Ownership, access & consent",
+  outcome:"The church owns all of its accounts, and there is a clear, respectful flow for people's images and for approving anything public.",
+  tasks:[
+    { t:"Put every account under church ownership",
+      body:"Accounts must belong to the church, not to a volunteer's personal email. Create one church-owned email (e.g. media@yourchurch.org) as the recovery address for every platform, and store passwords in a shared church password manager. <b>The team performs the actual login and password changes</b> — VOM never handles your credentials. Work down the audit from Week 1 until every channel's recovery routes to the church.",
+      tpl:{ title:"Ownership handover checklist", html:
+        '<ul class="checklist">'+
+        '<li>Church-owned email created and set as recovery on every platform</li>'+
+        '<li>Passwords moved into a shared password manager (not a spreadsheet, not a sticky note)</li>'+
+        '<li>Two staff/elders have emergency access to that manager</li>'+
+        '<li>Departed volunteers removed as admins</li>'+
+        '<li>Each page/channel has at least two church-owned admins</li></ul>' }
+    },
+    { t:"Set a photo & video consent flow",
+      body:"Filming a congregation carries real responsibility, especially with children. Put up simple “you may appear in photos/video” signage at entrances, add a consent line to membership and connect cards, and designate a camera-free seating zone for those who opt out. For minors, require explicit parental consent before a child is ever the focus of a shot.",
+      tpl:{ title:"Consent checklist", html:
+        '<ul class="checklist">'+
+        '<li>Entrance signage: “Services are filmed & photographed for ministry use”</li>'+
+        '<li>Consent line added to connect / membership cards</li>'+
+        '<li>A clearly marked camera-free zone offered</li>'+
+        '<li>Written parental consent required for any child in focus</li>'+
+        '<li>Named process to remove someone’s image on request</li></ul>' }
+    },
+    { t:"Write the approval flow",
+      body:"Decide who signs off before something goes public, and keep it light enough to actually use. For most small churches, one named approver (the pastor or coordinator) reviewing a shared “ready to post” folder is plenty. The point is one clear gate — not a committee.",
+      tpl:{ title:"Approval SOP", html:
+        '<ol><li>Creator drops the finished asset + caption into the <b>Ready to Approve</b> folder.</li>'+
+        '<li>Approver (<code>name</code>) reviews within <b>24 hours</b> — theology, accuracy, consent, tone.</li>'+
+        '<li>Approved → moves to <b>Ready to Post</b>. Needs changes → one comment, back to creator.</li>'+
+        '<li>Anything urgent/sensitive goes straight to the pastor before posting.</li></ol>' }
+    }
+  ],
+  dod:"Every account routes to a church-owned recovery email and lives in a shared password manager, consent signage and card language are in place, and a one-approver flow is written and agreed."
+},
+{
+  n:4, title:"Your look & your library",
+  outcome:"A tiny, repeatable brand kit and one organised home where all your media lives and can be found in seconds.",
+  tasks:[
+    { t:"Build the one-page brand kit",
+      body:"Consistency reads as trust. You don't need a design agency — you need three colours, two fonts, your logo in the right formats, and a service-graphic template, all on a single page any volunteer can copy from. Lock it so every clip, post, and slide looks like it came from the same church.",
+      tpl:{ title:"One-page brand kit", html:
+        '<ul><li><b>Logo files:</b> full-colour, white, and icon-only (PNG with transparent background)</li>'+
+        '<li><b>Colours:</b> <code>#______</code> primary &nbsp; <code>#______</code> secondary &nbsp; <code>#______</code> accent</li>'+
+        '<li><b>Fonts:</b> one heading + one body (use a free family so every volunteer has it)</li>'+
+        '<li><b>Templates saved:</b> sermon title card · scripture/quote card · event card</li></ul>' }
+    },
+    { t:"Set up the media library",
+      body:"A shared, church-owned cloud drive with a folder structure everyone follows. The enemy is media scattered across five people's phones. One home, one structure, one naming convention — so last month's Easter photos are findable next year without a search party.",
+      tpl:{ title:"Library structure & naming", html:
+        '<ul><li><code>/Media/</code></li>'+
+        '<li><code>&nbsp;&nbsp;Brand-Kit/</code> &middot; logos, fonts, templates</li>'+
+        '<li><code>&nbsp;&nbsp;Raw/</code> &middot; unedited service recordings & photos</li>'+
+        '<li><code>&nbsp;&nbsp;Sermons/</code> &middot; final clips by date</li>'+
+        '<li><code>&nbsp;&nbsp;Social/</code> &middot; scheduled & posted graphics</li>'+
+        '<li><code>&nbsp;&nbsp;Ready-to-Approve/</code> &nbsp; <code>Ready-to-Post/</code></li>'+
+        '<li style="margin-top:8px"><b>Naming:</b> <code>2026-07-27_sermon_title-here_v1</code> — date first, always.</li></ul>' }
+    },
+    { t:"Make three reusable frames",
+      body:"Create three drag-and-drop templates in whatever free tool your team knows (Canva works well for volunteers): a <b>sermon title card</b>, a <b>quote/scripture card</b>, and an <b>event card</b>. New content becomes fill-in-the-blank instead of design-from-scratch — the single biggest time-saver for a volunteer team.",
+      tpl:null
+    }
+  ],
+  dod:"The brand kit fits on one page, the library folders and naming convention are created and documented, and three reusable templates are saved where volunteers can duplicate them."
+},
+/* ===================== PHASE 2 ===================== */
+{
+  n:5, title:"The livestream SOP",
+  outcome:"Any trained volunteer can run Sunday's stream from a written run sheet — without the media director in the room.",
+  tasks:[
+    { t:"Write the livestream run sheet",
+      body:"The stream should run on rails, not on one person's memory. Write a time-boxed run sheet from power-on to shutdown, so a nervous first-timer can follow it top to bottom. Print it and tape it to the booth.",
+      tpl:{ title:"Livestream run sheet", html:
+        '<ul class="timed">'+
+        '<li><span class="t">T-60</span><span>Arrive, power on: camera, encoder, audio desk, computer. Open the streaming software.</span></li>'+
+        '<li><span class="t">T-40</span><span>Audio check with the worship team — confirm levels feed the stream, not just the room.</span></li>'+
+        '<li><span class="t">T-20</span><span>Set today’s stream title & thumbnail. Paste the pre-set title format.</span></li>'+
+        '<li><span class="t">T-10</span><span>Start the stream on a “starting soon” holding slide. Confirm it’s live on the public page.</span></li>'+
+        '<li><span class="t">T-0</span><span>Switch to live camera as service begins. Watch levels; nudge as needed.</span></li>'+
+        '<li><span class="t">END</span><span>Hold on an outro slide 60s, then stop stream. Confirm the recording saved to the library.</span></li></ul>' }
+    },
+    { t:"Prepare titles & thumbnails in advance",
+      body:"Decide a repeatable title format and a thumbnail template so the operator never invents these live under pressure. Consistency here also helps people find your services later.",
+      tpl:{ title:"Stream title & thumbnail", html:
+        '<ul><li><b>Title format:</b> <code>[Series] — [Sermon Title] | [Church Name] | [Date]</code></li>'+
+        '<li><b>Thumbnail:</b> brand template + speaker photo + sermon title, saved in <code>/Brand-Kit/</code></li>'+
+        '<li><b>Set the night before</b> whenever possible, so Sunday is execution only.</li></ul>' }
+    },
+    { t:"Write the failure playbook",
+      body:"Things break on Sunday. A one-page “when it goes wrong” guide keeps a volunteer calm and the congregation informed instead of staring at a frozen screen. Rehearse it once with the team.",
+      tpl:{ title:"Failure playbook", html:
+        '<ul><li><b>Audio drops:</b> switch to backup mic / board feed; post a pinned “we’re fixing audio” comment.</li>'+
+        '<li><b>Stream disconnects:</b> stop, restart with the same key, pin the new link in the group chat.</li>'+
+        '<li><b>No operator shows:</b> the named backup starts a phone-camera stream from the pre-saved account — presence beats polish.</li>'+
+        '<li><b>Nothing works:</b> record locally so the sermon can still be posted later.</li></ul>' }
+    }
+  ],
+  dod:"A volunteer who is not the media director runs one full Sunday entirely from the SOP, and the recording lands in the library — proving the stream no longer depends on any one person."
+},
+{
+  n:6, title:"The sermon-clip pipeline",
+  outcome:"Every sermon reliably produces 2–3 short clips within 72 hours, from a process anyone on the team can run.",
+  tasks:[
+    { t:"Mark the moment during the service",
+      body:"The best clips are spotted live, not hunted for later. Give one person the simple job of noting the timecode whenever the preacher lands a quotable line, a story peaks, or the room responds. Three noted moments on Sunday saves hours of scrubbing on Monday.",
+      tpl:{ title:"Clip-spotting log", html:
+        '<div class="tpl-scroll"><table class="grid"><thead><tr><th>Timecode</th><th>The moment (why it lands)</th><th>Format</th></tr></thead><tbody>'+
+        '<tr><td class="fill">00:00</td><td class="fill">quote / story / call to action…</td><td class="fill">vertical / horizontal</td></tr>'+
+        '<tr><td class="fill">00:00</td><td class="fill">…</td><td class="fill">…</td></tr>'+
+        '<tr><td class="fill">00:00</td><td class="fill">…</td><td class="fill">…</td></tr>'+
+        '</tbody></table></div>' }
+    },
+    { t:"Run the 72-hour clip SOP",
+      body:"A repeatable clip process, start to finish, so quality doesn't depend on who's editing. Captions matter most — the majority of social video is watched on mute, so a clip without captions is a clip nobody hears.",
+      tpl:{ title:"72-hour clip SOP", html:
+        '<ol><li>Pull each marked moment (aim for <b>20–60 seconds</b>, one complete thought).</li>'+
+        '<li>Auto-generate captions, then <b>fix names, scripture references, and errors</b> by hand.</li>'+
+        '<li>Add the brand title card (first 1–2s) and lower-third with the sermon title.</li>'+
+        '<li>Export twice: <b>vertical 9:16</b> (Reels/Shorts/TikTok) and <b>horizontal 16:9</b> if needed.</li>'+
+        '<li>Drop into <code>Ready-to-Approve/</code> with a draft caption. Log it as done.</li></ol>' }
+    },
+    { t:"Batch the whole week",
+      body:"Don't clip in dribs and drabs. Hold one clipping session — Monday works well — that produces the entire week's shorts in a single sitting. Batching is what makes a volunteer-run pipeline survive busy weeks.",
+      tpl:null
+    }
+  ],
+  dod:"Last Sunday's sermon has 2–3 finished, captioned, brand-framed clips sitting in the library ready to schedule — produced by following the SOP, not by heroics."
+},
+{
+  n:7, title:"The social cadence",
+  outcome:"A weekly content calendar the team can fill in 30 minutes and schedule in one sitting — consistent, not sporadic.",
+  tasks:[
+    { t:"Pick a realistic cadence",
+      body:"Fewer posts done consistently beat many posts done in bursts and then silence. Choose a weekly rhythm your team can actually sustain in its busiest month, then protect it. A predictable four-posts-a-week ministry outgrows a heroic ten-then-nothing one every time.",
+      tpl:{ title:"Sample weekly cadence", html:
+        '<div class="tpl-scroll"><table class="grid"><thead><tr><th>Day</th><th>Post</th><th>Source</th></tr></thead><tbody>'+
+        '<tr><td>Sunday</td><td>Service recap / photo + verse of the week</td><td>Capture</td></tr>'+
+        '<tr><td>Tuesday</td><td>Sermon clip #1</td><td>Clip pipeline</td></tr>'+
+        '<tr><td>Thursday</td><td>Scripture or quote card</td><td>Templates</td></tr>'+
+        '<tr><td>Saturday</td><td>Invite to tomorrow’s service + livestream link</td><td>Coordinator</td></tr>'+
+        '</tbody></table></div>' }
+    },
+    { t:"Build the content calendar",
+      body:"One shared grid is your source of truth for what goes out, where, and whether it's ready. It ends the frantic Saturday-night “what do we post tomorrow?” and lets anyone see the week at a glance.",
+      tpl:{ title:"Weekly content calendar", html:
+        '<div class="tpl-scroll"><table class="grid"><thead><tr><th>Date</th><th>Channel</th><th>Asset</th><th>Caption</th><th>Status</th></tr></thead><tbody>'+
+        '<tr><td class="fill">__/__</td><td class="fill">IG / FB / YT</td><td class="fill">link…</td><td class="fill">draft…</td><td class="fill">draft / approved / scheduled</td></tr>'+
+        '<tr><td class="fill">__/__</td><td class="fill">…</td><td class="fill">…</td><td class="fill">…</td><td class="fill">…</td></tr>'+
+        '<tr><td class="fill">__/__</td><td class="fill">…</td><td class="fill">…</td><td class="fill">…</td><td class="fill">…</td></tr>'+
+        '</tbody></table></div>' }
+    },
+    { t:"Batch and schedule ahead",
+      body:"In one planning block, load the whole week into each platform's native scheduler (free on Facebook/Instagram via Meta Business Suite, and on most email tools). Scheduling ahead means a missed Sunday or a sick volunteer never breaks the cadence.",
+      tpl:null
+    }
+  ],
+  dod:"Next week's calendar is fully filled in and every post is scheduled across your chosen channels — the team's job for the week is done before the week starts."
+},
+{
+  n:8, title:"Bulletin & newsletter",
+  outcome:"A dependable weekly and monthly touch to the people who aren't on social — via email and a clean bulletin.",
+  tasks:[
+    { t:"Standardise the bulletin workflow",
+      body:"The bulletin still reaches the members social media never will. Make it a reusable template with a hard content cutoff so it stops being a Saturday-night scramble. A cutoff is a gift: it protects your volunteers' weekend and the quality of the product.",
+      tpl:{ title:"Bulletin workflow", html:
+        '<ol><li><b>Wednesday:</b> content cutoff — announcements in by end of day or they wait a week.</li>'+
+        '<li><b>Thursday:</b> Publish role drops content into the bulletin template.</li>'+
+        '<li><b>Friday:</b> approver signs off (per Week 3 flow).</li>'+
+        '<li><b>Sunday:</b> print + post the digital version to the library and email list.</li></ol>' }
+    },
+    { t:"Start (or restart) the email newsletter",
+      body:"Email is the one channel you own — no algorithm decides who sees it. Grow the list with a QR code in the bulletin and a connect-card checkbox, then send a simple monthly note with <b>one</b> clear call to action. One ask per email always beats five.",
+      tpl:{ title:"Monthly newsletter template", html:
+        '<ul><li><b>Subject:</b> warm, specific, no “Newsletter #14”</li>'+
+        '<li><b>A word from the pastor</b> — 3–4 sentences</li>'+
+        '<li><b>This month’s one thing</b> — the single most important event/ask</li>'+
+        '<li><b>Watch / catch up</b> — last month’s best clip or full sermon</li>'+
+        '<li><b>One clear button:</b> <code>Plan your visit</code> / <code>Sign up</code> / <code>Give</code></li></ul>' }
+    },
+    { t:"Create one source of truth for announcements",
+      body:"Hallway requests and last-minute texts are where bulletins go to die. Route <b>every</b> announcement through one intake form so nothing gets lost and nothing jumps the queue. This single change removes most of the weekly chaos.",
+      tpl:{ title:"Announcement intake form — fields", html:
+        '<ul class="checklist">'+
+        '<li>What’s the announcement? (1–2 sentences)</li>'+
+        '<li>Dates & times</li>'+
+        '<li>Who to contact / link</li>'+
+        '<li>Where should it run? (bulletin / email / social / slides)</li>'+
+        '<li>Requested by + submitted date</li></ul>' }
+    }
+  ],
+  dod:"One newsletter has gone out from the template, and one bulletin has been produced through the workflow with the Wednesday cutoff actually honoured."
+},
+{
+  n:9, title:"The volunteer rota & recruitment",
+  outcome:"A rota that fills itself weeks ahead, plus a clear on-ramp so new volunteers can join and grow.",
+  tasks:[
+    { t:"Build a rolling rota",
+      body:"Schedule roles at least six weeks ahead so people can plan and swaps happen early, not at 9pm Saturday. A free shared calendar or scheduling tool with automatic reminders removes the coordinator's weekly chase and the dreaded no-show.",
+      tpl:{ title:"6-week rota grid", html:
+        '<div class="tpl-scroll"><table class="grid"><thead><tr><th>Sunday</th><th>Live/Tech</th><th>Capture</th><th>Publish</th><th>Confirmed?</th></tr></thead><tbody>'+
+        '<tr><td class="fill">__/__</td><td class="fill">name</td><td class="fill">name</td><td class="fill">name</td><td class="fill">✓ / —</td></tr>'+
+        '<tr><td class="fill">__/__</td><td class="fill">name</td><td class="fill">name</td><td class="fill">name</td><td class="fill">✓ / —</td></tr>'+
+        '<tr><td class="fill">__/__</td><td class="fill">name</td><td class="fill">name</td><td class="fill">name</td><td class="fill">✓ / —</td></tr>'+
+        '</tbody></table></div>' }
+    },
+    { t:"Make the recruitment ask easy to say yes to",
+      body:"People don't join because they're never clearly asked, or the ask feels huge. Offer a low-commitment entry role — “clip spotter” needs only a phone and one Sunday — and make the invitation concrete: a 60-second team clip, a connect-card checkbox, a named person to text.",
+      tpl:{ title:"The on-ramp", html:
+        '<ul><li><b>Entry role:</b> Clip Spotter — mark 3 moments on your phone, one Sunday a month.</li>'+
+        '<li><b>The ask:</b> a 60-sec “join the media team” clip + “I’d help with media” on the connect card.</li>'+
+        '<li><b>Next step:</b> one named person texts every interested person within 48 hours.</li></ul>' }
+    },
+    { t:"Write the 20-minute onboarding",
+      body:"A new volunteer should be useful on their first Sunday and confident by their third. A one-page “your first Sunday” guide plus a shadow-then-solo path turns willing people into reliable ones — and protects the two-deep rule from Week 2.",
+      tpl:{ title:"New-volunteer one-pager", html:
+        '<ul><li><b>Sunday 1:</b> shadow — watch the role run, no pressure.</li>'+
+        '<li><b>Sunday 2:</b> co-pilot — do it with the trainer beside you.</li>'+
+        '<li><b>Sunday 3:</b> solo with the SOP + trainer on call.</li>'+
+        '<li><b>Always includes:</b> where logins live, who to text, the run sheet, the group chat.</li></ul>' }
+    }
+  ],
+  dod:"The rota is filled and confirmed at least four weeks out, an onboarding path is documented, and at least one new volunteer is in the pipeline."
+},
+/* ===================== PHASE 3 ===================== */
+{
+  n:10, title:"Automate & templatise",
+  outcome:"The repetitive steps are templated or automated, so the team spends its time on ministry, not mechanics.",
+  tasks:[
+    { t:"Templatise everything recurring",
+      body:"Anything you build more than twice should be a template, not a fresh effort. Saved caption formats, pre-built thumbnails, a reusable email — each one turns a 20-minute task into a 2-minute one and makes it delegable to anyone.",
+      tpl:{ title:"Templatise this list", html:
+        '<ul class="checklist">'+
+        '<li>Sermon-clip caption format (with a consistent hashtag set)</li>'+
+        '<li>“Invite to Sunday” post + “service recap” post</li>'+
+        '<li>Thumbnail & title-card templates</li>'+
+        '<li>Monthly newsletter shell</li>'+
+        '<li>New-series launch checklist</li></ul>' }
+    },
+    { t:"Add a few simple automations",
+      body:"You don't need complex software — just remove the manual steps that eat attention. Auto-captions, streams that auto-archive to your channel, recurring calendar holds for the rota, and an intake form that drops straight into a shared sheet all run without anyone remembering to do them.",
+      tpl:{ title:"Starter automations", html:
+        '<ul><li>Livestream set to <b>auto-publish to the archive</b> when it ends.</li>'+
+        '<li>Auto-captions on by default (still human-checked for names/scripture).</li>'+
+        '<li>Recurring calendar holds for the weekly ops block & rota reminders.</li>'+
+        '<li>Announcement intake form → auto-populates a shared responses sheet.</li></ul>' }
+    },
+    { t:"Institute the weekly ops block",
+      body:"One protected 45-minute block clears the entire media queue for the week — approve, schedule, update the rota, empty the intake form. A single recurring appointment replaces a hundred scattered interruptions and is the heartbeat of a self-running operation.",
+      tpl:{ title:"Weekly ops block — 45 min agenda", html:
+        '<ol><li><b>0–10:</b> approve & schedule this week’s clips + posts.</li>'+
+        '<li><b>10–20:</b> clear the announcement intake into the calendar.</li>'+
+        '<li><b>20–30:</b> confirm next 6 weeks of rota; fill any gaps.</li>'+
+        '<li><b>30–40:</b> prep next Sunday’s stream title & thumbnail.</li>'+
+        '<li><b>40–45:</b> note anything broken to fix before next block.</li></ol>' }
+    }
+  ],
+  dod:"At least three recurring tasks are now templates or automations, and the weekly ops block is on the calendar as a recurring event with an owner."
+},
+{
+  n:11, title:"The dashboard & the rhythm of review",
+  outcome:"A one-glance dashboard and a monthly habit, so the ministry steers by evidence instead of gut feel.",
+  tasks:[
+    { t:"Build the one-page dashboard",
+      body:"Lead with the One Number from Week 1, backed by three or four supporting metrics, updated once a month. Keep it to a single page anyone can read in ten seconds — a dashboard nobody can grasp at a glance is a dashboard nobody uses.",
+      tpl:{ title:"One-page dashboard", html:
+        '<div class="tpl-scroll"><table class="grid"><thead><tr><th>Metric</th><th>Last month</th><th>This month</th><th>Trend</th></tr></thead><tbody>'+
+        '<tr><td><b>The One Number</b></td><td class="fill">__</td><td class="fill">__</td><td class="fill">▲ ▼ ▬</td></tr>'+
+        '<tr><td>Returning online viewers</td><td class="fill">__</td><td class="fill">__</td><td class="fill">▲ ▼ ▬</td></tr>'+
+        '<tr><td>Email open rate</td><td class="fill">__</td><td class="fill">__</td><td class="fill">▲ ▼ ▬</td></tr>'+
+        '<tr><td>New connect cards (online)</td><td class="fill">__</td><td class="fill">__</td><td class="fill">▲ ▼ ▬</td></tr>'+
+        '</tbody></table></div>' }
+    },
+    { t:"Hold a monthly media huddle",
+      body:"Thirty minutes, once a month: what worked, what to stop, what's the one focus for next month. The discipline of a short, regular review is what keeps the system improving instead of drifting.",
+      tpl:{ title:"Monthly huddle agenda", html:
+        '<ol><li><b>Numbers:</b> read the dashboard together (5 min).</li>'+
+        '<li><b>Wins:</b> the post/clip that reached the most people — do more of it.</li>'+
+        '<li><b>Cut:</b> one thing that isn’t working — stop it.</li>'+
+        '<li><b>Focus:</b> the single priority for next month.</li>'+
+        '<li><b>People:</b> anyone stretched thin? any gap to fill?</li></ol>' }
+    },
+    { t:"Tie the numbers back to ministry",
+      body:"Numbers are a means, not the mission. In every huddle, name at least one <b>story</b> behind the metric — the member who watched from hospital, the visitor who came because of a clip. Connecting data to people keeps the team motivated and the elders bought in.",
+      tpl:null
+    }
+  ],
+  dod:"The dashboard is populated with real numbers for the current month, the first monthly huddle has been held, and the next one is on the calendar."
+},
+{
+  n:12, title:"The operations manual",
+  outcome:"Every SOP, template, login location, and role lives in one manual a brand-new leader could pick up cold.",
+  tasks:[
+    { t:"Assemble the Media Operations Manual",
+      body:"Gather everything built in Weeks 1–11 into one indexed document with links to each SOP and template. This is the artefact that makes the ministry outlast any individual — the difference between a system and a set of habits in one person's head.",
+      tpl:{ title:"Operations manual — contents", html:
+        '<ol><li>Roles, backups & contact list (Wk 2)</li>'+
+        '<li>Where every login lives + consent & approval flow (Wk 3)</li>'+
+        '<li>Brand kit + library structure & naming (Wk 4)</li>'+
+        '<li>Livestream run sheet + failure playbook (Wk 5)</li>'+
+        '<li>Clip pipeline SOP (Wk 6)</li>'+
+        '<li>Content calendar + posting cadence (Wk 7)</li>'+
+        '<li>Bulletin & newsletter workflow (Wk 8)</li>'+
+        '<li>Rota + onboarding path (Wk 9)</li>'+
+        '<li>Templates, automations & weekly ops block (Wk 10)</li>'+
+        '<li>Dashboard + monthly huddle (Wk 11)</li></ol>' }
+    },
+    { t:"Record three how-to walkthroughs",
+      body:"Some tasks are far easier shown than written. Record a short screen or phone walkthrough of your three hardest jobs — usually the stream setup, the clip export, and scheduling a week. Store them beside the manual so a new volunteer can watch, then do.",
+      tpl:null
+    },
+    { t:"Run the bus test",
+      body:"The real test of documentation is whether a stranger can use it. Hand the manual to someone <b>outside</b> the media team and ask them to complete one real task — schedule a post, or find last month's sermon — using only the manual. Wherever they get stuck is a gap to fix now, while you still have the team's attention.",
+      tpl:null
+    }
+  ],
+  dod:"The manual is assembled and stored in the church-owned library, three walkthroughs are recorded, and one person outside the team completes a real task using only the manual."
+},
+{
+  n:13, title:"Handoff, commissioning & the year ahead",
+  outcome:"The system is owned by the team, a leader is publicly commissioned, and the next twelve months have a rhythm.",
+  tasks:[
+    { t:"Commission a Media Ministry Lead",
+      body:"A system needs an owner, not just a manual. Formally name the person who carries the ministry forward, and commission them publicly — a moment in a service — so the whole church recognises the role and the team's work is honoured. Ownership is what makes “runs itself” true.",
+      tpl:{ title:"Handoff record", html:
+        '<ul><li><b>Media Ministry Lead:</b> <code>________________</code></li>'+
+        '<li><b>Commissioned on:</b> <code>__/__/____</code></li>'+
+        '<li><b>Holds:</b> the manual, the password manager access, the calendar</li>'+
+        '<li><b>Reports to:</b> <code>________</code> at the monthly huddle</li></ul>' }
+    },
+    { t:"Set the annual rhythm",
+      body:"Lay the recurring beats onto a twelve-month calendar so the ministry never coasts into silence: the weekly ops block, the monthly huddle, a quarterly review, and the big seasons — Easter, Christmas, series launches — planned with real lead time instead of a last-minute rush.",
+      tpl:{ title:"12-month rhythm skeleton", html:
+        '<ul><li><b>Weekly:</b> ops block (45 min) + Sunday run sheet.</li>'+
+        '<li><b>Monthly:</b> media huddle + dashboard update + newsletter.</li>'+
+        '<li><b>Quarterly:</b> review against the One Number; refresh templates.</li>'+
+        '<li><b>Seasonal:</b> Easter & Christmas plans start <b>6 weeks</b> out; each new series gets a launch checklist.</li></ul>' }
+    },
+    { t:"Run the 90-day retrospective",
+      body:"Close the loop you opened in Week 1. Measure against your goal statement and the One Number's baseline, celebrate what moved, and name the single improvement for next quarter. This is where a program becomes a permanent, self-improving ministry.",
+      tpl:{ title:"Retrospective questions", html:
+        '<ol><li>Where did the One Number start, and where is it now?</li>'+
+        '<li>Did we hit the Week 1 goal statement? If not, why?</li>'+
+        '<li>What is now genuinely running without the media director?</li>'+
+        '<li>What is still one-person-deep — and who becomes the backup?</li>'+
+        '<li>The <b>one</b> thing we improve next quarter: <code>__________</code></li></ol>' }
+    }
+  ],
+  dod:"A Lead is named and commissioned, the annual calendar is drafted, and the retrospective is complete with the goal statement's outcome measured against the Week 1 baseline."
+}
+];
+
+/* ------------------------------------------------------------------ *
+ * State & persistence
+ * ------------------------------------------------------------------ */
+var STORE = "cma90:v1";
+var state = load();
+var current = state.current || 1;
+
+function load(){ try{ return JSON.parse(localStorage.getItem(STORE)) || {done:{}}; }catch(e){ return {done:{}}; } }
+function save(){ try{ state.current = current; localStorage.setItem(STORE, JSON.stringify(state)); }catch(e){} }
+function keyFor(n, id){ return "w"+n+":"+id; }
+function isDone(n, id){ return !!(state.done && state.done[keyFor(n,id)]); }
+function setDone(n, id, v){ if(!state.done) state.done={}; if(v) state.done[keyFor(n,id)]=1; else delete state.done[keyFor(n,id)]; save(); }
+
+function weekById(n){ for(var i=0;i<WEEKS.length;i++){ if(WEEKS[i].n===n) return WEEKS[i]; } return WEEKS[0]; }
+function weekItemCount(w){ return w.tasks.length + 1; } // +1 for DoD
+function weekDoneCount(w){
+  var c=0; for(var i=0;i<w.tasks.length;i++){ if(isDone(w.n,"t"+i)) c++; }
+  if(isDone(w.n,"dod")) c++; return c;
+}
+function phaseOf(n){ for(var i=0;i<PHASES.length;i++){ if(PHASES[i].weeks.indexOf(n)>=0) return PHASES[i]; } return PHASES[0]; }
+function phaseIndex(n){ for(var i=0;i<PHASES.length;i++){ if(PHASES[i].weeks.indexOf(n)>=0) return i; } return 0; }
+
+/* ------------------------------------------------------------------ *
+ * Rendering
+ * ------------------------------------------------------------------ */
+var CHECK = '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5l4 4 8-9"/></svg>';
+
+function buildRail(){
+  var rail = document.getElementById("rail");
+  var chips = document.getElementById("chips");
+  var html = ""; var chipHtml = "";
+  var phaseDots = ["","",""];
+  for(var p=0;p<PHASES.length;p++){
+    var ph = PHASES[p];
+    html += '<div class="phase-h"><span class="dot"></span><span class="pn">'+ph.name+'</span> · '+ph.label+'</div>';
+    for(var wi=0; wi<ph.weeks.length; wi++){
+      var n = ph.weeks[wi];
+      var w = weekById(n);
+      var dc = weekDoneCount(w), tot = weekItemCount(w);
+      var full = dc>=tot;
+      html += '<button class="wk" data-week="'+n+'" role="tab" aria-selected="false">'+
+        '<span class="wk-num'+(full?' done':'')+'" data-num="'+n+'">'+(full?'✓':n)+'</span>'+
+        '<span class="wk-body"><span class="wk-t">'+w.title+'</span>'+
+        '<span class="wk-frac" data-frac="'+n+'">'+dc+'/'+tot+' done</span></span></button>';
+      chipHtml += '<button class="chip'+(full?' done':'')+'" data-week="'+n+'" title="Week '+n+' — '+w.title+'">'+(full?'✓':n)+
+        '<span class="ph" style="background:var(--c);opacity:'+(0.35+p*0.32)+'"></span></button>';
+    }
+  }
+  rail.innerHTML = html;
+  chips.innerHTML = chipHtml;
+  rail.querySelectorAll(".wk").forEach(function(b){ b.addEventListener("click", function(){ go(+b.dataset.week); }); });
+  chips.querySelectorAll(".chip").forEach(function(b){ b.addEventListener("click", function(){ go(+b.dataset.week); }); });
+}
+
+function refreshRailState(){
+  // update per-week fractions, done ticks, active markers
+  var railBtns = document.querySelectorAll(".wk");
+  railBtns.forEach(function(b){
+    var n = +b.dataset.week, w = weekById(n);
+    var dc = weekDoneCount(w), tot = weekItemCount(w), full = dc>=tot;
+    b.classList.toggle("active", n===current);
+    b.setAttribute("aria-selected", n===current ? "true":"false");
+    var num = b.querySelector(".wk-num");
+    num.classList.toggle("done", full);
+    num.textContent = full ? "✓" : n;
+    b.querySelector(".wk-frac").textContent = dc+"/"+tot+" done";
+  });
+  document.querySelectorAll(".chip").forEach(function(c){
+    var n = +c.dataset.week, w = weekById(n);
+    var full = weekDoneCount(w)>=weekItemCount(w);
+    c.classList.toggle("active", n===current);
+    c.classList.toggle("done", full);
+    c.firstChild.nodeValue = full ? "✓" : String(n);
+  });
+}
+
+function overallProgress(){
+  var done=0, tot=0;
+  for(var i=0;i<WEEKS.length;i++){ done += weekDoneCount(WEEKS[i]); tot += weekItemCount(WEEKS[i]); }
+  return { done:done, tot:tot, pct: tot? Math.round(done/tot*100):0 };
+}
+function refreshBar(){
+  var o = overallProgress();
+  document.getElementById("barFill").style.width = o.pct+"%";
+  document.getElementById("barPct").textContent = o.pct+"% · "+o.done+"/"+o.tot;
+}
+
+function tplBlock(tpl, uid){
+  if(!tpl) return "";
+  return '<div class="tpl" data-uid="'+uid+'">'+
+    '<div class="tpl-bar"><span class="tt">▤ '+tpl.title+'</span>'+
+    '<button class="copy" data-copy="'+uid+'">Copy</button></div>'+
+    '<div class="tpl-in" id="'+uid+'">'+tpl.html+'</div></div>';
+}
+
+function renderWeek(n){
+  var w = weekById(n);
+  var ph = phaseOf(n);
+  var pos = ph.weeks.indexOf(n)+1;
+  var html = '<section class="wk-panel" role="tabpanel" aria-label="Week '+n+'">';
+  html += '<div class="wk-head">'+
+    '<p class="crumb"><span class="phase-pill">'+ph.name+' · '+ph.label+'</span> <span>—</span> <span>Week '+n+' of 13</span> <span>—</span> <span>'+pos+' of '+ph.weeks.length+' in this phase</span></p>'+
+    '<h2 class="wk-title">'+w.title+'</h2>'+
+    '<div class="outcome"><span class="ol">Outcome</span><span class="ov">'+w.outcome+'</span></div></div>';
+
+  for(var i=0;i<w.tasks.length;i++){
+    var task = w.tasks[i];
+    var done = isDone(n,"t"+i);
+    var cbId = "cb-"+n+"-t"+i;
+    var uid = "tpl-"+n+"-"+i;
+    html += '<div class="task'+(done?' done':'')+'" data-task="'+i+'">'+
+      '<div class="task-top">'+
+        '<span class="cbx"><input type="checkbox" id="'+cbId+'" data-week="'+n+'" data-id="t'+i+'"'+(done?' checked':'')+'>'+
+        '<label for="'+cbId+'" aria-label="Mark task done">'+CHECK+'</label></span>'+
+        '<div class="task-body"><h3>'+task.t+'</h3><p>'+task.body+'</p></div>'+
+      '</div>'+ tplBlock(task.tpl, uid) +'</div>';
+  }
+
+  var dodDone = isDone(n,"dod");
+  var dodId = "cb-"+n+"-dod";
+  html += '<div class="dod'+(dodDone?' done':'')+'">'+
+    '<div class="dod-in">'+
+      '<span class="cbx"><input type="checkbox" id="'+dodId+'" data-week="'+n+'" data-id="dod"'+(dodDone?' checked':'')+'>'+
+      '<label for="'+dodId+'" aria-label="Mark week complete">'+CHECK+'</label></span>'+
+      '<div><p class="lbl">Definition of done — checkpoint</p><div class="txt">'+w.dod+'</div></div>'+
+    '</div></div>';
+  html += '</section>';
+
+  document.getElementById("panel").innerHTML = html;
+
+  // wire checkboxes
+  document.getElementById("panel").querySelectorAll('input[type=checkbox]').forEach(function(cb){
+    cb.addEventListener("change", function(){
+      setDone(+cb.dataset.week, cb.dataset.id, cb.checked);
+      // toggle task styling
+      var taskEl = cb.closest(".task"); if(taskEl) taskEl.classList.toggle("done", cb.checked);
+      var dodEl = cb.closest(".dod"); if(dodEl) dodEl.classList.toggle("done", cb.checked);
+      refreshBar(); refreshRailState();
+    });
+  });
+  // wire copy buttons
+  document.getElementById("panel").querySelectorAll(".copy").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      var src = document.getElementById(btn.dataset.copy);
+      var text = src ? src.innerText.replace(/\n{3,}/g,"\n\n").trim() : "";
+      copyText(text, btn);
+    });
+  });
+
+  // nav
+  var prev = document.getElementById("prevBtn"), next = document.getElementById("nextBtn");
+  prev.disabled = n<=1; next.disabled = n>=13;
+  document.getElementById("prevW").textContent = n>1 ? ("Week "+(n-1)+" · "+weekById(n-1).title) : "Start of program";
+  document.getElementById("nextW").textContent = n<13 ? ("Week "+(n+1)+" · "+weekById(n+1).title) : "Program complete";
+}
+
+function go(n){
+  current = Math.max(1, Math.min(13, n));
+  save();
+  renderWeek(current);
+  refreshRailState();
+  // keep active rail item in view on desktop
+  var act = document.querySelector('.wk.active');
+  if(act && act.scrollIntoView) act.scrollIntoView({block:"nearest"});
+  var chip = document.querySelector('.chip.active');
+  if(chip && chip.scrollIntoView) chip.scrollIntoView({inline:"center", block:"nearest"});
+  window.scrollTo({top:0, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto":"smooth"});
+}
+
+/* ------------------------------------------------------------------ *
+ * Utilities
+ * ------------------------------------------------------------------ */
+var toastTimer;
+function toast(msg){
+  var el = document.getElementById("toast");
+  el.textContent = msg; el.classList.add("show");
+  clearTimeout(toastTimer); toastTimer = setTimeout(function(){ el.classList.remove("show"); }, 1600);
+}
+function copyText(text, btn){
+  function done(){ if(btn){ var o=btn.textContent; btn.textContent="Copied ✓"; btn.classList.add("ok"); setTimeout(function(){ btn.textContent=o; btn.classList.remove("ok"); },1400);} toast("Template copied — paste it into your own doc"); }
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(done, function(){ fallbackCopy(text); done(); });
+  } else { fallbackCopy(text); done(); }
+}
+function fallbackCopy(text){
+  var ta=document.createElement("textarea"); ta.value=text; ta.style.position="fixed"; ta.style.opacity="0";
+  document.body.appendChild(ta); ta.select(); try{ document.execCommand("copy"); }catch(e){} document.body.removeChild(ta);
+}
+
+/* theme */
+var themeBtn = document.getElementById("themeBtn");
+themeBtn.addEventListener("click", function(){
+  var c = document.documentElement.getAttribute("data-theme");
+  var n = c==="dark" ? "light" : (c==="light" ? "dark" : (matchMedia("(prefers-color-scheme: dark)").matches ? "light":"dark"));
+  document.documentElement.setAttribute("data-theme", n);
+  try{ localStorage.setItem("cma90:theme", n); }catch(e){}
+});
+try{ var st=localStorage.getItem("cma90:theme"); if(st) document.documentElement.setAttribute("data-theme", st); }catch(e){}
+
+/* keyboard: left/right arrows change week when not typing */
+document.addEventListener("keydown", function(e){
+  var tag = (e.target && e.target.tagName || "").toLowerCase();
+  if(tag==="input"||tag==="textarea"||e.metaKey||e.ctrlKey) return;
+  if(e.key==="ArrowRight" && current<13){ go(current+1); }
+  else if(e.key==="ArrowLeft" && current>1){ go(current-1); }
+});
+
+document.getElementById("prevBtn").addEventListener("click", function(){ if(current>1) go(current-1); });
+document.getElementById("nextBtn").addEventListener("click", function(){ if(current<13) go(current+1); });
+
+/* boot */
+buildRail();
+refreshBar();
+go(current);
+</script>
+</body>
+</html>

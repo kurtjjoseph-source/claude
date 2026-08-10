@@ -1,0 +1,361 @@
+<title>Engage AI — Free Engagement Scorecard</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root{
+    --navy:#061629; --navy-2:#0c2f63; --teal:#00A6A6; --teal-deep:#068B8B; --orange:#FF8A3D; --orange-deep:#F0762A;
+    --ink:#111315; --ink-soft:#515863; --ink-faint:#8a919b;
+    --paper:#FFFFFF; --wash:#F4F7FA; --line:#E5E9EF; --line-soft:#EFF2F6; --blue:#2C6BE0;
+    --font:"Manrope",system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --shadow:0 2px 4px rgba(6,22,41,.04), 0 20px 44px -20px rgba(6,22,41,.20);
+  }
+  *{ box-sizing:border-box; }
+  body{ margin:0; background:var(--paper); color:var(--ink); font-family:var(--font); line-height:1.6; -webkit-font-smoothing:antialiased; }
+  .wrap{ max-width:960px; margin:0 auto; padding:0 24px; }
+  a{ color:inherit; }
+
+  /* brand bar */
+  .bar{ background:var(--paper); border-bottom:1px solid var(--line); }
+  .bar .wrap{ display:flex; align-items:center; gap:14px; height:64px; max-width:1120px; }
+  a.logo{ display:flex; align-items:center; gap:11px; font-weight:800; font-size:17px; letter-spacing:-.01em; text-decoration:none; color:inherit; }
+  .logo .mk{ width:38px; height:38px; border-radius:8px; object-fit:contain; display:block; }
+  .bar .sp{ flex:1; }
+  .bar .back{ font-weight:700; font-size:14px; color:var(--ink-soft); text-decoration:none; }
+  .bar .back:hover{ color:var(--ink); }
+
+  /* hero */
+  .hero{ position:relative; overflow:hidden; color:#fff;
+    background:
+      radial-gradient(closest-side at 100% 0%, rgba(0,166,166,.36), transparent 60%),
+      radial-gradient(circle, rgba(255,255,255,.10) 1px, transparent 1.4px) 0 0 / 26px 26px,
+      linear-gradient(135deg, var(--navy-2), var(--navy) 62%); }
+  .hero .wrap{ padding:54px 24px 60px; }
+  .kick{ display:inline-flex; align-items:center; gap:8px; font-size:12px; font-weight:800; letter-spacing:.14em; text-transform:uppercase; color:#bff0ef;
+    border:1.5px solid rgba(0,166,166,.5); border-radius:999px; padding:7px 15px; margin:0 0 22px; }
+  h1{ font-weight:800; font-size:clamp(30px,5vw,50px); line-height:1.05; letter-spacing:-.02em; margin:0 0 16px; max-width:20ch; text-wrap:balance; }
+  h1 .u{ color:var(--orange); }
+  .hero p{ font-size:clamp(15px,2vw,18px); color:rgba(255,255,255,.84); max-width:60ch; margin:0; }
+  .hero p b{ color:#fff; }
+
+  .section{ padding:clamp(34px,5vw,52px) 0; }
+  .card{ background:var(--paper); border:1px solid var(--line); border-radius:20px; box-shadow:var(--shadow); padding:clamp(22px,3vw,34px); }
+  .card h2{ font-size:22px; font-weight:800; letter-spacing:-.01em; margin:0 0 4px; }
+  .card .hint{ font-size:14px; color:var(--ink-soft); margin:0 0 22px; }
+
+  .field{ margin-bottom:16px; }
+  .field label{ display:block; font-size:13px; font-weight:700; color:var(--ink-soft); margin-bottom:6px; }
+  .field input{ width:100%; font-family:inherit; font-size:15px; color:var(--ink); background:var(--wash); border:1px solid var(--line); border-radius:11px; padding:12px 14px; }
+  .field input:focus{ outline:2px solid color-mix(in srgb,var(--teal) 55%,#fff); border-color:var(--teal); }
+  .twocol{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  @media (max-width:640px){ .twocol{ grid-template-columns:1fr; } }
+
+  .chrow{ display:flex; align-items:center; gap:14px; padding:12px 0; border-top:1px solid var(--line-soft); }
+  .chrow:first-of-type{ border-top:none; }
+  .chrow .ic{ width:34px; height:34px; border-radius:9px; flex:none; display:grid; place-items:center; font-size:16px; background:var(--wash); color:var(--navy); font-weight:800; }
+  .chrow .nm{ flex:1; min-width:0; }
+  .chrow .nm .t{ font-weight:700; font-size:14.5px; }
+  .chrow .nm .d{ font-size:12px; color:var(--ink-faint); }
+  .seg{ display:inline-flex; background:var(--wash); border:1px solid var(--line); border-radius:10px; padding:3px; gap:2px; flex:none; }
+  .seg button{ font-family:inherit; font-size:12px; font-weight:700; color:var(--ink-soft); background:transparent; border:none; border-radius:8px; padding:7px 11px; cursor:pointer; white-space:nowrap; }
+  .seg button:hover{ color:var(--ink); }
+  .seg button.on{ background:var(--paper); color:var(--navy); box-shadow:0 1px 3px rgba(6,22,41,.12); }
+  @media (max-width:640px){ .chrow{ flex-wrap:wrap; } .seg{ width:100%; justify-content:space-between; } }
+
+  .go{ margin-top:22px; width:100%; font-family:inherit; font-size:16px; font-weight:800; color:#fff; background:linear-gradient(135deg,var(--orange),var(--orange-deep)); border:none; border-radius:12px; padding:15px; cursor:pointer; box-shadow:0 16px 34px -14px rgba(240,118,42,.6); }
+  .go:hover{ filter:brightness(1.04); }
+
+  /* results */
+  #out{ display:none; }
+  .scorewrap{ display:grid; grid-template-columns:auto 1fr; gap:clamp(20px,3vw,36px); align-items:center; }
+  @media (max-width:680px){ .scorewrap{ grid-template-columns:1fr; text-align:center; } }
+  .dial{ position:relative; width:180px; height:180px; margin:0 auto; }
+  .dial .num{ position:absolute; inset:0; display:grid; place-content:center; text-align:center; }
+  .dial .num b{ font-size:46px; font-weight:800; letter-spacing:-.03em; line-height:1; }
+  .dial .num span{ font-size:12px; font-weight:700; color:var(--ink-faint); }
+  .verdict .band{ display:inline-block; font-size:12px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--teal-deep); background:color-mix(in srgb,var(--teal) 14%,#fff); border-radius:999px; padding:5px 14px; margin-bottom:12px; }
+  .verdict h3{ font-size:clamp(20px,3vw,26px); font-weight:800; letter-spacing:-.01em; margin:0 0 8px; }
+  .verdict p{ font-size:15px; color:var(--ink-soft); margin:0; }
+
+  .radarwrap{ display:grid; place-items:center; padding:6px 0 2px; }
+  .radar{ width:100%; max-width:440px; height:auto; }
+
+  .blocks{ display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-top:8px; }
+  @media (max-width:760px){ .blocks{ grid-template-columns:1fr; } }
+  .blk h4{ font-size:12px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; margin:0 0 12px; }
+  .blk.opp h4{ color:var(--orange-deep); } .blk.str h4{ color:var(--teal-deep); }
+  .item{ display:flex; gap:11px; padding:11px 0; border-top:1px solid var(--line-soft); }
+  .item:first-of-type{ border-top:none; }
+  .item .dot{ width:22px; height:22px; border-radius:7px; flex:none; display:grid; place-items:center; font-size:12px; color:#fff; font-weight:800; }
+  .opp .dot{ background:var(--orange); } .str .dot{ background:var(--teal); }
+  .item .tx b{ display:block; font-size:14px; font-weight:800; }
+  .item .tx span{ font-size:13px; color:var(--ink-soft); }
+
+  .next{ margin-top:26px; border-radius:18px; overflow:hidden; border:1px solid var(--line); }
+  .next .top{ background:linear-gradient(135deg,var(--navy-2),var(--navy) 70%); color:#fff; padding:24px clamp(20px,3vw,30px); }
+  .next .top h3{ font-size:clamp(19px,2.6vw,24px); font-weight:800; letter-spacing:-.01em; margin:0 0 8px; }
+  .next .top p{ font-size:14.5px; color:rgba(255,255,255,.82); margin:0; max-width:58ch; }
+  .next .top .cta{ display:inline-block; margin-top:16px; font-weight:800; font-size:14px; color:var(--navy); background:#fff; border-radius:999px; padding:11px 20px; text-decoration:none; }
+  .next .foot{ background:var(--wash); padding:20px clamp(20px,3vw,30px); }
+  .next .foot label{ display:block; font-size:13px; font-weight:700; color:var(--ink-soft); margin-bottom:8px; }
+  .cap{ display:flex; gap:10px; flex-wrap:wrap; }
+  .cap input{ flex:1; min-width:200px; font-family:inherit; font-size:15px; background:var(--paper); border:1px solid var(--line); border-radius:11px; padding:12px 14px; }
+  .cap button{ font-family:inherit; font-size:15px; font-weight:800; color:#fff; background:var(--teal); border:none; border-radius:11px; padding:12px 22px; cursor:pointer; }
+  .cap button:hover{ background:var(--teal-deep); }
+  .capmsg{ font-size:13.5px; color:var(--teal-deep); font-weight:700; margin:10px 0 0; display:none; }
+
+  footer{ background:var(--navy); color:rgba(255,255,255,.66); }
+  footer .wrap{ padding:22px 24px; font-size:12.5px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; max-width:1120px; }
+  footer a{ color:rgba(255,255,255,.82); text-decoration:none; }
+</style>
+
+<div class="bar"><div class="wrap">
+  <a class="logo" href="https://visionoutreachmedia.nl/"><img class="mk" src="vom-logo.jpg" alt="Vision Outreach Media">Vision Outreach Media</a>
+  <span class="sp"></span>
+  <a class="back" href="https://vom-grow.vercel.app">← All offerings</a>
+</div></div>
+
+<section class="hero"><div class="wrap">
+  <span class="kick">◆ Engage AI · Free Scorecard</span>
+  <h1>Where does your audience engagement <span class="u">actually stand?</span></h1>
+  <p>Rate your presence on each channel and get an instant <b>Engagement Score</b>, a channel-by-channel map, and the <b>specific improvements</b> that will move it. Two minutes, no signup.</p>
+</div></section>
+
+<section class="section"><div class="wrap">
+
+  <div class="card" id="form">
+    <h2>Your Engagement Scorecard</h2>
+    <p class="hint">Be honest — the gaps are where your growth is.</p>
+    <div class="twocol">
+      <div class="field"><label for="biz">Business / organization name</label><input id="biz" type="text" placeholder="e.g. Northside Community Church" autocomplete="organization"></div>
+      <div class="field"><label for="site">Website (optional)</label><input id="site" type="text" placeholder="yourbusiness.com" autocomplete="url"></div>
+    </div>
+    <div id="rows"></div>
+    <button class="go" id="calc">See my scorecard →</button>
+  </div>
+
+  <div class="card" id="out" style="margin-top:26px;">
+    <div class="scorewrap">
+      <div class="dial">
+        <svg viewBox="0 0 180 180" width="180" height="180" aria-hidden="true">
+          <circle cx="90" cy="90" r="78" fill="none" stroke="#E5E9EF" stroke-width="14"></circle>
+          <circle id="arc" cx="90" cy="90" r="78" fill="none" stroke="#00A6A6" stroke-width="14" stroke-linecap="round"
+                  transform="rotate(-90 90 90)" stroke-dasharray="0 999"></circle>
+        </svg>
+        <div class="num"><b id="scoreNum">0</b><span>/ 100</span></div>
+      </div>
+      <div class="verdict">
+        <span class="band" id="band">—</span>
+        <h3 id="headline">—</h3>
+        <p id="verdict">—</p>
+      </div>
+    </div>
+
+    <div class="radarwrap"><svg class="radar" id="radar" viewBox="0 0 420 360" role="img" aria-label="Channel engagement radar"></svg></div>
+
+    <div class="blocks">
+      <div class="blk opp"><h4>Your biggest opportunities</h4><div id="opps"></div></div>
+      <div class="blk str"><h4>Where you're already strong</h4><div id="strs"></div></div>
+    </div>
+
+    <div class="next">
+      <div class="top">
+        <h3>This is your starting line — Engage AI moves the number.</h3>
+        <p>Engage AI re-scores you every month, spots your white space, and its agents draft the content to close it — you just approve. Or have Vision Outreach Media run the whole cycle for you.</p>
+        <a class="cta" href="https://vom-grow.vercel.app/#engage">See Engage AI plans →</a>
+      </div>
+      <div class="foot">
+        <form id="cap" class="capform">
+          <label for="email">Email me my full report + a 90-day engagement roadmap</label>
+          <div class="cap">
+            <input id="email" name="email" type="email" required placeholder="you@yourbusiness.com" autocomplete="email">
+            <button type="submit">Send it →</button>
+          </div>
+          <p class="capmsg" id="capmsg">Thanks — your report is on its way. We'll be in touch from hello@visionoutreachmedia.nl.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</div></section>
+
+<footer><div class="wrap">
+  <span>© Vision Outreach Media — Engage AI. Reach the audience you already earned.</span>
+  <a href="https://visionoutreachmedia.nl/">visionoutreachmedia.nl</a>
+</div></footer>
+
+<script>
+(function(){
+  var HOUSE_EMAIL = "hello@visionoutreachmedia.nl";
+  var LEVELS = [
+    {k:"none",  t:"None",   f:0.00},
+    {k:"basic", t:"Basic",  f:0.35},
+    {k:"active",t:"Active", f:0.70},
+    {k:"strong",t:"Strong", f:1.00}
+  ];
+  var CH = [
+    {key:"web",  label:"Website",          desc:"Your hub — fast, clear, converts", icon:"◍", w:18,
+      none:"Get a fast, mobile-first site with clear calls to action — it's the hub every other channel points to.",
+      improve:"Add fresh content and unmistakable calls to action so visitors act, not just browse."},
+    {key:"gbp",  label:"Google Business",   desc:"How local audiences find you",     icon:"◉", w:14,
+      none:"Claim your Google Business Profile — it's how nearby audiences discover and trust you.",
+      improve:"Post updates weekly and gather reviews; it directly lifts local discovery."},
+    {key:"yt",   label:"YouTube",           desc:"Long-tail, searchable reach",       icon:"▶", w:12,
+      none:"Start a channel — even monthly video compounds into searchable, long-tail reach.",
+      improve:"Publish on a steady cadence and optimize titles and thumbnails for search."},
+    {key:"fb",   label:"Facebook",          desc:"Community & groups",                icon:"f", w:12,
+      none:"Set up a page and cross-post — it's still where much of your audience gathers.",
+      improve:"Post consistently and reply to every comment to expand reach."},
+    {key:"ig",   label:"Instagram",         desc:"Visual, high-frequency",            icon:"◎", w:12,
+      none:"Claim the handle and post visual content on a steady rhythm.",
+      improve:"Lean into Reels and a weekly cadence to grow a new audience."},
+    {key:"li",   label:"LinkedIn",          desc:"Authority & B2B trust",             icon:"in", w:12,
+      none:"Create a company page — essential for authority and B2B trust.",
+      improve:"Post insight weekly; engagement here builds credibility fast."},
+    {key:"x",    label:"X (Twitter)",       desc:"Real-time & discovery",             icon:"✕", w:10,
+      none:"Grab your handle for real-time presence and discovery.",
+      improve:"Join the conversations in your niche and post consistently."},
+    {key:"news", label:"News / PR",         desc:"Third-party credibility",           icon:"★", w:10,
+      none:"Pursue local press and features — third-party mentions build authority and links.",
+      improve:"Pitch a story each quarter to keep mentions fresh and credible."}
+  ];
+  var state = {};
+  CH.forEach(function(c){ state[c.key] = null; });
+
+  // build rows
+  var rows = document.getElementById('rows');
+  CH.forEach(function(c){
+    var row = document.createElement('div'); row.className='chrow';
+    var seg = LEVELS.map(function(l){ return '<button type="button" data-ch="'+c.key+'" data-lv="'+l.k+'">'+l.t+'</button>'; }).join('');
+    row.innerHTML =
+      '<div class="ic">'+c.icon+'</div>'+
+      '<div class="nm"><div class="t">'+c.label+'</div><div class="d">'+c.desc+'</div></div>'+
+      '<div class="seg" data-ch="'+c.key+'">'+seg+'</div>';
+    rows.appendChild(row);
+  });
+  rows.addEventListener('click', function(e){
+    var b = e.target.closest('button[data-ch]'); if(!b) return;
+    state[b.dataset.ch] = b.dataset.lv;
+    var seg = b.parentNode;
+    [].forEach.call(seg.querySelectorAll('button'), function(x){ x.classList.toggle('on', x===b); });
+  });
+
+  function fOf(key){ var lv = state[key]; var m = LEVELS.filter(function(l){return l.k===lv;})[0]; return m? m.f : 0; }
+  function levelName(key){ var lv = state[key]||"none"; var m=LEVELS.filter(function(l){return l.k===lv;})[0]; return m?m.t:"None"; }
+
+  function bandFor(s){
+    if(s<30) return {b:"Invisible",  h:"You're leaving your audience on the table.", p:"Most of your channels are dark. The upside here is enormous — a few consistent moves will show up fast."};
+    if(s<50) return {b:"Emerging",   h:"The foundations are forming.", p:"You've started, but engagement is inconsistent. A steady monthly rhythm is what turns presence into reach."};
+    if(s<70) return {b:"Growing",    h:"You're building real momentum.", p:"Several channels are working. Close the white space and tighten consistency to break into the top tier."};
+    if(s<85) return {b:"Established", h:"You're a strong, consistent presence.", p:"You're ahead of most. Now it's about compounding — optimization and coverage on the last gaps."};
+    return {b:"Leading", h:"You're setting the pace.", p:"Excellent coverage and consistency. The job now is to defend it and keep the loop running."};
+  }
+
+  function render(){
+    var score = 0; CH.forEach(function(c){ score += fOf(c.key) * c.w; });
+    score = Math.round(score);
+    var bd = bandFor(score);
+
+    document.getElementById('out').style.display='block';
+    document.getElementById('band').textContent = bd.b;
+    document.getElementById('headline').textContent = bd.h;
+    document.getElementById('verdict').textContent = bd.p;
+
+    // count up + arc
+    var C = 2*Math.PI*78;
+    var arc = document.getElementById('arc');
+    arc.setAttribute('stroke', score<50 ? '#FF8A3D' : '#00A6A6');
+    var num = document.getElementById('scoreNum'), t0=null;
+    function step(ts){ if(!t0)t0=ts; var p=Math.min((ts-t0)/900,1); var e=1-Math.pow(1-p,3);
+      num.textContent = Math.round(score*e);
+      arc.setAttribute('stroke-dasharray', (C*(score/100)*e)+' 999');
+      if(p<1) requestAnimationFrame(step); }
+    requestAnimationFrame(step);
+
+    drawRadar();
+
+    // opportunities: highest weight*(1-f), not already strong
+    var opp = CH.map(function(c){ return {c:c, f:fOf(c.key), gap:c.w*(1-fOf(c.key))}; })
+                .filter(function(o){ return o.f < 0.7; })
+                .sort(function(a,b){ return b.gap - a.gap; }).slice(0,4);
+    var oc = document.getElementById('opps'); oc.innerHTML='';
+    if(!opp.length){ oc.innerHTML='<div class="item"><div class="dot" style="background:#00A6A6">✓</div><div class="tx"><b>No major gaps</b><span>Every channel is active — focus on optimization and consistency.</span></div></div>'; }
+    opp.forEach(function(o){
+      var tip = o.f===0 ? o.c.none : o.c.improve;
+      var d=document.createElement('div'); d.className='item';
+      d.innerHTML='<div class="dot">'+o.c.icon+'</div><div class="tx"><b>'+o.c.label+' · '+levelName(o.c.key)+'</b><span>'+tip+'</span></div>';
+      oc.appendChild(d);
+    });
+
+    // strengths
+    var str = CH.filter(function(c){ return fOf(c.key) >= 0.7; })
+                .sort(function(a,b){ return fOf(b.key)-fOf(a.key); }).slice(0,4);
+    var sc = document.getElementById('strs'); sc.innerHTML='';
+    if(!str.length){ sc.innerHTML='<div class="item"><div class="dot">•</div><div class="tx"><b>Nothing strong yet</b><span>That\'s okay — pick two channels and make them consistent first.</span></div></div>'; }
+    str.forEach(function(c){
+      var d=document.createElement('div'); d.className='item';
+      d.innerHTML='<div class="dot">'+c.icon+'</div><div class="tx"><b>'+c.label+'</b><span>'+(fOf(c.key)===1?'Strong, consistent engagement — keep it up.':'Active and working — push it to strong.')+'</span></div>';
+      sc.appendChild(d);
+    });
+
+    window._sc = {score:score, band:bd.b};
+    document.getElementById('out').scrollIntoView({behavior:'smooth', block:'start'});
+  }
+
+  function drawRadar(){
+    var cx=210, cy=178, R=128, n=CH.length;
+    var svg=document.getElementById('radar'); var ns='http://www.w3.org/2000/svg';
+    while(svg.firstChild) svg.removeChild(svg.firstChild);
+    function pt(i,r){ var a=-Math.PI/2 + i*2*Math.PI/n; return [cx+Math.cos(a)*r, cy+Math.sin(a)*r]; }
+    // grid rings
+    [0.25,0.5,0.75,1].forEach(function(g){
+      var d=''; for(var i=0;i<n;i++){ var p=pt(i,R*g); d+=(i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1); } d+='Z';
+      var poly=document.createElementNS(ns,'path'); poly.setAttribute('d',d);
+      poly.setAttribute('fill','none'); poly.setAttribute('stroke','#E5E9EF'); poly.setAttribute('stroke-width','1'); svg.appendChild(poly);
+    });
+    // axes + labels
+    for(var i=0;i<n;i++){
+      var e=pt(i,R);
+      var ln=document.createElementNS(ns,'line'); ln.setAttribute('x1',cx); ln.setAttribute('y1',cy); ln.setAttribute('x2',e[0]); ln.setAttribute('y2',e[1]);
+      ln.setAttribute('stroke','#EFF2F6'); ln.setAttribute('stroke-width','1'); svg.appendChild(ln);
+      var lp=pt(i,R+20), tx=document.createElementNS(ns,'text');
+      tx.setAttribute('x',lp[0].toFixed(1)); tx.setAttribute('y',lp[1].toFixed(1));
+      tx.setAttribute('font-size','10.5'); tx.setAttribute('font-weight','700'); tx.setAttribute('fill','#515863');
+      tx.setAttribute('font-family','var(--font)');
+      tx.setAttribute('text-anchor', lp[0]<cx-6?'end':(lp[0]>cx+6?'start':'middle'));
+      tx.setAttribute('dominant-baseline', lp[1]<cy-6?'auto':(lp[1]>cy+6?'hanging':'middle'));
+      tx.textContent=CH[i].label.replace(' (Twitter)',''); svg.appendChild(tx);
+    }
+    // data polygon
+    var dd=''; for(var j=0;j<n;j++){ var f=Math.max(fOf(CH[j].key),0.02); var p=pt(j,R*f); dd+=(j?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1); } dd+='Z';
+    var area=document.createElementNS(ns,'path'); area.setAttribute('d',dd);
+    area.setAttribute('fill','rgba(0,166,166,.18)'); area.setAttribute('stroke','#00A6A6'); area.setAttribute('stroke-width','2'); area.setAttribute('stroke-linejoin','round');
+    svg.appendChild(area);
+    for(var k=0;k<n;k++){ var f2=Math.max(fOf(CH[k].key),0.02); var p2=pt(k,R*f2);
+      var c=document.createElementNS(ns,'circle'); c.setAttribute('cx',p2[0].toFixed(1)); c.setAttribute('cy',p2[1].toFixed(1)); c.setAttribute('r','3.2');
+      c.setAttribute('fill', fOf(CH[k].key)>=0.7?'#00A6A6':'#FF8A3D'); svg.appendChild(c); }
+  }
+
+  document.getElementById('calc').addEventListener('click', render);
+
+  // lead capture
+  document.getElementById('cap').addEventListener('submit', function(e){
+    e.preventDefault();
+    var email=document.getElementById('email').value.trim(); if(!email) return;
+    var biz=document.getElementById('biz').value.trim()||'(not given)';
+    var site=document.getElementById('site').value.trim()||'(not given)';
+    var breakdown = CH.map(function(c){ return c.label+': '+levelName(c.key); }).join(' | ');
+    var sc = window._sc||{score:'?',band:'?'};
+    var payload = {
+      _subject: "Engage AI Scorecard lead — "+biz+" ("+sc.score+"/100, "+sc.band+")",
+      email: email, business: biz, website: site,
+      engagement_score: sc.score+"/100", band: sc.band, channels: breakdown,
+      _template: "table"
+    };
+    fetch("https://formsubmit.co/ajax/"+HOUSE_EMAIL, {
+      method:"POST", headers:{"Content-Type":"application/json","Accept":"application/json"},
+      body: JSON.stringify(payload)
+    }).then(function(){}).catch(function(){});
+    document.getElementById('capmsg').style.display='block';
+    document.querySelector('#cap .cap').style.display='none';
+  });
+})();
+</script>

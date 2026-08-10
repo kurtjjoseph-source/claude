@@ -1,0 +1,820 @@
+{
+  "schema": "apb/1",
+  "spec_version": 1,
+  "id": "website-rescue",
+  "generated": "2026-08-06T06:55:36Z",
+  "generator": "turnkey spec",
+  "business": {
+    "name": "Website Rescue",
+    "slug": "website-rescue",
+    "tagline": "Prelaunch validation funnel",
+    "city": "Amersfoort",
+    "email": "info@visionoutreachmedia.nl",
+    "offer_line": "You suspect your website is costing you work, and have no way to tell which part is at fault. A scored report in five days with a prioritised list of fixes and what each one is worth, for a fixed price.",
+    "org_type": "service_business",
+    "org_label": "Service business / consultancy / agency"
+  },
+  "operator": {
+    "id": "vom",
+    "name": "Vision Outreach Media",
+    "author_as": "Vision Outreach Media (VOM)"
+  },
+  "brand": {
+    "palette": {
+      "navy": "#1B2A4A",
+      "orange": "#E8843C",
+      "teal": "#2FA8A0",
+      "ink": "#1B2233",
+      "paper": "#FFFFFF"
+    },
+    "accent": "#2f9e63",
+    "accent_soft": "#E8F5EE",
+    "display": "Manrope",
+    "body": "Manrope",
+    "logo": "none supplied — the site draws its own monogram",
+    "logo_data_uri": "",
+    "kit": {
+      "id": "waitlist-green",
+      "name": "Waitlist Green",
+      "family": "Natural",
+      "source": "default",
+      "scheme": "light",
+      "best_for": "Prelaunch funnels — one page, one question",
+      "accent": "#278453",
+      "accent_bright": "#38D07F",
+      "on_accent": "#FFFFFF",
+      "secondary": "#4E6357",
+      "band": "#12281D",
+      "on_band": "#FFFFFF",
+      "paper": "#F6F5F1",
+      "card": "#FFFFFF",
+      "ink": "#1A1D1B",
+      "line": "#E1DFD4",
+      "type": {
+        "preset": "grotesk",
+        "heading": "Inter / system grotesk",
+        "body": "Manrope"
+      },
+      "voice": "One promise, one ask, no filler. It is honest that the thing does not exist yet and specific about what joining gets you.",
+      "usage": "Green appears exactly once per page: the join button. A second green element on a waitlist page costs signups.",
+      "swatches": [
+        {
+          "role": "primary",
+          "name": "Waitlist Green",
+          "hex": "#278453",
+          "rgb": "39, 132, 83",
+          "cmyk": "70 / 0 / 37 / 48",
+          "on": "#FFFFFF"
+        },
+        {
+          "role": "secondary",
+          "name": "Moss Slate",
+          "hex": "#4E6357",
+          "rgb": "78, 99, 87",
+          "cmyk": "21 / 0 / 12 / 61",
+          "on": "#FFFFFF"
+        },
+        {
+          "role": "background",
+          "name": "Warm Paper",
+          "hex": "#F6F5F1",
+          "rgb": "246, 245, 241",
+          "cmyk": "0 / 0 / 2 / 4",
+          "on": "#111111"
+        },
+        {
+          "role": "text",
+          "name": "Deep Bark",
+          "hex": "#1A1D1B",
+          "rgb": "26, 29, 27",
+          "cmyk": "10 / 0 / 7 / 89",
+          "on": "#FFFFFF"
+        },
+        {
+          "role": "neutral",
+          "name": "Sand Line",
+          "hex": "#E1DFD4",
+          "rgb": "225, 223, 212",
+          "cmyk": "0 / 1 / 6 / 12",
+          "on": "#111111"
+        }
+      ],
+      "tokens": {
+        "light": "\n    --paper:#F6F5F1; --paper-2:#FFFFFF; --card:#FFFFFF; --ink:#1A1D1B;\n    --muted:color-mix(in srgb,#1A1D1B 68%,#F6F5F1);\n    --faint:#6E6E6B;\n    --line:#E1DFD4; --line-soft:color-mix(in srgb,#E1DFD4 55%,#F6F5F1);\n    --raised:#FFFFFF; --sunk:color-mix(in srgb,#E1DFD4 42%,#F6F5F1);\n    --accent:#278453; --accent-2:#38D07F; --on-accent:#FFFFFF;\n    --accent-text:#257C4F;\n    --band:#12281D; --on-band:#FFFFFF;\n    --shadow-1:0 1px 2px rgba(26,29,27,.05),0 2px 10px rgba(26,29,27,.045);--shadow-2:0 2px 6px rgba(26,29,27,.06),0 18px 40px rgba(26,29,27,.10);\n    --wash-1:color-mix(in srgb,#278453 13%,transparent);\n    --wash-2:color-mix(in srgb,#12281D 8%,transparent);",
+        "dark": "\n    --paper:#0E100F; --paper-2:#121513; --card:#171B19; --ink:#F0F2EE;\n    --muted:color-mix(in srgb,#F0F2EE 68%,#0E100F);\n    --faint:#818381;\n    --line:#2A322D; --line-soft:color-mix(in srgb,#2A322D 55%,#0E100F);\n    --raised:#171B19; --sunk:color-mix(in srgb,#2A322D 42%,#0E100F);\n    --accent:#38d07f; --accent-2:#2dbd70; --on-accent:#0E100F;\n    --accent-text:#38D07F;\n    --band:#171B19; --on-band:#F0F2EE;\n    --shadow-1:0 1px 2px rgba(0,0,0,.35);--shadow-2:0 18px 44px rgba(0,0,0,.5);\n    --wash-1:color-mix(in srgb,#38d07f 13%,transparent);\n    --wash-2:color-mix(in srgb,#171B19 8%,transparent);"
+      },
+      "hitech": {
+        "id": "kit-waitlist-green",
+        "name": "Waitlist Green",
+        "a": "#38D07F",
+        "b": "#8fa799",
+        "c": "#6adc9f",
+        "glow": "#278453",
+        "bg": "#000000"
+      }
+    }
+  },
+  "archetype": {
+    "id": "prelaunch",
+    "label": "Prelaunch validation funnel",
+    "curated": true,
+    "source": "operator override",
+    "voice": "Direct and unembarrassed. It is asking for a small commitment to an idea that does not exist yet, so it must be specific about what it is, honest that it is early, and clear about what happens next. No fake scarcity.",
+    "summary": "One page that turns an idea into evidence. It states the promise, asks for a name and an email, and counts. Nothing else is built until enough people say they want it.",
+    "type_preset": "grotesk",
+    "site_scheme": "light",
+    "type_preset_archetype": "grotesk",
+    "site_scheme_archetype": "light",
+    "skin": "house",
+    "product_app": null,
+    "forge": {
+      "name": "PRELAUNCHforge",
+      "scheme": "dark",
+      "base": "#0A0A0B",
+      "base_soft": "#141416",
+      "accent": "#38D07F",
+      "accent_2": "#7BE3AC",
+      "accent_site": "#2f9e63",
+      "on_accent": "#0A0A0B",
+      "line": "Building a validation funnel."
+    }
+  },
+  "blueprint_source": {
+    "org_type": "service_business",
+    "confidence": "unknown",
+    "platform": "WordPress",
+    "wordpress": true,
+    "functions": [
+      "analytics_reporting",
+      "booking",
+      "checkout_payments",
+      "content_publishing",
+      "courses_lms",
+      "crm",
+      "documents_contracts",
+      "email_marketing",
+      "finance_admin",
+      "lead_capture",
+      "membership_access",
+      "product_catalog",
+      "social_publishing",
+      "subscriptions",
+      "support_inbox",
+      "web_presence"
+    ],
+    "modules_from_blueprint": [
+      "crm",
+      "content_publishing",
+      "booking",
+      "checkout_payments",
+      "support_inbox",
+      "email_marketing",
+      "finance_admin",
+      "documents_contracts",
+      "lead_capture"
+    ],
+    "added_by_archetype": [],
+    "dropped_by_archetype": [
+      "checkout_payments",
+      "finance_admin",
+      "booking",
+      "documents_contracts"
+    ]
+  },
+  "modules": [
+    {
+      "title": "Waitlist",
+      "icon": "◌",
+      "record": "enquiry",
+      "blurb": "People who put their hand up, before they become contacts.",
+      "fields": [
+        {
+          "k": "name",
+          "label": "Name",
+          "type": "text",
+          "required": true
+        },
+        {
+          "k": "email",
+          "label": "Email",
+          "type": "text"
+        },
+        {
+          "k": "asked",
+          "label": "What they want",
+          "type": "textarea"
+        },
+        {
+          "k": "date",
+          "label": "When",
+          "type": "date"
+        },
+        {
+          "k": "handled",
+          "label": "Handled",
+          "type": "check"
+        }
+      ],
+      "tiles": [
+        {
+          "label": "New enquiries",
+          "calc": "count_false:handled"
+        }
+      ],
+      "key": "lead_capture",
+      "seed": [
+        {
+          "name": "Example — replace me",
+          "email": "someone@example.com",
+          "date": "2026-08-06",
+          "handled": false,
+          "asked": "Seed record so the waitlist view is not empty. Delete it when the first real name arrives."
+        }
+      ]
+    },
+    {
+      "title": "People",
+      "icon": "◍",
+      "record": "contact",
+      "blurb": "Everyone this business deals with, and where each one stands.",
+      "view": "pipeline",
+      "stages": [
+        "Lead",
+        "Contacted",
+        "In conversation",
+        "Customer",
+        "Lapsed"
+      ],
+      "fields": [
+        {
+          "k": "name",
+          "label": "Name",
+          "type": "text",
+          "required": true
+        },
+        {
+          "k": "email",
+          "label": "Email",
+          "type": "text"
+        },
+        {
+          "k": "phone",
+          "label": "Phone",
+          "type": "text"
+        },
+        {
+          "k": "stage",
+          "label": "Stage",
+          "type": "select",
+          "from": "stages"
+        },
+        {
+          "k": "value",
+          "label": "Value",
+          "type": "money"
+        },
+        {
+          "k": "note",
+          "label": "Notes",
+          "type": "textarea"
+        }
+      ],
+      "tiles": [
+        {
+          "label": "Contacts",
+          "calc": "count"
+        },
+        {
+          "label": "In pipeline",
+          "calc": "sum:value",
+          "money": true
+        }
+      ],
+      "key": "crm",
+      "seed": []
+    },
+    {
+      "title": "Announcements",
+      "icon": "✦",
+      "record": "subscriber",
+      "blurb": "The list, and what has been sent to it.",
+      "fields": [
+        {
+          "k": "email",
+          "label": "Email",
+          "type": "text",
+          "required": true
+        },
+        {
+          "k": "name",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "k": "source",
+          "label": "Came from",
+          "type": "text"
+        },
+        {
+          "k": "date",
+          "label": "Joined",
+          "type": "date"
+        },
+        {
+          "k": "subscribed",
+          "label": "Subscribed",
+          "type": "check"
+        }
+      ],
+      "tiles": [
+        {
+          "label": "On the list",
+          "calc": "count_true:subscribed"
+        }
+      ],
+      "key": "email_marketing",
+      "seed": []
+    },
+    {
+      "title": "Content",
+      "icon": "✎",
+      "record": "post",
+      "blurb": "Posts and announcements, drafted here before they go out.",
+      "fields": [
+        {
+          "k": "title",
+          "label": "Title",
+          "type": "text",
+          "required": true
+        },
+        {
+          "k": "status",
+          "label": "Status",
+          "type": "select",
+          "options": [
+            "Idea",
+            "Draft",
+            "Ready",
+            "Published"
+          ]
+        },
+        {
+          "k": "channel",
+          "label": "Channel",
+          "type": "select",
+          "options": [
+            "Website",
+            "Newsletter",
+            "Facebook",
+            "Instagram",
+            "LinkedIn",
+            "YouTube"
+          ]
+        },
+        {
+          "k": "date",
+          "label": "Planned for",
+          "type": "date"
+        },
+        {
+          "k": "body",
+          "label": "The piece",
+          "type": "textarea"
+        }
+      ],
+      "tiles": [
+        {
+          "label": "Ready to publish",
+          "calc": "count_eq:status:Ready"
+        },
+        {
+          "label": "Published",
+          "calc": "count_eq:status:Published"
+        }
+      ],
+      "key": "content_publishing",
+      "seed": [
+        {
+          "title": "Why I am building this",
+          "status": "Draft",
+          "channel": "Website",
+          "date": "2026-08-06",
+          "body": "The founding post. Say what you noticed, who it hurts, and what you intend to do about it. This is what people share."
+        }
+      ]
+    },
+    {
+      "title": "Inbox",
+      "icon": "✉",
+      "record": "message",
+      "blurb": "Questions coming in, and what was sent back.",
+      "fields": [
+        {
+          "k": "who",
+          "label": "From",
+          "type": "text",
+          "required": true
+        },
+        {
+          "k": "subject",
+          "label": "About",
+          "type": "text"
+        },
+        {
+          "k": "date",
+          "label": "Received",
+          "type": "date"
+        },
+        {
+          "k": "status",
+          "label": "Status",
+          "type": "select",
+          "options": [
+            "New",
+            "Replied",
+            "Closed"
+          ]
+        },
+        {
+          "k": "message",
+          "label": "What they said",
+          "type": "textarea"
+        },
+        {
+          "k": "reply",
+          "label": "Draft reply",
+          "type": "textarea"
+        }
+      ],
+      "tiles": [
+        {
+          "label": "Needs a reply",
+          "calc": "count_eq:status:New"
+        }
+      ],
+      "key": "support_inbox",
+      "seed": []
+    }
+  ],
+  "site": {
+    "platform": "WordPress",
+    "nav": [
+      {
+        "slug": "home",
+        "title": "Home",
+        "href": "index.html"
+      },
+      {
+        "slug": "faq",
+        "title": "What happens next",
+        "href": "faq.html"
+      }
+    ],
+    "primary_cta": {
+      "label": "Join the waitlist",
+      "href": "/"
+    },
+    "secondary_cta": null,
+    "pages": [
+      {
+        "slug": "home",
+        "path": "index.html",
+        "title": "Home",
+        "purpose": "Say what it is, who it is for, and ask for an email. One screen, one decision.",
+        "hero": {
+          "eyebrow": "Not built yet — this list decides",
+          "title": "Website Rescue",
+          "lede": "You suspect your website is costing you work, and have no way to tell which part is at fault. A scored report in five days with a prioritised list of fixes and what each one is worth, for a fixed price.",
+          "cta": "Join the waitlist",
+          "cta_href": "#waitlist",
+          "cta2": "What happens next",
+          "cta2_href": "/faq"
+        },
+        "sections": [
+          {
+            "kind": "cards",
+            "title": "What you get",
+            "limit": 3,
+            "items": [
+              {
+                "title": "A scored audit of speed, SEO, tracking, conversion and compliance",
+                "body": ""
+              },
+              {
+                "title": "A prioritised fix list with an estimated impact and effort against each item",
+                "body": ""
+              },
+              {
+                "title": "A 30-minute walkthrough of the report, recorded so you can pass it on",
+                "body": ""
+              }
+            ]
+          },
+          {
+            "kind": "steps",
+            "title": "Where this is",
+            "items": [
+              {
+                "title": "Today — finding out if it should exist",
+                "body": "You are early. Nothing is built yet, and that is the point: the people on this list decide what gets built."
+              },
+              {
+                "title": "Next — the first version, for this list only",
+                "body": "Everyone here sees it before anyone else, and pays less than everyone else, permanently."
+              },
+              {
+                "title": "Then — open to everyone",
+                "body": "At full price, with the list's fingerprints all over it."
+              }
+            ]
+          },
+          {
+            "kind": "form",
+            "title": "Join the waitlist",
+            "form": "waitlist",
+            "body": "A name and an email. No spam, no drip sequence — you hear from us when there is something real to see.",
+            "fields": [
+              "name",
+              "email",
+              "message"
+            ],
+            "target": "lead_capture"
+          },
+          {
+            "kind": "facts",
+            "title": "Straight answers",
+            "items": [
+              {
+                "label": "Cost to join",
+                "value": "Nothing"
+              },
+              {
+                "label": "What you get",
+                "value": "First access, lower price"
+              },
+              {
+                "label": "How often we write",
+                "value": "Only when it matters"
+              },
+              {
+                "label": "Leaving",
+                "value": "One click, any time"
+              }
+            ]
+          },
+          {
+            "kind": "cta",
+            "title": "Want it to exist?",
+            "body": "That is the whole ask. A name on the list is the signal that decides whether this gets built.",
+            "cta": "Join the waitlist",
+            "cta_href": "#waitlist"
+          }
+        ]
+      },
+      {
+        "slug": "faq",
+        "path": "faq.html",
+        "title": "What happens next",
+        "purpose": "Answer the suspicion that a waitlist is a trick.",
+        "hero": {
+          "eyebrow": "Before you sign up",
+          "title": "What happens next",
+          "lede": "What joining actually means, and what it does not."
+        },
+        "sections": [
+          {
+            "kind": "faq",
+            "title": "Fair questions",
+            "items": [
+              {
+                "q": "Is this real, or an idea?",
+                "a": "An idea, openly. It gets built if enough people here say they want it. That is what the list is for."
+              },
+              {
+                "q": "Am I committing to buy anything?",
+                "a": "No. You are saying you would be interested. Nothing is charged, and there is nothing to charge for yet."
+              },
+              {
+                "q": "What do you do with my email?",
+                "a": "Write to you when there is something to see. It is not sold, shared, or added to anything else."
+              },
+              {
+                "q": "What if it never gets built?",
+                "a": "Then you get one message saying so. That is a real outcome and you deserve to be told."
+              }
+            ]
+          },
+          {
+            "kind": "cta",
+            "title": "Still in?",
+            "body": "Add your name and we will keep you posted either way.",
+            "cta": "Join the waitlist",
+            "cta_href": "/"
+          }
+        ]
+      }
+    ]
+  },
+  "integrations": [
+    {
+      "key": "email",
+      "provider": "brevo",
+      "purpose": "the one announcement the list is waiting for",
+      "mode": "stub",
+      "env_required": [
+        "BREVO_API_KEY",
+        "BREVO_SENDER_EMAIL"
+      ],
+      "env_present": [],
+      "note": "the interface is built and labelled; it goes live when the operator supplies the credentials — an agent never holds them"
+    },
+    {
+      "key": "analytics",
+      "provider": "engage_ai",
+      "purpose": "where the signups came from",
+      "mode": "stub",
+      "env_required": [
+        "ENGAGE_AI_BASE_URL"
+      ],
+      "env_present": [],
+      "note": "the interface is built and labelled; it goes live when the operator supplies the credentials — an agent never holds them"
+    }
+  ],
+  "deploy": {
+    "target": "vercel",
+    "description": "a Vercel deployment — a public URL",
+    "public": true,
+    "hub_url": null,
+    "project": "website-rescue-prelaunch",
+    "domain": {
+      "mode": "subdomain",
+      "value": ""
+    },
+    "requires": [
+      "vercel CLI, authenticated"
+    ]
+  },
+  "authorization": {
+    "mode": "unattended",
+    "targets": [
+      "vercel"
+    ],
+    "scope": "unattended forge build + deploy to 'vercel' for this business, limited to: composing the platform modules, writing the public site, wiring rails that already have credentials, publishing the result, and — for a hosting target that gates new projects behind a login — making that one deployment publicly reachable. Does not authorize sending email, charging anyone, or posting to any channel.",
+    "consent_ref": "07a5376e313d915f",
+    "consent_seq": 1,
+    "granted_by": "VOM",
+    "granted_at": "2026-08-06T06:55:36Z",
+    "channel": "standing service authorization"
+  },
+  "plan": [
+    {
+      "id": "resolve",
+      "title": "Read the spec",
+      "cue": "◇",
+      "detail": "load the blueprint, verify the fingerprint, refuse if anything is unresolved"
+    },
+    {
+      "id": "scaffold",
+      "title": "Lay out the build",
+      "cue": "▢",
+      "detail": "create the output tree this run writes into"
+    },
+    {
+      "id": "brand",
+      "title": "Apply the brand · Waitlist Green",
+      "cue": "◐",
+      "detail": "grotesk type on a light ground, accent #278453, logo embedded, and the manual written for the owner"
+    },
+    {
+      "id": "platform",
+      "title": "Build the platform · 5 modules",
+      "cue": "▣",
+      "detail": "the operating app the owner works in, seeded so it opens with something in it"
+    },
+    {
+      "id": "site",
+      "title": "Write the site · 2 pages",
+      "cue": "▤",
+      "detail": "the public pages, in this archetype's voice"
+    },
+    {
+      "id": "wire",
+      "title": "Wire the rails",
+      "cue": "◈",
+      "detail": "payments, email and analytics — live where credentials exist, labelled where not"
+    },
+    {
+      "id": "package",
+      "title": "Package",
+      "cue": "▥",
+      "detail": "manifest, readme, deployment config"
+    },
+    {
+      "id": "verify",
+      "title": "Check the work",
+      "cue": "◎",
+      "detail": "run every check in the spec against what was actually written"
+    },
+    {
+      "id": "deploy",
+      "title": "Deploy · vercel",
+      "cue": "▲",
+      "detail": "a Vercel deployment — a public URL"
+    },
+    {
+      "id": "smoke",
+      "title": "Prove it is up",
+      "cue": "◉",
+      "detail": "fetch what was deployed and confirm it answers"
+    },
+    {
+      "id": "seal",
+      "title": "Seal the run",
+      "cue": "●",
+      "detail": "record the fingerprint, artifacts and outcome"
+    }
+  ],
+  "checks": [
+    {
+      "id": "spec_fingerprint",
+      "kind": "fingerprint",
+      "assert": "the build matches the spec it claims to be built from"
+    },
+    {
+      "id": "no_placeholders",
+      "kind": "no_placeholders",
+      "assert": "no unresolved {token} reached any page"
+    },
+    {
+      "id": "pages_written",
+      "kind": "files_exist",
+      "target": "site",
+      "assert": "all 2 pages exist and are non-empty"
+    },
+    {
+      "id": "platform_written",
+      "kind": "files_exist",
+      "target": "platform",
+      "assert": "the operating platform opens and carries its modules"
+    },
+    {
+      "id": "nav_resolves",
+      "kind": "links_resolve",
+      "assert": "every navigation link points at a page that was written"
+    },
+    {
+      "id": "module_titles_unique",
+      "kind": "unique_module_titles",
+      "assert": "no two modules carry the same name in the owner's interface"
+    },
+    {
+      "id": "brand_kit_applied",
+      "kind": "brand_kit_applied",
+      "assert": "the site is built in the 'Waitlist Green' kit — its accent #278453 reached the stylesheet"
+    },
+    {
+      "id": "waitlist_present",
+      "kind": "module_present",
+      "target": "lead_capture",
+      "assert": "The waitlist exists — a validation funnel that cannot capture a name is not a funnel."
+    },
+    {
+      "id": "ask_on_first_screen",
+      "kind": "site_path",
+      "assert": "The ask is reachable without leaving the first page."
+    },
+    {
+      "id": "no_payment_rail",
+      "kind": "module_present",
+      "target": "crm",
+      "assert": "People are captured; nothing is charged at this stage."
+    }
+  ],
+  "assumptions": [
+    {
+      "token": "tagline",
+      "value": "Prelaunch validation funnel",
+      "reason": "no tagline in the operating profile — the archetype label stands in"
+    },
+    {
+      "token": "about",
+      "value": "Website Rescue is run by one team who answer their own messages.",
+      "reason": "no About section in the profile"
+    },
+    {
+      "token": "leadership",
+      "value": "The church is led by its elders, with a teaching team who share the preaching through the year.",
+      "reason": "no leadership section in the profile"
+    },
+    {
+      "token": "brand_kit",
+      "value": "Waitlist Green",
+      "reason": "the branding step was not run, so the archetype's default kit applies"
+    }
+  ],
+  "readiness": {
+    "ready": true,
+    "blocking": []
+  },
+  "fingerprint": "sha256:ca60066194afc5e3df97d0a037c87b7e"
+}

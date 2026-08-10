@@ -1,0 +1,547 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Turnkey — guided launch</title>
+<link rel="icon" type="image/jpeg" href="{{LOGO}}">
+<style>
+  :root{
+    --navy:#1B2A4A; --orange:#E8843C; --teal:#2FA8A0;
+    --bg:#f7f6f3; --surface:#fff; --surface-2:#f0efe9; --line:#e2e0d6; --line-soft:#eceade;
+    --ink:#1B2233; --ink-dim:#535b66; --ink-faint:#868f99; --stop:#c0553f;
+    --mono:ui-monospace,"SF Mono",Menlo,monospace;
+    --sans:"Manrope",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  }
+  @media (prefers-color-scheme:dark){:root{
+    --bg:#0d1117;--surface:#151b24;--surface-2:#1b2330;--line:#28323f;--line-soft:#212a35;
+    --ink:#eef2f7;--ink-dim:#a4b0bd;--ink-faint:#6d7987;}}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.55}
+  button{font:inherit;cursor:pointer}
+  code{font-family:var(--mono);font-size:.9em}
+  h1,h2,h3{letter-spacing:-.015em;margin:0}
+
+  .top{position:sticky;top:0;z-index:10;display:flex;align-items:center;gap:13px;padding:11px 20px;
+       background:var(--surface);border-bottom:1px solid var(--line);flex-wrap:wrap}
+  .top img{width:34px;height:34px;border-radius:8px;background:#fff;border:1px solid var(--line);object-fit:cover}
+  .brand{font-weight:800}.brand span{color:var(--ink-faint);font-weight:600}
+  .sp{flex:1}
+  .btn{border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:8px 14px;
+       border-radius:9px;font-weight:650;font-size:13.5px}
+  .btn:hover{border-color:var(--ink-faint)}
+  .btn.primary{background:var(--orange);border-color:var(--orange);color:#1b1206}
+  .btn.go{background:var(--teal);border-color:var(--teal);color:#04201e}
+  .btn.quiet{background:transparent}
+  .btn.sm{padding:5px 10px;font-size:12.5px;border-radius:7px}
+  .btn[disabled]{opacity:.45;cursor:not-allowed}
+  .wrap{max-width:1120px;margin:0 auto;padding:22px 20px 80px}
+
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:12px;margin-bottom:14px}
+  .card .hd{padding:13px 16px;border-bottom:1px solid var(--line-soft);display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .card .hd h2,.card .hd h3{font-size:14px;text-transform:uppercase;letter-spacing:.03em;color:var(--ink-dim);font-weight:800}
+  .card .bd{padding:16px}
+  .lead{color:var(--ink-dim);margin:0 0 14px;max-width:70ch}
+
+  .grid{display:grid;grid-template-columns:250px 1fr;gap:20px;align-items:start}
+  @media(max-width:860px){.grid{grid-template-columns:1fr}}
+
+  .steps{list-style:none;margin:0;padding:0}
+  .steps li{display:flex;gap:11px;align-items:flex-start;padding:9px 12px;border-radius:9px;color:var(--ink-faint)}
+  .steps li .dot{width:22px;height:22px;border-radius:50%;border:2px solid var(--line);flex-shrink:0;
+                 display:grid;place-items:center;font-size:11px;font-weight:800;font-family:var(--mono)}
+  .steps li.done{color:var(--ink-dim)} .steps li.done .dot{border-color:var(--teal);color:var(--teal)}
+  .steps li.now{background:var(--surface-2);color:var(--ink);font-weight:750}
+  .steps li.now .dot{border-color:var(--orange);color:var(--orange)}
+  .steps li small{display:block;font-weight:500;color:var(--ink-faint);font-size:12px}
+
+  .ws{border:1px solid var(--line-soft);border-radius:10px;padding:13px 15px;margin-bottom:10px;background:var(--surface)}
+  .ws h4{margin:0 0 3px;font-size:15px}
+  .ws .meta{font-family:var(--mono);font-size:12px;color:var(--ink-faint);margin-bottom:9px}
+  .ws .acts{display:flex;gap:7px;flex-wrap:wrap}
+  .chip{display:inline-block;font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.05em;
+        padding:2px 7px;border-radius:5px;border:1px solid var(--line);color:var(--ink-dim);background:var(--surface-2)}
+  .chip.done{color:var(--teal);border-color:var(--teal)}
+  .chip.wait{color:var(--orange);border-color:var(--orange)}
+  .chip.lock{color:var(--stop);border-color:var(--stop)}
+
+  label{display:block;font-size:11.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-faint);
+        font-weight:700;margin:12px 0 5px}
+  input[type=text],textarea,select{width:100%;background:var(--bg);color:var(--ink);border:1px solid var(--line);
+    border-radius:9px;padding:9px 11px;font-family:var(--sans);font-size:14px}
+  textarea{min-height:120px;font-family:var(--mono);font-size:13px;resize:vertical}
+  .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:640px){.two{grid-template-columns:1fr}}
+
+  .out{border-radius:9px;padding:11px 13px;font-family:var(--mono);font-size:12.5px;white-space:pre-wrap;margin-top:12px}
+  .out.ok{background:color-mix(in srgb,var(--teal) 10%,var(--surface));border:1px solid color-mix(in srgb,var(--teal) 40%,var(--line))}
+  .out.bad{background:color-mix(in srgb,var(--stop) 9%,var(--surface));border:1px solid color-mix(in srgb,var(--stop) 40%,var(--line))}
+  .note{font-size:13px;color:var(--ink-dim)}
+  .fn{display:flex;gap:9px;align-items:baseline;padding:6px 0;border-bottom:1px solid var(--line-soft)}
+  .fn:last-child{border:0}
+  .fn .t{font-family:var(--mono);font-size:11px;width:100px;flex-shrink:0}
+  .t.core{color:var(--teal)}.t.recommended{color:var(--orange)}.t.optional{color:var(--ink-faint)}
+  dialog{border:1px solid var(--line);border-radius:14px;background:var(--surface);color:var(--ink);
+         padding:0;max-width:560px;width:92vw}
+  dialog::backdrop{background:rgba(10,12,16,.55)}
+  dialog .bd{padding:18px}
+  .folder{display:flex;gap:12px;align-items:center;padding:12px 14px;border:1px solid var(--line);
+          border-radius:10px;margin-bottom:9px;background:var(--surface)}
+  .folder .nm{font-weight:750}
+  .toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:var(--navy);color:#fff;
+         padding:9px 17px;border-radius:999px;font-size:13.5px;font-weight:650;opacity:0;transition:.18s;z-index:60}
+  .toast.on{opacity:1}
+</style>
+</head>
+<body>
+
+<div class="top">
+  <img src="{{LOGO}}" alt="Vision Outreach Media">
+  <div class="brand">Turnkey <span>· guided launch</span></div>
+  <span class="chip" id="here">…</span>
+  <div class="sp"></div>
+  <button class="btn quiet sm" id="backBtn" style="display:none">← All launches</button>
+  <button class="btn quiet sm" id="syncBtn" style="display:none">Sync to hosted OS</button>
+</div>
+
+<div class="wrap" id="app"></div>
+<div class="toast" id="toast"></div>
+
+<dialog id="dlg"><div class="bd" id="dlgBody"></div></dialog>
+
+<script>
+"use strict";
+const TOKEN = "{{TOKEN}}", ROOT = "{{ROOT}}";
+const STAGES = ["intake","foundation","build","market","operate","launched"];
+const STAGE_COPY = {
+  intake:    { t:"Intake",     s:"Who this business is, and their yes to the terms" },
+  foundation:{ t:"Foundation", s:"Profile, NL legal & finance, domain and email" },
+  build:     { t:"Build",      s:"The site, the payment rail, the products" },
+  market:    { t:"Market",     s:"Presence, content, and the first outreach" },
+  operate:   { t:"Operate",    s:"CRM and the follow-up routine" },
+  launched:  { t:"Launched",   s:"Running, and handed over" },
+};
+let FOLDERS = [], CUR = null, STATE = null, NEXT = [], CATALOG = null, PREVIEW = null;
+
+const $ = (s,r)=> (r||document).querySelector(s);
+const esc = (s)=> String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function toast(m){ const t=$("#toast"); t.textContent=m; t.classList.add("on");
+  clearTimeout(t._h); t._h=setTimeout(()=>t.classList.remove("on"),2400); }
+
+async function api(action, payload){
+  const r = await fetch("/api/"+action, { method:"POST",
+    headers:{ "Content-Type":"application/json", "X-Turnkey-Token":TOKEN },
+    body: JSON.stringify(payload||{}) });
+  return r.json();
+}
+/** Runs an engine action and reports the engine's own words on refusal. */
+async function engine(action, payload, okMsg){
+  const d = await api(action, payload);
+  if (d.ok){ if(okMsg) toast(okMsg); }
+  else { showResult(d); }
+  return d;
+}
+function showResult(d){
+  const box = $("#result"); if(!box) { toast(d.stderr || "That didn't work"); return; }
+  box.className = "out " + (d.ok ? "ok" : "bad");
+  box.textContent = (d.ok ? (d.stdout || "Done.") : (d.stderr || d.stdout || "That didn't work."));
+}
+
+/* ------------------------------------------------------------ launch list */
+async function showList(){
+  CUR = null; STATE = null;
+  $("#backBtn").style.display = "none"; $("#syncBtn").style.display = "none";
+  $("#here").textContent = "choose a launch";
+  const d = await api("folders");
+  FOLDERS = d.folders || [];
+  $("#app").innerHTML =
+    '<div class="card"><div class="hd"><h2>Your launches</h2><div class="sp"></div>'
+    + '<button class="btn primary sm" id="newBtn">+ New idea</button></div><div class="bd">'
+    + '<p class="lead">Each launch is one business, kept in its own folder under <code>'+esc(ROOT)+'</code>. '
+    + 'Pick up where you left off, or start a new one — the wizard runs every step for you.</p>'
+    + (FOLDERS.length ? FOLDERS.map(f =>
+        '<div class="folder"><div style="flex:1">'
+        + '<div class="nm">'+esc(f.business||f.name)+'</div>'
+        + '<div class="note">'+(f.has_launch
+            ? esc(f.stage)+' · '+f.done+'/'+f.total+' done'+(f.gates?' · '+f.gates+' waiting on a person':'')
+              +(f.blueprint?'':' · no blueprint yet')
+            : (f.has_idea ? 'idea captured — not started' : 'no business-idea.md'))
+        + '</div></div>'
+        + '<button class="btn '+(f.has_launch?'':'primary')+' sm" data-open="'+esc(f.folder)+'">'
+        + (f.has_launch?'Continue →':'Start the launch')+'</button></div>').join("")
+      : '<p class="note">No idea folders yet. Start one.</p>')
+    + '</div></div>';
+  $("#newBtn").onclick = newIdeaDialog;
+  document.querySelectorAll("[data-open]").forEach(b => b.onclick = async () => {
+    const folder = b.dataset.open;
+    const f = FOLDERS.find(x => x.folder === folder);
+    if (!f.has_launch){
+      const d = await engine("init", { folder }, "Launch started");
+      if (!d.ok) return toast(d.stderr || "Could not start");
+    }
+    openLaunch(folder);
+  });
+}
+
+function newIdeaDialog(){
+  openDialog('<h3>Start a new idea</h3>'
+    + '<p class="note">This creates the folder and its <code>business-idea.md</code>, then scaffolds the launch.</p>'
+    + '<label for="ni">Name</label><input type="text" id="ni" placeholder="Amersfoort Community Church">'
+    + '<label for="nb">What is the idea?</label>'
+    + '<textarea id="nb" placeholder="What the business does, who it serves, how money arrives, what it does week to week, any existing site."></textarea>'
+    + '<div class="row" style="margin-top:14px"><button class="btn primary" id="mk">Create and start</button>'
+    + '<button class="btn quiet" onclick="document.getElementById(\'dlg\').close()">Cancel</button></div>',
+    () => {
+      $("#mk").onclick = async () => {
+        const name = $("#ni").value.trim(), idea = $("#nb").value.trim();
+        if (!name) return toast("Give it a name");
+        const d = await api("new_idea", { name, idea });
+        if (!d.ok) return toast(d.stderr || "Could not create it");
+        const r = await api("init", { folder: d.folder });
+        $("#dlg").close();
+        if (!r.ok) return toast(r.stderr || "Created, but could not start the launch");
+        openLaunch(d.folder);
+      };
+    });
+}
+
+/* ------------------------------------------------------------ one launch */
+async function openLaunch(folder){
+  CUR = folder;
+  if (!CATALOG) CATALOG = await api("catalog");
+  await refresh();
+}
+async function refresh(){
+  const d = await api("status", { folder: CUR });
+  STATE = d.state; NEXT = d.next || [];
+  window.PROFILE_EXISTS = d.profile_exists;
+  $("#backBtn").style.display = ""; $("#syncBtn").style.display = "";
+  $("#here").textContent = (STATE && STATE.business) || "launch";
+  render();
+}
+
+function stageIndex(){ return STAGES.indexOf(STATE.stage); }
+
+function render(){
+  const at = stageIndex();
+  const steps = STAGES.map((s,i) =>
+    '<li class="'+(i<at?"done":(i===at?"now":""))+'"><span class="dot">'+(i<at?"✓":(i+1))+'</span>'
+    + '<span>'+STAGE_COPY[s].t+'<small>'+STAGE_COPY[s].s+'</small></span></li>').join("");
+
+  $("#app").innerHTML =
+    '<div class="grid"><div class="card"><div class="hd"><h3>The launch</h3></div><div class="bd">'
+      + '<ul class="steps">'+steps+'</ul>'
+      + '<p class="note" style="margin:12px 0 0">Folder<br><code style="word-break:break-all">'+esc(CUR)+'</code></p>'
+    + '</div></div><div id="panel"></div></div>';
+
+  const p = $("#panel");
+  if (STATE.stage === "intake") p.innerHTML = paneIntake();
+  else if (!STATE.blueprint) p.innerHTML = paneBlueprint();
+  else if (STATE.stage === "launched") p.innerHTML = paneLaunched();
+  else p.innerHTML = paneStage();
+  wire();
+}
+
+/* --- step 1: intake ------------------------------------------------------ */
+function paneIntake(){
+  const w = (STATE.workstreams||{}).intake || {};
+  const hasProfile = window.PROFILE_EXISTS;
+  const hasYes = (NEXT.find(n=>n.workstream==="intake")||{}).has_yes;
+  return '<div class="card"><div class="hd"><h2>Step 1 · Intake</h2>'
+    + '<div class="sp"></div><span class="chip '+(w.status==="done"?"done":"")+'">'+esc(w.status||"")+'</span></div><div class="bd">'
+    + '<p class="lead">Two things unlock the whole pipeline: a business profile that says what kind of '
+    + 'organization this is, and an explicit yes to the terms. Nothing downstream runs without both.</p>'
+    + '<div class="ws"><h4>1. The business profile</h4>'
+      + '<div class="meta">'+(hasProfile?"turnkey/business-profile.md exists":"not written yet")+'</div>'
+      + '<div class="acts"><button class="btn '+(hasProfile?"":"primary")+' sm" id="profBtn">'
+      + (hasProfile?"Edit the profile":"Write the profile")+'</button></div></div>'
+    + '<div class="ws"><h4>2. The terms</h4>'
+      + '<div class="meta">'+(hasYes?"a YES is on the consent log":"no decision recorded yet")+'</div>'
+      + '<div class="acts"><button class="btn '+(hasYes?"":"primary")+' sm" id="termsBtn">Record the decision</button></div></div>'
+    + '<div class="ws"><h4>3. Close intake</h4>'
+      + '<div class="meta">needs the profile and a YES — the engine refuses otherwise</div>'
+      + '<div class="acts"><button class="btn go sm" id="doneBtn" '+((hasProfile&&hasYes)?"":"disabled")+'>Mark intake done</button>'
+      + '<button class="btn sm" id="advBtn" '+(w.status==="done"?"":"disabled")+'>Continue to Foundation →</button></div></div>'
+    + '<div id="result"></div></div></div>';
+}
+
+/* --- step 2: blueprint --------------------------------------------------- */
+function paneBlueprint(){
+  const bp = PREVIEW;
+  let body = '<p class="lead">Before anything is built, Turnkey decides <b>what this business actually needs</b> '
+    + '— CRM, finance, a catalog, giving, booking — and whether the site runs on <b>WordPress or a custom app</b>. '
+    + 'It reads the profile and proposes; you confirm.</p>'
+    + '<div class="row"><button class="btn primary" id="sugBtn">Read the profile and propose</button>'
+    + '<select id="orgSel" style="width:auto"><option value="">— or choose the org type yourself —</option>'
+    + Object.keys((CATALOG&&CATALOG.org_types)||{}).map(k =>
+        '<option value="'+k+'">'+esc(CATALOG.org_types[k].label)+'</option>').join("")
+    + '</select></div>';
+
+  if (bp){
+    const p = bp.platform, f = bp.functions;
+    const tier = t => Object.keys(f).filter(k=>f[k].tier===t)
+      .map(k => '<div class="fn"><div class="t '+t+'">'+(t==="core"?"● core":t==="recommended"?"◐ rec.":"○ opt.")+'</div>'
+        + '<div><b>'+esc(f[k].title)+'</b>'+(f[k].gated?" 🔒":"")
+        + ' <span class="note">'+esc(f[k].workstream)+'</span><br><span class="note">'+esc(f[k].implementation||"")+'</span></div></div>').join("");
+    body += '<div class="ws" style="margin-top:16px"><h4>'+esc(bp.org_label)+'</h4>'
+      + '<div class="meta">'+esc(bp.classification.source)+' · confidence '+esc(bp.classification.confidence)
+      + ' · revenue: '+esc(bp.revenue_model)+'</div>'
+      + (bp.classification.confidence==="low"
+          ? '<p class="note"><b>Too close to call from the profile.</b> Choose the org type above so the build order is a decision, not a guess.</p>' : '')
+      + '</div>'
+      + '<div class="ws"><h4>Site: '+esc(p.label)+'</h4>'
+      + '<div class="meta">WordPress: '+(p.wordpress_used?"YES":"NO")+' · confidence '+esc(p.confidence)
+      + ' · wp '+p.scores.wordpress+' vs app '+p.scores.vercel_app+'</div>'
+      + '<p class="note">'+esc(p.headline)+'</p>'
+      + '<details><summary class="note">Why</summary>'
+      + p.reasons.map(r=>'<div class="note">• ('+esc(r.platform)+' +'+esc(r.weight)+') '+esc(r.reason)+'</div>').join("")
+      + '</details>'
+      + '<div class="acts" style="margin-top:9px"><button class="btn sm" id="ovrBtn">Override the platform</button></div></div>'
+      + '<div class="ws"><h4>What gets built</h4>'+tier("core")+tier("recommended")+tier("optional")+'</div>'
+      + '<div class="row" style="margin-top:14px"><button class="btn go" id="saveBp">Save as the build order</button>'
+      + '<span class="note">The engine will not enter Build without this.</span></div>';
+  }
+  return '<div class="card"><div class="hd"><h2>Step 2 · What to build</h2></div><div class="bd">'
+    + body + '<div id="result"></div></div></div>';
+}
+
+/* --- stage panes --------------------------------------------------------- */
+function paneStage(){
+  const bp = STATE.blueprint, p = bp.platform;
+  const rows = NEXT.map(n => {
+    const w = STATE.workstreams[n.workstream] || {};
+    const fns = Object.keys(bp.functions||{}).filter(k => bp.functions[k].workstream===n.workstream
+                  && bp.functions[k].tier!=="optional").map(k=>bp.functions[k].title);
+    let chip = '<span class="chip '+(w.status==="done"?"done":w.status==="gate_pending"?"wait":"")+'">'+esc(w.status)+'</span>';
+    if (n.requires_consent && !n.has_yes) chip += ' <span class="chip lock">needs a yes</span>';
+    const acts = [];
+    if (!n.ready) acts.push('<span class="note">waiting on '+esc(n.blocked_by.join(", "))+'</span>');
+    else {
+      if (w.status === "not_started") acts.push(btn("start","Start this","primary",n.workstream));
+      if (w.status !== "done"){
+        acts.push(btn("gate","Hand it to a person","",n.workstream));
+        acts.push(btn("consent","Record a decision","",n.workstream));
+        acts.push(btn("done","Mark done","go",n.workstream));
+      }
+    }
+    return '<div class="ws"><h4>'+esc(n.title)+'</h4>'
+      + '<div class="meta">'+chip+(w.actor_waiting?' · waiting on '+esc(w.actor_waiting):"")
+      + (fns.length?' · delivers: '+esc(fns.join(", ")):"")+'</div>'
+      + '<div class="acts">'+acts.join("")+'</div></div>';
+  }).join("");
+
+  const nextStage = STAGES[stageIndex()+1];
+  const built = STATE.platform_built;
+  const platformCard =
+    '<div class="card"><div class="hd"><h2>The platform</h2><div class="sp"></div>'
+    + '<span class="chip'+(built?" done":"")+'">'+(built?"built":"not built yet")+'</span></div><div class="bd">'
+    + '<p class="lead">This is the thing the business actually runs on — assembled from the blueprint, '
+    + 'carrying the modules a '+esc((STATE.blueprint.org_label||"business").toLowerCase())+' needs and nothing else. '
+    + 'It writes a real, working app into <code>platform/</code> in the business folder.</p>'
+    + '<div class="row"><button class="btn primary" id="buildPlat">'+(built?"Rebuild the platform":"Build the platform")+'</button>'
+    + '<button class="btn" id="openPlat">Open it</button>'
+    + '<button class="btn" id="pubPlat">Publish for the owner</button></div>'
+    + '<p class="note" style="margin:10px 0 0">Built = a working app in the business folder, records in '
+    + 'this browser. Published = the owner signs in on the hub with a magic link and their records live in '
+    + 'their account, on any device.</p>'
+    + '<div id="platOut"></div></div></div>';
+  return platformCard + '<div class="card"><div class="hd"><h2>Step '+(stageIndex()+2)+' · '+STAGE_COPY[STATE.stage].t+'</h2>'
+    + '<div class="sp"></div><span class="chip">'+esc(bp.org_label)+'</span>'
+    + '<span class="chip">'+(p.wordpress_used?"WordPress":"Custom app")+'</span></div><div class="bd">'
+    + '<p class="lead">'+STAGE_COPY[STATE.stage].s+'. Work the list; anything that publishes, sends or moves money '
+    + 'stops for a human decision, and the engine will not let you skip it.</p>'
+    + rows
+    + '<div class="row" style="margin-top:16px"><button class="btn go" id="advBtn">Continue to '+STAGE_COPY[nextStage].t+' →</button>'
+    + '<button class="btn quiet sm" id="checkBtn">Run the audit</button></div>'
+    + '<div id="result"></div></div></div>';
+}
+function btn(kind,label,cls,ws){
+  return '<button class="btn sm '+cls+'" data-act="'+kind+'" data-ws="'+esc(ws)+'">'+label+'</button>';
+}
+
+function paneLaunched(){
+  return '<div class="card"><div class="hd"><h2>Launched</h2></div><div class="bd">'
+    + '<p class="lead">The business is running. Keep the audit clean and the registry in sync.</p>'
+    + '<div class="row"><button class="btn" id="checkBtn">Run the audit</button>'
+    + '<button class="btn" id="verifyBtn">Verify the consent chain</button></div>'
+    + '<div id="result"></div></div></div>';
+}
+
+/* ------------------------------------------------------------ wiring */
+function wire(){
+  const on = (sel,fn)=>{ const e=$(sel); if(e) e.onclick=fn; };
+
+  on("#profBtn", profileDialog);
+  on("#termsBtn", ()=> consentDialog("intake","accept the disclosure and terms"));
+  on("#doneBtn", async ()=>{ const d=await engine("set",{folder:CUR,workstream:"intake",status:"done"},"Intake closed"); showResult(d); refresh(); });
+  on("#sugBtn", async ()=>{
+    const org = $("#orgSel") ? $("#orgSel").value : "";
+    const d = await api("blueprint", { folder:CUR, org_type:org||undefined, save:false });
+    if(!d.ok) return showResult(d);
+    PREVIEW = d.blueprint; render();
+  });
+  const sel = $("#orgSel"); if (sel) sel.onchange = ()=> $("#sugBtn").click();
+  on("#saveBp", async ()=>{
+    const org = PREVIEW ? (PREVIEW.classification.source==="operator" ? PREVIEW.org_type : ($("#orgSel").value||undefined)) : undefined;
+    const d = await engine("blueprint",{folder:CUR, org_type:org, save:true},"Build order saved");
+    showResult(d); if(d.ok){ PREVIEW=null; refresh(); }
+  });
+  on("#ovrBtn", platformDialog);
+  on("#advBtn", async ()=>{
+    const d = await api("advance",{folder:CUR});
+    if (d.ok){ toast("Moved on"); return refresh(); }
+    showResult(d);
+    openDialog('<h3>Not ready to move on</h3><p class="note">The engine is holding the stage open:</p>'
+      + '<pre class="out bad" style="white-space:pre-wrap">'+esc(d.stdout||d.stderr)+'</pre>'
+      + '<p class="note">You can override — it is recorded in the decision log with what was skipped.</p>'
+      + '<div class="row" style="margin-top:12px"><button class="btn" id="forceAdv">Override and continue</button>'
+      + '<button class="btn quiet" onclick="document.getElementById(\'dlg\').close()">Go back</button></div>',
+      ()=>{ $("#forceAdv").onclick = async ()=>{ const r=await engine("advance",{folder:CUR,force:true},"Moved on (override recorded)");
+              $("#dlg").close(); refresh(); }; });
+  });
+  on("#buildPlat", async ()=>{
+    const box = $("#platOut"); if (box){ box.className="out ok"; box.textContent="Building…"; }
+    const d = await api("platform",{folder:CUR});
+    if (box){ box.className = "out " + (d.ok?"ok":"bad"); box.textContent = d.ok ? d.stdout : (d.stderr||"failed"); }
+    if (d.ok){ toast("Platform built"); STATE.platform_built = true; }
+  });
+  on("#pubPlat", ()=> openDialog(
+      '<h3>Publish for the owner</h3>'
+      + '<p class="note">This registers the business on the hub and installs the platform shell. The owner '
+      + 'then signs in at <code>/app</code> with a magic link — no password, and their records live in their '
+      + 'account rather than one browser.</p>'
+      + '<label for="oe">The owner\'s email</label><input type="text" id="oe" placeholder="owner@theirchurch.nl">'
+      + '<div class="row" style="margin-top:14px"><button class="btn primary" id="pubGo">Publish</button>'
+      + '<button class="btn quiet" onclick="document.getElementById(\'dlg\').close()">Cancel</button></div>',
+      ()=>{ $("#pubGo").onclick = async ()=>{
+        const email = $("#oe").value.trim(); if(!email) return toast("Their email, please");
+        const d = await api("publish_platform",{folder:CUR, owner_email:email});
+        $("#dlg").close();
+        const box = $("#platOut");
+        if (box){ box.className = "out " + (d.ok?"ok":"bad"); box.textContent = d.ok ? d.stdout : (d.stderr||"failed"); }
+        toast(d.ok ? "Published" : "Could not publish");
+      }; }));
+  on("#openPlat", async ()=>{ const d = await api("open_platform",{folder:CUR});
+    if(!d.ok) toast(d.stderr||"Build it first"); });
+  on("#checkBtn", async ()=>{ showResult(await api("check",{folder:CUR})); });
+  on("#verifyBtn", async ()=>{ showResult(await api("verify",{folder:CUR})); });
+
+  document.querySelectorAll("[data-act]").forEach(b => b.onclick = () => {
+    const ws = b.dataset.ws;
+    if (b.dataset.act === "start") engine("set",{folder:CUR,workstream:ws,status:"in_progress"},"Started").then(refresh);
+    if (b.dataset.act === "gate") gateDialog(ws);
+    if (b.dataset.act === "consent") consentDialog(ws);
+    if (b.dataset.act === "done") markDone(ws);
+  });
+
+  $("#backBtn").onclick = showList;
+  $("#syncBtn").onclick = async ()=>{ const d = await api("sync",{folder:CUR});
+    toast(d.ok ? "Synced to the hosted OS" : (d.stderr||"Sync failed")); };
+}
+
+async function markDone(ws){
+  const d = await api("set",{folder:CUR,workstream:ws,status:"done"});
+  if (d.ok){ toast("Done"); return refresh(); }
+  showResult(d);
+  if (/REFUSED/.test(d.stderr||"")) {
+    // Show WHY it refused, not the command line you no longer have to type.
+    const why = (d.stderr||"").split("\n")
+      .filter(l => !/Record consent first|turnkey consent |Decide first:|turnkey blueprint /.test(l))
+      .join("\n").replace(/^turnkey:\s*/, "").trim();
+    openDialog('<h3>The engine refused</h3><pre class="out bad" style="white-space:pre-wrap">'+esc(why)+'</pre>'
+      + '<p class="note">This is the guard doing its job. Record the decision first, then mark it done.</p>'
+      + '<div class="row" style="margin-top:12px"><button class="btn primary" id="fixIt">Record the decision now</button>'
+      + '<button class="btn quiet" onclick="document.getElementById(\'dlg\').close()">Close</button></div>',
+      ()=>{ $("#fixIt").onclick = ()=>{ $("#dlg").close(); consentDialog(ws); }; });
+  }
+}
+
+/* ------------------------------------------------------------ dialogs */
+function openDialog(html, after){
+  $("#dlgBody").innerHTML = html; $("#dlg").showModal(); if (after) after();
+}
+function profileDialog(){
+  const tmpl = "# Business Profile — " + ((STATE&&STATE.business)||"") + "\n\n"
+    + "## Organization\n"
+    + "- **What kind of organization is this?** (church / nonprofit / service business / e-commerce /\n"
+    + "  digital products / membership / education / local venue / SaaS / creator brand) — describe THIS\n"
+    + "  business, not who it sells to.\n"
+    + "- **How money arrives:** \n"
+    + "- **What it does week to week:** (publishes? takes bookings? ships goods? runs events? teaches?\n"
+    + "  collects giving?)\n"
+    + "- **Existing site:** (WordPress / Wix / Shopify / none) and **who edits it**\n\n"
+    + "## Offer\n\n## Pricing\n\n## Brand & voice\n\n## Domain intent\n";
+  openDialog('<h3>The business profile</h3>'
+    + '<p class="note">This is what the blueprint reads. Be concrete about the <b>Organization</b> section — '
+    + 'a vague answer there becomes a guessed build order.</p>'
+    + '<textarea id="pf" style="min-height:280px">'+esc(tmpl)+'</textarea>'
+    + '<label><input type="checkbox" id="ow"> overwrite if one already exists</label>'
+    + '<div class="row" style="margin-top:12px"><button class="btn primary" id="savePf">Save the profile</button>'
+    + '<button class="btn quiet" onclick="document.getElementById(\'dlg\').close()">Cancel</button></div>',
+    ()=>{ $("#savePf").onclick = async ()=>{
+      const d = await api("profile",{folder:CUR,text:$("#pf").value,overwrite:$("#ow").checked});
+      $("#dlg").close(); if(!d.ok) return toast(d.stderr||"Could not save"); toast("Profile saved"); refresh(); }; });
+}
+function consentDialog(ws, presetAction){
+  openDialog('<h3>Record a decision</h3>'
+    + '<p class="note">Consent is logged <b>before</b> the action, word for word, and can never be edited afterwards. '
+    + 'Say exactly what is being approved.</p>'
+    + '<label for="cAct">What is being approved</label>'
+    + '<input type="text" id="cAct" value="'+esc(presetAction||"")+'" placeholder="promote the site to its live public URL">'
+    + '<div class="two"><div><label for="cActor">Who decided</label><select id="cActor"><option>VOM</option><option>CLIENT</option></select></div>'
+    + '<div><label for="cCh">How</label><select id="cCh"><option>in-session</option><option>magic-link</option><option>whatsapp</option><option>phone</option><option>email</option></select></div></div>'
+    + '<div class="two"><div><label for="cEv">Evidence</label><input type="text" id="cEv" placeholder="said go on the call, 14:02"></div>'
+    + '<div><label for="cSc">Scope</label><input type="text" id="cSc" placeholder="this deploy only"></div></div>'
+    + '<div class="row" style="margin-top:14px"><button class="btn go" id="cYes">Record YES</button>'
+    + '<button class="btn" id="cNo">Record NO</button>'
+    + '<button class="btn quiet" onclick="document.getElementById(\'dlg\').close()">Cancel</button></div>',
+    ()=>{
+      const go = async (decision)=>{
+        const d = await api("consent",{ folder:CUR, workstream:ws, decision,
+          action:$("#cAct").value, actor:$("#cActor").value, channel:$("#cCh").value,
+          evidence:$("#cEv").value, scope:$("#cSc").value });
+        $("#dlg").close();
+        if(!d.ok) return toast(d.stderr||"Could not record it");
+        toast("Recorded "+decision); refresh();
+      };
+      $("#cYes").onclick = ()=>go("YES"); $("#cNo").onclick = ()=>go("NO");
+    });
+}
+function gateDialog(ws){
+  openDialog('<h3>Hand it to a person</h3>'
+    + '<p class="note">This parks the workstream and writes a do-this-now script, so whoever picks it up knows '
+    + 'exactly what to click. The rest of the launch keeps moving.</p>'
+    + '<label for="gAct">What must they do</label>'
+    + '<input type="text" id="gAct" placeholder="complete Stripe\'s hosted ID + IBAN flow on their phone">'
+    + '<div class="two"><div><label for="gActor">Who</label><select id="gActor"><option>VOM</option><option>CLIENT</option></select></div>'
+    + '<div><label for="gCh">How you will reach them</label><select id="gCh"><option>in-session</option><option>magic-link</option><option>whatsapp</option><option>phone</option><option>email</option></select></div></div>'
+    + '<label for="gScript">Steps (optional)</label>'
+    + '<textarea id="gScript" placeholder="1. Open …&#10;2. Enter …&#10;3. Send back the …"></textarea>'
+    + '<div class="row" style="margin-top:12px"><button class="btn primary" id="gGo">Open the gate</button>'
+    + '<button class="btn quiet" onclick="document.getElementById(\'dlg\').close()">Cancel</button></div>',
+    ()=>{ $("#gGo").onclick = async ()=>{
+      const d = await api("gate",{ folder:CUR, workstream:ws, action:$("#gAct").value,
+        actor:$("#gActor").value, channel:$("#gCh").value, script:$("#gScript").value });
+      $("#dlg").close(); if(!d.ok) return toast(d.stderr||"Could not open the gate");
+      toast("Gate opened"); refresh(); }; });
+}
+function platformDialog(){
+  openDialog('<h3>Override the site platform</h3>'
+    + '<p class="note">The recommendation is scored from the org type, the functions and your rails. Overriding is '
+    + 'fine — the reason goes in the audit trail.</p>'
+    + '<label for="pV">Platform</label><select id="pV">'
+    + Object.keys((CATALOG&&CATALOG.platforms)||{}).map(k=>'<option value="'+k+'">'+esc(CATALOG.platforms[k].label)+'</option>').join("")
+    + '</select><label for="pR">Why</label><input type="text" id="pR" placeholder="the owner will publish weekly and wants to edit it herself">'
+    + '<div class="row" style="margin-top:12px"><button class="btn primary" id="pGo">Set it</button>'
+    + '<button class="btn quiet" onclick="document.getElementById(\'dlg\').close()">Cancel</button></div>',
+    ()=>{ $("#pGo").onclick = async ()=>{
+      const d = await api("platform",{folder:CUR,value:$("#pV").value,reason:$("#pR").value});
+      $("#dlg").close(); if(!d.ok) return toast(d.stderr||"Could not override");
+      toast("Platform set"); PREVIEW=null; refresh(); }; });
+}
+
+showList();
+</script>
+</body>
+</html>

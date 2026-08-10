@@ -1,0 +1,30 @@
+{
+  "run": "20260806-014716",
+  "sealed": "2026-08-06T01:47:16Z",
+  "fingerprint": "sha256:c690082bf21a823b510b83baa6d01e36",
+  "business": "Always Answered",
+  "archetype": "prelaunch",
+  "forge": "PRELAUNCHforge",
+  "target": "local",
+  "artifacts": {
+    "logo": "drawn monogram — no client logo was supplied",
+    "brand_manual": "/Users/kurtjoseph/Business Ideas/SMB Pain Point Seeds/Always Answered/forge/20260806-014716/build/brand-manual.html",
+    "brand_kit": "Waitlist Green (default)",
+    "platform": "/Users/kurtjoseph/Business Ideas/SMB Pain Point Seeds/Always Answered/forge/20260806-014716/build/platform/index.html",
+    "photos": "6 placeholder photographs (CC0/PDM)",
+    "site": "/Users/kurtjoseph/Business Ideas/SMB Pain Point Seeds/Always Answered/forge/20260806-014716/build/site/index.html",
+    "pages": [
+      "faq.html",
+      "index.html"
+    ],
+    "url": "file:///Users/kurtjoseph/Business Ideas/SMB Pain Point Seeds/Always Answered/forge/20260806-014716/build/index.html",
+    "platform_url": "file:///Users/kurtjoseph/Business Ideas/SMB Pain Point Seeds/Always Answered/forge/20260806-014716/build/platform/index.html"
+  },
+  "checks_passed": 10,
+  "elapsed_seconds": 0.08,
+  "authorization": {
+    "mode": "none",
+    "scope": [],
+    "note": "no unattended-run authorization on file — Forge will build, and will refuse any deploy target the public can reach"
+  }
+}

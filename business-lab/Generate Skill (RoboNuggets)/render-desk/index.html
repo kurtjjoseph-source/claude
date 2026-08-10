@@ -1,0 +1,1220 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Render Desk — implementation wizard</title>
+<meta name="description" content="Replace a creative-AI subscription with a Claude skill that routes to the cheapest model aggregator, caps its own spend, and keeps every prompt on your own disk.">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#E6E3DD" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#131215" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%23131215'/%3E%3C/svg%3E">
+</head>
+<body>
+<style>
+html{font-size:17px}
+:root[data-fs="l"]{font-size:19px}
+:root[data-fs="xl"]{font-size:21px}
+
+:root{
+  --paper:#E6E3DD; --sheet:#F4F2ED; --sheet-2:#ECE9E3; --sheet-3:#DDD9D1;
+  --ink:#17161A; --ink-soft:#57545C; --ink-faint:#8C8892;
+  --line:#C9C5BC; --line-soft:#DCD8D0;
+  --ember:#B8410F; --steel:#1F4E9C; --moss:#3A6B22; --plum:#6E2E7A; --slate:#4A5560; --gold:#8A6408;
+  --ember-w:#F7DFD3; --steel-w:#D9E2F5; --moss-w:#DEEAD3; --plum-w:#EEDDF1; --slate-w:#E0E4E8; --gold-w:#F0E7CB;
+  --plate:var(--plum); --plate-w:var(--plum-w); --plate-on:#FFFFFF;
+  --grain:rgba(23,22,26,.055); --misreg:multiply;
+  --mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --shadow:0 1px 1px rgba(23,22,26,.05), 0 8px 24px rgba(23,22,26,.07);
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --paper:#131215; --sheet:#1A191E; --sheet-2:#201F25; --sheet-3:#2A2830;
+    --ink:#EAE7E1; --ink-soft:#9E9AA3; --ink-faint:#6E6A74;
+    --line:#302E37; --line-soft:#26242C;
+    --ember:#FF8A57; --steel:#7FA3F0; --moss:#84C264; --plum:#C58ED2; --slate:#9AAAB8; --gold:#DCAE3C;
+    --ember-w:#3A1D11; --steel-w:#17233F; --moss-w:#1A2C13; --plum-w:#2D1932; --slate-w:#1D242A; --gold-w:#2E2410;
+    --plate-on:#0E0D10;
+    --grain:rgba(234,231,225,.05); --misreg:screen;
+    --shadow:0 1px 1px rgba(0,0,0,.4), 0 10px 30px rgba(0,0,0,.42);
+  }
+}
+:root[data-theme="light"]{
+  --paper:#E6E3DD; --sheet:#F4F2ED; --sheet-2:#ECE9E3; --sheet-3:#DDD9D1;
+  --ink:#17161A; --ink-soft:#57545C; --ink-faint:#8C8892;
+  --line:#C9C5BC; --line-soft:#DCD8D0;
+  --ember:#B8410F; --steel:#1F4E9C; --moss:#3A6B22; --plum:#6E2E7A; --slate:#4A5560; --gold:#8A6408;
+  --ember-w:#F7DFD3; --steel-w:#D9E2F5; --moss-w:#DEEAD3; --plum-w:#EEDDF1; --slate-w:#E0E4E8; --gold-w:#F0E7CB;
+  --plate-on:#FFFFFF; --grain:rgba(23,22,26,.055); --misreg:multiply;
+  --shadow:0 1px 1px rgba(23,22,26,.05), 0 8px 24px rgba(23,22,26,.07);
+}
+:root[data-theme="dark"]{
+  --paper:#131215; --sheet:#1A191E; --sheet-2:#201F25; --sheet-3:#2A2830;
+  --ink:#EAE7E1; --ink-soft:#9E9AA3; --ink-faint:#6E6A74;
+  --line:#302E37; --line-soft:#26242C;
+  --ember:#FF8A57; --steel:#7FA3F0; --moss:#84C264; --plum:#C58ED2; --slate:#9AAAB8; --gold:#DCAE3C;
+  --ember-w:#3A1D11; --steel-w:#17233F; --moss-w:#1A2C13; --plum-w:#2D1932; --slate-w:#1D242A; --gold-w:#2E2410;
+  --plate-on:#0E0D10; --grain:rgba(234,231,225,.05); --misreg:screen;
+  --shadow:0 1px 1px rgba(0,0,0,.4), 0 10px 30px rgba(0,0,0,.42);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0; color:var(--ink); background:var(--paper);
+  background-image:radial-gradient(var(--grain) .5px, transparent .5px);
+  background-size:4px 4px;
+  font-family:var(--sans); font-size:1.03125rem; line-height:1.55; -webkit-font-smoothing:antialiased;
+}
+button,input,select,textarea{font:inherit; color:inherit}
+:focus-visible{outline:2px solid var(--plate); outline-offset:2px}
+@media (prefers-reduced-motion:reduce){ *{transition:none !important; animation:none !important} }
+
+/* ---------- chrome ---------- */
+.bar{position:sticky; top:0; z-index:60; background:color-mix(in srgb,var(--paper) 88%,transparent); backdrop-filter:saturate(1.4) blur(10px); border-bottom:1px solid var(--line)}
+.bar-in{max-width:1380px; margin:0 auto; padding:0 clamp(12px,2.4vw,24px); height:56px; display:flex; align-items:center; gap:14px}
+.brand{display:flex; align-items:center; gap:9px; font-family:var(--mono); font-size:0.8125rem; letter-spacing:.16em; text-transform:uppercase; white-space:nowrap}
+.brand i{width:7px; height:7px; background:var(--ember); border-radius:50%; flex:none; box-shadow:2px 0 0 var(--steel)}
+.brand span{color:var(--ink-faint)}
+.bar .grow{flex:1; min-width:0}
+.sname{font-family:var(--mono); font-size:0.875rem; background:transparent; border:1px solid transparent; border-radius:2px; padding:5px 8px; width:100%; max-width:340px}
+.sname:hover{border-color:var(--line)}
+.sname:focus{border-color:var(--plate); background:var(--sheet)}
+.prog{display:flex; align-items:center; gap:9px; font-family:var(--mono); font-size:0.84375rem; letter-spacing:.1em; color:var(--ink-faint); white-space:nowrap; font-variant-numeric:tabular-nums}
+.track{width:88px; height:5px; background:var(--sheet-3); border-radius:99px; overflow:hidden}
+.fill{height:100%; width:0; background:var(--plate); transition:width .45s cubic-bezier(.2,.7,.2,1)}
+.btn{font-family:var(--mono); font-size:0.84375rem; letter-spacing:.11em; text-transform:uppercase; background:transparent; border:1px solid var(--line); color:var(--ink-soft); padding:8px 12px; border-radius:2px; cursor:pointer; transition:.15s; white-space:nowrap}
+.btn:hover{color:var(--ink); border-color:var(--plate)}
+.btn.primary{background:var(--plate); border-color:var(--plate); color:var(--plate-on)}
+.btn.primary:hover{filter:brightness(1.1)}
+.btn.ghost{border-color:transparent; color:var(--ink-faint)}
+.btn.ghost:hover{color:var(--ink); border-color:var(--line)}
+.btn[disabled]{opacity:.34; cursor:not-allowed}
+.btn.sm{padding:5px 9px; font-size:0.75rem}
+.hide-sm{display:none}
+@media(min-width:900px){ .hide-sm{display:inline} }
+
+.rail{display:flex; gap:4px; overflow-x:auto; padding:9px clamp(12px,2.4vw,24px); border-bottom:1px solid var(--line); background:color-mix(in srgb,var(--paper) 72%,transparent); position:sticky; top:56px; z-index:50; scrollbar-width:thin}
+.rail button{font-family:var(--mono); font-size:0.8125rem; letter-spacing:.09em; text-transform:uppercase; background:transparent; border:1px solid transparent; color:var(--ink-faint); padding:6px 10px; border-radius:2px; cursor:pointer; white-space:nowrap; transition:.15s}
+.rail button:hover{color:var(--ink)}
+.rail button[aria-current="true"]{color:var(--plate-on); background:var(--plate); border-color:var(--plate)}
+.rail button.done{color:var(--plate)}
+.rail button.done::before{content:"\2713\00a0"}
+
+/* ---------- layout ---------- */
+.stage{max-width:1380px; margin:0 auto; padding:clamp(16px,2.8vw,30px) clamp(12px,2.4vw,24px) 90px; display:grid; gap:20px; align-items:start}
+@media(min-width:1060px){ .stage{grid-template-columns:minmax(0,1fr) minmax(360px,36%)} .col-side{position:sticky; top:112px} }
+
+.panel{background:var(--sheet); border:1px solid var(--line); border-radius:3px; box-shadow:var(--shadow); overflow:hidden}
+.panel-head{padding:15px 20px; border-bottom:1px solid var(--line-soft); background:var(--sheet-2); display:flex; align-items:baseline; gap:12px; flex-wrap:wrap}
+.panel-head .sno{font-family:var(--mono); font-size:0.84375rem; letter-spacing:.14em; color:var(--plate)}
+.panel-head h2{font-family:var(--mono); font-size:1rem; letter-spacing:.01em; text-transform:uppercase; margin:0; font-weight:600}
+.panel-head .hint{margin-left:auto; font-family:var(--mono); font-size:0.8125rem; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-faint)}
+.panel-body{padding:clamp(16px,2.4vw,24px); display:flex; flex-direction:column; gap:18px}
+.nav{display:flex; align-items:center; gap:8px; padding:13px 20px; border-top:1px solid var(--line-soft); background:var(--sheet-2)}
+.nav .sp{flex:1}
+
+.lede{font-family:var(--serif); font-size:1.15625rem; line-height:1.5; color:var(--ink-soft); margin:0; max-width:64ch; text-wrap:pretty}
+.lede strong{color:var(--ink); font-weight:600}
+h3.sec{font-family:var(--mono); font-size:0.8125rem; letter-spacing:.13em; text-transform:uppercase; color:var(--ink-faint); margin:8px 0 -4px; font-weight:600}
+
+/* ---------- fields ---------- */
+.f{display:flex; flex-direction:column; gap:6px}
+.f > label, .f .flab{font-family:var(--mono); font-size:0.8125rem; letter-spacing:.09em; text-transform:uppercase; color:var(--ink); font-weight:600}
+.f .help{font-size:0.96875rem; color:var(--ink-soft); line-height:1.45; margin:-2px 0 2px; max-width:66ch}
+.f .help b{color:var(--ink); font-weight:600}
+input[type=text], input[type=number], textarea, select{
+  width:100%; background:var(--sheet-2); border:1px solid var(--line); border-radius:2px;
+  padding:9px 11px; font-size:1rem; transition:.15s;
+}
+input[type=text]:focus, input[type=number]:focus, textarea:focus, select:focus{border-color:var(--plate); background:var(--sheet)}
+textarea{resize:vertical; min-height:74px; line-height:1.5}
+.numwrap{display:flex; align-items:stretch; max-width:340px}
+.numwrap .pre,.numwrap .suf{display:flex; align-items:center; padding:0 10px; background:var(--sheet-3); border:1px solid var(--line); font-family:var(--mono); font-size:0.875rem; color:var(--ink-soft)}
+.numwrap .pre{border-right:0; border-radius:2px 0 0 2px}
+.numwrap .suf{border-left:0; border-radius:0 2px 2px 0; white-space:nowrap}
+.numwrap input{border-radius:0}
+.numwrap .pre + input{border-radius:0}
+.numwrap input:first-child{border-radius:2px 0 0 2px}
+
+/* choices */
+.opts{display:grid; gap:9px; grid-template-columns:1fr}
+@media(min-width:620px){ .opts.two{grid-template-columns:1fr 1fr} }
+.opt{position:relative; text-align:left; background:var(--sheet-2); border:1px solid var(--line); border-radius:3px; padding:12px 14px 13px 40px; cursor:pointer; transition:.16s; width:100%; display:block}
+.opt:hover{border-color:var(--plate); background:var(--sheet)}
+.opt[aria-pressed="true"]{border-color:var(--plate); background:var(--plate-w); box-shadow:inset 3px 0 0 var(--plate)}
+.opt .mk{position:absolute; left:13px; top:14px; width:14px; height:14px; border:1.5px solid var(--line); border-radius:50%; transition:.16s}
+.opt[aria-pressed="true"] .mk{border-color:var(--plate); background:var(--plate); box-shadow:inset 0 0 0 2.5px var(--plate-w)}
+.opt.sq .mk{border-radius:2px}
+.opt[aria-pressed="true"].sq .mk{box-shadow:none; background:var(--plate)}
+.opt[aria-pressed="true"].sq .mk::after{content:"\2713"; position:absolute; inset:-1px 0 0 1px; color:var(--plate-w); font-size:0.8125rem; line-height:14px; font-weight:700}
+.opt h4{margin:0 0 2px; font-size:1rem; font-weight:650; letter-spacing:-.01em}
+.opt p{margin:0; font-size:0.9375rem; color:var(--ink-soft); line-height:1.45}
+.opt .tag{position:absolute; right:11px; top:11px; font-family:var(--mono); font-size:0.71875rem; letter-spacing:.1em; text-transform:uppercase; color:var(--plate); background:var(--plate-w); padding:2px 6px; border-radius:2px}
+
+/* rows table */
+.rows{border:1px solid var(--line); border-radius:3px; overflow:hidden; background:var(--sheet-2)}
+.rowsh{display:flex; gap:0; background:var(--sheet-3); border-bottom:1px solid var(--line)}
+.rowsh span{font-family:var(--mono); font-size:0.75rem; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-soft); padding:7px 9px; border-right:1px solid var(--line)}
+.rowsh span:last-child{border-right:0}
+.rw{display:flex; border-bottom:1px solid var(--line-soft)}
+.rw:last-of-type{border-bottom:0}
+.rw > div{border-right:1px solid var(--line-soft); min-width:0}
+.rw > div:last-child{border-right:0}
+.rw input{border:0; background:transparent; border-radius:0; padding:8px 9px; font-size:1rem}
+.rw input:focus{background:var(--sheet); outline-offset:-2px}
+.rw .del{flex:none; width:34px; display:flex; align-items:center; justify-content:center}
+.rw .del button{background:transparent; border:0; color:var(--ink-faint); cursor:pointer; font-size:1.03125rem; line-height:1; padding:4px 6px}
+.rw .del button:hover{color:var(--ember)}
+.rowsf{display:flex; align-items:center; gap:10px; padding:8px 10px; background:var(--sheet-3); border-top:1px solid var(--line)}
+.rowsf .tot{margin-left:auto; font-family:var(--mono); font-size:0.8125rem; color:var(--ink-soft); font-variant-numeric:tabular-nums}
+.rowsf .tot b{color:var(--ink); font-size:0.96875rem}
+
+/* notes */
+.note{border:1px solid var(--line); border-left:3px solid var(--slate); background:var(--sheet-2); border-radius:2px; padding:12px 14px; font-size:1rem; color:var(--ink-soft); line-height:1.5}
+.note b{display:block; color:var(--ink); font-family:var(--mono); font-size:0.8125rem; letter-spacing:.12em; text-transform:uppercase; margin-bottom:5px}
+.note.warn{border-left-color:var(--ember); background:var(--ember-w)}
+.note.warn b{color:var(--ember)}
+.note.quote{border-left-color:var(--gold); font-family:var(--serif); font-size:1.0625rem; font-style:italic}
+.note.quote b{font-style:normal; color:var(--gold)}
+.note.ok{border-left-color:var(--moss); background:var(--moss-w)}
+.note.ok b{color:var(--moss)}
+.note code{font-family:var(--mono); font-size:0.9375rem; background:var(--sheet-3); padding:1px 4px; border-radius:2px}
+
+/* calculator */
+.calc{border:1px solid var(--line); border-radius:3px; background:var(--sheet-2); overflow:hidden}
+.calc-h{padding:10px 14px; background:var(--sheet-3); border-bottom:1px solid var(--line); font-family:var(--mono); font-size:0.84375rem; letter-spacing:.12em; text-transform:uppercase; color:var(--ink); font-weight:600; display:flex; gap:10px; align-items:center}
+.calc-h em{margin-left:auto; font-style:normal; font-size:0.75rem; color:var(--ink-faint); letter-spacing:.1em}
+.calc-in{display:grid; gap:10px; padding:14px; grid-template-columns:1fr}
+@media(min-width:560px){ .calc-in{grid-template-columns:1fr 1fr} }
+@media(min-width:900px){ .calc-in.three{grid-template-columns:1fr 1fr 1fr} }
+.ci{display:flex; flex-direction:column; gap:4px}
+.ci label{font-family:var(--mono); font-size:0.75rem; letter-spacing:.09em; text-transform:uppercase; color:var(--ink-faint)}
+.calc-out{border-top:1px solid var(--line); background:var(--sheet); padding:14px; display:grid; gap:12px; grid-template-columns:repeat(auto-fit,minmax(128px,1fr))}
+.kpi{display:flex; flex-direction:column; gap:2px}
+.kpi .v{font-family:var(--mono); font-size:1.59375rem; font-weight:700; letter-spacing:-.03em; line-height:1.1; color:var(--plate); font-variant-numeric:tabular-nums}
+.kpi .v.dim{color:var(--ink-faint)}
+.kpi .l{font-family:var(--mono); font-size:0.75rem; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-faint)}
+.calc-note{padding:0 14px 14px; font-size:0.9375rem; color:var(--ink-soft); line-height:1.45}
+.calc-note b{color:var(--ink)}
+
+/* side column */
+.side{display:flex; flex-direction:column; gap:14px}
+.card{background:var(--sheet); border:1px solid var(--line); border-radius:3px; box-shadow:var(--shadow); overflow:hidden}
+.card-h{padding:11px 15px; border-bottom:1px solid var(--line-soft); background:var(--sheet-2); font-family:var(--mono); font-size:0.84375rem; letter-spacing:.13em; text-transform:uppercase; color:var(--ink-soft); display:flex; align-items:center; gap:8px}
+.card-h i{width:6px; height:6px; border-radius:50%; background:var(--plate); flex:none}
+.card-b{padding:14px 15px; display:flex; flex-direction:column; gap:11px; font-size:1rem}
+.kv{display:flex; gap:10px; align-items:baseline; border-bottom:1px dotted var(--line); padding-bottom:8px}
+.kv:last-child{border-bottom:0; padding-bottom:0}
+.kv .k{font-family:var(--mono); font-size:0.75rem; letter-spacing:.09em; text-transform:uppercase; color:var(--ink-faint); flex:none; width:96px}
+.kv .v{color:var(--ink); min-width:0; word-break:break-word}
+.kv .v.empty{color:var(--ink-faint); font-style:italic}
+.tri{display:flex; gap:6px}
+.tri div{flex:1; text-align:center; padding:9px 5px; border:1px solid var(--line); border-radius:2px; background:var(--sheet-2)}
+.tri div.on{border-color:var(--plate); background:var(--plate-w); box-shadow:inset 0 -2px 0 var(--plate)}
+.tri div b{display:block; font-family:var(--mono); font-size:0.8125rem; letter-spacing:.1em; text-transform:uppercase; color:var(--ink)}
+.tri div span{font-size:0.84375rem; color:var(--ink-faint)}
+.tri div.on b{color:var(--plate)}
+.seq{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:7px}
+.seq li{display:flex; gap:9px; align-items:flex-start; font-size:0.96875rem; color:var(--ink-soft); line-height:1.4}
+.seq li i{font-family:var(--mono); font-size:0.75rem; color:var(--plate); flex:none; width:16px; padding-top:2px; font-style:normal}
+.seq li.done{color:var(--ink)}
+.seq li.done i::before{content:"\2713"}
+
+/* export */
+textarea#out, textarea#manualtx{font-family:var(--mono); font-size:0.875rem; line-height:1.5; min-height:220px; background:var(--sheet-2)}
+.outbar{display:flex; align-items:center; gap:8px; flex-wrap:wrap}
+.outbar .t{font-family:var(--mono); font-size:0.8125rem; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-faint); margin-right:auto}
+.done-grid{display:grid; gap:10px; grid-template-columns:1fr}
+@media(min-width:640px){ .done-grid{grid-template-columns:1fr 1fr} }
+.dc{border:1px solid var(--line); border-radius:3px; background:var(--sheet-2); padding:12px 14px}
+.dc h5{margin:0 0 4px; font-family:var(--mono); font-size:0.84375rem; letter-spacing:.11em; text-transform:uppercase; color:var(--plate)}
+.dc p{margin:0; font-size:0.96875rem; color:var(--ink-soft); line-height:1.45}
+.dc p b{color:var(--ink)}
+
+.foot{max-width:1380px; margin:0 auto; padding:0 clamp(12px,2.4vw,24px) 40px; font-size:0.875rem; color:var(--ink-faint); line-height:1.6}
+.foot a{color:var(--ink-soft)}
+</style>
+
+<div class="bar">
+  <div class="bar-in">
+    <div class="brand"><i></i>The Render Desk <span class="hide-sm">&mdash; implementation wizard</span></div>
+    <div class="grow"><input class="sname" id="sname" type="text" placeholder="Name this plan (e.g. VOM creative stack, Q3)" aria-label="Plan name"></div>
+    <div class="prog"><span id="pct">0%</span><span class="track"><i class="fill" id="fill"></i></span></div>
+    <button class="btn ghost sm" data-a="fs" type="button" title="Text size" aria-label="Text size">A</button>
+    <button class="btn ghost sm" data-a="theme" type="button" title="Toggle light/dark">&#9681;</button>
+  </div>
+</div>
+
+<nav class="rail" id="rail" aria-label="Steps"></nav>
+
+<main class="stage">
+  <section>
+    <div class="panel">
+      <div class="panel-head">
+        <span class="sno" id="sno">STEP 01</span>
+        <h2 id="stitle">&nbsp;</h2>
+        <span class="hint" id="shint"></span>
+      </div>
+      <div class="panel-body" id="body"></div>
+      <div class="nav">
+        <button class="btn" data-a="prev" id="prev" type="button">&larr; Back</button>
+        <span class="sp"></span>
+        <button class="btn ghost sm" data-a="reset" type="button">Clear</button>
+        <button class="btn primary" data-a="next" id="next" type="button">Next &rarr;</button>
+      </div>
+    </div>
+  </section>
+
+  <aside class="col-side">
+    <div class="side" id="side"></div>
+  </aside>
+</main>
+
+<div class="foot">
+  Built from <a href="https://www.youtube.com/watch?v=9C4TRbucmhQ" target="_blank" rel="noopener">&ldquo;This 1 Claude Skill fully replaces your Higgsfield Subscription&rdquo;</a> by Jay E | RoboNuggets.
+  Every price in it is one person&rsquo;s screen on one day, quoted from Australia, for one model &mdash; check the provider&rsquo;s own pricing page before you commit to a number.
+  Everything you type stays in this browser (localStorage); nothing is sent anywhere.
+</div>
+
+<script>
+/* ============================================================
+   The Render Desk — implementation wizard
+   Single file, no dependencies, state in localStorage.
+
+   AUTHORING MAP — everything you change per wizard is in the four
+   blocks marked ▼ AUTHOR. The engine below them never changes.
+     1. STEPS      — the whole wizard: steps, copy, fields
+     2. CALCS      — live calculators, keyed by {t:"calc", id:"…"}
+     3. CALC_MD    — what those calculators add to the exported plan
+     4. SIDE       — the sticky right column
+   ============================================================ */
+var KEY = "render-desk.v1";      /* localStorage key — bump the .vN suffix on breaking changes */
+var CUR = "$";            /* provider billing is in USD throughout */
+
+/* ============================================================
+   ▼ AUTHOR 1 — STEPS
+   Field types:
+     {t:"sec",   label}                                    section heading
+     {t:"note",  title, body, tone:""|"warn"|"ok"|"quote"} callout (body may contain HTML)
+     {t:"text",  k, label, help?, ph?}                     one-line input
+     {t:"area",  k, label, help?, ph?, rows?}              textarea
+     {t:"num",   k, label, help?, ph?, pre?, suf?}         number, with prefix/suffix chips
+     {t:"choice",k, label, help?, opts:[{v,h?,d,tag?}]}    pick one (click again to clear)
+     {t:"multi", k, label, help?, opts:[{v,d,tag?}]}       pick many
+     {t:"rows",  k, label, help?, min?, cols:[{k,label,w}]} repeating table, w is a CSS width
+     {t:"calc",  id}                                       renders CALCS[id]()
+     {t:"export"}                                          the final plan step — exactly one, last
+   Only text/area/num/choice/multi/rows count towards progress.
+   ============================================================ */
+var STEPS = [
+
+{k:"bill", nav:"The bill", title:"The month you actually had", hint:"Start here",
+ lede:"Before this is a build decision it is an arithmetic one. Price <strong>the month you actually had</strong> &mdash; not the month the plan was sold for.",
+ fields:[
+  {t:"note", title:"How this works", tone:"ok",
+   body:"Eight decisions, four calculators, one markdown plan at the end. Nothing you type leaves this browser. Every figure is in <strong>US dollars</strong>, because that is how all four providers bill."},
+  {t:"text", k:"tool", label:"The subscription you are pricing against",
+   help:"Name it. Higgsfield in the video &mdash; but the arithmetic is identical for any seat-priced creative tool you rent.", ph:"e.g. Higgsfield Max"},
+  {t:"num", k:"sub", label:"What it costs you per month", pre:"$", ph:"79",
+   help:"His screens showed <b>$49 plus / $79 max</b>, quoted from Australia. Use your own invoice, not his."},
+  {t:"multi", k:"makes", label:"What you actually generate",
+   help:"Tick only what you produced <b>last month</b>. Aspiration is the thing that makes a subscription look cheap.",
+   opts:[{v:"Still ads & social creative", d:"Batched, disposable, high volume. The strongest case for per-image pricing."},
+         {v:"Brand & product imagery", d:"Low volume, high stakes, heavily referenced. Quality beats price here."},
+         {v:"Short video clips", d:"Where the gap between plan and pay-as-you-go nearly closes."},
+         {v:"Edits & variations", d:"Cheap per call, and the count runs away from you faster than anything else."},
+         {v:"Upscales & restores", d:"Usually the quietest line on the bill, and the easiest to move off-plan."},
+         {v:"Audio, voice or 3D", d:"A coverage question, not a price question — check your provider actually carries it."}]},
+  {t:"num", k:"img_mo", label:"Images you generated last month", suf:"images", ph:"120",
+   help:"Count them, do not estimate. This one number decides most of what follows."},
+  {t:"num", k:"vid_mo", label:"Video clips you generated last month", suf:"clips", ph:"8"},
+  {t:"calc", id:"burn"}
+ ]},
+
+{k:"custody", nav:"Custody", title:"The part price does not fix", hint:"The real reason",
+ lede:"If the arithmetic says stay and you still want out, this step is why. <strong>Custody is not a discount question</strong> &mdash; no price cut returns your prompts to you.",
+ fields:[
+  {t:"note", title:"His line", tone:"quote",
+   body:"I have every single image we generated, along with its prompts, all available locally on my device. So I own it."},
+  {t:"multi", k:"bites", label:"Which of these actually bites your work",
+   help:"The video names five. Only some matter to any given operator &mdash; <b>tick the ones that would cost you a client conversation.</b>",
+   opts:[{v:"Generations used to improve their models", d:"The published terms ask you to agree to it. Hard to defend under a client NDA."},
+         {v:"A deletion window on cancel", d:"Leave and you have a limited time to pull your own files out before they go."},
+         {v:"Prompts you cannot get back", d:"The image is usually recoverable. The prompt that produced it is not."},
+         {v:"Their menu, their call", d:"Which models you can reach, at which resolution, changes when their margins do."},
+         {v:"“Unlimited” with undisclosed caveats", d:"You cannot plan capacity against a limit nobody will state."}]},
+  {t:"choice", k:"stakes", label:"Whose work is this",
+   help:"This sets how much the terms matter. <b>Client work under contract raises the bar; your own experiments do not.</b>",
+   opts:[{v:"Client work", d:"Under contract. You answer for the rights posture whether you thought about it or not."},
+         {v:"Own brand", d:"Your risk, your call. Throughput matters more than terms."},
+         {v:"Experiments", d:"Nothing shipped yet. Optimise for learning speed, not custody."}]},
+  {t:"area", k:"why", label:"In one line: why you are leaving, or why you are staying", rows:3,
+   help:"Write it now, while the numbers are still on screen. <b>If you cannot finish this sentence, the answer is stay.</b>",
+   ph:"We are leaving because every image we make is client work and we cannot license their training clause."}
+ ]},
+
+{k:"routing", nav:"Routing", title:"The routing order", hint:"A chain, not a favourite",
+ lede:"You are not picking a provider. You are writing <strong>a fallback chain</strong> &mdash; because the cheapest supply is also the least reliable, and any ranking you write today is stale within a quarter.",
+ fields:[
+  {t:"note", title:"The three he uses",
+   body:"<strong>Kie.ai</strong> &mdash; cheapest by a distance; reliability wobbles under demand.<br><strong>fal.ai</strong> &mdash; his default for most projects; ~500 models, a few cents more per call.<br><strong>WaveSpeed</strong> &mdash; the niche models fal does not carry."},
+  {t:"choice", k:"primary", label:"First provider the skill tries",
+   help:"Cheapest-first is the rule in his skill. <b>His own default is fal, not the cheapest</b> — on client work a failed run costs more than five cents ever will.",
+   opts:[{v:"Kie.ai", tag:"cheapest", d:"Go first here when the run is large, disposable and cheap to repeat."},
+         {v:"fal.ai", tag:"his default", d:"Go first here when a failed run costs you a deadline."},
+         {v:"WaveSpeed", d:"Only when the model you need lives nowhere else."}]},
+  {t:"choice", k:"fallback", label:"Where it falls through to",
+   help:"Write the whole chain into the skill. <b>A provider being down should cost you a retry, not a morning.</b>",
+   opts:[{v:"fal.ai", d:"The reliable floor. The usual answer if Kie is your first hop."},
+         {v:"Kie.ai", d:"Cheap second hop — accept that a retry may also fail."},
+         {v:"WaveSpeed", d:"Breadth as the backstop. Slower to reach, rarely missing."},
+         {v:"Stop and ask me", d:"No silent substitution. Slower, but you always know which model made which file."}]},
+  {t:"text", k:"niche", label:"A model you need that only one provider carries",
+   help:"This is the field that decides whether WaveSpeed belongs in your chain at all.", ph:"e.g. a specific lipsync, 3D or restoration model"},
+  {t:"note", title:"The part he flags as a guess", tone:"warn",
+   body:"He speculates that Kie&rsquo;s prices come from reselling subsidised consumer subscriptions, and says plainly that he cannot confirm it. Do not repeat it as fact &mdash; but do read the implication he leaves unsaid: <strong>supply like that disappears without notice.</strong> That is an argument for the fallback chain, not against Kie."}
+ ]},
+
+{k:"bench", nav:"Bench", title:"The model bench", hint:"Price every row",
+ lede:"One row per model you will actually wire, with the job it does and what one unit costs. <strong>A bench you cannot price is a bench you cannot cap.</strong>",
+ fields:[
+  {t:"note", title:"His reference points",
+   body:"GPT Image 2 at 2K, 1:1 &mdash; Higgsfield ~$0.31&ndash;0.34, <strong>Kie $0.05</strong> (Kie&rsquo;s own page: $0.03 at 1K, $0.05 at 2K, $0.08 at 4K). On video &mdash; Seedance 2 fast, 720p, 8s &mdash; the spread across all four is small. Check each provider&rsquo;s page before you trust any of these."},
+  {t:"rows", k:"bench_rows", label:"Your bench", min:4,
+   help:"<b>Per campaign</b> is how many units of that model one real job consumes — that is what the caps in step 5 get checked against.",
+   cols:[{k:"model", label:"Model", w:"34%"}, {k:"job", label:"What it is for", w:"30%"}, {k:"unit", label:"$ / unit", w:"18%"}, {k:"qty", label:"Per campaign", w:"18%"}]},
+  {t:"calc", id:"basket"}
+ ]},
+
+{k:"rules", nav:"Rules", title:"The hard rules", hint:"This is the product",
+ lede:"Routing is convenience. <strong>The rules are what stop an agent asked for a hundred images from making a hundred images</strong> &mdash; and they are the reason a written skill beats a subscription rather than merely undercutting it.",
+ fields:[
+  {t:"note", title:"The failure this exists to prevent", tone:"warn",
+   body:"Ask a capable agent for 100 images and it will go and make 100 images, draining the credit while it does. <strong>The cost quote before submission is the one rule that is not optional.</strong>"},
+  {t:"num", k:"cap_run", label:"Hard cap per run", pre:"$", ph:"3",
+   help:"His demo prompt capped a three-model comparison at <b>$3</b> — low enough to survive a mistake, high enough to finish a real comparison."},
+  {t:"num", k:"cap_mo", label:"Ceiling per month", pre:"$", ph:"60",
+   help:"The number that replaces the subscription on your books. If you cannot name it, you have swapped a fixed cost for an unbounded one."},
+  {t:"multi", k:"hard", label:"Rules written into the skill",
+   help:"Each of these is one line in a markdown file. <b>Quote the cost first</b> is the one that pays for itself in the first week.",
+   opts:[{v:"Quote the cost before submitting", tag:"required", d:"Print the estimate and wait for a yes. Everything else on this list is comfort."},
+         {v:"Refuse to exceed the per-run cap", d:"The cap is a stop, not a warning."},
+         {v:"Show me the prompts before spending", d:"He inspects them mid-flow. Cheap to keep, expensive to have skipped."},
+         {v:"Never delete a generation", d:"You decide what goes. That is the entire point of leaving."},
+         {v:"Log prompt, model, provider and cost", d:"This is what makes yesterday’s good result repeatable next month."},
+         {v:"Write to a dated folder per job", d:"Findable in six months without a search."}]},
+  {t:"calc", id:"cap"}
+ ]},
+
+{k:"spine", nav:"Spine", title:"What it loads before it spends", hint:"Order matters",
+ lede:"Step two of his four is <strong>load the references, then craft the prompts</strong> &mdash; in that order. It is the difference between output that lands inside the house style and output that lands near it.",
+ fields:[
+  {t:"area", k:"refs", label:"Reference paths the skill loads every time", rows:3,
+   help:"Brand assets, past campaigns, the design systems this client has already used. <b>Paths, not descriptions</b> — the skill has to be able to open them.",
+   ph:"~/clients/<name>/brand/*.jpg\n~/vom-systems/vom-logo.jpg"},
+  {t:"area", k:"style", label:"Standing style rules", rows:3,
+   help:"The sentences you would otherwise retype into every brief. Written once here, they stop being something you can forget.",
+   ph:"Never place type over the product. Warm neutrals only. 50mm, shallow depth of field."},
+  {t:"text", k:"defaults", label:"Default resolution and aspect",
+   help:"Resolution is a price lever: <b>$0.03 at 1K against $0.08 at 4K on the same model</b>. Set the cheap default and override deliberately.",
+   ph:"2K 1:1 default · 16:9 for hero frames"},
+  {t:"text", k:"outdir", label:"Where generations land", ph:"~/clients/<name>/generations/YYYY-MM-DD/"},
+  {t:"choice", k:"variety", label:"How many models per brief, by default",
+   help:"His demo ran <b>three models × three images</b> to compare. That is a discovery setting, not a production one — leaving it on triples every bill.",
+   opts:[{v:"One model", d:"Production. You already know which model wins for this job."},
+         {v:"Three models, three each", tag:"his demo", d:"Discovery. Costs about 3× and is worth it once per style, not once per brief."},
+         {v:"Ask me each time", d:"Safest, slowest, and the one people quietly stop answering."}]}
+ ]},
+
+{k:"gallery", nav:"Gallery", title:"The seeing surface", hint:"Do not skip",
+ lede:"You cannot judge an image from a terminal. <strong>If there is nowhere to look at the output, the skill quietly stops being used</strong> &mdash; and you end up back on a subscription you already decided against.",
+ fields:[
+  {t:"choice", k:"surface", label:"Where you will look at what you made",
+   opts:[{v:"A masonry gallery page", tag:"his build", d:"Everything on one canvas, auto-loaded from the folder. A weekend build, and the one that makes this stick."},
+         {v:"OS folder previews", d:"Free and working today. No styles palette, no cost view — but it is not nothing."},
+         {v:"Straight into the client deck", d:"Only viable at low volume. Above that you stop reviewing and start shipping the first take."}]},
+  {t:"multi", k:"gal_feat", label:"Features worth the build",
+   help:"The styles palette is the sleeper: click a look and it copies the prompt <b>and the reference file paths</b> back to your clipboard, ready to send.",
+   opts:[{v:"Styles palette", tag:"the one", d:"Turns a style you liked once into a reusable asset instead of a memory."},
+         {v:"Prompt shown under each image", d:"The whole point of logging, made visible at the moment you need it."},
+         {v:"Cost per run on screen", d:"Closes the loop with the cap you set two steps ago."},
+         {v:"Filter by model", d:"How you find out which model you actually keep choosing — which is rarely the one you assumed."},
+         {v:"Re-run with edits", d:"The second-most-used button, the day after it exists."}]},
+  {t:"text", k:"gal_when", label:"When you will build it",
+   help:"A date, not &ldquo;later&rdquo;. <b>The gallery is what makes the rest of this survive contact with a busy week.</b>", ph:"e.g. the Saturday after the first paid run"}
+ ]},
+
+{k:"cutover", nav:"Cutover", title:"The cutover", hint:"Export first",
+ lede:"Two things happen in the wrong order more often than not: people cancel, and <em>then</em> discover the deletion window. <strong>Export first.</strong>",
+ fields:[
+  {t:"note", title:"Before you touch the cancel button", tone:"warn",
+   body:"Cancelling starts a limited window before your generations are deleted for good. Pull the files &mdash; and whatever prompt history you can reach &mdash; while the account is still live."},
+  {t:"multi", k:"exit", label:"Before you cancel",
+   opts:[{v:"Download every asset worth keeping", d:"The window is limited and it starts the moment you cancel, not the moment you remember."},
+         {v:"Save the prompts, not just the images", d:"Usually the harder half to recover, and the half that has ongoing value."},
+         {v:"Note which models you actually used", d:"That list is your bench. It is shorter than you think it is."},
+         {v:"Re-run one past job on the new stack", d:"Proof the replacement holds before the old one goes away."}]},
+  {t:"choice", k:"mode", label:"How you cut over",
+   help:"<b>Overlap costs one month and buys certainty.</b> Cancelling first buys a month back and hands you a deadline instead.",
+   opts:[{v:"Run both for one month", tag:"safest", d:"One more invoice, both stacks live, a real comparison at the end of it."},
+         {v:"Cancel now, build under pressure", d:"Cheapest, and the deadline is the point — provided you exported first."},
+         {v:"Keep the plan, add the skill", d:"A real answer. Some volumes genuinely favour the subscription — just say so out loud."}]},
+  {t:"text", k:"first_job", label:"The first real job you will run through it",
+   help:"Real work with a real deliverable. <b>A test brief proves nothing</b>, because you will forgive it for being slow.", ph:"e.g. the green-apple launch set for <client>"},
+  {t:"num", k:"first_n", label:"Generations that job needs", suf:"gens", ph:"27"},
+  {t:"calc", id:"run"}
+ ]},
+
+{k:"plan", nav:"Your plan", title:"Your plan", hint:"Take it with you",
+ lede:"Everything you decided, as one markdown file &mdash; the arithmetic, the routing chain, the rules and the cutover date.",
+ fields:[{t:"export"}]}
+];
+
+/* ============================================================
+   ▼ AUTHOR 2 — CALCS   id -> function returning calculator HTML
+   Helpers available: val(k) num(k,default) money(n) esc(s) rowsOf(k) ci(k,label,value,unit)
+   Shape: .calc > .calc-h (+ <em> aside) > .calc-in? > .calc-out (.kpi) > .calc-note
+   The note is where the wizard earns trust: say what the number MEANS, and
+   say it differently when the number is bad.
+   ============================================================ */
+
+/* money() rounds to whole units, which hides five-cent generations. usd() keeps cents
+   below $100 — every price in this wizard lives in that range. */
+function usd(n){
+  if(!isFinite(n)) return "—";
+  if(n === 0) return "$0";
+  if(Math.abs(n) < 100){
+    var t = n.toFixed(2);
+    return "$" + (t.slice(-3) === ".00" ? t.slice(0, -3) : t);
+  }
+  return "$" + Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+}
+function toolName(){ return val("tool") || "the plan"; }
+
+/* pay-as-you-go cost of the month they actually had */
+function payg(){ return num("img_mo") * num("p_img", 0.05) + num("vid_mo") * num("p_vid", 0.40); }
+/* what one campaign costs on the bench they priced */
+function campaign(rs){
+  rs = rs || rowsOf("bench_rows");
+  var t = 0;
+  for(var i=0;i<rs.length;i++) t += (parseFloat(rs[i].unit)||0) * (parseFloat(rs[i].qty)||0);
+  return t;
+}
+/* average $/unit across priced bench rows — the default blended rate for the first job */
+function benchAvg(){
+  var rs = rowsOf("bench_rows"), s = 0, n = 0;
+  for(var i=0;i<rs.length;i++){ var u = parseFloat(rs[i].unit); if(isFinite(u) && u>0){ s+=u; n++; } }
+  return n ? s/n : 0;
+}
+function hasRule(r){ var a = val("hard")||[]; return a.indexOf(r) >= 0; }
+
+var CALCS = {
+
+  /* 1 — the arithmetic that decides whether price is even your reason to leave */
+  burn: function(){
+    var sub = num("sub"), im = num("img_mo"), vd = num("vid_mo");
+    var pi = num("p_img", 0.05), pv = num("p_vid", 0.40);
+    var p = payg(), delta = sub - p;
+    var be = pi ? Math.round(sub / pi) : 0;
+    var have = sub && (im || vd);
+    return '<div class="calc"><div class="calc-h">Plan vs pay-as-you-go <em>last month, actual</em></div>'+
+      '<div class="calc-in three">'+
+        ci("p_img", "$ per image", val("p_img")===undefined?0.05:val("p_img"), "$")+
+        ci("p_vid", "$ per clip",  val("p_vid")===undefined?0.40:val("p_vid"), "$")+
+      '</div>'+
+      '<div class="calc-out">'+
+        '<div class="kpi"><span class="v'+(sub?'':' dim')+'">'+(sub?usd(sub):"—")+'</span><span class="l">Plan / month</span></div>'+
+        '<div class="kpi"><span class="v'+(have?'':' dim')+'">'+(have?usd(p):"—")+'</span><span class="l">Same output, per call</span></div>'+
+        '<div class="kpi"><span class="v'+(have&&delta>0?'':' dim')+'">'+(have?usd(Math.abs(delta)):"—")+'</span><span class="l">'+(delta>=0?"Overpaid / month":"Extra / month")+'</span></div>'+
+        '<div class="kpi"><span class="v'+(be&&im>=be?'':' dim')+'">'+(be?be:"—")+'</span><span class="l">Break-even images</span></div>'+
+      '</div>'+
+      '<div class="calc-note">'+
+      (!sub ? 'Put your actual monthly invoice in and the counts from last month. Estimates make the plan look cheaper than it is.'
+       : !have ? 'Now the counts. Not a typical month — <b>last</b> month.'
+       : (delta > 0
+          ? 'You generated <b>'+usd(p)+'</b> of media on a <b>'+usd(sub)+'</b> plan. '+esc(toolName())+' only starts paying for itself around <b>'+be+' images a month</b>; you made '+im+'. The other <b>'+usd(delta)+'</b> is optionality you are renting and not using.'
+          : 'At your volume the plan is genuinely the cheaper line — <b>'+usd(p)+'</b> per call against <b>'+usd(sub)+'</b> flat. <b>Price is not your reason to leave.</b> Step 2 decides whether custody is, and if it is not, the honest answer is stay.'))+
+      '</div></div>';
+  },
+
+  /* 2 — does the bench you just priced actually beat the plan you are leaving */
+  basket: function(){
+    var c = campaign(), cm = num("camp_mo", 2), sub = num("sub");
+    var monthly = c * cm, gap = sub - monthly;
+    return '<div class="calc"><div class="calc-h">Bench cost <em>against '+esc(toolName())+'</em></div>'+
+      '<div class="calc-in">'+
+        ci("camp_mo", "Campaigns per month", val("camp_mo")===undefined?2:val("camp_mo"), "×")+
+      '</div>'+
+      '<div class="calc-out">'+
+        '<div class="kpi"><span class="v'+(c?'':' dim')+'">'+(c?usd(c):"—")+'</span><span class="l">One campaign</span></div>'+
+        '<div class="kpi"><span class="v'+(c?'':' dim')+'">'+(c?usd(monthly):"—")+'</span><span class="l">Bench / month</span></div>'+
+        '<div class="kpi"><span class="v'+(sub?'':' dim')+'">'+(sub?usd(sub):"—")+'</span><span class="l">Plan / month</span></div>'+
+        '<div class="kpi"><span class="v'+(c&&sub&&gap>0?'':' dim')+'">'+((c&&sub)?usd(Math.abs(gap)):"—")+'</span><span class="l">'+(gap>=0?"Saved / month":"Over the plan")+'</span></div>'+
+      '</div>'+
+      '<div class="calc-note">'+
+      (!c ? 'Give at least one row a price and a per-campaign quantity. A bench you have not priced cannot be capped in the next step.'
+       : !sub ? 'One campaign runs <b>'+usd(c)+'</b> on this bench. Go back to step 1 and enter the plan cost to see whether that is a saving or a story.'
+       : (gap < 0
+          ? '<b>Your bench costs more per month than the plan you are leaving.</b> Either the mix is too rich for the job — check which rows are video — or you are planning to generate more than you ever did on the plan. Cheapest-first routing does nothing for you if half the bench is premium.'
+          : '<b>'+usd(monthly)+'</b> a month against <b>'+usd(sub)+'</b> flat. That <b>'+usd(gap)+'</b> gap is what an afternoon of setup actually buys — decide now whether it is worth your afternoon.'))+
+      '</div></div>';
+  },
+
+  /* 3 — do the caps you just set survive contact with the bench you just priced */
+  cap: function(){
+    var cr = num("cap_run"), cm = num("cap_mo");
+    var c = campaign(), monthly = c * num("camp_mo", 2);
+    var runs = (cm && c) ? Math.floor(cm / c) : 0;
+    var quoted = hasRule("Quote the cost before submitting");
+    var tight = cr && c && cr < c;
+    return '<div class="calc"><div class="calc-h">Do your caps hold <em>against your own bench</em></div>'+
+      '<div class="calc-out">'+
+        '<div class="kpi"><span class="v'+(cr?'':' dim')+'">'+(cr?usd(cr):"—")+'</span><span class="l">Cap / run</span></div>'+
+        '<div class="kpi"><span class="v'+(c?'':' dim')+'">'+(c?usd(c):"—")+'</span><span class="l">One campaign</span></div>'+
+        '<div class="kpi"><span class="v'+(runs?'':' dim')+'">'+(runs?runs:"—")+'</span><span class="l">Campaigns the ceiling allows</span></div>'+
+        '<div class="kpi"><span class="v'+(quoted?'':' dim')+'">'+(quoted?"On":"Off")+'</span><span class="l">Cost quoted first</span></div>'+
+      '</div>'+
+      '<div class="calc-note">'+
+      (!quoted ? '<b>The cost quote is off.</b> That is the one rule holding the line between a $3 comparison and a drained balance — tick it before anything else on this list.'
+       : !cr ? '<b>No cap is also a rule</b> — it is the rule that lets an agent make a hundred images because you asked for a hundred images. His demo capped a three-model comparison at $3.'
+       : tight ? '<b>Your cap ('+usd(cr)+') is below what one campaign costs ('+usd(c)+').</b> The run stops halfway and you pay for the half. Raise the cap, cut the bench, or split the campaign into runs you meant to split.'
+       : (cm && monthly > cm) ? 'One campaign clears the cap, but <b>your monthly ceiling ('+usd(cm)+') is under your own plan for the month ('+usd(monthly)+')</b>. You will hit it in week three and start making exceptions — which is how ceilings stop working.'
+       : 'The cap clears one campaign with <b>'+usd(cr - c)+'</b> to spare'+(runs?', and the ceiling allows <b>'+runs+'</b> campaigns a month':'')+'. Both numbers go in the skill as hard stops, not warnings.')+
+      '</div></div>';
+  },
+
+  /* 4 — price the first real job before you promise it to anyone */
+  run: function(){
+    var n = num("first_n"), avg = benchAvg();
+    var rate = num("p_run", avg || 0.05), cost = n * rate;
+    var cr = num("cap_run"), sub = num("sub");
+    var pctPlan = sub ? cost / sub * 100 : 0;
+    return '<div class="calc"><div class="calc-h">The first real job <em>priced before you run it</em></div>'+
+      '<div class="calc-in">'+
+        ci("p_run", "Blended $ per generation", val("p_run")===undefined?(avg?avg.toFixed(2):0.05):val("p_run"), "$")+
+      '</div>'+
+      '<div class="calc-out">'+
+        '<div class="kpi"><span class="v'+(n?'':' dim')+'">'+(n?usd(cost):"—")+'</span><span class="l">Whole job</span></div>'+
+        '<div class="kpi"><span class="v'+(n&&cr&&cost<=cr?'':' dim')+'">'+(cr?usd(cr):"—")+'</span><span class="l">Your cap</span></div>'+
+        '<div class="kpi"><span class="v'+(n&&sub?'':' dim')+'">'+((n&&sub)?Math.round(pctPlan)+"%":"—")+'</span><span class="l">Of one month of plan</span></div>'+
+      '</div>'+
+      '<div class="calc-note">'+
+      (!n ? 'How many generations does that job really need? Count the variations, not the finals — the variations are the bill.'
+       : (cr && cost > cr)
+          ? '<b>Your first job trips your own cap</b> ('+usd(cost)+' against '+usd(cr)+'). That is not a reason to raise the cap on the spot. Split it into runs, or drop the discovery setting in step 6 from three models to one.'
+       : (sub && pctPlan < 25)
+          ? 'The whole job runs <b>'+usd(cost)+'</b> — about <b>'+Math.round(pctPlan)+'%</b> of a single month of '+esc(toolName())+'. That number is the argument. Put it in front of whoever signs the invoice.'
+          : 'The whole job runs <b>'+usd(cost)+'</b>'+(sub?', roughly <b>'+Math.round(pctPlan)+'%</b> of one month of '+esc(toolName()):'')+'. Quote it, run it, and log what it actually came to — the estimate is only ever an estimate.')+
+      '</div></div>';
+  }
+};
+
+/* Live totals for a {t:"rows"} table, keyed by the row key. */
+var ROW_TOTALS = {
+  bench_rows: function(rs){
+    var t = campaign(rs);
+    return t ? 'One campaign <b>'+usd(t)+'</b>' : null;
+  }
+};
+
+/* ============================================================
+   ▼ AUTHOR 3 — CALC_MD   step key -> extra markdown lines for the export
+   Anything a calculator computed that belongs in the downloadable plan.
+   ============================================================ */
+var CALC_MD = {
+  bill: function(){
+    var sub = num("sub"), p = payg();
+    if(!sub || !p) return [];
+    var d = sub - p, be = Math.round(sub / num("p_img", 0.05));
+    return ["",
+      "- **Priced at** "+usd(num("p_img",0.05))+" per image · "+usd(num("p_vid",0.40))+" per clip",
+      "- **Same output, per call:** "+usd(p)+" against "+usd(sub)+" flat — "+
+        (d>0 ? "**"+usd(d)+" a month of unused optionality**" : "**"+usd(-d)+" a month more than the plan**"),
+      "- **Break-even:** the plan starts paying for itself around **"+be+" images a month**; last month was "+num("img_mo")+"."];
+  },
+  bench: function(){
+    var c = campaign(); if(!c) return [];
+    var cm = num("camp_mo", 2), monthly = c*cm, sub = num("sub");
+    var L = ["", "- **One campaign on this bench:** "+usd(c)+" · **"+cm+" campaigns a month:** "+usd(monthly)];
+    if(sub) L.push("- **Against "+toolName()+":** "+(monthly<=sub ? usd(sub-monthly)+" a month saved" : usd(monthly-sub)+" a month **more** than the plan — check the mix"));
+    return L;
+  },
+  rules: function(){
+    var cr = num("cap_run"), c = campaign();
+    if(!cr) return ["", "- **No per-run cap set.** That is the rule that lets an agent make a hundred images."];
+    var L = ["", "- **Caps:** "+usd(cr)+" per run"+(num("cap_mo")?" · "+usd(num("cap_mo"))+" per month ceiling":" · no monthly ceiling set")];
+    if(c) L.push("- **Cap vs one campaign ("+usd(c)+"):** "+(cr<c ? "**the cap stops the run halfway** — split the campaign or raise it deliberately" : usd(cr-c)+" of headroom"));
+    if(!hasRule("Quote the cost before submitting")) L.push("- ⚠️ **Cost-quote-before-submitting is not on the list.** Add it before you wire a single key.");
+    return L;
+  },
+  cutover: function(){
+    var n = num("first_n"); if(!n) return [];
+    var rate = num("p_run", benchAvg() || 0.05), cost = n*rate, sub = num("sub"), cr = num("cap_run");
+    var L = ["", "- **First job priced:** "+n+" generations × "+usd(rate)+" = **"+usd(cost)+"**"+
+      (sub ? " (about "+Math.round(cost/sub*100)+"% of one month of "+toolName()+")" : "")];
+    if(cr && cost > cr) L.push("- ⚠️ **That job exceeds your own "+usd(cr)+" run cap.** Split it into runs before you start.");
+    return L;
+  }
+};
+
+/* Where to start, shown on the export step and in the markdown. */
+function startHere(){
+  var mode = val("mode"), sub = num("sub"), p = payg();
+  var job = val("first_job") ? "<strong>"+esc(val("first_job"))+"</strong>" : "your first real job";
+  var prim = val("primary") || "your chosen provider";
+  var tail = "";
+
+  if(sub && p){
+    tail = (p < sub)
+      ? " The arithmetic is on your side: <strong>"+usd(sub-p)+" a month</strong> of the plan went unused last month."
+      : " Be straight in the plan: <strong>at your volume the subscription is the cheaper line.</strong> "+
+        (val("stakes")==="Client work"
+          ? "You are leaving for custody, not for price — and on client work that is a real reason. Say it that way to whoever asks."
+          : "If custody is not costing you anything either, the honest move is to stay and revisit at higher volume.");
+  }
+
+  if(mode==="Keep the plan, add the skill")
+    return "You are not cancelling anything, so skip the export drill. Start at <strong>the bench and the rules</strong> — what the skill buys you here is the cost quote before spend and a local log beside every file, not a saving."+tail;
+  if(mode==="Cancel now, build under pressure")
+    return "Before anything else: <strong>export</strong>. The deletion window starts the moment you cancel, not the moment you remember. Then API keys at <strong>"+esc(prim)+"</strong>, the rules file, and "+job+" as the proof."+tail;
+  if(mode==="Run both for one month")
+    return "Pay "+esc(toolName())+" for one more month and run "+job+" on <strong>both</strong> stacks. Get the keys at <strong>"+esc(prim)+"</strong> this week, write the rules file the same day, and cancel on day 30 — after you have exported, not before."+tail;
+
+  return "Go to step 8 and pick a cutover mode. Everything else on this page is a preference until there is a date attached to it."+tail;
+}
+
+/* Intro and closing lines of the exported markdown. */
+function mdIntro(){
+  return ["_Built with The Render Desk implementation wizard, from “This 1 Claude Skill fully replaces your Higgsfield Subscription” — https://www.youtube.com/watch?v=9C4TRbucmhQ_"];
+}
+function mdOutro(){
+  return ["_Every price carried over from the source is one person's screen on one day, quoted from Australia, for one model. Check the provider's own pricing page before you commit to a number._"];
+}
+
+/* ============================================================
+   ▼ AUTHOR 4 — SIDE   the sticky right column
+   Helpers: card(title, innerHTML) kv(label, value) progressCard()
+   Keep it to what changes as they type — a mirror, not a menu.
+   ============================================================ */
+function renderSide(){
+  var sub = num("sub"), p = payg(), c = campaign();
+  var verdict = (sub && p) ? (p < sub ? "Price says leave" : "Price says stay") : "";
+
+  var decision = card("The verdict",
+    kv("Renting", val("tool")) +
+    kv("Plan / mo", sub ? usd(sub) : "") +
+    kv("Per call", (num("img_mo")||num("vid_mo")) ? usd(p)+" / mo" : "") +
+    kv("On price", verdict) +
+    kv("Stake", val("stakes"))
+  );
+
+  var stack = card("The stack",
+    kv("First hop", val("primary")) +
+    kv("Falls to", val("fallback")) +
+    kv("Campaign", c ? usd(c) : "") +
+    kv("Cap / run", val("cap_run") ? usd(num("cap_run")) : "") +
+    kv("Cutover", val("mode"))
+  );
+
+  var order = card("Build order", seqList([
+    {t:"Price the month you actually had",        ok: !!(sub && (num("img_mo")||num("vid_mo")))},
+    {t:"Name why you are leaving",                ok: !!(val("why") && String(val("why")).trim())},
+    {t:"Get API keys at "+(val("primary")||"your first provider"), ok: !!val("primary")},
+    {t:"Write the fallback chain into the skill", ok: !!(val("primary") && val("fallback"))},
+    {t:"Price the bench",                         ok: c > 0},
+    {t:"Set the caps and the hard rules",         ok: !!(num("cap_run") && (val("hard")||[]).length)},
+    {t:"Point it at your references",             ok: !!(val("refs") && String(val("refs")).trim())},
+    {t:"Build somewhere to look at the output",   ok: !!val("surface")},
+    {t:"Export, then run the first real job",     ok: !!(val("first_job") && val("mode"))}
+  ]));
+
+  return decision + stack + order + progressCard();
+}
+
+/* ============================================================
+   ENGINE — no edits needed below this line
+   ============================================================ */
+var BYKEY = {}; for(var i=0;i<STEPS.length;i++) BYKEY[STEPS[i].k] = STEPS[i];
+
+/* ---------- state ---------- */
+function blank(){ return {name:"", step:0, v:{}}; }
+var store = blank();
+(function(){
+  try{
+    var raw = localStorage.getItem(KEY);
+    if(raw){ var p = JSON.parse(raw); if(p && typeof p==="object"){ store = p; store.v = store.v || {}; } }
+  }catch(e){}
+})();
+function save(){ try{ localStorage.setItem(KEY, JSON.stringify(store)); }catch(e){} }
+function val(k){ return store.v[k]; }
+function setv(k,x){ store.v[k]=x; save(); }
+
+/* ---------- helpers ---------- */
+function esc(s){ return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
+function num(k, d){ var n = parseFloat(val(k)); return isFinite(n) ? n : (d===undefined?0:d); }
+function money(n){
+  if(!isFinite(n)) return "—";
+  return CUR + Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+}
+function slug(s){ return String(s||"").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"").slice(0,60) || "render-desk-plan"; }
+function rowsOf(k){ var r = val(k); return (r && r.length) ? r : []; }
+function rowFilled(r){ if(!r) return false; for(var q in r){ if(r[q] && String(r[q]).trim()) return true; } return false; }
+function fieldOf(k){
+  for(var i=0;i<STEPS.length;i++) for(var j=0;j<STEPS[i].fields.length;j++)
+    if(STEPS[i].fields[j].k===k) return STEPS[i].fields[j];
+  return null;
+}
+
+/* fields that count towards progress */
+function countable(f){ return f.t==="text"||f.t==="area"||f.t==="num"||f.t==="choice"||f.t==="multi"||f.t==="rows"; }
+function filled(f){
+  if(f.t==="rows"){ var rs = rowsOf(f.k); for(var i=0;i<rs.length;i++) if(rowFilled(rs[i])) return true; return false; }
+  if(f.t==="multi"){ var a = val(f.k); return !!(a && a.length); }
+  var v = val(f.k); return !!(v!==undefined && v!==null && String(v).trim());
+}
+function stepStats(st){
+  var t=0,d=0;
+  for(var i=0;i<st.fields.length;i++){ var f=st.fields[i]; if(!countable(f)) continue; t++; if(filled(f)) d++; }
+  return {t:t, d:d};
+}
+function overall(){
+  var t=0,d=0;
+  for(var i=0;i<STEPS.length;i++){ var s=stepStats(STEPS[i]); t+=s.t; d+=s.d; }
+  return {t:t, d:d, pct: t? Math.round(d/t*100):0};
+}
+function curStepIdx(){ var n = store.step||0; return Math.max(0, Math.min(STEPS.length-1, n)); }
+function curStep(){ return STEPS[curStepIdx()]; }
+
+/* ---------- rendering ---------- */
+var body = document.getElementById("body");
+var rail = document.getElementById("rail");
+
+function renderRail(){
+  var h = "";
+  for(var i=0;i<STEPS.length;i++){
+    var st = STEPS[i], s = stepStats(st);
+    var done = s.t>0 && s.d===s.t;
+    h += '<button type="button" data-go="'+i+'"'+(i===curStepIdx()?' aria-current="true"':'')+(done&&i!==curStepIdx()?' class="done"':'')+'>'+
+         (i<STEPS.length-1 ? ("0"+(i+1)).slice(-2)+" " : "")+esc(st.nav)+'</button>';
+  }
+  rail.innerHTML = h;
+}
+
+function renderFields(fields){
+  var h = "";
+  for(var i=0;i<fields.length;i++){
+    var f = fields[i];
+    switch(f.t){
+      case "sec": h += '<h3 class="sec">'+esc(f.label)+'</h3>'; break;
+      case "note":
+        h += '<div class="note '+(f.tone||"")+'"><b>'+esc(f.title)+'</b>'+f.body+'</div>'; break;
+      case "text":
+        h += '<div class="f"><label for="fld_'+f.k+'">'+esc(f.label)+'</label>'+
+             (f.help?'<div class="help">'+f.help+'</div>':'')+
+             '<input type="text" id="fld_'+f.k+'" data-k="'+f.k+'" placeholder="'+esc(f.ph||"")+'" value="'+esc(val(f.k)||"")+'"></div>';
+        break;
+      case "area":
+        h += '<div class="f"><label for="fld_'+f.k+'">'+esc(f.label)+'</label>'+
+             (f.help?'<div class="help">'+f.help+'</div>':'')+
+             '<textarea id="fld_'+f.k+'" data-k="'+f.k+'" rows="'+(f.rows||4)+'" placeholder="'+esc(f.ph||"")+'">'+esc(val(f.k)||"")+'</textarea></div>';
+        break;
+      case "num":
+        h += '<div class="f"><label for="fld_'+f.k+'">'+esc(f.label)+'</label>'+
+             (f.help?'<div class="help">'+f.help+'</div>':'')+
+             '<div class="numwrap">'+(f.pre?'<span class="pre">'+esc(f.pre)+'</span>':'')+
+             '<input type="number" id="fld_'+f.k+'" data-k="'+f.k+'" placeholder="'+esc(f.ph||"")+'" value="'+esc(val(f.k)||"")+'">'+
+             (f.suf?'<span class="suf">'+esc(f.suf)+'</span>':'')+'</div></div>';
+        break;
+      case "choice":
+        h += '<div class="f"><span class="flab">'+esc(f.label)+'</span>'+
+             (f.help?'<div class="help">'+f.help+'</div>':'')+'<div class="opts'+(f.opts.length>2?'':' two')+'">';
+        for(var a=0;a<f.opts.length;a++){
+          var o = f.opts[a], on = val(f.k)===o.v;
+          h += '<button type="button" class="opt" data-pick="'+f.k+'" data-v="'+esc(o.v)+'" aria-pressed="'+(on?"true":"false")+'">'+
+               '<span class="mk"></span>'+(o.tag?'<span class="tag">'+esc(o.tag)+'</span>':'')+
+               '<h4>'+esc(o.h||o.v)+'</h4><p>'+esc(o.d)+'</p></button>';
+        }
+        h += '</div></div>';
+        break;
+      case "multi":
+        var sel = val(f.k) || [];
+        h += '<div class="f"><span class="flab">'+esc(f.label)+'</span>'+
+             (f.help?'<div class="help">'+f.help+'</div>':'')+'<div class="opts">';
+        for(var b=0;b<f.opts.length;b++){
+          var o2 = f.opts[b], on2 = sel.indexOf(o2.v)>=0;
+          h += '<button type="button" class="opt sq" data-toggle="'+f.k+'" data-v="'+esc(o2.v)+'" aria-pressed="'+(on2?"true":"false")+'">'+
+               '<span class="mk"></span>'+(o2.tag?'<span class="tag">'+esc(o2.tag)+'</span>':'')+
+               '<h4>'+esc(o2.v)+'</h4><p>'+esc(o2.d)+'</p></button>';
+        }
+        h += '</div></div>';
+        break;
+      case "rows": h += renderRows(f); break;
+      case "calc": h += renderCalc(f.id); break;
+      case "export": h += renderExport(); break;
+    }
+  }
+  return h;
+}
+
+function renderRows(f){
+  var rs = rowsOf(f.k).slice();
+  while(rs.length < (f.min||3)) rs.push({});
+  var h = '<div class="f"><span class="flab">'+esc(f.label)+'</span>'+
+          (f.help?'<div class="help">'+f.help+'</div>':'')+'<div class="rows" data-rows="'+f.k+'"><div class="rowsh">';
+  for(var c=0;c<f.cols.length;c++) h += '<span style="width:'+f.cols[c].w+'">'+esc(f.cols[c].label)+'</span>';
+  h += '<span style="width:34px"></span></div>';
+  for(var r=0;r<rs.length;r++){
+    h += '<div class="rw">';
+    for(var c2=0;c2<f.cols.length;c2++){
+      var col = f.cols[c2];
+      h += '<div style="width:'+col.w+'"><input type="text" data-rk="'+f.k+'" data-ri="'+r+'" data-rc="'+col.k+'" value="'+esc(rs[r][col.k]||"")+'" aria-label="'+esc(col.label)+' row '+(r+1)+'"></div>';
+    }
+    h += '<div class="del"><button type="button" data-rowdel="'+f.k+'" data-ri="'+r+'" title="Remove row">&times;</button></div></div>';
+  }
+  var tot = ROW_TOTALS[f.k] ? ROW_TOTALS[f.k](rs) : null;
+  h += '<div class="rowsf"><button class="btn sm" type="button" data-rowadd="'+f.k+'">+ Row</button>'+
+       (tot?'<span class="tot">'+tot+'</span>':'')+'</div></div></div>';
+  return h;
+}
+
+function renderCalc(id){ return CALCS[id] ? CALCS[id]() : ""; }
+
+/* one labelled number input inside a .calc-in block */
+function ci(k, label, v, unit){
+  var isPct = unit==="%";
+  return '<div class="ci"><label>'+esc(label)+'</label><div class="numwrap">'+
+    (isPct?'':'<span class="pre">'+esc(unit||CUR)+'</span>')+
+    '<input type="number" data-k="'+k+'" value="'+esc(v===undefined||v===null?"":v)+'">'+
+    (isPct?'<span class="suf">%</span>':'')+'</div></div>';
+}
+
+/* ---------- export step ---------- */
+function renderExport(){
+  var o = overall();
+  var gaps = [];
+  for(var i=0;i<STEPS.length-1;i++){
+    var s = stepStats(STEPS[i]);
+    if(s.t && s.d < s.t) gaps.push(STEPS[i].nav+" ("+s.d+"/"+s.t+")");
+  }
+  return '<div class="done-grid">'+
+    '<div class="dc"><h5>Completed</h5><p><b>'+o.d+' of '+o.t+'</b> fields across '+(STEPS.length-1)+' steps.</p></div>'+
+    '<div class="dc"><h5>Still open</h5><p>'+(gaps.length?esc(gaps.join(" · ")):"Nothing — every step is filled.")+'</p></div>'+
+    '</div>'+
+    '<div class="note"><b>Where to start</b>'+startHere()+'</div>'+
+    '<div class="f"><span class="flab">Your plan, as markdown</span><textarea id="out" readonly aria-label="Your plan in markdown"></textarea></div>'+
+    '<div class="outbar"><span class="t" id="outlen"></span>'+
+    '<button class="btn" type="button" data-a="copy">Copy</button>'+
+    '<button class="btn primary" type="button" data-a="download">Download .md</button></div>'+
+    '<div id="manual"></div>';
+}
+
+/* ---------- markdown ---------- */
+function markdown(){
+  var L = [], o = overall();
+  L.push("# "+(store.name || "The Render Desk plan"));
+  L.push("");
+  L = L.concat(mdIntro());
+  L.push("");
+  L.push("**Completeness:** "+o.d+"/"+o.t+" fields ("+o.pct+"%)");
+  L.push("");
+  L.push("---");
+
+  for(var i=0;i<STEPS.length-1;i++){
+    var st = STEPS[i];
+    var chunk = [];
+    for(var j=0;j<st.fields.length;j++){
+      var f = st.fields[j];
+      if(!countable(f) || !filled(f)) continue;
+      /* a block (list, table, quote) after a bullet needs a blank line or it joins the list */
+      if(f.t!=="text" && f.t!=="num" && f.t!=="choice" && chunk.length && chunk[chunk.length-1]) chunk.push("");
+      if(f.t==="multi"){
+        var sel = val(f.k)||[];
+        chunk.push("**"+f.label+"**"); chunk.push("");
+        for(var a=0;a<sel.length;a++) chunk.push("- "+sel[a]);
+        chunk.push("");
+      } else if(f.t==="rows"){
+        var rs = rowsOf(f.k).filter(rowFilled);
+        if(!rs.length) continue;
+        chunk.push("**"+f.label+"**"); chunk.push("");
+        chunk.push("| "+f.cols.map(function(c){return c.label;}).join(" | ")+" |");
+        chunk.push("|"+f.cols.map(function(){return "---";}).join("|")+"|");
+        for(var r=0;r<rs.length;r++){
+          chunk.push("| "+f.cols.map(function(c){ return String(rs[r][c.k]||"").replace(/\|/g,"\\|"); }).join(" | ")+" |");
+        }
+        chunk.push("");
+      } else if(f.t==="area"){
+        chunk.push("**"+f.label+"**"); chunk.push("");
+        var lines = String(val(f.k)).split(/\n/);
+        for(var q=0;q<lines.length;q++) chunk.push("> "+lines[q]);
+        chunk.push("");
+      } else {
+        var pre = f.pre||"", suf = f.suf?(" "+f.suf):"";
+        chunk.push("- **"+f.label+":** "+pre+String(val(f.k))+suf);
+      }
+    }
+    if(CALC_MD[st.k]) chunk = chunk.concat(CALC_MD[st.k]());
+    while(chunk.length && !chunk[0]) chunk.shift();
+    if(!chunk.length) continue;
+    L.push("");
+    L.push("## "+(i+1)+" · "+st.title);
+    L.push("");
+    L = L.concat(chunk);
+  }
+
+  L.push("");
+  L.push("---");
+  L.push("");
+  L.push("## Where to start");
+  L.push("");
+  L.push(startHere().replace(/<\/?(b|strong)>/g,"**"));
+  L.push("");
+  L = L.concat(mdOutro());
+  return L.join("\n");
+}
+
+/* ---------- side column ---------- */
+function card(title, inner){
+  return '<div class="card"><div class="card-h"><i></i>'+esc(title)+'</div><div class="card-b">'+inner+'</div></div>';
+}
+function kv(k,v){
+  return '<div class="kv"><span class="k">'+esc(k)+'</span><span class="v'+(v?'':' empty')+'">'+esc(v||"not set")+'</span></div>';
+}
+function seqList(items){
+  var h = "";
+  for(var i=0;i<items.length;i++) h += '<li class="'+(items[i].ok?"done":"")+'"><i>'+(items[i].ok?"":("0"+(i+1)).slice(-2))+'</i><span>'+esc(items[i].t)+'</span></li>';
+  return '<ul class="seq">'+h+'</ul>';
+}
+function progressCard(){
+  var o = overall();
+  return card("Progress",
+    '<div class="kv"><span class="k">Filled</span><span class="v">'+o.d+' / '+o.t+' fields</span></div>'+
+    '<div class="track" style="width:100%"><i class="fill" style="width:'+o.pct+'%"></i></div>');
+}
+function repaintSide(){ document.getElementById("side").innerHTML = renderSide(); }
+
+/* ---------- paint ---------- */
+function paint(){
+  var st = curStep(), idx = curStepIdx();
+  document.getElementById("sno").textContent = "STEP "+("0"+(idx+1)).slice(-2)+" / "+("0"+STEPS.length).slice(-2);
+  document.getElementById("stitle").textContent = st.title;
+  document.getElementById("shint").textContent = st.hint||"";
+  body.innerHTML = (st.lede ? '<p class="lede">'+st.lede+'</p>' : "") + renderFields(st.fields);
+
+  document.getElementById("prev").disabled = idx===0;
+  var nx = document.getElementById("next");
+  nx.textContent = idx===STEPS.length-1 ? "Done" : "Next →";
+  nx.disabled = idx===STEPS.length-1;
+
+  bumpProgress();
+  repaintSide();
+
+  if(st.fields.length && st.fields[st.fields.length-1].t==="export"){
+    var md = markdown(), out = document.getElementById("out");
+    if(out){ out.value = md; document.getElementById("outlen").textContent = md.length+" characters"; }
+  }
+  window.scrollTo({top:0, behavior:"instant"});
+}
+
+/* ---------- events ---------- */
+document.addEventListener("input", function(e){
+  var t = e.target;
+  if(t.id==="sname"){ store.name = t.value; save(); return; }
+
+  var k = t.getAttribute("data-k");
+  if(k){
+    setv(k, t.value);
+    repaintCalcs();
+    bumpProgress(); repaintSide();
+    return;
+  }
+  var rk = t.getAttribute("data-rk");
+  if(rk){
+    var ri = parseInt(t.getAttribute("data-ri"),10), rc = t.getAttribute("data-rc");
+    var arr = (val(rk)||[]).slice();
+    while(arr.length<=ri) arr.push({});
+    arr[ri] = Object.assign({}, arr[ri]); arr[ri][rc] = t.value;
+    setv(rk, arr);
+    repaintRowTotal(rk);
+    repaintCalcs();
+    bumpProgress(); repaintSide();
+  }
+});
+
+document.addEventListener("click", function(e){
+  var t = e.target.closest ? e.target.closest("[data-a],[data-go],[data-pick],[data-toggle],[data-rowadd],[data-rowdel]") : null;
+  if(!t) return;
+
+  var go = t.getAttribute("data-go");
+  if(go!==null && go!==undefined){ store.step = parseInt(go,10); save(); paint(); return; }
+
+  var pick = t.getAttribute("data-pick");
+  if(pick){
+    var v = t.getAttribute("data-v");
+    setv(pick, val(pick)===v ? "" : v);
+    paint(); return;
+  }
+  var tog = t.getAttribute("data-toggle");
+  if(tog){
+    var v2 = t.getAttribute("data-v");
+    var arr = (val(tog)||[]).slice();
+    var i2 = arr.indexOf(v2);
+    if(i2>=0) arr.splice(i2,1); else arr.push(v2);
+    setv(tog, arr);
+    t.setAttribute("aria-pressed", i2>=0 ? "false" : "true");
+    repaintCalcs(); bumpProgress(); repaintSide();
+    return;
+  }
+  var add = t.getAttribute("data-rowadd");
+  if(add){
+    var f = fieldOf(add), a2 = (val(add)||[]).slice();
+    while(a2.length < ((f&&f.min)||3)) a2.push({});
+    a2.push({}); setv(add, a2); paint(); return;
+  }
+  var del = t.getAttribute("data-rowdel");
+  if(del){
+    var ri2 = parseInt(t.getAttribute("data-ri"),10);
+    var a3 = (val(del)||[]).slice();
+    if(a3.length>ri2) a3.splice(ri2,1);
+    setv(del, a3); paint(); return;
+  }
+
+  switch(t.getAttribute("data-a")){
+    case "next": if(curStepIdx()<STEPS.length-1){ store.step=curStepIdx()+1; save(); paint(); } break;
+    case "prev": if(curStepIdx()>0){ store.step=curStepIdx()-1; save(); paint(); } break;
+    case "theme": toggleTheme(); break;
+    case "fs": cycleSize(); break;
+    /* data-src="#someTextarea" copies that field instead of the whole plan —
+       used by prompt generators inside calculators */
+    case "copy":
+      var src = t.getAttribute("data-src");
+      var el = src ? document.querySelector(src) : null;
+      copy(el ? (el.value!==undefined ? el.value : el.textContent) : markdown(), t);
+      break;
+    case "download": download(); break;
+    case "reset":
+      if(confirm("Clear this plan? Everything you typed is deleted from this browser.")){
+        store = blank(); save(); document.getElementById("sname").value=""; paint();
+      }
+      break;
+  }
+});
+
+function bumpProgress(){
+  var o = overall();
+  document.getElementById("pct").textContent = o.pct+"%";
+  document.getElementById("fill").style.width = o.pct+"%";
+  renderRail();
+}
+
+/* re-render calculators in place, without stealing focus from the field being typed in */
+function repaintCalcs(){
+  var st = curStep(), ids = [];
+  for(var j=0;j<st.fields.length;j++) if(st.fields[j].t==="calc") ids.push(st.fields[j].id);
+  if(!ids.length) return;
+  var active = document.activeElement;
+  var nodes = body.querySelectorAll(".calc");
+  for(var n=0;n<nodes.length;n++){
+    if(!ids[n]) continue;
+    var tmp = document.createElement("div"); tmp.innerHTML = renderCalc(ids[n]);
+    var fresh = tmp.firstChild;
+    if(!fresh) continue;
+    if(nodes[n].contains(active)){
+      /* never replace the block you are typing in — swap only the computed parts */
+      var live = nodes[n];
+      ["calc-out","calc-note"].forEach(function(cls){
+        var a = live.querySelector("."+cls), b = fresh.querySelector("."+cls);
+        if(a && b) a.innerHTML = b.innerHTML;
+      });
+      continue;
+    }
+    nodes[n].parentNode.replaceChild(fresh, nodes[n]);
+  }
+}
+
+/* update a rows table's footer total without re-rendering its inputs */
+function repaintRowTotal(rk){
+  if(!ROW_TOTALS[rk]) return;
+  var box = body.querySelector('[data-rows="'+rk+'"]');
+  if(!box) return;
+  var html = ROW_TOTALS[rk](rowsOf(rk));
+  var foot = box.querySelector(".rowsf"), tot = foot.querySelector(".tot");
+  if(!html){ if(tot) tot.remove(); return; }
+  if(!tot){ tot = document.createElement("span"); tot.className = "tot"; foot.appendChild(tot); }
+  tot.innerHTML = html;
+}
+
+/* ---------- output helpers ---------- */
+function copy(text, btn){
+  var done = function(){ var o = btn.textContent; btn.textContent = "Copied"; setTimeout(function(){ btn.textContent = o; }, 1400); };
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(done, function(){ fallback(text); done(); });
+  } else { fallback(text); done(); }
+}
+function fallback(text){
+  var ta = document.createElement("textarea");
+  ta.value = text; ta.style.position="fixed"; ta.style.opacity="0";
+  document.body.appendChild(ta); ta.select();
+  try{ document.execCommand("copy"); }catch(e){}
+  document.body.removeChild(ta);
+}
+function download(){
+  var md = markdown(), name = slug(store.name)+".md", worked = false;
+  try{
+    var blob = new Blob([md], {type:"text/markdown;charset=utf-8"});
+    var url = URL.createObjectURL(blob), a = document.createElement("a");
+    a.href = url; a.download = name; a.rel = "noopener";
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 2000);
+    worked = true;
+  }catch(e){ worked = false; }
+  /* Embedded pages block file downloads, and the block is silent — always offer the manual path there. */
+  if(!worked || window.self !== window.top) manualSave(md, name);
+}
+function manualSave(md, name){
+  var host = document.getElementById("manual");
+  if(!host) return;
+  host.innerHTML =
+    '<div class="note warn"><b>If nothing saved</b>This page is embedded, and browsers block file downloads inside an embedded page. '+
+    'Copy the text below and save it as <code>'+esc(name)+'</code> — it is the same file.</div>'+
+    '<textarea id="manualtx" rows="10" readonly aria-label="Your plan in markdown"></textarea>'+
+    '<div class="outbar"><span class="t">'+md.length+' characters</span>'+
+    '<button class="btn primary" data-a="copy" type="button">Copy the plan</button></div>';
+  var tx = document.getElementById("manualtx");
+  tx.value = md; tx.focus(); tx.select();
+}
+/* text size — one root font-size knob; every size in the CSS is rem */
+var FS = ["m","l","xl"];
+function applySize(v){
+  var r = document.documentElement;
+  if(v==="m") r.removeAttribute("data-fs"); else r.setAttribute("data-fs", v);
+  var b = document.querySelector('[data-a="fs"]');
+  if(b) b.textContent = v==="m" ? "A" : (v==="l" ? "A+" : "A++");
+}
+function cycleSize(){
+  var cur = document.documentElement.getAttribute("data-fs") || "m";
+  var next = FS[(FS.indexOf(cur)+1) % FS.length];
+  applySize(next);
+  try{ localStorage.setItem(KEY+".fs", next); }catch(e){}
+}
+function toggleTheme(){
+  var r = document.documentElement;
+  var cur2 = r.getAttribute("data-theme");
+  var sysDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+  var next = cur2 ? (cur2==="dark" ? "light" : "dark") : (sysDark ? "light" : "dark");
+  r.setAttribute("data-theme", next);
+  try{ localStorage.setItem(KEY+".theme", next); }catch(e){}
+}
+
+/* ---------- boot ---------- */
+(function(){
+  try{ var th = localStorage.getItem(KEY+".theme"); if(th) document.documentElement.setAttribute("data-theme", th); }catch(e){}
+  try{ applySize(localStorage.getItem(KEY+".fs") || "m"); }catch(e){ applySize("m"); }
+  document.getElementById("sname").value = store.name || "";
+  paint();
+})();
+</script>
+
+</body>
+</html>

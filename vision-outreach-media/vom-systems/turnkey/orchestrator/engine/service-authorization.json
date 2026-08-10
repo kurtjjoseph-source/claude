@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "mode": "standing",
+  "granted_by": "VOM",
+  "granted_at": "2026-08-03T09:11:49Z",
+  "channel": "operator console (session 2026-08-03)",
+  "targets": [
+    "vercel",
+    "local"
+  ],
+  "scope": "unattended build and deploy of any business submitted through this service, to the targets listed. Covers: composing the platform modules, writing the public site and the prelaunch funnel, wiring rails that already have credentials, publishing the result, and making those deployments publicly reachable. Does NOT cover sending email, charging anyone, posting to any channel, or registering a domain.",
+  "operator": "vom",
+  "hash": "e1d1b7aee7971ea87808c7ada5629650ca8bd818d3d55f24f0c0a4edb17fec7b"
+}

@@ -1,0 +1,272 @@
+.engageai-wrap .nav-tab-wrapper {
+    margin-bottom: 1em;
+}
+
+.engageai-generate-form textarea,
+.engageai-assistant-form textarea {
+    width: 100%;
+}
+
+.engageai-generated {
+    margin-top: 1em;
+    padding-top: 1em;
+    border-top: 1px solid #dcdcde;
+}
+
+.engageai-generated h4 {
+    margin-bottom: 0.25em;
+}
+
+.engageai-channels {
+    margin-top: 1em;
+    padding-top: 1em;
+    border-top: 1px solid #dcdcde;
+}
+
+.engageai-channels h4 {
+    margin-bottom: 0.25em;
+}
+
+.engageai-tickets {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    margin-bottom: 1.5em;
+}
+
+.engageai-card {
+    background: #fff;
+    border: 1px solid #dcdcde;
+    border-radius: 4px;
+    padding: 1em 1.25em;
+    max-width: 800px;
+}
+
+.engageai-card h3 {
+    margin-top: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.6em;
+}
+
+.engageai-risk {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 3px;
+    letter-spacing: 0.03em;
+}
+
+.engageai-risk-low {
+    background: #edf7ed;
+    color: #1e5f2e;
+}
+
+.engageai-risk-high {
+    background: #fbeaea;
+    color: #8a1f1f;
+}
+
+.engageai-rationale {
+    color: #50575e;
+}
+
+.engageai-why {
+    color: #646970;
+}
+
+.engageai-channel-links {
+    font-size: 13px;
+}
+
+.engageai-question {
+    background: #fcf9e8;
+    padding: 0.75em 1em;
+    border-radius: 3px;
+}
+
+.engageai-subfields {
+    background: #f6f7f7;
+    padding: 0.5em 0.9em;
+    border-radius: 3px;
+    margin: 0.5em 0;
+}
+
+.engageai-decision-form textarea {
+    width: 100%;
+    max-width: 600px;
+}
+
+.engageai-decision-note {
+    background: #f6f7f7;
+    padding: 0.6em 0.9em;
+    border-radius: 3px;
+}
+
+.engageai-profile-form {
+    margin-bottom: 1.5em;
+}
+
+.engageai-profile-form input[type="text"] {
+    margin-right: 0.5em;
+}
+
+.engageai-score-badge {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 2px 10px;
+    border-radius: 12px;
+    background: #f0f0f1;
+    color: #1d2327;
+}
+
+.engageai-score-high {
+    background: #edf7ed;
+    color: #1e5f2e;
+}
+
+.engageai-score-mid {
+    background: #fcf9e8;
+    color: #7a6115;
+}
+
+.engageai-score-low {
+    background: #fbeaea;
+    color: #8a1f1f;
+}
+
+.engageai-classification {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 3px;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+}
+
+.engageai-classification-saturated {
+    background: #fcf9e8;
+    color: #7a6115;
+}
+
+.engageai-classification-growing {
+    background: #edf7ed;
+    color: #1e5f2e;
+}
+
+.engageai-classification-healthy {
+    background: #eaf2fb;
+    color: #1a4d8f;
+}
+
+.engageai-classification-white_space {
+    background: #fbeaea;
+    color: #8a1f1f;
+}
+
+.engageai-classification-new {
+    background: #f0f0f1;
+    color: #1d2327;
+}
+
+.engageai-breakdown {
+    margin-top: 0.5em;
+}
+
+.engageai-breakdown table {
+    margin-top: 0.4em;
+}
+
+.engageai-inline-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5em;
+    align-items: center;
+    margin: 1em 0;
+}
+
+.engageai-radar {
+    max-width: 460px;
+    margin: 1em 0 1.5em;
+}
+
+.engageai-radar svg {
+    width: 100%;
+    height: auto;
+}
+
+.engageai-stat-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+    margin: 1em 0 1.5em;
+}
+
+.engageai-stat-card {
+    background: #fff;
+    border: 1px solid #dcdcde;
+    border-radius: 4px;
+    padding: 1em 1.25em;
+    min-width: 160px;
+}
+
+.engageai-stat-label {
+    margin: 0 0 0.25em;
+    color: #50575e;
+    font-size: 13px;
+}
+
+.engageai-stat-value {
+    margin: 0;
+    font-size: 28px;
+    font-weight: 700;
+    color: #1d2327;
+}
+
+.engageai-stat-positive {
+    color: #1e5f2e;
+}
+
+.engageai-stat-negative {
+    color: #8a1f1f;
+}
+
+.engageai-cycle-distribution {
+    margin-bottom: 1.5em;
+}
+
+.engageai-cycle-status {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 3px;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    background: #f0f0f1;
+    color: #1d2327;
+}
+
+.engageai-cycle-status-completed {
+    background: #edf7ed;
+    color: #1e5f2e;
+}
+
+.engageai-cycle-status-dry_run {
+    background: #eaf2fb;
+    color: #1a4d8f;
+}
+
+.engageai-cycle-status-blocked_no_baseline,
+.engageai-cycle-status-no_action {
+    background: #fcf9e8;
+    color: #7a6115;
+}
+
+.engageai-cycle-simulated {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    color: #7a6115;
+}

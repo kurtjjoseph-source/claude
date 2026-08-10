@@ -1,0 +1,824 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Leverage Stack — The Operator's Academy</title>
+<meta name="description" content="The core AI-operator leverage every VOM system depends on: the four leverage layers, the audit→optimize→automate loop, and cost-as-leverage thinking — taught as a working course.">
+<style>
+  :root{
+    --c:#2b86bd; --c-ink:#1c5e88;
+    --bg:#f6f5f1; --surface:#ffffff; --surface-2:#efeee7; --surface-3:#e9e7dd;
+    --line:#e1dfd4; --line-soft:#ece9df;
+    --ink:#1a1d1b; --ink-dim:#535b56; --ink-faint:#868f89;
+    --good:#3f8f5b; --good-bg:#e7f2ea; --warn:#b8791f; --warn-bg:#f6ecd8; --bad:#bd5340; --bad-bg:#f6e5e0;
+    --code-bg:#1d211f; --code-ink:#e7ece8; --code-dim:#93a29a;
+    --mono:ui-monospace,"SF Mono","Cascadia Code",Menlo,Consolas,monospace;
+    --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --serif:"Iowan Old Style","Palatino Linotype",ui-serif,Georgia,"Times New Roman",serif;
+    --shadow:0 1px 2px rgba(20,26,22,.04),0 8px 24px -14px rgba(20,26,22,.18);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --c:#5fb9e8; --c-ink:#8fd0f2;
+      --bg:#0e100f; --surface:#161a18; --surface-2:#1c211e; --surface-3:#222824;
+      --line:#2a322d; --line-soft:#212824;
+      --ink:#eef2ef; --ink-dim:#a6b1aa; --ink-faint:#6c7772;
+      --good:#5db97e; --good-bg:#16271d; --warn:#d6a24d; --warn-bg:#2a2113; --bad:#e2836e; --bad-bg:#2a1a16;
+      --code-bg:#0a0c0b; --code-ink:#e2e8e4; --code-dim:#7f8c85;
+      --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px -16px rgba(0,0,0,.7);
+    }
+  }
+  :root[data-theme="light"]{
+    --c:#2b86bd; --c-ink:#1c5e88; --bg:#f6f5f1; --surface:#ffffff; --surface-2:#efeee7; --surface-3:#e9e7dd;
+    --line:#e1dfd4; --line-soft:#ece9df; --ink:#1a1d1b; --ink-dim:#535b56; --ink-faint:#868f89;
+    --good:#3f8f5b; --good-bg:#e7f2ea; --warn:#b8791f; --warn-bg:#f6ecd8; --bad:#bd5340; --bad-bg:#f6e5e0;
+    --code-bg:#1d211f; --code-ink:#e7ece8; --code-dim:#93a29a;
+    --shadow:0 1px 2px rgba(20,26,22,.04),0 8px 24px -14px rgba(20,26,22,.18);
+  }
+  :root[data-theme="dark"]{
+    --c:#5fb9e8; --c-ink:#8fd0f2; --bg:#0e100f; --surface:#161a18; --surface-2:#1c211e; --surface-3:#222824;
+    --line:#2a322d; --line-soft:#212824; --ink:#eef2ef; --ink-dim:#a6b1aa; --ink-faint:#6c7772;
+    --good:#5db97e; --good-bg:#16271d; --warn:#d6a24d; --warn-bg:#2a2113; --bad:#e2836e; --bad-bg:#2a1a16;
+    --code-bg:#0a0c0b; --code-ink:#e2e8e4; --code-dim:#7f8c85;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px -16px rgba(0,0,0,.7);
+  }
+
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{ margin:0; background:var(--bg); color:var(--ink); font-family:var(--sans); line-height:1.6;
+    -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; overflow-x:hidden; }
+  a{ color:var(--c); }
+  ::selection{ background:color-mix(in srgb,var(--c) 30%,transparent); }
+
+  /* ---------- progress bar (fixed top) ---------- */
+  .topbar{ position:fixed; top:0; left:0; right:0; z-index:40; height:4px; background:transparent; }
+  .topbar .fill{ height:100%; width:0; background:linear-gradient(90deg,var(--c),color-mix(in srgb,var(--c) 55%,var(--good))); transition:width .25s ease; }
+
+  .toggle{ position:fixed; top:14px; right:16px; z-index:41; font:inherit; font-size:12.5px; font-weight:650;
+    cursor:pointer; border:1px solid var(--line); background:color-mix(in srgb,var(--bg) 78%,transparent);
+    -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px); color:var(--ink); border-radius:9px; padding:7px 11px; }
+  .toggle:hover{ border-color:var(--c); }
+
+  /* ---------- layout shell ---------- */
+  .shell{ max-width:1160px; margin:0 auto; padding:0 24px; }
+  .layout{ display:grid; grid-template-columns:236px minmax(0,1fr); gap:52px; align-items:start; }
+
+  /* ---------- hero ---------- */
+  header{ position:relative; overflow:hidden; border-bottom:1px solid var(--line);
+    background:radial-gradient(120% 90% at 84% -20%, color-mix(in srgb,var(--c) 15%,transparent), transparent 56%); }
+  .hero{ max-width:1160px; margin:0 auto; padding:78px 24px 46px; }
+  .crumb{ font-family:var(--mono); font-size:11.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-faint); margin:0 0 20px; display:flex; gap:9px; align-items:center; flex-wrap:wrap; }
+  .crumb b{ color:var(--c); font-weight:650; }
+  .flag{ display:inline-flex; align-items:center; gap:7px; font-family:var(--mono); font-size:10.5px; letter-spacing:.11em; text-transform:uppercase; color:var(--c); border:1px solid var(--c); border-radius:20px; padding:4px 11px; margin:0 0 18px; }
+  h1.title{ font-family:var(--serif); font-weight:600; font-size:clamp(42px,8.2vw,80px); line-height:.96; letter-spacing:-.03em; margin:0 0 16px; color:var(--c); text-wrap:balance; }
+  .tagline{ font-family:var(--serif); font-style:italic; font-size:clamp(18px,3vw,25px); color:var(--ink); margin:0 0 20px; }
+  .lede{ font-size:clamp(16px,2.1vw,19px); color:var(--ink-dim); max-width:64ch; margin:0 0 26px; }
+  .hero-meta{ display:flex; flex-wrap:wrap; gap:10px 22px; font-size:13px; color:var(--ink-faint); }
+  .hero-meta span{ display:inline-flex; align-items:center; gap:7px; }
+  .dotc{ width:7px; height:7px; border-radius:50%; background:var(--c); display:inline-block; }
+
+  /* ---------- rail ---------- */
+  .rail{ position:sticky; top:34px; align-self:start; padding-top:44px; }
+  .rail .rlabel{ font-family:var(--mono); font-size:10.5px; letter-spacing:.15em; text-transform:uppercase; color:var(--ink-faint); margin:0 0 14px; padding-left:2px; }
+  .rail ol{ list-style:none; margin:0 0 20px; padding:0; position:relative; }
+  .rail ol::before{ content:""; position:absolute; left:12px; top:11px; bottom:11px; width:2px; background:var(--line); }
+  .rail li{ position:relative; }
+  .rail a.step{ display:flex; gap:12px; align-items:flex-start; text-decoration:none; color:var(--ink-dim); padding:7px 0; font-size:14px; line-height:1.35; }
+  .rail a.step .num{ position:relative; z-index:1; flex:none; width:25px; height:25px; border-radius:50%; background:var(--surface); border:2px solid var(--line);
+    display:grid; place-items:center; font-family:var(--mono); font-size:11px; font-weight:600; color:var(--ink-faint); transition:.2s; }
+  .rail a.step.done .num{ background:var(--good); border-color:var(--good); color:#fff; }
+  .rail a.step.active{ color:var(--ink); font-weight:600; }
+  .rail a.step.active .num{ border-color:var(--c); color:var(--c); box-shadow:0 0 0 4px color-mix(in srgb,var(--c) 16%,transparent); }
+  .rail a.step.done.active .num{ background:var(--good); border-color:var(--good); color:#fff; box-shadow:0 0 0 4px color-mix(in srgb,var(--good) 20%,transparent); }
+  .rail a.step:hover .num{ border-color:var(--c); }
+  .rail .stname{ padding-top:2px; }
+  .rail .prog{ padding-left:2px; }
+  .rail .prog .ptxt{ font-family:var(--mono); font-size:11px; color:var(--ink-faint); letter-spacing:.04em; display:flex; justify-content:space-between; margin-bottom:6px; }
+  .rail .prog .ptxt b{ color:var(--c); }
+  .rail .ptrack{ height:6px; border-radius:6px; background:var(--surface-3); overflow:hidden; }
+  .rail .pbar{ height:100%; width:0; background:var(--good); transition:width .35s ease; border-radius:6px; }
+  .rail .reset{ margin-top:14px; font:inherit; font-size:11.5px; color:var(--ink-faint); background:none; border:none; cursor:pointer; padding:2px; text-decoration:underline; text-underline-offset:3px; }
+  .rail .reset:hover{ color:var(--bad); }
+
+  /* ---------- reading column ---------- */
+  main{ padding:44px 0 60px; min-width:0; }
+  .lesson{ scroll-margin-top:26px; padding-bottom:14px; margin-bottom:40px; border-bottom:1px solid var(--line); }
+  .lesson:last-of-type{ border-bottom:none; }
+  .les-head{ display:flex; align-items:baseline; gap:14px; margin:0 0 8px; }
+  .les-kicker{ font-family:var(--mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--c); }
+  .les-time{ font-family:var(--mono); font-size:11px; color:var(--ink-faint); margin-left:auto; }
+  h2{ font-family:var(--serif); font-weight:600; font-size:clamp(27px,4.4vw,38px); line-height:1.05; letter-spacing:-.02em; margin:0 0 18px; text-wrap:balance; }
+  h3{ font-family:var(--sans); font-weight:700; font-size:16px; letter-spacing:.01em; margin:30px 0 10px; color:var(--ink); }
+  .prose{ font-family:var(--serif); font-size:clamp(16.5px,1.5vw,18.5px); line-height:1.66; color:var(--ink); max-width:66ch; }
+  .prose p{ margin:0 0 16px; }
+  .prose strong{ font-weight:700; }
+  .prose em{ font-style:italic; }
+  .prose .k{ font-family:var(--sans); font-weight:600; font-size:.92em; background:color-mix(in srgb,var(--c) 12%,transparent); color:var(--c-ink); padding:1px 6px; border-radius:5px; white-space:nowrap; }
+  .prose ul{ margin:0 0 16px; padding-left:22px; }
+  .prose li{ margin:0 0 8px; }
+  .dropcap::first-letter{ font-family:var(--serif); font-weight:600; font-size:3.1em; line-height:.82; float:left; margin:6px 10px 0 0; color:var(--c); }
+
+  /* ---------- the ladder diagram ---------- */
+  .ladder{ display:flex; flex-direction:column; gap:10px; margin:26px 0 8px; }
+  .rung{ display:grid; grid-template-columns:44px 1fr auto; gap:16px; align-items:center; background:var(--surface); border:1px solid var(--line);
+    border-left:4px solid var(--rc,var(--c)); border-radius:12px; padding:14px 18px; box-shadow:var(--shadow); }
+  .rung .rn{ font-family:var(--mono); font-size:19px; font-weight:700; color:var(--rc,var(--c)); font-variant-numeric:tabular-nums; }
+  .rung .rt{ font-family:var(--sans); font-weight:700; font-size:15.5px; margin:0 0 3px; }
+  .rung .rd{ font-size:13.5px; color:var(--ink-dim); line-height:1.45; }
+  .rung .reach{ font-family:var(--mono); font-size:10.5px; letter-spacing:.05em; text-transform:uppercase; color:var(--rc,var(--c)); text-align:right; max-width:130px; line-height:1.4; }
+  .ladder-axis{ display:flex; justify-content:space-between; font-family:var(--mono); font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-faint); padding:0 4px; margin-top:4px; }
+
+  /* ---------- callouts ---------- */
+  .callout{ border-radius:12px; padding:16px 18px 16px 20px; margin:22px 0; font-size:14.5px; line-height:1.55; border:1px solid var(--line); background:var(--surface-2); position:relative; }
+  .callout .ctag{ font-family:var(--mono); font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; font-weight:600; display:block; margin-bottom:6px; }
+  .callout.key{ background:color-mix(in srgb,var(--c) 9%,var(--surface)); border-color:color-mix(in srgb,var(--c) 35%,var(--line)); }
+  .callout.key .ctag{ color:var(--c-ink); }
+  .callout.warnbox{ background:var(--warn-bg); border-color:color-mix(in srgb,var(--warn) 40%,var(--line)); }
+  .callout.warnbox .ctag{ color:var(--warn); }
+  .callout b{ color:var(--ink); }
+
+  /* ---------- worked example / code ---------- */
+  .ex{ margin:22px 0; border:1px solid var(--line); border-radius:12px; overflow:hidden; background:var(--surface); box-shadow:var(--shadow); }
+  .ex-head{ display:flex; align-items:center; gap:10px; padding:11px 14px; background:var(--surface-2); border-bottom:1px solid var(--line); }
+  .ex-head .etag{ font-family:var(--mono); font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-faint); }
+  .ex-head .ename{ font-weight:650; font-size:13.5px; }
+  .copybtn{ margin-left:auto; font:inherit; font-family:var(--mono); font-size:11px; letter-spacing:.04em; cursor:pointer; border:1px solid var(--line); background:var(--surface); color:var(--ink-dim); border-radius:7px; padding:5px 10px; transition:.15s; }
+  .copybtn:hover{ border-color:var(--c); color:var(--c); }
+  .copybtn.copied{ border-color:var(--good); color:var(--good); }
+  pre{ margin:0; background:var(--code-bg); color:var(--code-ink); font-family:var(--mono); font-size:12.8px; line-height:1.62;
+    padding:16px 18px; overflow-x:auto; }
+  pre .cm{ color:var(--code-dim); }
+  pre .ky{ color:#8fd0f2; }
+  pre .st{ color:#a9d9a0; }
+  @media (prefers-color-scheme: light){ pre .ky{ color:#7fc2ea; } pre .st{ color:#bfe0b4; } }
+
+  .badgood{ display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:22px 0; }
+  .bgcard{ border:1px solid var(--line); border-radius:12px; padding:14px 16px; background:var(--surface); }
+  .bgcard .bghead{ font-family:var(--mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase; font-weight:600; display:flex; align-items:center; gap:7px; margin-bottom:9px; }
+  .bgcard.bad{ background:var(--bad-bg); border-color:color-mix(in srgb,var(--bad) 35%,var(--line)); }
+  .bgcard.bad .bghead{ color:var(--bad); }
+  .bgcard.good{ background:var(--good-bg); border-color:color-mix(in srgb,var(--good) 35%,var(--line)); }
+  .bgcard.good .bghead{ color:var(--good); }
+  .bgcard .bgbody{ font-size:13.5px; color:var(--ink-dim); line-height:1.5; }
+  .bgcard .bgbody code{ font-family:var(--mono); font-size:12px; background:color-mix(in srgb,var(--ink) 7%,transparent); padding:1px 5px; border-radius:4px; color:var(--ink); }
+
+  /* ---------- loop steps ---------- */
+  .loop{ display:grid; gap:12px; margin:24px 0; }
+  .lstep{ display:grid; grid-template-columns:auto 1fr; gap:16px; align-items:start; }
+  .lstep .lc{ display:flex; flex-direction:column; align-items:center; }
+  .lstep .lci{ width:38px; height:38px; border-radius:10px; background:color-mix(in srgb,var(--c) 12%,var(--surface)); border:1px solid color-mix(in srgb,var(--c) 30%,var(--line));
+    display:grid; place-items:center; font-family:var(--mono); font-weight:700; font-size:14px; color:var(--c); }
+  .lstep .lline{ flex:1; width:2px; background:var(--line); margin:4px 0; min-height:8px; }
+  .lstep:last-child .lline{ display:none; }
+  .lstep .lb h4{ margin:6px 0 4px; font-family:var(--sans); font-size:15px; font-weight:700; }
+  .lstep .lb p{ margin:0; font-size:14px; color:var(--ink-dim); line-height:1.5; }
+  .lstep .lb .lbtag{ font-family:var(--mono); font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-faint); }
+
+  /* ---------- cost table ---------- */
+  .tablewrap{ overflow-x:auto; margin:22px 0; border:1px solid var(--line); border-radius:12px; }
+  table{ border-collapse:collapse; width:100%; min-width:520px; font-size:13.5px; }
+  th,td{ text-align:left; padding:11px 14px; border-bottom:1px solid var(--line-soft); vertical-align:top; }
+  thead th{ font-family:var(--mono); font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-faint); background:var(--surface-2); font-weight:600; }
+  tbody tr:last-child td{ border-bottom:none; }
+  td .tier{ font-weight:700; color:var(--ink); }
+  td .cost{ font-family:var(--mono); font-variant-numeric:tabular-nums; }
+  .c1{ color:var(--good); } .c2{ color:var(--c); } .c3{ color:var(--warn); } .c4{ color:var(--bad); }
+
+  /* ---------- quiz ---------- */
+  .quiz{ border:1px solid var(--line); border-radius:12px; padding:16px 18px; margin:20px 0; background:var(--surface); }
+  .quiz .q{ font-family:var(--serif); font-weight:600; font-size:16.5px; margin:0 0 12px; }
+  .quiz .opts{ display:grid; gap:8px; }
+  .qopt{ display:flex; gap:10px; align-items:flex-start; text-align:left; font:inherit; font-size:14px; cursor:pointer;
+    border:1px solid var(--line); background:var(--surface-2); color:var(--ink); border-radius:9px; padding:10px 13px; transition:.14s; }
+  .qopt:hover{ border-color:var(--c); }
+  .qopt .mk{ flex:none; width:19px; height:19px; border-radius:50%; border:2px solid var(--line); display:grid; place-items:center; font-size:11px; margin-top:1px; }
+  .qopt.correct{ background:var(--good-bg); border-color:var(--good); color:var(--ink); }
+  .qopt.correct .mk{ background:var(--good); border-color:var(--good); color:#fff; }
+  .qopt.wrong{ background:var(--bad-bg); border-color:var(--bad); }
+  .qopt.wrong .mk{ background:var(--bad); border-color:var(--bad); color:#fff; }
+  .qexplain{ margin-top:12px; font-size:13.5px; color:var(--ink-dim); line-height:1.5; padding:11px 13px; background:var(--surface-2); border-radius:9px; border-left:3px solid var(--c); display:none; }
+  .qexplain.show{ display:block; }
+  .qexplain b{ color:var(--ink); }
+
+  /* ---------- checklist (self-check) ---------- */
+  .check{ margin:26px 0 8px; border:1px solid var(--line); border-radius:14px; background:var(--surface-2); padding:18px 20px; }
+  .check .chhead{ display:flex; align-items:center; gap:10px; margin-bottom:4px; }
+  .check .chhead .chtag{ font-family:var(--mono); font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--c-ink); font-weight:600; }
+  .check .chhead .chstate{ margin-left:auto; font-family:var(--mono); font-size:11px; color:var(--ink-faint); }
+  .check .chhead .chstate.done{ color:var(--good); }
+  .check .chsub{ font-size:13px; color:var(--ink-faint); margin:0 0 12px; }
+  .chitem{ display:flex; gap:12px; align-items:flex-start; padding:9px 4px; cursor:pointer; border-radius:8px; }
+  .chitem:hover{ background:color-mix(in srgb,var(--c) 6%,transparent); }
+  .chitem input{ position:absolute; opacity:0; width:0; height:0; }
+  .chitem .box{ flex:none; width:21px; height:21px; margin-top:1px; border-radius:6px; border:2px solid var(--line); background:var(--surface);
+    display:grid; place-items:center; transition:.15s; }
+  .chitem .box svg{ width:12px; height:12px; opacity:0; transform:scale(.5); transition:.15s; }
+  .chitem input:checked ~ .box{ background:var(--good); border-color:var(--good); }
+  .chitem input:checked ~ .box svg{ opacity:1; transform:scale(1); }
+  .chitem input:focus-visible ~ .box{ box-shadow:0 0 0 3px color-mix(in srgb,var(--c) 35%,transparent); }
+  .chitem .ctxt{ font-size:14.5px; color:var(--ink); line-height:1.45; }
+  .chitem input:checked ~ .ctxt{ color:var(--ink-dim); }
+
+  /* ---------- final capstone banner ---------- */
+  .capstone{ margin:36px 0 0; border:1px solid color-mix(in srgb,var(--c) 30%,var(--line)); border-radius:16px; padding:26px 28px;
+    background:radial-gradient(120% 130% at 100% 0%, color-mix(in srgb,var(--c) 12%,transparent), transparent 60%), var(--surface); box-shadow:var(--shadow); }
+  .capstone h3{ margin:0 0 8px; font-family:var(--serif); font-size:22px; font-weight:600; }
+  .capstone p{ margin:0 0 14px; color:var(--ink-dim); font-size:15px; max-width:60ch; }
+  .capstone .medal{ display:none; align-items:center; gap:10px; font-family:var(--mono); font-size:12px; letter-spacing:.06em; text-transform:uppercase; color:var(--good); font-weight:600; }
+  .capstone.complete .medal{ display:inline-flex; }
+  .capstone.complete .todo{ display:none; }
+
+  footer{ border-top:1px solid var(--line); }
+  .foot{ max-width:1160px; margin:0 auto; padding:22px 24px 54px; font-size:12.5px; color:var(--ink-faint);
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; }
+  .foot a{ color:var(--c); text-decoration:none; }
+  .foot a:hover{ text-decoration:underline; }
+
+  a:focus-visible,button:focus-visible,.qopt:focus-visible{ outline:2px solid var(--c); outline-offset:2px; border-radius:6px; }
+
+  /* ---------- responsive ---------- */
+  @media (max-width:860px){
+    .layout{ grid-template-columns:1fr; gap:0; }
+    .rail{ position:static; padding-top:26px; margin-bottom:8px; }
+    .rail ol{ display:flex; overflow-x:auto; gap:4px; padding-bottom:8px; }
+    .rail ol::before{ display:none; }
+    .rail li{ flex:none; }
+    .rail a.step{ flex-direction:column; align-items:center; gap:7px; width:78px; text-align:center; font-size:11.5px; padding:4px; }
+    .rail a.step .stname{ padding-top:0; }
+    .badgood{ grid-template-columns:1fr; }
+    .rung{ grid-template-columns:38px 1fr; }
+    .rung .reach{ grid-column:2; text-align:left; max-width:none; }
+  }
+  @media (prefers-reduced-motion:reduce){ *{ transition:none!important; scroll-behavior:auto!important; } }
+</style>
+</head>
+<body>
+<div class="topbar"><div class="fill" id="scrollfill"></div></div>
+<button class="toggle" id="themeBtn" aria-label="Toggle color theme">◐ Theme</button>
+
+<header>
+  <div class="hero">
+    <p class="crumb"><b>The Operator's Academy</b> <span>·</span> Module 02 <span>·</span> Curriculum</p>
+    <span class="flag">◆ Flagship module of the Academy</span>
+    <h1 class="title">The Leverage Stack</h1>
+    <p class="tagline">“Learn the leverage before you need it.”</p>
+    <p class="lede">Every system in the Vision Outreach Media house — the scans, the reports, the launch kits, the media pipelines — is really the same four moves stacked in a different order. This module teaches those moves directly: the four leverage layers, the loop that turns one manual task into a machine, and the cost thinking that keeps the marginal task near-free.</p>
+    <div class="hero-meta">
+      <span><span class="dotc"></span> 5 lessons</span>
+      <span><span class="dotc"></span> ~35 min read</span>
+      <span><span class="dotc"></span> Copy-ready examples</span>
+      <span><span class="dotc"></span> Progress saved on this device</span>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+<div class="layout">
+
+  <!-- ===================== RAIL ===================== -->
+  <nav class="rail" aria-label="Lesson navigation">
+    <p class="rlabel">The Stack</p>
+    <ol id="railList">
+      <li><a class="step" href="#l1" data-step="1"><span class="num">1</span><span class="stname">The Leverage Ladder</span></a></li>
+      <li><a class="step" href="#l2" data-step="2"><span class="num">2</span><span class="stname">The Operator's Loop</span></a></li>
+      <li><a class="step" href="#l3" data-step="3"><span class="num">3</span><span class="stname">Cost as Leverage</span></a></li>
+      <li><a class="step" href="#l4" data-step="4"><span class="num">4</span><span class="stname">Worked Examples</span></a></li>
+      <li><a class="step" href="#l5" data-step="5"><span class="num">5</span><span class="stname">Assemble the Stack</span></a></li>
+    </ol>
+    <div class="prog">
+      <div class="ptxt"><span>Course progress</span><b id="progPct">0%</b></div>
+      <div class="ptrack"><div class="pbar" id="progBar"></div></div>
+      <button class="reset" id="resetBtn">Reset my progress</button>
+    </div>
+  </nav>
+
+  <!-- ===================== MAIN ===================== -->
+  <main>
+
+    <!-- ============ LESSON 1 ============ -->
+    <section class="lesson" id="l1">
+      <div class="les-head"><span class="les-kicker">Lesson 01</span><span class="les-time">~8 min</span></div>
+      <h2>The Leverage Ladder</h2>
+      <div class="prose">
+        <p class="dropcap">Leverage is the amount of output you get from one unit of your attention. An operator with no leverage does every task with their own hands, every time. An operator with high leverage does a task <em>once</em>, then never spends full attention on it again. The whole job is climbing from the first state to the second — deliberately, one task at a time.</p>
+        <p>There are four layers you can move a task into, and they run from cheapest and most flexible to richest and most expensive. Learn them as a ladder, because that ordering is the single most useful decision rule you will carry into every other VOM system.</p>
+      </div>
+
+      <div class="ladder" aria-hidden="false">
+        <div class="rung" style="--rc:var(--good)">
+          <div class="rn">01</div>
+          <div><p class="rt">Prompts &amp; Context</p><p class="rd">A reusable prompt, a saved instruction, a project context file the model reads before it works. You write the words once and paste — or point — the model at them again and again.</p></div>
+          <div class="reach">Reach first — one-off &amp; still-changing work</div>
+        </div>
+        <div class="rung" style="--rc:var(--c)">
+          <div class="rn">02</div>
+          <div><p class="rt">Skills</p><p class="rd">A named, described procedure the model loads on demand — instructions plus any scripts or reference files it needs. The same steps run the same way every time, and the description triggers it automatically.</p></div>
+          <div class="reach">Reach when the steps stop changing</div>
+        </div>
+        <div class="rung" style="--rc:var(--warn)">
+          <div class="rn">03</div>
+          <div><p class="rt">Scheduled Tasks</p><p class="rd">A skill or prompt that fires on a clock instead of waiting for you to start it. The morning brief, the weekly report, the Monday monitor — they run whether or not you remember.</p></div>
+          <div class="reach">Reach when the work is on a clock</div>
+        </div>
+        <div class="rung" style="--rc:var(--bad)">
+          <div class="rn">04</div>
+          <div><p class="rt">Agents &amp; Agent Teams</p><p class="rd">Autonomous, multi-step work: an agent that plans, uses tools, branches on what it finds, and hands sub-tasks to other agents in parallel. The most capable layer — and the most expensive per run.</p></div>
+          <div class="reach">Reach last — when judgment can't be scripted</div>
+        </div>
+      </div>
+      <div class="ladder-axis"><span>← cheaper · more flexible · less capable</span><span>more capable · pricier →</span></div>
+
+      <div class="prose">
+        <h3>The one rule that governs the ladder</h3>
+        <p>Reach for the <strong>cheapest layer that fully holds the task</strong>, and climb only when the layer below genuinely can't. Most operators do the opposite — they get excited about agents and reach for Layer 4 to do a Layer 1 job. That is how you end up paying premium prices and waiting on a slow, over-powered pipeline to do something a saved prompt did in one shot.</p>
+        <p>Read the ladder the other direction too. If you find yourself doing the same thing by hand for the third time, you are sitting one rung too low — that is your signal to climb. The ladder is not a place you settle; it's a direction you keep pushing each task upward along, until the marginal cost of doing it again is close to nothing.</p>
+      </div>
+
+      <div class="callout key">
+        <span class="ctag">The mental model</span>
+        <b>Same task, four homes.</b> A task doesn't belong to a layer forever. It starts as a prompt, earns its way into a skill once it's stable, gets scheduled once it's routine, and only becomes an agent job if it needs judgment you can't write down. Moving a task <em>up</em> the ladder is the core act of operating with leverage.
+      </div>
+
+      <div class="quiz" data-quiz="q1" data-correct="b">
+        <p class="q">You've written the same three-paragraph outreach email, tweaked per prospect, about four times this month. Where does this task belong <em>right now</em>?</p>
+        <div class="opts">
+          <button class="qopt" data-opt="a"><span class="mk"></span><span>Layer 4 — build an outreach agent that researches and writes each one autonomously.</span></button>
+          <button class="qopt" data-opt="b"><span class="mk"></span><span>Layer 2 — the steps have stabilized, so package it as a skill with the structure baked in.</span></button>
+          <button class="qopt" data-opt="c"><span class="mk"></span><span>Layer 1 — keep pasting the prompt; four times isn't enough to bother.</span></button>
+        </div>
+        <div class="qexplain"><b>Layer 2.</b> Four repetitions with a stable structure is the classic "promote it to a skill" signal — you've earned near-free reuse. An agent (Layer 4) is over-powered and expensive for a templated email; staying at Layer 1 leaves real leverage on the table.</div>
+      </div>
+
+      <div class="check" data-check="c1" data-lesson="1">
+        <div class="chhead"><span class="chtag">Check yourself</span><span class="chstate">0 / 3</span></div>
+        <p class="chsub">Tick each one you can honestly do without looking back.</p>
+        <label class="chitem"><input type="checkbox" data-id="c1a"><span class="box"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6.5L4.7 9L10 3" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="ctxt">I can name the four layers in order, cheapest to richest.</span></label>
+        <label class="chitem"><input type="checkbox" data-id="c1b"><span class="box"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6.5L4.7 9L10 3" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="ctxt">I can state the rule: reach for the cheapest layer that fully holds the task.</span></label>
+        <label class="chitem"><input type="checkbox" data-id="c1c"><span class="box"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6.5L4.7 9L10 3" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="ctxt">I know what signal tells me a task should climb a rung.</span></label>
+      </div>
+    </section>
+
+    <!-- ============ LESSON 2 ============ -->
+    <section class="lesson" id="l2">
+      <div class="les-head"><span class="les-kicker">Lesson 02</span><span class="les-time">~7 min</span></div>
+      <h2>The Operator's Loop: Audit → Optimize → Automate</h2>
+      <div class="prose">
+        <p class="dropcap">The ladder tells you <em>where</em> a task should live. The loop tells you <em>how</em> to move it there without breaking it. It's four moves, and the order is not optional — skip a step and you automate a mess.</p>
+      </div>
+
+      <div class="loop">
+        <div class="lstep">
+          <div class="lc"><div class="lci">1</div><div class="lline"></div></div>
+          <div class="lb"><span class="lbtag">Audit — do it once by hand</span><h4>Run the task manually and watch yourself do it.</h4><p>Every decision you make, every input you go looking for, every place you pause to think — write it down. You cannot package a process you haven't actually seen. The goal of this pass is a plain-language list of the real steps, including the judgment calls you make on autopilot.</p></div>
+        </div>
+        <div class="lstep">
+          <div class="lc"><div class="lci">2</div><div class="lline"></div></div>
+          <div class="lb"><span class="lbtag">Optimize — fix the steps</span><h4>Cut, reorder, and standardize before you package anything.</h4><p>Remove steps that don't earn their place. Nail down the inputs (same shape every time) and the outputs (a defined format). Replace "I just kind of know" with an explicit rule. A process that's ambiguous to you will be ambiguous to a skill, a schedule, or an agent — and they can't ask a colleague.</p></div>
+        </div>
+        <div class="lstep">
+          <div class="lc"><div class="lci">3</div><div class="lline"></div></div>
+          <div class="lb"><span class="lbtag">Package — make it repeatable</span><h4>Turn the clean procedure into a skill.</h4><p>Now it's worth writing down permanently: a description that says what it does and when to use it, the ordered steps, and any reference files or scripts it leans on. This is the moment a task stops living in your head and starts living in a system that anyone — or any agent — can invoke.</p></div>
+        </div>
+        <div class="lstep">
+          <div class="lc"><div class="lci">4</div></div>
+          <div class="lb"><span class="lbtag">Automate — remove yourself</span><h4>Schedule it, or hand it to an agent.</h4><p>Once the packaged procedure runs cleanly under supervision, take your hands off. Put it on a clock if it's recurring, or delegate it to an agent if it needs to branch and use tools. You only reach this step <em>after</em> the process is stable — automation is an amplifier, and it amplifies whatever you point it at.</p></div>
+        </div>
+      </div>
+
+      <div class="callout warnbox">
+        <span class="ctag">The expensive mistake</span>
+        <b>Never automate a mess.</b> Automating a bad process doesn't fix it — it just produces bad output faster and more often, and now nobody's watching. The loop's order exists to stop exactly this. Optimize <em>before</em> you package; package <em>before</em> you automate.
+      </div>
+
+      <div class="prose">
+        <p>Notice how the loop maps onto the ladder: <span class="k">Audit</span> and <span class="k">Optimize</span> happen while the task still lives at Layer 1 (prompts and context). <span class="k">Package</span> promotes it to Layer 2 (a skill). <span class="k">Automate</span> pushes it to Layer 3 or 4. The loop <em>is</em> the act of climbing — done responsibly.</p>
+        <p>And it's a loop, not a line. When the automated version drifts or the world changes, you drop back to Audit, watch the new reality, and climb again. Good operators run this quietly and constantly, on one small task at a time, rather than trying to automate everything at once.</p>
+      </div>
+
+      <div class="quiz" data-quiz="q2" data-correct="c">
+        <p class="q">Your weekly client report takes an hour and involves a few "it depends" judgment calls you make from memory. What's the mistake to avoid?</p>
+        <div class="opts">
+          <button class="qopt" data-opt="a"><span class="mk"></span><span>Auditing it first — you already know the steps, that's wasted time.</span></button>
+          <button class="qopt" data-opt="b"><span class="mk"></span><span>Optimizing the inputs into a fixed format before packaging.</span></button>
+          <button class="qopt" data-opt="c"><span class="mk"></span><span>Jumping straight to a scheduled agent while those judgment calls are still undefined.</span></button>
+        </div>
+        <div class="qexplain"><b>Jumping to automation too early.</b> Those "it depends" calls are exactly the ambiguity you must resolve in the Optimize step. Schedule it while they're still vibes-based and you'll get confidently wrong reports every week, unwatched. Make the rules explicit first, then climb.</div>
+      </div>
+
+      <div class="check" data-check="c2" data-lesson="2">
+        <div class="chhead"><span class="chtag">Check yourself</span><span class="chstate">0 / 3</span></div>
+        <p class="chsub">Tick each one you can honestly do without looking back.</p>
+        <label class="chitem"><input type="checkbox" data-id="c2a"><span class="box"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6.5L4.7 9L10 3" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="ctxt">I can list the loop's four moves in order and say why order matters.</span></label>
+        <label class="chitem"><input type="checkbox" data-id="c2b"><span class="box"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6.5L4.7 9L10 3" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="ctxt">I understand why "never automate a mess" is the core warning.</span></label>
+        <label class="chitem"><input type="checkbox" data-id="c2c"><span class="box"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6.5L4.7 9L10 3" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="ctxt">I can map each loop step onto the layer of the ladder it moves a task to.</span></label>
+      </div>
+    </section>
+
+    <!-- ============ LESSON 3 ============ -->
+    <section class="lesson" id="l3">
+      <div class="les-head"><span class="les-kicker">Lesson 03</span><span class="les-time">~7 min</span></div>
+      <h2>Cost as Leverage</h2>
+      <div class="prose">
+        <p class="dropcap">Leverage isn't only about your time — it's about the cost of the work itself. Once a task runs on a machine, the question becomes: how cheaply can this run every single time it fires? The operator's instinct is to push each task down to the cheapest tier that still does it well, so the <em>marginal</em> cost of doing it once more stays close to zero.</p>
+        <p>There's a cost ladder inside the automation, running cheapest to priciest:</p>
+      </div>
+
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Tier</th><th>Marginal cost</th><th>Use it for</th></tr></thead>
+          <tbody>
+            <tr><td><span class="tier c1">Code</span></td><td class="cost c1">≈ free</td><td>Anything deterministic — parsing, formatting, math, date logic, moving files, string matching. Don't pay a model to do what a script does perfectly every time.</td></tr>
+            <tr><td><span class="tier c2">Cached context</span></td><td class="cost c2">fraction of full</td><td>Reusing a large, stable prefix — a long system prompt, a knowledge base, a style guide — across many calls. Cache it once, pay a sliver on each reuse.</td></tr>
+            <tr><td><span class="tier c3">Cheap-tier model</span></td><td class="cost c3">low</td><td>Classification, extraction, routing, tagging, first-draft text. Fast, small models handle the high-volume, low-ambiguity middle of most pipelines.</td></tr>
+            <tr><td><span class="tier c4">Premium model</span></td><td class="cost c4">highest</td><td>Genuinely hard reasoning — ambiguous judgment, architecture, nuanced writing, the load-bearing decision a whole pipeline hinges on. Spend here on purpose, not by default.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="prose">
+        <h3>Route the work, don't run it all at the top</h3>
+        <p>A well-built system almost never uses one tier. It <strong>routes</strong>: code does the mechanical parts, cheap-tier models chew through the bulk classification and drafting, cached context carries the shared background, and the premium model is reserved for the one or two steps that actually need frontier judgment. The art is drawing those lines correctly — pushing everything you can downward without breaking quality.</p>
+        <p>Play it out at scale. A task that costs a few cents at the premium tier feels trivial once. Fire it ten thousand times a month on a schedule and the tier you chose is the difference between a rounding error and a real bill. <strong>Keeping the marginal task near-free is what makes automation worth building at all</strong> — leverage that costs a lot per use isn't leverage, it's a subscription to your own process.</p>
+      </div>
+
+      <div class="callout key">
+        <span class="ctag">The routing instinct</span>
+        <b>Code &gt; cached &gt; cheap-tier &gt; premium.</b> Ask of every step: could the tier below do this acceptably? Walk down until the answer is honestly no, and stop there. That's the cheapest correct home for the step.
+      </div>
+
+      <div class="quiz" data-quiz="q3" data-correct="a">
+        <p class="q">A pipeline runs 8,000 times a month. One step reformats a date and strips whitespace from a name. Where should that step run?</p>
+        <div class="opts">
+          <button class="qopt" data-opt="a"><span class="mk"></span><span>Code — it's fully deterministic, so it should cost essentially nothing per run.</span></button>
+          <button class="qopt" data-opt="b"><span class="mk"></span><span>A cheap-tier model — it's simple text work, close enough.</span></button>
+          <button class="qopt" data-opt="c"><span class="mk"></span><span>The premium model — to be safe about edge cases in the formatting.</span></button>
+        </div>
+        <div class="qexplain"><b>Code.</b> Reformatting a date and trimming whitespace is deterministic — a script gets it right every time for ≈ free. Paying <em>any</em> model 8,000 times a month for what a few lines of code do perfectly is exactly the leak this lesson exists to close.</div>
+      </div>
+
+      <div class="check" data-check="c3" data-lesson="3">
+        <div class="chhead"><span class="chtag">Check yourself</span><span class="chstate">0 / 3</span></div>
+        <p class="chsub">Tick each one you can honestly do without looking back.</p>
+        <label class="chitem"><input type="checkbox" data-id="c3a"><span class="box"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6.5L4.7 9L10 3" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="ctxt">I can order the four cost tiers from cheapest to priciest.</span></label>
+        <label class="chitem"><input type="checkbox" data-id="c3b"><span class="box"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6.5L4.7 9L10 3" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="ctxt">I know why deterministic work should be code, not a model call.</span></label>
+        <label class="chitem"><input type="checkbox" data-id="c3c"><span class="box"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6.5L4.7 9L10 3" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="ctxt">I can explain why "keep the marginal task near-free" matters more at scale.</span></label>
+      </div>
+    </section>
+
+    <!-- ============ LESSON 4 ============ -->
+    <section class="lesson" id="l4">
+      <div class="les-head"><span class="les-kicker">Lesson 04</span><span class="les-time">~9 min</span></div>
+      <h2>Worked Examples You Can Lift</h2>
+      <div class="prose">
+        <p class="dropcap">Principles are cheap; patterns you can copy are the real deliverable. Here are three you can lift straight into your own operation — one per layer where the craft actually lives. Read what makes each one good, then adapt the wording to your work.</p>
+
+        <h3>A. A skill description that actually triggers</h3>
+        <p>A skill only helps if it fires at the right moment. The <strong>description is the trigger</strong> — the model reads it to decide whether to load the skill. Write it for retrieval: say plainly <em>what</em> it does, <em>when</em> to use it, and the words a person would naturally use to ask.</p>
+      </div>
+
+      <div class="badgood">
+        <div class="bgcard bad">
+          <div class="bghead"><span>✕</span> Vague — won't fire reliably</div>
+          <div class="bgbody"><code>"Helps with client reports."</code><br><br>No trigger words, no timing, no scope. The model can't tell a weekly performance report from a bug report, so it loads at the wrong time or not at all.</div>
+        </div>
+        <div class="bgcard good">
+          <div class="bghead"><span>✓</span> Specific — fires on the real request</div>
+          <div class="bgbody"><code>"Generate the weekly client performance report from that client's channel scores. Use when the operator asks to 'run the weekly report', 'send the Monday update', or prep a client's weekly numbers. Pulls the latest scores, writes the summary, and formats it for email."</code></div>
+        </div>
+      </div>
+
+      <div class="ex">
+        <div class="ex-head"><span class="etag">Copy-ready</span><span class="ename">weekly-client-report — SKILL.md front matter</span><button class="copybtn" data-copy="ex-skill">Copy</button></div>
+        <pre id="ex-skill"><span class="cm">---</span>
+name: <span class="st">weekly-client-report</span>
+description: <span class="st">Generate a client's weekly performance report from their</span>
+  <span class="st">latest channel scores. Use when the operator asks to "run the</span>
+  <span class="st">weekly report", "send the Monday update", or prep a client's</span>
+  <span class="st">weekly numbers. Pulls latest scores, writes the plain-language</span>
+  <span class="st">summary, and formats it for email.</span>
+<span class="cm">---</span>
+
+<span class="cm"># Steps</span>
+<span class="ky">1.</span> Load the client's latest scores (last 7 days) from the store.
+<span class="ky">2.</span> Compute deltas vs. the prior week for each channel.
+<span class="ky">3.</span> Write a 3-part summary: <span class="st">wins · watch-items · one next step</span>.
+<span class="ky">4.</span> Format with the house email template in ./assets/email.html
+<span class="ky">5.</span> Return as a draft for the operator to review — never auto-send.</pre>
+      </div>
+
+      <div class="callout key">
+        <span class="ctag">Why this is good</span>
+        <b>Trigger phrases + a defined output + a human gate.</b> The description names how people actually ask, the steps standardize the output, and step 5 keeps a person between the machine and the client. Notice it packages a process you'd have <em>audited and optimized</em> first (Lesson 02).
+      </div>
+
+      <div class="prose">
+        <h3>B. A scheduled task, fully specified</h3>
+        <p>A schedule is only as good as what it runs and where the output lands. Specify all four: <strong>when</strong> it fires, <strong>what</strong> it runs, <strong>where</strong> the result goes, and <strong>what happens on failure</strong>. Leave any one vague and you get silent gaps.</p>
+      </div>
+
+      <div class="ex">
+        <div class="ex-head"><span class="etag">Copy-ready</span><span class="ename">scheduled-task — configuration</span><button class="copybtn" data-copy="ex-sched">Copy</button></div>
+        <pre id="ex-sched"><span class="ky">name:</span>        <span class="st">monday-client-updates</span>
+<span class="ky">schedule:</span>    <span class="st">every Monday at 07:00 (operator's timezone)</span>
+<span class="ky">runs:</span>        <span class="st">skill: weekly-client-report</span>   <span class="cm"># the packaged procedure</span>
+<span class="ky">for_each:</span>    <span class="st">client in active_clients</span>       <span class="cm"># loop, one report each</span>
+<span class="ky">model:</span>       <span class="st">cheap-tier</span>                     <span class="cm"># drafting is not premium work</span>
+<span class="ky">output:</span>      <span class="st">draft in operator's review queue</span> <span class="cm"># NOT auto-sent</span>
+<span class="ky">on_success:</span>  <span class="st">notify operator: "12 drafts ready to review"</span>
+<span class="ky">on_failure:</span>  <span class="st">retry once, then alert operator with the error</span>
+<span class="ky">note:</span>        <span class="st">operator reviews + sends by 09:00. Human stays in the loop.</span></pre>
+      </div>
+
+      <div class="callout warnbox">
+        <span class="ctag">Don't skip failure handling</span>
+        <b>A schedule with no failure path is a trap.</b> The one week the data source is down, a silent task produces nothing and nobody notices until a client asks where their report is. <code>on_failure</code> is not optional polish — it's the difference between a system you can trust unattended and one you can't.
+      </div>
+
+      <div class="prose">
+        <h3>C. An agent hand-off that doesn't need a follow-up</h3>
+        <p>When an orchestrator hands work to a subagent, the subagent starts <em>cold</em> — it has none of your context. A good hand-off is completely self-contained: goal, the context it needs, hard constraints, what "done" looks like, and the exact return format. Get this right and you can run subagents in parallel without babysitting; get it wrong and you spend more time correcting than the delegation saved.</p>
+      </div>
+
+      <div class="ex">
+        <div class="ex-head"><span class="etag">Copy-ready</span><span class="ename">orchestrator → subagent — hand-off brief</span><button class="copybtn" data-copy="ex-agent">Copy</button></div>
+        <pre id="ex-agent"><span class="cm"># HAND-OFF BRIEF  (orchestrator → research subagent)</span>
+
+<span class="ky">GOAL:</span>       Assess one prospect's public digital presence and
+            return a channel-by-channel scorecard.
+
+<span class="ky">CONTEXT:</span>    Prospect = "Riverside Community Church", Amersfoort.
+            We score 8 channels on the house rubric (v3).
+            You have web-search + the scoring rubric tool.
+
+<span class="ky">CONSTRAINTS:</span>
+            • Use only public sources — no login-gated pages.
+            • Do not contact the prospect or submit any form.
+            • Cap at ~15 minutes of research; note gaps, don't guess.
+
+<span class="ky">DONE MEANS:</span> All 8 channels scored 0–100 with a one-line reason
+            each, plus a 2-sentence overall read.
+
+<span class="ky">RETURN AS:</span>  JSON: { channel: {score, reason} } + "summary".
+            No prose outside those fields — the orchestrator parses it.</pre>
+      </div>
+
+      <div class="callout key">
+        <span class="ctag">The pattern to internalize</span>
+        <b>Goal · Context · Constraints · Done-criteria · Return format.</b> Every strong hand-off has all five. The return-format line is the one operators forget — pinning it down is what lets the orchestrator combine many subagents' work automatically instead of re-reading each one by hand.
+      </div>
+
+      <div class="quiz" data-quiz="q4" data-correct="b">
+        <p class="q">A subagent keeps returning slightly-different, hard-to-combine results across runs. Which part of the hand-off is most likely missing?</p>
+        <div class="opts">
+          <button class="qopt" data-opt="a"><span class="mk"></span><span>The goal — it doesn't know what it's doing.</span></button>
+          <button class="qopt" data-opt="b"><span class="mk"></span><span>The return format — nothing pins the output shape, so it varies each run.</span></button>
+          <button class="qopt" data-opt="c"><span class="mk"></span><span>The model tier — bump it to premium and the inconsistency goes away.</span></button>
+        </div>
+        <div class="qexplain"><b>The return format.</b> Inconsistent, hard-to-merge output is the signature of an unspecified return shape. Define the exact structure (the JSON contract above) and every run comes back the same way — no premium upgrade required.</div>
+      </div>
+
+      <div class="check" data-check="c4" data-lesson="4">
+        <div class="chhead"><span class="chtag">Check yourself</span><span class="chstate">0 / 3</span></div>
+        <p class="chsub">Tick each one you can honestly do without looking back.</p>
+        <label class="chitem"><input type="checkbox" data-id="c4a"><span class="box"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6.5L4.7 9L10 3" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="ctxt">I can write a skill description that names what, when, and the trigger phrases.</span></label>
+        <label class="chitem"><input type="checkbox" data-id="c4b"><span class="box"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6.5L4.7 9L10 3" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="ctxt">I can name the four parts a scheduled task must specify — including failure.</span></label>
+        <label class="chitem"><input type="checkbox" data-id="c4c"><span class="box"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6.5L4.7 9L10 3" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="ctxt">I can list the five parts of a self-contained agent hand-off.</span></label>
+      </div>
+    </section>
+
+    <!-- ============ LESSON 5 ============ -->
+    <section class="lesson" id="l5">
+      <div class="les-head"><span class="les-kicker">Lesson 05</span><span class="les-time">~4 min</span></div>
+      <h2>Assemble the Stack</h2>
+      <div class="prose">
+        <p class="dropcap">You now hold the whole model. The <strong>ladder</strong> tells you where a task should live; the <strong>loop</strong> moves it there safely; <strong>cost thinking</strong> keeps it near-free once it runs. Put together, they're a single working habit you can apply to any process in front of you — which is exactly what every other product in the VOM house is built on top of.</p>
+        <p>Here's the whole module as one decision path, to run on your next real task:</p>
+        <ul>
+          <li><strong>Spot the repeat.</strong> You're doing something by hand for the third time — that's the signal to climb.</li>
+          <li><strong>Audit &amp; optimize.</strong> Do it once more deliberately, write down the real steps, and make the ambiguous parts explicit.</li>
+          <li><strong>Package it.</strong> Promote the clean procedure to a skill with a description that triggers and an output that's defined.</li>
+          <li><strong>Automate at the right cost.</strong> Put it on a clock or hand it to an agent — and route each step to the cheapest tier that still does it well.</li>
+          <li><strong>Keep a human gate</strong> wherever the output touches a client, and a failure path wherever it runs unattended.</li>
+        </ul>
+        <p>That's the leverage the rest of the house depends on. Learn it here, and every other system — the scans, the reports, the launch kits — stops looking like separate products and starts looking like the same four moves, stacked.</p>
+      </div>
+
+      <div class="quiz" data-quiz="q5" data-correct="c">
+        <p class="q">You've packaged a report skill and want to schedule it to run for every client, unattended, overnight. What's the last thing to lock in before you flip it on?</p>
+        <div class="opts">
+          <button class="qopt" data-opt="a"><span class="mk"></span><span>Upgrade every step to the premium model so nothing goes wrong overnight.</span></button>
+          <button class="qopt" data-opt="b"><span class="mk"></span><span>Nothing — a packaged skill is ready to automate by definition.</span></button>
+          <button class="qopt" data-opt="c"><span class="mk"></span><span>A failure path and a human review gate before anything reaches a client.</span></button>
+        </div>
+        <div class="qexplain"><b>The failure path and human gate.</b> Unattended + client-facing is exactly where silent failures and unreviewed output bite. Premium-everything (a) just burns money; "ready by definition" (b) ignores Lesson 04. The safeguards are the last, non-negotiable step.</div>
+      </div>
+
+      <div class="check" data-check="c5" data-lesson="5">
+        <div class="chhead"><span class="chtag">Final self-check</span><span class="chstate">0 / 3</span></div>
+        <p class="chsub">The whole module, in three claims. Tick each you can defend.</p>
+        <label class="chitem"><input type="checkbox" data-id="c5a"><span class="box"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6.5L4.7 9L10 3" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="ctxt">Given a task, I can decide which layer it belongs in and defend the choice.</span></label>
+        <label class="chitem"><input type="checkbox" data-id="c5b"><span class="box"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6.5L4.7 9L10 3" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="ctxt">I can walk a real task through audit → optimize → package → automate.</span></label>
+        <label class="chitem"><input type="checkbox" data-id="c5c"><span class="box"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6.5L4.7 9L10 3" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="ctxt">I can route the steps of an automation across the four cost tiers.</span></label>
+      </div>
+
+      <div class="capstone" id="capstone">
+        <div class="medal">◆ Module complete — you've learned the leverage</div>
+        <h3 class="todo">Finish the stack</h3>
+        <p class="todo">Work through all five self-checks above to complete the module. Your progress is saved on this device, so you can leave and come back.</p>
+        <p class="medal-sub" style="display:none"></p>
+      </div>
+
+      <style>
+        .join{ margin:38px 0 0; border:1px solid color-mix(in srgb,var(--c) 32%,var(--line)); border-radius:16px; padding:26px 28px;
+          background:radial-gradient(120% 130% at 0% 0%, color-mix(in srgb,var(--c) 11%,transparent), transparent 60%), var(--surface); box-shadow:var(--shadow); }
+        .join-eyebrow{ font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--c); margin-bottom:10px; }
+        .join h3{ font-family:var(--serif); font-size:clamp(22px,3vw,27px); font-weight:600; margin:0 0 6px; }
+        .join > p{ margin:0 0 16px; color:var(--ink-dim); font-size:15px; max-width:58ch; }
+        .join-form{ display:flex; gap:10px; flex-wrap:wrap; }
+        .join-form input[type=email]{ flex:1; min-width:220px; font:inherit; font-size:15px; padding:12px 14px; border:1px solid var(--line); border-radius:10px; background:var(--bg); color:var(--ink); }
+        .join-form input[type=email]:focus{ outline:2px solid var(--c); outline-offset:1px; border-color:var(--c); }
+        .join-form button{ font:inherit; font-size:15px; font-weight:700; padding:12px 22px; border-radius:10px; border:1px solid var(--c); background:var(--c); color:var(--bg); cursor:pointer; }
+        .join-form button:hover{ filter:brightness(1.05); } .join-form button:disabled{ opacity:.6; cursor:default; }
+        .join-note{ margin:12px 0 0; font-size:13.5px; color:var(--good); min-height:1em; }
+        .join-note.err{ color:var(--bad); }
+        .join.done .join-form{ display:none; }
+        .join.done .join-eyebrow, .join.done > h3, .join.done > p{ opacity:.5; }
+      </style>
+      <div class="join" id="joinCard">
+        <div class="join-eyebrow">◆ The Operator's Academy</div>
+        <h3>Get the next module.</h3>
+        <p>New modules, playbooks, and the tools behind every VOM system — sent as they ship. No spam; leave anytime.</p>
+        <form id="joinForm" class="join-form" action="https://formsubmit.co/ajax/hello@visionoutreachmedia.nl" method="POST">
+          <input type="email" name="email" required placeholder="you@work.com" aria-label="Your email" autocomplete="email">
+          <input type="hidden" name="_subject" value="New Operator's Academy signup">
+          <input type="hidden" name="source" value="The Leverage Stack">
+          <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+          <button type="submit">Join the list →</button>
+        </form>
+        <p class="join-note" id="joinNote" role="status"></p>
+      </div>
+      <script>
+      (function(){
+        var f=document.getElementById('joinForm'); if(!f) return;
+        var note=document.getElementById('joinNote'), card=document.getElementById('joinCard');
+        f.addEventListener('submit', function(e){
+          e.preventDefault();
+          var btn=f.querySelector('button'), old=btn.textContent; btn.disabled=true; btn.textContent='Joining…';
+          note.className='join-note'; note.textContent='';
+          fetch(f.action, { method:'POST', headers:{'Accept':'application/json'}, body:new FormData(f) })
+            .then(function(r){ return r.json(); })
+            .then(function(d){
+              if(d && (d.success===true || String(d.success)==='true')){ card.classList.add('done'); note.textContent="You're on the list. Talk soon."; }
+              else { throw new Error('failed'); }
+            })
+            .catch(function(){ btn.disabled=false; btn.textContent=old; note.className='join-note err'; note.textContent="Couldn't sign you up just now — please try again."; });
+        });
+      })();
+      </script>
+    </section>
+
+  </main>
+</div>
+</div>
+
+<footer>
+  <div class="foot">
+    <span>The Leverage Stack — a curriculum module of <b>The Operator's Academy</b>, part of the Vision Outreach Media house of operating systems.</span>
+    <span><a href="index.html">← Back to the Academy</a></span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var STORE = "vom_leverage_stack_v1";
+  var LESSON_ITEMS = { 1:["c1a","c1b","c1c"], 2:["c2a","c2b","c2c"], 3:["c3a","c3b","c3c"], 4:["c4a","c4b","c4c"], 5:["c5a","c5b","c5c"] };
+  var TOTAL = 15;
+
+  /* ---------- state ---------- */
+  function load(){ try{ return JSON.parse(localStorage.getItem(STORE)) || {}; }catch(e){ return {}; } }
+  function save(s){ try{ localStorage.setItem(STORE, JSON.stringify(s)); }catch(e){} }
+  var state = load();
+
+  /* ---------- theme ---------- */
+  var root = document.documentElement, tbtn = document.getElementById("themeBtn");
+  try{ var th = localStorage.getItem("vom_theme"); if(th) root.setAttribute("data-theme", th); }catch(e){}
+  tbtn.addEventListener("click", function(){
+    var cur = root.getAttribute("data-theme");
+    var sysDark = matchMedia("(prefers-color-scheme: dark)").matches;
+    var next = cur === "dark" ? "light" : (cur === "light" ? "dark" : (sysDark ? "light" : "dark"));
+    root.setAttribute("data-theme", next);
+    try{ localStorage.setItem("vom_theme", next); }catch(e){}
+  });
+
+  /* ---------- checkboxes + progress ---------- */
+  var boxes = Array.prototype.slice.call(document.querySelectorAll('.chitem input[type=checkbox]'));
+  boxes.forEach(function(b){
+    var id = b.getAttribute("data-id");
+    if(state[id]) b.checked = true;
+    b.addEventListener("change", function(){
+      state[id] = b.checked; save(state); refresh();
+    });
+  });
+
+  function lessonDone(n){ return LESSON_ITEMS[n].every(function(id){ return state[id]; }); }
+  function countDone(){ var c=0; for(var k in LESSON_ITEMS){ LESSON_ITEMS[k].forEach(function(id){ if(state[id]) c++; }); } return c; }
+
+  function refresh(){
+    /* per-lesson check state text */
+    document.querySelectorAll('.check').forEach(function(chk){
+      var n = +chk.getAttribute("data-lesson");
+      var ids = LESSON_ITEMS[n], done = ids.filter(function(id){ return state[id]; }).length;
+      var st = chk.querySelector(".chstate");
+      st.textContent = done + " / " + ids.length;
+      st.classList.toggle("done", done === ids.length);
+    });
+    /* rail dots */
+    document.querySelectorAll('.rail a.step').forEach(function(a){
+      var n = +a.getAttribute("data-step");
+      a.classList.toggle("done", lessonDone(n));
+      var num = a.querySelector(".num");
+      if(lessonDone(n)) num.innerHTML = '<svg viewBox="0 0 12 12" width="12" height="12" fill="none"><path d="M2 6.5L4.7 9L10 3" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+      else num.textContent = n;
+    });
+    /* progress bar */
+    var done = countDone(), pct = Math.round(done / TOTAL * 100);
+    document.getElementById("progBar").style.width = pct + "%";
+    document.getElementById("progPct").textContent = pct + "%";
+    /* capstone */
+    var cap = document.getElementById("capstone");
+    var allDone = done === TOTAL;
+    cap.classList.toggle("complete", allDone);
+    var sub = cap.querySelector(".medal-sub");
+    if(allDone){ sub.style.display="block"; sub.style.color="var(--ink-dim)"; sub.style.fontSize="15px"; sub.style.margin="0";
+      sub.textContent = "That's the leverage every VOM system runs on. Next stop: apply it in The Distribution Console, or open any product in the house and watch the four moves repeat."; }
+    else { sub.style.display="none"; }
+  }
+
+  /* ---------- reset ---------- */
+  document.getElementById("resetBtn").addEventListener("click", function(){
+    if(!confirm("Clear all your progress on this module?")) return;
+    for(var k in LESSON_ITEMS){ LESSON_ITEMS[k].forEach(function(id){ delete state[id]; }); }
+    save(state);
+    boxes.forEach(function(b){ b.checked = false; });
+    refresh();
+  });
+
+  /* ---------- quizzes ---------- */
+  document.querySelectorAll('.quiz').forEach(function(q){
+    var correct = q.getAttribute("data-correct");
+    var explain = q.querySelector(".qexplain");
+    var opts = q.querySelectorAll(".qopt");
+    opts.forEach(function(opt){
+      opt.addEventListener("click", function(){
+        if(q.getAttribute("data-answered")) return;
+        q.setAttribute("data-answered","1");
+        var pick = opt.getAttribute("data-opt");
+        opts.forEach(function(o){
+          var v = o.getAttribute("data-opt");
+          if(v === correct){ o.classList.add("correct"); o.querySelector(".mk").textContent = "✓"; }
+          else if(v === pick){ o.classList.add("wrong"); o.querySelector(".mk").textContent = "✕"; }
+          o.disabled = true; o.style.cursor = "default";
+        });
+        explain.classList.add("show");
+      });
+    });
+  });
+
+  /* ---------- copy buttons ---------- */
+  document.querySelectorAll('.copybtn').forEach(function(btn){
+    btn.addEventListener("click", function(){
+      var el = document.getElementById(btn.getAttribute("data-copy"));
+      if(!el) return;
+      var text = el.textContent;
+      var done = function(){ var o = btn.textContent; btn.textContent = "Copied ✓"; btn.classList.add("copied");
+        setTimeout(function(){ btn.textContent = "Copy"; btn.classList.remove("copied"); }, 1600); };
+      if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(text).then(done, function(){ fallback(text); done(); }); }
+      else { fallback(text); done(); }
+    });
+  });
+  function fallback(text){ var t=document.createElement("textarea"); t.value=text; t.style.position="fixed"; t.style.opacity="0"; document.body.appendChild(t); t.select(); try{ document.execCommand("copy"); }catch(e){} document.body.removeChild(t); }
+
+  /* ---------- scroll spy + top progress fill ---------- */
+  var steps = Array.prototype.slice.call(document.querySelectorAll('.rail a.step'));
+  var sections = Array.prototype.slice.call(document.querySelectorAll('.lesson'));
+  var fill = document.getElementById("scrollfill");
+  function onScroll(){
+    var st = window.pageYOffset || document.documentElement.scrollTop;
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    fill.style.width = (h > 0 ? Math.min(100, st / h * 100) : 0) + "%";
+    var cur = sections[0].id, mid = st + window.innerHeight * 0.32;
+    sections.forEach(function(s){ if(s.offsetTop <= mid) cur = s.id; });
+    steps.forEach(function(a){ a.classList.toggle("active", a.getAttribute("href") === "#" + cur); });
+  }
+  var ticking = false;
+  window.addEventListener("scroll", function(){ if(!ticking){ requestAnimationFrame(function(){ onScroll(); ticking=false; }); ticking=true; } }, {passive:true});
+  window.addEventListener("resize", onScroll);
+
+  refresh();
+  onScroll();
+})();
+</script>
+</body>
+</html>

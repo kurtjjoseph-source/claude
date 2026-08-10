@@ -1,0 +1,16 @@
+{
+  "rewrites": [
+    { "source": "/os", "destination": "/api/os" },
+    { "source": "/os/", "destination": "/api/os" }
+  ],
+  "headers": [
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "no-store" },
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "X-Frame-Options", "value": "DENY" }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "run": "20260807-071523",
+  "sealed": "2026-08-07T07:15:38Z",
+  "fingerprint": "sha256:c00c17544d6ed4c47025908222e0debc",
+  "business": "Paid in Full",
+  "archetype": "prelaunch",
+  "forge": "PRELAUNCHforge",
+  "target": "vercel",
+  "artifacts": {
+    "logo": "drawn monogram — no client logo was supplied",
+    "brand_manual": "/Users/kurtjoseph/Business Ideas/Paid in Full/forge/20260807-071523/build/brand-manual.html",
+    "brand_kit": "Waitlist Green (default)",
+    "platform": "/Users/kurtjoseph/Business Ideas/Paid in Full/forge/20260807-071523/build/platform/index.html",
+    "photos": "6 placeholder photographs (CC0/PDM)",
+    "site": "/Users/kurtjoseph/Business Ideas/Paid in Full/forge/20260807-071523/build/site/index.html",
+    "pages": [
+      "faq.html",
+      "index.html"
+    ],
+    "url": "https://paid-in-full-prelaunch-ck8oje0e9-kurtjjoseph-6989s-projects.vercel.app",
+    "platform_url": "https://paid-in-full-prelaunch-ck8oje0e9-kurtjjoseph-6989s-projects.vercel.app/platform/",
+    "alias": "https://paid-in-full-prelaunch.vercel.app"
+  },
+  "checks_passed": 10,
+  "elapsed_seconds": 14.1,
+  "authorization": {
+    "mode": "unattended",
+    "targets": [
+      "vercel"
+    ],
+    "scope": "unattended forge build + deploy to 'vercel' for this business, limited to: composing the platform modules, writing the public site, wiring rails that already have credentials, publishing the result, and — for a hosting target that gates new projects behind a login — making that one deployment publicly reachable. Does not authorize sending email, charging anyone, or posting to any channel.",
+    "consent_ref": "d300b222462e98dd",
+    "consent_seq": 0,
+    "granted_by": "VOM",
+    "granted_at": "2026-08-07T07:15:23Z",
+    "channel": "standing service authorization"
+  }
+}

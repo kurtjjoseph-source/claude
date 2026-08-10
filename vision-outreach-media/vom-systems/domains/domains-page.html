@@ -1,0 +1,400 @@
+<title>Your Domain, Handled — Vision Outreach Media</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#061629; --navy-2:#0c2f63; --teal:#00A6A6; --teal-deep:#068B8B; --orange:#FF8A3D; --orange-deep:#F0762A;
+    --ink:#111315; --ink-soft:#515863; --ink-faint:#8a919b;
+    --paper:#FFFFFF; --wash:#F4F7FA; --line:#E5E9EF; --line-soft:#EFF2F6;
+    --blue:#2C6BE0;
+    --font:"Manrope",system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --shadow:0 2px 4px rgba(6,22,41,.04), 0 20px 44px -20px rgba(6,22,41,.20);
+  }
+  *{ box-sizing:border-box; }
+  body{ margin:0; background:var(--paper); color:var(--ink); font-family:var(--font); line-height:1.6; -webkit-font-smoothing:antialiased; }
+  .wrap{ max-width:1120px; margin:0 auto; padding:0 24px; }
+  a{ color:inherit; }
+
+  /* ---------- brand bar ---------- */
+  .bar{ background:var(--paper); border-bottom:1px solid var(--line); }
+  .bar .wrap{ display:flex; align-items:center; gap:14px; height:66px; }
+  .logo{ display:flex; align-items:center; gap:11px; font-weight:800; font-size:17px; letter-spacing:-.01em; text-decoration:none; color:inherit; }
+  .logo .mk{ width:38px; height:38px; border-radius:8px; object-fit:contain; display:block; }
+  .bar .sp{ flex:1; }
+  .bar .nav{ display:none; gap:26px; font-weight:600; font-size:15px; color:var(--ink-soft); }
+  @media (min-width:820px){ .bar .nav{ display:flex; } }
+  .bar .nav a{ text-decoration:none; color:inherit; }
+  .bar .nav a:hover{ color:var(--ink); }
+  .pill-cta{ background:var(--orange); color:#fff; font-weight:700; font-size:15px; text-decoration:none; border-radius:999px; padding:10px 22px; }
+  .pill-cta:hover{ background:var(--orange-deep); }
+
+  /* ---------- hero ---------- */
+  .hero{ position:relative; overflow:hidden; color:#fff;
+    background:
+      radial-gradient(closest-side at 100% 0%, rgba(0,166,166,.34), transparent 62%),
+      radial-gradient(circle, rgba(255,255,255,.10) 1px, transparent 1.4px) 0 0 / 26px 26px,
+      linear-gradient(135deg, var(--navy-2), var(--navy) 62%); }
+  .hero .wrap{ padding:72px 24px 78px; }
+  .eyebrow{ display:inline-block; font-size:12px; font-weight:700; letter-spacing:.16em; text-transform:uppercase; color:#fff;
+    border:1.5px solid rgba(255,255,255,.4); border-radius:999px; padding:8px 18px; margin:0 0 26px; }
+  h1{ font-weight:800; font-size:clamp(36px,6.2vw,62px); line-height:1.04; letter-spacing:-.02em; margin:0 0 18px; text-wrap:balance; max-width:18ch; }
+  h1 .u{ color:var(--orange); }
+  .sub{ font-size:clamp(16px,2.1vw,20px); line-height:1.55; color:rgba(255,255,255,.82); max-width:60ch; margin:0 0 30px; }
+  .herobtns{ display:flex; flex-wrap:wrap; gap:12px; }
+  .btn{ display:inline-block; font-weight:700; font-size:15px; text-decoration:none; border-radius:999px; padding:13px 26px; }
+  .btn-o{ background:var(--orange); color:#fff; } .btn-o:hover{ background:var(--orange-deep); }
+  .btn-g{ border:1.5px solid rgba(255,255,255,.45); color:#fff; } .btn-g:hover{ background:rgba(255,255,255,.08); }
+
+  /* ---------- sections ---------- */
+  section{ padding:66px 0; }
+  section.wash{ background:var(--wash); border-top:1px solid var(--line-soft); border-bottom:1px solid var(--line-soft); }
+  .kicker{ font-size:12px; font-weight:800; letter-spacing:.15em; text-transform:uppercase; color:var(--teal-deep); margin:0 0 12px; }
+  h2{ font-weight:800; font-size:clamp(27px,3.9vw,40px); line-height:1.12; letter-spacing:-.02em; margin:0 0 14px; text-wrap:balance; max-width:22ch; }
+  .lede{ font-size:17px; color:var(--ink-soft); max-width:64ch; margin:0 0 34px; }
+
+  .three{ display:grid; gap:18px; grid-template-columns:1fr; }
+  @media (min-width:800px){ .three{ grid-template-columns:repeat(3,1fr); } }
+  .card{ background:var(--paper); border:1px solid var(--line); border-radius:16px; padding:26px 24px; box-shadow:var(--shadow); }
+  .card .n{ font-size:26px; margin:0 0 12px; }
+  .card h3{ font-size:19px; font-weight:800; letter-spacing:-.01em; margin:0 0 8px; }
+  .card p{ font-size:15px; color:var(--ink-soft); margin:0; }
+
+  /* ---------- price table ---------- */
+  .tablewrap{ overflow-x:auto; border:1px solid var(--line); border-radius:16px; background:var(--paper); box-shadow:var(--shadow); }
+  table{ width:100%; border-collapse:collapse; font-size:15px; min-width:520px; }
+  th{ font-size:12px; font-weight:800; letter-spacing:.09em; text-transform:uppercase; color:var(--ink-faint); text-align:left; padding:16px 20px; border-bottom:1px solid var(--line); }
+  td{ padding:15px 20px; border-bottom:1px solid var(--line-soft); }
+  tr:last-child td{ border-bottom:0; }
+  td.tld{ font-weight:800; }
+  td.ours{ font-weight:800; color:var(--teal-deep); white-space:nowrap; }
+  td.theirs{ color:var(--ink-faint); text-decoration:line-through; white-space:nowrap; }
+  .note{ font-size:13.5px; color:var(--ink-faint); margin:16px 0 0; max-width:70ch; }
+
+  /* ---------- promise ---------- */
+  .promise{ background:var(--navy); color:#fff; border-radius:20px; padding:44px 40px; }
+  .promise h2{ color:#fff; max-width:20ch; }
+  .promise .lede{ color:rgba(255,255,255,.78); }
+  .plist{ list-style:none; margin:0; padding:0; display:grid; gap:16px; }
+  @media (min-width:760px){ .plist{ grid-template-columns:1fr 1fr; gap:18px 32px; } }
+  .plist li{ position:relative; padding-left:32px; font-size:15.5px; color:rgba(255,255,255,.9); }
+  .plist li::before{ content:"✓"; position:absolute; left:0; top:-1px; width:21px; height:21px; border-radius:50%; background:var(--teal); color:var(--navy); font-size:12px; font-weight:800; display:grid; place-items:center; }
+  .plist b{ color:#fff; }
+
+  /* ---------- steps ---------- */
+  .steps{ display:grid; gap:16px; grid-template-columns:1fr; counter-reset:s; }
+  @media (min-width:760px){ .steps{ grid-template-columns:repeat(2,1fr); } }
+  .step{ display:flex; gap:16px; align-items:flex-start; }
+  .step .num{ flex:none; width:34px; height:34px; border-radius:50%; background:var(--wash); border:1px solid var(--line); display:grid; place-items:center; font-weight:800; font-size:14px; color:var(--navy-2); }
+  .step h3{ font-size:17px; font-weight:800; margin:5px 0 5px; letter-spacing:-.01em; }
+  .step p{ font-size:15px; color:var(--ink-soft); margin:0; }
+
+  /* ---------- form ---------- */
+  .formcard{ background:var(--paper); border:1px solid var(--line); border-radius:20px; padding:34px 32px; box-shadow:var(--shadow); max-width:600px; }
+  .fgrid{ display:grid; gap:14px; }
+  @media (min-width:620px){ .fgrid.two{ grid-template-columns:1fr 1fr; } }
+  label{ display:block; font-size:13px; font-weight:700; letter-spacing:.02em; color:var(--ink-soft); margin:0 0 6px; }
+  input, textarea{ width:100%; font-family:inherit; font-size:15.5px; color:var(--ink); background:var(--paper);
+    border:1.5px solid var(--line); border-radius:11px; padding:12px 14px; }
+  input:focus, textarea:focus{ outline:none; border-color:var(--blue); box-shadow:0 0 0 3px rgba(44,107,224,.13); }
+  textarea{ min-height:92px; resize:vertical; }
+  .submit{ margin-top:18px; width:100%; background:var(--orange); color:#fff; font-family:inherit; font-weight:800; font-size:16px;
+    border:0; border-radius:999px; padding:14px 26px; cursor:pointer; }
+  .submit:hover{ background:var(--orange-deep); }
+  .submit:disabled{ opacity:.6; cursor:default; }
+  .fnote{ font-size:13px; color:var(--ink-faint); margin:14px 0 0; }
+  .fmsg{ display:none; margin-top:16px; padding:14px 16px; border-radius:12px; font-size:15px; font-weight:600; }
+  .fmsg.ok{ display:block; background:rgba(0,166,166,.10); border:1px solid rgba(0,166,166,.35); color:var(--teal-deep); }
+  .fmsg.err{ display:block; background:rgba(240,118,42,.10); border:1px solid rgba(240,118,42,.35); color:var(--orange-deep); }
+
+  /* ---------- faq ---------- */
+  .faq{ display:grid; gap:14px; max-width:820px; }
+  details{ border:1px solid var(--line); border-radius:14px; background:var(--paper); padding:0; }
+  summary{ cursor:pointer; list-style:none; padding:18px 22px; font-weight:700; font-size:16.5px; letter-spacing:-.01em; display:flex; justify-content:space-between; gap:16px; align-items:center; }
+  summary::-webkit-details-marker{ display:none; }
+  summary::after{ content:"+"; font-size:21px; font-weight:700; color:var(--ink-faint); flex:none; }
+  details[open] summary::after{ content:"–"; }
+  details p{ margin:0; padding:0 22px 20px; font-size:15.5px; color:var(--ink-soft); max-width:68ch; }
+
+  /* ---------- footer ---------- */
+  footer{ background:var(--navy); color:rgba(255,255,255,.72); padding:44px 0 52px; font-size:14.5px; }
+  footer .wrap{ display:flex; flex-wrap:wrap; gap:22px; align-items:center; }
+  footer a{ text-decoration:none; color:rgba(255,255,255,.72); font-weight:600; }
+  footer a:hover{ color:#fff; }
+  footer .sp{ flex:1; }
+</style>
+
+<header class="bar">
+  <div class="wrap">
+    <a class="logo" href="https://visionoutreachmedia.nl">
+      <img class="mk" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAASABIAAD/4QBMRXhpZgAATU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAgKADAAQAAAABAAAAgAAAAAD/4QnSaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLwA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJYTVAgQ29yZSA2LjAuMCI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnBob3Rvc2hvcD0iaHR0cDovL25zLmFkb2JlLmNvbS9waG90b3Nob3AvMS4wLyIgcGhvdG9zaG9wOkluc3RydWN0aW9ucz0iRkJNRDBhMDAwYTA3MDIwMDAwYmQwYTAwMDBjMzE0MDAwMDU3MTYwMDAwNTkxODAwMDBhMjIxMDAwMDBhMzIwMDAwYmMzNDAwMDA2OTM2MDAwMDMxMzgwMDAwMmI0YzAwMDAiLz4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8P3hwYWNrZXQgZW5kPSJ3Ij8+AP/tAK5QaG90b3Nob3AgMy4wADhCSU0EBAAAAAAAdhwBWgADGyVHHAIAAAIAAhwCKABiRkJNRDBhMDAwYTA3MDIwMDAwYmQwYTAwMDBjMzE0MDAwMDU3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" alt="Vision Outreach Media">
+      Vision Outreach Media
+    </a>
+    <div class="sp"></div>
+    <nav class="nav">
+      <a href="https://visionoutreachmedia.nl/services/">Services</a>
+      <a href="https://vom-grow.vercel.app">Grow With Us</a>
+      <a href="https://visionoutreachmedia.nl/about/">About</a>
+    </nav>
+    <a class="pill-cta" href="#request">Request a domain</a>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="wrap">
+    <span class="eyebrow">Domains</span>
+    <h1>Your domain. <span class="u">Your name on it.</span> Registered at cost.</h1>
+    <p class="sub">We register and manage your web address for you — the searching, the paperwork,
+      the DNS, the renewals — and we charge you exactly what the registry charges us. Not a cent on
+      top. You are the legal owner from day one.</p>
+    <div class="herobtns">
+      <a class="btn btn-o" href="#request">Request a domain</a>
+      <a class="btn btn-g" href="#price">See what it costs</a>
+    </div>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <p class="kicker">Why we do it this way</p>
+    <h2>Most people overpay for the easiest part of being online.</h2>
+    <p class="lede">A domain name is cheap. What's expensive is the hour you lose to a registrar's
+      upsell screen, the renewal notice that lands in a spam folder, and the day you discover the
+      volunteer who set it up in 2019 has left the church and taken the password with them.</p>
+    <div class="three">
+      <div class="card">
+        <div class="n">🏷️</div>
+        <h3>At cost, itemised</h3>
+        <p>We buy at the registry's own price through our wholesale account and pass it straight
+          through on your invoice. You can check the number against the registry's public price
+          list — please do.</p>
+      </div>
+      <div class="card">
+        <div class="n">📜</div>
+        <h3>Registered in your name</h3>
+        <p>Your organisation is the registrant — the legal owner — on the official record. We're
+          listed only as the technical contact, so we can do the work without owning your address.</p>
+      </div>
+      <div class="card">
+        <div class="n">🔓</div>
+        <h3>You can leave with it</h3>
+        <p>Ask, and we hand over the transfer code within two working days. Free. No exit fee, no
+          notice period, no conversation about why. It was always yours.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="wash" id="price">
+  <div class="wrap">
+    <p class="kicker">What it costs</p>
+    <h2>The registry's price, and nothing else.</h2>
+    <p class="lede">These are the annual prices the registries themselves charge. The struck-through
+      column is roughly what the same domain costs at a typical Dutch consumer registrar at renewal
+      — which is the price most organisations quietly pay year after year.</p>
+    <div class="tablewrap">
+      <table>
+        <thead>
+          <tr><th>Address ends in</th><th>You pay, per year</th><th>Typical retail</th><th>Best for</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="tld">.nl</td><td class="ours">€4.38</td><td class="theirs">€12–16.50</td><td>Dutch churches, ministries and local organisations</td></tr>
+          <tr><td class="tld">.com</td><td class="ours">≈ €9.80</td><td class="theirs">€14–28</td><td>International reach, or when the .nl is taken</td></tr>
+          <tr><td class="tld">.eu</td><td class="ours">≈ €4.00</td><td class="theirs">€10–15</td><td>Work across European borders</td></tr>
+          <tr><td class="tld">.org</td><td class="ours">≈ €10.50</td><td class="theirs">€14–20</td><td>Foundations and non-profits</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">Prices exclude 21% VAT. A <b>.nl</b> therefore lands at about <b>€5.30 a year</b>
+      on your invoice. Registry prices change from time to time — SIDN adjusts the .nl price each
+      year — and when they do, the new price is passed through unchanged, up or down. We never add a
+      margin, so there is nothing for us to adjust. The setup and ongoing management sit inside your
+      project or care fee; the domain itself is never a profit line for us.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="kicker">What we actually do</p>
+    <h2>You say the name. We handle the rest.</h2>
+    <p class="lede">From "we'd like to be called this" to a working web address with working email —
+      usually within a day.</p>
+    <div class="steps">
+      <div class="step"><div class="num">1</div><div>
+        <h3>We check what's free</h3>
+        <p>You tell us the name you want. We check every sensible variation and extension in one
+          pass and come back with what's actually available — and what we'd choose.</p></div></div>
+      <div class="step"><div class="num">2</div><div>
+        <h3>We register it in your name</h3>
+        <p>Your organisation goes on the record as registrant. Automatic renewal is switched on from
+          the first day, so it cannot lapse by accident.</p></div></div>
+      <div class="step"><div class="num">3</div><div>
+        <h3>We point it at the right places</h3>
+        <p>Website, email, security records — the technical settings that decide whether your site
+          loads and whether your email reaches inboxes instead of spam folders.</p></div></div>
+      <div class="step"><div class="num">4</div><div>
+        <h3>We keep watching it</h3>
+        <p>Renewals, expiry dates and mail records stay on our calendar, not yours. If something
+          needs attention, you hear it from us first.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="wash">
+  <div class="wrap">
+    <div class="promise">
+      <p class="kicker" style="color:var(--teal)">Our ownership promise</p>
+      <h2>We manage your domain. We never hold it.</h2>
+      <p class="lede">A web address is the one asset that can be used against you — plenty of
+        agencies register it in their own name, and the relationship quietly stops being voluntary.
+        We wrote the opposite into how we work, and into our terms:</p>
+      <ul class="plist">
+        <li><b>You are the registrant.</b> Your organisation's name, address and email are on the official record — not ours.</li>
+        <li><b>Transfer out is free.</b> No exit fee, ever, and no minimum term on the domain.</li>
+        <li><b>Two working days.</b> That's our limit for handing over the transfer code once you ask.</li>
+        <li><b>No reason required.</b> We don't ask why, and we don't make it a conversation.</li>
+        <li><b>No markup, no bundling tricks.</b> The domain is never used to lock in a bigger contract.</li>
+        <li><b>Your records, on request.</b> Ask and we'll send the full technical configuration so anyone can take over.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="request">
+  <div class="wrap">
+    <p class="kicker">Request a domain</p>
+    <h2>Tell us the name. We'll come back with what's available.</h2>
+    <p class="lede">No payment now, and no commitment. We check availability first and send you the
+      options with the exact price of each.</p>
+    <div class="formcard">
+      <form id="dform" class="fgrid">
+        <div class="fgrid two">
+          <div>
+            <label for="f-org">Organisation</label>
+            <input id="f-org" name="organisation" type="text" required placeholder="Church of God Amersfoort">
+          </div>
+          <div>
+            <label for="f-name">Your name</label>
+            <input id="f-name" name="name" type="text" required placeholder="First and last name">
+          </div>
+        </div>
+        <div class="fgrid two">
+          <div>
+            <label for="f-email">Email</label>
+            <input id="f-email" name="email" type="email" required placeholder="you@example.nl">
+          </div>
+          <div>
+            <label for="f-domain">Domain you'd like</label>
+            <input id="f-domain" name="domain_wish" type="text" required placeholder="ourchurch.nl">
+          </div>
+        </div>
+        <div>
+          <label for="f-notes">Anything else? (optional)</label>
+          <textarea id="f-notes" name="notes" placeholder="Alternatives you'd accept, whether you also need email addresses, whether you already own a domain somewhere else…"></textarea>
+        </div>
+        <input type="hidden" name="_subject" value="Domain request — VOM domains page">
+        <input type="hidden" name="_template" value="table">
+        <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+        <button class="submit" type="submit">Check availability</button>
+      </form>
+      <div class="fmsg" id="fmsg"></div>
+      <p class="fnote">We reply from <b>hello@visionoutreachmedia.nl</b>, usually within one working
+        day. We use your details only to answer this request.</p>
+    </div>
+  </div>
+</section>
+
+<section class="wash">
+  <div class="wrap">
+    <p class="kicker">Questions people actually ask</p>
+    <h2>The honest answers.</h2>
+    <div class="faq">
+      <details>
+        <summary>Who owns the domain — really?</summary>
+        <p>You do. Your organisation is entered as the registrant, which is the legal owner in the
+          registry's record. We are listed as the administrative and technical contact, which is what
+          lets us do the work. If we disappeared tomorrow, you could contact the registrar directly
+          and take full control.</p>
+      </details>
+      <details>
+        <summary>Why is this cheaper than what we pay now?</summary>
+        <p>We hold a wholesale account with a registrar platform. We pay a small annual membership
+          fee and in exchange get domains at the registry's own price, with no per-domain markup. We
+          pass that price straight to you and absorb the membership fee ourselves. Consumer
+          registrars work the other way round: a very cheap first year, then a renewal price several
+          times the registry cost, every year after.</p>
+      </details>
+      <details>
+        <summary>What if we already have a domain somewhere else?</summary>
+        <p>Keep it. There's no need to move anything. If you'd rather consolidate, we can transfer it
+          in — you request a transfer code from your current provider and we handle the rest. A
+          transfer usually adds a year to the registration at the same at-cost price.</p>
+      </details>
+      <details>
+        <summary>What happens if we stop working with you?</summary>
+        <p>You ask for the transfer code, we send it within two working days, and you move the domain
+          wherever you like. Free. Your site and email keep working throughout — a transfer doesn't
+          interrupt anything. We'll also send your full DNS configuration so whoever takes over can
+          pick it up cleanly.</p>
+      </details>
+      <details>
+        <summary>Can you also set up our email addresses?</summary>
+        <p>Yes. Addresses on your own domain — <i>hello@</i>, <i>office@</i>, <i>giving@</i> — plus
+          the technical records (SPF, DKIM, DMARC) that decide whether your email is trusted or
+          filtered as spam. Most organisations we meet have never had these configured, which is
+          usually why their newsletters land in spam.</p>
+      </details>
+      <details>
+        <summary>Do we have to buy anything else from you?</summary>
+        <p>No. The domain is not bundled with a contract and has no minimum term. In practice most
+          domains we register are for organisations we're already building something with — but a
+          domain on its own is fine, and it's priced the same either way.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>© <span id="yr">2026</span> Vision Outreach Media</div>
+    <div class="sp"></div>
+    <a href="https://visionoutreachmedia.nl">visionoutreachmedia.nl</a>
+    <a href="https://vom-grow.vercel.app">Grow With Us</a>
+    <a href="mailto:hello@visionoutreachmedia.nl">hello@visionoutreachmedia.nl</a>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  var form = document.getElementById('dform');
+  var msg  = document.getElementById('fmsg');
+  var btn  = form.querySelector('.submit');
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    if (form.querySelector('[name="_honey"]').value) return;   // bot trap
+    btn.disabled = true; btn.textContent = 'Sending…';
+    msg.className = 'fmsg';
+
+    var data = {};
+    new FormData(form).forEach(function(v, k){ if (k !== '_honey') data[k] = v; });
+
+    fetch('https://formsubmit.co/ajax/hello@visionoutreachmedia.nl', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(data)
+    })
+    .then(function(r){ if (!r.ok) throw new Error('bad status'); return r.json(); })
+    .then(function(){
+      form.style.display = 'none';
+      msg.className = 'fmsg ok';
+      msg.textContent = 'Thank you — request received. We’ll check availability and reply from hello@visionoutreachmedia.nl, usually within one working day.';
+    })
+    .catch(function(){
+      msg.className = 'fmsg err';
+      msg.innerHTML = 'Something went wrong sending that. Please email us directly at <a href="mailto:hello@visionoutreachmedia.nl"><b>hello@visionoutreachmedia.nl</b></a> and we’ll pick it up straight away.';
+      btn.disabled = false; btn.textContent = 'Check availability';
+    });
+  });
+</script>

@@ -1,0 +1,35 @@
+{
+  "run": "20260804-191108",
+  "sealed": "2026-08-04T19:11:24Z",
+  "fingerprint": "sha256:dfeb9c8afc60a302bb04adc20bf1315a",
+  "business": "church f god amersfoort",
+  "archetype": "prelaunch",
+  "forge": "PRELAUNCHforge",
+  "target": "vercel",
+  "artifacts": {
+    "logo": "embedded",
+    "platform": "/Users/kurtjoseph/Business Ideas/church f god amersfoort/forge/20260804-191108/build/platform/index.html",
+    "site": "/Users/kurtjoseph/Business Ideas/church f god amersfoort/forge/20260804-191108/build/site/index.html",
+    "pages": [
+      "faq.html",
+      "index.html"
+    ],
+    "url": "https://church-f-god-amersfoort-prelaunch-gqc9av1ht.vercel.app",
+    "platform_url": "https://church-f-god-amersfoort-prelaunch-gqc9av1ht.vercel.app/platform/",
+    "alias": "https://church-f-god-amersfoort-prelaunch.vercel.app"
+  },
+  "checks_passed": 9,
+  "elapsed_seconds": 15.63,
+  "authorization": {
+    "mode": "unattended",
+    "targets": [
+      "vercel"
+    ],
+    "scope": "unattended forge build + deploy to 'vercel' for this business, limited to: composing the platform modules, writing the public site, wiring rails that already have credentials, publishing the result, and — for a hosting target that gates new projects behind a login — making that one deployment publicly reachable. Does not authorize sending email, charging anyone, or posting to any channel.",
+    "consent_ref": "6b1b2513ace373ee",
+    "consent_seq": 0,
+    "granted_by": "VOM",
+    "granted_at": "2026-08-04T19:11:08Z",
+    "channel": "standing service authorization"
+  }
+}

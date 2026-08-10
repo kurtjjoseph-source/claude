@@ -1,0 +1,491 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{NAME}} — business platform</title>
+<link rel="icon" type="image/jpeg" href="{{LOGO}}">
+<style>
+  :root{
+    --navy:#1B2A4A; --orange:#E8843C; --teal:#2FA8A0;
+    /* VOM Kit v2 tokens — the same ground, ink and line as the public site this
+       platform ships beside, so the owner's back office and their front door are
+       visibly one thing. --c is the archetype's accent, set from CONFIG on boot. */
+    --bg:#f6f5f1; --surface:#ffffff; --surface-2:#f1efe8; --line:#e1dfd4; --line-soft:#ece9df;
+    --ink:#1a1d1b; --ink-dim:#535b56; --ink-faint:#676c67; --stop:#c0523a;
+    /* The accent is set from CONFIG at boot — as --c-lt / --c-ink-lt, never as --c
+       itself. An inline custom property on :root beats a media query, so writing --c
+       directly meant the dark rule below never applied and dark mode ran the LIGHT
+       accent: 3.8:1 for every link button in the back office. */
+    --c-lt:#0f8f86; --c-bright:#3fd0c0; --c:var(--c-lt);
+    --c-ink-lt:#ffffff; --c-ink:var(--c-ink-lt);
+    --good:#267a4e; --warn:#955f1d;
+    --mono:ui-monospace,"SF Mono",Menlo,monospace;
+    --sans:"Manrope",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  }
+  @media (prefers-color-scheme:dark){:root{
+    --bg:#0e100f;--surface:#161a18;--surface-2:#1c211e;--line:#2a322d;--line-soft:#232a26;
+    --ink:#f0f2ee;--ink-dim:#a8b1aa;--ink-faint:#828a85;--c:var(--c-bright);--c-ink:#0e100f;
+    /* status colours are hues, and a hue legible on paper is not legible on ink */
+    --good:#2f9e63;--warn:#c9862a;--stop:#d97757;}}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.5}
+  button{font:inherit;cursor:pointer}
+  h1,h2,h3,h4{margin:0;letter-spacing:-.015em}
+  .app{display:grid;grid-template-columns:238px 1fr;min-height:100vh}
+  @media(max-width:820px){.app{grid-template-columns:1fr}}
+
+  /* ---- rail ---- */
+  .rail{background:var(--surface);border-right:1px solid var(--line);padding:16px 12px;display:flex;flex-direction:column;gap:3px}
+  .biz{display:flex;gap:11px;align-items:center;padding:4px 8px 16px}
+  .biz img{width:38px;height:38px;border-radius:9px;background:#fff;border:1px solid var(--line);object-fit:cover}
+  .biz b{display:block;font-size:14.5px;line-height:1.25}
+  .biz span{font-size:11.5px;color:var(--ink-faint);font-family:var(--mono)}
+  .nav{border:0;background:none;color:var(--ink-dim);text-align:left;padding:9px 11px;border-radius:9px;
+       font-weight:650;font-size:14px;display:flex;gap:10px;align-items:center;width:100%}
+  .nav:hover{background:var(--surface-2);color:var(--ink)}
+  .nav[aria-current="true"]{background:var(--navy);color:#fff}
+  @media(prefers-color-scheme:dark){.nav[aria-current="true"]{background:var(--c);color:var(--c-ink)}}
+  .nav .ic{width:19px;text-align:center;opacity:.85}
+  .nav .n{margin-left:auto;font-family:var(--mono);font-size:11px;opacity:.75}
+  .railfoot{margin-top:auto;padding-top:14px;display:flex;gap:6px;flex-wrap:wrap}
+
+  /* ---- main ---- */
+  .main{padding:24px 26px 70px;max-width:1000px}
+  .hd{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:4px}
+  .hd h2{font-size:23px}
+  .sub{color:var(--ink-dim);margin:0 0 18px}
+  .btn{border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:8px 14px;
+       border-radius:9px;font-weight:650;font-size:13.5px}
+  .btn:hover{border-color:var(--ink-faint)}
+  .btn.primary{background:var(--c);border-color:var(--c);color:var(--c-ink)}
+  .btn.sm{padding:4px 9px;font-size:12.5px;border-radius:7px}
+  .btn.link{border:0;background:none;color:var(--c);padding:4px 6px}
+  .sp{flex:1}
+
+  .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(168px,1fr));gap:12px;margin-bottom:22px}
+  .tile{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+  .tile .v{font-size:26px;font-weight:800;letter-spacing:-.02em}
+  .tile .l{font-size:12px;color:var(--ink-faint);text-transform:uppercase;letter-spacing:.05em;font-weight:700}
+
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:16px}
+  .card .ch{padding:12px 16px;border-bottom:1px solid var(--line-soft);display:flex;align-items:center;gap:10px}
+  .card .ch h3{font-size:13px;text-transform:uppercase;letter-spacing:.04em;color:var(--ink-dim)}
+  .tw{overflow-x:auto}
+  table{width:100%;border-collapse:collapse;font-size:14px;min-width:540px}
+  th,td{text-align:left;padding:10px 16px;border-bottom:1px solid var(--line-soft);vertical-align:top}
+  th{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-faint);background:var(--surface-2);font-weight:800}
+  tr:last-child td{border-bottom:0}
+  tr.row:hover{background:var(--surface-2)}
+  .muted{color:var(--ink-faint)}
+  .pill{display:inline-block;font-size:11px;font-family:var(--mono);padding:2px 7px;border-radius:5px;
+        border:1px solid var(--line);color:var(--ink-dim);background:var(--surface-2);white-space:nowrap}
+  .pill.good{color:var(--good);border-color:var(--good)}
+  .pill.warn{color:var(--warn);border-color:var(--warn)}
+  .pill.bad{color:var(--stop);border-color:var(--stop)}
+  .money{font-family:var(--mono);white-space:nowrap}
+
+  .board{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:12px;overflow-x:auto;padding:2px}
+  @media(max-width:820px){.board{grid-auto-flow:row;grid-auto-columns:auto}}
+  .col{background:var(--surface-2);border:1px solid var(--line-soft);border-radius:11px;padding:10px;min-height:90px}
+  .col h4{font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-faint);margin-bottom:8px}
+  .cardlet{background:var(--surface);border:1px solid var(--line);border-radius:9px;padding:9px 11px;margin-bottom:8px;cursor:grab}
+  .cardlet b{display:block;font-size:14px}
+  .cardlet .m{font-size:12px;color:var(--ink-faint);font-family:var(--mono)}
+  .cardlet.drag{opacity:.4}
+  .col.over{border-color:var(--c)}
+
+  .empty{padding:34px 16px;text-align:center;color:var(--ink-faint)}
+  label{display:block;font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-faint);
+        font-weight:700;margin:13px 0 5px}
+  input,textarea,select{width:100%;background:var(--bg);color:var(--ink);border:1px solid var(--line);
+    border-radius:9px;padding:9px 11px;font-family:var(--sans);font-size:14px}
+  input[type=checkbox]{width:auto}
+  textarea{min-height:90px;resize:vertical}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:600px){.two{grid-template-columns:1fr}}
+  dialog{border:1px solid var(--line);border-radius:14px;background:var(--surface);color:var(--ink);padding:0;width:min(560px,94vw)}
+  dialog::backdrop{background:rgba(9,11,15,.55)}
+  dialog .db{padding:20px}
+  .row{display:flex;gap:9px;flex-wrap:wrap;align-items:center}
+  .toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:var(--navy);color:#fff;
+         padding:9px 17px;border-radius:999px;font-size:13.5px;font-weight:650;opacity:0;transition:.18s;z-index:9}
+  .toast.on{opacity:1}
+</style>
+</head>
+<body>
+<div class="app">
+  <nav class="rail">
+    <div class="biz"><img src="{{LOGO}}" alt=""><div><b id="bizName"></b><span id="bizType"></span></div></div>
+    <button class="nav" data-go="dash"><span class="ic">◈</span> Dashboard</button>
+    <div id="navList"></div>
+    <div class="railfoot">
+      <span class="pill" id="syncBadge" style="width:100%;text-align:center"></span>
+      <button class="btn sm" id="backupBtn">Backup</button>
+      <button class="btn sm" id="restoreBtn">Restore</button>
+      <button class="btn sm" id="signoutBtn" style="display:none">Sign out</button>
+      <input type="file" id="restoreFile" accept="application/json" style="display:none">
+    </div>
+  </nav>
+  <main class="main" id="main"></main>
+</div>
+<dialog id="dlg"><div class="db" id="dlgBody"></div></dialog>
+<div class="toast" id="toast"></div>
+
+<script>
+"use strict";
+const CONFIG = {{CONFIG}};
+const BIZ = CONFIG.business;
+const MODULES = CONFIG.modules;
+const KEY = "vom_platform_" + (BIZ.name || "business").toLowerCase().replace(/[^a-z0-9]+/g, "_");
+
+/* The accent is the business's brand kit, so the owner's back office matches their front
+   door. Light and dark get different values because the same hue cannot serve both
+   grounds. The archetype's forge colours remain the fallback for a build made before
+   kits existed — an older platform must not lose its accent to a missing key. */
+(function(){
+  var k = CONFIG.kit || {};
+  var f = (CONFIG.archetype && CONFIG.archetype.forge) || {};
+  var r = document.documentElement.style;
+  var light = k.accent || f.accent_site;
+  var bright = k.accent_bright || f.accent;
+  if (light)  r.setProperty("--c-lt", light);
+  if (bright) r.setProperty("--c-bright", bright);
+  if (k.on_accent) r.setProperty("--c-ink-lt", k.on_accent);
+})();
+
+/* ---------------------------------------------------------------- store
+   Two modes, same app:
+     local — the generated file on disk; records live in this browser.
+     hub   — served by the Client Business Hub to a signed-in owner; records live
+             server-side under their tenant, so the same business shows up on any device.
+   The local copy is kept either way, so a dropped connection never loses a keystroke. */
+const HUB = (CONFIG.hub && CONFIG.hub.enabled) ? CONFIG.hub : null;
+const MODE = HUB ? "hub" : "local";
+function loadLocal(){ try { return JSON.parse(localStorage.getItem(KEY) || "{}"); } catch(e){ return {}; } }
+function saveLocal(d){ try { localStorage.setItem(KEY, JSON.stringify(d)); } catch(e){} }
+let DB = loadLocal();
+/* A platform that opens empty teaches nobody how to use it. The build seeds each module
+   with a few obviously-editable example records — once, on the very first open, and never
+   again, so nothing the owner deletes comes back. */
+if (CONFIG.seed && localStorage.getItem(KEY) === null) {
+  DB = JSON.parse(JSON.stringify(CONFIG.seed));
+  saveLocal(DB);
+}
+
+let syncState = MODE === "hub" ? "loading" : "local";
+let pending = null, saving = false;
+function setSync(s){ syncState = s; const el = document.getElementById("syncBadge"); if (el) paintSync(el); }
+function paintSync(el){
+  const map = {
+    loading: ["◌ loading…", ""],
+    saved:   ["● saved to your account", "good"],
+    saving:  ["◍ saving…", ""],
+    offline: ["▲ offline — kept in this browser", "warn"],
+    local:   ["● this device only", ""],
+  };
+  const [text, cls] = map[syncState] || map.local;
+  el.textContent = text; el.className = "pill " + cls;
+}
+async function pushRemote(){
+  if (saving){ pending = true; return; }
+  saving = true; setSync("saving");
+  try {
+    const r = await fetch("/api/state", { method:"PUT", credentials:"same-origin",
+      headers:{ "Content-Type":"application/json" }, body: JSON.stringify({ state: DB }) });
+    if (r.status === 401){ location.href = "/?next=/app"; return; }
+    setSync(r.ok ? "saved" : "offline");
+  } catch(e){ setSync("offline"); }
+  saving = false;
+  if (pending){ pending = false; pushRemote(); }
+}
+function save(d){
+  saveLocal(DB);
+  if (MODE === "hub"){ clearTimeout(save._t); save._t = setTimeout(pushRemote, 400); }
+}
+function rows(m){ return (DB[m] || []); }
+function setRows(m, list){ DB[m] = list; save(DB); }
+function upsert(m, rec){
+  const list = rows(m).slice();
+  if (rec.id){ const i = list.findIndex(r => r.id === rec.id); if (i >= 0) list[i] = rec; else list.push(rec); }
+  else { rec.id = "r" + Date.now().toString(36) + Math.random().toString(36).slice(2,6); list.push(rec); }
+  setRows(m, list); return rec;
+}
+function remove(m, id){ setRows(m, rows(m).filter(r => r.id !== id)); }
+
+/* ---------------------------------------------------------------- helpers */
+const $ = (s,r)=> (r||document).querySelector(s);
+const esc = s => String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const mod = k => MODULES.find(m => m.key === k);
+const money = n => "€" + (Number(n||0)).toLocaleString("nl-NL",{minimumFractionDigits:2, maximumFractionDigits:2});
+const today = () => new Date().toISOString().slice(0,10);
+const isFuture = d => d && d >= today();
+const sameMonth = d => d && d.slice(0,7) === today().slice(0,7);
+function toast(m){ const t=$("#toast"); t.textContent=m; t.classList.add("on");
+  clearTimeout(t._h); t._h=setTimeout(()=>t.classList.remove("on"),2200); }
+
+/** Tile arithmetic — every number on screen is computed from real records. */
+function calc(m, spec){
+  const list = rows(m.key);
+  const [op, ...rest] = spec.split(":");
+  const f = rest[0], want = rest.slice(1).join(":");
+  switch(op){
+    case "count": return list.length;
+    case "sum": return list.reduce((a,r)=> a + Number(r[f]||0), 0);
+    case "count_true": return list.filter(r=> !!r[f]).length;
+    case "count_false": return list.filter(r=> !r[f]).length;
+    case "count_eq": return list.filter(r=> String(r[f]||"") === want).length;
+    case "sum_eq": return list.filter(r=> String(r[rest[1]]||"") === rest[2]).reduce((a,r)=> a+Number(r[f]||0),0);
+    case "count_future": return list.filter(r=> isFuture(r[f])).length;
+    case "sum_future": return list.filter(r=> isFuture(r.date)).reduce((a,r)=> a+Number(r[f]||0),0);
+    case "sum_month": return list.filter(r=> sameMonth(r.date)).reduce((a,r)=> a+Number(r[f]||0),0);
+    case "sum_month_eq": return list.filter(r=> sameMonth(r.date) && String(r[rest[1]]||"")===rest[2])
+                                    .reduce((a,r)=> a+Number(r[f]||0),0);
+    case "sum_vat": return list.reduce((a,r)=> a + Number(r.amount||0) * Number(r.vat||0)/100, 0);
+    default: return 0;
+  }
+}
+function tileValue(m, t){ const v = calc(m, t.calc); return t.money ? money(v) : v; }
+
+/* ---------------------------------------------------------------- chrome */
+function paintNav(){
+  $("#bizName").textContent = BIZ.name;
+  $("#bizType").textContent = BIZ.org_label || "";
+  $("#navList").innerHTML = MODULES.map(m =>
+    '<button class="nav" data-go="'+m.key+'"><span class="ic">'+m.icon+'</span> '+esc(m.title)
+    + '<span class="n">'+(rows(m.key).length||"")+'</span></button>').join("");
+  document.querySelectorAll("[data-go]").forEach(b => b.onclick = () => go(b.dataset.go));
+}
+let VIEW = "dash";
+function go(v){ VIEW = v; paintNav();
+  document.querySelectorAll("[data-go]").forEach(b => b.setAttribute("aria-current", String(b.dataset.go === v)));
+  VIEW === "dash" ? paintDash() : paintModule(mod(v));
+  window.scrollTo(0,0);
+}
+
+/* ---------------------------------------------------------------- dashboard */
+function paintDash(){
+  // Only surface numbers that mean something: a module with no records yet has nothing to say.
+  const live = MODULES.filter(m => rows(m.key).length);
+  const tiles = [];
+  (live.length ? live : []).forEach(m => (m.tiles||[]).forEach(t =>
+    tiles.push('<div class="tile"><div class="v">'+tileValue(m,t)+'</div><div class="l">'+esc(t.label)+'</div></div>')));
+
+  // the next things that actually need doing, pulled from the records
+  const todo = [];
+  MODULES.forEach(m => {
+    rows(m.key).forEach(r => {
+      if (m.key === "support_inbox" && r.status === "New") todo.push([m, r, "needs a reply"]);
+      if (m.key === "lead_capture" && !r.handled) todo.push([m, r, "new enquiry"]);
+      if (m.key === "people_roster" && !r.confirmed && isFuture(r.date)) todo.push([m, r, "unconfirmed slot"]);
+      if (m.key === "booking" && r.status === "Requested") todo.push([m, r, "awaiting confirmation"]);
+      if (m.key === "finance_admin" && r.status === "Sent") todo.push([m, r, "invoice unpaid"]);
+      if (m.key === "documents_contracts" && r.status === "Sent") todo.push([m, r, "quote out"]);
+      if (m.key === "checkout_payments" && r.status === "Pending") todo.push([m, r, "payment pending"]);
+      if (m.key === "content_publishing" && r.status === "Ready") todo.push([m, r, "ready to publish"]);
+    });
+  });
+
+  // "Coming up" means things that are scheduled — not every record that happens to carry a date.
+  const SCHEDULED = ["events", "booking", "people_roster"];
+  const upcoming = [];
+  MODULES.filter(m => SCHEDULED.includes(m.key)).forEach(m => {
+    rows(m.key).filter(r => isFuture(r.date)).forEach(r => upcoming.push([m, r]));
+  });
+  upcoming.sort((a,b)=> String(a[1].date).localeCompare(String(b[1].date)));
+
+  $("#main").innerHTML =
+    '<div class="hd"><h2>'+esc(BIZ.name)+'</h2><span class="pill">'+esc(BIZ.org_label||"")+'</span>'
+    + '<span class="pill">'+esc(BIZ.platform_choice||"")+'</span></div>'
+    + '<p class="sub">'+MODULES.length+' modules, chosen for a '+esc((BIZ.org_label||"business").toLowerCase())
+    + '. Everything below is computed from your own records.</p>'
+    + (tiles.length ? '<div class="tiles">'+tiles.join("")+'</div>'
+        : '<div class="card"><div class="empty">Nothing recorded yet. Pick a module on the left and add '
+          + 'your first record — the numbers here are computed from them.</div></div>')
+    + '<div class="card"><div class="ch"><h3>Needs you</h3><div class="sp"></div>'
+      + '<span class="pill '+(todo.length?"warn":"good")+'">'+todo.length+'</span></div>'
+      + (todo.length
+          ? '<div class="tw"><table><tbody>'+todo.slice(0,12).map(([m,r,why]) =>
+              '<tr class="row"><td style="width:120px"><span class="pill">'+esc(m.title)+'</span></td>'
+              + '<td><b>'+esc(r[m.fields[0].k])+'</b> <span class="muted">— '+esc(why)+'</span></td>'
+              + '<td style="width:90px"><button class="btn link" data-open="'+m.key+'|'+r.id+'">Open</button></td></tr>').join("")
+            + '</tbody></table></div>'
+          : '<div class="empty">Nothing waiting. Add records in the modules on the left.</div>')
+    + '</div>'
+    + (upcoming.length ? '<div class="card"><div class="ch"><h3>Coming up</h3></div><div class="tw"><table><tbody>'
+        + upcoming.slice(0,8).map(([m,r]) =>
+          '<tr class="row"><td style="width:110px" class="money">'+esc(r.date)+'</td>'
+          + '<td><span class="pill">'+esc(m.title)+'</span> '+esc(r[m.fields[0].k])+'</td></tr>').join("")
+        + '</tbody></table></div></div>' : "");
+
+  document.querySelectorAll("[data-open]").forEach(b => b.onclick = () => {
+    const [k, id] = b.dataset.open.split("|");
+    go(k); setTimeout(()=> editRecord(mod(k), rows(k).find(r=>r.id===id)), 60);
+  });
+}
+
+/* ---------------------------------------------------------------- modules */
+function paintModule(m){
+  const list = rows(m.key);
+  let body;
+  if (!list.length){
+    body = '<div class="empty"><p>No '+esc(m.record)+'s yet.</p>'
+      + '<button class="btn primary" id="addFirst">Add the first '+esc(m.record)+'</button></div>';
+  } else if (m.view === "pipeline"){
+    body = boardHtml(m, list);
+  } else {
+    body = tableHtml(m, list);
+  }
+
+  $("#main").innerHTML =
+    '<div class="hd"><h2>'+m.icon+' '+esc(m.title)+'</h2><div class="sp"></div>'
+    + '<button class="btn primary" id="addBtn">+ New '+esc(m.record)+'</button></div>'
+    + '<p class="sub">'+esc(m.blurb)+'</p>'
+    + ((m.tiles && list.length) ? '<div class="tiles">'+m.tiles.map(t =>
+        '<div class="tile"><div class="v">'+tileValue(m,t)+'</div><div class="l">'+esc(t.label)+'</div></div>').join("")+'</div>' : "")
+    + '<div class="card">'+body+'</div>';
+
+  const add = () => editRecord(m, null);
+  if ($("#addBtn")) $("#addBtn").onclick = add;
+  if ($("#addFirst")) $("#addFirst").onclick = add;
+  document.querySelectorAll("[data-edit]").forEach(b => b.onclick = () =>
+    editRecord(m, list.find(r => r.id === b.dataset.edit)));
+  if (m.view === "pipeline") wireBoard(m);
+}
+
+function cellHtml(m, r, f){
+  const v = r[f.k];
+  if (f.type === "money") return '<span class="money">'+money(v)+'</span>';
+  if (f.type === "check") return v ? '<span class="pill good">yes</span>' : '<span class="pill">no</span>';
+  if (f.type === "select"){
+    const bad = ["Overdue","Failed","Declined","No-show"], good = ["Paid","Published","Accepted","Confirmed","Closed","Done"];
+    const cls = bad.includes(v) ? "bad" : good.includes(v) ? "good" : v ? "warn" : "";
+    return v ? '<span class="pill '+cls+'">'+esc(v)+'</span>' : "";
+  }
+  if (f.type === "textarea") return '<span class="muted">'+esc(String(v||"").slice(0,70))+(String(v||"").length>70?"…":"")+'</span>';
+  return esc(v);
+}
+function tableHtml(m, list){
+  const cols = m.fields.filter(f => f.type !== "textarea").slice(0,5);
+  const sorted = list.slice().sort((a,b)=> String(b.date||b.created||"").localeCompare(String(a.date||a.created||"")));
+  return '<div class="tw"><table><thead><tr>'+cols.map(f=>'<th>'+esc(f.label)+'</th>').join("")+'<th></th></tr></thead><tbody>'
+    + sorted.map(r => '<tr class="row">'+cols.map(f=>'<td>'+cellHtml(m,r,f)+'</td>').join("")
+      + '<td style="width:70px"><button class="btn link" data-edit="'+r.id+'">Edit</button></td></tr>').join("")
+    + '</tbody></table></div>';
+}
+function boardHtml(m, list){
+  const stages = m.stages || ["New","Doing","Done"];
+  const stageField = (m.fields.find(f=>f.type==="select")||{}).k || "stage";
+  return '<div style="padding:12px"><div class="board">'
+    + stages.map(s => '<div class="col" data-stage="'+esc(s)+'"><h4>'+esc(s)+'</h4>'
+        + list.filter(r => (r[stageField]||stages[0]) === s).map(r =>
+            '<div class="cardlet" draggable="true" data-id="'+r.id+'" data-edit="'+r.id+'">'
+            + '<b>'+esc(r[m.fields[0].k])+'</b>'
+            + '<span class="m">'+(r.value?money(r.value):"")+(r.email?" · "+esc(r.email):"")+'</span></div>').join("")
+        + '</div>').join("")
+    + '</div></div>';
+}
+function wireBoard(m){
+  const stageField = (m.fields.find(f=>f.type==="select")||{}).k || "stage";
+  let dragged = null;
+  document.querySelectorAll(".cardlet").forEach(c => {
+    c.addEventListener("dragstart", e => { dragged = c.dataset.id; c.classList.add("drag"); });
+    c.addEventListener("dragend", () => { c.classList.remove("drag"); });
+  });
+  document.querySelectorAll(".col").forEach(col => {
+    col.addEventListener("dragover", e => { e.preventDefault(); col.classList.add("over"); });
+    col.addEventListener("dragleave", () => col.classList.remove("over"));
+    col.addEventListener("drop", e => {
+      e.preventDefault(); col.classList.remove("over");
+      if (!dragged) return;
+      const rec = rows(m.key).find(r => r.id === dragged);
+      if (rec){ rec[stageField] = col.dataset.stage; upsert(m.key, rec); paintModule(m); paintNav(); }
+    });
+  });
+}
+
+/* ---------------------------------------------------------------- editing */
+function fieldHtml(m, f, r){
+  const v = r ? r[f.k] : "";
+  const id = "f_"+f.k;
+  if (f.type === "textarea") return '<label for="'+id+'">'+esc(f.label)+'</label><textarea id="'+id+'">'+esc(v)+'</textarea>';
+  if (f.type === "select"){
+    const opts = f.options || (f.from === "stages" ? m.stages : []) || [];
+    return '<label for="'+id+'">'+esc(f.label)+'</label><select id="'+id+'">'
+      + opts.map(o=>'<option'+(o===v?" selected":"")+'>'+esc(o)+'</option>').join("")+'</select>';
+  }
+  if (f.type === "check") return '<label for="'+id+'">'+esc(f.label)+'</label>'
+      + '<input type="checkbox" id="'+id+'"'+(v?" checked":"")+'>';
+  const t = f.type === "date" ? "date" : (f.type === "number" || f.type === "money") ? "number" : "text";
+  const step = f.type === "money" ? ' step="0.01"' : "";
+  return '<label for="'+id+'">'+esc(f.label)+'</label><input type="'+t+'" id="'+id+'"'+step+' value="'+esc(v)+'">';
+}
+function editRecord(m, r){
+  const fields = m.fields.map(f => fieldHtml(m, f, r)).join("");
+  $("#dlgBody").innerHTML = '<h3>'+(r?"Edit":"New")+" "+esc(m.record)+'</h3>'
+    + '<p class="muted" style="font-size:13.5px">'+esc(m.blurb)+'</p>'
+    + fields
+    + '<div class="row" style="margin-top:18px"><button class="btn primary" id="saveRec">Save</button>'
+    + (r ? '<button class="btn" id="delRec">Delete</button>' : "")
+    + '<div class="sp"></div><button class="btn link" id="cancelRec">Cancel</button></div>';
+  $("#dlg").showModal();
+  $("#cancelRec").onclick = () => $("#dlg").close();
+  if (r) $("#delRec").onclick = () => {
+    if (!confirm("Delete this "+m.record+"?")) return;
+    remove(m.key, r.id); $("#dlg").close(); paintModule(m); paintNav(); toast("Deleted");
+  };
+  $("#saveRec").onclick = () => {
+    const rec = Object.assign({}, r || { created: today() });
+    for (const f of m.fields){
+      const el = $("#f_"+f.k);
+      rec[f.k] = f.type === "check" ? el.checked
+               : (f.type === "number" || f.type === "money") ? (el.value === "" ? "" : Number(el.value))
+               : el.value.trim();
+      if (f.required && (rec[f.k] === "" || rec[f.k] == null)) { toast(f.label + " is needed"); return; }
+    }
+    upsert(m.key, rec); $("#dlg").close(); paintModule(m); paintNav(); toast("Saved");
+  };
+}
+
+/* ---------------------------------------------------------------- backup */
+$("#backupBtn").onclick = () => {
+  const blob = new Blob([JSON.stringify({ business: BIZ.name, saved: new Date().toISOString(), data: DB }, null, 2)],
+                        { type:"application/json" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = KEY + "-backup.json"; a.click(); URL.revokeObjectURL(a.href);
+};
+$("#restoreBtn").onclick = () => $("#restoreFile").click();
+$("#restoreFile").onchange = async (e) => {
+  const f = e.target.files[0]; if (!f) return;
+  try {
+    const j = JSON.parse(await f.text());
+    DB = j.data || j; save(DB); paintNav(); go(VIEW); toast("Restored");
+  } catch(_){ toast("That file could not be read"); }
+};
+
+async function boot(){
+  paintNav(); go("dash");
+  paintSync(document.getElementById("syncBadge"));
+  if (MODE !== "hub") return;
+
+  document.getElementById("signoutBtn").style.display = "";
+  document.getElementById("signoutBtn").onclick = async () => {
+    await fetch("/api/auth/signout", { method:"POST", credentials:"same-origin" });
+    location.href = "/";
+  };
+  try {
+    const r = await fetch("/api/state", { credentials:"same-origin" });
+    if (r.status === 401){ location.href = "/?next=/app"; return; }
+    const server = await r.json();
+    // The server is the source of truth for a signed-in owner; the local copy is a cache.
+    DB = (server && typeof server === "object") ? server : {};
+    saveLocal(DB);
+    setSync("saved");
+    paintNav(); go(VIEW);
+  } catch(e){ setSync("offline"); }
+}
+boot();
+</script>
+</body>
+</html>

@@ -1,0 +1,656 @@
+<title>Buzz × The House — Implementation Wizard</title>
+<style>
+  :root{
+    --bg:#F6F0E4; --panel:#FFFDF8; --panel-2:#F1E9D8; --ink:#241D14; --ink-2:#5C5142;
+    --line:#E4D8C1; --line-2:#D6C6A6;
+    --honey:#C6791F; --honey-2:#E8A33D; --honey-soft:#F6E2BE;
+    --good:#2E8B62; --warn:#B87516; --crit:#B84A38; --info:#3F6FA8;
+    --shadow:0 1px 2px rgba(60,45,20,.06),0 8px 24px rgba(60,45,20,.08);
+    --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+    --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+    --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --bg:#17130D; --panel:#211A11; --panel-2:#2A2216; --ink:#F1E7D6; --ink-2:#B3A489;
+      --line:#332918; --line-2:#463818;
+      --honey:#E8A33D; --honey-2:#F0B858; --honey-soft:#3A2C13;
+      --good:#4FB283; --warn:#E0A64A; --crit:#E0705C; --info:#6E9FD6;
+      --shadow:0 1px 2px rgba(0,0,0,.4),0 12px 30px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="light"]{
+    --bg:#F6F0E4; --panel:#FFFDF8; --panel-2:#F1E9D8; --ink:#241D14; --ink-2:#5C5142;
+    --line:#E4D8C1; --line-2:#D6C6A6; --honey:#C6791F; --honey-2:#E8A33D; --honey-soft:#F6E2BE;
+    --good:#2E8B62; --warn:#B87516; --crit:#B84A38; --info:#3F6FA8;
+    --shadow:0 1px 2px rgba(60,45,20,.06),0 8px 24px rgba(60,45,20,.08);
+  }
+  :root[data-theme="dark"]{
+    --bg:#17130D; --panel:#211A11; --panel-2:#2A2216; --ink:#F1E7D6; --ink-2:#B3A489;
+    --line:#332918; --line-2:#463818; --honey:#E8A33D; --honey-2:#F0B858; --honey-soft:#3A2C13;
+    --good:#4FB283; --warn:#E0A64A; --crit:#E0705C; --info:#6E9FD6;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 12px 30px rgba(0,0,0,.35);
+  }
+
+  *{box-sizing:border-box}
+  body{margin:0}
+  .wrap{background:var(--bg);color:var(--ink);font-family:var(--sans);
+    line-height:1.55;min-height:100vh;-webkit-font-smoothing:antialiased}
+  .shell{max-width:920px;margin:0 auto;padding:0 20px 96px}
+
+  /* header */
+  header.top{position:relative;overflow:hidden;border-bottom:1px solid var(--line);
+    background:linear-gradient(180deg,var(--panel-2),var(--bg))}
+  header.top .hexbg{position:absolute;inset:0;opacity:.5;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='56' height='96' viewBox='0 0 56 96'><g fill='none' stroke='%23c6791f' stroke-opacity='0.16' stroke-width='1.4'><path d='M28 1 L54 16 L54 48 L28 63 L2 48 L2 16 Z'/><path d='M28 49 L54 64 L54 96 M28 49 L2 64 L2 96'/></g></svg>");
+    background-size:56px 96px;pointer-events:none}
+  .head-inner{position:relative;max-width:920px;margin:0 auto;padding:34px 20px 26px;
+    display:flex;flex-direction:column;gap:14px}
+  .brandrow{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+  .eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--honey);display:flex;align-items:center;gap:9px}
+  .eyebrow .dot{width:7px;height:7px;border-radius:2px;background:var(--honey);transform:rotate(45deg)}
+  h1{font-family:var(--serif);font-weight:600;letter-spacing:-.01em;text-wrap:balance;
+    margin:2px 0 0;font-size:clamp(28px,5.4vw,44px);line-height:1.06}
+  h1 em{font-style:italic;color:var(--honey)}
+  .lede{color:var(--ink-2);max-width:60ch;font-size:15.5px;margin:0}
+  .tbtn{font-family:var(--mono);font-size:12px;color:var(--ink-2);background:var(--panel);
+    border:1px solid var(--line-2);border-radius:8px;padding:8px 12px;cursor:pointer;
+    display:inline-flex;gap:7px;align-items:center}
+  .tbtn:hover{border-color:var(--honey);color:var(--ink)}
+
+  /* progress meter */
+  .meter{max-width:920px;margin:0 auto;padding:14px 20px 0}
+  .meter-track{height:6px;border-radius:99px;background:var(--panel-2);overflow:hidden;border:1px solid var(--line)}
+  .meter-fill{height:100%;background:linear-gradient(90deg,var(--honey),var(--honey-2));
+    width:0;transition:width .4s cubic-bezier(.2,.7,.2,1)}
+  .meter-label{font-family:var(--mono);font-size:11px;color:var(--ink-2);margin-top:7px;
+    display:flex;justify-content:space-between;letter-spacing:.04em}
+
+  /* step rail */
+  .rail{display:flex;gap:6px;overflow-x:auto;padding:16px 20px 4px;max-width:920px;margin:0 auto;
+    scrollbar-width:thin}
+  .rail::-webkit-scrollbar{height:5px}
+  .rail::-webkit-scrollbar-thumb{background:var(--line-2);border-radius:9px}
+  .chip{flex:0 0 auto;display:flex;align-items:center;gap:8px;padding:7px 12px;border-radius:9px;
+    border:1px solid var(--line);background:var(--panel);cursor:pointer;font-size:12.5px;color:var(--ink-2);
+    white-space:nowrap;transition:.15s}
+  .chip:hover{border-color:var(--line-2);color:var(--ink)}
+  .chip .num{font-family:var(--mono);font-size:11px;width:19px;height:19px;border-radius:5px;
+    display:grid;place-items:center;background:var(--panel-2);color:var(--ink-2);flex:0 0 auto}
+  .chip.active{border-color:var(--honey);background:var(--honey-soft);color:var(--ink)}
+  .chip.active .num{background:var(--honey);color:#1b1206}
+  .chip.done .num{background:var(--good);color:#fff}
+
+  /* panel */
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:16px;
+    box-shadow:var(--shadow);margin-top:18px;overflow:hidden}
+  .card-hd{padding:24px 26px 4px}
+  .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--honey)}
+  .card-hd h2{font-family:var(--serif);font-weight:600;font-size:clamp(21px,3.4vw,27px);margin:8px 0 6px;
+    letter-spacing:-.01em;text-wrap:balance;line-height:1.12}
+  .card-hd p.sub{color:var(--ink-2);margin:0;font-size:14.5px;max-width:64ch}
+  .card-bd{padding:18px 26px 26px;display:flex;flex-direction:column;gap:16px}
+
+  .from-video{border-left:3px solid var(--honey);background:var(--panel-2);border-radius:0 10px 10px 0;
+    padding:11px 15px;font-size:13.5px;color:var(--ink-2)}
+  .from-video b{color:var(--ink);font-weight:600}
+  .from-video .tag{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--honey);display:block;margin-bottom:3px}
+
+  label.q{font-weight:600;font-size:14px;display:block;margin-bottom:2px}
+  .hint{font-size:12.5px;color:var(--ink-2)}
+  .opts{display:grid;gap:8px;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));margin-top:9px}
+  .opt{border:1px solid var(--line-2);background:var(--panel-2);border-radius:10px;padding:11px 13px;
+    cursor:pointer;font-size:13.5px;transition:.13s;display:flex;flex-direction:column;gap:2px}
+  .opt small{color:var(--ink-2);font-size:11.5px}
+  .opt:hover{border-color:var(--honey)}
+  .opt.sel{border-color:var(--honey);background:var(--honey-soft);box-shadow:inset 0 0 0 1px var(--honey)}
+  .field{display:flex;flex-direction:column;gap:8px}
+
+  /* verdict */
+  .verdict{border-radius:12px;padding:16px 18px;border:1px solid var(--line-2);background:var(--panel-2);
+    display:flex;gap:14px;align-items:flex-start}
+  .verdict .badge{font-family:var(--mono);font-weight:700;font-size:12px;letter-spacing:.05em;
+    padding:5px 10px;border-radius:7px;white-space:nowrap;flex:0 0 auto}
+  .badge.good{background:var(--good);color:#fff}.badge.warn{background:var(--warn);color:#fff}
+  .badge.info{background:var(--info);color:#fff}
+  .verdict p{margin:0;font-size:13.5px;color:var(--ink-2)}
+  .verdict b{color:var(--ink)}
+
+  /* checklist rows */
+  .rows{display:flex;flex-direction:column;gap:9px}
+  .row{display:flex;gap:12px;align-items:flex-start;border:1px solid var(--line);border-radius:11px;
+    padding:12px 14px;background:var(--panel-2);cursor:pointer;transition:.13s}
+  .row:hover{border-color:var(--line-2)}
+  .row.on{border-color:var(--honey);background:var(--honey-soft)}
+  .box{width:20px;height:20px;border-radius:6px;border:1.5px solid var(--line-2);flex:0 0 auto;margin-top:1px;
+    display:grid;place-items:center;font-size:12px;color:transparent;background:var(--panel)}
+  .row.on .box{background:var(--honey);border-color:var(--honey);color:#1b1206}
+  .row .body{flex:1;min-width:0}
+  .row .body .t{font-weight:600;font-size:14px}
+  .row .body .d{font-size:12.5px;color:var(--ink-2);margin-top:2px}
+  .row .body .d code{font-family:var(--mono);font-size:11.5px;background:var(--panel);padding:1px 5px;
+    border-radius:5px;border:1px solid var(--line);color:var(--honey)}
+
+  /* agent cards */
+  .agents{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
+  .agent{border:1px solid var(--line);border-radius:12px;padding:13px 14px;background:var(--panel-2);
+    display:flex;flex-direction:column;gap:9px;transition:.13s}
+  .agent.off{opacity:.5}
+  .agent-top{display:flex;align-items:center;gap:9px}
+  .swatch{width:26px;height:26px;border-radius:7px;flex:0 0 auto;display:grid;place-items:center;
+    font-family:var(--mono);font-weight:700;font-size:12px;color:#1b1206}
+  .agent input.name{font-weight:600;font-size:14.5px;border:none;background:transparent;color:var(--ink);
+    width:100%;font-family:var(--sans);padding:2px 0;border-bottom:1px dashed transparent}
+  .agent input.name:focus{outline:none;border-bottom-color:var(--line-2)}
+  .agent .role{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+  .agent .selrow{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+  select,input.txt{font-family:var(--mono);font-size:12px;color:var(--ink);background:var(--panel);
+    border:1px solid var(--line-2);border-radius:7px;padding:7px 8px;width:100%}
+  select:focus,input:focus{outline:2px solid var(--honey);outline-offset:1px}
+  .toggle{margin-left:auto;width:38px;height:22px;border-radius:99px;background:var(--line-2);
+    position:relative;cursor:pointer;flex:0 0 auto;transition:.15s;border:none;padding:0}
+  .toggle::after{content:"";position:absolute;top:2px;left:2px;width:18px;height:18px;border-radius:50%;
+    background:#fff;transition:.15s}
+  .toggle.on{background:var(--honey)}.toggle.on::after{left:18px}
+  .add-agent{border:1.5px dashed var(--line-2);border-radius:12px;background:transparent;color:var(--ink-2);
+    padding:13px;cursor:pointer;font-size:13.5px;font-family:var(--sans);display:grid;place-items:center;min-height:70px}
+  .add-agent:hover{border-color:var(--honey);color:var(--honey)}
+
+  .section-lbl{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--ink-2);margin:6px 0 -4px}
+
+  /* plan output */
+  .plan-cards{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
+  .pcard{border:1px solid var(--line);border-radius:12px;padding:14px;background:var(--panel-2)}
+  .pcard h4{margin:0 0 8px;font-family:var(--serif);font-size:16px;font-weight:600}
+  .pcard ul{margin:0;padding-left:17px;font-size:13px;color:var(--ink-2);display:flex;flex-direction:column;gap:4px}
+  .pcard ul li b{color:var(--ink);font-weight:600}
+  pre.md{font-family:var(--mono);font-size:11.5px;line-height:1.6;background:var(--panel-2);color:var(--ink);
+    border:1px solid var(--line);border-radius:12px;padding:16px;overflow-x:auto;white-space:pre;max-height:340px}
+  .act-row{display:flex;gap:10px;flex-wrap:wrap}
+  .btn{font-family:var(--sans);font-size:14px;font-weight:600;border-radius:10px;padding:11px 18px;
+    cursor:pointer;border:1px solid var(--line-2);background:var(--panel);color:var(--ink)}
+  .btn:hover{border-color:var(--honey)}
+  .btn.primary{background:var(--honey);border-color:var(--honey);color:#1b1206}
+  .btn.primary:hover{background:var(--honey-2)}
+
+  /* footer nav */
+  .navbar{position:sticky;bottom:0;margin-top:18px;background:var(--panel);border:1px solid var(--line);
+    border-radius:14px;box-shadow:var(--shadow);padding:11px 14px;display:flex;align-items:center;
+    justify-content:space-between;gap:12px}
+  .navbar .mid{font-family:var(--mono);font-size:11.5px;color:var(--ink-2);text-align:center;flex:1;letter-spacing:.03em}
+  .link{background:none;border:none;color:var(--ink-2);font-family:var(--mono);font-size:11.5px;cursor:pointer;
+    text-decoration:underline;text-underline-offset:3px}
+  .link:hover{color:var(--crit)}
+  .toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%) translateY(20px);opacity:0;
+    background:var(--ink);color:var(--bg);font-size:13px;padding:10px 18px;border-radius:9px;
+    transition:.25s;pointer-events:none;z-index:9;font-family:var(--mono)}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+  @media(max-width:560px){.head-inner{padding:26px 18px 22px}.card-hd,.card-bd{padding-left:18px;padding-right:18px}
+    .agent .selrow{grid-template-columns:1fr}}
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div class="hexbg"></div>
+    <div class="head-inner">
+      <div class="brandrow">
+        <div class="eyebrow"><span class="dot"></span> Vision Outreach Media · House of Systems</div>
+        <button class="tbtn" id="themeBtn">◐ Theme</button>
+      </div>
+      <h1>Run the House on <em>Buzz</em></h1>
+      <p class="lede">An implementation wizard that turns Jack Dorsey's agentic workspace into a concrete, House-specific setup — your agent team, channels, and the context loops that feed them. Eight steps, your answers saved, a copy-ready plan at the end.</p>
+    </div>
+  </header>
+
+  <div class="meter">
+    <div class="meter-track"><div class="meter-fill" id="fill"></div></div>
+    <div class="meter-label"><span id="mlabel">Step 1 of 8</span><span id="mpct">0% mapped</span></div>
+  </div>
+
+  <div class="rail" id="rail"></div>
+
+  <main class="shell">
+    <div class="card">
+      <div class="card-hd">
+        <div class="kicker" id="kicker">Foundation</div>
+        <h2 id="title">…</h2>
+        <p class="sub" id="sub">…</p>
+      </div>
+      <div class="card-bd" id="body"></div>
+    </div>
+
+    <div class="navbar">
+      <button class="btn" id="back">← Back</button>
+      <div class="mid"><span id="crumb"></span> · <button class="link" id="reset">reset wizard</button></div>
+      <button class="btn primary" id="next">Next →</button>
+    </div>
+  </main>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+  "use strict";
+  var KEY="buzz_wizard_v1";
+  var $=function(s,r){return (r||document).querySelector(s)};
+
+  /* ---------- default state ---------- */
+  function seedAgents(){return [
+    {id:"chief",name:"Chief",role:"Agent Officer · delegator",model:"Opus",harness:"Claude Code",color:"#E8A33D",on:true},
+    {id:"scout",name:"Scout",role:"Strategy · Engage AI benchmarks",model:"Sonnet",harness:"Claude Code",color:"#4FB283",on:true},
+    {id:"quill",name:"Quill",role:"Copywriter · funnels & email",model:"Sonnet",harness:"Claude Code",color:"#6E9FD6",on:true},
+    {id:"palette",name:"Palette",role:"Designer · pages & mockups",model:"Sonnet",harness:"Claude Code",color:"#E0705C",on:true},
+    {id:"forge",name:"Forge",role:"Builder · full-stack & deploy",model:"Opus",harness:"Claude Code",color:"#C6791F",on:true},
+    {id:"ledger",name:"Ledger",role:"Ops · CRM, Stripe, leads",model:"Haiku",harness:"Codex",color:"#B87516",on:true},
+    {id:"warden",name:"Warden",role:"Reviewer · code & security",model:"Sonnet",harness:"Claude Code",color:"#8E7CC3",on:false}
+  ];}
+  function seedChannels(){return [
+    {id:"team",label:"#team",kind:"Private",desc:"Core operator + agents. The shared context hub.",on:true},
+    {id:"build",label:"#build",kind:"Private",desc:"Projects, feature branches, deploy previews.",on:true},
+    {id:"revenue",label:"#revenue",kind:"Private",desc:"Stripe sales digests — Hundred, Launch Kits.",on:true},
+    {id:"engagement",label:"#engagement",kind:"Private",desc:"Engage AI scores + monthly re-benchmarks.",on:true},
+    {id:"operators",label:"#operators-academy",kind:"Public",desc:"Community channel for Academy learners.",on:true},
+    {id:"church",label:"#church-media",kind:"Public",desc:"Church Media Academy cohort + support.",on:false},
+    {id:"vital",label:"#vital-community",kind:"Public",desc:"vital. users — recovery + accountability.",on:false}
+  ];}
+  function seedLoops(){return [
+    {id:"engage",t:"Engage AI score digest",d:"App exposes a public API of the 8-channel scores; a daily workflow posts them into <code>#engagement</code> so Scout can spot white-space and drift.",on:true},
+    {id:"sales",t:"Stripe sales digest",d:"Daily revenue + refunds from the VOM Foundry account into <code>#revenue</code>; Ledger flags anomalies and slow days.",on:true},
+    {id:"leads",t:"Lead pipeline",d:"New hello@ / Formsubmit signups land in <code>#team</code>; agents draft the first follow-up in the operator's voice.",on:true},
+    {id:"social",t:"Social leaderboard",d:"Vinnie's tweet-stats pattern — top posts + impressions to <code>#team</code>; \"novelty gets reach, friction gets engagement.\"",on:false},
+    {id:"content",t:"Content review status",d:"Nightly status of the 39 live deliverables into <code>#build</code> so nothing ships unreviewed.",on:false}
+  ];}
+  function fresh(){return {
+    step:0,
+    fit:{team:"",rev:"",tech:"",goal:""},
+    setup:{install:false,relay:"",harness:false,skills:false,agents_seen:false},
+    agents:seedAgents(),
+    channels:seedChannels(),
+    loops:seedLoops(),
+    build:{deploy:"Vercel",git:"Relay-hosted",worktrees:true},
+    adv:{huddles:true,compute:false,lightning:false}
+  };}
+
+  var S;
+  try{S=JSON.parse(localStorage.getItem(KEY))||fresh();}catch(e){S=fresh();}
+  if(!S.agents){S=fresh();}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
+
+  /* ---------- theme ---------- */
+  var tb=$("#themeBtn");
+  tb.onclick=function(){
+    var cur=document.documentElement.getAttribute("data-theme");
+    var next = cur==="dark"?"light": cur==="light"?"dark":
+      (matchMedia("(prefers-color-scheme:dark)").matches?"light":"dark");
+    document.documentElement.setAttribute("data-theme",next);
+  };
+
+  /* ---------- steps ---------- */
+  var STEPS=[
+    {k:"Assess",t:"Is Buzz right for the House?",s:"Buzz's sweet spot is solopreneurs and small teams (1–10 people, $0–10M) who want one context-rich place to think and ship. Let's check the fit before you invest.",r:renderFit},
+    {k:"Foundation",t:"Stand up the relay",s:"The relay is your server — where every chat, agent, and push lives, and the shared context that makes the rest work. Get the foundation in place.",r:renderSetup},
+    {k:"The team",t:"Build your agent team",s:"In Buzz, agents are first-class teammates, not integrations. Seed the House roster, then pin each agent to the cheapest-capable model and a harness.",r:renderAgents},
+    {k:"Spaces",t:"Channels & shared context",s:"Private channels for the team, public channels for your communities — all drawing from one shared context window. Choose the rooms the House needs.",r:renderChannels},
+    {k:"The edge",t:"Close the context loops",s:"The real advantage: wire an app → public API → daily workflow that posts data back into a channel, so agents reason over live House data in context.",r:renderLoops},
+    {k:"Ship",t:"Projects, git & deploy",s:"Agents create projects, work in parallel git work-trees, and deploy live. Point them at the House's build and hosting conventions.",r:renderBuild},
+    {k:"Frontier",t:"Huddles, compute & payments",s:"The openness dividend — audio huddles with agents, shared local compute, and (coming) Bitcoin Lightning micropayments on Nostr.",r:renderAdv},
+    {k:"Launch",t:"Your implementation plan",s:"Everything you chose, compiled into a House-specific runbook you can copy into Buzz, a doc, or an agent chat.",r:renderPlan}
+  ];
+
+  /* ---------- helpers ---------- */
+  function fromVideo(label,html){
+    return '<div class="from-video"><span class="tag">From the video · '+label+'</span>'+html+'</div>';
+  }
+  function optSet(cfg){
+    // cfg: {get, set, items:[{v,label,small}]}
+    var d=document.createElement("div");d.className="opts";
+    cfg.items.forEach(function(it){
+      var o=document.createElement("div");o.className="opt"+(cfg.get()===it.v?" sel":"");
+      o.innerHTML="<span>"+it.label+"</span>"+(it.small?"<small>"+it.small+"</small>":"");
+      o.onclick=function(){cfg.set(it.v);save();render();};
+      d.appendChild(o);
+    });
+    return d;
+  }
+  function fieldBlock(labelText,hintText,node){
+    var f=document.createElement("div");f.className="field";
+    f.innerHTML='<label class="q">'+labelText+'</label>'+(hintText?'<div class="hint">'+hintText+'</div>':'');
+    f.appendChild(node);return f;
+  }
+  function checkRows(list,onToggle){
+    var w=document.createElement("div");w.className="rows";
+    list.forEach(function(it){
+      var r=document.createElement("div");r.className="row"+(it.on?" on":"");
+      r.innerHTML='<div class="box">✓</div><div class="body"><div class="t">'+it.t+'</div><div class="d">'+it.d+'</div></div>';
+      r.onclick=function(){it.on=!it.on;onToggle&&onToggle(it);save();render();};
+      w.appendChild(r);
+    });
+    return w;
+  }
+
+  /* ---------- STEP 1: fit ---------- */
+  function renderFit(b){
+    b.appendChild(nodeFromHTML(fromVideo("who it's for",
+      'Greg &amp; Vinnie: <b>"If you\'re a founder, small team — one to ten people, $0–10M revenue, on Slack today — download Buzz and try it."</b> Heavy software engineering? Not yet. One central context-rich tool? Ideal.')));
+
+    b.appendChild(fieldBlock("How big is the team touching this?","Agents count as teammates — this is about human operators.",
+      optSet({get:function(){return S.fit.team},set:function(v){S.fit.team=v},items:[
+        {v:"solo",label:"Just me",small:"Solopreneur"},
+        {v:"small",label:"2–10",small:"Small team"},
+        {v:"mid",label:"11–30",small:"Growing"},
+        {v:"big",label:"30+",small:"Established"}]})));
+
+    b.appendChild(fieldBlock("Revenue stage","Buzz is tuned for early, iterative operations.",
+      optSet({get:function(){return S.fit.rev},set:function(v){S.fit.rev=v},items:[
+        {v:"pre",label:"Pre-revenue",small:"Building"},
+        {v:"early",label:"$0–1M",small:"Early"},
+        {v:"scaling",label:"$1–10M",small:"Scaling"},
+        {v:"over",label:"$10M+",small:"Large"}]})));
+
+    b.appendChild(fieldBlock("Comfort with git, APIs & harnesses","You don't need much — agents handle the mechanics — but it shapes how fast you'll move.",
+      optSet({get:function(){return S.fit.tech},set:function(v){S.fit.tech=v},items:[
+        {v:"low",label:"Non-technical",small:"I direct, agents do"},
+        {v:"mid",label:"Comfortable",small:"I've shipped with AI"},
+        {v:"high",label:"Technical",small:"Terminals & repos"}]})));
+
+    b.appendChild(fieldBlock("What's the primary job for the House?","Your answer steers the agent roster and loops we suggest.",
+      optSet({get:function(){return S.fit.goal},set:function(v){S.fit.goal=v},items:[
+        {v:"ship",label:"Ship products faster",small:"Build & deploy"},
+        {v:"market",label:"Run marketing",small:"Content & leads"},
+        {v:"central",label:"One context hub",small:"Consolidate everything"},
+        {v:"community",label:"Serve communities",small:"Academy / church / vital."}]})));
+
+    if(S.fit.team&&S.fit.rev&&S.fit.tech&&S.fit.goal){
+      b.appendChild(nodeFromHTML(fitVerdict()));
+    }
+  }
+  function fitVerdict(){
+    var v="info",badge="WORTH A PILOT",msg;
+    var small=(S.fit.team==="solo"||S.fit.team==="small");
+    var early=(S.fit.rev==="pre"||S.fit.rev==="early"||S.fit.rev==="scaling");
+    if(small&&early){v="good";badge="STRONG FIT";
+      msg="You're squarely in Buzz's sweet spot. <b>Run a two-week pilot</b> — put the House's agent team and one live context loop in Buzz, keep Slack for anything mission-critical, and compare.";}
+    else if(S.fit.team==="big"||S.fit.rev==="over"){v="warn";badge="PILOT NARROWLY";
+      msg="Bigger and later-stage than Buzz's current sweet spot (it's alpha/beta and can be slow). <b>Pilot a single workflow</b> — e.g. the Engage AI or lead loop — rather than migrating the whole team off Slack.";}
+    else{msg="Reasonable fit. <b>Start small:</b> one channel, three agents, one context loop. The point is to get your hands dirty and learn how the agentic workspace behaves.";}
+    if(S.fit.tech==="low"){msg+=" Since you're non-technical, lean on the <b>Chief</b> delegator agent and let it route work.";}
+    return '<div class="verdict"><span class="badge '+v+'">'+badge+'</span><p>'+msg+'</p></div>';
+  }
+
+  /* ---------- STEP 2: setup ---------- */
+  function renderSetup(b){
+    b.appendChild(nodeFromHTML(fromVideo("the relay",
+      'Buzz runs on <b>relays</b> — servers you host or that Block hosts for you. Your chats, context, and even git pushes live there. It\'s built on <b>Nostr</b>, so integrations are open and your data is portable.')));
+
+    b.appendChild(fieldBlock("Where should your relay live?","Data control was Vinnie's core argument — own the context, keep it portable.",
+      optSet({get:function(){return S.setup.relay},set:function(v){S.setup.relay=v},items:[
+        {v:"hosted",label:"Block-hosted",small:"Fastest to start"},
+        {v:"self",label:"Self-hosted",small:"Full data control"}]})));
+
+    var list=[
+      {t:"Install Buzz & sign in",d:"Grab the app, create your workspace on the chosen relay.",on:S.setup.install,key:"install"},
+      {t:"Connect a harness",d:'Point agents at <code>Claude Code</code> — swap to <code>Codex</code>/<code>Goose</code>/<code>Open Code</code> anytime without losing context.',on:S.setup.harness,key:"harness"},
+      {t:"Make skills globally available",d:'Install House skills in the <code>global</code> directory (not project-specific) so every Buzz agent can use them.',on:S.setup.skills,key:"skills"},
+      {t:"Meet the default agents",d:"See the seeded agents before you customize the roster in the next step.",on:S.setup.agents_seen,key:"agents_seen"}
+    ];
+    b.appendChild(nodeFromHTML('<div class="section-lbl">Foundation checklist</div>'));
+    b.appendChild(checkRows(list,function(it){S.setup[it.key]=it.on;}));
+  }
+
+  /* ---------- STEP 3: agents ---------- */
+  var MODELS=["Opus","Sonnet","Haiku","Fable","Local (shared)"];
+  var HARNESSES=["Claude Code","Codex","Goose","Open Code"];
+  function renderAgents(b){
+    b.appendChild(nodeFromHTML(fromVideo("the sauce",
+      'Vinnie\'s #1 tip: <b>pin agents to models</b> — "Fizz is Fable, Honey is Sonnet" — so routine tasks don\'t burn your best model\'s tokens. Then a <b>Chief Agent Officer</b> delegates the delegation: "I have this task, who\'s best for it?"')));
+
+    var grid=document.createElement("div");grid.className="agents";
+    S.agents.forEach(function(a,i){
+      var c=document.createElement("div");c.className="agent"+(a.on?"":" off");
+      var top=document.createElement("div");top.className="agent-top";
+      top.innerHTML='<div class="swatch" style="background:'+a.color+'">'+a.name.charAt(0).toUpperCase()+'</div>';
+      var nm=document.createElement("div");nm.style.flex="1";nm.style.minWidth="0";
+      var inp=document.createElement("input");inp.className="name";inp.value=a.name;inp.setAttribute("aria-label","Agent name");
+      inp.onchange=function(){a.name=inp.value||"Agent";save();render();};
+      var role=document.createElement("div");role.className="role";role.textContent=a.role;
+      nm.appendChild(inp);nm.appendChild(role);
+      var tog=document.createElement("button");tog.className="toggle"+(a.on?" on":"");tog.setAttribute("aria-label","Enable agent");
+      tog.onclick=function(){a.on=!a.on;save();render();};
+      top.appendChild(nm);top.appendChild(tog);
+      c.appendChild(top);
+      var selrow=document.createElement("div");selrow.className="selrow";
+      selrow.appendChild(mkSelect(MODELS,a.model,function(v){a.model=v;save();}));
+      selrow.appendChild(mkSelect(HARNESSES,a.harness,function(v){a.harness=v;save();}));
+      c.appendChild(selrow);
+      grid.appendChild(c);
+    });
+    var add=document.createElement("button");add.className="add-agent";add.textContent="+ Add agent";
+    add.onclick=function(){
+      var colors=["#E8A33D","#4FB283","#6E9FD6","#E0705C","#8E7CC3","#C6791F"];
+      S.agents.push({id:"a"+Date.now(),name:"New agent",role:"Custom · define its job",
+        model:"Sonnet",harness:"Claude Code",color:colors[S.agents.length%colors.length],on:true});
+      save();render();
+    };
+    grid.appendChild(add);
+    b.appendChild(grid);
+  }
+  function mkSelect(opts,val,cb){
+    var s=document.createElement("select");
+    opts.forEach(function(o){var op=document.createElement("option");op.value=o;op.textContent=o;
+      if(o===val)op.selected=true;s.appendChild(op);});
+    s.onchange=function(){cb(s.value);};
+    return s;
+  }
+
+  /* ---------- STEP 4: channels ---------- */
+  function renderChannels(b){
+    b.appendChild(nodeFromHTML(fromVideo("private + public",
+      '"You can create channels that are private and public — invite your community into public channels, keep private channels for your team, and the context is shared." A community bug report becomes <b>"an @ away"</b>: "Fizz, let\'s tackle this."')));
+    b.appendChild(nodeFromHTML('<div class="section-lbl">Private · your operating rooms</div>'));
+    b.appendChild(checkRows(S.channels.filter(function(c){return c.kind==="Private"}).map(function(c){
+      return {t:c.label,d:c.desc,on:c.on,_ref:c};}),function(it){it._ref.on=it.on;}));
+    b.appendChild(nodeFromHTML('<div class="section-lbl">Public · your communities</div>'));
+    b.appendChild(checkRows(S.channels.filter(function(c){return c.kind==="Public"}).map(function(c){
+      return {t:c.label,d:c.desc,on:c.on,_ref:c};}),function(it){it._ref.on=it.on;}));
+  }
+
+  /* ---------- STEP 5: loops ---------- */
+  function renderLoops(b){
+    b.appendChild(nodeFromHTML(fromVideo("the closed loop",
+      'Vinnie built an app, exposed a <b>public API</b>, and set a <b>daily workflow</b> to post the data back into a channel — so agents reason over it in context. "This is the boring stuff every business has; an unfair advantage here separates a good business from a bad one."')));
+    b.appendChild(nodeFromHTML('<div class="hint">Toggle the House data loops to wire. Each becomes an app + public API + daily workflow feeding a channel.</div>'));
+    b.appendChild(checkRows(S.loops,function(it){/* mutated in place */}));
+  }
+
+  /* ---------- STEP 6: build ---------- */
+  function renderBuild(b){
+    b.appendChild(nodeFromHTML(fromVideo("build on the fly",
+      '"Spin up three landing pages from the ideas we just had." Agents create projects, work in <b>parallel work-trees</b> (never touching your local files), push to repos, and deploy live — returning preview links and screenshots.')));
+    b.appendChild(fieldBlock("Deploy target","The House default is Vercel (CLI-only, clean aliases). Buzz can also deploy to Railway or its own relay hosting.",
+      optSet({get:function(){return S.build.deploy},set:function(v){S.build.deploy=v},items:[
+        {v:"Vercel",label:"Vercel",small:"House default"},
+        {v:"Railway",label:"Railway",small:"From the demo"},
+        {v:"Relay",label:"Relay-hosted",small:"Buzz-native"}]})));
+    b.appendChild(fieldBlock("Git hosting","Buzz has its own hosted git on your relay, or connect GitHub (House repos are vom-*).",
+      optSet({get:function(){return S.build.git},set:function(v){S.build.git=v},items:[
+        {v:"Relay-hosted",label:"Relay git",small:"On your relay"},
+        {v:"GitHub",label:"GitHub",small:"vom-* repos"}]})));
+    var wt={t:"Agents work in parallel work-trees",d:"Keeps agent builds isolated from your local checkout — safe parallel experiments.",on:S.build.worktrees};
+    b.appendChild(nodeFromHTML('<div class="section-lbl">Convention</div>'));
+    b.appendChild(checkRows([wt],function(it){S.build.worktrees=it.on;}));
+  }
+
+  /* ---------- STEP 7: advanced ---------- */
+  function renderAdv(b){
+    b.appendChild(nodeFromHTML(fromVideo("openness dividend",
+      'Buzz is built on <b>Nostr</b>, coupled with <b>Bitcoin Lightning</b>. Expect agents paying for compute, or people tipping each other for work. Plus <b>shared compute</b> — pool one beefy machine\'s local model across the team — and <b>audio huddles</b> with agents that keep full chat context.')));
+    var list=[
+      {t:"Audio huddles with agents",d:"Live voice brainstorms where agents join with full context. Greg's \"holy grail\": eventually FaceTime your agents.",on:S.adv.huddles,key:"huddles"},
+      {t:"Shared local compute",d:"Download a local model and share it across the team from one machine — model choice + data control, no per-seat token cost.",on:S.adv.compute,key:"compute"},
+      {t:"Bitcoin Lightning payments",d:"Not integrated yet — plan for agent-pays-for-compute and community tipping once it lands on the Nostr rails.",on:S.adv.lightning,key:"lightning"}
+    ];
+    b.appendChild(checkRows(list,function(it){S.adv[it.key]=it.on;}));
+  }
+
+  /* ---------- STEP 8: plan ---------- */
+  function renderPlan(b){
+    var agentsOn=S.agents.filter(function(a){return a.on;});
+    var chOn=S.channels.filter(function(c){return c.on;});
+    var loopsOn=S.loops.filter(function(l){return l.on;});
+
+    var cards=document.createElement("div");cards.className="plan-cards";
+    cards.appendChild(nodeFromHTML('<div class="pcard"><h4>Team</h4><ul>'+
+      agentsOn.map(function(a){return '<li><b>'+esc(a.name)+'</b> — '+esc(a.model)+' · '+esc(a.harness)+'</li>';}).join('')+
+      '</ul></div>'));
+    cards.appendChild(nodeFromHTML('<div class="pcard"><h4>Channels</h4><ul>'+
+      chOn.map(function(c){return '<li><b>'+esc(c.label)+'</b> — '+c.kind+'</li>';}).join('')+
+      '</ul></div>'));
+    cards.appendChild(nodeFromHTML('<div class="pcard"><h4>Context loops</h4><ul>'+
+      (loopsOn.length?loopsOn.map(function(l){return '<li><b>'+esc(l.t)+'</b></li>';}).join(''):'<li>None selected yet</li>')+
+      '</ul></div>'));
+    b.appendChild(cards);
+
+    var md=buildMarkdown(agentsOn,chOn,loopsOn);
+    var actions=document.createElement("div");actions.className="act-row";
+    var copy=document.createElement("button");copy.className="btn primary";copy.textContent="Copy runbook";
+    copy.onclick=function(){copyText(md);};
+    var dl=document.createElement("button");dl.className="btn";dl.textContent="Download .md";
+    dl.onclick=function(){download("buzz-house-runbook.md",md);};
+    actions.appendChild(copy);actions.appendChild(dl);
+    b.appendChild(actions);
+
+    var pre=document.createElement("pre");pre.className="md";pre.textContent=md;
+    b.appendChild(pre);
+  }
+  function buildMarkdown(agents,channels,loops){
+    var fitTeam={solo:"Solopreneur",small:"Small team (2–10)",mid:"Growing (11–30)",big:"Established (30+)"}[S.fit.team]||"—";
+    var fitGoal={ship:"Ship products faster",market:"Run marketing",central:"One context hub",community:"Serve communities"}[S.fit.goal]||"—";
+    var L=[];
+    L.push("# Buzz × The House — Implementation Runbook");
+    L.push("_Generated by the VOM implementation wizard · from Jack Dorsey's Buzz (Greg Isenberg)_ ");
+    L.push("");
+    L.push("## 0 · Fit");
+    L.push("- Team: **"+fitTeam+"**  ·  Revenue: **"+(S.fit.rev||"—")+"**  ·  Tech comfort: **"+(S.fit.tech||"—")+"**");
+    L.push("- Primary job: **"+fitGoal+"**");
+    L.push("");
+    L.push("## 1 · Foundation");
+    L.push("- Relay: **"+(S.setup.relay==="self"?"Self-hosted (full data control)":S.setup.relay==="hosted"?"Block-hosted":"— choose one")+"**");
+    L.push("- [ ] Install Buzz & sign in");
+    L.push("- [ ] Connect a harness (start with Claude Code — swappable, context-preserving)");
+    L.push("- [ ] Install House skills to the **global** directory so every agent can use them");
+    L.push("");
+    L.push("## 2 · Agent team  (pin each to the cheapest-capable model)");
+    agents.forEach(function(a){L.push("- **"+a.name+"** — "+a.role+"  →  `"+a.model+"` on `"+a.harness+"`");});
+    L.push("");
+    L.push("## 3 · Channels");
+    L.push("**Private**");
+    channels.filter(function(c){return c.kind==="Private";}).forEach(function(c){L.push("- `"+c.label+"` — "+c.desc.replace(/<[^>]+>/g,''));});
+    L.push("**Public (communities)**");
+    var pub=channels.filter(function(c){return c.kind==="Public";});
+    if(pub.length)pub.forEach(function(c){L.push("- `"+c.label+"` — "+c.desc.replace(/<[^>]+>/g,''));});
+    else L.push("- _none selected_");
+    L.push("");
+    L.push("## 4 · Context loops  (app → public API → daily workflow → channel)");
+    if(loops.length)loops.forEach(function(l){L.push("- **"+l.t+"** — "+l.d.replace(/<[^>]+>/g,''));});
+    else L.push("- _none selected — add at least one; this is the unfair advantage_");
+    L.push("");
+    L.push("## 5 · Build & deploy");
+    L.push("- Deploy target: **"+S.build.deploy+"**  ·  Git: **"+S.build.git+"**");
+    L.push("- Agents work in parallel git work-trees: **"+(S.build.worktrees?"yes":"no")+"**");
+    L.push("");
+    L.push("## 6 · Frontier");
+    L.push("- Audio huddles: **"+(S.adv.huddles?"on":"off")+"**  ·  Shared local compute: **"+(S.adv.compute?"on":"off")+"**  ·  Lightning payments: **"+(S.adv.lightning?"planned":"off")+"**");
+    L.push("");
+    L.push("## First moves");
+    L.push("1. Stand up the relay and connect Claude Code.");
+    L.push("2. Enable the top 3 agents; pin models; add the Chief delegator.");
+    L.push("3. Open `#team` and one context loop — prove the loop before adding more.");
+    L.push("4. Run a 2-week pilot alongside Slack, then decide.");
+    L.push("");
+    L.push("> \"The most important thing in the agentic era is getting your hands dirty.\" — Greg Isenberg");
+    return L.join("\n");
+  }
+
+  /* ---------- utils ---------- */
+  function esc(s){return String(s).replace(/[&<>]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;"}[c];});}
+  function nodeFromHTML(h){var d=document.createElement("div");d.innerHTML=h;return d.firstElementChild||d;}
+  function toast(msg){var t=$("#toast");t.textContent=msg;t.classList.add("show");
+    clearTimeout(t._t);t._t=setTimeout(function(){t.classList.remove("show");},1600);}
+  function copyText(txt){
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(txt).then(function(){toast("Runbook copied");},function(){legacyCopy(txt);});
+    }else legacyCopy(txt);
+  }
+  function legacyCopy(txt){var ta=document.createElement("textarea");ta.value=txt;ta.style.position="fixed";
+    ta.style.opacity="0";document.body.appendChild(ta);ta.select();
+    try{document.execCommand("copy");toast("Runbook copied");}catch(e){toast("Copy failed — select the text below");}
+    document.body.removeChild(ta);}
+  function download(name,txt){
+    try{var blob=new Blob([txt],{type:"text/markdown"});var url=URL.createObjectURL(blob);
+      var a=document.createElement("a");a.href=url;a.download=name;document.body.appendChild(a);a.click();
+      document.body.removeChild(a);setTimeout(function(){URL.revokeObjectURL(url);},400);toast("Downloaded");
+    }catch(e){copyText(txt);}
+  }
+
+  /* ---------- render frame ---------- */
+  function completion(){
+    var n=0,tot=6;
+    if(S.fit.team&&S.fit.rev&&S.fit.tech&&S.fit.goal)n++;
+    if(S.setup.relay&&S.setup.install)n++;
+    if(S.agents.some(function(a){return a.on;}))n++;
+    if(S.channels.some(function(c){return c.on;}))n++;
+    if(S.loops.some(function(l){return l.on;}))n++;
+    if(S.build.deploy)n++;
+    return Math.round(n/tot*100);
+  }
+  function stepDone(i){
+    if(i===0)return !!(S.fit.team&&S.fit.rev&&S.fit.tech&&S.fit.goal);
+    if(i===1)return !!(S.setup.relay&&S.setup.install);
+    if(i===2)return S.agents.some(function(a){return a.on;});
+    if(i===3)return S.channels.some(function(c){return c.on;});
+    if(i===4)return S.loops.some(function(l){return l.on;});
+    if(i===5)return !!S.build.deploy;
+    if(i===6)return true;
+    return false;
+  }
+  function render(){
+    var st=STEPS[S.step];
+    $("#kicker").textContent=st.k;
+    $("#title").textContent=st.t;
+    $("#sub").textContent=st.s;
+    var body=$("#body");body.innerHTML="";
+    st.r(body);
+
+    // rail
+    var rail=$("#rail");rail.innerHTML="";
+    STEPS.forEach(function(s,i){
+      var c=document.createElement("button");
+      c.className="chip"+(i===S.step?" active":"")+(i!==S.step&&stepDone(i)?" done":"");
+      c.innerHTML='<span class="num">'+(stepDone(i)&&i!==S.step?"✓":(i+1))+'</span>'+s.k;
+      c.onclick=function(){S.step=i;save();render();window.scrollTo({top:0,behavior:"smooth"});};
+      rail.appendChild(c);
+    });
+
+    // meter + nav
+    var pct=completion();
+    $("#fill").style.width=pct+"%";
+    $("#mlabel").textContent="Step "+(S.step+1)+" of "+STEPS.length;
+    $("#mpct").textContent=pct+"% mapped";
+    $("#crumb").textContent=st.k;
+    $("#back").disabled=S.step===0;$("#back").style.opacity=S.step===0?.4:1;
+    var next=$("#next");
+    next.textContent=S.step===STEPS.length-1?"Done ✓":"Next →";
+    save();
+  }
+  $("#back").onclick=function(){if(S.step>0){S.step--;render();window.scrollTo({top:0,behavior:"smooth"});}};
+  $("#next").onclick=function(){if(S.step<STEPS.length-1){S.step++;render();window.scrollTo({top:0,behavior:"smooth"});}
+    else toast("Your runbook is ready above");};
+  $("#reset").onclick=function(){if(confirm("Reset every answer and start over?")){S=fresh();save();render();window.scrollTo({top:0,behavior:"smooth"});}};
+
+  render();
+})();
+</script>

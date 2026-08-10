@@ -1,0 +1,566 @@
+<title>VOM Launch Console — Turnkey Business Launches</title>
+<style>
+  :root {
+    --paper: #F2F6F4; --card: #FFFFFF; --ink: #172823; --ink-soft: #536B62;
+    --line: #D4DFDA; --accent: #1F6E5C; --accent-soft: #E3EFEA;
+    --ok: #2E7D4F; --ok-soft: #E2EFE7; --warn: #B45309; --warn-soft: #F7ECDA;
+    --bad: #B3372E; --bad-soft: #F7E3E1; --dim: #87988F;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --paper:#0D1614; --card:#152220; --ink:#E2ECE8; --ink-soft:#93A89F; --line:#27392F;
+      --accent:#6FC2AD; --accent-soft:#16302A; --ok:#6DBA8C; --ok-soft:#17301F;
+      --warn:#D99A4E; --warn-soft:#33270F; --bad:#D97C72; --bad-soft:#3A1B17; --dim:#5E7268; }
+  }
+  :root[data-theme="dark"] { --paper:#0D1614; --card:#152220; --ink:#E2ECE8; --ink-soft:#93A89F; --line:#27392F;
+    --accent:#6FC2AD; --accent-soft:#16302A; --ok:#6DBA8C; --ok-soft:#17301F;
+    --warn:#D99A4E; --warn-soft:#33270F; --bad:#D97C72; --bad-soft:#3A1B17; --dim:#5E7268; }
+  :root[data-theme="light"] { --paper:#F2F6F4; --card:#FFFFFF; --ink:#172823; --ink-soft:#536B62; --line:#D4DFDA;
+    --accent:#1F6E5C; --accent-soft:#E3EFEA; --ok:#2E7D4F; --ok-soft:#E2EFE7;
+    --warn:#B45309; --warn-soft:#F7ECDA; --bad:#B3372E; --bad-soft:#F7E3E1; --dim:#87988F; }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .bar i { transition: none !important; } }
+  body { margin:0; background:var(--paper); color:var(--ink); font: 15.5px/1.6 Charter, Georgia, "Times New Roman", serif; }
+  .disp { font-family: "Avenir Next Condensed", "Avenir Next", "Arial Narrow", -apple-system, sans-serif; }
+  .mono { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-variant-numeric: tabular-nums; }
+
+  /* nav + scroll progress */
+  #scrollbar { position: fixed; top:0; left:0; height:2px; background:var(--accent); width:0; z-index:60; }
+  nav.top { position: sticky; top:0; z-index:50; background:var(--paper); border-bottom:1px solid var(--line);
+    display:flex; gap:4px; overflow-x:auto; padding:10px 16px; }
+  nav.top a { font-family:ui-monospace,Menlo,monospace; font-size:12px; color:var(--ink-soft); text-decoration:none;
+    padding:4px 10px; border-radius:999px; white-space:nowrap; }
+  nav.top a:hover { color:var(--accent); background:var(--card); }
+
+  .shell { max-width: 1000px; margin:0 auto; padding: 34px 20px 90px; display:flex; flex-direction:column; gap:56px; }
+  section { display:flex; flex-direction:column; gap:16px; scroll-margin-top:56px; }
+  .sec-head { display:flex; align-items:baseline; gap:12px; border-bottom:1px solid var(--line); padding-bottom:8px; }
+  .sec-head .idx { font-family:ui-monospace,Menlo,monospace; font-size:12.5px; color:var(--accent); font-weight:700; }
+  .sec-head h2 { margin:0; font-size:24px; font-weight:600; }
+  .sec-note { color:var(--ink-soft); max-width:70ch; margin:0; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:8px; padding:16px 18px; }
+  .scroll-x { overflow-x:auto; }
+
+  /* hero */
+  header.hero { display:flex; flex-direction:column; gap:16px; padding-top:22px; }
+  .hero .eyebrow { font-family:ui-monospace,Menlo,monospace; font-size:11.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); font-weight:700; }
+  .hero h1 { margin:0; font-size:clamp(32px,6vw,52px); line-height:1.05; font-weight:600; text-wrap:balance; max-width:24ch; }
+  .verdict { border:2px solid var(--accent); border-left-width:8px; background:var(--accent-soft); border-radius:8px;
+    padding:14px 18px; font-size:16.5px; max-width:72ch; }
+  .verdict b { color:var(--accent); }
+  .hero-grid { display:grid; grid-template-columns: 1fr 1fr; gap:16px; align-items:stretch; }
+  @media (max-width:760px){ .hero-grid { grid-template-columns:1fr; } }
+  .bignum { background:var(--card); border:1px solid var(--line); border-radius:8px; padding:16px 18px; display:flex; flex-direction:column; gap:8px; }
+  .bignum .v { font-size:52px; font-weight:700; line-height:1; font-variant-numeric:tabular-nums; color:var(--accent); }
+  .bignum .k { font-family:ui-monospace,Menlo,monospace; font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-soft); font-weight:700; }
+  .bar { height:10px; background:var(--paper); border:1px solid var(--line); border-radius:5px; overflow:hidden; }
+  .bar i { display:block; height:100%; background:var(--accent); border-radius:5px; width:0; transition: width .35s ease; }
+
+  /* chips */
+  .chip { display:inline-flex; align-items:center; gap:6px; font-family:ui-monospace,Menlo,monospace; font-size:11px;
+    font-weight:700; padding:2px 9px; border-radius:999px; border:1px solid var(--line); white-space:nowrap; }
+  .chip.done { background:var(--ok-soft); color:var(--ok); border-color:transparent; }
+  .chip.prog { background:var(--warn-soft); color:var(--warn); border-color:transparent; }
+  .chip.todo { background:var(--paper); color:var(--dim); }
+  .chip.block { background:var(--bad-soft); color:var(--bad); border-color:transparent; }
+  .chip.auto { background:var(--accent-soft); color:var(--accent); border-color:transparent; }
+  .chip.vom { background:var(--warn-soft); color:var(--warn); border-color:transparent; }
+  .chip.client { background:var(--ok-soft); color:var(--ok); border-color:transparent; }
+
+  /* status board */
+  .board { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:14px; }
+  .ws { background:var(--card); border:1px solid var(--line); border-radius:8px; padding:14px 16px; display:flex; flex-direction:column; gap:8px; }
+  .ws h3 { margin:0; font-size:15px; font-family:"Avenir Next Condensed","Avenir Next",sans-serif; font-weight:600; display:flex; justify-content:space-between; gap:10px; }
+  .ws p { margin:0; font-size:13px; color:var(--ink-soft); }
+
+  /* launch flow */
+  .bizbar { display:flex; flex-wrap:wrap; gap:10px; align-items:center; }
+  .bizbar select, .bizbar input[type="text"] { padding:8px 11px; border:1px solid var(--line); border-radius:6px;
+    background:var(--card); color:var(--ink); font:inherit; font-size:14px; }
+  .btn { display:inline-flex; align-items:center; gap:6px; border:1px solid var(--ink); background:var(--ink); color:var(--paper);
+    font-family:"Avenir Next Condensed","Avenir Next",sans-serif; font-size:14px; font-weight:600; padding:8px 15px; border-radius:6px; cursor:pointer; }
+  .btn.secondary { background:none; color:var(--ink); }
+  .btn.small { padding:4px 10px; font-size:12.5px; }
+  .btn:focus-visible, input:focus-visible, select:focus-visible, a:focus-visible { outline:2px solid var(--accent); outline-offset:1px; }
+  .layerbars { display:flex; flex-direction:column; gap:10px; }
+  .lbar { display:grid; grid-template-columns:150px 1fr 52px; gap:12px; align-items:center; font-size:13.5px; }
+  .lbar .pct { font-family:ui-monospace,Menlo,monospace; text-align:right; color:var(--ink-soft); font-size:12.5px; }
+  .launch-done { border:2px solid var(--ok); background:var(--ok-soft); color:var(--ok); border-radius:8px;
+    padding:12px 16px; font-weight:700; text-align:center; display:none; }
+
+  .layer { border:1px solid var(--line); border-radius:10px; background:var(--card); overflow:hidden; }
+  .layer > summary { list-style:none; cursor:pointer; display:flex; flex-wrap:wrap; align-items:center; gap:12px;
+    padding:14px 18px; font-family:"Avenir Next Condensed","Avenir Next",sans-serif; font-size:17px; font-weight:600; }
+  .layer > summary::-webkit-details-marker { display:none; }
+  .layer > summary .mono { font-size:11.5px; color:var(--accent); }
+  .layer > summary .lpct { margin-left:auto; font-family:ui-monospace,Menlo,monospace; font-size:12.5px; color:var(--ink-soft); }
+  .steps { border-top:1px solid var(--line); padding:6px 18px 16px; display:flex; flex-direction:column; gap:14px; }
+  .step { border-bottom:1px dashed var(--line); padding:12px 0 14px; }
+  .step:last-child { border-bottom:none; }
+  .step-head { display:flex; flex-wrap:wrap; gap:10px; align-items:baseline; }
+  .step-head h4 { margin:0; font-size:15.5px; }
+  .step-head .wid { font-family:ui-monospace,Menlo,monospace; font-size:11.5px; color:var(--accent); font-weight:700; }
+  .step p.sum { margin:6px 0 8px; font-size:13.5px; color:var(--ink-soft); max-width:76ch; }
+  ul.items { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:7px; }
+  ul.items li { display:flex; gap:10px; align-items:flex-start; font-size:13.5px; }
+  ul.items input[type="checkbox"] { width:16px; height:16px; margin-top:3px; accent-color:var(--accent); flex:none; }
+  ul.items li.checked label { color:var(--ink-soft); text-decoration:line-through; }
+  ul.items .chip { margin-left:auto; flex:none; }
+  .gate-note { font-size:12px; color:var(--ink-soft); font-style:italic; margin-top:8px; }
+
+  /* flow diagram */
+  .flow { border:2px dashed var(--line); border-radius:10px; padding:18px; display:flex; flex-direction:column; gap:14px; }
+  .flow-row { display:flex; gap:10px; align-items:stretch; flex-wrap:wrap; }
+  .fbox { border:1px solid var(--line); background:var(--card); border-radius:8px; padding:10px 14px; font-size:13.5px; flex:1; min-width:150px; }
+  .fbox b { display:block; font-family:"Avenir Next Condensed","Avenir Next",sans-serif; font-size:14.5px; margin-bottom:2px; }
+  .farrow { align-self:center; color:var(--dim); font-size:18px; flex:none; }
+  .frail { border:1px solid var(--line); border-left:4px solid var(--accent); background:var(--paper); border-radius:8px; padding:8px 14px; font-size:12.5px; color:var(--ink-soft); }
+
+  /* timeline */
+  .tl { list-style:none; margin:0; padding:0 0 0 4px; display:flex; flex-direction:column; gap:0; }
+  .tl li { display:grid; grid-template-columns:92px 14px 1fr; gap:12px; align-items:baseline; padding:7px 0; }
+  .tl .d { font-family:ui-monospace,Menlo,monospace; font-size:12px; color:var(--ink-soft); }
+  .tl .m { width:10px; height:10px; border-radius:2px; background:var(--accent); align-self:center; }
+  .tl li.decided .m { background:var(--warn); } .tl li.shipped .m { border-radius:50%; background:var(--ok); }
+  .tl li.upcoming .m { background:none; border:2px dashed var(--dim); }
+  .tl li.upcoming { color:var(--dim); }
+  .tl .t { font-size:14px; }
+  .tl .t .mono { font-size:11px; color:var(--dim); margin-left:6px; }
+
+  /* problems & decisions */
+  .twocol { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  @media (max-width:760px){ .twocol { grid-template-columns:1fr; } }
+  .plist { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:9px; font-size:13.5px; }
+  .plist li { display:flex; gap:9px; align-items:flex-start; }
+  .plist .chip { flex:none; margin-top:1px; }
+
+  /* next actions */
+  ul.next { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:9px; }
+  ul.next li { display:flex; gap:10px; align-items:flex-start; font-size:14.5px; }
+  ul.next input { width:17px; height:17px; margin-top:3px; accent-color:var(--accent); flex:none; }
+  ul.next li.checked label { color:var(--ink-soft); text-decoration:line-through; }
+
+  /* map explorer */
+  .explorer { display:grid; grid-template-columns: 300px 1fr; gap:0; border:1px solid var(--line); border-radius:10px; overflow:hidden; background:var(--card); }
+  @media (max-width:720px){ .explorer { grid-template-columns:1fr; } }
+  .files { border-right:1px solid var(--line); display:flex; flex-direction:column; }
+  @media (max-width:720px){ .files { border-right:none; border-bottom:1px solid var(--line); } }
+  .files button { font-family:ui-monospace,Menlo,monospace; font-size:12.5px; text-align:left; background:none; border:none;
+    border-bottom:1px solid var(--line); color:var(--ink-soft); padding:10px 14px; cursor:pointer; }
+  .files button:last-child { border-bottom:none; }
+  .files button.on { background:var(--accent-soft); color:var(--accent); font-weight:700; }
+  .fdetail { padding:16px 18px; }
+  .fdetail h4 { margin:0 0 6px; font-size:15.5px; }
+  .fdetail p { margin:0; font-size:13.5px; color:var(--ink-soft); }
+  a { color:var(--accent); }
+  footer { border-top:1px solid var(--line); padding-top:16px; color:var(--ink-soft); font-size:12.5px; }
+</style>
+
+<div id="scrollbar"></div>
+<nav class="top" aria-label="Sections">
+  <a href="#status">Status</a><a href="#flow">Launch flow</a><a href="#how">How it works</a><a href="#model">Business model</a>
+  <a href="#timeline">Timeline</a><a href="#decisions">Decisions</a><a href="#next">Next</a><a href="#map">Map</a>
+</nav>
+
+<div class="shell">
+
+  <header class="hero" id="top">
+    <span class="eyebrow">Vision Outreach Media (VOM) · Business Onboarding System · updated 2026-07-22</span>
+    <h1 class="disp">One console. Every step. A business, launched turnkey.</h1>
+    <p class="sec-note" style="font-size:16px">Agents take any business idea to full production — website, payments, marketing, operations — while VOM clears only the gates no agent may touch, and non-technical owners approve everything from their phone. This console bundles the whole system and walks each launch through it, step by step.</p>
+    <div class="verdict"><b>Verdict:</b> architecture complete and PO-accepted — execution not started. All 5 security decisions are now ratified (1–4 on 2026-07-21; the credential baseline settled 2026-07-22 as a simple two-tool, trigger-based setup). What remains is execution: run the security runbook, then bootstrap the platform and build the orchestrator. One reference business (Church Media Academy) is partially live and pre-seeded below.</div>
+    <div class="hero-grid">
+      <div class="bignum">
+        <span class="k">Active launch progress — <span id="heroBizName">—</span></span>
+        <span class="v" id="heroPct">0%</span>
+        <div class="bar"><i id="heroBar"></i></div>
+        <span class="mono" style="font-size:11.5px;color:var(--ink-soft)"><span id="heroCount">0 / 0</span> steps checked · jump to <a href="#flow">launch flow</a></span>
+      </div>
+      <div class="bignum">
+        <span class="k">System build readiness</span>
+        <span class="v" style="color:var(--ink)">78%</span>
+        <div class="bar"><i style="width:78%;background:var(--ink-soft)"></i></div>
+        <span class="mono" style="font-size:11.5px;color:var(--ink-soft)">7 of 9 tracks done · 2 not started (orchestrator · platform bootstrap)</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- STATUS BOARD -->
+  <section id="status">
+    <div class="sec-head"><span class="idx">01</span><h2 class="disp">System status board</h2></div>
+    <p class="sec-note">What exists today and its evidence. This is the system that powers launches — the guided flow below is what it executes.</p>
+    <div class="board">
+      <div class="ws"><h3>Plan v2 — 13 workstreams <span class="chip done">✓ done</span></h3><p>onboarding-plan.md: 4 layers, 7 diagrams, prerequisite matrix (5🟢/11🟡/15🔴), channel matrices.</p></div>
+      <div class="ws"><h3>Visual overview page <span class="chip done">✓ done</span></h3><p>Published artifact, v2.1 with gate-minimization section; regenerates from the md.</p></div>
+      <div class="ws"><h3>Gate-minimization architecture <span class="chip done">✓ done</span></h3><p>Tenancy, Stripe Connect Express, client UX — PO acceptance passed after 2 remediations.</p></div>
+      <div class="ws"><h3>Security threat model <span class="chip done">✓ done</span></h3><p>All 5 decisions ratified; credential baseline is a simple two-tool, trigger-based setup with a one-time runbook (security.md).</p></div>
+      <div class="ws"><h3>Compliance dashboard <span class="chip done">✓ done</span></h3><p>Published operator console; all checks start unticked — score reflects reality (≈0%).</p></div>
+      <div class="ws"><h3>Client-clarity disclosure <span class="chip done">✓ done</span></h3><p>8 implications EN+NL + step 8 terms bundling in client-ux.md; fee values still blank.</p></div>
+      <div class="ws"><h3>QA validation <span class="chip done">✓ done</span></h3><p>qa-report.md: 5 pass / 3 conditional / 0 fail on the phone-friendly criterion.</p></div>
+      <div class="ws"><h3>Orchestrator + biz-* agents <span class="chip todo">○ not started</span></h3><p>/onboard-business skill and per-workstream subagents are specified (§7) but unbuilt.</p></div>
+      <div class="ws"><h3>Platform bootstrap <span class="chip todo">○ not started</span></h3><p>Stripe Connect enablement, Cloudflare clients-zone + NS paste, restricted keys/MFA.</p></div>
+    </div>
+  </section>
+
+  <!-- LAUNCH FLOW -->
+  <section id="flow">
+    <div class="sec-head"><span class="idx">02</span><h2 class="disp">The guided launch flow</h2></div>
+    <p class="sec-note">Every workflow step in logical order — Intake → Foundation → Build → Market → Operate. Each item names its actor: <span class="chip auto">AUTO</span> agents via API · <span class="chip vom">VOM</span> operator action · <span class="chip client">CLIENT</span> owner's phone approval. Check items as they complete; progress is saved in this browser per business.</p>
+    <div class="card bizbar">
+      <label for="bizSel" class="mono" style="font-size:12px;font-weight:700">BUSINESS</label>
+      <select id="bizSel" aria-label="Active business"></select>
+      <input type="text" id="bizNew" placeholder="New business name…">
+      <button class="btn" id="bizAdd" type="button">Add launch</button>
+      <button class="btn secondary small" id="bizReset" type="button">Reset this launch</button>
+    </div>
+    <div class="card layerbars" id="layerBars"></div>
+    <div class="launch-done" id="launchDone">🏁 Turnkey launch complete — every step checked. Hand off to the operating rhythm.</div>
+    <div id="layers" style="display:flex;flex-direction:column;gap:14px"></div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="how">
+    <div class="sec-head"><span class="idx">03</span><h2 class="disp">How it works</h2></div>
+    <div class="flow">
+      <div class="flow-row">
+        <div class="fbox"><b>Input</b>An idea folder + a verified business owner (KYB) and their one-YES disclosure &amp; terms.</div>
+        <span class="farrow">→</span>
+        <div class="fbox"><b>Process</b>Agents execute the four layers — foundation, build, market, operate — as tenants on VOM infrastructure (Vercel · Cloudflare clients-zone · Brevo · Stripe Connect).</div>
+        <span class="farrow">→</span>
+        <div class="fbox"><b>Output</b>A running business: live site with SSL, payments to the owner's own IBAN, content, leads, and scheduled routines.</div>
+      </div>
+      <div class="frail"><b class="mono" style="font-size:11px">VOM RAIL</b> — minutes-scale gate scripts: KYB, filings, custom-domain approvals, refunds, live test purchases. Never credentials-by-agent, never client-executed tech.</div>
+      <div class="frail" style="border-left-color:var(--ok)"><b class="mono" style="font-size:11px">CLIENT RAIL</b> — WhatsApp magic links only: profile+terms YES, Stripe-hosted ID flow, content YES, GBP code, one weekly digest. No logins, ever.</div>
+      <div class="frail" style="border-left-color:var(--ink-soft)"><b class="mono" style="font-size:11px">FEEDBACK</b> — monthly Engage AI benchmark (8 channels, 0–100) turns scores into a fix backlog routed back into Build and Market.</div>
+    </div>
+    <div class="card" style="margin-top:14px">
+      <h3 class="disp" style="margin:0 0 4px;font-size:16px">Runtime — where the swarms live after launch</h3>
+      <p class="sec-note" style="margin:0 0 10px"><b>Isolate the tenant, not the compute.</b> A per-client swarm is a logical identity — isolated context, scoped keys, isolated outputs — run by <b>shared, ephemeral, serverless</b> compute. Never per-client always-on: an LLM agent is stateless between runs, so residence costs an idle baseline × every client and buys nothing. A client's agents work only minutes a day.</p>
+      <ul class="plist">
+        <li><span class="chip auto">STORE</span><span><b>Per-tenant context store</b> (repo-per-client) — profile, brand voice, pillars, prospect list, benchmark history, running inventory, consent log. This is what makes a run "this client's."</span></li>
+        <li><span class="chip auto">RUN</span><span><b>Ephemeral routines</b> wake, load one tenant + its scoped keys, run the swarm, write back, exit — scaling to zero between runs. Event-driven where possible: no event → no run → no cost.</span></li>
+        <li><span class="chip auto">SHARE</span><span><b>Shared agent definitions</b>, per-tenant data + keys (never duplicated code). One always-on piece: the Client Contact Gateway.</span></li>
+        <li><span class="chip auto">SPEND</span><span><b>Spend hierarchy</b> — code → cached → cheap-tier → batched → premium; per-tenant cost caps + a metered offer keep the marginal client near-free as N grows.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- BUSINESS MODEL -->
+  <section id="model">
+    <div class="sec-head"><span class="idx">04</span><h2 class="disp">Business model — the product, and why clients stay</h2></div>
+    <p class="sec-note">The machinery above is <em>how</em>; this is <em>why it's a business</em>. Two things the mechanics never state: what VOM sells, and what keeps a launched business attached when the client owns everything.</p>
+    <div class="flow-row" style="gap:14px">
+      <div class="fbox"><b>The launcher is the product</b>VOM sells the done-for-you service itself — "we launch and run a turnkey business for you." The €999 assessment and the membership academy are examples of what it produces, not the ceiling.</div>
+      <div class="fbox"><b>VOM runs operator-run</b>VOM builds its own site, payments, and leads through the same workstreams — but as the platform root, never a tenant of its own platform. (VOM holds the keys; a tenant is by definition not the root.)</div>
+      <div class="fbox"><b>Clients run on tenancy</b>Client businesses use the tenancy model — Stripe Connect, delegated DNS, magic-link phone approvals. Sovereign assets, VOM-operated.</div>
+    </div>
+    <div class="card">
+      <h3 class="disp" style="margin:0 0 4px;font-size:16px">Ownership ≠ attachment</h3>
+      <p class="sec-note" style="margin:0 0 10px">By design the client owns their domain (day one), their Stripe account + funds to their own IBAN, their content and customers — <b>no hostage lever</b>. Retention comes from operational dependency and recurring value, never lock-in:</p>
+      <ul class="plist">
+        <li><span class="chip auto">1</span><span><b>Operational dependency</b> — a non-technical owner can't run the hosting, DNS, automations, social swarm, follow-ups, or monthly optimization. Leaving means the business stops being operated.</span></li>
+        <li><span class="chip auto">2</span><span><b>Recurring revenue is the model</b> — a retainer / membership back-end, not a one-time launch fee. VOM earns by running the business each month.</span></li>
+        <li><span class="chip auto">3</span><span><b>Platform fee per transaction</b> — destination charges carry an application fee, so VOM earns a cut for as long as the business runs on the platform.</span></li>
+        <li><span class="chip auto">4</span><span><b>Genuine switching cost</b> — tuned automations, running inventory, and benchmark history live on the platform; migrating out is real effort, and automated operation beats a human replacement.</span></li>
+      </ul>
+    </div>
+    <div class="frail" style="border-left-color:var(--accent);font-size:13.5px;color:var(--ink)"><b>The pitch is sovereignty, not lock-in</b> — "we launch and run your business, and it's genuinely yours." For the faith / church niche, trust beats capture.</div>
+    <p class="sec-note" style="font-size:13px"><b>Retention risk &amp; defense:</b> if VOM operates too invisibly, the client under-perceives value and considers going in-house or cheaper. The defense is <b>visible recurring value</b> — the monthly Engage AI report (W7) and the per-client running inventory (W10) are the monthly proof that justifies the retainer.</p>
+  </section>
+
+  <!-- TIMELINE -->
+  <section id="timeline">
+    <div class="sec-head"><span class="idx">05</span><h2 class="disp">Timeline</h2></div>
+    <ul class="tl">
+      <li class="shipped"><span class="d">2026-07-18</span><span class="m"></span><span class="t">AI Tools Assessment idea captured — the €999 church-niche assessment funnel<span class="mono">built</span></span></li>
+      <li class="shipped"><span class="d">2026-07-19</span><span class="m"></span><span class="t">Membership club idea captured; Church Media Academy site built by the dev swarm<span class="mono">built</span></span></li>
+      <li class="shipped"><span class="d">2026-07-20</span><span class="m"></span><span class="t">CMA live on Vercel + custom domain; Stripe Payment Links activated<span class="mono">shipped</span></span></li>
+      <li><span class="d">2026-07-20</span><span class="m"></span><span class="t">Onboarding plan v2: diagrams, prerequisite matrix, channel matrices<span class="mono">built</span></span></li>
+      <li class="decided"><span class="d">2026-07-20</span><span class="m"></span><span class="t">Gate-minimization architecture accepted: platform tenancy + Connect Express + magic-link UX<span class="mono">decided</span></span></li>
+      <li><span class="d">2026-07-20</span><span class="m"></span><span class="t">Compliance &amp; client-clarity dashboard published; this console bundles it all<span class="mono">built</span></span></li>
+      <li class="decided"><span class="d">2026-07-21</span><span class="m"></span><span class="t">Security decisions 1–4 ratified — automated KYB, second factor, operator-set cap, client-owned domains<span class="mono">decided</span></span></li>
+      <li class="decided"><span class="d">2026-07-22</span><span class="m"></span><span class="t">Credential baseline ratified — password manager + separate authenticator, trigger-based maintenance<span class="mono">decided</span></span></li>
+      <li class="upcoming"><span class="d">next</span><span class="m"></span><span class="t">Run the security runbook · bootstrap platform (Connect + NS delegation) · build orchestrator</span></li>
+      <li class="upcoming"><span class="d">then</span><span class="m"></span><span class="t">First fully turnkey client launch through this console, end to end</span></li>
+    </ul>
+  </section>
+
+  <!-- PROBLEMS & DECISIONS -->
+  <section id="decisions">
+    <div class="sec-head"><span class="idx">06</span><h2 class="disp">Open problems &amp; settled decisions</h2></div>
+    <div class="twocol">
+      <div class="card">
+        <h3 class="disp" style="margin:0 0 10px;font-size:16px">Unresolved</h3>
+        <ul class="plist">
+          <li><span class="chip prog">med</span><span>Exposed <span class="mono">VERCEL_OIDC_TOKEN</span> sits in plaintext at church-media-academy/deploy/.env.local — rotate + remove (step 6 of the security runbook).</span></li>
+          <li><span class="chip block">high</span><span>Stripe Connect platform capability on the live account: unverified assumption (payments.md).</span></li>
+          <li><span class="chip prog">med</span><span>Disclosure fee fields blank — implication 8 isn't honest until they're set (compliance dashboard).</span></li>
+          <li><span class="chip prog">med</span><span>Terms drafts need a Dutch lawyer before the first client signs.</span></li>
+          <li><span class="chip prog">med</span><span>Registrar for client .nl domains: TransIP primary vs Cloudflare Registrar — unverified .nl support (tenancy.md).</span></li>
+          <li><span class="chip todo">low</span><span>GBP postcard lead time (~14 days) sits on the launch critical path for local visibility.</span></li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3 class="disp" style="margin:0 0 10px;font-size:16px">Decided — don't re-litigate</h3>
+        <ul class="plist">
+          <li><span class="chip done">✓</span><span><b>Ratified 2026-07-21:</b> automated KYB with flagged-case review · OTP/verbal second factor · operator-set blast cap with throttling · client purchases and owns their own domain.</span></li>
+          <li><span class="chip done">✓</span><span><b>Ratified 2026-07-22 — credential baseline:</b> a simple two-tool setup (password manager + a separate authenticator app with encrypted backup) over 6 accounts, scoped agent keys, and <b>trigger-based</b> maintenance — no calendar rotation.</span></li>
+          <li><span class="chip done">✓</span><span>Stripe Connect <b>Express + destination charges</b> — hosted KYC on the owner's phone; central catalog; money to their IBAN.</span></li>
+          <li><span class="chip done">✓</span><span><b>Delegated clients-subdomain zone</b> on Cloudflare; the one.com apex and Brevo mail records stay untouched.</span></li>
+          <li><span class="chip done">✓</span><span><b>No client dashboards, ever</b> — magic links + one weekly WhatsApp digest; the Stripe Express login link only as a VOM-mediated fallback.</span></li>
+          <li><span class="chip done">✓</span><span>Nothing publishes, sends, or moves money without an explicit YES; consent is logged append-only.</span></li>
+          <li><span class="chip done">✓</span><span>Cheapest-capable model routing with escalation (devops-scrum pattern) for all agent teams.</span></li>
+          <li><span class="chip done">✓</span><span><b>Operations runtime</b> — per-client swarms are ephemeral serverless (isolate the tenant, not the compute); repo-per-client context store, one fan-out routine per function, spend hierarchy + metered offer (plan §8).</span></li>
+          <li><span class="chip done">✓</span><span>Deliverables use the org name — Vision Outreach Media (VOM) — never a personal name.</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEXT ACTIONS -->
+  <section id="next">
+    <div class="sec-head"><span class="idx">07</span><h2 class="disp">Next actions — make the system launch-ready</h2></div>
+    <p class="sec-note">System-level moves (distinct from any one business's flow above). <span class="mono" id="nextCount" style="font-size:12px">0 / 7</span></p>
+    <div class="card">
+      <ul class="next" id="nextList">
+        <li data-n="n0"><input type="checkbox" id="n0"><label for="n0">Execute the security baseline runbook — set up the password manager + authenticator, scope the agent keys, rotate the exposed token</label></li>
+        <li data-n="n1"><input type="checkbox" id="n1"><label for="n1">Set the fee values and finalize the client disclosure (no [brackets] left)</label></li>
+        <li data-n="n2"><input type="checkbox" id="n2"><label for="n2">Send the terms drafts to a Dutch lawyer for review</label></li>
+        <li data-n="n3"><input type="checkbox" id="n3"><label for="n3">Enable iDEAL + SEPA and verify Connect platform capability on the Stripe account</label></li>
+        <li data-n="n4"><input type="checkbox" id="n4"><label for="n4">Bootstrap the Cloudflare clients-zone and paste the one-time NS delegation at one.com</label></li>
+        <li data-n="n5"><input type="checkbox" id="n5"><label for="n5">Build the /onboard-business orchestrator skill and the biz-* subagent definitions</label></li>
+        <li data-n="n6"><input type="checkbox" id="n6"><label for="n6">Run one pilot turnkey launch end-to-end through this console</label></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- MAP -->
+  <section id="map">
+    <div class="sec-head"><span class="idx">08</span><h2 class="disp">Project map</h2></div>
+    <div class="explorer">
+      <div class="files" id="fileBtns" role="tablist" aria-label="Project files"></div>
+      <div class="fdetail"><h4 id="fdTitle"></h4><p id="fdBody"></p></div>
+    </div>
+  </section>
+
+  <footer>
+    Generated 2026-07-20 from <span class="mono">Business Ideas/Business Onboarding System/</span> (plan, gate-minimization/*, dashboards).
+    Launch &amp; checklist state lives in this browser only. Regenerate by asking Claude to update the launch console.
+  </footer>
+</div>
+
+<script>
+(function () {
+  "use strict";
+  var LS = "launch-console-v1";
+
+  /* ---------------- flow model ---------------- */
+  var LAYERS = [
+    { id:"LI", name:"Intake & trust", tag:"before anything runs", steps:[
+      { id:"I1", t:"Capture & verify", sum:"The idea becomes a business profile; the owner is verified and informed before any account exists.",
+        gate:"KYB runs as automated checks; only flagged cases go to VOM (decision 1, modified 2026-07-21).",
+        items:[ {id:"i1a", l:"Business profile drafted from the idea folder", a:"auto"},
+                {id:"i1b", l:"Automated KYB checks passed (flags reviewed by VOM)", a:"auto"},
+                {id:"i1c", l:"Disclosure + terms approved — one YES, two consent entries", a:"client"} ]}]},
+    { id:"L0", name:"Foundation", tag:"layer 0", steps:[
+      { id:"W1", t:"Business profile", sum:"One shared input every agent reads: promise, one specific person, offer ladder, 90-day metric.",
+        items:[ {id:"w1a", l:"business-profile.md generated with offer ladder & pricing", a:"auto"},
+                {id:"w1b", l:"Owner approves the profile via magic link", a:"client"} ]},
+      { id:"W2", t:"Legal & financial (NL)", sum:"VAT position, trade-name filing, bookkeeping, and drafted terms — the paperwork rail.",
+        items:[ {id:"w2a", l:"BTW/OSS position determined from the offer type", a:"auto"},
+                {id:"w2b", l:"Trade name / SBI activity filed (DigiD script)", a:"vom"},
+                {id:"w2c", l:"Bookkeeping connected for this business", a:"vom"} ]},
+      { id:"W3", t:"Domain & email", sum:"A subdomain is free and instant via the delegated clients zone; custom domains are VOM-approved purchases.",
+        gate:"Apex/NS DNS changes stay human-only; the client buys and owns any custom domain (ratified 2026-07-21).",
+        items:[ {id:"w3a", l:"Subdomain + DNS provisioned via Cloudflare API", a:"auto"},
+                {id:"w3b", l:"Custom domain purchased & owned by the client (agent preps, VOM assists by phone)", a:"client"},
+                {id:"w3c", l:"Brevo sender + aliases live; deliverability verified", a:"auto"} ]}]},
+    { id:"L1", name:"Build", tag:"layer 1", steps:[
+      { id:"W4", t:"Website & deployment", sum:"Archetype chosen from the hosting matrix, built by the dev swarm, hardened for production.",
+        items:[ {id:"w4a", l:"Site archetype chosen & recorded (default Vercel)", a:"auto"},
+                {id:"w4b", l:"Site built by the dev swarm from the profile", a:"auto"},
+                {id:"w4c", l:"Deployed: SSL, analytics, monitoring, checklist complete", a:"auto"} ]},
+      { id:"W5", t:"Payments", sum:"Connected account by API; the owner's ONE technical step is Stripe's hosted ID + IBAN flow on their phone.",
+        gate:"Money movement stays human: VOM runs the live test purchase and refund.",
+        items:[ {id:"w5a", l:"Connect Express account created via API", a:"auto"},
+                {id:"w5b", l:"Owner completes Stripe-hosted ID + IBAN link", a:"client"},
+                {id:"w5c", l:"Catalog + checkout live in test mode (iDEAL/SEPA)", a:"auto"},
+                {id:"w5d", l:"Live test purchase made and refunded", a:"vom"} ]},
+      { id:"W6", t:"Digital products", sum:"Deliverables assembled from existing assets and wired to purchase via webhooks.",
+        items:[ {id:"w6a", l:"Products assembled from the asset inventory", a:"auto"},
+                {id:"w6b", l:"Owner approves content shipping in their name", a:"client"},
+                {id:"w6c", l:"Webhook fulfillment delivers automatically", a:"auto"} ]}]},
+    { id:"L2", name:"Market", tag:"layer 2", steps:[
+      { id:"W7", t:"Presence & Engage AI loop", sum:"Google Business, SEO, then the standing loop: benchmark 8 channels monthly and fix the lowest.",
+        items:[ {id:"w7a", l:"GBP prepped; owner enters the postcard code", a:"client"},
+                {id:"w7b", l:"Baseline benchmark run (8 channels, 0–100)", a:"auto"},
+                {id:"w7c", l:"Monthly re-benchmark scheduled; backlog started", a:"auto"} ]},
+      { id:"W8", t:"Social delivery team", sum:"Two ICP-matched channels run by the strategist→copywriter→designer→scheduler→analyst swarm.",
+        gate:"Nothing auto-posts: every batch needs a YES (weekly digest).",
+        items:[ {id:"w8a", l:"Two channels selected; accounts created", a:"vom"},
+                {id:"w8b", l:"Team spec, pillars, first 10 posts drafted", a:"auto"},
+                {id:"w8c", l:"First batch approved via weekly digest & published", a:"client"} ]},
+      { id:"W9", t:"Leads & distribution", sum:"Prospect list from public sources, sequences in the owner's voice, personalization per prospect.",
+        gate:"Sending is hard-gated: each batch is approved, never auto-sent.",
+        items:[ {id:"w9a", l:"Prospect list ≥ 50 with tracking in the CRM", a:"auto"},
+                {id:"w9b", l:"Outreach sequences + per-prospect variants drafted", a:"auto"},
+                {id:"w9c", l:"First outreach batch approved & sent", a:"client"} ]}]},
+    { id:"L3", name:"Operate", tag:"layer 3", steps:[
+      { id:"W10", t:"CRM & client hub", sum:"Pipeline stages plus the per-client running inventory that earns retention.",
+        items:[ {id:"w10a", l:"CRM pipeline live; hub template created", a:"auto"} ]},
+      { id:"W11", t:"Follow-ups", sum:"A daily routine checks inbox and orders, drafting replies for approval within the SLA.",
+        items:[ {id:"w11a", l:"Daily follow-up routine scheduled", a:"auto"},
+                {id:"w11b", l:"Reply drafts flowing for approval", a:"vom"} ]},
+      { id:"W12", t:"Delivery SOPs", sum:"Every product has a within-24h fulfillment SOP; the automatable parts are automated.",
+        items:[ {id:"w12a", l:"Delivery SOP per product; fulfillment automated", a:"auto"} ]},
+      { id:"W13", t:"Finance ops", sum:"Automated fee statements, the BTW calendar, and a monthly one-page review.",
+        gate:"Tax filings and bank actions are never agent-executed.",
+        items:[ {id:"w13a", l:"Monthly white-label statement automated", a:"auto"},
+                {id:"w13b", l:"BTW calendar + monthly review handed off", a:"vom"} ]}]}
+  ];
+  var ALL_ITEMS = [];
+  LAYERS.forEach(function (L) { L.steps.forEach(function (s) { s.items.forEach(function (it) { ALL_ITEMS.push(it.id); }); }); });
+
+  /* ---------------- state ---------------- */
+  function load() { try { return JSON.parse(localStorage.getItem(LS)) || {}; } catch (e) { return {}; } }
+  var S = load();
+  if (!S.biz || !S.biz.length) {
+    S.biz = [{ name: "Church Media Academy", checks: { w3a:true, w4a:true, w4b:true, w4c:true, w5c:true } }]; // pre-seeded from evidence: site + payment links live
+  }
+  if (S.active === undefined || S.active >= S.biz.length) S.active = 0;
+  S.next = S.next || {};
+  function save() { try { localStorage.setItem(LS, JSON.stringify(S)); } catch (e) {} }
+  function biz() { return S.biz[S.active]; }
+
+  /* ---------------- render flow ---------------- */
+  var layersEl = document.getElementById("layers");
+  var ACTOR = { auto: '<span class="chip auto">AUTO</span>', vom: '<span class="chip vom">VOM</span>', client: '<span class="chip client">CLIENT</span>' };
+  LAYERS.forEach(function (L, li) {
+    var d = document.createElement("details");
+    d.className = "layer"; d.open = li < 2; d.id = "lay-" + L.id;
+    var stepsHtml = L.steps.map(function (s) {
+      var items = s.items.map(function (it) {
+        return '<li data-it="' + it.id + '"><input type="checkbox" id="' + it.id + '"><label for="' + it.id + '">' + it.l + "</label>" + ACTOR[it.a] + "</li>";
+      }).join("");
+      return '<div class="step" id="st-' + s.id + '"><div class="step-head"><span class="wid">' + s.id + '</span><h4>' + s.t +
+        '</h4><span class="chip todo" data-state="' + s.id + '">○ not started</span></div><p class="sum">' + s.sum +
+        '</p><ul class="items">' + items + "</ul>" + (s.gate ? '<p class="gate-note">⚑ ' + s.gate + "</p>" : "") + "</div>";
+    }).join("");
+    d.innerHTML = '<summary><span class="mono">' + L.tag.toUpperCase() + "</span>" + L.name +
+      '<span class="lpct" data-lpct="' + L.id + '"></span></summary><div class="steps">' + stepsHtml + "</div>";
+    layersEl.appendChild(d);
+  });
+
+  var barsEl = document.getElementById("layerBars");
+  barsEl.innerHTML = LAYERS.map(function (L) {
+    return '<div class="lbar"><a href="#lay-' + L.id + '" style="text-decoration:none;color:var(--ink)">' + L.name +
+      '</a><div class="bar"><i data-lbar="' + L.id + '"></i></div><span class="pct" data-lnum="' + L.id + '"></span></div>';
+  }).join("");
+
+  /* checkbox wiring */
+  ALL_ITEMS.forEach(function (id) {
+    var b = document.getElementById(id);
+    b.addEventListener("change", function () { biz().checks[id] = b.checked; save(); paint(); });
+  });
+
+  /* ---------------- business bar ---------------- */
+  var sel = document.getElementById("bizSel");
+  function renderSel() {
+    sel.innerHTML = S.biz.map(function (b, i) { return '<option value="' + i + '"' + (i === S.active ? " selected" : "") + ">" + b.name + "</option>"; }).join("");
+  }
+  sel.addEventListener("change", function () { S.active = +sel.value; save(); paint(); });
+  document.getElementById("bizAdd").addEventListener("click", function () {
+    var n = document.getElementById("bizNew").value.trim();
+    if (!n) return;
+    S.biz.push({ name: n, checks: {} }); S.active = S.biz.length - 1;
+    document.getElementById("bizNew").value = ""; save(); renderSel(); paint();
+  });
+  document.getElementById("bizReset").addEventListener("click", function () {
+    if (confirm("Clear all checked steps for “" + biz().name + "”? (Only this console's checklist — nothing real is touched.)")) {
+      biz().checks = {}; save(); paint();
+    }
+  });
+
+  /* ---------------- next actions ---------------- */
+  var nextBoxes = Array.prototype.slice.call(document.querySelectorAll("#nextList input"));
+  nextBoxes.forEach(function (b) {
+    if (S.next[b.id]) b.checked = true;
+    b.addEventListener("change", function () { S.next[b.id] = b.checked; save(); paintNext(); });
+  });
+  function paintNext() {
+    var done = nextBoxes.filter(function (b) { return b.checked; }).length;
+    document.getElementById("nextCount").textContent = done + " / " + nextBoxes.length;
+    nextBoxes.forEach(function (b) { b.closest("li").classList.toggle("checked", b.checked); });
+  }
+
+  /* ---------------- paint ---------------- */
+  function paint() {
+    var C = biz().checks, total = 0, done = 0;
+    LAYERS.forEach(function (L) {
+      var lt = 0, ld = 0;
+      L.steps.forEach(function (s) {
+        var st = 0, sd = 0;
+        s.items.forEach(function (it) {
+          var on = !!C[it.id];
+          var box = document.getElementById(it.id);
+          box.checked = on;
+          box.closest("li").classList.toggle("checked", on);
+          st++; sd += on ? 1 : 0;
+        });
+        lt += st; ld += sd; total += st; done += sd;
+        var chip = document.querySelector('[data-state="' + s.id + '"]');
+        if (sd === st) { chip.className = "chip done"; chip.textContent = "✓ done"; }
+        else if (sd > 0) { chip.className = "chip prog"; chip.textContent = "◐ in progress"; }
+        else { chip.className = "chip todo"; chip.textContent = "○ not started"; }
+      });
+      var pct = lt ? Math.round((ld / lt) * 100) : 0;
+      document.querySelector('[data-lbar="' + L.id + '"]').style.width = pct + "%";
+      document.querySelector('[data-lnum="' + L.id + '"]').textContent = pct + "%";
+      document.querySelector('[data-lpct="' + L.id + '"]').textContent = ld + " / " + lt;
+    });
+    var pct = total ? Math.round((done / total) * 100) : 0;
+    document.getElementById("heroPct").textContent = pct + "%";
+    document.getElementById("heroBar").style.width = pct + "%";
+    document.getElementById("heroCount").textContent = done + " / " + total;
+    document.getElementById("heroBizName").textContent = biz().name;
+    document.getElementById("launchDone").style.display = pct === 100 ? "block" : "none";
+    paintNext();
+  }
+
+  /* ---------------- map explorer ---------------- */
+  var FILES = [
+    { f:"gate-minimization/gate-minimization.md", t:"Read this first — the master matrix", b:"All 32 prerequisite rows re-assigned to PLATFORM-AUTO / VOM-ONCE / VOM-RECURRING / CLIENT-PHONE, with before/after counts, reconciliation notes, and the 7-phase rollout order." },
+    { f:"onboarding-plan.md", t:"The system of record (v2)", b:"13 workstreams in 4 layers with prerequisites, 7 mermaid diagrams, payment & hosting decision matrices, and exit criteria. This console's flow is derived from it." },
+    { f:"gate-minimization/tenancy.md", t:"Platform tenancy design", b:"Vercel umbrella projects, the Cloudflare-delegated clients zone (one one-time NS paste), custom-domain ethics, Brevo senders, and the 10-step zero-touch provisioning outline." },
+    { f:"gate-minimization/payments.md", t:"Stripe Connect architecture", b:"Express + destination charges: hosted Account-Link KYC on the owner's phone, central catalog, multiplexed webhooks, payouts to the client's IBAN, failure paths." },
+    { f:"gate-minimization/security.md", t:"Threat model — 5 decisions pending", b:"11 assets, 10 ranked abuse cases, the automation-boundary table, and the PENDING HUMAN SIGN-OFF list that blocks rollout until VOM ratifies it." },
+    { f:"gate-minimization/client-ux.md", t:"The owner's experience", b:"8 phone-friendly steps with real Dutch + English copy, the weekly digest, consent-log semantics, and the anti-pattern list (no logins, no PDFs, no jargon)." },
+    { f:"gate-minimization/qa-report.md", t:"QA against the 5-minute test", b:"Every client step tested for phone, <5 min, zero jargon: 5 pass, 3 conditional, 0 fail. Weakest step: Stripe's own photo screens." },
+    { f:"compliance-dashboard.html", t:"Operator dashboard (published)", b:"Live artifact: compliance score, the 5 decision pillars, the 8-implication client disclosure with live fee interpolation, per-client status, 9 draft terms clauses." },
+    { f:"onboarding-overview.html", t:"Visual overview (published)", b:"Live artifact: the infographic render of plan v2.1 — layer pipeline, gantt, automation donut, channel matrices, swarm and Engage-AI diagrams." }
+  ];
+  var btnsEl = document.getElementById("fileBtns");
+  FILES.forEach(function (x, i) {
+    var b = document.createElement("button");
+    b.type = "button"; b.textContent = x.f; b.setAttribute("role", "tab");
+    b.addEventListener("click", function () { selectFile(i); });
+    btnsEl.appendChild(b);
+  });
+  function selectFile(i) {
+    Array.prototype.forEach.call(btnsEl.children, function (b, j) { b.classList.toggle("on", i === j); });
+    document.getElementById("fdTitle").textContent = FILES[i].t;
+    document.getElementById("fdBody").textContent = FILES[i].b;
+  }
+  selectFile(0);
+
+  /* ---------------- scroll progress ---------------- */
+  var sb = document.getElementById("scrollbar");
+  window.addEventListener("scroll", function () {
+    var h = document.documentElement;
+    sb.style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100 + "%";
+  }, { passive: true });
+
+  renderSel(); paint();
+})();
+</script>

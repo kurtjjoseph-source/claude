@@ -1,0 +1,364 @@
+/* ============================================================================
+   VOM KIT v2 — the Vision Outreach Media design system
+   Vision Outreach Media · 2026-08-02
+
+   v1 was written as theory and adopted by exactly one page (its own demo), so
+   four palettes drifted apart in practice: the kit's cream/gold, the six product
+   sites' warm paper, Forge's cold white, and the Forge console's near-black.
+
+   v2 is taken from what actually ships. The six live product sites already agreed
+   on a ground, an ink scale, a line colour and a per-product accent; that is the
+   real system, so it is the one written down here. Everything else — Forge's
+   generated client sites, the build console, the house consoles — moves onto it.
+
+   ONE GROUND, ONE INK SCALE, ONE ACCENT SLOT.
+
+     --c            the accent. Everything brand-coloured reads from it.
+     [data-brand]   swaps the accent (and only the accent) per product.
+     [data-theme]   forces light/dark; otherwise the OS decides.
+     --display      the display face — serif for VOM's own surfaces, sans for a
+                    client's, because a church should not inherit our editorial voice.
+
+   Adoption rule: a page may add layout, never a second palette. If you need a
+   colour that is not a token here, the token is missing — add it here first.
+   ========================================================================== */
+
+/* ---------------------------------------------------------------- tokens */
+:root{
+  /* ground + ink — the part every surface shares */
+  --bg:#f6f5f1;
+  --surface:#ffffff;
+  --surface-2:#f1efe8;
+  --line:#e1dfd4;
+  --line-soft:#ece9df;
+  --ink:#1a1d1b;
+  --ink-soft:#535b56;
+  --ink-faint:#868f89;
+
+  /* the accent slot — [data-brand] below is the only thing that should change it */
+  --c:#c47716;
+  --c-bright:#f0a24b;
+  --c-ink:#ffffff;                                   /* readable text ON the accent */
+  --c-wash:color-mix(in srgb, var(--c) 9%, var(--surface));
+  --c-line:color-mix(in srgb, var(--c) 38%, var(--line));
+
+  /* semantic */
+  --good:#2f9e63; --warn:#c9862a; --bad:#c0523a; --info:#2b86bd;
+
+  /* the logo bar navy is a constant — it is the mark's own field, not a theme */
+  --brand-navy:#1B2A4A;
+
+  /* shape + depth */
+  --radius:14px; --radius-sm:9px; --radius-pill:999px;
+  --shadow-sm:0 1px 2px rgba(26,29,27,.05), 0 2px 8px rgba(26,29,27,.04);
+  --shadow:0 2px 6px rgba(26,29,27,.06), 0 14px 34px rgba(26,29,27,.08);
+
+  /* type */
+  --serif:ui-serif,Georgia,"Times New Roman",serif;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --mono:ui-monospace,"SF Mono","Cascadia Code",Menlo,Consolas,monospace;
+  --display:var(--serif);      /* VOM's own surfaces. Client surfaces set --sans. */
+
+  /* rhythm — one scale, so spacing never gets invented per page */
+  --s1:6px; --s2:10px; --s3:14px; --s4:20px; --s5:28px; --s6:40px; --s7:60px; --s8:88px;
+  --wrap:1080px;
+}
+
+:root[data-surface="client"]{
+  /* What Forge builds for a church or a solo business. Same ground, same rhythm,
+     but the display face is the client's own voice, not our editorial serif. */
+  --display:var(--sans);
+  --surface:#ffffff;
+}
+
+@media (prefers-color-scheme:dark){
+  :root{
+    --bg:#0e100f; --surface:#161a18; --surface-2:#1c211e;
+    --line:#2a322d; --line-soft:#232a26;
+    --ink:#f0f2ee; --ink-soft:#a8b1aa; --ink-faint:#79837c;
+    --c:var(--c-bright);
+    --good:#38d07f; --warn:#e0a94b; --bad:#e8785c; --info:#5fb9e8;
+    --shadow-sm:0 1px 2px rgba(0,0,0,.4); --shadow:0 14px 34px rgba(0,0,0,.5);
+  }
+}
+:root[data-theme="light"]{
+  --bg:#f6f5f1; --surface:#ffffff; --surface-2:#f1efe8; --line:#e1dfd4; --line-soft:#ece9df;
+  --ink:#1a1d1b; --ink-soft:#535b56; --ink-faint:#868f89;
+  --good:#2f9e63; --warn:#c9862a; --bad:#c0523a; --info:#2b86bd;
+}
+:root[data-theme="dark"]{
+  --bg:#0e100f; --surface:#161a18; --surface-2:#1c211e; --line:#2a322d; --line-soft:#232a26;
+  --ink:#f0f2ee; --ink-soft:#a8b1aa; --ink-faint:#79837c; --c:var(--c-bright);
+  --good:#38d07f; --warn:#e0a94b; --bad:#e8785c; --info:#5fb9e8;
+}
+
+/* ---------------------------------------------------- the house of brands */
+/* Each product owns an accent and nothing else. That is the whole difference
+   between them, and it is why they read as one house.                        */
+[data-brand="vom"]         { --c:#e8843c; --c-bright:#f0a05c; }
+[data-brand="hundred"]     { --c:#2f9e63; --c-bright:#38d07f; }
+[data-brand="turnkey"]     { --c:#c47716; --c-bright:#f0a24b; }
+[data-brand="vital"]       { --c:#0f9f8f; --c-bright:#3fd0c0; }
+[data-brand="launch-kits"] { --c:#d1522f; --c-bright:#f2765c; }
+[data-brand="cma"]         { --c:#6b56d6; --c-bright:#a48cf5; }
+[data-brand="operators"]   { --c:#2b86bd; --c-bright:#5fb9e8; }
+/* Forge archetypes — the accent a built platform carries, and the colour its
+   build console runs under. */
+[data-brand="churchforge"] { --c:#e2670a; --c-bright:#fb923c; --c-forge:#F97316; }
+[data-brand="bizforge"]    { --c:#0d87c4; --c-bright:#38bdf8; --c-forge:#38BDF8; }
+[data-brand="forge"]       { --c:#0f8f86; --c-bright:#3fd0c0; --c-forge:#2FA8A0; }
+
+/* ------------------------------------------------------------------- base */
+*,*::before,*::after{ box-sizing:border-box; }
+.vk-body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:var(--sans); line-height:1.6; -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+.vk-wrap{ max-width:var(--wrap); margin:0 auto; padding:0 var(--s4); }
+.vk-wrap--narrow{ max-width:760px; }
+a{ color:inherit; }
+.vk-num{ font-variant-numeric:tabular-nums; }
+.vk-sec{ padding:var(--s7) 0; }
+.vk-sec + .vk-sec{ border-top:1px solid var(--line); }
+
+/* ------------------------------------------------------------------- type */
+.vk-eyebrow{
+  display:inline-block; font-family:var(--mono); font-size:11.5px; font-weight:600;
+  letter-spacing:.18em; text-transform:uppercase; color:var(--c); margin:0 0 var(--s3);
+}
+.vk-h1{
+  font-family:var(--display); font-weight:600; font-size:clamp(32px,5.2vw,52px);
+  letter-spacing:-.025em; line-height:1.04; margin:0 0 var(--s3);
+}
+.vk-h1 em{ font-style:italic; color:var(--c); }
+.vk-h2{
+  font-family:var(--display); font-weight:600; font-size:clamp(21px,2.8vw,30px);
+  letter-spacing:-.018em; line-height:1.14; margin:0 0 var(--s3);
+}
+.vk-h3{ font-size:16px; font-weight:700; letter-spacing:-.008em; margin:0 0 var(--s1); }
+.vk-lede{ font-size:clamp(15px,1.6vw,18px); color:var(--ink-soft); max-width:64ch; margin:0 0 var(--s4); }
+.vk-shead{
+  font-family:var(--mono); font-size:11px; font-weight:600; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--ink-faint); margin:0 0 var(--s3);
+}
+.vk-p{ margin:0 0 var(--s3); color:var(--ink-soft); }
+.vk-p strong{ color:var(--ink); }
+
+/* --------------------------------------------------------------- logo bar */
+/* <div class="vom-bar"><a href="…"><img …><b>Vision Outreach Media</b><span>· The House</span></a></div> */
+.vom-bar{
+  display:flex; align-items:center; gap:var(--s2); padding:9px 18px;
+  background:var(--brand-navy); color:#fff; font-family:var(--sans);
+}
+.vom-bar a{ display:flex; align-items:center; gap:var(--s2); text-decoration:none; color:#fff; }
+.vom-bar img{ width:28px; height:28px; border-radius:7px; object-fit:cover; background:#fff; display:block; }
+.vom-bar b{ font-weight:700; font-size:13.5px; letter-spacing:.02em; }
+.vom-bar span{ font-size:11px; opacity:.72; font-weight:600; letter-spacing:.09em; text-transform:uppercase; }
+
+/* ---------------------------------------------------------------- buttons */
+.vk-btn{
+  display:inline-flex; align-items:center; gap:8px; font:inherit; font-weight:700; font-size:14px;
+  padding:11px 20px; border-radius:var(--radius-pill); border:1px solid var(--line);
+  background:var(--surface); color:var(--ink); cursor:pointer; text-decoration:none;
+  white-space:nowrap; transition:background .15s, border-color .15s, color .15s;
+}
+.vk-btn:hover{ border-color:var(--ink-faint); }
+.vk-btn--accent{ background:var(--c); border-color:var(--c); color:var(--c-ink); }
+.vk-btn--accent:hover{ background:var(--c-bright); border-color:var(--c-bright); }
+.vk-btn--ghost{ background:transparent; color:var(--c); border-color:var(--c-line); }
+.vk-btn--ghost:hover{ background:var(--c-wash); border-color:var(--c); }
+.vk-btn--quiet{ background:transparent; color:var(--ink-soft); border-color:transparent; padding-inline:10px; }
+.vk-btn--quiet:hover{ color:var(--ink); background:var(--surface-2); border-color:transparent; }
+.vk-btn--sm{ font-size:13px; padding:8px 15px; }
+.vk-btn[disabled],.vk-btn--off{ opacity:.5; cursor:not-allowed; }
+.vk-btns{ display:flex; gap:var(--s2); flex-wrap:wrap; }
+
+/* ------------------------------------------------------------------ pills */
+.vk-pill{
+  display:inline-block; font-family:var(--mono); font-size:10px; font-weight:700;
+  letter-spacing:.06em; text-transform:uppercase; border-radius:6px; padding:4px 8px; white-space:nowrap;
+}
+.vk-pill--live   { color:#fff; background:var(--good); }
+.vk-pill--paid   { color:var(--c-ink); background:var(--c); }
+.vk-pill--spec   { color:var(--ink-soft); background:var(--surface-2); border:1px solid var(--line); }
+.vk-pill--partial{ color:#fff; background:var(--warn); }
+.vk-pill--planned{ color:var(--ink-faint); background:transparent; border:1px dashed var(--line); }
+.vk-pill--bad    { color:#fff; background:var(--bad); }
+
+/* ------------------------------------------------------------------ cards */
+.vk-card{
+  background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
+  padding:var(--s4);
+}
+.vk-card--pad0{ padding:0; }
+.vk-card--rail{ position:relative; overflow:hidden; }
+.vk-card--rail::before{ content:""; position:absolute; inset:0 auto 0 0; width:4px; background:var(--c); }
+.vk-card--rail{ padding-left:calc(var(--s4) + 4px); }
+.vk-card.is-done   { border-color:color-mix(in srgb,var(--good) 45%,var(--line)); background:color-mix(in srgb,var(--good) 5%,var(--surface)); }
+.vk-card.is-flagged{ border-color:color-mix(in srgb,var(--bad) 50%,var(--line)); }
+.vk-card .vk-h3{ margin-top:0; }
+.vk-card p:last-child{ margin-bottom:0; }
+.vk-grid{ display:grid; gap:var(--s3); grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); }
+
+/* ------------------------------------------------------------- facts strip */
+/* Dividers are drawn by each cell, so a row that does not divide evenly leaves
+   ground behind rather than an empty filled box. */
+.vk-facts{
+  display:grid; gap:1px; background:var(--surface); border:1px solid var(--line);
+  border-radius:var(--radius); overflow:hidden;
+  grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+}
+.vk-fact{ background:var(--surface); padding:var(--s3) var(--s4); box-shadow:0 0 0 1px var(--line); }
+.vk-fact .k{ font-family:var(--mono); font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-faint); font-weight:700; margin-bottom:4px; }
+.vk-fact .v{ font-weight:700; font-size:16px; }
+
+/* ------------------------------------------------------------------ steps */
+.vk-steps{ counter-reset:s; list-style:none; padding:0; margin:0; display:grid; gap:var(--s2); }
+.vk-steps li{
+  counter-increment:s; position:relative; padding:var(--s3) var(--s4) var(--s3) 58px;
+  background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
+}
+.vk-steps li::before{
+  content:counter(s); position:absolute; left:var(--s4); top:var(--s3);
+  width:26px; height:26px; border-radius:50%; background:var(--c); color:var(--c-ink);
+  display:grid; place-items:center; font-weight:800; font-size:13px;
+}
+.vk-steps h4{ margin:0 0 2px; font-size:15px; font-weight:700; }
+.vk-steps p{ margin:0; color:var(--ink-soft); font-size:14px; }
+
+/* -------------------------------------------------------------------- faq */
+.vk-faq{
+  border:1px solid var(--line); border-radius:var(--radius); padding:var(--s3) var(--s4);
+  margin-bottom:var(--s2); background:var(--surface);
+}
+.vk-faq summary{ cursor:pointer; font-weight:700; list-style:none; }
+.vk-faq summary::-webkit-details-marker{ display:none; }
+.vk-faq summary::after{ content:"+"; float:right; color:var(--c); font-weight:800; }
+.vk-faq[open] summary::after{ content:"–"; }
+.vk-faq p{ margin:var(--s2) 0 0; color:var(--ink-soft); }
+
+/* ------------------------------------------------------------------- feed */
+.vk-feed{ display:grid; gap:var(--s2); }
+.vk-item{
+  display:flex; gap:var(--s3); align-items:baseline; padding:var(--s3) var(--s4);
+  border:1px solid var(--line); border-radius:var(--radius); background:var(--surface);
+}
+.vk-item .when{ font-family:var(--mono); font-variant-numeric:tabular-nums; font-weight:700; color:var(--c); font-size:12.5px; min-width:96px; }
+.vk-item .what{ font-weight:650; }
+.vk-item .sub{ color:var(--ink-soft); font-size:14px; }
+.vk-empty{ color:var(--ink-faint); font-style:italic; padding:var(--s3) var(--s4); border:1px dashed var(--line); border-radius:var(--radius); }
+
+/* ------------------------------------------------------------------ forms */
+.vk-form{ display:grid; gap:var(--s3); max-width:560px; }
+.vk-form label{ display:grid; gap:5px; font-weight:650; font-size:14px; }
+.vk-form input,.vk-form textarea,.vk-form select{
+  font:inherit; padding:11px 13px; border-radius:var(--radius-sm);
+  border:1px solid var(--line); background:var(--surface); color:var(--ink); width:100%;
+}
+.vk-form input:focus-visible,.vk-form textarea:focus-visible{
+  outline:2px solid var(--c); outline-offset:1px; border-color:var(--c);
+}
+.vk-form textarea{ min-height:120px; resize:vertical; }
+.vk-note{ font-size:13px; color:var(--ink-soft); }
+
+/* ---------------------------------------------------------------- pricing */
+.vk-tiers{ display:grid; gap:var(--s3); grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); }
+.vk-tier{ border:1px solid var(--line); border-radius:var(--radius); padding:var(--s4); background:var(--surface); }
+.vk-tier--pick{ border-color:var(--c-line); background:var(--c-wash); }
+.vk-tier .amt{ font-family:var(--display); font-size:34px; font-weight:600; letter-spacing:-.03em; margin:6px 0 var(--s2); }
+.vk-tier ul{ margin:0; padding-left:1.1em; color:var(--ink-soft); font-size:14px; }
+
+/* ---------------------------------------------------------------- chooser */
+/* Amount / frequency / fund pickers — giving, checkout, plan selection. */
+.vk-chips{ display:flex; gap:8px; flex-wrap:wrap; }
+.vk-chip{
+  padding:8px 15px; border-radius:var(--radius-pill); border:1px solid var(--line);
+  font-weight:650; font-size:14px; background:var(--surface); cursor:pointer;
+}
+.vk-chip[aria-pressed="true"],.vk-chip.is-on{ background:var(--c); color:var(--c-ink); border-color:var(--c); }
+.vk-panel{ display:grid; gap:var(--s3); border:1px solid var(--line); border-radius:var(--radius); padding:var(--s4); background:var(--surface); }
+.vk-notice{ font-size:13.5px; color:var(--ink-soft); border-left:3px solid var(--c); padding-left:var(--s2); }
+
+/* ------------------------------------------------------------------ meter */
+.vk-meter{ display:flex; align-items:center; gap:var(--s2); margin-bottom:8px; }
+.vk-meter .k{ width:96px; font-size:13px; color:var(--ink-soft); }
+.vk-meter .track{ flex:1; height:8px; background:var(--surface-2); border:1px solid var(--line); border-radius:var(--radius-pill); overflow:hidden; }
+.vk-meter .track i{ display:block; height:100%; border-radius:var(--radius-pill); background:var(--c); }
+.vk-meter .v{ width:34px; text-align:right; font-size:13px; font-weight:700; font-variant-numeric:tabular-nums; }
+
+/* ------------------------------------------------------------------ table */
+.vk-tablewrap{ overflow-x:auto; }
+.vk-table{ width:100%; border-collapse:collapse; font-size:14px; }
+.vk-table th{ font-family:var(--mono); font-size:10.5px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-faint); font-weight:700; padding:9px 8px; text-align:left; border-bottom:1px solid var(--line); }
+.vk-table td{ padding:11px 8px; border-bottom:1px solid var(--line-soft); }
+.vk-table tr:last-child td{ border-bottom:0; }
+
+/* ------------------------------------------------------------ site header */
+.vk-head{ position:sticky; top:0; z-index:20; background:color-mix(in srgb,var(--bg) 88%,transparent); backdrop-filter:blur(10px); border-bottom:1px solid var(--line); }
+.vk-bar{ display:flex; align-items:center; gap:var(--s3); min-height:64px; flex-wrap:wrap; }
+.vk-brand{ display:flex; align-items:center; gap:var(--s2); font-weight:800; text-decoration:none; letter-spacing:-.02em; margin-right:auto; white-space:nowrap; }
+.vk-brand img{ height:26px; width:auto; border-radius:5px; }
+.vk-brand .dot{ width:9px; height:9px; border-radius:50%; background:var(--c); }
+.vk-nav{ display:flex; gap:2px; flex-wrap:wrap; }
+.vk-nav a{ text-decoration:none; font-size:14px; font-weight:600; color:var(--ink-soft); padding:7px 11px; border-radius:var(--radius-sm); }
+.vk-nav a:hover{ color:var(--ink); background:var(--surface-2); }
+.vk-nav a[aria-current]{ color:var(--ink); background:var(--surface-2); }
+@media (max-width:1040px){
+  /* padding-block only — the shorthand would wipe the wrapper's side gutters */
+  .vk-nav{ order:3; width:100%; padding-top:7px; border-top:1px solid var(--line); }
+  .vk-nav a{ padding-left:0; padding-right:16px; }
+  .vk-bar{ padding-top:9px; padding-bottom:9px; min-height:0; }
+}
+@media (max-width:640px){
+  .vk-nav{ border-top:0; padding-top:0; overflow-x:auto; flex-wrap:nowrap; scrollbar-width:none; }
+  .vk-nav::-webkit-scrollbar{ display:none; }
+}
+
+/* -------------------------------------------------------------------- CTA */
+.vk-band{
+  background:var(--brand-navy); color:#fff; border-radius:var(--radius);
+  padding:clamp(28px,4vw,48px); text-align:center;
+}
+.vk-band .vk-h2{ color:#fff; }
+.vk-band p{ color:#fff; opacity:.82; max-width:56ch; margin:0 auto var(--s4); }
+.vk-band--accent{ background:var(--c); color:var(--c-ink); }
+.vk-band--accent .vk-h2{ color:var(--c-ink); }
+
+/* ----------------------------------------------------------------- footer */
+.vk-footer{ padding:var(--s5) 0 var(--s7); margin-top:var(--s5); color:var(--ink-faint); font-size:14px; border-top:1px solid var(--line); }
+.vk-footer .cols{ display:flex; gap:var(--s5); justify-content:space-between; flex-wrap:wrap; }
+
+/* ============================================================ FORGE surfaces
+   The build console runs dark under the archetype's forge colour, so an operator
+   always knows which kind of platform is being made. This is the ONE place the
+   ground legitimately differs — it is a tool, not a page.                      */
+.vk-forge{
+  --bg:#0e100f; --surface:#161a18; --surface-2:#1c211e; --line:#2a322d; --line-soft:#232a26;
+  --ink:#f0f2ee; --ink-soft:#a8b1aa; --ink-faint:#79837c;
+  --c:var(--c-forge, var(--c-bright)); --c-ink:#0e100f;
+  background:var(--bg); color:var(--ink);
+}
+.vk-rail{ list-style:none; margin:0; padding:var(--s1) 0; }
+.vk-rail li{ display:flex; gap:var(--s3); padding:9px var(--s4); position:relative; }
+.vk-rail li::before{ content:""; position:absolute; left:33px; top:0; bottom:0; width:1px; background:var(--line); }
+.vk-rail li:first-child::before{ top:22px; }
+.vk-rail li:last-child::before{ bottom:calc(100% - 22px); }
+.vk-cue{
+  width:30px; height:30px; border-radius:9px; flex:none; display:grid; place-items:center;
+  font-size:14px; background:var(--surface-2); color:var(--ink-faint);
+  border:1px solid var(--line); position:relative; z-index:1; transition:.25s;
+}
+.is-running > .vk-cue{ background:var(--c); color:var(--c-ink); border-color:var(--c); animation:vk-pulse 1.15s ease-in-out infinite; }
+@keyframes vk-pulse{ 0%,100%{ box-shadow:0 0 0 0 color-mix(in srgb,var(--c) 55%,transparent); } 70%{ box-shadow:0 0 0 9px transparent; } }
+.is-ok > .vk-cue{ background:color-mix(in srgb,var(--good) 16%,var(--surface-2)); color:var(--good); border-color:color-mix(in srgb,var(--good) 40%,transparent); }
+.is-failed > .vk-cue{ background:color-mix(in srgb,var(--bad) 18%,var(--surface-2)); color:var(--bad); border-color:color-mix(in srgb,var(--bad) 50%,transparent); }
+.is-skipped > .vk-cue{ opacity:.45; }
+.vk-rail .body{ flex:1; min-width:0; padding-top:3px; }
+.vk-rail .t{ font-weight:700; font-size:15px; display:flex; gap:var(--s2); align-items:baseline; }
+.vk-rail .d{ color:var(--ink-soft); font-size:13px; }
+.is-pending > .body{ opacity:.42; }
+.is-running > .body .t{ color:var(--c); }
+.vk-rail .ms{ margin-left:auto; font-family:var(--mono); font-size:12px; color:var(--ink-faint); flex:none; }
+
+@media (prefers-reduced-motion:reduce){ *{ animation:none!important; transition:none!important; } }

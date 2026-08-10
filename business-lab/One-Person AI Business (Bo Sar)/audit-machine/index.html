@@ -1,0 +1,1283 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Audit Machine — implementation wizard</title>
+<meta name="description" content="Turn a 72-minute AI-agency playbook into your own audit machine: constraint, niche, offer, funnel, sales, delivery, back end.">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#E6E3DD" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#131215" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%23131215'/%3E%3C/svg%3E">
+</head>
+<body>
+<style>
+html{font-size:17px}
+:root[data-fs="l"]{font-size:19px}
+:root[data-fs="xl"]{font-size:21px}
+
+:root{
+  --paper:#E6E3DD; --sheet:#F4F2ED; --sheet-2:#ECE9E3; --sheet-3:#DDD9D1;
+  --ink:#17161A; --ink-soft:#57545C; --ink-faint:#8C8892;
+  --line:#C9C5BC; --line-soft:#DCD8D0;
+  --ember:#B8410F; --steel:#1F4E9C; --moss:#3A6B22; --plum:#6E2E7A; --slate:#4A5560; --gold:#8A6408;
+  --ember-w:#F7DFD3; --steel-w:#D9E2F5; --moss-w:#DEEAD3; --plum-w:#EEDDF1; --slate-w:#E0E4E8; --gold-w:#F0E7CB;
+  --plate:var(--ember); --plate-w:var(--ember-w); --plate-on:#FFFFFF;
+  --grain:rgba(23,22,26,.055); --misreg:multiply;
+  --mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --shadow:0 1px 1px rgba(23,22,26,.05), 0 8px 24px rgba(23,22,26,.07);
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --paper:#131215; --sheet:#1A191E; --sheet-2:#201F25; --sheet-3:#2A2830;
+    --ink:#EAE7E1; --ink-soft:#9E9AA3; --ink-faint:#6E6A74;
+    --line:#302E37; --line-soft:#26242C;
+    --ember:#FF8A57; --steel:#7FA3F0; --moss:#84C264; --plum:#C58ED2; --slate:#9AAAB8; --gold:#DCAE3C;
+    --ember-w:#3A1D11; --steel-w:#17233F; --moss-w:#1A2C13; --plum-w:#2D1932; --slate-w:#1D242A; --gold-w:#2E2410;
+    --plate-on:#0E0D10;
+    --grain:rgba(234,231,225,.05); --misreg:screen;
+    --shadow:0 1px 1px rgba(0,0,0,.4), 0 10px 30px rgba(0,0,0,.42);
+  }
+}
+:root[data-theme="light"]{
+  --paper:#E6E3DD; --sheet:#F4F2ED; --sheet-2:#ECE9E3; --sheet-3:#DDD9D1;
+  --ink:#17161A; --ink-soft:#57545C; --ink-faint:#8C8892;
+  --line:#C9C5BC; --line-soft:#DCD8D0;
+  --ember:#B8410F; --steel:#1F4E9C; --moss:#3A6B22; --plum:#6E2E7A; --slate:#4A5560; --gold:#8A6408;
+  --ember-w:#F7DFD3; --steel-w:#D9E2F5; --moss-w:#DEEAD3; --plum-w:#EEDDF1; --slate-w:#E0E4E8; --gold-w:#F0E7CB;
+  --plate-on:#FFFFFF; --grain:rgba(23,22,26,.055); --misreg:multiply;
+  --shadow:0 1px 1px rgba(23,22,26,.05), 0 8px 24px rgba(23,22,26,.07);
+}
+:root[data-theme="dark"]{
+  --paper:#131215; --sheet:#1A191E; --sheet-2:#201F25; --sheet-3:#2A2830;
+  --ink:#EAE7E1; --ink-soft:#9E9AA3; --ink-faint:#6E6A74;
+  --line:#302E37; --line-soft:#26242C;
+  --ember:#FF8A57; --steel:#7FA3F0; --moss:#84C264; --plum:#C58ED2; --slate:#9AAAB8; --gold:#DCAE3C;
+  --ember-w:#3A1D11; --steel-w:#17233F; --moss-w:#1A2C13; --plum-w:#2D1932; --slate-w:#1D242A; --gold-w:#2E2410;
+  --plate-on:#0E0D10; --grain:rgba(234,231,225,.05); --misreg:screen;
+  --shadow:0 1px 1px rgba(0,0,0,.4), 0 10px 30px rgba(0,0,0,.42);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0; color:var(--ink); background:var(--paper);
+  background-image:radial-gradient(var(--grain) .5px, transparent .5px);
+  background-size:4px 4px;
+  font-family:var(--sans); font-size:1.03125rem; line-height:1.55; -webkit-font-smoothing:antialiased;
+}
+button,input,select,textarea{font:inherit; color:inherit}
+:focus-visible{outline:2px solid var(--plate); outline-offset:2px}
+@media (prefers-reduced-motion:reduce){ *{transition:none !important; animation:none !important} }
+
+/* ---------- chrome ---------- */
+.bar{position:sticky; top:0; z-index:60; background:color-mix(in srgb,var(--paper) 88%,transparent); backdrop-filter:saturate(1.4) blur(10px); border-bottom:1px solid var(--line)}
+.bar-in{max-width:1380px; margin:0 auto; padding:0 clamp(12px,2.4vw,24px); height:56px; display:flex; align-items:center; gap:14px}
+.brand{display:flex; align-items:center; gap:9px; font-family:var(--mono); font-size:0.8125rem; letter-spacing:.16em; text-transform:uppercase; white-space:nowrap}
+.brand i{width:7px; height:7px; background:var(--ember); border-radius:50%; flex:none; box-shadow:2px 0 0 var(--steel)}
+.brand span{color:var(--ink-faint)}
+.bar .grow{flex:1; min-width:0}
+.sname{font-family:var(--mono); font-size:0.875rem; background:transparent; border:1px solid transparent; border-radius:2px; padding:5px 8px; width:100%; max-width:340px}
+.sname:hover{border-color:var(--line)}
+.sname:focus{border-color:var(--plate); background:var(--sheet)}
+.prog{display:flex; align-items:center; gap:9px; font-family:var(--mono); font-size:0.84375rem; letter-spacing:.1em; color:var(--ink-faint); white-space:nowrap; font-variant-numeric:tabular-nums}
+.track{width:88px; height:5px; background:var(--sheet-3); border-radius:99px; overflow:hidden}
+.fill{height:100%; width:0; background:var(--plate); transition:width .45s cubic-bezier(.2,.7,.2,1)}
+.btn{font-family:var(--mono); font-size:0.84375rem; letter-spacing:.11em; text-transform:uppercase; background:transparent; border:1px solid var(--line); color:var(--ink-soft); padding:8px 12px; border-radius:2px; cursor:pointer; transition:.15s; white-space:nowrap}
+.btn:hover{color:var(--ink); border-color:var(--plate)}
+.btn.primary{background:var(--plate); border-color:var(--plate); color:var(--plate-on)}
+.btn.primary:hover{filter:brightness(1.1)}
+.btn.ghost{border-color:transparent; color:var(--ink-faint)}
+.btn.ghost:hover{color:var(--ink); border-color:var(--line)}
+.btn[disabled]{opacity:.34; cursor:not-allowed}
+.btn.sm{padding:5px 9px; font-size:0.75rem}
+.hide-sm{display:none}
+@media(min-width:900px){ .hide-sm{display:inline} }
+
+.rail{display:flex; gap:4px; overflow-x:auto; padding:9px clamp(12px,2.4vw,24px); border-bottom:1px solid var(--line); background:color-mix(in srgb,var(--paper) 72%,transparent); position:sticky; top:56px; z-index:50; scrollbar-width:thin}
+.rail button{font-family:var(--mono); font-size:0.8125rem; letter-spacing:.09em; text-transform:uppercase; background:transparent; border:1px solid transparent; color:var(--ink-faint); padding:6px 10px; border-radius:2px; cursor:pointer; white-space:nowrap; transition:.15s}
+.rail button:hover{color:var(--ink)}
+.rail button[aria-current="true"]{color:var(--plate-on); background:var(--plate); border-color:var(--plate)}
+.rail button.done{color:var(--plate)}
+.rail button.done::before{content:"\2713\00a0"}
+
+/* ---------- layout ---------- */
+.stage{max-width:1380px; margin:0 auto; padding:clamp(16px,2.8vw,30px) clamp(12px,2.4vw,24px) 90px; display:grid; gap:20px; align-items:start}
+@media(min-width:1060px){ .stage{grid-template-columns:minmax(0,1fr) minmax(360px,36%)} .col-side{position:sticky; top:112px} }
+
+.panel{background:var(--sheet); border:1px solid var(--line); border-radius:3px; box-shadow:var(--shadow); overflow:hidden}
+.panel-head{padding:15px 20px; border-bottom:1px solid var(--line-soft); background:var(--sheet-2); display:flex; align-items:baseline; gap:12px; flex-wrap:wrap}
+.panel-head .sno{font-family:var(--mono); font-size:0.84375rem; letter-spacing:.14em; color:var(--plate)}
+.panel-head h2{font-family:var(--mono); font-size:1rem; letter-spacing:.01em; text-transform:uppercase; margin:0; font-weight:600}
+.panel-head .hint{margin-left:auto; font-family:var(--mono); font-size:0.8125rem; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-faint)}
+.panel-body{padding:clamp(16px,2.4vw,24px); display:flex; flex-direction:column; gap:18px}
+.nav{display:flex; align-items:center; gap:8px; padding:13px 20px; border-top:1px solid var(--line-soft); background:var(--sheet-2)}
+.nav .sp{flex:1}
+
+.lede{font-family:var(--serif); font-size:1.15625rem; line-height:1.5; color:var(--ink-soft); margin:0; max-width:64ch; text-wrap:pretty}
+.lede strong{color:var(--ink); font-weight:600}
+h3.sec{font-family:var(--mono); font-size:0.8125rem; letter-spacing:.13em; text-transform:uppercase; color:var(--ink-faint); margin:8px 0 -4px; font-weight:600}
+
+/* ---------- fields ---------- */
+.f{display:flex; flex-direction:column; gap:6px}
+.f > label, .f .flab{font-family:var(--mono); font-size:0.8125rem; letter-spacing:.09em; text-transform:uppercase; color:var(--ink); font-weight:600}
+.f .help{font-size:0.96875rem; color:var(--ink-soft); line-height:1.45; margin:-2px 0 2px; max-width:66ch}
+.f .help b{color:var(--ink); font-weight:600}
+input[type=text], input[type=number], textarea, select{
+  width:100%; background:var(--sheet-2); border:1px solid var(--line); border-radius:2px;
+  padding:9px 11px; font-size:1rem; transition:.15s;
+}
+input[type=text]:focus, input[type=number]:focus, textarea:focus, select:focus{border-color:var(--plate); background:var(--sheet)}
+textarea{resize:vertical; min-height:74px; line-height:1.5}
+.numwrap{display:flex; align-items:stretch; max-width:340px}
+.numwrap .pre,.numwrap .suf{display:flex; align-items:center; padding:0 10px; background:var(--sheet-3); border:1px solid var(--line); font-family:var(--mono); font-size:0.875rem; color:var(--ink-soft)}
+.numwrap .pre{border-right:0; border-radius:2px 0 0 2px}
+.numwrap .suf{border-left:0; border-radius:0 2px 2px 0; white-space:nowrap}
+.numwrap input{border-radius:0}
+.numwrap .pre + input{border-radius:0}
+.numwrap input:first-child{border-radius:2px 0 0 2px}
+
+/* choices */
+.opts{display:grid; gap:9px; grid-template-columns:1fr}
+@media(min-width:620px){ .opts.two{grid-template-columns:1fr 1fr} }
+.opt{position:relative; text-align:left; background:var(--sheet-2); border:1px solid var(--line); border-radius:3px; padding:12px 14px 13px 40px; cursor:pointer; transition:.16s; width:100%; display:block}
+.opt:hover{border-color:var(--plate); background:var(--sheet)}
+.opt[aria-pressed="true"]{border-color:var(--plate); background:var(--plate-w); box-shadow:inset 3px 0 0 var(--plate)}
+.opt .mk{position:absolute; left:13px; top:14px; width:14px; height:14px; border:1.5px solid var(--line); border-radius:50%; transition:.16s}
+.opt[aria-pressed="true"] .mk{border-color:var(--plate); background:var(--plate); box-shadow:inset 0 0 0 2.5px var(--plate-w)}
+.opt.sq .mk{border-radius:2px}
+.opt[aria-pressed="true"].sq .mk{box-shadow:none; background:var(--plate)}
+.opt[aria-pressed="true"].sq .mk::after{content:"\2713"; position:absolute; inset:-1px 0 0 1px; color:var(--plate-w); font-size:0.8125rem; line-height:14px; font-weight:700}
+.opt h4{margin:0 0 2px; font-size:1rem; font-weight:650; letter-spacing:-.01em}
+.opt p{margin:0; font-size:0.9375rem; color:var(--ink-soft); line-height:1.45}
+.opt .tag{position:absolute; right:11px; top:11px; font-family:var(--mono); font-size:0.71875rem; letter-spacing:.1em; text-transform:uppercase; color:var(--plate); background:var(--plate-w); padding:2px 6px; border-radius:2px}
+
+/* rows table */
+.rows{border:1px solid var(--line); border-radius:3px; overflow:hidden; background:var(--sheet-2)}
+.rowsh{display:flex; gap:0; background:var(--sheet-3); border-bottom:1px solid var(--line)}
+.rowsh span{font-family:var(--mono); font-size:0.75rem; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-soft); padding:7px 9px; border-right:1px solid var(--line)}
+.rowsh span:last-child{border-right:0}
+.rw{display:flex; border-bottom:1px solid var(--line-soft)}
+.rw:last-of-type{border-bottom:0}
+.rw > div{border-right:1px solid var(--line-soft); min-width:0}
+.rw > div:last-child{border-right:0}
+.rw input{border:0; background:transparent; border-radius:0; padding:8px 9px; font-size:1rem}
+.rw input:focus{background:var(--sheet); outline-offset:-2px}
+.rw .del{flex:none; width:34px; display:flex; align-items:center; justify-content:center}
+.rw .del button{background:transparent; border:0; color:var(--ink-faint); cursor:pointer; font-size:1.03125rem; line-height:1; padding:4px 6px}
+.rw .del button:hover{color:var(--ember)}
+.rowsf{display:flex; align-items:center; gap:10px; padding:8px 10px; background:var(--sheet-3); border-top:1px solid var(--line)}
+.rowsf .tot{margin-left:auto; font-family:var(--mono); font-size:0.8125rem; color:var(--ink-soft); font-variant-numeric:tabular-nums}
+.rowsf .tot b{color:var(--ink); font-size:0.96875rem}
+
+/* notes */
+.note{border:1px solid var(--line); border-left:3px solid var(--slate); background:var(--sheet-2); border-radius:2px; padding:12px 14px; font-size:1rem; color:var(--ink-soft); line-height:1.5}
+.note b{display:block; color:var(--ink); font-family:var(--mono); font-size:0.8125rem; letter-spacing:.12em; text-transform:uppercase; margin-bottom:5px}
+.note.warn{border-left-color:var(--ember); background:var(--ember-w)}
+.note.warn b{color:var(--ember)}
+.note.quote{border-left-color:var(--gold); font-family:var(--serif); font-size:1.0625rem; font-style:italic}
+.note.quote b{font-style:normal; color:var(--gold)}
+.note.ok{border-left-color:var(--moss); background:var(--moss-w)}
+.note.ok b{color:var(--moss)}
+.note code{font-family:var(--mono); font-size:0.9375rem; background:var(--sheet-3); padding:1px 4px; border-radius:2px}
+
+/* calculator */
+.calc{border:1px solid var(--line); border-radius:3px; background:var(--sheet-2); overflow:hidden}
+.calc-h{padding:10px 14px; background:var(--sheet-3); border-bottom:1px solid var(--line); font-family:var(--mono); font-size:0.84375rem; letter-spacing:.12em; text-transform:uppercase; color:var(--ink); font-weight:600; display:flex; gap:10px; align-items:center}
+.calc-h em{margin-left:auto; font-style:normal; font-size:0.75rem; color:var(--ink-faint); letter-spacing:.1em}
+.calc-in{display:grid; gap:10px; padding:14px; grid-template-columns:1fr}
+@media(min-width:560px){ .calc-in{grid-template-columns:1fr 1fr} }
+@media(min-width:900px){ .calc-in.three{grid-template-columns:1fr 1fr 1fr} }
+.ci{display:flex; flex-direction:column; gap:4px}
+.ci label{font-family:var(--mono); font-size:0.75rem; letter-spacing:.09em; text-transform:uppercase; color:var(--ink-faint)}
+.calc-out{border-top:1px solid var(--line); background:var(--sheet); padding:14px; display:grid; gap:12px; grid-template-columns:repeat(auto-fit,minmax(128px,1fr))}
+.kpi{display:flex; flex-direction:column; gap:2px}
+.kpi .v{font-family:var(--mono); font-size:1.59375rem; font-weight:700; letter-spacing:-.03em; line-height:1.1; color:var(--plate); font-variant-numeric:tabular-nums}
+.kpi .v.dim{color:var(--ink-faint)}
+.kpi .l{font-family:var(--mono); font-size:0.75rem; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-faint)}
+.calc-note{padding:0 14px 14px; font-size:0.9375rem; color:var(--ink-soft); line-height:1.45}
+.calc-note b{color:var(--ink)}
+
+/* side column */
+.side{display:flex; flex-direction:column; gap:14px}
+.card{background:var(--sheet); border:1px solid var(--line); border-radius:3px; box-shadow:var(--shadow); overflow:hidden}
+.card-h{padding:11px 15px; border-bottom:1px solid var(--line-soft); background:var(--sheet-2); font-family:var(--mono); font-size:0.84375rem; letter-spacing:.13em; text-transform:uppercase; color:var(--ink-soft); display:flex; align-items:center; gap:8px}
+.card-h i{width:6px; height:6px; border-radius:50%; background:var(--plate); flex:none}
+.card-b{padding:14px 15px; display:flex; flex-direction:column; gap:11px; font-size:1rem}
+.kv{display:flex; gap:10px; align-items:baseline; border-bottom:1px dotted var(--line); padding-bottom:8px}
+.kv:last-child{border-bottom:0; padding-bottom:0}
+.kv .k{font-family:var(--mono); font-size:0.75rem; letter-spacing:.09em; text-transform:uppercase; color:var(--ink-faint); flex:none; width:96px}
+.kv .v{color:var(--ink); min-width:0; word-break:break-word}
+.kv .v.empty{color:var(--ink-faint); font-style:italic}
+.tri{display:flex; gap:6px}
+.tri div{flex:1; text-align:center; padding:9px 5px; border:1px solid var(--line); border-radius:2px; background:var(--sheet-2)}
+.tri div.on{border-color:var(--plate); background:var(--plate-w); box-shadow:inset 0 -2px 0 var(--plate)}
+.tri div b{display:block; font-family:var(--mono); font-size:0.8125rem; letter-spacing:.1em; text-transform:uppercase; color:var(--ink)}
+.tri div span{font-size:0.84375rem; color:var(--ink-faint)}
+.tri div.on b{color:var(--plate)}
+.seq{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:7px}
+.seq li{display:flex; gap:9px; align-items:flex-start; font-size:0.96875rem; color:var(--ink-soft); line-height:1.4}
+.seq li i{font-family:var(--mono); font-size:0.75rem; color:var(--plate); flex:none; width:16px; padding-top:2px; font-style:normal}
+.seq li.done{color:var(--ink)}
+.seq li.done i::before{content:"\2713"}
+
+/* export */
+textarea#out, textarea#manualtx{font-family:var(--mono); font-size:0.875rem; line-height:1.5; min-height:220px; background:var(--sheet-2)}
+.outbar{display:flex; align-items:center; gap:8px; flex-wrap:wrap}
+.outbar .t{font-family:var(--mono); font-size:0.8125rem; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-faint); margin-right:auto}
+.done-grid{display:grid; gap:10px; grid-template-columns:1fr}
+@media(min-width:640px){ .done-grid{grid-template-columns:1fr 1fr} }
+.dc{border:1px solid var(--line); border-radius:3px; background:var(--sheet-2); padding:12px 14px}
+.dc h5{margin:0 0 4px; font-family:var(--mono); font-size:0.84375rem; letter-spacing:.11em; text-transform:uppercase; color:var(--plate)}
+.dc p{margin:0; font-size:0.96875rem; color:var(--ink-soft); line-height:1.45}
+.dc p b{color:var(--ink)}
+
+.foot{max-width:1380px; margin:0 auto; padding:0 clamp(12px,2.4vw,24px) 40px; font-size:0.875rem; color:var(--ink-faint); line-height:1.6}
+.foot a{color:var(--ink-soft)}
+</style>
+
+<div class="bar">
+  <div class="bar-in">
+    <div class="brand"><i></i>The Audit Machine <span>&mdash; implementation wizard</span></div>
+    <div class="grow"><input class="sname" id="sname" type="text" placeholder="Name this plan (e.g. Fencing contractors, NL)" aria-label="Plan name"></div>
+    <div class="prog"><span id="pct">0%</span><span class="track"><i class="fill" id="fill"></i></span></div>
+    <button class="btn ghost sm" data-a="theme" type="button" title="Toggle light/dark">&#9681;</button>
+  </div>
+</div>
+
+<nav class="rail" id="rail" aria-label="Steps"></nav>
+
+<main class="stage">
+  <section>
+    <div class="panel">
+      <div class="panel-head">
+        <span class="sno" id="sno">STEP 01 / 11</span>
+        <h2 id="stitle">&nbsp;</h2>
+        <span class="hint" id="shint"></span>
+      </div>
+      <div class="panel-body" id="body"></div>
+      <div class="nav">
+        <button class="btn" data-a="prev" id="prev" type="button">&larr; Back</button>
+        <span class="sp"></span>
+        <button class="btn ghost sm" data-a="reset" type="button">Clear</button>
+        <button class="btn primary" data-a="next" id="next" type="button">Next &rarr;</button>
+      </div>
+    </div>
+  </section>
+
+  <aside class="col-side">
+    <div class="side" id="side"></div>
+  </aside>
+</main>
+
+<div class="foot">
+  Built from <a href="https://www.youtube.com/watch?v=VDROpRg0zV8" target="_blank" rel="noopener">&ldquo;Start a One-Person AI Business in 2026 (Full Playbook)&rdquo;</a> by Bo Sar.
+  The benchmarks quoted throughout &mdash; $85 per booked call, 80% close on the second call, $10k audit &mdash; are his agency&rsquo;s numbers in his market, behind a two-year YouTube library. Treat them as targets to test, not inputs to a plan.
+  Everything you type stays in this browser (localStorage); nothing is sent anywhere.
+</div>
+
+<script>
+/* ============================================================
+   The Audit Machine — implementation wizard
+   Single file, no dependencies, state in localStorage.
+   ============================================================ */
+var KEY = "audit-machine.v1";
+
+/* ---------- step + field definitions ---------- */
+var STEPS = [
+
+/* 01 ---------------------------------------------------------- */
+{k:"constraint", nav:"Constraint", title:"Find your one constraint", hint:"Diagnose before you build",
+ lede:"Every service business is three parts &mdash; <strong>traffic</strong> fills the funnel, <strong>system</strong> converts opportunities into cash, <strong>skill</strong> delivers so well you get paid, kept and referred. At any moment exactly one of them is your bottleneck. Working on the other two while ignoring it is how people stay stuck for years.",
+ fields:[
+  {t:"choice", k:"constraint", label:"Which one is binding right now?", opts:[
+    {v:"Traffic", h:"Traffic", d:"You can deliver, but not enough of the right people know you exist or trust you yet."},
+    {v:"System", h:"System", d:"Conversations happen and then evaporate. Leads leak, calls no-show, proposals go quiet."},
+    {v:"Skill", h:"Skill", d:"You can fill a calendar but you cannot deliver something worth referring."}
+  ]},
+  {t:"note", tone:"warn", title:"The usual misdiagnosis", body:"Almost everyone starting an AI business obsesses over skill &mdash; cooler demos, another tool, another certification &mdash; while their real constraint is traffic and trust. They can build; nobody knows them. If you picked Skill, check that it is honest."},
+  {t:"text", k:"evidence", label:"What is the evidence?", ph:"e.g. 14 discovery calls in 3 months, 2 closed — the calls exist, the close does not",
+   help:"One sentence. If you cannot point to a number or a specific failure, you are guessing at your constraint."},
+  {t:"text", k:"first_fix", label:"The single thing you will fix first", ph:"e.g. build the demo audit so call one has something to show"},
+  {t:"sec", label:"The one-of-each rule"},
+  {t:"multi", k:"one_rule", label:"Commit to one of each before stacking anything", opts:[
+    {v:"One traffic source", d:"Not five channels. One, until it works end to end."},
+    {v:"One conversion mechanism", d:"One funnel, one call structure. When something breaks you know which piece."},
+    {v:"One delivery channel", d:"One offer, delivered one way, until it is repeatable."}
+  ]},
+  {t:"sec", label:"Where you stand on proof"},
+  {t:"choice", k:"stage", label:"Your proof stage — this sets your price later", opts:[
+    {v:"cold", h:"No paying clients yet", d:"You are buying your proof. Floor price, anchored higher.", tag:"floor"},
+    {v:"warm", h:"1–3 delivered, no filmed case study", d:"You have receipts but nothing a stranger can check.", tag:"mid"},
+    {v:"hot", h:"Filmed case studies with numbers", d:"Before-and-after on camera from clients who look like the next one.", tag:"full"}
+  ]}
+ ]},
+
+/* 02 ---------------------------------------------------------- */
+{k:"niche", nav:"Buyer", title:"Name your buyer out loud", hint:"General traffic brings general leads",
+ lede:"Two years of general content brought every request imaginable &mdash; a dashboard here, a funnel there, a manufacturer with who-knows-what. Every client a different task. That is an outsourcing treadmill and nothing about it is repeatable. <strong>Similar problems let you template the solution; templated solutions let you productize; productized delivery is the thing you can automate.</strong>",
+ fields:[
+  {t:"text", k:"industry", label:"Industry / trade", ph:"e.g. fencing and landscaping contractors"},
+  {t:"text", k:"country", label:"Market", ph:"e.g. the Netherlands", help:"One country to start. Selling into another country is fine — a Twilio caller app dialing from local numbers is an afternoon build — but pick one."},
+  {t:"num", k:"rev_floor", label:"Annual revenue floor", pre:"€", suf:"per year", ph:"1000000",
+   help:"Below roughly a million a year, the hidden costs are too small to fund the fee and the owner does the work himself."},
+  {t:"text", k:"callout", label:"The callout line", ph:"Auto-filled from the three fields above — edit it",
+   help:"This is the first line of every ad and the headline of the landing page. <b>90% of people never read past the first line</b>, so the first line does the qualifying. Wrong-fit traffic bouncing off the page is a feature: it teaches the pixel who not to bring."},
+  {t:"area", k:"same_problems", label:"The three processes that leak in every business of this type", rows:4,
+   ph:"1. Quoting — estimator re-keys the same job into two systems\n2. Scheduling — whiteboard plus WhatsApp, nothing reconciles\n3. Invoicing — chased manually once a week, money sits past 30 days",
+   help:"If you cannot name three, you do not know the niche yet. Go run four conversations before writing anything else here."},
+  {t:"text", k:"why_you", label:"Why you, for this niche", ph:"e.g. ran a subcontracting business for 6 years — I know the quoting language"},
+  {t:"area", k:"disqualify", label:"Who you will say no to", rows:3,
+   ph:"Under 5 staff. Owners who insist on skipping the audit. Anyone who wants the automation without the map.",
+   help:"The prospects who push hardest to skip the audit are almost always 5–10 person teams whose owner is certain he knows everything happening in his business. Bigger decision makers never argue with the audit — they know they don't know. <b>Treat the push as a qualification signal.</b>"}
+ ]},
+
+/* 03 ---------------------------------------------------------- */
+{k:"offer", nav:"Offer", title:"The audit offer", hint:"Sell the map, not the build",
+ lede:"The offer is a paid process audit: five to twenty hours of interviews turned into a map of how the business actually runs, what it costs them, and what to build first. <strong>It is the entry point, not the business</strong> &mdash; but it is what makes everything after it easy to sell.",
+ fields:[
+  {t:"text", k:"offer_name", label:"What you call it", ph:"e.g. The AI Process Audit — where the money leaks and what to build first"},
+  {t:"num", k:"price", label:"Your price", pre:"€", suf:"per audit", ph:"5000",
+   help:"See the ladder below. The floor exists for a reason: to a business above a million a year, a suspiciously cheap audit reads as a red flag, not a deal."},
+  {t:"calc", id:"ladder"},
+  {t:"num", k:"guarantee", label:"Guarantee — recoverable waste you will find, or full refund", pre:"€", suf:"per year", ph:"50000",
+   help:"His ratio is 5× the fee. It is the single line that kills the risk and makes call two a formality — but only promise a number the audit reliably finds. Check it against the hidden-cost calculator in step 7 before you commit."},
+  {t:"choice", k:"bundle", label:"What lands at the end", opts:[
+    {v:"Map only", h:"The map alone", d:"Process maps, findings, hidden costs, the blueprint. Clean, but it is paper."},
+    {v:"Map + first build", h:"Map + the first automation built", d:"You also build item one off the priority matrix. The deliverable becomes a before-and-after instead of a report — easier to sell, and it produces a case study the day the audit ends.", tag:"if new"}
+  ]},
+  {t:"multi", k:"parts", label:"What is inside the deliverable", opts:[
+    {v:"Process map, department by department", d:"Stages, steps, tools, staff — walkable on screen."},
+    {v:"Pain points, each tied to a solution", d:"Marked in the map, each carrying the interview quote that produced it."},
+    {v:"Hidden cost table quoting their own team", d:"Every number sourced from their staff, so nobody can say you invented the math."},
+    {v:"Priority matrix — impact versus effort", d:"What to build first, second, never."},
+    {v:"Risk section — where AI should not go", d:"Not a disclaimer. The most persuasive page in the document."},
+    {v:"Education layer for a non-technical owner", d:"The Excel analogy, amplification not replacement, why data centralization matters."},
+    {v:"Each section downloadable", d:"They keep it. It circulates internally without you in the room."}
+  ]},
+  {t:"text", k:"terms", label:"Payment terms", ph:"50% upfront, 50% on delivery — first half clears before delivery starts"},
+  {t:"note", tone:"quote", title:"The rule that never breaks", body:"The sale is a sale only when the money is in the bank &mdash; not when they say yes. People promise you the world on calls."}
+ ]},
+
+/* 04 ---------------------------------------------------------- */
+{k:"proof", nav:"Proof", title:"Build the demo, then buy your proof", hint:"Not all proof counts",
+ lede:"A random chatbot project is not a case study. A case study is <em>&ldquo;quoting took 20 hours a week, now it takes 3 &mdash; that is &euro;28,000 a year in one process&rdquo;</em>, said by a client who looks exactly like the next one you want. That kind of proof only comes from a specific engagement with a specific client, which is what the whole machine exists to produce.",
+ fields:[
+  {t:"sec", label:"The demo audit — your single most valuable sales asset"},
+  {t:"note", tone:"", title:"Dummy data, real structure", body:"You cannot describe an audit into existence on a call. Build one for a fictional company in your niche, with the full structure and invented numbers, and walk prospects through it live. The prospect needs to see the thing to buy the thing &mdash; an audit is invisible, and this makes it physical. It doubles as the spec for your delivery skills."},
+  {t:"multi", k:"demo_build", label:"Demo audit build checklist", opts:[
+    {v:"Fictional company profile in my niche", d:"Right size, right tools, right mess."},
+    {v:"Process map with pain points marked", d:"At least two departments, walkable top to bottom."},
+    {v:"Hidden cost table with role-specific rates", d:"Shows the method, not just the total."},
+    {v:"Priority matrix", d:"Impact versus effort, with the first three initiatives named."},
+    {v:"Risk section", d:"Two processes you would explicitly not touch with AI, and why."},
+    {v:"Rehearsed 8-minute walkthrough", d:"Top to bottom, out loud, timed."}
+  ]},
+  {t:"sec", label:"Buying your proof"},
+  {t:"rows", k:"first_clients", label:"Your first three audits", min:3,
+   cols:[{k:"who", label:"Who", w:"30%"},{k:"src", label:"How you reach them", w:"28%"},{k:"price", label:"Price", w:"14%"},{k:"story", label:"Case study it should produce", w:"28%"}],
+   help:"Price lower so the barrier is lower &mdash; but <b>never announce that you are new</b>. You do not say “you are one of our first clients, so it is cheaper.” You simply price lower. Early buyers asking “how are you even making money on this?” is exactly the reaction you want."},
+  {t:"area", k:"testimonial_qs", label:"The testimonial interview — your questions", rows:5,
+   ph:"What did this process look like before we started?\nHow many hours a week was it taking, and who was doing it?\nWhat does it look like now?\nWhat surprised you?\nWho would you tell to do this?",
+   help:"Ask <b>at the peak</b> &mdash; right after you deliver value, while they are excited. Never as a stated condition of the discount. Record it as an interview so you control the questions and can extract the numbers."},
+  {t:"multi", k:"proof_rules", label:"Rules you are holding yourself to", opts:[
+    {v:"I will not announce that I am new", d:"Price low, posture normal."},
+    {v:"I will not go below the floor", d:"A cheap audit reads as a red flag to a serious business."},
+    {v:"I will ask for the testimonial at the peak", d:"Not weeks later over email."},
+    {v:"Every case study carries a number", d:"Hours saved or revenue captured. No adjectives."}
+  ]}
+ ]},
+
+/* 05 ---------------------------------------------------------- */
+{k:"traffic", nav:"Traffic", title:"One traffic source, on purpose", hint:"Volume that responds to money",
+ lede:"Four realistic sources, each with a downside every course skips. <strong>Outreach</strong> gets you first conversations and is a treadmill. <strong>Content</strong> brings the best leads that exist and the algorithm decides your month. <strong>Paid</strong> is the only source where volume responds to money on demand. <strong>Referrals</strong> are the best of all and useless when you have three clients.",
+ fields:[
+  {t:"choice", k:"source", label:"Your one source, for now", opts:[
+    {v:"Outreach", h:"Outreach", d:"Upwork, LinkedIn, cold email. Zero trust, price competition, brutal 2026 response rates — but real reps and real conversations, fast."},
+    {v:"Content", h:"Content", d:"Trust arrives before the call. Unpredictable, slow to compound, tied to your face — you cannot hire someone to be you."},
+    {v:"Paid", h:"Paid ads", d:"A dial. Spend more this week, get more calls next week. Needs proven unit economics and real money up front."},
+    {v:"Referrals", h:"Referrals", d:"Cheapest and highest trust. A multiplier on great delivery, not a dial you can turn when you are small."}
+  ]},
+  {t:"note", tone:"ok", title:"The sequencing that saves your money", body:"Outreach and inbound first, until the offer is proven and a few clients have paid. <b>Then</b> paid, to scale a formula that already works &mdash; not to discover one. Discovering the formula with paid traffic is how people burn a year of savings."},
+  {t:"area", k:"source_plan", label:"What you will actually do this month on that one source", rows:4,
+   ph:"e.g. 15 conversations/week: 8 from the trade association member list, 4 warm intros, 3 from the supplier I used to buy from. Same opening, same diagnostic questions, demo audit shown on every second call."},
+  {t:"sec", label:"When you turn paid on"},
+  {t:"multi", k:"paid_doctrine", label:"The doctrine — simpler than every media-buying tutorial", opts:[
+    {v:"One campaign, one ad set, ~20 creatives, CBO", d:"Not a matrix of ad sets."},
+    {v:"Targeting is country only", d:"No age, no gender, no interests. Settings are suggestions; the algorithm reallocates by itself and does it better."},
+    {v:"Niche down in the first line of copy, not the settings", d:"Your callout line from step 2."},
+    {v:"95% of results come from creatives", d:"Your job is to keep feeding it new hooks and formats to test."},
+    {v:"Optimize for booked calls, Conversions API wired", d:"Not clicks, not leads."},
+    {v:"Wrong-fit traffic bouncing is a feature", d:"The bounce teaches the pixel who not to bring next time."}
+  ]},
+  {t:"calc", id:"admath"},
+  {t:"area", k:"creative_hooks", label:"Five hooks to test", rows:5,
+   ph:"1. “Fencing contractors in NL doing over €1M: here is where your quoting hours actually go.”\n2. ...",
+   help:"Every one of them opens with the callout line. Different hooks, different formats — some video, some static."},
+  {t:"sec", label:"The referral system (build it now, harvest it later)"},
+  {t:"multi", k:"referral_sys", label:"Referrals are a system, not luck", opts:[
+    {v:"Ask at the peak, never during a lull", d:"Right after you deliver value."},
+    {v:"Ask with a specific list", d:"“Do you know any electricians? Any landscapers?” beats “know anyone who needs this?”"},
+    {v:"Pay 20% commission on referred revenue", d:"Gladly."},
+    {v:"Price so they get roughly 5× the value they paid", d:"Underpriced value is what makes clients talk about you."}
+  ]}
+ ]},
+
+/* 06 ---------------------------------------------------------- */
+{k:"funnel", nav:"Funnel", title:"The system between the click and the call", hint:"Boring habits, compounding returns",
+ lede:"This is the part no course teaches, because those courses have never run a funnel. None of it is glamorous &mdash; which is exactly why it works and why almost nobody does it. <strong>The gap between a funnel that works and a funnel that books qualified calls every day is a stack of boring operational habits.</strong>",
+ fields:[
+  {t:"multi", k:"page_spec", label:"Landing page spec", opts:[
+    {v:"Plain HTML, no framework", d:"Frameworks load slower and every second of load time costs you leads."},
+    {v:"VSL explaining the offer", d:"Nobody is forced to watch it. The people who do arrive knowing the offer, the cost of ignoring the problem, and who you are."},
+    {v:"Testimonials and case studies above the fold of the form", d:"The proof the ad could not carry."},
+    {v:"Qualifying questions before the calendar", d:"This is where the real filtering happens — not the video."},
+    {v:"Calendar last", d:"After the questions, never before."}
+  ]},
+  {t:"sec", label:"The trick that pays for the whole tool stack"},
+  {t:"choice", k:"capture", label:"Booking flow order", opts:[
+    {v:"phone-first", h:"Name and phone first, then everything else", d:"A CRM record is created the moment those two fields are entered. Qualifying questions and the calendar come as separate steps afterwards. When someone abandons halfway, you still have them.", tag:"do this"},
+    {v:"all-at-once", h:"One form, everything at once", d:"Standard. Anyone who closes the tab before submitting is gone forever, and you paid for them."}
+  ]},
+  {t:"num", k:"sla_minutes", label:"Speed-to-lead SLA on an abandoned form", suf:"minutes", ph:"7",
+   help:"Five to ten minutes. Not tomorrow, not “within one business day.” You call while your page is still open in their brain. <b>Speed to lead is a superpower and it is free.</b>"},
+  {t:"multi", k:"ops_rules", label:"The operational habits", opts:[
+    {v:"Confirmation call within 5 minutes of booking", d:"Three jobs at once: they commit out loud, you send them something to watch, and the trust gap starts closing."},
+    {v:"Send one long-form video between booking and call", d:"An ad and a landing page cannot do what a 40-minute build video does. Put the long-form trust-building in the gap."},
+    {v:"No-show → call immediately, double dial", d:"One missed call from an unknown number reads as spam. A second right after reads as a real person who needs you."},
+    {v:"Keep the no-show call casual", d:"“Hey, I was waiting for you — where are you?” lands better than any follow-up email. ~90% who pick up rebook."},
+    {v:"Rebooking: never send a link", d:"Offer exactly two slots and book it for them. An open calendar is a decision; two slots is a coin flip."}
+  ]},
+  {t:"text", k:"video_url", label:"The long-form asset you send between booking and call", ph:"URL, or what you still need to record"},
+  {t:"text", k:"stack", label:"Your funnel stack", ph:"e.g. plain HTML page → booking tool with staged capture → CRM → instant notification → Twilio local number",
+   help:"He uses a booking tool built around staged capture and a Twilio caller app for dialing into his target country. Any stack that captures name and phone <i>before</i> everything else will do."}
+ ]},
+
+/* 07 ---------------------------------------------------------- */
+{k:"call1", nav:"Call one", title:"Call one — diagnose and quantify", hint:"Goal is a booked call two",
+ lede:"Call one has one goal and it is not closing. <strong>Its goal is a scheduled call two.</strong> You talk 20% of the time, they talk 80%, and you are there to diagnose, not to pitch.",
+ fields:[
+  {t:"area", k:"diagnostic_qs", label:"Your diagnostic questions", rows:6,
+   ph:"Which department is leaking the most time?\nWalk me through the quoting process, start to finish.\nWho does the invoicing, and what happens when it goes wrong?\nHow many people touch onboarding?\nWhat tools is all of this running on?",
+   help:"Then <b>dig for numbers on every answer</b>. When the owner says “estimating takes forever,” do not nod and move on — ask how many hours “forever” actually is, who does it, and what their hourly cost is."},
+  {t:"note", tone:"quote", title:"The whole foundation of the deal", body:"Hours &times; rate = hidden cost. If a process takes 20 hours a week across four people, that is a number &mdash; and numbers close deals. Vague adjectives do not."},
+  {t:"calc", id:"waste"},
+  {t:"sec", label:"The counterintuitive move"},
+  {t:"area", k:"no_ai_list", label:"Where you will tell them NOT to use AI", rows:4,
+   ph:"e.g. final pricing sign-off on jobs over €50k — failure cost too high, and the estimator's judgment is the product\nPayroll and personnel records — data too sensitive, no upside",
+   help:"Everyone pitching this owner is hype. When you are the one saying <i>“this process I would not touch with AI — the data is too sensitive and the failure cost is too high,”</i> something changes in the room. A 20-year operator can smell hype a mile away. <b>Trust is built by what you refuse to sell.</b>"},
+  {t:"sec", label:"How call one ends"},
+  {t:"multi", k:"close1", label:"The closing sequence, in order", opts:[
+    {v:"Walk them through the demo audit live", d:"Dummy data, real structure. They need to see the thing to buy the thing."},
+    {v:"Name the price while they are looking at it", d:"Not in a follow-up email. On the screen, with the document open."},
+    {v:"Name the guarantee in the same breath", d:"Find at least X in recoverable waste per year, or full refund."},
+    {v:"Book call two live, into the calendar", d:"Before they leave the call."},
+    {v:"Have them click the confirmation while you watch", d:"“Can you click yes on that confirmation email? Perfect, thank you.” Confirmed calls happen at a much higher rate."}
+  ]},
+  {t:"area", k:"objection_answer", label:"Your answer to the only real objection", rows:5,
+   ph:"“Why pay for an audit when another agency will just build the automation for less?”\n\nThey will automate one part, and that part is not built around everything else — so the process next to it starts leaking, then the one after that, and you end up paying someone to rip it out and rebuild properly. That costs more than mapping first. You would not build a house without a foundation. The map is the foundation.",
+   help:"Prefilled with his answer, near enough word for word. Rewrite it in your own voice — you will say it a lot."}
+ ]},
+
+/* 08 ---------------------------------------------------------- */
+{k:"close", nav:"Close", title:"The proposal and call two", hint:"15 minutes, then 80%",
+ lede:"Fifteen minutes after call one ends there is a proposal in their inbox. <strong>Speed is not the moat</strong> &mdash; every AI agency can send an AI-generated proposal fast. The value is in the iterations that keep it from reading like slop.",
+ fields:[
+  {t:"multi", k:"proposal_spec", label:"What the proposal contains", opts:[
+    {v:"Their problem areas, 1–4, in their own words", d:"Quoted from the call transcript, not paraphrased."},
+    {v:"Your solution, itemised", d:"Process audit, data and tools audit, existing automations review, transformation roadmap, first automation."},
+    {v:"Why us — the proof, with clickable links", d:"Case studies, recordings, whatever a stranger can check."},
+    {v:"The roadmap, milestone by milestone", d:"Blueprint delivered → review and prioritisation → first build → training, with what happens at each."},
+    {v:"Investment and terms", d:"Split, total, dates."},
+    {v:"The guarantee", d:"The line that makes it a no-brainer."}
+  ]},
+  {t:"note", tone:"", title:"How the proposal skill actually runs", body:"The call transcript lands in a central vault from the note-taker. One command pulls it, sets up the client folder, fetches their website, reads the template, and drafts. A second agent does a skeptical review pass. Before writing the send email it reads the existing thread to match tone, and it checks the calendar so the closing line can say “see you Thursday as agreed.” Output: PDF, HTML, and an email draft. About five minutes. <b>The centralized, legible vault is the prerequisite &mdash; not the model.</b>"},
+  {t:"text", k:"proposal_sla", label:"Your proposal SLA", ph:"15 minutes after call one ends"},
+  {t:"area", k:"vault", label:"Where your business brain lives", rows:3,
+   ph:"e.g. Obsidian vault at ~/vault, /clients/<name>/ per client, call transcripts auto-synced from the note-taker, Claude Code has read access to the whole tree",
+   help:"Every skill in this playbook reads from one place. Name it now, because nothing downstream works without it."},
+  {t:"sec", label:"Call two"},
+  {t:"multi", k:"call2", label:"Call two — it closes at ~80% if they show", opts:[
+    {v:"Expect a second person", d:"A business partner or whoever is more technical. That is a buying signal, not a threat."},
+    {v:"Handle remaining questions and logistics only", d:"The heavy lifting happened on call one: they saw the deliverable, the price is anchored, the guarantee killed the risk."},
+    {v:"Confirm terms", d:"50/50, first half clears before delivery starts."},
+    {v:"The sale is a sale only when the money is in the bank", d:"Not when they say yes."}
+  ]}
+ ]},
+
+/* 09 ---------------------------------------------------------- */
+{k:"delivery", nav:"Delivery", title:"Deliver the audit", hint:"Interviews in, blueprint out",
+ lede:"The raw material of an audit is interviews &mdash; five to twenty hours with the people who actually own each process. That is the most time-consuming part and it does not get automated away. <strong>Everything after it does.</strong>",
+ fields:[
+  {t:"text", k:"opening_line", label:"How you open every staff interview", ph:"AI is not here to replace you — it is here to take the boring parts off your plate.",
+   help:"Say it in the first five minutes, because it is true. Some employees are scared, scared employees give half answers, and half answers make useless audits."},
+  {t:"rows", k:"interviews", label:"Your interview plan for one client", min:4,
+   cols:[{k:"role", label:"Role", w:"26%"},{k:"owns", label:"What they own", w:"34%"},{k:"nums", label:"Numbers to extract", w:"32%"}],
+   help:"Questions that work: what does your day look like, where does the time go, what tools are you fighting with, what do you do when something goes wrong. Then always: how many hours, how often, what does that cost."},
+  {t:"num", k:"interview_hours", label:"Hours of interviews you are budgeting", suf:"hours", ph:"12"},
+  {t:"sec", label:"The three delivery skills"},
+  {t:"note", tone:"warn", title:"This is the actual project", body:"He put hundreds of hours into these plugins across many revisions, and each stage runs for hours per client. Do not expect to write them in a weekend. <b>Run two or three audits by hand first</b> &mdash; what you did manually becomes the spec."},
+  {t:"multi", k:"three_skills", label:"Build them in this order", opts:[
+    {v:"1 · Extractor", d:"Reads the materials folder — transcripts, documents, spreadsheets, email threads — and runs process review, findings review and waste review, citation-gated, into one consolidated map. Also generates the prep questions for your next interview."},
+    {v:"2 · Researcher", d:"Classifies their real tool stack: which tools have open APIs, which have MCP connectors, which are locked. This is where recommendations stop being generic and become “your invoicing tool has an open API, here is the integration, 11 hours a week.”"},
+    {v:"3 · Deliverable builder", d:"Assembles the client-facing artifact: process maps, findings with source quotes, waste in currency, the blueprint on an impact/effort matrix, and the risk section."}
+  ]},
+  {t:"text", k:"materials_folder", label:"Your materials folder convention", ph:"e.g. /clients/<name>/materials/ — transcripts, docs, sheets, threads, all auto-filed"},
+  {t:"sec", label:"The part that is not AI"},
+  {t:"num", k:"human_review_pct", label:"Share of the deliverable you personally review", suf:"%", ph:"20",
+   help:"About 80% of the document is AI. The remaining 20% is you reviewing every finding, because a human has to know what good looks like and be accountable for it. <b>If you cannot tell a sharp finding from a hallucinated one, you are flying blind and no plugin fixes that.</b> That judgment is what you are actually paid for."},
+  {t:"text", k:"timeline", label:"End-to-end timeline you promise", ph:"2–4 weeks depending on company size"},
+  {t:"multi", k:"walkthrough", label:"How you present the finished deliverable", opts:[
+    {v:"Walk it top to bottom, live, on a call", d:"It is built to be presented, not emailed."},
+    {v:"Open with the education layer", d:"The Excel analogy; amplification not replacement; why data centralization matters."},
+    {v:"Teach the three layers: data → systems → intelligence", d:"This is the moment that justifies the audit fee to anyone who wanted to skip to “just build me the automation.”"},
+    {v:"Every pain point carries its interview quote", d:"With a link back to the recording, so nothing looks invented."},
+    {v:"Every cost row uses a role-specific rate they confirmed", d:"Not a theoretical default. Mark any default rate for validation on the review call."},
+    {v:"End on the priority matrix and the next proposal", d:"Eleven initiatives identified — which three do we do first?"}
+  ]}
+ ]},
+
+/* 10 ---------------------------------------------------------- */
+{k:"backend", nav:"Back end", title:"The back end, where the money is", hint:"You already hold the map",
+ lede:"By the time you deliver the audit, three things have happened: you got paid, they trust you, and you hold a complete map of how their business works. You know their processes better than most of their staff, you have a prioritized build list with ROI on every line, and <strong>they already agreed with the math, because it came from their own team&rsquo;s mouths</strong>. You are not pitching any more.",
+ fields:[
+  {t:"multi", k:"services", label:"What you sell after the audit", opts:[
+    {v:"Plugins and skills", d:"Documented SOPs the staff trigger themselves. Most of what he recommends and sells, because it is the easiest thing for a team to adopt."},
+    {v:"Training and workshops", d:"Usually for bigger teams — the value grows with every extra person in the room."},
+    {v:"Small custom builds", d:"Small is the key word. Big companies keep critical operations on trusted tools because they cannot afford downtime or a breach. You build around those systems, not over them."},
+    {v:"Fully autonomous automations", d:"Background, event-triggered, no human in the loop."},
+    {v:"Data migration", d:"Once in a while, when the audit reveals a tool so closed it blocks everything else. Often the only reason a legacy system survives is the history inside it."}
+  ]},
+  {t:"note", tone:"warn", title:"The filter, applied to every single deliverable", body:"Does it save time, or does it capture revenue &mdash; with a specific number attached? If it does neither, you do not sell it, even if the client asks. A cool project without tangible ROI does not help you sell the next one."},
+  {t:"area", k:"retainer", label:"Your retainer story", rows:4,
+   ph:"e.g. €1,500/month: maintenance of shipped skills, one new skill per quarter, onboarding for new hires, and a re-fit every time the model or harness changes.",
+   help:"If you teach them to build their own skills, why do they keep paying? Because transformation is not a one-time event: the business changes, edge cases appear, new people need training — and there is a stronger model and a better harness every few months, so last year's build and last year's workshop are both out of date."},
+  {t:"choice", k:"posture", label:"Your positioning", opts:[
+    {v:"Transformation partner", h:"Transformation partner", d:"The client gets the files and can open every plugin you build. A partner who wants you independent is easier to trust than a vendor who needs you logged in — and trust is what you are actually selling.", tag:"his"},
+    {v:"Productized vendor", h:"Productized vendor", d:"A templatized product customized per client — setup fee plus monthly or revenue share. A fine business, and a different one."}
+  ]}
+ ]},
+
+/* 11 ---------------------------------------------------------- */
+{k:"stack", nav:"Your stack", title:"Be your own first client", hint:"Skill lives in files, not headcount",
+ lede:"The old way to scale was transferring skill into employees &mdash; slowly, expensively, with constant turnover. <strong>The trick is transferring it into files instead.</strong> About 80% of his agency&rsquo;s own operation runs as plugins: the proposal, the audit pipeline, the interview prep, project management, funnel analysis. That is the whole reason one person can run this.",
+ fields:[
+  {t:"note", tone:"", title:"The shape of a skill", body:"<b>Inputs</b> &rarr; <b>rules</b> &rarr; <b>outputs</b>. Anyone can name the inputs and the outputs. The rules are the hard part, because they live in the operator&rsquo;s head &mdash; the estimator who has been quoting for 15 years is applying 30 small rules and has never written one of them down. Claude writes the file; <b>surfacing the rules is the human job</b>, and it is the part nobody&rsquo;s nephew with a chatbot subscription can do."},
+  {t:"rows", k:"own_skills", label:"Your own operation, turned into skills", min:5,
+   cols:[{k:"name", label:"Skill", w:"20%"},{k:"in", label:"Inputs", w:"25%"},{k:"rules", label:"Rules (the hard part)", w:"33%"},{k:"out", label:"Output & where it lands", w:"22%"}],
+   help:"Start with the ones you already do by hand every week: the proposal, the follow-up sequence, the interview prep, the weekly funnel review, the onboarding pack. Build one per week, in the order of how often you repeat the task."},
+  {t:"text", k:"first_skill", label:"The first one you will build this week", ph:"e.g. the proposal skill — I write four a month by hand"},
+  {t:"sec", label:"The compounding claim"},
+  {t:"note", tone:"quote", title:"Where the moat actually is", body:"Every audit sharpens the plugins; every new industry adds patterns to the library. The moat is not any single skill file &mdash; it is the operating system you build around yourself and the speed at which it learns."},
+  {t:"area", k:"honest_check", label:"Your honest reality check", rows:4,
+   ph:"What will be hard, what you will be tempted to quit over, and what you will do instead.",
+   help:"Nothing here makes money in a weekend. The first client may take a couple of months, the first audit will be rough, and some weeks a client ghosts you while the ads spend money and nothing closes. But the proof, the pixel data, the plugins and the reputation all stack, and none of them reset. <b>Most people quit exactly where the compounding was about to start.</b>"}
+ ]},
+
+/* 12 ---------------------------------------------------------- */
+{k:"plan", nav:"Your plan", title:"Your plan", hint:"Take it with you",
+ lede:"Everything you entered, as one markdown file. Save it next to your work &mdash; it is the brief for the first version of the machine.",
+ fields:[{t:"export"}]}
+];
+
+var BYKEY = {}; for(var i=0;i<STEPS.length;i++) BYKEY[STEPS[i].k] = STEPS[i];
+
+/* ---------- state ---------- */
+function blank(){ return {name:"", step:0, v:{}}; }
+var store = blank();
+(function(){
+  try{
+    var raw = localStorage.getItem(KEY);
+    if(raw){ var p = JSON.parse(raw); if(p && typeof p==="object"){ store = p; store.v = store.v || {}; } }
+  }catch(e){}
+})();
+function save(){ try{ localStorage.setItem(KEY, JSON.stringify(store)); }catch(e){} }
+function val(k){ return store.v[k]; }
+function setv(k,x){ store.v[k]=x; save(); }
+
+/* ---------- helpers ---------- */
+function esc(s){ return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
+function num(k, d){ var n = parseFloat(val(k)); return isFinite(n) ? n : (d===undefined?0:d); }
+function cur(){ return "€"; }
+function money(n){
+  if(!isFinite(n)) return "—";
+  var s = Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+  return cur()+s;
+}
+function slug(s){ return String(s||"").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"").slice(0,60) || "audit-machine-plan"; }
+function rowsOf(k){ var r = val(k); return (r && r.length) ? r : []; }
+function rowFilled(r){ if(!r) return false; for(var q in r){ if(r[q] && String(r[q]).trim()) return true; } return false; }
+
+/* fields that count towards progress */
+function countable(f){ return f.t==="text"||f.t==="area"||f.t==="num"||f.t==="choice"||f.t==="multi"||f.t==="rows"; }
+function filled(f){
+  if(f.t==="rows"){ var rs = rowsOf(f.k); for(var i=0;i<rs.length;i++) if(rowFilled(rs[i])) return true; return false; }
+  if(f.t==="multi"){ var a = val(f.k); return !!(a && a.length); }
+  var v = val(f.k); return !!(v!==undefined && v!==null && String(v).trim());
+}
+function stepStats(st){
+  var t=0,d=0;
+  for(var i=0;i<st.fields.length;i++){ var f=st.fields[i]; if(!countable(f)) continue; t++; if(filled(f)) d++; }
+  return {t:t, d:d};
+}
+function overall(){
+  var t=0,d=0;
+  for(var i=0;i<STEPS.length;i++){ var s=stepStats(STEPS[i]); t+=s.t; d+=s.d; }
+  return {t:t, d:d, pct: t? Math.round(d/t*100):0};
+}
+function curStepIdx(){ var n = store.step||0; return Math.max(0, Math.min(STEPS.length-1, n)); }
+function curStep(){ return STEPS[curStepIdx()]; }
+
+/* ---------- price ladder ---------- */
+function ladder(){
+  var stage = val("stage") || "cold";
+  if(stage==="cold")  return {floor:3000, anchor:5000, land:3000, note:"You are buying proof. Anchor at the higher number and let it come down during the negotiation, live on call two — not as a scripted discount story."};
+  if(stage==="warm")  return {floor:4000, anchor:7500, land:6000, note:"You have delivered. Raise the floor as each audit lands, but you still cannot charge full price without something a stranger can verify."};
+  return {floor:7500, anchor:12000, land:10000, note:"With filmed before-and-afters carrying real numbers, the full price is defensible — the case study does the arguing for you."};
+}
+
+/* ---------- rendering ---------- */
+var body = document.getElementById("body");
+var rail = document.getElementById("rail");
+
+function renderRail(){
+  var h = "";
+  for(var i=0;i<STEPS.length;i++){
+    var st = STEPS[i], s = stepStats(st);
+    var done = s.t>0 && s.d===s.t;
+    h += '<button type="button" data-go="'+i+'"'+(i===curStepIdx()?' aria-current="true"':'')+(done&&i!==curStepIdx()?' class="done"':'')+'>'+
+         (i<STEPS.length-1 ? ("0"+(i+1)).slice(-2)+" " : "")+esc(st.nav)+'</button>';
+  }
+  rail.innerHTML = h;
+}
+
+function renderFields(fields){
+  var h = "";
+  for(var i=0;i<fields.length;i++){
+    var f = fields[i];
+    switch(f.t){
+      case "sec": h += '<h3 class="sec">'+esc(f.label)+'</h3>'; break;
+      case "note":
+        h += '<div class="note '+(f.tone||"")+'"><b>'+esc(f.title)+'</b>'+f.body+'</div>'; break;
+      case "text":
+        h += '<div class="f"><label for="fld_'+f.k+'">'+esc(f.label)+'</label>'+
+             (f.help?'<div class="help">'+f.help+'</div>':'')+
+             '<input type="text" id="fld_'+f.k+'" data-k="'+f.k+'" placeholder="'+esc(f.ph||"")+'" value="'+esc(val(f.k)||"")+'"></div>';
+        break;
+      case "area":
+        h += '<div class="f"><label for="fld_'+f.k+'">'+esc(f.label)+'</label>'+
+             (f.help?'<div class="help">'+f.help+'</div>':'')+
+             '<textarea id="fld_'+f.k+'" data-k="'+f.k+'" rows="'+(f.rows||4)+'" placeholder="'+esc(f.ph||"")+'">'+esc(val(f.k)||"")+'</textarea></div>';
+        break;
+      case "num":
+        h += '<div class="f"><label for="fld_'+f.k+'">'+esc(f.label)+'</label>'+
+             (f.help?'<div class="help">'+f.help+'</div>':'')+
+             '<div class="numwrap">'+(f.pre?'<span class="pre">'+esc(f.pre)+'</span>':'')+
+             '<input type="number" id="fld_'+f.k+'" data-k="'+f.k+'" placeholder="'+esc(f.ph||"")+'" value="'+esc(val(f.k)||"")+'">'+
+             (f.suf?'<span class="suf">'+esc(f.suf)+'</span>':'')+'</div></div>';
+        break;
+      case "choice":
+        h += '<div class="f"><span class="flab">'+esc(f.label)+'</span>'+
+             (f.help?'<div class="help">'+f.help+'</div>':'')+'<div class="opts'+(f.opts.length>2?'':' two')+'">';
+        for(var a=0;a<f.opts.length;a++){
+          var o = f.opts[a], on = val(f.k)===o.v;
+          h += '<button type="button" class="opt" data-pick="'+f.k+'" data-v="'+esc(o.v)+'" aria-pressed="'+(on?"true":"false")+'">'+
+               '<span class="mk"></span>'+(o.tag?'<span class="tag">'+esc(o.tag)+'</span>':'')+
+               '<h4>'+esc(o.h||o.v)+'</h4><p>'+esc(o.d)+'</p></button>';
+        }
+        h += '</div></div>';
+        break;
+      case "multi":
+        var sel = val(f.k) || [];
+        h += '<div class="f"><span class="flab">'+esc(f.label)+'</span>'+
+             (f.help?'<div class="help">'+f.help+'</div>':'')+'<div class="opts">';
+        for(var b=0;b<f.opts.length;b++){
+          var o2 = f.opts[b], on2 = sel.indexOf(o2.v)>=0;
+          h += '<button type="button" class="opt sq" data-toggle="'+f.k+'" data-v="'+esc(o2.v)+'" aria-pressed="'+(on2?"true":"false")+'">'+
+               '<span class="mk"></span>'+(o2.tag?'<span class="tag">'+esc(o2.tag)+'</span>':'')+
+               '<h4>'+esc(o2.v)+'</h4><p>'+esc(o2.d)+'</p></button>';
+        }
+        h += '</div></div>';
+        break;
+      case "rows": h += renderRows(f); break;
+      case "calc": h += renderCalc(f.id); break;
+      case "export": h += renderExport(); break;
+    }
+  }
+  return h;
+}
+
+function renderRows(f){
+  var rs = rowsOf(f.k).slice();
+  while(rs.length < (f.min||3)) rs.push({});
+  var h = '<div class="f"><span class="flab">'+esc(f.label)+'</span>'+
+          (f.help?'<div class="help">'+f.help+'</div>':'')+'<div class="rows" data-rows="'+f.k+'"><div class="rowsh">';
+  for(var c=0;c<f.cols.length;c++) h += '<span style="width:'+f.cols[c].w+'">'+esc(f.cols[c].label)+'</span>';
+  h += '<span style="width:34px"></span></div>';
+  for(var r=0;r<rs.length;r++){
+    h += '<div class="rw">';
+    for(var c2=0;c2<f.cols.length;c2++){
+      var col = f.cols[c2];
+      h += '<div style="width:'+col.w+'"><input type="text" data-rk="'+f.k+'" data-ri="'+r+'" data-rc="'+col.k+'" value="'+esc(rs[r][col.k]||"")+'" aria-label="'+esc(col.label)+' row '+(r+1)+'"></div>';
+    }
+    h += '<div class="del"><button type="button" data-rowdel="'+f.k+'" data-ri="'+r+'" title="Remove row">&times;</button></div></div>';
+  }
+  h += '<div class="rowsf"><button class="btn sm" type="button" data-rowadd="'+f.k+'">+ Row</button></div></div></div>';
+  return h;
+}
+
+/* ---------- calculators ---------- */
+function renderCalc(id){
+  if(id==="ladder"){
+    var L = ladder(), p = num("price",0);
+    var ok = p>0 && p>=L.floor;
+    return '<div class="calc"><div class="calc-h">Price ladder <em>from your proof stage</em></div>'+
+      '<div class="calc-out">'+
+      '<div class="kpi"><span class="v">'+money(L.floor)+'</span><span class="l">Floor</span></div>'+
+      '<div class="kpi"><span class="v">'+money(L.anchor)+'</span><span class="l">Anchor / quote</span></div>'+
+      '<div class="kpi"><span class="v">'+money(L.land)+'</span><span class="l">Expect to land</span></div>'+
+      '<div class="kpi"><span class="v'+(ok?'':' dim')+'">'+(p?money(p):"—")+'</span><span class="l">'+(p? (ok?"Yours — ok":"Below the floor") :"Yours")+'</span></div>'+
+      '</div><div class="calc-note">'+esc(L.note)+(p&&!ok?' <b>Your price is under the floor.</b> To a business above a million a year, a suspiciously cheap audit reads as a red flag, not a deal.':'')+'</div></div>';
+  }
+  if(id==="admath"){
+    var spend = num("spend_wk", 0), cpbc = num("cpbc", 85), show = num("show_rate", 70), close = num("close_rate", 25), price = num("price", 0);
+    var calls = cpbc>0 ? spend/cpbc : 0;
+    var shown = calls*show/100;
+    var clients = shown*close/100;
+    var revW = clients*price;
+    var cac = clients>0 ? spend/clients : 0;
+    var ratio = cac>0 ? price/cac : 0;
+    return '<div class="calc"><div class="calc-h">Paid unit economics <em>his benchmark: '+cur()+'85 per qualified booked call</em></div>'+
+      '<div class="calc-in three">'+
+        ci("spend_wk","Ad spend / week", spend||"", cur()) +
+        ci("cpbc","Cost per booked call", cpbc||"", cur()) +
+        ci("show_rate","Show rate", show||"", "%") +
+        ci("close_rate","Close rate", close||"", "%") +
+        '<div class="ci"><label>Audit price (step 3)</label><div class="numwrap"><span class="pre">'+cur()+'</span><input type="number" value="'+esc(val("price")||"")+'" data-k="price"></div></div>'+
+      '</div>'+
+      '<div class="calc-out">'+
+      '<div class="kpi"><span class="v">'+(calls?calls.toFixed(1):"—")+'</span><span class="l">Booked calls / wk</span></div>'+
+      '<div class="kpi"><span class="v">'+(clients?clients.toFixed(1):"—")+'</span><span class="l">Clients / wk</span></div>'+
+      '<div class="kpi"><span class="v">'+(revW?money(revW*4.33):"—")+'</span><span class="l">Revenue / month</span></div>'+
+      '<div class="kpi"><span class="v">'+(cac?money(cac):"—")+'</span><span class="l">Cost per client</span></div>'+
+      '<div class="kpi"><span class="v'+(ratio&&ratio<3?' dim':'')+'">'+(ratio?ratio.toFixed(1)+"×":"—")+'</span><span class="l">Price ÷ CAC</span></div>'+
+      '</div>'+
+      '<div class="calc-note">'+
+      (ratio ? (ratio<2 ? '<b>Under 2× on the audit alone.</b> That only works if the back end reliably follows — and the back end is not guaranteed. Fix the funnel before you scale the spend.'
+                       : (ratio<3 ? 'Workable, but thin on the front end. The audit is the entry point; the margin lives in what you sell after it.'
+                                  : 'Healthy on the front end alone, before a single back-end sale.'))
+              : 'Fill the fields above. Remember his sequencing: prove the offer with outreach and inbound <b>first</b>, then use paid to scale a formula that already works — discovering one with paid traffic is how people burn a year of savings.')+
+      '</div></div>';
+  }
+  if(id==="waste"){
+    var rs = rowsOf("waste_rows").slice();
+    while(rs.length<4) rs.push({});
+    var tot = 0, h = '<div class="calc"><div class="calc-h">Hidden cost calculator <em>hours × rate = the foundation of the deal</em></div>'+
+      '<div class="rows" data-rows="waste_rows"><div class="rowsh">'+
+      '<span style="width:34%">Process</span><span style="width:15%">People</span><span style="width:17%">Hrs / week</span><span style="width:17%">Rate / hr</span><span style="width:17%">Per year</span><span style="width:34px"></span></div>';
+    for(var r=0;r<rs.length;r++){
+      var pe = parseFloat(rs[r].people)||0, hr = parseFloat(rs[r].hrs)||0, rt = parseFloat(rs[r].rate)||0;
+      var yr = pe*hr*rt*52; tot += yr;
+      h += '<div class="rw">'+
+        '<div style="width:34%"><input type="text" data-rk="waste_rows" data-ri="'+r+'" data-rc="proc" value="'+esc(rs[r].proc||"")+'" placeholder="e.g. quoting" aria-label="Process"></div>'+
+        '<div style="width:15%"><input type="number" data-rk="waste_rows" data-ri="'+r+'" data-rc="people" value="'+esc(rs[r].people||"")+'" aria-label="People"></div>'+
+        '<div style="width:17%"><input type="number" data-rk="waste_rows" data-ri="'+r+'" data-rc="hrs" value="'+esc(rs[r].hrs||"")+'" aria-label="Hours per week"></div>'+
+        '<div style="width:17%"><input type="number" data-rk="waste_rows" data-ri="'+r+'" data-rc="rate" value="'+esc(rs[r].rate||"")+'" aria-label="Hourly rate"></div>'+
+        '<div style="width:17%"><input type="text" value="'+(yr?money(yr):"")+'" readonly tabindex="-1" aria-label="Per year"></div>'+
+        '<div class="del"><button type="button" data-rowdel="waste_rows" data-ri="'+r+'" title="Remove row">&times;</button></div></div>';
+    }
+    h += '<div class="rowsf"><button class="btn sm" type="button" data-rowadd="waste_rows">+ Row</button>'+
+         '<span class="tot">Annual hidden cost <b>'+money(tot)+'</b></span></div></div>'+
+      '<div class="calc-note">'+wasteNote(tot)+'</div></div>';
+    return h;
+  }
+  return "";
+}
+function wasteNote(tot){
+  var g = num("guarantee",0);
+  if(!tot) return 'Use this live on call one, or right after. Every row should come from something a named employee said — that is what makes the number unarguable later.';
+  if(!g) return 'Set your guarantee in step 3 to check this total against it.';
+  if(tot>=g) return '<b>Clears your '+money(g)+' guarantee.</b> Use role-specific rates the client confirmed, not a default — and mark any estimated rate for validation on the review call.';
+  return 'This is <b>'+money(g-tot)+' short of your '+money(g)+' guarantee.</b> Either the guarantee is too high for this size of client, or you have not dug deep enough yet. Keep asking: how many hours, who does it, what do they cost.';
+}
+function ci(k, label, v, unit){
+  var isPct = unit==="%";
+  return '<div class="ci"><label>'+esc(label)+'</label><div class="numwrap">'+
+    (isPct?'':'<span class="pre">'+esc(unit)+'</span>')+
+    '<input type="number" data-k="'+k+'" value="'+esc(v)+'">'+
+    (isPct?'<span class="suf">%</span>':'')+'</div></div>';
+}
+
+/* ---------- export ---------- */
+function renderExport(){
+  var o = overall();
+  var gaps = [];
+  for(var i=0;i<STEPS.length-1;i++){
+    var s = stepStats(STEPS[i]);
+    if(s.t && s.d < s.t) gaps.push(STEPS[i].nav+" ("+s.d+"/"+s.t+")");
+  }
+  return '<div class="done-grid">'+
+    '<div class="dc"><h5>Completed</h5><p><b>'+o.d+' of '+o.t+'</b> fields across '+(STEPS.length-1)+' steps.</p></div>'+
+    '<div class="dc"><h5>Still open</h5><p>'+(gaps.length?esc(gaps.join(" · ")):"Nothing — every step is filled.")+'</p></div>'+
+    '</div>'+
+    '<div class="note"><b>Where to start on Monday</b>'+startHere()+'</div>'+
+    '<div class="f"><span class="flab">Your plan, as markdown</span><textarea id="out" readonly aria-label="Your plan in markdown"></textarea></div>'+
+    '<div class="outbar"><span class="t" id="outlen"></span>'+
+    '<button class="btn" type="button" data-a="copy">Copy</button>'+
+    '<button class="btn primary" type="button" data-a="download">Download .md</button></div>'+
+    '<div id="manual"></div>';
+}
+function startHere(){
+  var c = val("constraint");
+  if(c==="Traffic") return "Your constraint is <b>traffic</b>. Do not touch the delivery skills yet. Write the callout line, then run fifteen conversations a week on your one source until the offer has been said out loud enough times that it stops changing.";
+  if(c==="System")  return "Your constraint is <b>system</b>. The cheapest fixes first: name-and-phone-first capture, a five-minute callback on abandons, a confirmation call, and the two-slots rebooking rule. None of it needs a new tool.";
+  if(c==="Skill")   return "Your constraint is <b>skill</b>. Build the demo audit this week &mdash; dummy data, real structure &mdash; and deliver two audits by hand before you write a single skill file. What you do manually becomes the spec.";
+  return "Go back to step 1 and pick your binding constraint. Everything downstream is ordered by it.";
+}
+
+/* ---------- markdown ---------- */
+function markdown(){
+  var L = [], o = overall();
+  L.push("# "+(store.name || "One-person AI business plan"));
+  L.push("");
+  L.push("_Built with the Audit Machine implementation wizard, from “Start a One-Person AI Business in 2026 (Full Playbook)” by Bo Sar — https://www.youtube.com/watch?v=VDROpRg0zV8_");
+  L.push("");
+  L.push("**Completeness:** "+o.d+"/"+o.t+" fields ("+o.pct+"%)");
+  L.push("");
+  L.push("---");
+
+  for(var i=0;i<STEPS.length-1;i++){
+    var st = STEPS[i];
+    var chunk = [];
+    for(var j=0;j<st.fields.length;j++){
+      var f = st.fields[j];
+      if(!countable(f)) continue;
+      if(!filled(f)) continue;
+      if(f.t==="multi"){
+        var sel = val(f.k)||[];
+        chunk.push("**"+f.label+"**"); chunk.push("");
+        for(var a=0;a<sel.length;a++) chunk.push("- "+sel[a]);
+        chunk.push("");
+      } else if(f.t==="rows"){
+        var rs = rowsOf(f.k).filter(rowFilled);
+        if(!rs.length) continue;
+        chunk.push("**"+f.label+"**"); chunk.push("");
+        chunk.push("| "+f.cols.map(function(c){return c.label;}).join(" | ")+" |");
+        chunk.push("|"+f.cols.map(function(){return "---";}).join("|")+"|");
+        for(var r=0;r<rs.length;r++){
+          chunk.push("| "+f.cols.map(function(c){ return String(rs[r][c.k]||"").replace(/\|/g,"\\|"); }).join(" | ")+" |");
+        }
+        chunk.push("");
+      } else if(f.t==="area"){
+        chunk.push("**"+f.label+"**"); chunk.push("");
+        var lines = String(val(f.k)).split(/\n/);
+        for(var q=0;q<lines.length;q++) chunk.push("> "+lines[q]);
+        chunk.push("");
+      } else {
+        var pre = f.pre||"", suf = f.suf?(" "+f.suf):"";
+        chunk.push("- **"+f.label+":** "+pre+String(val(f.k))+suf);
+      }
+    }
+    /* calculators */
+    if(st.k==="offer"){
+      var L2 = ladder();
+      chunk.push("- **Price ladder for this proof stage:** floor "+money(L2.floor)+" · anchor "+money(L2.anchor)+" · expect to land "+money(L2.land));
+    }
+    if(st.k==="traffic"){
+      var spend=num("spend_wk"), cpbc=num("cpbc",85), show=num("show_rate",70), close=num("close_rate",25), price=num("price");
+      if(spend&&cpbc){
+        var calls=spend/cpbc, clients=calls*show/100*close/100;
+        chunk.push("");
+        chunk.push("**Paid unit economics**");
+        chunk.push("");
+        chunk.push("- Spend "+money(spend)+"/week at "+money(cpbc)+" per booked call → "+calls.toFixed(1)+" calls/week");
+        chunk.push("- "+show+"% show × "+close+"% close → "+clients.toFixed(1)+" clients/week");
+        if(price) chunk.push("- At "+money(price)+" per audit → "+money(clients*price*4.33)+"/month, cost per client "+money(clients?spend/clients:0));
+        chunk.push("");
+      }
+    }
+    if(st.k==="call1"){
+      var rs2 = rowsOf("waste_rows").filter(rowFilled), tot=0;
+      if(rs2.length){
+        chunk.push("");
+        chunk.push("**Hidden cost worksheet**");
+        chunk.push("");
+        chunk.push("| Process | People | Hrs/wk | Rate | Per year |");
+        chunk.push("|---|---|---|---|---|");
+        for(var w=0;w<rs2.length;w++){
+          var x=rs2[w], yr=(parseFloat(x.people)||0)*(parseFloat(x.hrs)||0)*(parseFloat(x.rate)||0)*52; tot+=yr;
+          chunk.push("| "+(x.proc||"")+" | "+(x.people||"")+" | "+(x.hrs||"")+" | "+(x.rate||"")+" | "+money(yr)+" |");
+        }
+        chunk.push("| **Total** | | | | **"+money(tot)+"** |");
+        chunk.push("");
+      }
+    }
+    while(chunk.length && !chunk[0]) chunk.shift();
+    if(!chunk.length) continue;
+    L.push("");
+    L.push("## "+(i+1)+" · "+st.title);
+    L.push("");
+    L = L.concat(chunk);
+  }
+
+  L.push("");
+  L.push("---");
+  L.push("");
+  L.push("## Where to start");
+  L.push("");
+  L.push(startHere().replace(/<\/?b>/g,"**"));
+  L.push("");
+  L.push("### The order to run this");
+  L.push("");
+  L.push("1. Pick the niche and write the one-line ICP callout.");
+  L.push("2. Define the audit offer, the guarantee, and an honest starting price.");
+  L.push("3. Build the demo audit — dummy data, real structure. It is the sales asset and the delivery spec.");
+  L.push("4. Get 2–3 audits at the floor price through outreach and your network. Record the testimonials at the peak.");
+  L.push("5. Turn what you did by hand into the extractor → researcher → builder skills, one at a time.");
+  L.push("6. Stand up the funnel: landing page, name-and-phone-first capture, speed to lead, confirmation call.");
+  L.push("7. Only then turn on paid, to scale a formula that already works.");
+  L.push("8. Sell the back end into the map you already hold.");
+  L.push("");
+  L.push("_The benchmarks in this wizard — "+cur()+"85 per booked call, ~80% close on call two, the "+cur()+"10k audit — are one agency's numbers in one market, behind a two-year content library. Targets to test, not inputs to a plan._");
+  return L.join("\n");
+}
+
+/* ---------- side column ---------- */
+function repaintSide(){
+  var side = document.getElementById("side");
+  var c = val("constraint"), src = val("source"), L = ladder();
+  var o = overall();
+  var callout = val("callout") || autoCallout();
+
+  var seq = [
+    {t:"Niche named and called out in the traffic", ok: !!(val("industry")&&val("callout"))},
+    {t:"Offer, price and guarantee set", ok: !!(val("price")&&val("guarantee"))},
+    {t:"Demo audit built and rehearsed", ok: (val("demo_build")||[]).length>=5},
+    {t:"First 3 audits lined up", ok: rowsOf("first_clients").filter(rowFilled).length>=3},
+    {t:"Funnel: phone-first capture + speed to lead", ok: val("capture")==="phone-first" && !!val("sla_minutes")},
+    {t:"Call one structure written", ok: !!(val("diagnostic_qs")&&val("no_ai_list"))},
+    {t:"Delivery skills specced", ok: (val("three_skills")||[]).length>=3},
+    {t:"Back end and retainer defined", ok: !!(val("retainer")&&(val("services")||[]).length>=3)},
+    {t:"Your own ops turned into skills", ok: rowsOf("own_skills").filter(rowFilled).length>=3}
+  ];
+  var seqH = "";
+  for(var i=0;i<seq.length;i++) seqH += '<li class="'+(seq[i].ok?"done":"")+'"><i>'+(seq[i].ok?"":("0"+(i+1)).slice(-2))+'</i><span>'+esc(seq[i].t)+'</span></li>';
+
+  var h = "";
+  h += '<div class="card"><div class="card-h"><i></i>The constraint</div><div class="card-b">'+
+       '<div class="tri">'+
+       ['Traffic','System','Skill'].map(function(x){
+          var sub = x==='Traffic'?'fill the funnel':(x==='System'?'convert to cash':'deliver &amp; keep');
+          return '<div class="'+(c===x?"on":"")+'"><b>'+x+'</b><span>'+sub+'</span></div>';
+       }).join('')+
+       '</div>'+
+       (val("first_fix")?'<div class="kv"><span class="k">Fix first</span><span class="v">'+esc(val("first_fix"))+'</span></div>':'')+
+       '</div></div>';
+
+  h += '<div class="card"><div class="card-h"><i></i>The offer</div><div class="card-b">'+
+       kv("Buyer", callout)+
+       kv("Offer", val("offer_name"))+
+       kv("Price", val("price")?money(num("price")):"")+
+       kv("Ladder", money(L.floor)+" → "+money(L.anchor))+
+       kv("Guarantee", val("guarantee")?money(num("guarantee"))+" / yr recoverable, or refund":"")+
+       kv("Terms", val("terms"))+
+       '</div></div>';
+
+  h += '<div class="card"><div class="card-h"><i></i>Build order</div><div class="card-b">'+
+       '<ul class="seq">'+seqH+'</ul>'+
+       '</div></div>';
+
+  if(src){
+    h += '<div class="card"><div class="card-h"><i></i>Traffic</div><div class="card-b">'+
+         kv("Source", src)+
+         (src==="Paid"? kv("Weekly spend", val("spend_wk")?money(num("spend_wk")):"") + kv("Per call", money(num("cpbc",85))) : "")+
+         '<div class="note" style="border-left-color:var(--gold)"><b>Sequencing</b>Prove the offer with outreach and inbound. Then paid, to scale a formula that already works.</div>'+
+         '</div></div>';
+  }
+
+  h += '<div class="card"><div class="card-h"><i></i>Progress</div><div class="card-b">'+
+       '<div class="kv"><span class="k">Filled</span><span class="v">'+o.d+' / '+o.t+' fields</span></div>'+
+       '<div class="track" style="width:100%"><i class="fill" style="width:'+o.pct+'%"></i></div>'+
+       '</div></div>';
+
+  side.innerHTML = h;
+}
+function kv(k,v){
+  return '<div class="kv"><span class="k">'+esc(k)+'</span><span class="v'+(v?'':' empty')+'">'+esc(v||"not set")+'</span></div>';
+}
+function autoCallout(){
+  var ind = val("industry"), co = val("country"), rf = num("rev_floor");
+  if(!ind) return "";
+  var s = ind;
+  if(co) s += " in "+co;
+  if(rf) s += " doing over "+money(rf)+" a year";
+  return s;
+}
+
+/* ---------- paint ---------- */
+function paint(){
+  var st = curStep(), idx = curStepIdx();
+  document.getElementById("sno").textContent = "STEP "+("0"+(idx+1)).slice(-2)+" / "+("0"+STEPS.length).slice(-2);
+  document.getElementById("stitle").textContent = st.title;
+  document.getElementById("shint").textContent = st.hint||"";
+  var h = st.lede ? '<p class="lede">'+st.lede+'</p>' : "";
+  body.innerHTML = h + renderFields(st.fields);
+
+  document.getElementById("prev").disabled = idx===0;
+  var nx = document.getElementById("next");
+  nx.textContent = idx===STEPS.length-1 ? "Done" : "Next →";
+  nx.disabled = idx===STEPS.length-1;
+
+  var o = overall();
+  document.getElementById("pct").textContent = o.pct+"%";
+  document.getElementById("fill").style.width = o.pct+"%";
+
+  renderRail();
+  repaintSide();
+
+  if(st.k==="plan"){
+    var md = markdown();
+    var out = document.getElementById("out");
+    if(out){ out.value = md; document.getElementById("outlen").textContent = md.length+" characters"; }
+  }
+  window.scrollTo({top:0, behavior:"instant"});
+}
+
+/* ---------- events ---------- */
+document.addEventListener("input", function(e){
+  var t = e.target;
+  if(t.id==="sname"){ store.name = t.value; save(); return; }
+  var k = t.getAttribute("data-k");
+  if(k){
+    setv(k, t.value);
+    /* auto-suggest the callout line while industry/country/revenue are being typed */
+    if(k==="industry"||k==="country"||k==="rev_floor"){
+      var cf = document.getElementById("fld_callout");
+      if(cf && !cf.value){ /* leave alone once edited */ }
+    }
+    if(k==="price"||k==="stage") repaintCalcs();
+    if(k==="spend_wk"||k==="cpbc"||k==="show_rate"||k==="close_rate"||k==="price") repaintCalcs();
+    if(k==="guarantee") repaintCalcs();
+    bumpProgress(); repaintSide();
+    return;
+  }
+  var rk = t.getAttribute("data-rk");
+  if(rk){
+    var ri = parseInt(t.getAttribute("data-ri"),10), rc = t.getAttribute("data-rc");
+    var arr = (val(rk)||[]).slice();
+    while(arr.length<=ri) arr.push({});
+    arr[ri] = Object.assign({}, arr[ri]); arr[ri][rc] = t.value;
+    setv(rk, arr);
+    if(rk==="waste_rows") repaintWasteTotals();
+    bumpProgress(); repaintSide();
+  }
+});
+
+document.addEventListener("click", function(e){
+  var t = e.target.closest ? e.target.closest("[data-a],[data-go],[data-pick],[data-toggle],[data-rowadd],[data-rowdel]") : null;
+  if(!t) return;
+
+  var go = t.getAttribute("data-go");
+  if(go!==null && go!==undefined){ store.step = parseInt(go,10); save(); paint(); return; }
+
+  var pick = t.getAttribute("data-pick");
+  if(pick){
+    var v = t.getAttribute("data-v");
+    setv(pick, val(pick)===v ? "" : v);
+    paint(); return;
+  }
+  var tog = t.getAttribute("data-toggle");
+  if(tog){
+    var v2 = t.getAttribute("data-v");
+    var arr = (val(tog)||[]).slice();
+    var i2 = arr.indexOf(v2);
+    if(i2>=0) arr.splice(i2,1); else arr.push(v2);
+    setv(tog, arr);
+    t.setAttribute("aria-pressed", i2>=0 ? "false" : "true");
+    bumpProgress(); renderRail(); repaintSide();
+    return;
+  }
+  var add = t.getAttribute("data-rowadd");
+  if(add){
+    var a2 = (val(add)||[]).slice();
+    var minr = (add==="waste_rows") ? 4 : ((BYKEY[curStep().k].fields.filter(function(f){return f.k===add;})[0]||{}).min || 3);
+    while(a2.length < minr) a2.push({});
+    a2.push({}); setv(add, a2); paint(); return;
+  }
+  var del = t.getAttribute("data-rowdel");
+  if(del){
+    var ri2 = parseInt(t.getAttribute("data-ri"),10);
+    var a3 = (val(del)||[]).slice();
+    if(a3.length>ri2) a3.splice(ri2,1); else a3 = a3;
+    setv(del, a3); paint(); return;
+  }
+
+  switch(t.getAttribute("data-a")){
+    case "next": if(curStepIdx()<STEPS.length-1){ store.step=curStepIdx()+1; save(); paint(); } break;
+    case "prev": if(curStepIdx()>0){ store.step=curStepIdx()-1; save(); paint(); } break;
+    case "theme": toggleTheme(); break;
+    case "copy": copy(markdown(), t); break;
+    case "download": download(); break;
+    case "reset":
+      if(confirm("Clear this plan? Everything you typed is deleted from this browser.")){
+        store = blank(); save(); document.getElementById("sname").value=""; paint();
+      }
+      break;
+  }
+});
+
+/* keep the callout suggestion helpful without stomping edits */
+document.addEventListener("focusin", function(e){
+  if(e.target.id!=="fld_callout") return;
+  if(e.target.value) return;
+  var s = autoCallout();
+  if(s){ e.target.value = s; setv("callout", s); bumpProgress(); repaintSide(); }
+});
+
+function bumpProgress(){
+  var o = overall();
+  document.getElementById("pct").textContent = o.pct+"%";
+  document.getElementById("fill").style.width = o.pct+"%";
+  renderRail();
+}
+function repaintCalcs(){
+  var st = curStep();
+  var has = false;
+  for(var i=0;i<st.fields.length;i++) if(st.fields[i].t==="calc") has = true;
+  if(!has) return;
+  /* re-render only the calc blocks, preserving focus */
+  var active = document.activeElement;
+  var ak = active && active.getAttribute ? active.getAttribute("data-k") : null;
+  var pos = active && active.selectionStart;
+  var nodes = body.querySelectorAll(".calc");
+  var ids = []; for(var j=0;j<st.fields.length;j++) if(st.fields[j].t==="calc") ids.push(st.fields[j].id);
+  for(var n=0;n<nodes.length;n++){
+    if(!ids[n]) continue;
+    var tmp = document.createElement("div"); tmp.innerHTML = renderCalc(ids[n]);
+    nodes[n].parentNode.replaceChild(tmp.firstChild, nodes[n]);
+  }
+  if(ak){
+    var again = body.querySelector('[data-k="'+ak+'"]');
+    if(again && again!==active && document.activeElement!==again){
+      /* only refocus if the original node was inside a replaced calc */
+      if(!document.body.contains(active)){ again.focus(); try{ again.selectionStart=again.selectionEnd=pos; }catch(e){} }
+    }
+  }
+}
+function repaintWasteTotals(){
+  var box = body.querySelector('[data-rows="waste_rows"]');
+  if(!box) return;
+  var rs = rowsOf("waste_rows"), tot = 0;
+  var rws = box.querySelectorAll(".rw");
+  for(var i=0;i<rws.length;i++){
+    var x = rs[i]||{};
+    var yr = (parseFloat(x.people)||0)*(parseFloat(x.hrs)||0)*(parseFloat(x.rate)||0)*52;
+    tot += yr;
+    var cells = rws[i].querySelectorAll("input");
+    if(cells[4]) cells[4].value = yr ? money(yr) : "";
+  }
+  var totEl = box.querySelector(".tot b");
+  if(totEl) totEl.textContent = money(tot);
+  var noteEl = box.parentNode.querySelector(".calc-note");
+  if(noteEl) noteEl.innerHTML = wasteNote(tot);
+}
+
+/* ---------- output helpers ---------- */
+function copy(text, btn){
+  var done = function(){ var o = btn.textContent; btn.textContent = "Copied"; setTimeout(function(){ btn.textContent = o; }, 1400); };
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(done, function(){ fallback(text); done(); });
+  } else { fallback(text); done(); }
+}
+function fallback(text){
+  var ta = document.createElement("textarea");
+  ta.value = text; ta.style.position="fixed"; ta.style.opacity="0";
+  document.body.appendChild(ta); ta.select();
+  try{ document.execCommand("copy"); }catch(e){}
+  document.body.removeChild(ta);
+}
+function download(){
+  var md = markdown(), name = slug(store.name||"audit-machine-plan")+".md", worked = false;
+  try{
+    var blob = new Blob([md], {type:"text/markdown;charset=utf-8"});
+    var url = URL.createObjectURL(blob), a = document.createElement("a");
+    a.href = url; a.download = name; a.rel = "noopener";
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 2000);
+    worked = true;
+  }catch(e){ worked = false; }
+  /* Embedded pages block file downloads, and the block is silent — always offer the manual path there. */
+  if(!worked || window.self !== window.top) manualSave(md, name);
+}
+function manualSave(md, name){
+  var host = document.getElementById("manual");
+  if(!host) return;
+  host.innerHTML =
+    '<div class="note warn"><b>If nothing saved</b>This page is embedded, and browsers block file downloads inside an embedded page. '+
+    'Copy the text below and save it as <code>'+esc(name)+'</code> — it is the same file.</div>'+
+    '<textarea id="manualtx" rows="10" readonly aria-label="Your plan in markdown"></textarea>'+
+    '<div class="outbar"><span class="t">'+md.length+' characters</span>'+
+    '<button class="btn primary" data-a="copy" type="button">Copy the plan</button></div>';
+  var tx = document.getElementById("manualtx");
+  tx.value = md; tx.focus(); tx.select();
+}
+function toggleTheme(){
+  var r = document.documentElement;
+  var cur2 = r.getAttribute("data-theme");
+  var sysDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+  var next = cur2 ? (cur2==="dark" ? "light" : "dark") : (sysDark ? "light" : "dark");
+  r.setAttribute("data-theme", next);
+  try{ localStorage.setItem(KEY+".theme", next); }catch(e){}
+}
+
+/* ---------- boot ---------- */
+(function(){
+  try{ var th = localStorage.getItem(KEY+".theme"); if(th) document.documentElement.setAttribute("data-theme", th); }catch(e){}
+  var nameEl = document.getElementById("sname");
+  nameEl.value = store.name || "";
+  paint();
+})();
+</script>
+
+<script>
+/* ---------- text size ----------------------------------------------------
+   One root font-size knob; every font-size in this file is rem, so the whole
+   page scales together. Added 2026-08-06 at the operator's request.
+------------------------------------------------------------------------- */
+(function(){
+  var SIZES = ["m","l","xl"];
+  var K = (typeof KEY === "string" ? KEY : location.pathname) + ".fs";
+  var host = document.querySelector(".bar-in") || document.querySelector(".topbar .wrap") ||
+             document.querySelector(".bar") || document.querySelector("header") || document.body;
+  var b = document.createElement("button");
+  b.type = "button";
+  b.className = "btn ghost sm";
+  b.title = "Text size";
+  b.setAttribute("aria-label", "Text size");
+  /* no margin — the bar is a flex row with its own gap, and at the largest
+     text size an extra 8px is what tips it into a horizontal scrollbar */
+  b.style.cssText = "flex:none;font-family:var(--mono,monospace);cursor:pointer";
+  if(host === document.body){
+    b.style.cssText += ";position:fixed;top:10px;right:12px;z-index:999;background:var(--sheet,#fff);border:1px solid var(--line,#ccc);border-radius:2px;padding:6px 10px";
+  }
+  function apply(v){
+    if(v === "m") document.documentElement.removeAttribute("data-fs");
+    else document.documentElement.setAttribute("data-fs", v);
+    b.textContent = v === "m" ? "A" : (v === "l" ? "A+" : "A++");
+  }
+  b.addEventListener("click", function(){
+    var cur = document.documentElement.getAttribute("data-fs") || "m";
+    var next = SIZES[(SIZES.indexOf(cur) + 1) % SIZES.length];
+    apply(next);
+    try{ localStorage.setItem(K, next); }catch(e){}
+  });
+  var saved = "m";
+  try{ saved = localStorage.getItem(K) || "m"; }catch(e){}
+  apply(saved);
+  host.appendChild(b);
+})();
+</script>
+
+</body>
+</html>

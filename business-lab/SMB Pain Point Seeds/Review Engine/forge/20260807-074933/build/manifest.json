@@ -1,0 +1,53 @@
+{
+  "schema": 1,
+  "run": "20260807-074933",
+  "built": "2026-08-07T07:49:33Z",
+  "fingerprint": "sha256:57a9e98308f6256b5656197bb5c14e16",
+  "business": {
+    "name": "Review Engine",
+    "slug": "review-engine",
+    "tagline": "Prelaunch validation funnel",
+    "city": "Amersfoort",
+    "email": "info@visionoutreachmedia.nl",
+    "offer_line": "Your customers are happy and your Google listing does not show it. A steady flow of new reviews every month, without anyone in your business having to ask for one.",
+    "org_type": "service_business",
+    "org_label": "Service business / consultancy / agency"
+  },
+  "archetype": {
+    "id": "prelaunch",
+    "label": "Prelaunch validation funnel",
+    "curated": true,
+    "source": "operator override",
+    "voice": "Direct and unembarrassed. It is asking for a small commitment to an idea that does not exist yet, so it must be specific about what it is, honest that it is early, and clear about what happens next. No fake scarcity.",
+    "summary": "One page that turns an idea into evidence. It states the promise, asks for a name and an email, and counts. Nothing else is built until enough people say they want it.",
+    "type_preset": "grotesk",
+    "site_scheme": "light",
+    "type_preset_archetype": "grotesk",
+    "site_scheme_archetype": "light",
+    "skin": "house",
+    "product_app": null,
+    "forge": {
+      "name": "PRELAUNCHforge",
+      "scheme": "dark",
+      "base": "#0A0A0B",
+      "base_soft": "#141416",
+      "accent": "#38D07F",
+      "accent_2": "#7BE3AC",
+      "accent_site": "#2f9e63",
+      "on_accent": "#0A0A0B",
+      "line": "Building a validation funnel."
+    }
+  },
+  "modules": [
+    "lead_capture",
+    "crm",
+    "email_marketing",
+    "content_publishing",
+    "support_inbox"
+  ],
+  "pages": [
+    "index.html",
+    "faq.html"
+  ],
+  "target": "vercel"
+}

@@ -1,0 +1,40 @@
+{
+  "run": "20260804-232011",
+  "sealed": "2026-08-04T23:20:27Z",
+  "fingerprint": "sha256:d4d648a57b5243926a1b8a79bb0a8d6b",
+  "business": "church f god amersfoort",
+  "archetype": "church",
+  "forge": "CHURCHforge",
+  "target": "vercel",
+  "artifacts": {
+    "logo": "embedded",
+    "platform": "/Users/kurtjoseph/Business Ideas/church f god amersfoort/forge/20260804-232011/build/platform/index.html",
+    "site": "/Users/kurtjoseph/Business Ideas/church f god amersfoort/forge/20260804-232011/build/site/index.html",
+    "pages": [
+      "about.html",
+      "contact.html",
+      "events.html",
+      "give.html",
+      "index.html",
+      "sermons.html",
+      "visit.html"
+    ],
+    "url": "https://church-f-god-amersfoort-4az6oc3wi-kurtjjoseph-6989s-projects.vercel.app",
+    "platform_url": "https://church-f-god-amersfoort-4az6oc3wi-kurtjjoseph-6989s-projects.vercel.app/platform/",
+    "alias": "https://church-f-god-amersfoort.vercel.app"
+  },
+  "checks_passed": 10,
+  "elapsed_seconds": 15.87,
+  "authorization": {
+    "mode": "unattended",
+    "targets": [
+      "vercel"
+    ],
+    "scope": "unattended forge build + deploy to 'vercel' for this business, limited to: composing the platform modules, writing the public site, wiring rails that already have credentials, publishing the result, and — for a hosting target that gates new projects behind a login — making that one deployment publicly reachable. Does not authorize sending email, charging anyone, or posting to any channel.",
+    "consent_ref": "6b2030bb04c0ab8f",
+    "consent_seq": 1,
+    "granted_by": "VOM",
+    "granted_at": "2026-08-04T23:20:11Z",
+    "channel": "standing service authorization"
+  }
+}

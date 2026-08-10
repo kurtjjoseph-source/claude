@@ -1,0 +1,556 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Pipeline — Hundred · Growth OS</title>
+<meta name="description" content="A lightweight CRM and 100-no's tracker that carries an operator from lead to closed customer — oriented around Hundred's math: 100 customers × $1,000/mo = $100K/mo.">
+<style>
+  :root{
+    --c:#2f9e63;
+    --bg:#f6f5f1; --surface:#ffffff; --surface-2:#efeee7; --line:#e1dfd4; --line-soft:#ece9df;
+    --ink:#1a1d1b; --ink-dim:#535b56; --ink-faint:#868f89;
+    --won:#c99a2e; --won-ink:#8a6410; --lost:#c0453b; --warn:#c86a1a;
+    --mono:ui-monospace,"SF Mono","Cascadia Code",Menlo,monospace;
+    --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    --serif:ui-serif,Georgia,"Iowan Old Style","Times New Roman",serif;
+    --shadow:0 1px 2px rgba(20,25,22,.05),0 8px 24px -14px rgba(20,25,22,.18);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --c:#38d07f; --bg:#0e100f; --surface:#161a18; --surface-2:#1c211e; --line:#2a322d; --line-soft:#212824;
+      --ink:#eef2ef; --ink-dim:#a6b1aa; --ink-faint:#6c7772;
+      --won:#e6b84c; --won-ink:#e6b84c; --lost:#e0776b; --warn:#e0a03e;
+      --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px -16px rgba(0,0,0,.6); }
+  }
+  :root[data-theme="light"]{ --c:#2f9e63; --bg:#f6f5f1;--surface:#ffffff;--surface-2:#efeee7;--line:#e1dfd4;--line-soft:#ece9df;--ink:#1a1d1b;--ink-dim:#535b56;--ink-faint:#868f89;--won:#c99a2e;--won-ink:#8a6410;--lost:#c0453b;--warn:#c86a1a;--shadow:0 1px 2px rgba(20,25,22,.05),0 8px 24px -14px rgba(20,25,22,.18); }
+  :root[data-theme="dark"]{ --c:#38d07f; --bg:#0e100f;--surface:#161a18;--surface-2:#1c211e;--line:#2a322d;--line-soft:#212824;--ink:#eef2ef;--ink-dim:#a6b1aa;--ink-faint:#6c7772;--won:#e6b84c;--won-ink:#e6b84c;--lost:#e0776b;--warn:#e0a03e;--shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px -16px rgba(0,0,0,.6); }
+
+  *{ box-sizing:border-box; }
+  html,body{ max-width:100%; overflow-x:hidden; }
+  body{ margin:0; background:var(--bg); color:var(--ink); font-family:var(--sans); line-height:1.55; -webkit-font-smoothing:antialiased; }
+  .wrap{ max-width:1180px; margin:0 auto; padding:0 20px; }
+  h1,h2,h3{ font-family:var(--serif); font-weight:600; letter-spacing:-.01em; margin:0; }
+  .mono{ font-family:var(--mono); }
+  .num{ font-variant-numeric:tabular-nums; }
+  button{ font:inherit; cursor:pointer; }
+  :focus-visible{ outline:2px solid var(--c); outline-offset:2px; border-radius:4px; }
+
+  /* ---- top bar ---- */
+  .topbar{ position:sticky; top:0; z-index:20; background:color-mix(in srgb,var(--bg) 88%,transparent); backdrop-filter:blur(10px); border-bottom:1px solid var(--line); }
+  .topbar .wrap{ display:flex; align-items:center; gap:14px; padding-top:13px; padding-bottom:13px; }
+  .brand{ display:flex; flex-direction:column; gap:1px; margin-right:auto; }
+  .brand .k{ font-family:var(--mono); font-size:10.5px; letter-spacing:.22em; text-transform:uppercase; color:var(--c); }
+  .brand .n{ font-family:var(--serif); font-size:20px; font-weight:600; letter-spacing:-.02em; }
+  .tb-actions{ display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+  .btn{ font-weight:650; font-size:13.5px; border-radius:9px; padding:9px 15px; border:1px solid var(--line); background:var(--surface); color:var(--ink); }
+  .btn:hover{ border-color:var(--ink-faint); }
+  .btn.primary{ background:var(--c); color:var(--bg); border-color:var(--c); }
+  .btn.primary:hover{ filter:brightness(1.05); }
+  .btn.ghost{ background:transparent; }
+  .btn.sm{ font-size:12px; padding:6px 10px; }
+
+  main{ padding:26px 0 90px; }
+  .lbl{ font-family:var(--mono); font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-faint); }
+  .sec-head{ display:flex; align-items:baseline; gap:12px; margin:34px 0 14px; }
+  .sec-head h2{ font-size:19px; }
+  .sec-head .hint{ font-size:13px; color:var(--ink-faint); }
+
+  /* ---- the math readout ---- */
+  .math{ display:grid; grid-template-columns:1.5fr 1fr; gap:16px; }
+  .card{ background:var(--surface); border:1px solid var(--line); border-radius:16px; box-shadow:var(--shadow); }
+  .goal{ padding:22px 24px; }
+  .goal .top{ display:flex; justify-content:space-between; align-items:baseline; gap:10px; flex-wrap:wrap; }
+  .goal .mrr{ font-family:var(--serif); font-size:clamp(34px,6vw,52px); font-weight:600; line-height:1; color:var(--c); letter-spacing:-.02em; }
+  .goal .of{ font-size:14px; color:var(--ink-dim); }
+  .goal .of b{ color:var(--ink); }
+  .bar{ height:12px; border-radius:20px; background:var(--surface-2); border:1px solid var(--line-soft); overflow:hidden; margin:16px 0 8px; }
+  .bar > i{ display:block; height:100%; background:linear-gradient(90deg,color-mix(in srgb,var(--c) 72%,#000 0%),var(--c)); border-radius:20px; transition:width .5s cubic-bezier(.4,0,.1,1); }
+  .goal .foot{ display:flex; justify-content:space-between; font-size:12.5px; color:var(--ink-faint); font-family:var(--mono); }
+  .goal .more{ margin-top:14px; font-size:14px; color:var(--ink-dim); }
+  .goal .more b{ color:var(--ink); }
+  .goal .more .big{ color:var(--c); font-weight:800; font-family:var(--mono); font-size:16px; }
+
+  .tiles{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .tile{ background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:15px 16px; display:flex; flex-direction:column; gap:5px; box-shadow:var(--shadow); }
+  .tile .v{ font-family:var(--mono); font-size:24px; font-weight:700; letter-spacing:-.01em; line-height:1; }
+  .tile .t{ font-size:12px; color:var(--ink-dim); }
+  .tile.won .v{ color:var(--won-ink); }
+
+  /* ---- 100 no's + conversion row ---- */
+  .row2{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  .pad{ padding:20px 22px; }
+  .nos .head{ display:flex; justify-content:space-between; align-items:baseline; }
+  .nos h3{ font-size:18px; }
+  .nos .streak{ font-family:var(--mono); font-size:12px; color:var(--warn); }
+  .nos .count{ display:flex; align-items:baseline; gap:8px; margin:14px 0 4px; }
+  .nos .count .big{ font-family:var(--serif); font-size:46px; font-weight:600; line-height:1; color:var(--ink); }
+  .nos .count .goal{ font-family:var(--mono); font-size:14px; color:var(--ink-faint); padding:0; }
+  .nos .bar > i{ background:linear-gradient(90deg,color-mix(in srgb,var(--warn) 70%,#000 0%),var(--warn)); }
+  .nos .reframe{ font-family:var(--serif); font-style:italic; font-size:14.5px; color:var(--ink-dim); margin:12px 0 16px; line-height:1.5; }
+  .nos .reframe b{ color:var(--ink); font-style:normal; }
+  .nos .ctrls{ display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+  .no-btn{ font-weight:700; font-size:14px; border-radius:10px; padding:11px 16px; border:1px solid var(--warn); background:color-mix(in srgb,var(--warn) 12%,var(--surface)); color:var(--warn); }
+  .no-btn:hover{ background:color-mix(in srgb,var(--warn) 20%,var(--surface)); }
+  .no-btn:active{ transform:translateY(1px); }
+
+  .conv .kpis{ display:flex; flex-direction:column; gap:2px; margin-top:12px; }
+  .conv .kpi{ display:flex; align-items:center; gap:12px; padding:9px 0; border-top:1px solid var(--line-soft); }
+  .conv .kpi:first-child{ border-top:none; }
+  .conv .kpi .kv{ font-family:var(--mono); font-size:20px; font-weight:700; min-width:64px; }
+  .conv .kpi .kt{ font-size:12.5px; color:var(--ink-dim); }
+  .conv .kpi .kt b{ color:var(--ink); }
+
+  /* ---- board ---- */
+  .board-scroll{ overflow-x:auto; padding:2px 2px 14px; margin:0 -2px; scrollbar-width:thin; }
+  .board{ display:grid; grid-auto-flow:column; grid-auto-columns:minmax(0,1fr); gap:12px; }
+  @media (max-width:760px){ .board{ grid-auto-columns:minmax(158px,1fr); min-width:min-content; } }
+  .col{ background:var(--surface-2); border:1px solid var(--line-soft); border-radius:14px; display:flex; flex-direction:column; min-height:140px; }
+  .col.drop{ outline:2px dashed var(--c); outline-offset:-3px; }
+  .col-head{ display:flex; align-items:center; gap:8px; padding:12px 13px 8px; }
+  .col-head .dot{ width:8px; height:8px; border-radius:50%; background:var(--ink-faint); flex:none; }
+  .col-head .nm{ font-family:var(--mono); font-size:11px; letter-spacing:.09em; text-transform:uppercase; color:var(--ink-dim); font-weight:600; }
+  .col-head .ct{ font-family:var(--mono); font-size:11px; color:var(--ink-faint); margin-left:auto; }
+  .col.s-won .dot{ background:var(--won); } .col.s-won .nm{ color:var(--won-ink); }
+  .col.s-lost .dot{ background:var(--lost); } .col.s-lost .nm{ color:var(--lost); }
+  .col-sum{ padding:0 13px 8px; font-family:var(--mono); font-size:11px; color:var(--ink-faint); }
+  .col-body{ display:flex; flex-direction:column; gap:9px; padding:2px 10px 12px; flex:1; }
+  .col-empty{ font-size:12px; color:var(--ink-faint); text-align:center; padding:16px 8px; line-height:1.5; }
+
+  .pcard{ background:var(--surface); border:1px solid var(--line); border-radius:11px; padding:11px 12px; box-shadow:0 1px 2px rgba(20,25,22,.04); cursor:grab; }
+  .pcard:hover{ border-color:var(--ink-faint); }
+  .pcard:active{ cursor:grabbing; }
+  .pcard.dragging{ opacity:.45; }
+  .pcard .pn{ font-weight:650; font-size:14px; line-height:1.25; }
+  .pcard .pco{ font-size:12px; color:var(--ink-dim); margin-top:1px; }
+  .pcard .pv{ font-family:var(--mono); font-size:13px; font-weight:700; color:var(--c); margin-top:7px; }
+  .col.s-won .pcard .pv{ color:var(--won-ink); }
+  .col.s-lost .pcard .pv{ color:var(--ink-faint); text-decoration:line-through; }
+  .pcard .na{ font-size:12px; color:var(--ink-dim); margin-top:7px; display:flex; gap:6px; align-items:flex-start; }
+  .pcard .na .tag{ font-family:var(--mono); font-size:9px; letter-spacing:.08em; text-transform:uppercase; color:var(--warn); border:1px solid color-mix(in srgb,var(--warn) 40%,transparent); border-radius:4px; padding:1px 5px; flex:none; margin-top:1px; }
+  .pcard .mv{ display:flex; gap:6px; margin-top:10px; align-items:center; }
+  .mvbtn{ font-family:var(--mono); font-size:12px; line-height:1; width:26px; height:24px; border-radius:7px; border:1px solid var(--line); background:var(--surface-2); color:var(--ink-dim); display:inline-flex; align-items:center; justify-content:center; }
+  .mvbtn:hover:not(:disabled){ border-color:var(--c); color:var(--c); }
+  .mvbtn:disabled{ opacity:.3; cursor:not-allowed; }
+  .pcard .edit{ margin-left:auto; font-size:11.5px; color:var(--ink-faint); background:none; border:none; padding:4px; }
+  .pcard .edit:hover{ color:var(--c); }
+
+  /* ---- big empty state ---- */
+  .empty-all{ text-align:center; padding:44px 20px; }
+  .empty-all h3{ font-size:22px; margin-bottom:8px; }
+  .empty-all p{ color:var(--ink-dim); max-width:46ch; margin:0 auto 20px; font-size:14.5px; }
+  .empty-all .ea-btns{ display:flex; gap:10px; justify-content:center; flex-wrap:wrap; }
+
+  /* ---- modal ---- */
+  .scrim{ position:fixed; inset:0; background:rgba(10,14,12,.5); backdrop-filter:blur(3px); display:none; align-items:flex-start; justify-content:center; padding:40px 16px; z-index:40; overflow:auto; }
+  .scrim.open{ display:flex; }
+  .modal{ background:var(--surface); border:1px solid var(--line); border-radius:18px; box-shadow:var(--shadow); width:100%; max-width:460px; padding:22px 24px 24px; }
+  .modal h3{ font-size:20px; margin-bottom:2px; }
+  .modal .msub{ font-size:12.5px; color:var(--ink-faint); margin-bottom:18px; }
+  .field{ display:flex; flex-direction:column; gap:5px; margin-bottom:14px; }
+  .field label{ font-family:var(--mono); font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-faint); }
+  .field input,.field select,.field textarea{ font:inherit; font-size:14px; color:var(--ink); background:var(--surface-2); border:1px solid var(--line); border-radius:9px; padding:9px 11px; width:100%; }
+  .field textarea{ resize:vertical; min-height:52px; line-height:1.45; }
+  .field.two{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .field.two > div{ display:flex; flex-direction:column; gap:5px; }
+  .modal-foot{ display:flex; align-items:center; gap:10px; margin-top:8px; }
+  .modal-foot .del{ color:var(--lost); background:none; border:none; font-size:12.5px; font-weight:600; margin-right:auto; padding:6px; }
+  .modal-foot .del:hover{ text-decoration:underline; }
+
+  footer{ border-top:1px solid var(--line); }
+  footer .wrap{ display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap; padding:20px 20px; font-size:12px; color:var(--ink-faint); }
+  footer a{ color:var(--c); text-decoration:none; }
+
+  @media (max-width:820px){ .math{ grid-template-columns:1fr; } .row2{ grid-template-columns:1fr; } }
+  @media (max-width:520px){ .tiles{ grid-template-columns:1fr 1fr; } .field.two{ grid-template-columns:1fr; } .brand .n{ font-size:18px; } }
+  @media (prefers-reduced-motion:reduce){ *{ transition:none!important; animation:none!important; } }
+</style>
+</head>
+<body>
+<div class="topbar"><div class="wrap">
+  <div class="brand">
+    <span class="k">Hundred · Growth OS</span>
+    <span class="n">The Pipeline</span>
+  </div>
+  <div class="tb-actions">
+    <button class="btn ghost sm" id="themeBtn">◐ Theme</button>
+    <button class="btn ghost sm" id="resetBtn">Reset</button>
+    <a class="btn" href="prelaunch.html">← Prelaunch</a>
+    <button class="btn primary" id="addBtn">+ Add prospect</button>
+  </div>
+</div></div>
+
+<main class="wrap">
+  <!-- THE MATH -->
+  <div class="sec-head"><span class="lbl">The math</span><h2>Do the math backwards</h2>
+    <span class="hint">100 customers × $1,000/mo = $100K/mo</span></div>
+  <div class="math">
+    <div class="card goal">
+      <div class="top">
+        <div>
+          <div class="mrr num" id="mrrVal">$0</div>
+          <div class="of">committed MRR · <span id="mrrPct">0%</span> of the <b>$100,000/mo</b> goal</div>
+        </div>
+      </div>
+      <div class="bar"><i id="goalBar" style="width:0%"></i></div>
+      <div class="foot"><span>$0</span><span>$100K/mo</span></div>
+      <div class="more" id="moreLine"></div>
+    </div>
+    <div class="tiles">
+      <div class="tile won"><span class="v num" id="wonCount">0</span><span class="t">deals won</span></div>
+      <div class="tile"><span class="v num" id="avgDeal">$1,000</span><span class="t">avg won deal size</span></div>
+      <div class="tile"><span class="v num" id="openVal">$0</span><span class="t">open pipeline (MRR)</span></div>
+      <div class="tile"><span class="v num" id="openCount">0</span><span class="t">active prospects</span></div>
+    </div>
+  </div>
+
+  <!-- 100 NO'S + CONVERSION -->
+  <div class="row2" style="margin-top:16px">
+    <div class="card pad nos">
+      <div class="head">
+        <h3>Chase 100 no's today</h3>
+        <span class="streak mono" id="streak">0-day streak</span>
+      </div>
+      <div class="count">
+        <span class="big num" id="noToday">0</span>
+        <span class="goal mono">/ 100 no's</span>
+      </div>
+      <div class="bar"><i id="noBar" style="width:0%"></i></div>
+      <p class="reframe" id="noReframe"></p>
+      <div class="ctrls">
+        <button class="no-btn" id="noBtn">+ Log a no</button>
+        <button class="btn ghost sm" id="noUndo">Undo</button>
+        <span class="mono" style="font-size:11px;color:var(--ink-faint)" id="noLifetime"></span>
+      </div>
+    </div>
+
+    <div class="card pad conv">
+      <div class="head"><h3>Conversion</h3></div>
+      <div class="kpis">
+        <div class="kpi"><span class="kv num" id="cvContWon">—</span><span class="kt"><b>Contacted → Won.</b> Of everyone you engaged, the share that closed.</span></div>
+        <div class="kpi"><span class="kv num" id="cvWinRate">—</span><span class="kt"><b>Decision win rate.</b> Won ÷ (Won + Lost) — how you close once it's live or dead.</span></div>
+        <div class="kpi"><span class="kv num" id="cvNosPer">—</span><span class="kt"><b>No's per yes.</b> Logged no's for every deal you've won.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOARD -->
+  <div class="sec-head"><span class="lbl">The board</span><h2>Lead → Won</h2>
+    <span class="hint">Drag a card, use ◄ ►, or click a card to edit</span></div>
+  <div id="boardHost"></div>
+</main>
+
+<!-- MODAL -->
+<div class="scrim" id="scrim">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle">
+    <h3 id="mTitle">Add prospect</h3>
+    <div class="msub">Track one path from lead to closed customer.</div>
+    <form id="pForm">
+      <div class="field"><label for="fName">Name</label><input id="fName" required maxlength="80" placeholder="Contact name" autocomplete="off"></div>
+      <div class="field"><label for="fCompany">Company</label><input id="fCompany" maxlength="80" placeholder="Business or org" autocomplete="off"></div>
+      <div class="field two">
+        <div><label for="fValue">Deal value ($/mo)</label><input id="fValue" type="number" min="0" step="50" placeholder="1000" inputmode="numeric"></div>
+        <div><label for="fStage">Stage</label><select id="fStage"></select></div>
+      </div>
+      <div class="field"><label for="fAction">Next action</label><textarea id="fAction" maxlength="160" placeholder="e.g. Send the proposal Thursday"></textarea></div>
+      <div class="modal-foot">
+        <button type="button" class="del" id="delBtn" hidden>Delete</button>
+        <button type="button" class="btn ghost" id="cancelBtn">Cancel</button>
+        <button type="submit" class="btn primary">Save</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<footer><div class="wrap">
+  <span>The Pipeline — the close-and-track layer of <b>Hundred</b>, part of the Vision Outreach Media house of operating systems.</span>
+  <span><a href="https://vom-systems.vercel.app" target="_blank" rel="noopener">The house →</a></span>
+</div></footer>
+
+<script>
+"use strict";
+(function(){
+  var KEY = "hundred_pipeline_v1";
+  var GOAL = 100000, TARGET_DEAL = 1000;
+  var STAGES = [
+    {id:"lead",   name:"Lead"},
+    {id:"contacted", name:"Contacted"},
+    {id:"call",   name:"Call booked"},
+    {id:"proposal", name:"Proposal sent"},
+    {id:"won",    name:"Won",  terminal:true},
+    {id:"lost",   name:"Lost", terminal:true}
+  ];
+  var LINEAR = ["lead","contacted","call","proposal","won"]; // ► steps through this; Lost via edit
+  var stageIx = {}; STAGES.forEach(function(s,i){ stageIx[s.id]=i; });
+
+  // ---------- state ----------
+  var state = load();
+  function load(){
+    try{ var raw=localStorage.getItem(KEY); if(raw){ var o=JSON.parse(raw); return {prospects:o.prospects||[], noLog:o.noLog||{}}; } }catch(e){}
+    return {prospects:[], noLog:{}};
+  }
+  function save(){ try{ localStorage.setItem(KEY, JSON.stringify(state)); }catch(e){} }
+
+  // ---------- helpers ----------
+  function esc(s){ return String(s==null?"":s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];}); }
+  function uid(){ return Date.now().toString(36)+Math.random().toString(36).slice(2,7); }
+  function money(n){ n=Math.round(n||0); return "$"+n.toLocaleString("en-US"); }
+  function moneyK(n){ if(n>=1000 && n%1000===0) return "$"+(n/1000)+"K"; return money(n); }
+  function todayKey(){ var d=new Date(); return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"); }
+  function dayKey(d){ return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"); }
+
+  function byStage(id){ return state.prospects.filter(function(p){ return p.stage===id; }); }
+  function wonDeals(){ return byStage("won"); }
+  function committedMRR(){ return wonDeals().reduce(function(a,p){ return a+(+p.value||0); },0); }
+  function openDeals(){ return state.prospects.filter(function(p){ return p.stage!=="won" && p.stage!=="lost"; }); }
+  function totalNos(){ var t=0; for(var k in state.noLog){ t+=state.noLog[k]||0; } return t; }
+  function noStreak(){
+    var s=0, d=new Date();
+    // if today has none, streak still counts prior consecutive days up to yesterday
+    if(!(state.noLog[dayKey(d)]>0)){ d.setDate(d.getDate()-1); }
+    while(state.noLog[dayKey(d)]>0){ s++; d.setDate(d.getDate()-1); }
+    return s;
+  }
+
+  // ---------- render: math ----------
+  function renderMath(){
+    var mrr = committedMRR();
+    var won = wonDeals();
+    var avg = won.length ? Math.round(mrr/won.length) : TARGET_DEAL;
+    var pct = Math.min(100, mrr/GOAL*100);
+    var remaining = Math.max(0, GOAL-mrr);
+    var more = avg>0 ? Math.ceil(remaining/avg) : 0;
+
+    document.getElementById("mrrVal").textContent = money(mrr);
+    document.getElementById("mrrPct").textContent = (Math.round(pct*10)/10)+"%";
+    document.getElementById("goalBar").style.width = pct+"%";
+    document.getElementById("wonCount").textContent = won.length;
+    document.getElementById("avgDeal").textContent = money(avg);
+    document.getElementById("openVal").textContent = money(openDeals().reduce(function(a,p){return a+(+p.value||0);},0));
+    document.getElementById("openCount").textContent = openDeals().length;
+
+    var more_el = document.getElementById("moreLine");
+    if(mrr>=GOAL){
+      more_el.innerHTML = "<b>You hit $100K/mo.</b> The math is done — now protect it and repeat.";
+    } else if(won.length===0){
+      more_el.innerHTML = "At the house's target deal (<b>"+money(TARGET_DEAL)+"/mo</b>), you're <span class='big num'>100</span> customers from goal. Close one to recalibrate on your real numbers.";
+    } else {
+      more_el.innerHTML = "At your current average of <b>"+money(avg)+"/mo</b>, you need <span class='big num'>"+more+"</span> more like it to reach $100K/mo.";
+    }
+  }
+
+  // ---------- render: no's ----------
+  function renderNos(){
+    var today = state.noLog[todayKey()]||0;
+    var streak = noStreak();
+    var life = totalNos();
+    document.getElementById("noToday").textContent = today;
+    document.getElementById("noBar").style.width = Math.min(100, today/100*100)+"%";
+    document.getElementById("streak").textContent = streak+"-day streak";
+    document.getElementById("noLifetime").textContent = life>0 ? (life+" no's logged all-time") : "";
+    document.getElementById("noUndo").disabled = today<=0;
+
+    var re = document.getElementById("noReframe");
+    var wonN = wonDeals().length;
+    if(today>=100){
+      re.innerHTML = "<b>100 no's — a full day's work.</b> You cleared the field. The yeses are hiding behind the no's you just moved.";
+    } else if(wonN>0 && life>0){
+      re.innerHTML = "Every no is a data point, not a defeat. So far it takes you about <b>"+Math.round(life/wonN)+" no's per yes</b> — so keep chasing them.";
+    } else {
+      re.innerHTML = "A no isn't rejection — it's <b>progress you can count</b>. Chase 100 a day and the yeses fall out on their own.";
+    }
+  }
+
+  // ---------- render: conversion ----------
+  function renderConv(){
+    var won = wonDeals().length, lost = byStage("lost").length;
+    // "contacted" = anyone who moved past Lead (reached Contacted or beyond, incl. won/lost)
+    var contacted = state.prospects.filter(function(p){ return stageIx[p.stage] >= stageIx.contacted; }).length;
+    var life = totalNos();
+    function pctTxt(n,d){ return d>0 ? Math.round(n/d*100)+"%" : "—"; }
+    document.getElementById("cvContWon").textContent = pctTxt(won, contacted);
+    document.getElementById("cvWinRate").textContent = (won+lost)>0 ? Math.round(won/(won+lost)*100)+"%" : "—";
+    document.getElementById("cvNosPer").textContent = won>0 ? (life>0 ? Math.round(life/won) : "0") : "—";
+  }
+
+  // ---------- render: board ----------
+  function renderBoard(){
+    var host = document.getElementById("boardHost");
+    if(state.prospects.length===0){
+      host.innerHTML =
+        '<div class="card empty-all">'+
+          '<h3>Your pipeline is empty.</h3>'+
+          '<p>The Pipeline carries one operator from a cold lead to a paying customer, and keeps the $100K math honest the whole way. Add your first prospect, or drop in a sample pipeline to see how it reads.</p>'+
+          '<div class="ea-btns"><button class="btn primary" id="ea-add">+ Add your first prospect</button>'+
+          '<button class="btn ghost" id="ea-sample">Load sample pipeline</button></div>'+
+        '</div>';
+      document.getElementById("ea-add").onclick = function(){ openModal(null); };
+      document.getElementById("ea-sample").onclick = loadSample;
+      return;
+    }
+    var html = '<div class="board-scroll"><div class="board">';
+    STAGES.forEach(function(st){
+      var items = byStage(st.id);
+      var sum = items.reduce(function(a,p){ return a+(+p.value||0); },0);
+      html += '<div class="col s-'+st.id+'" data-stage="'+st.id+'">'+
+        '<div class="col-head"><span class="dot"></span><span class="nm">'+esc(st.name)+'</span><span class="ct num">'+items.length+'</span></div>'+
+        '<div class="col-sum num">'+(items.length? money(sum)+(st.id==="won"?" MRR":"/mo"):"—")+'</div>'+
+        '<div class="col-body" data-stage="'+st.id+'">';
+      if(items.length===0){
+        html += '<div class="col-empty">'+colEmptyText(st.id)+'</div>';
+      } else {
+        items.forEach(function(p){ html += cardHTML(p, st); });
+      }
+      html += '</div></div>';
+    });
+    html += '</div></div>';
+    host.innerHTML = html;
+    wireBoard();
+  }
+  function colEmptyText(id){
+    return {
+      lead:"New names land here.",
+      contacted:"You've reached out.",
+      call:"A call is on the calendar.",
+      proposal:"An offer is out for decision.",
+      won:"Closed customers — MRR toward $100K.",
+      lost:"Dead or ghosted. Learn and move on."
+    }[id]||"";
+  }
+  function cardHTML(p, st){
+    var i = LINEAR.indexOf(p.stage);
+    var canBack = stageIx[p.stage] > 0;
+    var canFwd = i>=0 && i < LINEAR.length-1;
+    var na = p.action ? '<div class="na"><span class="tag">Next</span><span>'+esc(p.action)+'</span></div>' : '';
+    return '<div class="pcard" draggable="true" data-id="'+p.id+'" tabindex="0" role="button" aria-label="Edit '+esc(p.name)+'">'+
+      '<div class="pn">'+esc(p.name)+'</div>'+
+      (p.company?'<div class="pco">'+esc(p.company)+'</div>':'')+
+      '<div class="pv num">'+money(+p.value||0)+(st.id==="won"?"/mo":"/mo")+'</div>'+
+      na+
+      '<div class="mv">'+
+        '<button class="mvbtn" data-mv="back" data-id="'+p.id+'" title="Move back" aria-label="Move back"'+(canBack?"":" disabled")+'>◄</button>'+
+        '<button class="mvbtn" data-mv="fwd" data-id="'+p.id+'" title="Advance" aria-label="Advance"'+(canFwd?"":" disabled")+'>►</button>'+
+        '<button class="edit" data-edit="'+p.id+'">Edit</button>'+
+      '</div></div>';
+  }
+
+  var dragId = null;
+  function wireBoard(){
+    // move buttons
+    Array.prototype.forEach.call(document.querySelectorAll("[data-mv]"), function(b){
+      b.addEventListener("click", function(e){ e.stopPropagation(); step(b.getAttribute("data-id"), b.getAttribute("data-mv")); });
+    });
+    // edit via button + card click/enter
+    Array.prototype.forEach.call(document.querySelectorAll("[data-edit]"), function(b){
+      b.addEventListener("click", function(e){ e.stopPropagation(); openModal(b.getAttribute("data-edit")); });
+    });
+    Array.prototype.forEach.call(document.querySelectorAll(".pcard"), function(card){
+      card.addEventListener("click", function(){ openModal(card.getAttribute("data-id")); });
+      card.addEventListener("keydown", function(e){ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); openModal(card.getAttribute("data-id")); } });
+      card.addEventListener("dragstart", function(e){ dragId=card.getAttribute("data-id"); card.classList.add("dragging"); if(e.dataTransfer){e.dataTransfer.effectAllowed="move";} });
+      card.addEventListener("dragend", function(){ dragId=null; card.classList.remove("dragging"); document.querySelectorAll(".col.drop").forEach(function(c){c.classList.remove("drop");}); });
+    });
+    Array.prototype.forEach.call(document.querySelectorAll(".col"), function(col){
+      col.addEventListener("dragover", function(e){ if(dragId){ e.preventDefault(); col.classList.add("drop"); } });
+      col.addEventListener("dragleave", function(){ col.classList.remove("drop"); });
+      col.addEventListener("drop", function(e){ e.preventDefault(); col.classList.remove("drop"); if(dragId){ setStage(dragId, col.getAttribute("data-stage")); } });
+    });
+  }
+  function step(id, dir){
+    var p = find(id); if(!p) return;
+    if(dir==="back"){ var bi=stageIx[p.stage]; if(bi>0){ setStage(id, STAGES[bi-1].id); } }
+    else { var li=LINEAR.indexOf(p.stage); if(li>=0 && li<LINEAR.length-1){ setStage(id, LINEAR[li+1]); } }
+  }
+  function setStage(id, stage){ var p=find(id); if(!p||p.stage===stage) return; p.stage=stage; p.updated=Date.now(); save(); renderAll(); }
+  function find(id){ return state.prospects.filter(function(p){return p.id===id;})[0]; }
+
+  // ---------- modal ----------
+  var editing = null;
+  var scrim=document.getElementById("scrim"), form=document.getElementById("pForm");
+  var fName=document.getElementById("fName"), fCompany=document.getElementById("fCompany"),
+      fValue=document.getElementById("fValue"), fStage=document.getElementById("fStage"), fAction=document.getElementById("fAction");
+  STAGES.forEach(function(s){ var o=document.createElement("option"); o.value=s.id; o.textContent=s.name; fStage.appendChild(o); });
+
+  function openModal(id){
+    editing = id ? find(id) : null;
+    document.getElementById("mTitle").textContent = editing ? "Edit prospect" : "Add prospect";
+    document.getElementById("delBtn").hidden = !editing;
+    fName.value = editing? editing.name : "";
+    fCompany.value = editing? (editing.company||"") : "";
+    fValue.value = editing? (editing.value||"") : "";
+    fStage.value = editing? editing.stage : "lead";
+    fAction.value = editing? (editing.action||"") : "";
+    scrim.classList.add("open");
+    setTimeout(function(){ fName.focus(); }, 30);
+  }
+  function closeModal(){ scrim.classList.remove("open"); editing=null; }
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+    var name=fName.value.trim(); if(!name) return;
+    var data={ name:name, company:fCompany.value.trim(), value:Math.max(0, +fValue.value||0), stage:fStage.value, action:fAction.value.trim() };
+    if(editing){ Object.assign(editing, data); editing.updated=Date.now(); }
+    else { state.prospects.push(Object.assign({id:uid(), created:Date.now(), updated:Date.now()}, data)); }
+    save(); closeModal(); renderAll();
+  });
+  document.getElementById("cancelBtn").addEventListener("click", closeModal);
+  document.getElementById("delBtn").addEventListener("click", function(){
+    if(!editing) return;
+    if(confirm("Delete "+editing.name+" from the pipeline?")){
+      state.prospects = state.prospects.filter(function(p){ return p.id!==editing.id; });
+      save(); closeModal(); renderAll();
+    }
+  });
+  scrim.addEventListener("click", function(e){ if(e.target===scrim) closeModal(); });
+  document.addEventListener("keydown", function(e){ if(e.key==="Escape" && scrim.classList.contains("open")) closeModal(); });
+
+  // ---------- no's tracker ----------
+  document.getElementById("noBtn").addEventListener("click", function(){
+    var k=todayKey(); state.noLog[k]=(state.noLog[k]||0)+1; save(); renderNos(); renderConv();
+  });
+  document.getElementById("noUndo").addEventListener("click", function(){
+    var k=todayKey(); if(state.noLog[k]>0){ state.noLog[k]--; if(state.noLog[k]<=0) delete state.noLog[k]; save(); renderNos(); renderConv(); }
+  });
+
+  // ---------- top actions ----------
+  document.getElementById("addBtn").addEventListener("click", function(){ openModal(null); });
+  document.getElementById("resetBtn").addEventListener("click", function(){
+    if(confirm("Reset The Pipeline? This clears every prospect and your no's log from this browser. This can't be undone.")){
+      state={prospects:[], noLog:{}}; save(); renderAll();
+    }
+  });
+
+  // ---------- sample ----------
+  function loadSample(){
+    var now=Date.now();
+    var s=[
+      ["Dana Reyes","Northlight Dental",1000,"lead","Warm intro from the referral list"],
+      ["Marcus Bell","Bell Home Services",1500,"lead",""],
+      ["Priya Anand","Anand Physio",1000,"contacted","Follow up on the DM this week"],
+      ["Theo Grant","Grant & Co Legal",2000,"contacted","Send the one-pager"],
+      ["Lena Ortiz","Bright Kids Academy",1000,"call","Discovery call Thursday 2pm"],
+      ["Sam Okafor","Okafor Fitness",1200,"proposal","Proposal out — chase decision Friday"],
+      ["Ruth Kim","Kim Accounting",1000,"won",""],
+      ["Owen Fisher","Fisher Roofing",1500,"won",""],
+      ["Ivy Chen","Chen Studio",1000,"lost","Went with an in-house hire"]
+    ];
+    state.prospects = s.map(function(r){ return {id:uid(), name:r[0], company:r[1], value:r[2], stage:r[3], action:r[4], created:now, updated:now}; });
+    var k=todayKey(); state.noLog[k]=(state.noLog[k]||0)+37;
+    save(); renderAll();
+  }
+
+  // ---------- theme ----------
+  var tBtn=document.getElementById("themeBtn");
+  tBtn.addEventListener("click", function(){
+    var c=document.documentElement.getAttribute("data-theme");
+    var n = c==="dark" ? "light" : (c==="light" ? "dark" : (matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "dark"));
+    document.documentElement.setAttribute("data-theme", n);
+    try{ localStorage.setItem("hundred_theme", n); }catch(e){}
+  });
+  try{ var th=localStorage.getItem("hundred_theme"); if(th) document.documentElement.setAttribute("data-theme", th); }catch(e){}
+
+  // ---------- render all ----------
+  function renderAll(){ renderMath(); renderNos(); renderConv(); renderBoard(); }
+  renderAll();
+})();
+</script>
+</body>
+</html>

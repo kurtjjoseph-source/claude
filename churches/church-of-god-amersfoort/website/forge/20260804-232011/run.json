@@ -1,0 +1,235 @@
+{
+  "schema": 1,
+  "run": "20260804-232011",
+  "outcome": "launched",
+  "started": "2026-08-04T23:20:11Z",
+  "elapsed": 15.87,
+  "business": "church f god amersfoort",
+  "archetype": {
+    "id": "church",
+    "label": "Church / faith community",
+    "curated": true,
+    "forge": {
+      "name": "CHURCHforge",
+      "scheme": "dark",
+      "base": "#0A0A0B",
+      "base_soft": "#141416",
+      "accent": "#F97316",
+      "accent_2": "#FDBA74",
+      "accent_site": "#e2670a",
+      "on_accent": "#0A0A0B",
+      "line": "Building a church platform."
+    }
+  },
+  "target": "vercel",
+  "fingerprint": "sha256:d4d648a57b5243926a1b8a79bb0a8d6b",
+  "progress": {
+    "done": 11,
+    "total": 11
+  },
+  "stages": [
+    {
+      "id": "resolve",
+      "title": "Read the spec",
+      "cue": "◇",
+      "detail": "load the blueprint, verify the fingerprint, refuse if anything is unresolved",
+      "state": "ok",
+      "started": 0.0,
+      "ended": 0.003,
+      "ms": 3,
+      "note": "",
+      "optional": false
+    },
+    {
+      "id": "scaffold",
+      "title": "Lay out the build",
+      "cue": "▢",
+      "detail": "create the output tree this run writes into",
+      "state": "ok",
+      "started": 0.004,
+      "ended": 0.008,
+      "ms": 4,
+      "note": "",
+      "optional": false
+    },
+    {
+      "id": "brand",
+      "title": "Apply the brand",
+      "cue": "◐",
+      "detail": "operator palette and type, archetype accent, logo embedded",
+      "state": "ok",
+      "started": 0.009,
+      "ended": 0.011,
+      "ms": 2,
+      "note": "",
+      "optional": false
+    },
+    {
+      "id": "platform",
+      "title": "Build the platform · 10 modules",
+      "cue": "▣",
+      "detail": "the operating app the owner works in, seeded so it opens with something in it",
+      "state": "ok",
+      "started": 0.012,
+      "ended": 0.016,
+      "ms": 4,
+      "note": "",
+      "optional": false
+    },
+    {
+      "id": "site",
+      "title": "Write the site · 7 pages",
+      "cue": "▤",
+      "detail": "the public pages, in this archetype's voice",
+      "state": "ok",
+      "started": 0.018,
+      "ended": 0.026,
+      "ms": 8,
+      "note": "",
+      "optional": false
+    },
+    {
+      "id": "wire",
+      "title": "Wire the rails",
+      "cue": "◈",
+      "detail": "payments, email and analytics — live where credentials exist, labelled where not",
+      "state": "ok",
+      "started": 0.027,
+      "ended": 0.03,
+      "ms": 2,
+      "note": "",
+      "optional": false
+    },
+    {
+      "id": "package",
+      "title": "Package",
+      "cue": "▥",
+      "detail": "manifest, readme, deployment config",
+      "state": "ok",
+      "started": 0.032,
+      "ended": 0.039,
+      "ms": 6,
+      "note": "",
+      "optional": false
+    },
+    {
+      "id": "verify",
+      "title": "Check the work",
+      "cue": "◎",
+      "detail": "run every check in the spec against what was actually written",
+      "state": "ok",
+      "started": 0.041,
+      "ended": 0.051,
+      "ms": 9,
+      "note": "",
+      "optional": false
+    },
+    {
+      "id": "deploy",
+      "title": "Deploy · vercel",
+      "cue": "▲",
+      "detail": "a Vercel deployment — a public URL",
+      "state": "ok",
+      "started": 0.053,
+      "ended": 15.087,
+      "ms": 15033,
+      "note": "",
+      "optional": false
+    },
+    {
+      "id": "smoke",
+      "title": "Prove it is up",
+      "cue": "◉",
+      "detail": "fetch what was deployed and confirm it answers",
+      "state": "ok",
+      "started": 15.088,
+      "ended": 15.866,
+      "ms": 778,
+      "note": "",
+      "optional": false
+    },
+    {
+      "id": "seal",
+      "title": "Seal the run",
+      "cue": "●",
+      "detail": "record the fingerprint, artifacts and outcome",
+      "state": "ok",
+      "started": 15.868,
+      "ended": 15.871,
+      "ms": 3,
+      "note": "",
+      "optional": false
+    }
+  ],
+  "artifacts": {
+    "logo": "embedded",
+    "platform": "/Users/kurtjoseph/Business Ideas/church f god amersfoort/forge/20260804-232011/build/platform/index.html",
+    "site": "/Users/kurtjoseph/Business Ideas/church f god amersfoort/forge/20260804-232011/build/site/index.html",
+    "pages": [
+      "about.html",
+      "contact.html",
+      "events.html",
+      "give.html",
+      "index.html",
+      "sermons.html",
+      "visit.html"
+    ],
+    "url": "https://church-f-god-amersfoort-4az6oc3wi-kurtjjoseph-6989s-projects.vercel.app",
+    "platform_url": "https://church-f-god-amersfoort-4az6oc3wi-kurtjjoseph-6989s-projects.vercel.app/platform/",
+    "alias": "https://church-f-god-amersfoort.vercel.app",
+    "receipt": "/Users/kurtjoseph/Business Ideas/church f god amersfoort/forge/20260804-232011/receipt.json"
+  },
+  "checks": [
+    {
+      "id": "spec_fingerprint",
+      "ok": true,
+      "detail": "spec fingerprint matches its contents"
+    },
+    {
+      "id": "no_placeholders",
+      "ok": true,
+      "detail": "no unresolved token reached a page"
+    },
+    {
+      "id": "pages_written",
+      "ok": true,
+      "detail": "7/7 present and non-trivial"
+    },
+    {
+      "id": "platform_written",
+      "ok": true,
+      "detail": "2/2 present and non-trivial"
+    },
+    {
+      "id": "nav_resolves",
+      "ok": true,
+      "detail": "every nav link points at a written page"
+    },
+    {
+      "id": "module_titles_unique",
+      "ok": true,
+      "detail": "every module has its own name"
+    },
+    {
+      "id": "visit_path",
+      "ok": true,
+      "detail": "A first-time visitor can reach 'Plan your visit' from the home page in one click."
+    },
+    {
+      "id": "giving_present",
+      "ok": true,
+      "detail": "module 'donations'"
+    },
+    {
+      "id": "events_seeded",
+      "ok": true,
+      "detail": "'events' opens with records in it"
+    },
+    {
+      "id": "no_ask_before_welcome",
+      "ok": true,
+      "detail": "The home page welcomes before it asks for money."
+    }
+  ],
+  "dir": "/Users/kurtjoseph/Business Ideas/church f god amersfoort/forge/20260804-232011"
+}

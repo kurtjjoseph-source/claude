@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Forge</title>
+<style>
+  /* VOM Kit v2 — the `.vk-forge` surface. The console is the one place the ground
+     legitimately differs from the house paper: it is a tool being watched, not a page
+     being read. It still uses the kit's dark tokens, so it belongs to the same family
+     as every product site's dark mode rather than being its own private black. */
+  :root{
+    --base:#0E100F; --base-2:#161A18; --base-3:#1C211E;
+    --ink:#F0F2EE; --muted:#A8B1AA; --faint:#79837C; --line:#2A322D;
+    --accent:#E8843C; --accent-2:#FDBA74; --on-accent:#0E100F;
+    --ok:#38D07F; --warn:#E0A94B; --bad:#E8785C;
+    --radius:14px; --radius-sm:9px;
+    --font:'Manrope',ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+    --mono:ui-monospace,SFMono-Regular,'SF Mono','Cascadia Code',Menlo,monospace;
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  html,body{height:100%}
+  body{margin:0;background:var(--base);color:var(--ink);font-family:var(--font);
+       line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 22px}
+
+  /* ---------- header ---------- */
+  header{border-bottom:1px solid var(--line);background:
+      radial-gradient(120% 140% at 12% 0%, color-mix(in srgb,var(--accent) 16%,transparent) 0%, transparent 58%),
+      var(--base);}
+  .top{display:flex;align-items:flex-start;gap:22px;padding:26px 0 22px;flex-wrap:wrap}
+  .mark{display:flex;align-items:center;gap:13px}
+  .anvil{width:44px;height:44px;border-radius:12px;background:var(--accent);color:var(--on-accent);
+    display:grid;place-items:center;font-size:22px;font-weight:800;flex:none;
+    box-shadow:0 0 0 1px color-mix(in srgb,var(--accent) 45%,transparent),
+               0 0 34px color-mix(in srgb,var(--accent) 30%,transparent)}
+  body[data-state="running"] .anvil{animation:heat 1.5s ease-in-out infinite}
+  @keyframes heat{0%,100%{box-shadow:0 0 0 1px color-mix(in srgb,var(--accent) 45%,transparent),0 0 24px color-mix(in srgb,var(--accent) 22%,transparent)}
+                  50%{box-shadow:0 0 0 1px color-mix(in srgb,var(--accent) 70%,transparent),0 0 50px color-mix(in srgb,var(--accent) 55%,transparent)}}
+  h1{margin:0;font-size:1.32rem;font-weight:800;letter-spacing:.02em}
+  h1 .sub{display:block;font-size:.86rem;font-weight:600;color:var(--muted);letter-spacing:0}
+  .meta{margin-left:auto;display:flex;gap:26px;flex-wrap:wrap;text-align:right}
+  .meta div{min-width:88px}
+  .meta .k{font-size:.68rem;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);font-weight:700}
+  .meta .v{font-weight:750;font-size:.98rem;font-variant-numeric:tabular-nums}
+  .clock{font-size:1.9rem;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums;
+    color:var(--accent);line-height:1.1}
+
+  .bar{height:3px;background:var(--base-3);position:relative;overflow:hidden}
+  .bar i{position:absolute;inset:0 auto 0 0;width:0;background:linear-gradient(90deg,var(--accent),var(--accent-2));
+    transition:width .5s cubic-bezier(.4,0,.2,1)}
+  body[data-state="failed"] .bar i{background:var(--bad)}
+
+  /* ---------- layout ---------- */
+  .grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:26px;padding:26px 0 60px}
+  @media (max-width:900px){ .grid{grid-template-columns:1fr} }
+  .panel{background:var(--base-2);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+  .panel > h2{margin:0;padding:14px 18px;font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--muted);font-weight:750;border-bottom:1px solid var(--line)}
+
+  /* ---------- stage rail ---------- */
+  ol.rail{list-style:none;margin:0;padding:8px 0}
+  ol.rail li{display:flex;gap:14px;padding:9px 18px;position:relative}
+  ol.rail li::before{content:"";position:absolute;left:33px;top:0;bottom:0;width:1px;background:var(--line)}
+  ol.rail li:first-child::before{top:22px}
+  ol.rail li:last-child::before{bottom:calc(100% - 22px)}
+  .cue{width:30px;height:30px;border-radius:9px;flex:none;display:grid;place-items:center;
+    font-size:14px;background:var(--base-3);color:var(--muted);border:1px solid var(--line);
+    position:relative;z-index:1;transition:.25s}
+  .st-running .cue{background:var(--accent);color:var(--on-accent);border-color:var(--accent);
+    animation:pulse 1.15s ease-in-out infinite}
+  @keyframes pulse{0%,100%{box-shadow:0 0 0 0 color-mix(in srgb,var(--accent) 55%,transparent)}
+                   70%{box-shadow:0 0 0 9px transparent}}
+  .st-ok .cue{background:color-mix(in srgb,var(--ok) 16%,var(--base-3));color:var(--ok);
+    border-color:color-mix(in srgb,var(--ok) 40%,transparent)}
+  .st-failed .cue{background:color-mix(in srgb,var(--bad) 18%,var(--base-3));color:var(--bad);
+    border-color:color-mix(in srgb,var(--bad) 50%,transparent)}
+  .st-skipped .cue{opacity:.45}
+  .sbody{flex:1;min-width:0;padding-top:3px}
+  .sbody .t{font-weight:700;font-size:.96rem;display:flex;gap:10px;align-items:baseline}
+  .sbody .d{color:var(--muted);font-size:.84rem}
+  .st-pending .sbody{opacity:.42}
+  .st-running .sbody .t{color:var(--accent)}
+  .ms{margin-left:auto;font-size:.76rem;color:var(--muted);font-variant-numeric:tabular-nums;
+    font-family:var(--mono);flex:none}
+  .note{margin-top:4px;font-size:.83rem;color:var(--bad);white-space:pre-wrap}
+
+  /* ---------- log ---------- */
+  .log{font-family:var(--mono);font-size:.78rem;line-height:1.75;padding:12px 18px;
+    max-height:430px;overflow:auto}
+  .log div{display:flex;gap:11px;white-space:pre-wrap;word-break:break-word}
+  .log .tm{color:var(--muted);flex:none;opacity:.6}
+  .log .sg{color:var(--accent);flex:none;min-width:66px;opacity:.85}
+  .log .warn .mg{color:var(--warn)}
+  .log .error .mg{color:var(--bad)}
+  .log .mg{color:color-mix(in srgb,var(--ink) 88%,transparent)}
+
+  /* ---------- result ---------- */
+  .result{padding:18px}
+  .result.hide{display:none}
+  .headline{font-size:1.28rem;font-weight:800;letter-spacing:-.01em;margin:0 0 4px}
+  .headline.bad{color:var(--bad)}
+  .sub2{color:var(--muted);font-size:.9rem;margin:0 0 16px}
+  .links{display:grid;gap:9px}
+  .link{display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid var(--line);
+    border-radius:var(--radius-sm);background:var(--base-3);text-decoration:none;color:inherit}
+  .link:hover{border-color:var(--accent)}
+  .link .ic{width:26px;height:26px;border-radius:7px;background:var(--accent);color:var(--on-accent);
+    display:grid;place-items:center;font-size:13px;font-weight:800;flex:none}
+  .link .lb{font-weight:700;font-size:.92rem}
+  .link .u{color:var(--muted);font-size:.78rem;font-family:var(--mono);word-break:break-all}
+  .checks{margin-top:16px;display:grid;gap:5px}
+  .chk{display:flex;gap:9px;font-size:.84rem;align-items:baseline}
+  .chk .m{flex:none;font-weight:800}
+  .chk.ok .m{color:var(--ok)} .chk.no .m{color:var(--bad)}
+  .chk .x{color:var(--muted)}
+  .empty{padding:34px 18px;text-align:center;color:var(--muted);font-size:.9rem}
+  .pill{display:inline-block;padding:3px 10px;border-radius:999px;font-size:.7rem;font-weight:750;
+    letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--line);color:var(--muted)}
+  .pill.live{border-color:var(--accent);color:var(--accent)}
+</style>
+</head>
+<body data-state="idle">
+
+<header>
+  <div class="wrap top">
+    <div class="mark">
+      <div class="anvil" id="anvil">◆</div>
+      <h1 id="forgeName">FORGE<span class="sub" id="bizName">waiting for a build…</span></h1>
+    </div>
+    <div class="meta">
+      <div><div class="k">Elapsed</div><div class="clock" id="clock">0.0s</div></div>
+      <div><div class="k">Stage</div><div class="v" id="stageNow">—</div></div>
+      <div><div class="k">Target</div><div class="v" id="target">—</div></div>
+      <div><div class="k">Archetype</div><div class="v" id="arch">—</div></div>
+    </div>
+  </div>
+  <div class="bar"><i id="progress"></i></div>
+</header>
+
+<div class="wrap grid">
+  <div>
+    <div class="panel">
+      <h2>Build stages</h2>
+      <ol class="rail" id="rail"><li class="st-pending"><div class="cue">·</div>
+        <div class="sbody"><div class="t">No run yet</div>
+        <div class="d">Start a forge run and the stages appear here.</div></div></li></ol>
+    </div>
+    <div class="panel result hide" id="result" style="margin-top:22px"></div>
+  </div>
+  <div class="panel">
+    <h2>Live log</h2>
+    <div class="log" id="log"><div class="empty">Nothing yet.</div></div>
+  </div>
+</div>
+
+<script>
+window.__RUN__ = {"schema": 1, "run": "20260806-015018", "outcome": "launched", "started": "2026-08-06T01:50:18Z", "elapsed": 14.38, "business": "The Freelance Desk", "archetype": {"id": "prelaunch", "label": "Prelaunch validation funnel", "curated": true, "forge": {"name": "PRELAUNCHforge", "scheme": "dark", "base": "#0A0A0B", "base_soft": "#141416", "accent": "#38D07F", "accent_2": "#7BE3AC", "accent_site": "#2f9e63", "on_accent": "#0A0A0B", "line": "Building a validation funnel."}}, "target": "vercel", "fingerprint": "sha256:36d09d9bf42eabc24ea3771b3478fcce", "progress": {"done": 11, "total": 11}, "stages": [{"id": "resolve", "title": "Read the spec", "cue": "◇", "detail": "load the blueprint, verify the fingerprint, refuse if anything is unresolved", "state": "ok", "started": 0.001, "ended": 0.005, "ms": 4, "note": "", "optional": false}, {"id": "scaffold", "title": "Lay out the build", "cue": "▢", "detail": "create the output tree this run writes into", "state": "ok", "started": 0.007, "ended": 0.012, "ms": 5, "note": "", "optional": false}, {"id": "brand", "title": "Apply the brand · Waitlist Green", "cue": "◐", "detail": "grotesk type on a light ground, accent #278453, logo embedded, and the manual written for the owner", "state": "ok", "started": 0.013, "ended": 0.017, "ms": 4, "note": "", "optional": false}, {"id": "platform", "title": "Build the platform · 5 modules", "cue": "▣", "detail": "the operating app the owner works in, seeded so it opens with something in it", "state": "ok", "started": 0.019, "ended": 0.025, "ms": 6, "note": "", "optional": false}, {"id": "site", "title": "Write the site · 2 pages", "cue": "▤", "detail": "the public pages, in this archetype's voice", "state": "ok", "started": 0.026, "ended": 0.042, "ms": 16, "note": "", "optional": false}, {"id": "wire", "title": "Wire the rails", "cue": "◈", "detail": "payments, email and analytics — live where credentials exist, labelled where not", "state": "ok", "started": 0.044, "ended": 0.047, "ms": 3, "note": "", "optional": false}, {"id": "package", "title": "Package", "cue": "▥", "detail": "manifest, readme, deployment config", "state": "ok", "started": 0.051, "ended": 0.083, "ms": 32, "note": "", "optional": false}, {"id": "verify", "title": "Check the work", "cue": "◎", "detail": "run every check in the spec against what was actually written", "state": "ok", "started": 0.09, "ended": 0.101, "ms": 11, "note": "", "optional": false}, {"id": "deploy", "title": "Deploy · vercel", "cue": "▲", "detail": "a Vercel deployment — a public URL", "state": "ok", "started": 0.107, "ended": 13.603, "ms": 13496, "note": "", "optional": false}, {"id": "smoke", "title": "Prove it is up", "cue": "◉", "detail": "fetch what was deployed and confirm it answers", "state": "ok", "started": 13.606, "ended": 14.375, "ms": 769, "note": "", "optional": false}, {"id": "seal", "title": "Seal the run", "cue": "●", "detail": "record the fingerprint, artifacts and outcome", "state": "ok", "started": 14.377, "ended": 14.379, "ms": 1, "note": "", "optional": false}], "artifacts": {"logo": "drawn monogram — no client logo was supplied", "brand_manual": "/Users/kurtjoseph/Business Ideas/SMB Pain Point Seeds/The Freelance Desk/forge/20260806-015018/build/brand-manual.html", "brand_kit": "Waitlist Green (default)", "platform": "/Users/kurtjoseph/Business Ideas/SMB Pain Point Seeds/The Freelance Desk/forge/20260806-015018/build/platform/index.html", "photos": "6 placeholder photographs (CC0/PDM)", "site": "/Users/kurtjoseph/Business Ideas/SMB Pain Point Seeds/The Freelance Desk/forge/20260806-015018/build/site/index.html", "pages": ["faq.html", "index.html"], "url": "https://the-freelance-desk-prelaunch-76zulghav.vercel.app", "platform_url": "https://the-freelance-desk-prelaunch-76zulghav.vercel.app/platform/", "alias": "https://the-freelance-desk-prelaunch.vercel.app", "receipt": "/Users/kurtjoseph/Business Ideas/SMB Pain Point Seeds/The Freelance Desk/forge/20260806-015018/receipt.json"}, "checks": [{"id": "spec_fingerprint", "ok": true, "detail": "spec fingerprint matches its contents"}, {"id": "no_placeholders", "ok": true, "detail": "no unresolved token reached a page"}, {"id": "pages_written", "ok": true, "detail": "2/2 present and non-trivial"}, {"id": "platform_written", "ok": true, "detail": "2/2 present and non-trivial"}, {"id": "nav_resolves", "ok": true, "detail": "every nav link points at a written page"}, {"id": "module_titles_unique", "ok": true, "detail": "every module has its own name"}, {"id": "brand_kit_applied", "ok": true, "detail": "Waitlist Green — #278453 is in the stylesheet"}, {"id": "waitlist_present", "ok": true, "detail": "module 'lead_capture'"}, {"id": "ask_on_first_screen", "ok": true, "detail": "The ask is reachable without leaving the first page."}, {"id": "no_payment_rail", "ok": true, "detail": "module 'crm'"}], "dir": "/Users/kurtjoseph/Business Ideas/SMB Pain Point Seeds/The Freelance Desk/forge/20260806-015018"};
+window.__EVENTS__ = [{"seq": 1, "ts": "2026-08-06T01:50:18Z", "t": 0.0, "kind": "run_start", "stage": "", "level": "info", "msg": "PRELAUNCHforge · The Freelance Desk", "data": {"archetype": "prelaunch", "target": "vercel", "fingerprint": "sha256:36d09d9bf42eabc24ea3771b3478fcce", "stages": 11}}, {"seq": 2, "ts": "2026-08-06T01:50:18Z", "t": 0.001, "kind": "stage_start", "stage": "resolve", "level": "info", "msg": "Read the spec"}, {"seq": 3, "ts": "2026-08-06T01:50:18Z", "t": 0.003, "kind": "log", "stage": "resolve", "level": "info", "msg": "Prelaunch validation funnel · 5 modules · 2 pages"}, {"seq": 4, "ts": "2026-08-06T01:50:18Z", "t": 0.004, "kind": "log", "stage": "resolve", "level": "info", "msg": "authorization: unattended (de23651af840ccdf)"}, {"seq": 5, "ts": "2026-08-06T01:50:18Z", "t": 0.004, "kind": "log", "stage": "resolve", "level": "warn", "msg": "4 value(s) filled from the archetype because the profile did not supply them", "data": {"assumptions": ["tagline", "about", "leadership", "brand_kit"]}}, {"seq": 6, "ts": "2026-08-06T01:50:18Z", "t": 0.005, "kind": "stage_end", "stage": "resolve", "level": "info", "msg": "Read the spec", "data": {"state": "ok"}}, {"seq": 7, "ts": "2026-08-06T01:50:18Z", "t": 0.007, "kind": "stage_start", "stage": "scaffold", "level": "info", "msg": "Lay out the build"}, {"seq": 8, "ts": "2026-08-06T01:50:18Z", "t": 0.012, "kind": "log", "stage": "scaffold", "level": "info", "msg": "build tree at forge/20260806-015018/build"}, {"seq": 9, "ts": "2026-08-06T01:50:18Z", "t": 0.012, "kind": "stage_end", "stage": "scaffold", "level": "info", "msg": "Lay out the build", "data": {"state": "ok"}}, {"seq": 10, "ts": "2026-08-06T01:50:18Z", "t": 0.014, "kind": "stage_start", "stage": "brand", "level": "info", "msg": "Apply the brand · Waitlist Green"}, {"seq": 11, "ts": "2026-08-06T01:50:18Z", "t": 0.017, "kind": "log", "stage": "brand", "level": "info", "msg": "Waitlist Green · accent #278453 · grotesk type · light ground · default · built by PRELAUNCHforge"}, {"seq": 12, "ts": "2026-08-06T01:50:18Z", "t": 0.017, "kind": "stage_end", "stage": "brand", "level": "info", "msg": "Apply the brand · Waitlist Green", "data": {"state": "ok"}}, {"seq": 13, "ts": "2026-08-06T01:50:18Z", "t": 0.019, "kind": "stage_start", "stage": "platform", "level": "info", "msg": "Build the platform · 5 modules"}, {"seq": 14, "ts": "2026-08-06T01:50:18Z", "t": 0.024, "kind": "log", "stage": "platform", "level": "info", "msg": "Waitlist, People, Announcements, Content, Inbox"}, {"seq": 15, "ts": "2026-08-06T01:50:18Z", "t": 0.025, "kind": "log", "stage": "platform", "level": "info", "msg": "2 seed record(s) so it opens with something in it"}, {"seq": 16, "ts": "2026-08-06T01:50:18Z", "t": 0.025, "kind": "stage_end", "stage": "platform", "level": "info", "msg": "Build the platform · 5 modules", "data": {"state": "ok"}}, {"seq": 17, "ts": "2026-08-06T01:50:18Z", "t": 0.026, "kind": "stage_start", "stage": "site", "level": "info", "msg": "Write the site · 2 pages"}, {"seq": 18, "ts": "2026-08-06T01:50:18Z", "t": 0.036, "kind": "log", "stage": "site", "level": "info", "msg": "6 photographs installed at site/img/ — placeholders, credited in img/CREDITS.md"}, {"seq": 19, "ts": "2026-08-06T01:50:18Z", "t": 0.041, "kind": "log", "stage": "site", "level": "info", "msg": "index.html  (49 KB)"}, {"seq": 20, "ts": "2026-08-06T01:50:18Z", "t": 0.042, "kind": "log", "stage": "site", "level": "info", "msg": "faq.html  (45 KB)"}, {"seq": 21, "ts": "2026-08-06T01:50:18Z", "t": 0.042, "kind": "stage_end", "stage": "site", "level": "info", "msg": "Write the site · 2 pages", "data": {"state": "ok"}}, {"seq": 22, "ts": "2026-08-06T01:50:18Z", "t": 0.044, "kind": "stage_start", "stage": "wire", "level": "info", "msg": "Wire the rails"}, {"seq": 23, "ts": "2026-08-06T01:50:18Z", "t": 0.046, "kind": "log", "stage": "wire", "level": "warn", "msg": "built but not switched on: email=brevo, analytics=engage_ai"}, {"seq": 24, "ts": "2026-08-06T01:50:18Z", "t": 0.047, "kind": "log", "stage": "wire", "level": "warn", "msg": "needs from the operator: BREVO_API_KEY, BREVO_SENDER_EMAIL, ENGAGE_AI_BASE_URL"}, {"seq": 25, "ts": "2026-08-06T01:50:18Z", "t": 0.047, "kind": "stage_end", "stage": "wire", "level": "info", "msg": "Wire the rails", "data": {"state": "ok"}}, {"seq": 26, "ts": "2026-08-06T01:50:18Z", "t": 0.051, "kind": "stage_start", "stage": "package", "level": "info", "msg": "Package"}, {"seq": 27, "ts": "2026-08-06T01:50:18Z", "t": 0.082, "kind": "log", "stage": "package", "level": "info", "msg": "site at the root, platform at /platform, manifest + readme written"}, {"seq": 28, "ts": "2026-08-06T01:50:18Z", "t": 0.083, "kind": "stage_end", "stage": "package", "level": "info", "msg": "Package", "data": {"state": "ok"}}, {"seq": 29, "ts": "2026-08-06T01:50:18Z", "t": 0.09, "kind": "stage_start", "stage": "verify", "level": "info", "msg": "Check the work"}, {"seq": 30, "ts": "2026-08-06T01:50:18Z", "t": 0.094, "kind": "log", "stage": "verify", "level": "info", "msg": "PASS  spec_fingerprint — spec fingerprint matches its contents"}, {"seq": 31, "ts": "2026-08-06T01:50:18Z", "t": 0.096, "kind": "log", "stage": "verify", "level": "info", "msg": "PASS  no_placeholders — no unresolved token reached a page"}, {"seq": 32, "ts": "2026-08-06T01:50:18Z", "t": 0.096, "kind": "log", "stage": "verify", "level": "info", "msg": "PASS  pages_written — 2/2 present and non-trivial"}, {"seq": 33, "ts": "2026-08-06T01:50:18Z", "t": 0.096, "kind": "log", "stage": "verify", "level": "info", "msg": "PASS  platform_written — 2/2 present and non-trivial"}, {"seq": 34, "ts": "2026-08-06T01:50:18Z", "t": 0.097, "kind": "log", "stage": "verify", "level": "info", "msg": "PASS  nav_resolves — every nav link points at a written page"}, {"seq": 35, "ts": "2026-08-06T01:50:18Z", "t": 0.097, "kind": "log", "stage": "verify", "level": "info", "msg": "PASS  module_titles_unique — every module has its own name"}, {"seq": 36, "ts": "2026-08-06T01:50:18Z", "t": 0.099, "kind": "log", "stage": "verify", "level": "info", "msg": "PASS  brand_kit_applied — Waitlist Green — #278453 is in the stylesheet"}, {"seq": 37, "ts": "2026-08-06T01:50:18Z", "t": 0.099, "kind": "log", "stage": "verify", "level": "info", "msg": "PASS  waitlist_present — module 'lead_capture'"}, {"seq": 38, "ts": "2026-08-06T01:50:18Z", "t": 0.1, "kind": "log", "stage": "verify", "level": "info", "msg": "PASS  ask_on_first_screen — The ask is reachable without leaving the first page."}, {"seq": 39, "ts": "2026-08-06T01:50:18Z", "t": 0.1, "kind": "log", "stage": "verify", "level": "info", "msg": "PASS  no_payment_rail — module 'crm'"}, {"seq": 40, "ts": "2026-08-06T01:50:18Z", "t": 0.101, "kind": "log", "stage": "verify", "level": "info", "msg": "all 10 checks passed"}, {"seq": 41, "ts": "2026-08-06T01:50:18Z", "t": 0.101, "kind": "stage_end", "stage": "verify", "level": "info", "msg": "Check the work", "data": {"state": "ok"}}, {"seq": 42, "ts": "2026-08-06T01:50:18Z", "t": 0.107, "kind": "stage_start", "stage": "deploy", "level": "info", "msg": "Deploy · vercel"}, {"seq": 43, "ts": "2026-08-06T01:50:21Z", "t": 2.558, "kind": "log", "stage": "deploy", "level": "info", "msg": "linked to project 'the-freelance-desk-prelaunch'"}, {"seq": 44, "ts": "2026-08-06T01:50:29Z", "t": 10.711, "kind": "log", "stage": "deploy", "level": "info", "msg": "deployment protection disabled — the site is reachable without a Vercel login"}, {"seq": 45, "ts": "2026-08-06T01:50:32Z", "t": 13.602, "kind": "log", "stage": "deploy", "level": "info", "msg": "stable address: https://the-freelance-desk-prelaunch.vercel.app"}, {"seq": 46, "ts": "2026-08-06T01:50:32Z", "t": 13.603, "kind": "log", "stage": "deploy", "level": "info", "msg": "https://the-freelance-desk-prelaunch-76zulghav.vercel.app"}, {"seq": 47, "ts": "2026-08-06T01:50:32Z", "t": 13.603, "kind": "stage_end", "stage": "deploy", "level": "info", "msg": "Deploy · vercel", "data": {"state": "ok"}}, {"seq": 48, "ts": "2026-08-06T01:50:32Z", "t": 13.606, "kind": "stage_start", "stage": "smoke", "level": "info", "msg": "Prove it is up"}, {"seq": 49, "ts": "2026-08-06T01:50:32Z", "t": 14.049, "kind": "log", "stage": "smoke", "level": "info", "msg": "HTTP 200 from https://the-freelance-desk-prelaunch-76zulghav.vercel.app — serving 'The Freelance Desk' (50759 bytes)"}, {"seq": 50, "ts": "2026-08-06T01:50:33Z", "t": 14.374, "kind": "log", "stage": "smoke", "level": "info", "msg": "stable address confirmed: https://the-freelance-desk-prelaunch.vercel.app"}, {"seq": 51, "ts": "2026-08-06T01:50:33Z", "t": 14.375, "kind": "stage_end", "stage": "smoke", "level": "info", "msg": "Prove it is up", "data": {"state": "ok"}}, {"seq": 52, "ts": "2026-08-06T01:50:33Z", "t": 14.377, "kind": "stage_start", "stage": "seal", "level": "info", "msg": "Seal the run"}, {"seq": 53, "ts": "2026-08-06T01:50:33Z", "t": 14.378, "kind": "log", "stage": "seal", "level": "info", "msg": "receipt written · 14.38s"}, {"seq": 54, "ts": "2026-08-06T01:50:33Z", "t": 14.379, "kind": "stage_end", "stage": "seal", "level": "info", "msg": "Seal the run", "data": {"state": "ok"}}, {"seq": 55, "ts": "2026-08-06T01:50:33Z", "t": 14.38, "kind": "run_end", "stage": "", "level": "info", "msg": "The Freelance Desk is launched", "data": {"outcome": "launched", "elapsed": 14.38, "url": "https://the-freelance-desk-prelaunch-76zulghav.vercel.app"}}];
+</script>
+<script>
+"use strict";
+
+/* Two ways this page gets its data:
+     - live   : a local server exposes /api/run?after=N while the build runs
+     - replay : a finished run is baked into window.__RUN__ / window.__EVENTS__
+   The rendering is identical, so a build looks the same while it happens and afterwards. */
+const TOKEN = new URLSearchParams(location.search).get("t") || "";
+const LIVE   = !window.__RUN__;
+let   after  = 0, RUN = window.__RUN__ || null, finished = !LIVE, t0 = null;
+const EVENTS = window.__EVENTS__ || [];
+
+const $ = (id) => document.getElementById(id);
+
+function fmt(sec){
+  if (sec == null) return "—";
+  if (sec < 60) return sec.toFixed(1) + "s";
+  const m = Math.floor(sec / 60), s = Math.round(sec % 60);
+  return m + "m " + String(s).padStart(2, "0") + "s";
+}
+function esc(s){ const d = document.createElement("div"); d.textContent = s == null ? "" : s; return d.innerHTML; }
+
+/* ---------- theme: the forge that is running paints the page ---------- */
+function paintTheme(run){
+  const f = (run.archetype && run.archetype.forge) || {};
+  if (f.accent)   document.documentElement.style.setProperty("--accent", f.accent);
+  if (f.accent_2) document.documentElement.style.setProperty("--accent-2", f.accent_2);
+  if (f.base)     document.documentElement.style.setProperty("--base", f.base);
+  if (f.base_soft)document.documentElement.style.setProperty("--base-2", f.base_soft);
+  $("forgeName").childNodes[0].nodeValue = f.name || "FORGE";
+  $("anvil").textContent = (f.name || "F").slice(0,1);
+  document.title = (f.name || "Forge") + " · " + (run.business || "");
+}
+
+/* ---------- header ---------- */
+function paintHead(run){
+  $("bizName").textContent = run.business + (run.archetype ? " — " + run.archetype.label : "");
+  $("target").textContent  = run.target || "—";
+  $("arch").textContent    = (run.archetype && run.archetype.id) || "—";
+  const p = run.progress || {done:0,total:1};
+  $("progress").style.width = Math.round(100 * p.done / Math.max(1, p.total)) + "%";
+  const running = (run.stages || []).find(s => s.state === "running");
+  $("stageNow").textContent = running ? running.title.split(" · ")[0]
+                            : (run.outcome === "running" ? "—" : run.outcome);
+  document.body.dataset.state = run.outcome;
+}
+
+/* ---------- stage rail: the cues ---------- */
+const GLYPH = { ok:"✓", failed:"✗", skipped:"–" };
+function paintRail(run){
+  const rail = $("rail");
+  rail.innerHTML = (run.stages || []).map(s => {
+    const glyph = GLYPH[s.state] || s.cue || "·";
+    const time  = s.state === "ok" && s.ms != null ? (s.ms >= 1000 ? (s.ms/1000).toFixed(1)+"s" : s.ms+" ms")
+                : s.state === "skipped" ? "skipped" : "";
+    return '<li class="st-' + s.state + '">' +
+      '<div class="cue">' + esc(glyph) + '</div>' +
+      '<div class="sbody"><div class="t">' + esc(s.title) +
+        (time ? '<span class="ms">' + esc(time) + '</span>' : '') + '</div>' +
+      '<div class="d">' + esc(s.detail || "") + '</div>' +
+      (s.state === "failed" && s.note ? '<div class="note">' + esc(s.note) + '</div>' : '') +
+      '</div></li>';
+  }).join("");
+}
+
+/* ---------- log ---------- */
+function appendLog(evs){
+  const log = $("log");
+  if (log.querySelector(".empty")) log.innerHTML = "";
+  const atEnd = log.scrollTop + log.clientHeight >= log.scrollHeight - 40;
+  evs.forEach(ev => {
+    if (ev.kind === "stage_start" || ev.kind === "run_start" || ev.kind === "log"
+        || (ev.kind === "stage_end" && (ev.level === "error" || (ev.data||{}).state === "skipped"))
+        || ev.kind === "run_end") {
+      const row = document.createElement("div");
+      row.className = ev.level || "info";
+      row.innerHTML = '<span class="tm">' + esc(ev.t.toFixed(2)) + '</span>' +
+                      '<span class="sg">' + esc(ev.stage || "forge") + '</span>' +
+                      '<span class="mg">' + esc(ev.msg) + '</span>';
+      log.appendChild(row);
+    }
+  });
+  if (atEnd) log.scrollTop = log.scrollHeight;
+}
+
+/* ---------- result ---------- */
+const LABEL = { url:["◱","The site"], platform_url:["▣","The business platform"],
+                receipt:["◇","Build receipt"], site:["▤","Site source"],
+                platform:["▣","Platform source"], tenant:["◈","Hub tenant"] };
+function paintResult(run){
+  if (run.outcome === "running") return;
+  const box = $("result");
+  box.classList.remove("hide");
+  const failed = run.outcome === "failed";
+  const bad = (run.stages || []).find(s => s.state === "failed");
+  const el = run.elapsed;
+
+  const links = Object.entries(run.artifacts || {})
+    .filter(([k,v]) => LABEL[k] && typeof v === "string" && v)
+    .map(([k,v]) => {
+      const [ic, lb] = LABEL[k];
+      const href = /^https?:|^file:/.test(v) ? v : "file://" + v;
+      return '<a class="link" href="' + esc(href) + '" target="_blank" rel="noopener">' +
+             '<span class="ic">' + esc(ic) + '</span><span><span class="lb">' + esc(lb) +
+             '</span><br><span class="u">' + esc(v) + '</span></span></a>';
+    }).join("");
+
+  const checks = (run.checks || []).map(c =>
+    '<div class="chk ' + (c.ok ? "ok" : "no") + '"><span class="m">' + (c.ok ? "✓" : "✗") +
+    '</span><span>' + esc(c.id) + ' <span class="x">— ' + esc(c.detail) + '</span></span></div>'
+  ).join("");
+
+  box.innerHTML =
+    '<div class="result">' +
+    '<h2 class="headline' + (failed ? ' bad' : '') + '">' +
+      (failed ? "Stopped at " + esc(bad ? bad.title : "a stage")
+              : esc(run.business) + " is " + esc(run.outcome)) + '</h2>' +
+    '<p class="sub2">' + (failed
+        ? esc((bad && bad.note) || "The run did not complete. Nothing was deployed.")
+        : "Built and " + (run.target === "local" ? "ready to open" : "deployed") +
+          " in <strong>" + fmt(el) + "</strong> · " + esc(run.fingerprint || "")) + '</p>' +
+    (links ? '<div class="links">' + links + '</div>' : '') +
+    (checks ? '<div class="checks">' + checks + '</div>' : '') +
+    '</div>';
+}
+
+/* ---------- clock ---------- */
+setInterval(() => {
+  if (finished || !t0) return;
+  $("clock").textContent = fmt((Date.now() - t0) / 1000);
+}, 100);
+
+function render(run){
+  if (!run) return;
+  RUN = run;
+  paintTheme(run); paintHead(run); paintRail(run); paintResult(run);
+  if (run.outcome !== "running"){
+    finished = true;
+    $("clock").textContent = fmt(run.elapsed);
+  } else if (!t0){
+    t0 = Date.now() - (run.elapsed || 0) * 1000;
+  }
+}
+
+/* ---------- live polling ---------- */
+async function poll(){
+  try {
+    const r = await fetch("/api/run?after=" + after + (TOKEN ? "&t=" + encodeURIComponent(TOKEN) : ""));
+    if (!r.ok) throw new Error("HTTP " + r.status);
+    const d = await r.json();
+    if (d.events && d.events.length){
+      after = d.events[d.events.length - 1].seq;
+      appendLog(d.events);
+    }
+    if (d.run) render(d.run);
+    if (d.run && d.run.outcome !== "running") return;   // done — stop polling
+  } catch(e){ /* the server goes away when the run ends; the last render stands */ }
+  setTimeout(poll, 400);
+}
+
+if (LIVE){ poll(); }
+else { appendLog(EVENTS); render(RUN); }
+</script>
+</body>
+</html>

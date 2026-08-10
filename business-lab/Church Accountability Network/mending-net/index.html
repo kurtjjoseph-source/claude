@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mending Net — network console</title>
+<meta name="description" content="The administrative bishop's region-wide view: ministers, congregations, concerns, restoration and safeguarding, every flag carrying the section that creates it.">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#f6f5f1" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0e100f" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231B2A4A'/%3E%3Cpath d='M6 22 L16 8 L26 22 M6 22 L16 16 L26 22' stroke='%2357b3a8' stroke-width='2' fill='none' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="kit.css">
+</head>
+<body>
+<div class="vom-bar">
+  <a class="brand" href="https://visionoutreachmedia.nl"><img src="vom-logo.jpg" alt="Vision Outreach Media"><b>Vision Outreach Media</b><span>· Mending Net</span></a>
+  <nav class="surfaces"><a class="surf" href="index.html" aria-current="page">Console</a><a class="surf" href="minister.html">Minister</a><a class="surf" href="church.html">Church</a></nav>
+  <button class="themebtn" id="themebtn" type="button">Theme</button>
+</div>
+
+<header class="mast">
+  <div class="wrap">
+    <p class="eyebrow">A church accountability network</p>
+    <h1>Mending<em>&nbsp;Net</em></h1>
+    <p class="lede">Every credentialed minister has their own <a href="minister.html">intranet</a>; every congregation has <a href="church.html">its own</a>. This is the third surface: the region read across both. Ministerial accountability is already written down — monthly reporting, a covenant of practical commitments, a Matthew&nbsp;18 pathway for concerns, a supervised restoration process. What is missing is a place where all of it is <em>visible and current</em> instead of scattered across files, inboxes and memory. Mending Net is that place: one network view for an administrative bishop, one standing record for every credentialed minister.</p>
+    <div class="ctx">
+      <div><label class="f" for="period">Current period</label><select id="period"></select></div>
+    </div>
+  </div>
+</header>
+
+<nav class="tabs"><div class="wrap" id="tabs"></div></nav>
+
+<main><div class="wrap">
+  <section class="pane" id="p-overview"></section>
+  <section class="pane" id="p-standing"></section>
+  <section class="pane" id="p-report"></section>
+  <section class="pane" id="p-covenant"></section>
+  <section class="pane" id="p-triads"></section>
+  <section class="pane" id="p-concerns"></section>
+  <section class="pane" id="p-restoration"></section>
+  <section class="pane" id="p-congregations"></section>
+  <section class="pane" id="p-churchhome"></section>
+  <section class="pane" id="p-churchreport"></section>
+  <section class="pane" id="p-governance"></section>
+  <section class="pane" id="p-progress"></section>
+  <section class="pane" id="p-safeguard"></section>
+  <section class="pane" id="p-sources"></section>
+</div></main>
+
+<footer><div class="wrap">
+  <p><b>Demonstration network.</b> Every minister, church, concern and restoration case in this build is fictional. Nothing here is a real disciplinary record.</p>
+  <p><b>Authority.</b> Mending Net implements process that is defined in the Church of God <i>Book of Church Order, Governance, and Discipline</i> (Minutes of the International General Assembly) and the <i>Practical Commitments</i>. Those documents are the authority; this tool is a tracker, and where the two ever disagree the Minutes govern. Section references throughout point to the governing text; the text itself is not reproduced here — it is copyright Church of God Ministerial Development, Cleveland, Tennessee.</p>
+  <p><b>Not a substitute for civil process.</b> Allegations of child sexual abuse, sexual exploitation of a minor, or any other suspected crime go to civil authorities under applicable mandatory-reporting law. Ministerial confidentiality does not preempt reporting law and may not be used to conceal a felonious act.</p>
+  <p style="margin-top:18px">Built by Vision Outreach Media · <button class="b quiet sm" id="reset" type="button">Reset demonstration data</button></p>
+</div></footer>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer"><div class="dhd"><div id="drawerTitle"></div><button class="x" id="drawerX" type="button">×</button></div><div class="dbd" id="drawerBody"></div></aside>
+<script src="core.js"></script>
+<script src="console.js"></script>
+</body>
+</html>

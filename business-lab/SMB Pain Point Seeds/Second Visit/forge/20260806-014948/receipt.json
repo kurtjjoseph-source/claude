@@ -1,0 +1,38 @@
+{
+  "run": "20260806-014948",
+  "sealed": "2026-08-06T01:50:03Z",
+  "fingerprint": "sha256:30647c7a5afc377039736abb7e2ae711",
+  "business": "Second Visit",
+  "archetype": "prelaunch",
+  "forge": "PRELAUNCHforge",
+  "target": "vercel",
+  "artifacts": {
+    "logo": "drawn monogram — no client logo was supplied",
+    "brand_manual": "/Users/kurtjoseph/Business Ideas/SMB Pain Point Seeds/Second Visit/forge/20260806-014948/build/brand-manual.html",
+    "brand_kit": "Waitlist Green (default)",
+    "platform": "/Users/kurtjoseph/Business Ideas/SMB Pain Point Seeds/Second Visit/forge/20260806-014948/build/platform/index.html",
+    "photos": "6 placeholder photographs (CC0/PDM)",
+    "site": "/Users/kurtjoseph/Business Ideas/SMB Pain Point Seeds/Second Visit/forge/20260806-014948/build/site/index.html",
+    "pages": [
+      "faq.html",
+      "index.html"
+    ],
+    "url": "https://second-visit-prelaunch-9xqv5h9by-kurtjjoseph-6989s-projects.vercel.app",
+    "platform_url": "https://second-visit-prelaunch-9xqv5h9by-kurtjjoseph-6989s-projects.vercel.app/platform/",
+    "alias": "https://second-visit-prelaunch.vercel.app"
+  },
+  "checks_passed": 10,
+  "elapsed_seconds": 14.55,
+  "authorization": {
+    "mode": "unattended",
+    "targets": [
+      "vercel"
+    ],
+    "scope": "unattended forge build + deploy to 'vercel' for this business, limited to: composing the platform modules, writing the public site, wiring rails that already have credentials, publishing the result, and — for a hosting target that gates new projects behind a login — making that one deployment publicly reachable. Does not authorize sending email, charging anyone, or posting to any channel.",
+    "consent_ref": "b2dd2f981845bb9f",
+    "consent_seq": 0,
+    "granted_by": "VOM",
+    "granted_at": "2026-08-06T01:49:48Z",
+    "channel": "standing service authorization"
+  }
+}

@@ -1,0 +1,508 @@
+<title>Vision Outreach Media — say what you want to be true</title>
+<script>
+/* Paint-blocking bootstrap. deploy-wizard.sh supplies a bare <html>/<body>, so the
+   accent slot and the kit's body class have to be set here or the page ships in the
+   kit's default amber instead of VOM orange. */
+(function(){
+  var d = document.documentElement;
+  d.setAttribute("data-brand","vom");
+  try{ var t = localStorage.getItem("vom.fd.theme"); if (t) d.setAttribute("data-theme", t); }catch(e){}
+  document.addEventListener("DOMContentLoaded", function(){ document.body.className = "vk-body"; });
+})();
+</script>
+<!--INLINE_CSS-->
+<style>
+/* ---- layout only. Every colour is a vom-kit-v2 token or a mix of them. ---- */
+.fd-top{position:sticky;top:0;z-index:40;background:var(--brand-navy)}
+.fd-note{background:color-mix(in srgb,var(--c) 12%,var(--surface));border-bottom:1px solid var(--c-line);
+  padding:7px 0;font-size:12.5px;color:var(--ink-soft)}
+.fd-note b{color:var(--ink)}
+.fd-note .vk-wrap{display:flex;gap:var(--s2);align-items:baseline;flex-wrap:wrap}
+
+.fd-hero{padding:var(--s7) 0 var(--s5)}
+.fd-hero .vk-h1{max-width:19ch}
+.fd-kicker{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--c);margin:0 0 var(--s3)}
+
+/* the bar — this is the navigation */
+.fd-barwrap{border:1px solid var(--c-line);background:var(--surface);border-radius:var(--radius);
+  padding:var(--s4);box-shadow:var(--shadow-sm);margin-top:var(--s4)}
+.fd-lab{display:block;font-weight:700;font-size:15px;margin-bottom:var(--s1)}
+.fd-sub{font-size:13.5px;color:var(--ink-soft);margin:0 0 var(--s3)}
+.fd-field{display:flex;gap:var(--s2);align-items:stretch;flex-wrap:wrap}
+.fd-field input{flex:1 1 320px;min-width:0;font:inherit;font-size:16px;padding:13px 15px;
+  border:1px solid var(--line);border-radius:var(--radius-sm);background:var(--bg);color:var(--ink)}
+.fd-field input:focus-visible{outline:2px solid var(--c);outline-offset:1px;border-color:var(--c)}
+.fd-seeds{margin-top:var(--s3)}
+.fd-seeds .vk-shead{margin-bottom:var(--s2)}
+.fd-seed{text-align:left;font-size:13.5px;line-height:1.35;padding:10px 14px}
+
+.fd-read{margin-top:var(--s5);border:1px solid var(--line);border-radius:var(--radius);
+  background:var(--surface);overflow:hidden}
+.fd-read-head{background:var(--surface-2);border-bottom:1px solid var(--line);padding:var(--s3) var(--s4)}
+.fd-read-body{padding:var(--s4)}
+.fd-goal{font-family:var(--display);font-size:clamp(19px,2.4vw,25px);line-height:1.2;margin:0 0 var(--s4);
+  letter-spacing:-.015em}
+.fd-goal em{font-style:italic;color:var(--c)}
+.fd-cons{display:grid;gap:var(--s3);grid-template-columns:repeat(auto-fit,minmax(215px,1fr))}
+.fd-con .k{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ink-faint);font-weight:700;margin-bottom:6px}
+.fd-con .vk-chips{gap:6px}
+.fd-con .vk-chip{font-size:12.5px;padding:6px 11px}
+
+.fd-answer{margin-top:var(--s6)}
+.fd-grid{display:grid;gap:var(--s3);grid-template-columns:repeat(12,1fr);align-items:start}
+.fd-card{grid-column:span 12;background:var(--surface);border:1px solid var(--line);
+  border-radius:var(--radius);padding:var(--s4)}
+.fd-card--lead{grid-column:span 7;border-color:var(--c-line);background:var(--c-wash)}
+.fd-card--side{grid-column:span 5}
+.fd-card--half{grid-column:span 6}
+@media(max-width:900px){.fd-card,.fd-card--lead,.fd-card--side,.fd-card--half{grid-column:span 12}}
+.fd-card h3{margin:0 0 var(--s2)}
+.fd-eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink-faint);font-weight:700;margin:0 0 var(--s2)}
+.fd-lead-name{font-family:var(--display);font-size:clamp(21px,2.6vw,28px);letter-spacing:-.02em;
+  line-height:1.15;margin:0 0 var(--s2)}
+.fd-steps{margin:0;padding-left:1.15em;color:var(--ink-soft);font-size:14px}
+.fd-steps li{margin-bottom:6px}
+.fd-steps li::marker{color:var(--c)}
+
+/* provenance — a claim you can open */
+.fd-src{display:inline-flex;align-items:center;gap:5px;font-family:var(--mono);font-size:10px;
+  font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:3px 7px;border-radius:6px;
+  border:1px solid var(--line);background:var(--surface-2);color:var(--ink-soft);
+  text-decoration:none;white-space:normal;max-width:100%}
+.fd-src:hover,.fd-src:focus-visible{border-color:var(--c);color:var(--ink);background:var(--c-wash)}
+.fd-src::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--c);flex:none}
+.fd-claim{display:grid;gap:6px;padding:var(--s3) 0;border-bottom:1px solid var(--line-soft)}
+.fd-claim:last-child{border-bottom:0;padding-bottom:0}
+.fd-claim p{margin:0;font-size:14px;color:var(--ink-soft)}
+.fd-claim p strong{color:var(--ink)}
+
+.fd-open{display:inline-flex;align-items:center;gap:7px;font-weight:700;font-size:14px;
+  text-decoration:none;color:var(--c);margin-top:var(--s2)}
+.fd-open:hover{text-decoration:underline}
+
+/* the gate */
+.fd-gate{margin-top:var(--s6);border:1px solid var(--c-line);border-radius:var(--radius);
+  background:var(--surface);padding:var(--s5);text-align:center}
+.fd-gate .vk-h2{margin-bottom:var(--s2)}
+.fd-gate p{color:var(--ink-soft);max-width:56ch;margin:0 auto var(--s4);font-size:14.5px}
+.fd-staged{margin-top:var(--s4);text-align:left;border-left:3px solid var(--c);padding:var(--s2) var(--s3);
+  background:var(--surface-2);border-radius:0 var(--radius-sm) var(--radius-sm) 0}
+.fd-staged pre{margin:0;font-family:var(--mono);font-size:12px;color:var(--ink-soft);
+  white-space:pre-wrap;line-height:1.6}
+.fd-verdict{margin-top:var(--s3);font-size:13.5px;color:var(--ink-soft)}
+.fd-verdict b{color:var(--good)}
+
+.fd-empty{color:var(--ink-faint);font-style:italic}
+.fd-foot-cols{display:grid;gap:var(--s4);grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.fd-foot-cols a{display:block;font-size:13.5px;color:var(--ink-soft);text-decoration:none;padding:3px 0}
+.fd-foot-cols a:hover{color:var(--c)}
+:where(button,input,a[href],[tabindex]:not([tabindex="-1"])){scroll-margin-top:calc(var(--fd-sticky,0px) + var(--s3))}
+</style>
+
+<div class="fd-top">
+  <div class="vom-bar vk-wrap">
+    <a href="https://visionoutreachmedia.nl">
+      <img src="__LOGO_DATA_URI__" alt="Vision Outreach Media">
+      <b>Vision Outreach Media</b><span>· Front door</span>
+    </a>
+  </div>
+</div>
+
+<div class="fd-note">
+  <div class="vk-wrap">
+    <span class="vk-pill vk-pill--spec">Prototype</span>
+    <span><b>This page has no navigation on purpose.</b> You state an outcome and it composes an
+    answer. Every recommendation links to a real Vision Outreach Media page you can open and check.
+    Nothing here is sent to anyone.</span>
+  </div>
+</div>
+
+<div class="vk-wrap fd-hero">
+  <p class="fd-kicker">Vision Outreach Media · Netherlands</p>
+  <h1 class="vk-h1">Say what you want to be <em>true</em>. Not what page you want.</h1>
+  <p class="vk-lede">Most sites make you guess which of their pages holds your answer. This one asks
+  for the outcome and assembles the answer around it — what we would do, what you would get, and
+  the working thing you can open right now before you talk to anyone.</p>
+
+  <div class="fd-barwrap">
+    <form id="fd-form">
+      <label class="fd-lab" for="fd-in">What do you want to be true in ninety days?</label>
+      <p class="fd-sub">Plain words are fine. Whatever it reads, it shows you underneath — and you
+      correct it there.</p>
+      <div class="fd-field">
+        <input id="fd-in" type="text" autocomplete="off"
+               placeholder="our church needs a website people actually use">
+        <button class="vk-btn vk-btn--accent" type="submit">Compose the answer</button>
+      </div>
+    </form>
+    <div class="fd-seeds">
+      <p class="vk-shead">Or start from one of these</p>
+      <div class="vk-chips" id="fd-seeds"></div>
+    </div>
+  </div>
+
+  <div id="fd-out" aria-live="polite"></div>
+</div>
+
+<div class="vk-wrap">
+  <div class="vk-footer">
+    <p class="vk-shead">Everything referenced on this page</p>
+    <div class="fd-foot-cols" id="fd-foot"></div>
+    <p style="margin-top:var(--s4);font-size:13px">
+      <b>Vision Outreach Media</b> — a studio in the Netherlands building the website and the back
+      office behind it as one system. This front door is a working prototype of an intent-led
+      interface; the <a href="https://vom-intent.vercel.app" style="color:var(--c)">interaction
+      model it is built on is documented here</a>. No form on this page sends anything.
+    </p>
+  </div>
+</div>
+
+<script>
+(function(){
+"use strict";
+
+/* ---------------------------------------------------------------- catalogue
+   Every entry is a real, live Vision Outreach Media surface. `what` is taken
+   from that page's own title/description, not written fresh here, so a claim
+   on this page can always be checked against the page it points at.        */
+var P = {
+  core:{name:"Vision Outreach Media",url:"https://visionoutreachmedia.nl",
+    what:"Done-for-you WordPress websites, media design and digital support for churches, ministries and nonprofits."},
+  gallery:{name:"What we build",url:"https://vom-gallery.vercel.app",
+    what:"Ten kinds of business, each with a live example you can open — the website and the back office as one system."},
+  engage:{name:"Engage AI",url:"https://engage-ai-api.onrender.com/dashboard",
+    what:"Scores a website and its channels one by one, and shows where the reach is missing."},
+  grow:{name:"Three ways we help you grow",url:"https://vom-grow.vercel.app",
+    what:"The three engagements we offer, written out plainly."},
+  forge:{name:"Turnkey · Forge",url:"https://vom-forge.vercel.app",
+    what:"Turnkey compiles a business into a platform blueprint; Forge composes, writes, checks and deploys it."},
+  hundred:{name:"Hundred — Growth OS",url:"https://hundred-theta.vercel.app",
+    what:"The operating system for your first $100K month — the map and the machine in one product."},
+  studio:{name:"Studio Index",url:"https://artifact-hub-nu.vercel.app",
+    what:"One menu for every published tool, guide, dashboard and wizard."},
+  intent:{name:"Intent browsing",url:"https://vom-intent.vercel.app",
+    what:"The interaction model this front door is built on, with the thinking behind it."}
+};
+
+/* ------------------------------------------------------------- constraints */
+var C = {
+  who:  {label:"You are", opts:["A church or ministry","A nonprofit","A small business","A solo operator"]},
+  now:  {label:"Right now you have", opts:["Nothing yet","A site that underperforms","A site and some channels"]},
+  how:  {label:"You want it", opts:["Done for you","Built with you","You drive it"]},
+  when: {label:"Starting", opts:["This month","This quarter","Just exploring"]}
+};
+var ORDER = ["who","now","how","when"];
+
+/* ------------------------------------------------------------------- seeds
+   Each seed states an outcome and the constraint reading it implies.       */
+var SEEDS = [
+  {t:"Our church has a message but it isn't reaching anyone under forty.",
+   s:{who:"A church or ministry",now:"A site that underperforms",how:"Done for you",when:"This quarter"}},
+  {t:"I want to start a business and I have no website and no back office.",
+   s:{who:"A small business",now:"Nothing yet",how:"Done for you",when:"This month"}},
+  {t:"We exist online but nobody finds us and I don't know which channel is the problem.",
+   s:{who:"A small business",now:"A site and some channels",how:"Built with you",when:"This month"}},
+  {t:"I run everything myself and I want a system instead of a to-do list.",
+   s:{who:"A solo operator",now:"A site and some channels",how:"You drive it",when:"This quarter"}}
+];
+
+/* --------------------------------------------------------------- the words
+   Keyword reading. It sets the constraints and SAYS it did — it never keeps
+   the sentence and pretends to have understood more than it read.          */
+var CUES = [
+  [/church|ministr|congregat|parish|worship|sermon|faith/i, {who:"A church or ministry"}],
+  [/nonprofit|non-profit|charit|stichting|foundation|volunteer/i, {who:"A nonprofit"}],
+  [/\bsolo\b|myself|one[- ]person|freelanc|just me|on my own/i, {who:"A solo operator"}],
+  [/business|company|shop|store|clients|customers/i, {who:"A small business"}],
+  [/no website|nothing yet|from scratch|starting|start a|new business|haven't got/i, {now:"Nothing yet"}],
+  [/underperform|not working|isn't working|old site|outdated|nobody uses|doesn't convert/i, {now:"A site that underperforms"}],
+  [/nobody finds|can't find|not reaching|no traffic|invisible|reach|channel|social|instagram|facebook/i, {now:"A site and some channels"}],
+  [/done for me|done-for-you|you handle|hand it over|too busy/i, {how:"Done for you"}],
+  [/with me|together|help me|coach|guide/i, {how:"Built with you"}],
+  [/myself|i'll drive|my own|diy|system instead/i, {how:"You drive it"}],
+  [/this month|urgent|asap|right now|immediately/i, {when:"This month"}],
+  [/exploring|just looking|curious|thinking about/i, {when:"Just exploring"}]
+];
+
+function read(sentence){
+  var s = {}, hits = [];
+  for (var i=0;i<CUES.length;i++){
+    if (CUES[i][0].test(sentence)){
+      var patch = CUES[i][1];
+      for (var k in patch){ if (!s[k]){ s[k] = patch[k]; hits.push(C[k].label + " → " + patch[k]); } }
+    }
+  }
+  return {state:s, hits:hits};
+}
+
+/* ---------------------------------------------------------------- resolving
+   Deterministic. The lead recommendation follows from the constraints, and
+   the reasoning is stated on screen so it can be argued with.              */
+function resolve(st){
+  var who = st.who, now = st.now, how = st.how, when = st.when;
+  var lead, why, steps, support = [];
+
+  if (now === "A site and some channels" && how !== "Done for you"){
+    lead = "engage";
+    why = "You already have surfaces. The first job is not building another one — it is finding "
+        + "which of the ones you have is actually failing.";
+    steps = ["Benchmark the website and every channel separately, and score them.",
+             "Name the one channel with the most reach going unused.",
+             "Fix that one before touching anything else."];
+    support = ["grow","gallery"];
+  } else if (how === "You drive it"){
+    lead = "hundred";
+    why = "You do not want a supplier, you want a system you can run yourself.";
+    steps = ["Take the operating system rather than an engagement.",
+             "Run it against your own numbers.",
+             "Bring us in only where you want a surface built."];
+    support = ["studio","gallery"];
+  } else if (now === "Nothing yet" && (who === "A small business" || who === "A solo operator")){
+    lead = "forge";
+    why = "Nothing exists yet, so the site and the back office should be compiled together rather "
+        + "than bolted to each other later.";
+    steps = ["Compile the business into a platform blueprint.",
+             "Build and deploy the platform from that blueprint.",
+             "Hand you a running system, not a folder of files."];
+    support = ["gallery","grow"];
+  } else if (who === "A church or ministry" || who === "A nonprofit"){
+    lead = "core";
+    why = "This is the work the studio was built for, and the one where the message matters more "
+        + "than the machinery.";
+    steps = ["Get the message and the audience straight before design starts.",
+             "Build the site and the media that carries it.",
+             "Leave you able to run it without us."];
+    support = ["engage","gallery"];
+  } else {
+    lead = "core";
+    why = "A site that underperforms is usually a positioning problem wearing a design problem's "
+        + "clothes, so we start with what it is supposed to do.";
+    steps = ["Establish what the site is for and who it is for.",
+             "Rebuild it against that, not against a template.",
+             "Measure whether it moved."];
+    support = ["engage","grow"];
+  }
+
+  var pace = when === "This month"
+      ? "You said this month, so the first step is scoped to be finishable inside it."
+      : when === "Just exploring"
+      ? "You said you are exploring, so nothing below asks you to commit — open the live examples first."
+      : "You said this quarter, which is enough room to do the first step properly rather than fast.";
+
+  var mode = how === "Done for you"
+      ? "We do the work and hand it over running."
+      : how === "Built with you"
+      ? "We build it alongside you so you can carry it afterwards."
+      : "You run it; we stay out of the way unless you ask.";
+
+  return {lead:lead, why:why, steps:steps, support:support, pace:pace, mode:mode};
+}
+
+/* ------------------------------------------------------------------- state */
+var state = null, staged = false;
+
+function el(tag, cls, txt){
+  var n = document.createElement(tag);
+  if (cls) n.className = cls;
+  if (txt != null) n.textContent = txt;
+  return n;
+}
+function srcChip(key){
+  var p = P[key];
+  var a = el("a","fd-src",p.name);
+  a.href = p.url; a.target = "_blank"; a.rel = "noopener";
+  a.title = p.what + " — opens " + p.url;
+  return a;
+}
+function claim(text, key){
+  var d = el("div","fd-claim");
+  var p = el("p"); p.innerHTML = text;
+  d.appendChild(p);
+  d.appendChild(srcChip(key));
+  return d;
+}
+
+function render(readNote){
+  var out = document.getElementById("fd-out");
+  out.textContent = "";
+  if (!state) return;
+  var r = resolve(state);
+  var lead = P[r.lead];
+
+  /* --- what it read, and the controls that correct it --- */
+  var box = el("div","fd-read");
+  var head = el("div","fd-read-head");
+  head.appendChild(el("p","vk-shead","What this page understood — change anything and it re-composes"));
+  if (readNote) {
+    var n = el("p"); n.style.margin = "0"; n.style.fontSize = "13px"; n.style.color = "var(--ink-soft)";
+    n.textContent = readNote;
+    head.appendChild(n);
+  }
+  box.appendChild(head);
+
+  var body = el("div","fd-read-body");
+  var goal = el("p","fd-goal");
+  goal.innerHTML = "You want <em>" + esc(state.who.toLowerCase()) + "</em> that "
+    + (state.now === "Nothing yet" ? "does not exist yet" : "has " + esc(state.now.toLowerCase()))
+    + " to be reaching the people it is for — " + esc(r.mode.toLowerCase().replace(/\.$/,"")) + ".";
+  body.appendChild(goal);
+
+  var cons = el("div","fd-cons");
+  ORDER.forEach(function(key){
+    var wrap = el("div","fd-con");
+    wrap.appendChild(el("p","k",C[key].label));
+    var chips = el("div","vk-chips");
+    C[key].opts.forEach(function(opt){
+      var b = el("button","vk-chip",opt);
+      b.type = "button";
+      b.setAttribute("aria-pressed", state[key] === opt ? "true" : "false");
+      b.addEventListener("click", function(){
+        state[key] = opt; staged = false;
+        render("Re-composed after you changed " + C[key].label.toLowerCase() + " to “" + opt + "”.");
+      });
+      chips.appendChild(b);
+    });
+    wrap.appendChild(chips);
+    cons.appendChild(wrap);
+  });
+  body.appendChild(cons);
+  box.appendChild(body);
+  out.appendChild(box);
+
+  /* --- the composed answer --- */
+  var ans = el("div","fd-answer");
+  ans.appendChild(el("p","vk-shead","The answer, composed for those four things"));
+  var grid = el("div","fd-grid");
+
+  var leadCard = el("div","fd-card fd-card--lead");
+  leadCard.appendChild(el("p","fd-eyebrow","Where we would start"));
+  leadCard.appendChild(el("h3","fd-lead-name",lead.name));
+  var w = el("p"); w.style.margin = "0 0 var(--s3)"; w.style.color = "var(--ink-soft)";
+  w.style.fontSize = "14.5px"; w.textContent = r.why;
+  leadCard.appendChild(w);
+  var ol = el("ol","fd-steps");
+  r.steps.forEach(function(s){ ol.appendChild(el("li",null,s)); });
+  leadCard.appendChild(ol);
+  var open = el("a","fd-open","Open " + lead.name + " →");
+  open.href = lead.url; open.target = "_blank"; open.rel = "noopener";
+  leadCard.appendChild(open);
+  grid.appendChild(leadCard);
+
+  var side = el("div","fd-card fd-card--side");
+  side.appendChild(el("p","fd-eyebrow","Why this and not the others"));
+  side.appendChild(claim("<strong>" + esc(lead.name) + "</strong> — " + esc(lead.what), r.lead));
+  r.support.forEach(function(k){
+    side.appendChild(claim("<strong>" + esc(P[k].name) + "</strong> — " + esc(P[k].what), k));
+  });
+  grid.appendChild(side);
+
+  var pace = el("div","fd-card fd-card--half");
+  pace.appendChild(el("p","fd-eyebrow","Pace"));
+  var pp = el("p"); pp.style.margin = "0"; pp.style.fontSize = "14.5px"; pp.style.color = "var(--ink-soft)";
+  pp.textContent = r.pace;
+  pace.appendChild(pp);
+  grid.appendChild(pace);
+
+  var proof = el("div","fd-card fd-card--half");
+  proof.appendChild(el("p","fd-eyebrow","Check it before you talk to anyone"));
+  proof.appendChild(claim("Ten kinds of business, each with a <strong>live example you can open</strong> — "
+    + "the site and the back office as one system.", "gallery"));
+  proof.appendChild(claim("Every tool the studio has published, in <strong>one menu</strong>.", "studio"));
+  grid.appendChild(proof);
+
+  ans.appendChild(grid);
+  out.appendChild(ans);
+
+  /* --- the gate: prepares, never sends --- */
+  var gate = el("div","fd-gate");
+  var h2 = el("h2","vk-h2","Send this to Vision Outreach Media?");
+  gate.appendChild(h2);
+  var gp = el("p");
+  gp.textContent = "This would hand over exactly what is on screen — the four things you set and "
+    + "the starting point they produced — so a first conversation begins from the answer rather "
+    + "than from scratch.";
+  gate.appendChild(gp);
+
+  var btn = el("button","vk-btn vk-btn--accent", staged ? "Prepared — nothing was sent" : "Prepare this enquiry");
+  btn.type = "button";
+  btn.disabled = staged;
+  btn.addEventListener("click", function(){ staged = true; render(readNote); });
+  gate.appendChild(btn);
+
+  if (staged){
+    var sd = el("div","fd-staged");
+    var pre = el("pre");
+    pre.textContent =
+      "To:      Vision Outreach Media\n" +
+      "Subject: " + state.who + " — " + state.now.toLowerCase() + "\n\n" +
+      ORDER.map(function(k){ return C[k].label + ": " + state[k]; }).join("\n") + "\n\n" +
+      "Composed starting point: " + lead.name + "\n" +
+      lead.url;
+    sd.appendChild(pre);
+    gate.appendChild(sd);
+    var v = el("p","fd-verdict");
+    v.innerHTML = "<b>Prepared, not sent.</b> This prototype has no mail, no form handler and no "
+      + "network of any kind. The message above exists only in this browser tab and leaves when you "
+      + "close it. To reach us for real, open "
+      + "<a href='https://visionoutreachmedia.nl' style='color:var(--c)'>visionoutreachmedia.nl</a>.";
+    gate.appendChild(v);
+  }
+  out.appendChild(gate);
+}
+
+function esc(s){ return String(s).replace(/[&<>"]/g, function(c){
+  return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c]; }); }
+
+/* --------------------------------------------------------------------- boot */
+function start(preset, note){
+  state = {who:preset.who || "A small business",
+           now:preset.now || "A site that underperforms",
+           how:preset.how || "Done for you",
+           when:preset.when || "This quarter"};
+  staged = false;
+  render(note);
+  document.getElementById("fd-out").scrollIntoView({behavior:"smooth", block:"start"});
+}
+
+document.getElementById("fd-form").addEventListener("submit", function(e){
+  e.preventDefault();
+  var v = document.getElementById("fd-in").value.trim();
+  if (!v){ document.getElementById("fd-in").focus(); return; }
+  var got = read(v);
+  var note = got.hits.length
+    ? "Read from your sentence: " + got.hits.join(" · ") + ". Anything it did not read is set to a "
+      + "default below — correct it and the answer changes."
+    : "Nothing in that sentence matched what this page knows how to read, so everything below is a "
+      + "default. Set the four yourself — that is the real input.";
+  start(got.state, note);
+});
+
+var seedWrap = document.getElementById("fd-seeds");
+SEEDS.forEach(function(sd){
+  var b = el("button","vk-chip fd-seed",sd.t);
+  b.type = "button";
+  b.addEventListener("click", function(){
+    document.getElementById("fd-in").value = sd.t;
+    start(sd.s, "Started from a written example, so all four are set. Change any of them.");
+  });
+  seedWrap.appendChild(b);
+});
+
+var foot = document.getElementById("fd-foot");
+Object.keys(P).forEach(function(k){
+  var a = el("a", null, P[k].name + " — " + P[k].url.replace(/^https:\/\//,""));
+  a.href = P[k].url; a.target = "_blank"; a.rel = "noopener";
+  foot.appendChild(a);
+});
+
+function sticky(){
+  var t = document.querySelector(".fd-top");
+  if (t) document.documentElement.style.setProperty("--fd-sticky", t.getBoundingClientRect().height + "px");
+}
+sticky();
+window.addEventListener("resize", sticky);
+})();
+</script>

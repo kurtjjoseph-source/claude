@@ -1,0 +1,886 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark"></head><body><title>Vision Outreach Media — say what you want to be true</title>
+<script>
+/* Paint-blocking bootstrap. deploy-wizard.sh supplies a bare <html>/<body>, so the
+   accent slot and the kit's body class have to be set here or the page ships in the
+   kit's default amber instead of VOM orange. */
+(function(){
+  var d = document.documentElement;
+  d.setAttribute("data-brand","vom");
+  try{ var t = localStorage.getItem("vom.fd.theme"); if (t) d.setAttribute("data-theme", t); }catch(e){}
+  document.addEventListener("DOMContentLoaded", function(){ document.body.className = "vk-body"; });
+})();
+</script>
+<style>
+/* ==== VOM Kit v2 ==== */
+/* ============================================================================
+   VOM KIT v2 — the Vision Outreach Media design system
+   Vision Outreach Media · 2026-08-02
+
+   v1 was written as theory and adopted by exactly one page (its own demo), so
+   four palettes drifted apart in practice: the kit's cream/gold, the six product
+   sites' warm paper, Forge's cold white, and the Forge console's near-black.
+
+   v2 is taken from what actually ships. The six live product sites already agreed
+   on a ground, an ink scale, a line colour and a per-product accent; that is the
+   real system, so it is the one written down here. Everything else — Forge's
+   generated client sites, the build console, the house consoles — moves onto it.
+
+   ONE GROUND, ONE INK SCALE, ONE ACCENT SLOT.
+
+     --c            the accent. Everything brand-coloured reads from it.
+     [data-brand]   swaps the accent (and only the accent) per product.
+     [data-theme]   forces light/dark; otherwise the OS decides.
+     --display      the display face — serif for VOM's own surfaces, sans for a
+                    client's, because a church should not inherit our editorial voice.
+
+   Adoption rule: a page may add layout, never a second palette. If you need a
+   colour that is not a token here, the token is missing — add it here first.
+   ========================================================================== */
+
+/* ---------------------------------------------------------------- tokens */
+:root{
+  /* ground + ink — the part every surface shares */
+  --bg:#f6f5f1;
+  --surface:#ffffff;
+  --surface-2:#f1efe8;
+  --line:#e1dfd4;
+  --line-soft:#ece9df;
+  --ink:#1a1d1b;
+  --ink-soft:#535b56;
+  --ink-faint:#868f89;
+
+  /* the accent slot — [data-brand] below is the only thing that should change it */
+  --c:#c47716;
+  --c-bright:#f0a24b;
+  --c-ink:#ffffff;                                   /* readable text ON the accent */
+  --c-wash:color-mix(in srgb, var(--c) 9%, var(--surface));
+  --c-line:color-mix(in srgb, var(--c) 38%, var(--line));
+
+  /* semantic */
+  --good:#2f9e63; --warn:#c9862a; --bad:#c0523a; --info:#2b86bd;
+
+  /* the logo bar navy is a constant — it is the mark's own field, not a theme */
+  --brand-navy:#1B2A4A;
+
+  /* shape + depth */
+  --radius:14px; --radius-sm:9px; --radius-pill:999px;
+  --shadow-sm:0 1px 2px rgba(26,29,27,.05), 0 2px 8px rgba(26,29,27,.04);
+  --shadow:0 2px 6px rgba(26,29,27,.06), 0 14px 34px rgba(26,29,27,.08);
+
+  /* type */
+  --serif:ui-serif,Georgia,"Times New Roman",serif;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --mono:ui-monospace,"SF Mono","Cascadia Code",Menlo,Consolas,monospace;
+  --display:var(--serif);      /* VOM's own surfaces. Client surfaces set --sans. */
+
+  /* rhythm — one scale, so spacing never gets invented per page */
+  --s1:6px; --s2:10px; --s3:14px; --s4:20px; --s5:28px; --s6:40px; --s7:60px; --s8:88px;
+  --wrap:1080px;
+}
+
+:root[data-surface="client"]{
+  /* What Forge builds for a church or a solo business. Same ground, same rhythm,
+     but the display face is the client's own voice, not our editorial serif. */
+  --display:var(--sans);
+  --surface:#ffffff;
+}
+
+@media (prefers-color-scheme:dark){
+  :root{
+    --bg:#0e100f; --surface:#161a18; --surface-2:#1c211e;
+    --line:#2a322d; --line-soft:#232a26;
+    --ink:#f0f2ee; --ink-soft:#a8b1aa; --ink-faint:#79837c;
+    --c:var(--c-bright);
+    --good:#38d07f; --warn:#e0a94b; --bad:#e8785c; --info:#5fb9e8;
+    --shadow-sm:0 1px 2px rgba(0,0,0,.4); --shadow:0 14px 34px rgba(0,0,0,.5);
+  }
+}
+:root[data-theme="light"]{
+  --bg:#f6f5f1; --surface:#ffffff; --surface-2:#f1efe8; --line:#e1dfd4; --line-soft:#ece9df;
+  --ink:#1a1d1b; --ink-soft:#535b56; --ink-faint:#868f89;
+  --good:#2f9e63; --warn:#c9862a; --bad:#c0523a; --info:#2b86bd;
+}
+:root[data-theme="dark"]{
+  --bg:#0e100f; --surface:#161a18; --surface-2:#1c211e; --line:#2a322d; --line-soft:#232a26;
+  --ink:#f0f2ee; --ink-soft:#a8b1aa; --ink-faint:#79837c; --c:var(--c-bright);
+  --good:#38d07f; --warn:#e0a94b; --bad:#e8785c; --info:#5fb9e8;
+}
+
+/* ---------------------------------------------------- the house of brands */
+/* Each product owns an accent and nothing else. That is the whole difference
+   between them, and it is why they read as one house.                        */
+[data-brand="vom"]         { --c:#e8843c; --c-bright:#f0a05c; }
+[data-brand="hundred"]     { --c:#2f9e63; --c-bright:#38d07f; }
+[data-brand="turnkey"]     { --c:#c47716; --c-bright:#f0a24b; }
+[data-brand="vital"]       { --c:#0f9f8f; --c-bright:#3fd0c0; }
+[data-brand="launch-kits"] { --c:#d1522f; --c-bright:#f2765c; }
+[data-brand="cma"]         { --c:#6b56d6; --c-bright:#a48cf5; }
+[data-brand="operators"]   { --c:#2b86bd; --c-bright:#5fb9e8; }
+/* Forge archetypes — the accent a built platform carries, and the colour its
+   build console runs under. */
+/* Two values per forge, and they are not interchangeable: `--c-forge` is the bright one
+   the build console runs on black, `--c` is the darkened sibling a client's site uses on
+   the warm paper, where the bright value fails contrast. Same hue, honest ratios. */
+[data-brand="churchforge"]    { --c:#e2670a; --c-bright:#fb923c; --c-forge:#F97316; }
+[data-brand="bizforge"]       { --c:#0d87c4; --c-bright:#38bdf8; --c-forge:#38BDF8; }
+[data-brand="nonprofitforge"] { --c:#047857; --c-bright:#34d399; --c-forge:#10B981; }
+[data-brand="shopforge"]      { --c:#be123c; --c-bright:#fb7185; --c-forge:#F43F5E; }
+[data-brand="digitalforge"]   { --c:#6d28d9; --c-bright:#a78bfa; --c-forge:#8B5CF6; }
+[data-brand="memberforge"]    { --c:#b45309; --c-bright:#fbbf24; --c-forge:#F59E0B; }
+[data-brand="learnforge"]     { --c:#0f766e; --c-bright:#5eead4; --c-forge:#14B8A6; }
+[data-brand="venueforge"]     { --c:#a21caf; --c-bright:#f0abfc; --c-forge:#D946EF; }
+[data-brand="saasforge"]      { --c:#4338ca; --c-bright:#a5b4fc; --c-forge:#6366F1; }
+[data-brand="prelaunchforge"] { --c:#2f9e63; --c-bright:#38d07f; --c-forge:#38D07F; }
+[data-brand="forge"]          { --c:#0f8f86; --c-bright:#3fd0c0; --c-forge:#2FA8A0; }
+
+/* ------------------------------------------------------------------- base */
+*,*::before,*::after{ box-sizing:border-box; }
+.vk-body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:var(--sans); line-height:1.6; -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+.vk-wrap{ max-width:var(--wrap); margin:0 auto; padding:0 var(--s4); }
+.vk-wrap--narrow{ max-width:760px; }
+a{ color:inherit; }
+.vk-num{ font-variant-numeric:tabular-nums; }
+.vk-sec{ padding:var(--s7) 0; }
+.vk-sec + .vk-sec{ border-top:1px solid var(--line); }
+
+/* ------------------------------------------------------------------- type */
+.vk-eyebrow{
+  display:inline-block; font-family:var(--mono); font-size:11.5px; font-weight:600;
+  letter-spacing:.18em; text-transform:uppercase; color:var(--c); margin:0 0 var(--s3);
+}
+.vk-h1{
+  font-family:var(--display); font-weight:600; font-size:clamp(32px,5.2vw,52px);
+  letter-spacing:-.025em; line-height:1.04; margin:0 0 var(--s3);
+}
+.vk-h1 em{ font-style:italic; color:var(--c); }
+.vk-h2{
+  font-family:var(--display); font-weight:600; font-size:clamp(21px,2.8vw,30px);
+  letter-spacing:-.018em; line-height:1.14; margin:0 0 var(--s3);
+}
+.vk-h3{ font-size:16px; font-weight:700; letter-spacing:-.008em; margin:0 0 var(--s1); }
+.vk-lede{ font-size:clamp(15px,1.6vw,18px); color:var(--ink-soft); max-width:64ch; margin:0 0 var(--s4); }
+.vk-shead{
+  font-family:var(--mono); font-size:11px; font-weight:600; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--ink-faint); margin:0 0 var(--s3);
+}
+.vk-p{ margin:0 0 var(--s3); color:var(--ink-soft); }
+.vk-p strong{ color:var(--ink); }
+
+/* --------------------------------------------------------------- logo bar */
+/* <div class="vom-bar"><a href="…"><img …><b>Vision Outreach Media</b><span>· The House</span></a></div> */
+.vom-bar{
+  display:flex; align-items:center; gap:var(--s2); padding:9px 18px;
+  background:var(--brand-navy); color:#fff; font-family:var(--sans);
+}
+.vom-bar a{ display:flex; align-items:center; gap:var(--s2); text-decoration:none; color:#fff; }
+.vom-bar img{ width:28px; height:28px; border-radius:7px; object-fit:cover; background:#fff; display:block; }
+.vom-bar b{ font-weight:700; font-size:13.5px; letter-spacing:.02em; }
+.vom-bar span{ font-size:11px; opacity:.72; font-weight:600; letter-spacing:.09em; text-transform:uppercase; }
+
+/* ---------------------------------------------------------------- buttons */
+.vk-btn{
+  display:inline-flex; align-items:center; gap:8px; font:inherit; font-weight:700; font-size:14px;
+  padding:11px 20px; border-radius:var(--radius-pill); border:1px solid var(--line);
+  background:var(--surface); color:var(--ink); cursor:pointer; text-decoration:none;
+  white-space:nowrap; transition:background .15s, border-color .15s, color .15s;
+}
+.vk-btn:hover{ border-color:var(--ink-faint); }
+.vk-btn--accent{ background:var(--c); border-color:var(--c); color:var(--c-ink); }
+.vk-btn--accent:hover{ background:var(--c-bright); border-color:var(--c-bright); }
+.vk-btn--ghost{ background:transparent; color:var(--c); border-color:var(--c-line); }
+.vk-btn--ghost:hover{ background:var(--c-wash); border-color:var(--c); }
+.vk-btn--quiet{ background:transparent; color:var(--ink-soft); border-color:transparent; padding-inline:10px; }
+.vk-btn--quiet:hover{ color:var(--ink); background:var(--surface-2); border-color:transparent; }
+.vk-btn--sm{ font-size:13px; padding:8px 15px; }
+.vk-btn[disabled],.vk-btn--off{ opacity:.5; cursor:not-allowed; }
+.vk-btns{ display:flex; gap:var(--s2); flex-wrap:wrap; }
+
+/* ------------------------------------------------------------------ pills */
+.vk-pill{
+  display:inline-block; font-family:var(--mono); font-size:10px; font-weight:700;
+  letter-spacing:.06em; text-transform:uppercase; border-radius:6px; padding:4px 8px; white-space:nowrap;
+}
+.vk-pill--live   { color:#fff; background:var(--good); }
+.vk-pill--paid   { color:var(--c-ink); background:var(--c); }
+.vk-pill--spec   { color:var(--ink-soft); background:var(--surface-2); border:1px solid var(--line); }
+.vk-pill--partial{ color:#fff; background:var(--warn); }
+.vk-pill--planned{ color:var(--ink-faint); background:transparent; border:1px dashed var(--line); }
+.vk-pill--bad    { color:#fff; background:var(--bad); }
+
+/* ------------------------------------------------------------------ cards */
+.vk-card{
+  background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
+  padding:var(--s4);
+}
+.vk-card--pad0{ padding:0; }
+.vk-card--rail{ position:relative; overflow:hidden; }
+.vk-card--rail::before{ content:""; position:absolute; inset:0 auto 0 0; width:4px; background:var(--c); }
+.vk-card--rail{ padding-left:calc(var(--s4) + 4px); }
+.vk-card.is-done   { border-color:color-mix(in srgb,var(--good) 45%,var(--line)); background:color-mix(in srgb,var(--good) 5%,var(--surface)); }
+.vk-card.is-flagged{ border-color:color-mix(in srgb,var(--bad) 50%,var(--line)); }
+.vk-card .vk-h3{ margin-top:0; }
+.vk-card p:last-child{ margin-bottom:0; }
+.vk-grid{ display:grid; gap:var(--s3); grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); }
+
+/* ------------------------------------------------------------- facts strip */
+/* Dividers are drawn by each cell, so a row that does not divide evenly leaves
+   ground behind rather than an empty filled box. */
+.vk-facts{
+  display:grid; gap:1px; background:var(--surface); border:1px solid var(--line);
+  border-radius:var(--radius); overflow:hidden;
+  grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+}
+.vk-fact{ background:var(--surface); padding:var(--s3) var(--s4); box-shadow:0 0 0 1px var(--line); }
+.vk-fact .k{ font-family:var(--mono); font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-faint); font-weight:700; margin-bottom:4px; }
+.vk-fact .v{ font-weight:700; font-size:16px; }
+
+/* ------------------------------------------------------------------ steps */
+.vk-steps{ counter-reset:s; list-style:none; padding:0; margin:0; display:grid; gap:var(--s2); }
+.vk-steps li{
+  counter-increment:s; position:relative; padding:var(--s3) var(--s4) var(--s3) 58px;
+  background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
+}
+.vk-steps li::before{
+  content:counter(s); position:absolute; left:var(--s4); top:var(--s3);
+  width:26px; height:26px; border-radius:50%; background:var(--c); color:var(--c-ink);
+  display:grid; place-items:center; font-weight:800; font-size:13px;
+}
+.vk-steps h4{ margin:0 0 2px; font-size:15px; font-weight:700; }
+.vk-steps p{ margin:0; color:var(--ink-soft); font-size:14px; }
+
+/* -------------------------------------------------------------------- faq */
+.vk-faq{
+  border:1px solid var(--line); border-radius:var(--radius); padding:var(--s3) var(--s4);
+  margin-bottom:var(--s2); background:var(--surface);
+}
+.vk-faq summary{ cursor:pointer; font-weight:700; list-style:none; }
+.vk-faq summary::-webkit-details-marker{ display:none; }
+.vk-faq summary::after{ content:"+"; float:right; color:var(--c); font-weight:800; }
+.vk-faq[open] summary::after{ content:"–"; }
+.vk-faq p{ margin:var(--s2) 0 0; color:var(--ink-soft); }
+
+/* ------------------------------------------------------------------- feed */
+.vk-feed{ display:grid; gap:var(--s2); }
+.vk-item{
+  display:flex; gap:var(--s3); align-items:baseline; padding:var(--s3) var(--s4);
+  border:1px solid var(--line); border-radius:var(--radius); background:var(--surface);
+}
+.vk-item .when{ font-family:var(--mono); font-variant-numeric:tabular-nums; font-weight:700; color:var(--c); font-size:12.5px; min-width:96px; }
+.vk-item .what{ font-weight:650; }
+.vk-item .sub{ color:var(--ink-soft); font-size:14px; }
+.vk-empty{ color:var(--ink-faint); font-style:italic; padding:var(--s3) var(--s4); border:1px dashed var(--line); border-radius:var(--radius); }
+
+/* ------------------------------------------------------------------ forms */
+.vk-form{ display:grid; gap:var(--s3); max-width:560px; }
+.vk-form label{ display:grid; gap:5px; font-weight:650; font-size:14px; }
+.vk-form input,.vk-form textarea,.vk-form select{
+  font:inherit; padding:11px 13px; border-radius:var(--radius-sm);
+  border:1px solid var(--line); background:var(--surface); color:var(--ink); width:100%;
+}
+.vk-form input:focus-visible,.vk-form textarea:focus-visible{
+  outline:2px solid var(--c); outline-offset:1px; border-color:var(--c);
+}
+.vk-form textarea{ min-height:120px; resize:vertical; }
+.vk-note{ font-size:13px; color:var(--ink-soft); }
+
+/* ---------------------------------------------------------------- pricing */
+.vk-tiers{ display:grid; gap:var(--s3); grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); }
+.vk-tier{ border:1px solid var(--line); border-radius:var(--radius); padding:var(--s4); background:var(--surface); }
+.vk-tier--pick{ border-color:var(--c-line); background:var(--c-wash); }
+.vk-tier .amt{ font-family:var(--display); font-size:34px; font-weight:600; letter-spacing:-.03em; margin:6px 0 var(--s2); }
+.vk-tier ul{ margin:0; padding-left:1.1em; color:var(--ink-soft); font-size:14px; }
+
+/* ---------------------------------------------------------------- chooser */
+/* Amount / frequency / fund pickers — giving, checkout, plan selection. */
+.vk-chips{ display:flex; gap:8px; flex-wrap:wrap; }
+.vk-chip{
+  padding:8px 15px; border-radius:var(--radius-pill); border:1px solid var(--line);
+  font-weight:650; font-size:14px; background:var(--surface); cursor:pointer;
+}
+.vk-chip[aria-pressed="true"],.vk-chip.is-on{ background:var(--c); color:var(--c-ink); border-color:var(--c); }
+.vk-panel{ display:grid; gap:var(--s3); border:1px solid var(--line); border-radius:var(--radius); padding:var(--s4); background:var(--surface); }
+.vk-notice{ font-size:13.5px; color:var(--ink-soft); border-left:3px solid var(--c); padding-left:var(--s2); }
+
+/* ------------------------------------------------------------------ meter */
+.vk-meter{ display:flex; align-items:center; gap:var(--s2); margin-bottom:8px; }
+.vk-meter .k{ width:96px; font-size:13px; color:var(--ink-soft); }
+.vk-meter .track{ flex:1; height:8px; background:var(--surface-2); border:1px solid var(--line); border-radius:var(--radius-pill); overflow:hidden; }
+.vk-meter .track i{ display:block; height:100%; border-radius:var(--radius-pill); background:var(--c); }
+.vk-meter .v{ width:34px; text-align:right; font-size:13px; font-weight:700; font-variant-numeric:tabular-nums; }
+
+/* ------------------------------------------------------------------ table */
+.vk-tablewrap{ overflow-x:auto; }
+.vk-table{ width:100%; border-collapse:collapse; font-size:14px; }
+.vk-table th{ font-family:var(--mono); font-size:10.5px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-faint); font-weight:700; padding:9px 8px; text-align:left; border-bottom:1px solid var(--line); }
+.vk-table td{ padding:11px 8px; border-bottom:1px solid var(--line-soft); }
+.vk-table tr:last-child td{ border-bottom:0; }
+
+/* ------------------------------------------------------------ site header */
+.vk-head{ position:sticky; top:0; z-index:20; background:color-mix(in srgb,var(--bg) 88%,transparent); backdrop-filter:blur(10px); border-bottom:1px solid var(--line); }
+.vk-bar{ display:flex; align-items:center; gap:var(--s3); min-height:64px; flex-wrap:wrap; }
+.vk-brand{ display:flex; align-items:center; gap:var(--s2); font-weight:800; text-decoration:none; letter-spacing:-.02em; margin-right:auto; white-space:nowrap; }
+.vk-brand img{ height:26px; width:auto; border-radius:5px; }
+.vk-brand .dot{ width:9px; height:9px; border-radius:50%; background:var(--c); }
+.vk-nav{ display:flex; gap:2px; flex-wrap:wrap; }
+.vk-nav a{ text-decoration:none; font-size:14px; font-weight:600; color:var(--ink-soft); padding:7px 11px; border-radius:var(--radius-sm); }
+.vk-nav a:hover{ color:var(--ink); background:var(--surface-2); }
+.vk-nav a[aria-current]{ color:var(--ink); background:var(--surface-2); }
+@media (max-width:1040px){
+  /* padding-block only — the shorthand would wipe the wrapper's side gutters */
+  .vk-nav{ order:3; width:100%; padding-top:7px; border-top:1px solid var(--line); }
+  .vk-nav a{ padding-left:0; padding-right:16px; }
+  .vk-bar{ padding-top:9px; padding-bottom:9px; min-height:0; }
+}
+@media (max-width:640px){
+  .vk-nav{ border-top:0; padding-top:0; overflow-x:auto; flex-wrap:nowrap; scrollbar-width:none; }
+  .vk-nav::-webkit-scrollbar{ display:none; }
+}
+
+/* -------------------------------------------------------------------- CTA */
+.vk-band{
+  background:var(--brand-navy); color:#fff; border-radius:var(--radius);
+  padding:clamp(28px,4vw,48px); text-align:center;
+}
+.vk-band .vk-h2{ color:#fff; }
+.vk-band p{ color:#fff; opacity:.82; max-width:56ch; margin:0 auto var(--s4); }
+.vk-band--accent{ background:var(--c); color:var(--c-ink); }
+.vk-band--accent .vk-h2{ color:var(--c-ink); }
+
+/* ----------------------------------------------------------------- footer */
+.vk-footer{ padding:var(--s5) 0 var(--s7); margin-top:var(--s5); color:var(--ink-faint); font-size:14px; border-top:1px solid var(--line); }
+.vk-footer .cols{ display:flex; gap:var(--s5); justify-content:space-between; flex-wrap:wrap; }
+
+/* ============================================================ FORGE surfaces
+   The build console runs dark under the archetype's forge colour, so an operator
+   always knows which kind of platform is being made. This is the ONE place the
+   ground legitimately differs — it is a tool, not a page.                      */
+.vk-forge{
+  --bg:#0e100f; --surface:#161a18; --surface-2:#1c211e; --line:#2a322d; --line-soft:#232a26;
+  --ink:#f0f2ee; --ink-soft:#a8b1aa; --ink-faint:#79837c;
+  --c:var(--c-forge, var(--c-bright)); --c-ink:#0e100f;
+  background:var(--bg); color:var(--ink);
+}
+.vk-rail{ list-style:none; margin:0; padding:var(--s1) 0; }
+.vk-rail li{ display:flex; gap:var(--s3); padding:9px var(--s4); position:relative; }
+.vk-rail li::before{ content:""; position:absolute; left:33px; top:0; bottom:0; width:1px; background:var(--line); }
+.vk-rail li:first-child::before{ top:22px; }
+.vk-rail li:last-child::before{ bottom:calc(100% - 22px); }
+.vk-cue{
+  width:30px; height:30px; border-radius:9px; flex:none; display:grid; place-items:center;
+  font-size:14px; background:var(--surface-2); color:var(--ink-faint);
+  border:1px solid var(--line); position:relative; z-index:1; transition:.25s;
+}
+.is-running > .vk-cue{ background:var(--c); color:var(--c-ink); border-color:var(--c); animation:vk-pulse 1.15s ease-in-out infinite; }
+@keyframes vk-pulse{ 0%,100%{ box-shadow:0 0 0 0 color-mix(in srgb,var(--c) 55%,transparent); } 70%{ box-shadow:0 0 0 9px transparent; } }
+.is-ok > .vk-cue{ background:color-mix(in srgb,var(--good) 16%,var(--surface-2)); color:var(--good); border-color:color-mix(in srgb,var(--good) 40%,transparent); }
+.is-failed > .vk-cue{ background:color-mix(in srgb,var(--bad) 18%,var(--surface-2)); color:var(--bad); border-color:color-mix(in srgb,var(--bad) 50%,transparent); }
+.is-skipped > .vk-cue{ opacity:.45; }
+.vk-rail .body{ flex:1; min-width:0; padding-top:3px; }
+.vk-rail .t{ font-weight:700; font-size:15px; display:flex; gap:var(--s2); align-items:baseline; }
+.vk-rail .d{ color:var(--ink-soft); font-size:13px; }
+.is-pending > .body{ opacity:.42; }
+.is-running > .body .t{ color:var(--c); }
+.vk-rail .ms{ margin-left:auto; font-family:var(--mono); font-size:12px; color:var(--ink-faint); flex:none; }
+
+@media (prefers-reduced-motion:reduce){ *{ animation:none!important; transition:none!important; } }
+</style>
+<style>
+/* ---- layout only. Every colour is a vom-kit-v2 token or a mix of them. ---- */
+.fd-top{position:sticky;top:0;z-index:40;background:var(--brand-navy)}
+.fd-note{background:color-mix(in srgb,var(--c) 12%,var(--surface));border-bottom:1px solid var(--c-line);
+  padding:7px 0;font-size:12.5px;color:var(--ink-soft)}
+.fd-note b{color:var(--ink)}
+.fd-note .vk-wrap{display:flex;gap:var(--s2);align-items:baseline;flex-wrap:wrap}
+
+.fd-hero{padding:var(--s7) 0 var(--s5)}
+.fd-hero .vk-h1{max-width:19ch}
+.fd-kicker{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--c);margin:0 0 var(--s3)}
+
+/* the bar — this is the navigation */
+.fd-barwrap{border:1px solid var(--c-line);background:var(--surface);border-radius:var(--radius);
+  padding:var(--s4);box-shadow:var(--shadow-sm);margin-top:var(--s4)}
+.fd-lab{display:block;font-weight:700;font-size:15px;margin-bottom:var(--s1)}
+.fd-sub{font-size:13.5px;color:var(--ink-soft);margin:0 0 var(--s3)}
+.fd-field{display:flex;gap:var(--s2);align-items:stretch;flex-wrap:wrap}
+.fd-field input{flex:1 1 320px;min-width:0;font:inherit;font-size:16px;padding:13px 15px;
+  border:1px solid var(--line);border-radius:var(--radius-sm);background:var(--bg);color:var(--ink)}
+.fd-field input:focus-visible{outline:2px solid var(--c);outline-offset:1px;border-color:var(--c)}
+.fd-seeds{margin-top:var(--s3)}
+.fd-seeds .vk-shead{margin-bottom:var(--s2)}
+.fd-seed{text-align:left;font-size:13.5px;line-height:1.35;padding:10px 14px}
+
+.fd-read{margin-top:var(--s5);border:1px solid var(--line);border-radius:var(--radius);
+  background:var(--surface);overflow:hidden}
+.fd-read-head{background:var(--surface-2);border-bottom:1px solid var(--line);padding:var(--s3) var(--s4)}
+.fd-read-body{padding:var(--s4)}
+.fd-goal{font-family:var(--display);font-size:clamp(19px,2.4vw,25px);line-height:1.2;margin:0 0 var(--s4);
+  letter-spacing:-.015em}
+.fd-goal em{font-style:italic;color:var(--c)}
+.fd-cons{display:grid;gap:var(--s3);grid-template-columns:repeat(auto-fit,minmax(215px,1fr))}
+.fd-con .k{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ink-faint);font-weight:700;margin-bottom:6px}
+.fd-con .vk-chips{gap:6px}
+.fd-con .vk-chip{font-size:12.5px;padding:6px 11px}
+
+.fd-answer{margin-top:var(--s6)}
+.fd-grid{display:grid;gap:var(--s3);grid-template-columns:repeat(12,1fr);align-items:start}
+.fd-card{grid-column:span 12;background:var(--surface);border:1px solid var(--line);
+  border-radius:var(--radius);padding:var(--s4)}
+.fd-card--lead{grid-column:span 7;border-color:var(--c-line);background:var(--c-wash)}
+.fd-card--side{grid-column:span 5}
+.fd-card--half{grid-column:span 6}
+@media(max-width:900px){.fd-card,.fd-card--lead,.fd-card--side,.fd-card--half{grid-column:span 12}}
+.fd-card h3{margin:0 0 var(--s2)}
+.fd-eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink-faint);font-weight:700;margin:0 0 var(--s2)}
+.fd-lead-name{font-family:var(--display);font-size:clamp(21px,2.6vw,28px);letter-spacing:-.02em;
+  line-height:1.15;margin:0 0 var(--s2)}
+.fd-steps{margin:0;padding-left:1.15em;color:var(--ink-soft);font-size:14px}
+.fd-steps li{margin-bottom:6px}
+.fd-steps li::marker{color:var(--c)}
+
+/* provenance — a claim you can open */
+.fd-src{display:inline-flex;align-items:center;gap:5px;font-family:var(--mono);font-size:10px;
+  font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:3px 7px;border-radius:6px;
+  border:1px solid var(--line);background:var(--surface-2);color:var(--ink-soft);
+  text-decoration:none;white-space:normal;max-width:100%}
+.fd-src:hover,.fd-src:focus-visible{border-color:var(--c);color:var(--ink);background:var(--c-wash)}
+.fd-src::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--c);flex:none}
+.fd-claim{display:grid;gap:6px;padding:var(--s3) 0;border-bottom:1px solid var(--line-soft)}
+.fd-claim:last-child{border-bottom:0;padding-bottom:0}
+.fd-claim p{margin:0;font-size:14px;color:var(--ink-soft)}
+.fd-claim p strong{color:var(--ink)}
+
+.fd-open{display:inline-flex;align-items:center;gap:7px;font-weight:700;font-size:14px;
+  text-decoration:none;color:var(--c);margin-top:var(--s2)}
+.fd-open:hover{text-decoration:underline}
+
+/* the gate */
+.fd-gate{margin-top:var(--s6);border:1px solid var(--c-line);border-radius:var(--radius);
+  background:var(--surface);padding:var(--s5);text-align:center}
+.fd-gate .vk-h2{margin-bottom:var(--s2)}
+.fd-gate p{color:var(--ink-soft);max-width:56ch;margin:0 auto var(--s4);font-size:14.5px}
+.fd-staged{margin-top:var(--s4);text-align:left;border-left:3px solid var(--c);padding:var(--s2) var(--s3);
+  background:var(--surface-2);border-radius:0 var(--radius-sm) var(--radius-sm) 0}
+.fd-staged pre{margin:0;font-family:var(--mono);font-size:12px;color:var(--ink-soft);
+  white-space:pre-wrap;line-height:1.6}
+.fd-verdict{margin-top:var(--s3);font-size:13.5px;color:var(--ink-soft)}
+.fd-verdict b{color:var(--good)}
+
+.fd-empty{color:var(--ink-faint);font-style:italic}
+.fd-foot-cols{display:grid;gap:var(--s4);grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.fd-foot-cols a{display:block;font-size:13.5px;color:var(--ink-soft);text-decoration:none;padding:3px 0}
+.fd-foot-cols a:hover{color:var(--c)}
+:where(button,input,a[href],[tabindex]:not([tabindex="-1"])){scroll-margin-top:calc(var(--fd-sticky,0px) + var(--s3))}
+</style>
+
+<div class="fd-top">
+  <div class="vom-bar vk-wrap">
+    <a href="https://visionoutreachmedia.nl">
+      <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAASABIAAD/4QBMRXhpZgAATU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAgKADAAQAAAABAAAAgAAAAAD/4QnSaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLwA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJYTVAgQ29yZSA2LjAuMCI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnBob3Rvc2hvcD0iaHR0cDovL25zLmFkb2JlLmNvbS9waG90b3Nob3AvMS4wLyIgcGhvdG9zaG9wOkluc3RydWN0aW9ucz0iRkJNRDBhMDAwYTA3MDIwMDAwYmQwYTAwMDBjMzE0MDAwMDU3MTYwMDAwNTkxODAwMDBhMjIxMDAwMDBhMzIwMDAwYmMzNDAwMDA2OTM2MDAwMDMxMzgwMDAwMmI0YzAwMDAiLz4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8P3hwYWNrZXQgZW5kPSJ3Ij8+AP/tAK5QaG90b3Nob3AgMy4wADhCSU0EBAAAAAAAdhwBWgADGyVHHAIAAAIAAhwCKABiRkJNRDBhMDAwYTA3MDIwMDAwYmQwYTAwMDBjMzE0MDAwMDU3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" alt="Vision Outreach Media">
+      <b>Vision Outreach Media</b><span>· Front door</span>
+    </a>
+  </div>
+</div>
+
+<div class="fd-note">
+  <div class="vk-wrap">
+    <span class="vk-pill vk-pill--spec">Prototype</span>
+    <span><b>This page has no navigation on purpose.</b> You state an outcome and it composes an
+    answer. Every recommendation links to a real Vision Outreach Media page you can open and check.
+    Nothing here is sent to anyone.</span>
+  </div>
+</div>
+
+<div class="vk-wrap fd-hero">
+  <p class="fd-kicker">Vision Outreach Media · Netherlands</p>
+  <h1 class="vk-h1">Say what you want to be <em>true</em>. Not what page you want.</h1>
+  <p class="vk-lede">Most sites make you guess which of their pages holds your answer. This one asks
+  for the outcome and assembles the answer around it — what we would do, what you would get, and
+  the working thing you can open right now before you talk to anyone.</p>
+
+  <div class="fd-barwrap">
+    <form id="fd-form">
+      <label class="fd-lab" for="fd-in">What do you want to be true in ninety days?</label>
+      <p class="fd-sub">Plain words are fine. Whatever it reads, it shows you underneath — and you
+      correct it there.</p>
+      <div class="fd-field">
+        <input id="fd-in" type="text" autocomplete="off"
+               placeholder="our church needs a website people actually use">
+        <button class="vk-btn vk-btn--accent" type="submit">Compose the answer</button>
+      </div>
+    </form>
+    <div class="fd-seeds">
+      <p class="vk-shead">Or start from one of these</p>
+      <div class="vk-chips" id="fd-seeds"></div>
+    </div>
+  </div>
+
+  <div id="fd-out" aria-live="polite"></div>
+</div>
+
+<div class="vk-wrap">
+  <div class="vk-footer">
+    <p class="vk-shead">Everything referenced on this page</p>
+    <div class="fd-foot-cols" id="fd-foot"></div>
+    <p style="margin-top:var(--s4);font-size:13px">
+      <b>Vision Outreach Media</b> — a studio in the Netherlands building the website and the back
+      office behind it as one system. This front door is a working prototype of an intent-led
+      interface; the <a href="https://vom-intent.vercel.app" style="color:var(--c)">interaction
+      model it is built on is documented here</a>. No form on this page sends anything.
+    </p>
+  </div>
+</div>
+
+<script>
+(function(){
+"use strict";
+
+/* ---------------------------------------------------------------- catalogue
+   Every entry is a real, live Vision Outreach Media surface. `what` is taken
+   from that page's own title/description, not written fresh here, so a claim
+   on this page can always be checked against the page it points at.        */
+var P = {
+  core:{name:"Vision Outreach Media",url:"https://visionoutreachmedia.nl",
+    what:"Done-for-you WordPress websites, media design and digital support for churches, ministries and nonprofits."},
+  gallery:{name:"What we build",url:"https://vom-gallery.vercel.app",
+    what:"Ten kinds of business, each with a live example you can open — the website and the back office as one system."},
+  engage:{name:"Engage AI",url:"https://engage-ai-api.onrender.com/dashboard",
+    what:"Scores a website and its channels one by one, and shows where the reach is missing."},
+  grow:{name:"Three ways we help you grow",url:"https://vom-grow.vercel.app",
+    what:"The three engagements we offer, written out plainly."},
+  forge:{name:"Turnkey · Forge",url:"https://vom-forge.vercel.app",
+    what:"Turnkey compiles a business into a platform blueprint; Forge composes, writes, checks and deploys it."},
+  hundred:{name:"Hundred — Growth OS",url:"https://hundred-theta.vercel.app",
+    what:"The operating system for your first $100K month — the map and the machine in one product."},
+  studio:{name:"Studio Index",url:"https://artifact-hub-nu.vercel.app",
+    what:"One menu for every published tool, guide, dashboard and wizard."},
+  intent:{name:"Intent browsing",url:"https://vom-intent.vercel.app",
+    what:"The interaction model this front door is built on, with the thinking behind it."}
+};
+
+/* ------------------------------------------------------------- constraints */
+var C = {
+  who:  {label:"You are", opts:["A church or ministry","A nonprofit","A small business","A solo operator"]},
+  now:  {label:"Right now you have", opts:["Nothing yet","A site that underperforms","A site and some channels"]},
+  how:  {label:"You want it", opts:["Done for you","Built with you","You drive it"]},
+  when: {label:"Starting", opts:["This month","This quarter","Just exploring"]}
+};
+var ORDER = ["who","now","how","when"];
+
+/* ------------------------------------------------------------------- seeds
+   Each seed states an outcome and the constraint reading it implies.       */
+var SEEDS = [
+  {t:"Our church has a message but it isn't reaching anyone under forty.",
+   s:{who:"A church or ministry",now:"A site that underperforms",how:"Done for you",when:"This quarter"}},
+  {t:"I want to start a business and I have no website and no back office.",
+   s:{who:"A small business",now:"Nothing yet",how:"Done for you",when:"This month"}},
+  {t:"We exist online but nobody finds us and I don't know which channel is the problem.",
+   s:{who:"A small business",now:"A site and some channels",how:"Built with you",when:"This month"}},
+  {t:"I run everything myself and I want a system instead of a to-do list.",
+   s:{who:"A solo operator",now:"A site and some channels",how:"You drive it",when:"This quarter"}}
+];
+
+/* --------------------------------------------------------------- the words
+   Keyword reading. It sets the constraints and SAYS it did — it never keeps
+   the sentence and pretends to have understood more than it read.          */
+var CUES = [
+  [/church|ministr|congregat|parish|worship|sermon|faith/i, {who:"A church or ministry"}],
+  [/nonprofit|non-profit|charit|stichting|foundation|volunteer/i, {who:"A nonprofit"}],
+  [/\bsolo\b|myself|one[- ]person|freelanc|just me|on my own/i, {who:"A solo operator"}],
+  [/business|company|shop|store|clients|customers/i, {who:"A small business"}],
+  [/no website|nothing yet|from scratch|starting|start a|new business|haven't got/i, {now:"Nothing yet"}],
+  [/underperform|not working|isn't working|old site|outdated|nobody uses|doesn't convert/i, {now:"A site that underperforms"}],
+  [/nobody finds|can't find|not reaching|no traffic|invisible|reach|channel|social|instagram|facebook/i, {now:"A site and some channels"}],
+  [/done for me|done-for-you|you handle|hand it over|too busy/i, {how:"Done for you"}],
+  [/with me|together|help me|coach|guide/i, {how:"Built with you"}],
+  [/myself|i'll drive|my own|diy|system instead/i, {how:"You drive it"}],
+  [/this month|urgent|asap|right now|immediately/i, {when:"This month"}],
+  [/exploring|just looking|curious|thinking about/i, {when:"Just exploring"}]
+];
+
+function read(sentence){
+  var s = {}, hits = [];
+  for (var i=0;i<CUES.length;i++){
+    if (CUES[i][0].test(sentence)){
+      var patch = CUES[i][1];
+      for (var k in patch){ if (!s[k]){ s[k] = patch[k]; hits.push(C[k].label + " → " + patch[k]); } }
+    }
+  }
+  return {state:s, hits:hits};
+}
+
+/* ---------------------------------------------------------------- resolving
+   Deterministic. The lead recommendation follows from the constraints, and
+   the reasoning is stated on screen so it can be argued with.              */
+function resolve(st){
+  var who = st.who, now = st.now, how = st.how, when = st.when;
+  var lead, why, steps, support = [];
+
+  if (now === "A site and some channels" && how !== "Done for you"){
+    lead = "engage";
+    why = "You already have surfaces. The first job is not building another one — it is finding "
+        + "which of the ones you have is actually failing.";
+    steps = ["Benchmark the website and every channel separately, and score them.",
+             "Name the one channel with the most reach going unused.",
+             "Fix that one before touching anything else."];
+    support = ["grow","gallery"];
+  } else if (how === "You drive it"){
+    lead = "hundred";
+    why = "You do not want a supplier, you want a system you can run yourself.";
+    steps = ["Take the operating system rather than an engagement.",
+             "Run it against your own numbers.",
+             "Bring us in only where you want a surface built."];
+    support = ["studio","gallery"];
+  } else if (now === "Nothing yet" && (who === "A small business" || who === "A solo operator")){
+    lead = "forge";
+    why = "Nothing exists yet, so the site and the back office should be compiled together rather "
+        + "than bolted to each other later.";
+    steps = ["Compile the business into a platform blueprint.",
+             "Build and deploy the platform from that blueprint.",
+             "Hand you a running system, not a folder of files."];
+    support = ["gallery","grow"];
+  } else if (who === "A church or ministry" || who === "A nonprofit"){
+    lead = "core";
+    why = "This is the work the studio was built for, and the one where the message matters more "
+        + "than the machinery.";
+    steps = ["Get the message and the audience straight before design starts.",
+             "Build the site and the media that carries it.",
+             "Leave you able to run it without us."];
+    support = ["engage","gallery"];
+  } else {
+    lead = "core";
+    why = "A site that underperforms is usually a positioning problem wearing a design problem's "
+        + "clothes, so we start with what it is supposed to do.";
+    steps = ["Establish what the site is for and who it is for.",
+             "Rebuild it against that, not against a template.",
+             "Measure whether it moved."];
+    support = ["engage","grow"];
+  }
+
+  var pace = when === "This month"
+      ? "You said this month, so the first step is scoped to be finishable inside it."
+      : when === "Just exploring"
+      ? "You said you are exploring, so nothing below asks you to commit — open the live examples first."
+      : "You said this quarter, which is enough room to do the first step properly rather than fast.";
+
+  var mode = how === "Done for you"
+      ? "We do the work and hand it over running."
+      : how === "Built with you"
+      ? "We build it alongside you so you can carry it afterwards."
+      : "You run it; we stay out of the way unless you ask.";
+
+  return {lead:lead, why:why, steps:steps, support:support, pace:pace, mode:mode};
+}
+
+/* ------------------------------------------------------------------- state */
+var state = null, staged = false;
+
+function el(tag, cls, txt){
+  var n = document.createElement(tag);
+  if (cls) n.className = cls;
+  if (txt != null) n.textContent = txt;
+  return n;
+}
+function srcChip(key){
+  var p = P[key];
+  var a = el("a","fd-src",p.name);
+  a.href = p.url; a.target = "_blank"; a.rel = "noopener";
+  a.title = p.what + " — opens " + p.url;
+  return a;
+}
+function claim(text, key){
+  var d = el("div","fd-claim");
+  var p = el("p"); p.innerHTML = text;
+  d.appendChild(p);
+  d.appendChild(srcChip(key));
+  return d;
+}
+
+function render(readNote){
+  var out = document.getElementById("fd-out");
+  out.textContent = "";
+  if (!state) return;
+  var r = resolve(state);
+  var lead = P[r.lead];
+
+  /* --- what it read, and the controls that correct it --- */
+  var box = el("div","fd-read");
+  var head = el("div","fd-read-head");
+  head.appendChild(el("p","vk-shead","What this page understood — change anything and it re-composes"));
+  if (readNote) {
+    var n = el("p"); n.style.margin = "0"; n.style.fontSize = "13px"; n.style.color = "var(--ink-soft)";
+    n.textContent = readNote;
+    head.appendChild(n);
+  }
+  box.appendChild(head);
+
+  var body = el("div","fd-read-body");
+  var goal = el("p","fd-goal");
+  goal.innerHTML = "You want <em>" + esc(state.who.toLowerCase()) + "</em> that "
+    + (state.now === "Nothing yet" ? "does not exist yet" : "has " + esc(state.now.toLowerCase()))
+    + " to be reaching the people it is for — " + esc(r.mode.toLowerCase().replace(/\.$/,"")) + ".";
+  body.appendChild(goal);
+
+  var cons = el("div","fd-cons");
+  ORDER.forEach(function(key){
+    var wrap = el("div","fd-con");
+    wrap.appendChild(el("p","k",C[key].label));
+    var chips = el("div","vk-chips");
+    C[key].opts.forEach(function(opt){
+      var b = el("button","vk-chip",opt);
+      b.type = "button";
+      b.setAttribute("aria-pressed", state[key] === opt ? "true" : "false");
+      b.addEventListener("click", function(){
+        state[key] = opt; staged = false;
+        render("Re-composed after you changed " + C[key].label.toLowerCase() + " to “" + opt + "”.");
+      });
+      chips.appendChild(b);
+    });
+    wrap.appendChild(chips);
+    cons.appendChild(wrap);
+  });
+  body.appendChild(cons);
+  box.appendChild(body);
+  out.appendChild(box);
+
+  /* --- the composed answer --- */
+  var ans = el("div","fd-answer");
+  ans.appendChild(el("p","vk-shead","The answer, composed for those four things"));
+  var grid = el("div","fd-grid");
+
+  var leadCard = el("div","fd-card fd-card--lead");
+  leadCard.appendChild(el("p","fd-eyebrow","Where we would start"));
+  leadCard.appendChild(el("h3","fd-lead-name",lead.name));
+  var w = el("p"); w.style.margin = "0 0 var(--s3)"; w.style.color = "var(--ink-soft)";
+  w.style.fontSize = "14.5px"; w.textContent = r.why;
+  leadCard.appendChild(w);
+  var ol = el("ol","fd-steps");
+  r.steps.forEach(function(s){ ol.appendChild(el("li",null,s)); });
+  leadCard.appendChild(ol);
+  var open = el("a","fd-open","Open " + lead.name + " →");
+  open.href = lead.url; open.target = "_blank"; open.rel = "noopener";
+  leadCard.appendChild(open);
+  grid.appendChild(leadCard);
+
+  var side = el("div","fd-card fd-card--side");
+  side.appendChild(el("p","fd-eyebrow","Why this and not the others"));
+  side.appendChild(claim("<strong>" + esc(lead.name) + "</strong> — " + esc(lead.what), r.lead));
+  r.support.forEach(function(k){
+    side.appendChild(claim("<strong>" + esc(P[k].name) + "</strong> — " + esc(P[k].what), k));
+  });
+  grid.appendChild(side);
+
+  var pace = el("div","fd-card fd-card--half");
+  pace.appendChild(el("p","fd-eyebrow","Pace"));
+  var pp = el("p"); pp.style.margin = "0"; pp.style.fontSize = "14.5px"; pp.style.color = "var(--ink-soft)";
+  pp.textContent = r.pace;
+  pace.appendChild(pp);
+  grid.appendChild(pace);
+
+  var proof = el("div","fd-card fd-card--half");
+  proof.appendChild(el("p","fd-eyebrow","Check it before you talk to anyone"));
+  proof.appendChild(claim("Ten kinds of business, each with a <strong>live example you can open</strong> — "
+    + "the site and the back office as one system.", "gallery"));
+  proof.appendChild(claim("Every tool the studio has published, in <strong>one menu</strong>.", "studio"));
+  grid.appendChild(proof);
+
+  ans.appendChild(grid);
+  out.appendChild(ans);
+
+  /* --- the gate: prepares, never sends --- */
+  var gate = el("div","fd-gate");
+  var h2 = el("h2","vk-h2","Send this to Vision Outreach Media?");
+  gate.appendChild(h2);
+  var gp = el("p");
+  gp.textContent = "This would hand over exactly what is on screen — the four things you set and "
+    + "the starting point they produced — so a first conversation begins from the answer rather "
+    + "than from scratch.";
+  gate.appendChild(gp);
+
+  var btn = el("button","vk-btn vk-btn--accent", staged ? "Prepared — nothing was sent" : "Prepare this enquiry");
+  btn.type = "button";
+  btn.disabled = staged;
+  btn.addEventListener("click", function(){ staged = true; render(readNote); });
+  gate.appendChild(btn);
+
+  if (staged){
+    var sd = el("div","fd-staged");
+    var pre = el("pre");
+    pre.textContent =
+      "To:      Vision Outreach Media\n" +
+      "Subject: " + state.who + " — " + state.now.toLowerCase() + "\n\n" +
+      ORDER.map(function(k){ return C[k].label + ": " + state[k]; }).join("\n") + "\n\n" +
+      "Composed starting point: " + lead.name + "\n" +
+      lead.url;
+    sd.appendChild(pre);
+    gate.appendChild(sd);
+    var v = el("p","fd-verdict");
+    v.innerHTML = "<b>Prepared, not sent.</b> This prototype has no mail, no form handler and no "
+      + "network of any kind. The message above exists only in this browser tab and leaves when you "
+      + "close it. To reach us for real, open "
+      + "<a href='https://visionoutreachmedia.nl' style='color:var(--c)'>visionoutreachmedia.nl</a>.";
+    gate.appendChild(v);
+  }
+  out.appendChild(gate);
+}
+
+function esc(s){ return String(s).replace(/[&<>"]/g, function(c){
+  return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c]; }); }
+
+/* --------------------------------------------------------------------- boot */
+function start(preset, note){
+  state = {who:preset.who || "A small business",
+           now:preset.now || "A site that underperforms",
+           how:preset.how || "Done for you",
+           when:preset.when || "This quarter"};
+  staged = false;
+  render(note);
+  document.getElementById("fd-out").scrollIntoView({behavior:"smooth", block:"start"});
+}
+
+document.getElementById("fd-form").addEventListener("submit", function(e){
+  e.preventDefault();
+  var v = document.getElementById("fd-in").value.trim();
+  if (!v){ document.getElementById("fd-in").focus(); return; }
+  var got = read(v);
+  var note = got.hits.length
+    ? "Read from your sentence: " + got.hits.join(" · ") + ". Anything it did not read is set to a "
+      + "default below — correct it and the answer changes."
+    : "Nothing in that sentence matched what this page knows how to read, so everything below is a "
+      + "default. Set the four yourself — that is the real input.";
+  start(got.state, note);
+});
+
+var seedWrap = document.getElementById("fd-seeds");
+SEEDS.forEach(function(sd){
+  var b = el("button","vk-chip fd-seed",sd.t);
+  b.type = "button";
+  b.addEventListener("click", function(){
+    document.getElementById("fd-in").value = sd.t;
+    start(sd.s, "Started from a written example, so all four are set. Change any of them.");
+  });
+  seedWrap.appendChild(b);
+});
+
+var foot = document.getElementById("fd-foot");
+Object.keys(P).forEach(function(k){
+  var a = el("a", null, P[k].name + " — " + P[k].url.replace(/^https:\/\//,""));
+  a.href = P[k].url; a.target = "_blank"; a.rel = "noopener";
+  foot.appendChild(a);
+});
+
+function sticky(){
+  var t = document.querySelector(".fd-top");
+  if (t) document.documentElement.style.setProperty("--fd-sticky", t.getBoundingClientRect().height + "px");
+}
+sticky();
+window.addEventListener("resize", sticky);
+})();
+</script>
+</body></html>

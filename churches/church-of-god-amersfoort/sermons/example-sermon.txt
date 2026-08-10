@@ -1,0 +1,46 @@
+# Title: The Good Shepherd
+Title-Translated: De Goede Herder
+Language: en
+Translation-Lang: nl
+
+// Lines starting with two slashes are comments and ignored on import.
+// Structure:
+//   ## Point: <your sermon point text>
+//   Dutch: <optional Dutch translation>
+//   ### Scripture: <reference>
+//   <scripture text — one or more lines, ends at the next ### or ##>
+//
+//   ## Word: <term for a word study>
+//   Transliteration: <original word + transliteration>
+//   Summary: <one-line summary>
+//   Meanings: <comma separated meanings>
+
+## Point: Jesus knows His sheep by name and lays down His life for them.
+Dutch: Jezus kent Zijn schapen bij naam en geeft Zijn leven voor hen.
+
+### Scripture: John 10:11
+I am the good shepherd. The good shepherd lays down his life for the sheep.
+
+### Scripture: John 10:14-15
+I am the good shepherd; I know my sheep and my sheep know me — just as the Father
+knows me and I know the Father — and I lay down my life for the sheep.
+
+## Point: The Shepherd leads us through the darkest valley without fear.
+Dutch: De Herder leidt ons door het donkerste dal zonder vrees.
+
+### Scripture: Psalm 23:1-4
+The LORD is my shepherd, I lack nothing. He makes me lie down in green pastures,
+he leads me beside quiet waters, he refreshes my soul. He guides me along the
+right paths for his name's sake. Even though I walk through the darkest valley,
+I will fear no evil, for you are with me; your rod and your staff, they comfort me.
+
+## Point: He searches for the one lost sheep until He finds it.
+### Scripture: Luke 15:4-5
+Suppose one of you has a hundred sheep and loses one of them. Doesn't he leave
+the ninety-nine in the open country and go after the lost sheep until he finds
+it? And when he finds it, he joyfully puts it on his shoulders.
+
+## Word: AGAPE
+Transliteration: ἀγάπη / agapē
+Summary: Self-giving, sacrificial love that seeks the good of the other.
+Meanings: love, charity, devotion, covenant faithfulness

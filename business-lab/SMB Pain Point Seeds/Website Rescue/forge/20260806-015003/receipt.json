@@ -1,0 +1,38 @@
+{
+  "run": "20260806-015003",
+  "sealed": "2026-08-06T01:50:18Z",
+  "fingerprint": "sha256:076ef212e934f84769efef0a410f93d1",
+  "business": "Website Rescue",
+  "archetype": "prelaunch",
+  "forge": "PRELAUNCHforge",
+  "target": "vercel",
+  "artifacts": {
+    "logo": "drawn monogram — no client logo was supplied",
+    "brand_manual": "/Users/kurtjoseph/Business Ideas/SMB Pain Point Seeds/Website Rescue/forge/20260806-015003/build/brand-manual.html",
+    "brand_kit": "Waitlist Green (default)",
+    "platform": "/Users/kurtjoseph/Business Ideas/SMB Pain Point Seeds/Website Rescue/forge/20260806-015003/build/platform/index.html",
+    "photos": "6 placeholder photographs (CC0/PDM)",
+    "site": "/Users/kurtjoseph/Business Ideas/SMB Pain Point Seeds/Website Rescue/forge/20260806-015003/build/site/index.html",
+    "pages": [
+      "faq.html",
+      "index.html"
+    ],
+    "url": "https://website-rescue-prelaunch-2xl7lua6m-kurtjjoseph-6989s-projects.vercel.app",
+    "platform_url": "https://website-rescue-prelaunch-2xl7lua6m-kurtjjoseph-6989s-projects.vercel.app/platform/",
+    "alias": "https://website-rescue-prelaunch.vercel.app"
+  },
+  "checks_passed": 10,
+  "elapsed_seconds": 15.07,
+  "authorization": {
+    "mode": "unattended",
+    "targets": [
+      "vercel"
+    ],
+    "scope": "unattended forge build + deploy to 'vercel' for this business, limited to: composing the platform modules, writing the public site, wiring rails that already have credentials, publishing the result, and — for a hosting target that gates new projects behind a login — making that one deployment publicly reachable. Does not authorize sending email, charging anyone, or posting to any channel.",
+    "consent_ref": "f16adc19c7262f86",
+    "consent_seq": 0,
+    "granted_by": "VOM",
+    "granted_at": "2026-08-06T01:50:03Z",
+    "channel": "standing service authorization"
+  }
+}

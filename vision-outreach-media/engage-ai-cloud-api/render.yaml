@@ -1,0 +1,80 @@
+services:
+  - type: web
+    name: engage-ai-api
+    runtime: docker
+    plan: starter
+    envVars:
+      - key: APP_ENV
+        value: production
+      # Baked into onboarding-flow plugin downloads (routers/onboarding.py) as
+      # the URL the plugin connects to - was missing entirely before, which
+      # silently fell back to the "http://localhost:8000" default and would
+      # have shipped broken plugin zips to real customers. Update if the
+      # service ever moves off the Render-assigned domain to a custom one.
+      - key: API_BASE_URL
+        value: https://engage-ai-api.onrender.com
+      - key: JWT_SECRET
+        generateValue: true
+      - key: OPENAI_API_KEY
+        sync: false
+      # Point imageio at the system ffmpeg installed in the Dockerfile, so it
+      # never tries to download its own binary at runtime (video assembly).
+      - key: IMAGEIO_FFMPEG_EXE
+        value: /usr/bin/ffmpeg
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: ANTHROPIC_MODEL
+        value: claude-sonnet-5
+      # Transactional email for password-reset links (services/email.py).
+      # Set the API key in the Render dashboard (sync:false = not in git).
+      - key: BREVO_API_KEY
+        sync: false
+      - key: BREVO_SENDER_EMAIL
+        sync: false
+      - key: BREVO_SENDER_NAME
+        value: Engage AI
+      # Per-channel posting authentication (docs/channel-authentication.md).
+      # TOKEN_ENCRYPTION_KEY encrypts customers' channel tokens at rest -
+      # generated once here; NOTE that regenerating it invalidates every stored
+      # channel connection (each customer would have to reconnect), so it is
+      # deliberately not tied to JWT_SECRET's rotation.
+      - key: TOKEN_ENCRYPTION_KEY
+        generateValue: true
+      # OAuth app credentials, set in the Render dashboard once each provider
+      # app is registered (sync:false = never in git). A provider left unset
+      # simply can't be connected by one-click sign-in - that channel falls back
+      # to the paste-a-long-lived-token path, which needs no app.
+      # Redirect URI to register: {API_BASE_URL}/channels/callback/{channel}
+      - key: FACEBOOK_CLIENT_ID
+        sync: false
+      - key: FACEBOOK_CLIENT_SECRET
+        sync: false
+      - key: GOOGLE_CLIENT_ID
+        sync: false
+      - key: GOOGLE_CLIENT_SECRET
+        sync: false
+      - key: LINKEDIN_CLIENT_ID
+        sync: false
+      - key: LINKEDIN_CLIENT_SECRET
+        sync: false
+      - key: TWITTER_CLIENT_ID
+        sync: false
+      - key: TWITTER_CLIENT_SECRET
+        sync: false
+      - key: ENABLE_SCHEDULER
+        value: "true"
+      - key: CYCLE_INTERVAL_HOURS
+        value: "24"
+      # Scheduled full-sweep analytics scan cadence (services/scheduler.py's
+      # analytics_scan job). ~monthly = 720h; this is what makes each org's
+      # trend line accrue on its own instead of waiting for a manual scan.
+      - key: ANALYTICS_SCAN_INTERVAL_HOURS
+        value: "720"
+      - key: DATABASE_URL
+        fromDatabase:
+          name: engage-ai-db
+          property: connectionString
+
+databases:
+  - name: engage-ai-db
+    plan: basic-256mb

@@ -1,0 +1,297 @@
+<meta charset="utf-8">
+<title>VOM Product Report Cards</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root{ --bg:#f6f5f1; --surface:#ffffff; --surface-2:#f1efe8; --line:#e1dfd4; --line-soft:#ece9df;
+    --ink:#1a1d1b; --ink-soft:#535b56; --ink-faint:#868f89;
+    --gold:#e8843c; --good:#2f9e63; --warn:#c9862a; --bad:#c0523a;
+    --serif:ui-serif,Georgia,"Times New Roman",serif; --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace; }
+  @media (prefers-color-scheme:dark){ :root{ --bg:#0e100f; --surface:#161a18; --surface-2:#1c211e; --line:#2a322d; --line-soft:#232a26; --ink:#f0f2ee; --ink-soft:#a8b1aa; --ink-faint:#79837c; --gold:#f0a05c; --good:#38d07f; --warn:#e0a94b; --bad:#e8785c; } }
+  :root[data-theme="light"]{ --bg:#f6f5f1; --surface:#ffffff; --surface-2:#f1efe8; --line:#e1dfd4; --line-soft:#ece9df; --ink:#1a1d1b; --ink-soft:#535b56; --ink-faint:#868f89; --gold:#e8843c; --good:#2f9e63; --warn:#c9862a; --bad:#c0523a; }
+  :root[data-theme="dark"]{ --bg:#0e100f; --surface:#161a18; --surface-2:#1c211e; --line:#2a322d; --line-soft:#232a26; --ink:#f0f2ee; --ink-soft:#a8b1aa; --ink-faint:#79837c; --gold:#f0a05c; --good:#38d07f; --warn:#e0a94b; --bad:#e8785c; }
+  *{ box-sizing:border-box; }
+  body{ margin:0; background:var(--bg); color:var(--ink); font-family:var(--sans); line-height:1.55; -webkit-font-smoothing:antialiased; }
+  .wrap{ max-width:1080px; margin:0 auto; padding:0 22px; }
+  a{ color:inherit; } .tabnum{ font-variant-numeric:tabular-nums; }
+  .ctrl{ position:fixed; top:14px; right:16px; display:flex; gap:8px; z-index:30; }
+  .ctrl button{ font-family:var(--mono); font-size:12px; font-weight:700; color:var(--ink-soft); background:color-mix(in srgb,var(--bg) 82%,transparent); backdrop-filter:blur(8px); border:1px solid var(--line); border-radius:9px; padding:7px 11px; cursor:pointer; }
+  .ctrl button:hover{ color:var(--ink); }
+  header.pg{ padding:34px 0 8px; }
+  .eyebrow{ font-family:var(--mono); font-size:11.5px; letter-spacing:.18em; text-transform:uppercase; color:var(--gold); margin:0 0 14px; }
+  header.pg h1{ font-family:var(--serif); font-weight:600; font-size:clamp(30px,5vw,46px); letter-spacing:-.02em; margin:0 0 14px; line-height:1.02; }
+  header.pg h1 em{ font-style:italic; color:var(--gold); }
+  .lede{ font-size:15px; color:var(--ink-soft); max-width:66ch; margin:0 0 22px; }
+  #meta{ display:flex; flex-wrap:wrap; gap:18px; align-items:center; font-size:13.5px; color:var(--ink-soft); padding:14px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+  #meta b{ color:var(--ink); }
+  .havg{ display:flex; align-items:center; gap:9px; }
+  .havg .badge{ font-family:var(--mono); font-weight:700; color:#fff; background:var(--good); border-radius:6px; padding:2px 9px; }
+  section{ padding:26px 0; } .shead{ font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-faint); margin:0 0 16px; }
+  .legend{ display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:12px; }
+  .lg{ background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:12px 14px; }
+  .lg b{ display:block; font-size:13px; margin-bottom:3px; } .lg span{ font-size:12px; color:var(--ink-soft); }
+  .tablewrap{ overflow-x:auto; }
+  #summary{ width:100%; border-collapse:collapse; font-size:13px; }
+  #summary th{ font-family:var(--mono); font-size:10.5px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-faint); font-weight:700; padding:8px 6px; text-align:center; border-bottom:1px solid var(--line); }
+  #summary td{ padding:10px 6px; text-align:center; border-bottom:1px solid var(--line-soft); }
+  #summary td.name{ text-align:left; white-space:nowrap; } #summary td.name b{ font-size:13.5px; } #summary td.name .t{ display:block; font-size:11px; color:var(--ink-faint); }
+  .dot{ display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:7px; vertical-align:middle; }
+  .cell{ font-weight:700; } .gradepill{ display:inline-block; font-family:var(--mono); font-weight:700; color:#fff; border-radius:6px; padding:2px 8px; }
+  .stat{ font-family:var(--mono); font-size:11px; font-weight:700; border-radius:6px; padding:3px 9px; white-space:nowrap; }
+  .stat.buy{ color:#fff; background:var(--good); } .stat.free{ color:var(--ink-soft); background:var(--surface-2); border:1px solid var(--line); } .stat.soon{ color:var(--ink-soft); background:var(--surface-2); border:1px solid var(--line); }
+  .cards{ display:grid; gap:18px; }
+  .card{ background:var(--surface); border:1px solid var(--line); border-radius:16px; overflow:hidden; position:relative; }
+  .card::before{ content:""; position:absolute; inset:0 auto 0 0; width:4px; background:var(--c); }
+  .pad{ padding:22px 24px; }
+  .chead{ display:flex; justify-content:space-between; gap:16px; align-items:flex-start; }
+  .ptype{ font-family:var(--mono); font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--c); margin-bottom:8px; }
+  .chead h2{ font-family:var(--serif); font-weight:600; font-size:26px; margin:0 0 8px; color:var(--c); }
+  .pos{ font-size:13.5px; color:var(--ink-soft); margin:0; max-width:60ch; }
+  .grade{ text-align:center; flex:none; }
+  .grade .g{ display:block; font-family:var(--mono); font-weight:700; color:#fff; font-size:15px; border-radius:8px; padding:5px 11px; }
+  .grade .o{ font-size:11px; color:var(--ink-faint); margin-top:4px; }
+  .cols{ display:grid; grid-template-columns:1.1fr 1fr; gap:26px; margin-top:20px; }
+  .k{ font-family:var(--mono); font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-faint); margin:0 0 12px; }
+  .dlist{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:10px; }
+  .dlist li{ display:flex; gap:10px; align-items:flex-start; font-size:13px; } .dlist li.intl{ opacity:.7; }
+  .dl-pill{ flex:none; font-size:9.5px; font-weight:800; letter-spacing:.03em; text-transform:uppercase; border-radius:5px; padding:3px 7px; }
+  .dl-tx b{ font-weight:700; } .dl-tx span{ color:var(--ink-soft); }
+  .aud-pill{ font-family:var(--mono); font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:.05em; color:var(--ink-soft); background:var(--surface-2); border:1px solid var(--line); border-radius:4px; padding:1px 5px; }
+  .intl-hint{ margin-top:10px; font-size:11.5px; color:var(--ink-faint); font-style:italic; }
+  .bar{ display:flex; align-items:center; gap:10px; margin-bottom:8px; }
+  .bar .bk{ width:92px; font-size:12px; color:var(--ink-soft); } .bar .track{ flex:1; height:8px; background:var(--surface-2); border:1px solid var(--line); border-radius:99px; overflow:hidden; } .bar .track i{ display:block; height:100%; border-radius:99px; } .bar .bv{ width:26px; text-align:right; font-size:12px; font-weight:700; }
+  .ovl{ display:flex; justify-content:space-between; align-items:center; margin-top:12px; padding-top:10px; border-top:1px solid var(--line); }
+  .ovl .lab{ font-family:var(--mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-faint); } .ovl .val{ font-family:var(--mono); font-weight:700; }
+  .foot{ border-top:1px solid var(--line); padding:16px 24px 22px; background:color-mix(in srgb,var(--surface-2) 50%,transparent); }
+  .bl{ font-size:13px; color:var(--ink-soft); margin:0 0 14px; } .bl b{ color:var(--ink); }
+  .row{ display:grid; grid-template-columns:1.3fr 1fr; gap:20px; }
+  .h{ font-family:var(--mono); font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-faint); margin-bottom:8px; }
+  .chips{ display:flex; flex-wrap:wrap; gap:6px; } .chip{ font-size:11.5px; color:var(--ink-soft); background:var(--surface-2); border:1px solid var(--line); border-radius:6px; padding:4px 9px; }
+  .prices .pl{ font-size:12.5px; color:var(--ink-soft); } .prices .core{ color:var(--ink); font-weight:700; } .prices .sep{ margin:0 6px; color:var(--ink-faint); }
+  footer.pg{ padding:22px 0 50px; color:var(--ink-faint); font-size:12px; display:flex; justify-content:space-between; gap:12px; border-top:1px solid var(--line); }
+  .p-live{ color:#fff; background:var(--good); } .p-paid{ color:#fff; background:var(--gold); } .p-spec{ color:var(--ink-soft); background:var(--surface-2); border:1px solid var(--line); } .p-partial{ color:#fff; background:var(--warn); } .p-planned{ color:var(--ink-faint); background:transparent; border:1px dashed var(--line); }
+  @media(max-width:720px){ .cols{ grid-template-columns:1fr; } .row{ grid-template-columns:1fr; } }
+</style>
+<div data-vom-badge style="display:flex;align-items:center;gap:10px;padding:9px 18px;background:#1B2A4A;color:#fff;font-family:-apple-system,system-ui,'Segoe UI',Roboto,sans-serif"><a href="https://vom-systems.vercel.app" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:10px;text-decoration:none;color:#fff"><img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAASABIAAD/4QBMRXhpZgAATU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAgKADAAQAAAABAAAAgAAAAAD/4QnSaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLwA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJYTVAgQ29yZSA2LjAuMCI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnBob3Rvc2hvcD0iaHR0cDovL25zLmFkb2JlLmNvbS9waG90b3Nob3AvMS4wLyIgcGhvdG9zaG9wOkluc3RydWN0aW9ucz0iRkJNRDBhMDAwYTA3MDIwMDAwYmQwYTAwMDBjMzE0MDAwMDU3MTYwMDAwNTkxODAwMDBhMjIxMDAwMDBhMzIwMDAwYmMzNDAwMDA2OTM2MDAwMDMxMzgwMDAwMmI0YzAwMDAiLz4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8P3hwYWNrZXQgZW5kPSJ3Ij8+AP/tAK5QaG90b3Nob3AgMy4wADhCSU0EBAAAAAAAdhwBWgADGyVHHAIAAAIAAhwCKABiRkJNRDBhMDAwYTA3MDIwMDAwYmQwYTAwMDBjMzE0MDAwMDU3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" alt="Vision Outreach Media" width="128" height="128" style="width:28px;height:28px;border-radius:7px;object-fit:cover;background:#fff;display:block"><span style="font-weight:700;font-size:13.5px;letter-spacing:.02em">Vision Outreach Media</span><span style="font-size:11px;opacity:.7;font-weight:600;letter-spacing:.09em;text-transform:uppercase">&middot; The House</span></a></div>
+
+<div class="ctrl">
+  <button id="intlBtn">&#9649; Internal: off</button>
+  <button id="themeBtn">&#9680; Theme</button>
+</div>
+<header class="pg"><div class="wrap">
+  <p class="eyebrow">Vision Outreach Media &middot; Portfolio Assessment</p>
+  <h1>Product <em>report cards</em>.</h1>
+  <p class="lede">Every product in the house, graded like a deliverable: what the client actually gets, each component and its status, and an honest score across six KPIs. No vanity numbers &mdash; the gaps are named. VOM-internal tooling is hidden from the client view (toggle it top-right).</p>
+  <div id="meta"></div>
+</div></header>
+
+<section><div class="wrap">
+  <p class="shead">How to read the score</p>
+  <div class="legend" id="legend"></div>
+</div></section>
+
+<section style="padding-top:0"><div class="wrap">
+  <p class="shead">The portfolio at a glance</p>
+  <div class="tablewrap"><table id="summary"></table></div>
+</div></section>
+
+<section style="padding-top:0"><div class="wrap">
+  <p class="shead">The report cards</p>
+  <div class="cards" id="cards"></div>
+</div></section>
+
+<footer class="pg"><div class="wrap">
+  <span>Vision Outreach Media — internal product assessment. Scores are a judgment of current, deliverable state.</span>
+  <span id="date"></span>
+</div></footer>
+
+<script>
+(function(){
+  var KPIS = [
+    {key:"quality", label:"Quality",       desc:"Craft, polish & professionalism of the deliverables."},
+    {key:"content", label:"Content",       desc:"Depth & substance of what's actually included."},
+    {key:"roi",     label:"ROI",           desc:"Value the client gets back relative to the price."},
+    {key:"complete",label:"Completeness",  desc:"How finished & deliverable it is right now."},
+    {key:"fit",     label:"Market Fit",    desc:"Audience clarity, demand & differentiation."},
+    {key:"scale",   label:"Scalability",   desc:"Delivers value with low manual effort."}
+  ];
+
+  var P = [
+    { name:"Hundred", type:"Growth OS · Operators", c:"#2f9e63", cd:"#38d07f", status:"buy", statusTxt:"Buyable €99",
+      gets:"A named, repeatable path to a first $100K month — plus the machine that builds the month for you and the pipeline that keeps the math honest.",
+      deliverables:[
+        {s:"live",name:"$100K Blueprint",d:"The Map — the five moves, taught visually; orients a new operator."},
+        {s:"paid",name:"$100K Workflow",d:"The Engine — an interactive wizard that fills every prompt & asset."},
+        {s:"paid",name:"100-Deal Pipeline",d:"The Pipeline — a CRM board + a ‘100 no’s a day’ tracker that keeps the math honest."}
+      ],
+      scores:{quality:88,content:85,roi:92,complete:88,fit:82,scale:90},
+      bottom:"Complete and buyable at €99 — one of the two fully self-serve, revenue-ready products in the house.",
+      finish:["A real $100K case study / proof","Optional video walkthrough of the Workflow"],
+      prices:[["Self-serve","€99"],["Core","$1K/mo",1],["Done-with-you","$10K/mo"]] },
+
+    { name:"Turnkey", type:"Flagship · Launch OS", c:"#c47716", cd:"#f0a24b", status:"soon", statusTxt:"Licence / DFY",
+      gets:"The client-facing product is the Onboarding Orchestrator — bring your idea, it launches your business. It isn't built yet (spec only). Everything else is VOM's internal engine, also licensable to operators.",
+      deliverables:[
+        {s:"spec",name:"Onboarding Orchestrator",d:"THE CLIENT-FACING PRODUCT — bring your idea, it launches your business (/onboard-business orchestrator + biz-* subagents). NOT BUILT YET — spec only.",aud:"client"},
+        {s:"live",name:"Kanalen instellen",d:"Your channels set up, NL-market ready — handed to the client.",aud:"client"},
+        {s:"live",name:"The Business Model",d:"The Thesis — why it works + the unit economics.",aud:"internal"},
+        {s:"live",name:"Onboarding System",d:"The Intake — how a raw idea enters production.",aud:"internal"},
+        {s:"live",name:"Launch Console",d:"The Cockpit — run every build in flight.",aud:"internal"},
+        {s:"live",name:"Compliance Dashboard",d:"The Trust Layer — security that lets you sell to serious clients.",aud:"internal"},
+        {s:"live",name:"Presence Sprint",d:"The productized first-win delivery VOM runs.",aud:"internal"}
+      ],
+      scores:{quality:82,content:88,roi:85,complete:42,fit:72,scale:78},
+      bottom:"The client-facing product — the Onboarding Orchestrator — isn't built yet; only a spec exists. The internal engine around it is strong, but there's nothing a client can be onboarded through until the Orchestrator is built and a platform bootstrap is done.",
+      finish:["BUILD the Onboarding Orchestrator (the client-facing engine) — currently spec only","Platform bootstrap: Stripe Connect, Cloudflare NS delegation, secrets rotation","A Dutch-lawyer terms review","One real launched client as proof"],
+      prices:[["Licence","$2K/mo"],["Done-for-you","$10K+",1],["Equity / rev-share","deal"]] },
+
+    { name:"Church Media Academy", type:"Vertical System · Faith", c:"#6b56d6", cd:"#a48cf5", status:"soon", statusTxt:"Free → Cohort",
+      gets:"In 90 days, an ad-hoc volunteer team becomes an owned, repeatable media ministry — with the curriculum, SOPs and templates to run it.",
+      deliverables:[
+        {s:"live",name:"AI Ministry Assessment",d:"The Front Door — a free diagnostic that scores presence & creates urgency."},
+        {s:"live",name:"90-Day Program",d:"The Program — a 13-week curriculum with copy-ready SOPs & templates."},
+        {s:"live",name:"Owner's Report",d:"VOM's internal ROI / sales case for the decision-maker.",aud:"internal"}
+      ],
+      scores:{quality:86,content:90,roi:88,complete:85,fit:88,scale:70},
+      bottom:"Content-rich and on home turf. Delivered as a done-with-you cohort, so value is high but it leans on your time.",
+      finish:["Wire the assessment as a self-serve tool (today it’s a lead step)","Package a self-serve tier so it scales beyond cohorts","Testimonials from a first church"],
+      prices:[["Assessment","Free"],["Cohort","$1K/mo",1],["Done-for-you","$10K"]] },
+
+    { name:"The Operator's Academy", type:"Front Door · Education", c:"#2b86bd", cd:"#5fb9e8", status:"free", statusTxt:"Free → €199",
+      gets:"The mental models and AI workflows that make every other system click — taught as interactive, self-paced courses.",
+      deliverables:[
+        {s:"live",name:"Automate Your Business With Claude",d:"Core Curriculum — the flagship interactive study guide."},
+        {s:"live",name:"The Leverage Stack",d:"The four leverage layers + the audit→optimize→automate loop."},
+        {s:"live",name:"The Distribution Console",d:"7 distribution plays that get customers to anything you build."},
+        {s:"planned",name:"The Cohort",d:"A community + one lesson drawn from each other brand."}
+      ],
+      scores:{quality:85,content:84,roi:90,complete:78,fit:80,scale:92},
+      bottom:"The house’s front door — cheap, high-trust, self-serve, and the top of every funnel. Strong as-is; the cohort would add recurring revenue.",
+      finish:["Build the paid Cohort tier","Tie course completion → next-step offers","Certificates / progress tracking"],
+      prices:[["Taster","Free"],["Course","$199",1],["Cohort","$29/mo"]] },
+
+    { name:"Launch Kits", type:"Vertical Kits · Productized", c:"#d1522f", cd:"#f2765c", status:"buy", statusTxt:"Buyable €199",
+      gets:"A specific business, pre-assembled — skip the strategy and run an end-to-end wizard for the vertical you want to launch this week.",
+      deliverables:[
+        {s:"paid",name:"KDP Ebook Launch Wizard",d:"Publish & launch a Kindle book, end to end."},
+        {s:"paid",name:"Course Launch Kit",d:"Launch & sell an online course, end to end."},
+        {s:"paid",name:"Newsletter Launch Kit",d:"Launch & grow a paid newsletter, end to end."},
+        {s:"paid",name:"Membership Club Ops Wizard",d:"Run a recurring membership club, end to end."},
+        {s:"planned",name:"More Kits",d:"Each a vertical instance of Turnkey — the shelf grows."}
+      ],
+      scores:{quality:85,content:88,roi:93,complete:88,fit:82,scale:90},
+      bottom:"Four complete, buyable wizards for €199 — exceptional value and fully self-serve. The other revenue-ready product alongside Hundred.",
+      finish:["Add 1–2 more kits to grow the shelf","Show a sample output per kit on the sales page","First buyer testimonial"],
+      prices:[["Single kit","€99"],["Bundle","€199",1],["Pro","€499"]] },
+
+    { name:"vital.", type:"Consumer Spin-off · Wellness", c:"#0f9f8f", cd:"#3fd0c0", status:"soon", statusTxt:"Free → $29/mo",
+      gets:"A structured, science-backed path to rebuild your health system by system — learn it, build your protocol, and track it daily.",
+      deliverables:[
+        {s:"live",name:"vital. training site & companion",d:"App + Academy — already one coherent product."},
+        {s:"live",name:"vital. Tracker",d:"Local profile, the six systems as daily protocols, streaks, and a vitality score."},
+        {s:"live",name:"6-body-systems research trilogy",d:"The Science Spine — the credibility the whole product rests on."}
+      ],
+      scores:{quality:85,content:88,roi:80,complete:72,fit:76,scale:84},
+      bottom:"A coherent consumer product with real depth. Needs subscription & account infrastructure before the $9–$29/mo tiers can actually bill.",
+      finish:["Subscription billing + accounts (the monetization backend)","Cloud sync for the tracker (currently local-only)","Medical disclaimer review"],
+      prices:[["Free","Trial"],["Plus","$9/mo"],["Full","$29/mo",1]] },
+
+    { name:"Engage AI", type:"Growth Engine · Existing Businesses", c:"#0891a6", cd:"#4dc9dd", status:"free", statusTxt:"Free → €99/mo",
+      gets:"Your audience engagement, measured and growing — a benchmark across every channel, then a monthly cycle that closes the gaps for you.",
+      deliverables:[
+        {s:"live",name:"The Engagement Scorecard",d:"A free self-serve benchmark across 8 channels + a prioritized improvement roadmap. Live, capturing leads."},
+        {s:"partial",name:"Engage AI platform",d:"Continuous benchmarking, Content Studio, AI agents & the engagement cycle. Exists as an internal control panel + WP plugin."},
+        {s:"spec",name:"Managed Engagement",d:"Done-for-you — VOM runs the whole cycle. Delivered as a service."}
+      ],
+      scores:{quality:84,content:80,roi:82,complete:58,fit:85,scale:80},
+      bottom:"A sharp free hook that’s already live and capturing leads. The self-serve client platform — signup, billing, and a real URL benchmark — is the gap between hook and product.",
+      finish:["Client-facing self-serve signup + billing","Real URL-crawl benchmark (backend) to replace the self-rated scorecard","Package the monthly engagement report as the recurring deliverable"],
+      prices:[["Scorecard","Free"],["Platform","€99/mo",1],["Managed","€1,500/mo"]] }
+  ];
+
+  function avg(s){ var k=Object.keys(s), t=0; k.forEach(function(x){t+=s[x];}); return Math.round(t/k.length); }
+  function grade(v){ if(v>=88)return"A"; if(v>=83)return"A-"; if(v>=78)return"B+"; if(v>=73)return"B"; if(v>=68)return"B-"; if(v>=63)return"C+"; if(v>=58)return"C"; return"C-"; }
+  function gcolor(v){ if(v>=83)return"var(--good)"; if(v>=73)return"var(--gold)"; if(v>=63)return"var(--warn)"; return"var(--bad)"; }
+  function scolor(v){ if(v>=80)return"var(--good)"; if(v>=65)return"var(--gold)"; return"var(--warn)"; }
+  var PILL={live:["p-live","Live"],paid:["p-paid","Paid"],spec:["p-spec","Spec"],partial:["p-partial","Partial"],planned:["p-planned","Planned"]};
+
+  // meta
+  var overalls = P.map(function(p){ return avg(p.scores); });
+  var houseAvg = Math.round(overalls.reduce(function(a,b){return a+b;},0)/overalls.length);
+  var buyable = P.filter(function(p){return p.status==="buy";}).length;
+  document.getElementById('meta').innerHTML =
+    '<span class="havg">House average <span class="badge">'+grade(houseAvg)+'</span> <b class="tabnum">'+houseAvg+'/100</b></span>'+
+    '<span><b>'+P.length+'</b> products</span>'+
+    '<span><b>'+buyable+'</b> buyable self-serve today</span>'+
+    '<span>Assessed <b>Jul 2026</b></span>';
+
+  // legend
+  document.getElementById('legend').innerHTML = KPIS.map(function(k){
+    return '<div class="lg"><b>'+k.label+'</b><span>'+k.desc+'</span></div>';
+  }).join('') + '<div class="lg"><b>Overall &amp; grade</b><span>The six KPIs, averaged. A ≥ 88 · B ≥ 73 · C ≥ 58.</span></div>';
+
+  // summary table
+  var thead = '<thead><tr><th class="name" style="text-align:left">Product</th><th>Overall</th>'+
+    KPIS.map(function(k){return '<th>'+k.label.slice(0,4)+'</th>';}).join('')+'<th>Status</th></tr></thead>';
+  var tbody = '<tbody>'+P.map(function(p){
+    var ov=avg(p.scores);
+    var cells=KPIS.map(function(k){ var v=p.scores[k.key]; return '<td class="cell tabnum" style="color:'+scolor(v)+'">'+v+'</td>'; }).join('');
+    var st=p.status, stc=st==="buy"?"buy":(st==="free"?"free":"soon");
+    return '<tr>'+
+      '<td class="name"><span class="dot" style="background:'+p.c+'"></span><b>'+p.name+'</b><span class="t">'+p.type+'</span></td>'+
+      '<td><span class="gradepill tabnum" style="background:'+gcolor(ov)+'">'+grade(ov)+'</span></td>'+
+      cells+
+      '<td><span class="stat '+stc+'">'+p.statusTxt+'</span></td>'+
+    '</tr>';
+  }).join('')+'</tbody>';
+  document.getElementById('summary').innerHTML = thead+tbody;
+
+  // cards
+  var showInternal=false;
+  function renderCards(){
+  document.getElementById('cards').innerHTML = P.map(function(p){
+    var ov=avg(p.scores);
+    var internalCount = p.deliverables.filter(function(d){return d.aud==='internal';}).length;
+    var dl = p.deliverables.filter(function(d){ return showInternal || d.aud!=='internal'; }).map(function(d){ var pl=PILL[d.s]; var intl=d.aud==='internal';
+      return '<li'+(intl?' class="intl"':'')+'><span class="dl-pill '+pl[0]+'">'+pl[1]+'</span><span class="dl-tx"><b>'+d.name+'</b>'+(intl?' <span class="aud-pill">VOM-internal</span>':'')+' — <span>'+d.d+'</span></span></li>';
+    }).join('');
+    var intlHint = (!showInternal && internalCount) ? '<div class="intl-hint">+ '+internalCount+' VOM-internal tool'+(internalCount>1?'s':'')+' hidden — not a client deliverable</div>' : '';
+    var bars = KPIS.map(function(k){ var v=p.scores[k.key];
+      return '<div class="bar"><span class="bk">'+k.label+'</span><span class="track"><i style="width:'+v+'%;background:'+scolor(v)+'"></i></span><span class="bv tabnum" style="color:'+scolor(v)+'">'+v+'</span></div>';
+    }).join('');
+    var chips = p.finish.map(function(f){ return '<span class="chip">'+f+'</span>'; }).join('');
+    var prices = p.prices.map(function(pr,i){ var core=pr[2]?' core':'';
+      return (i?'<span class="sep">·</span>':'')+'<span class="'+ (pr[2]?'core':'') +'">'+pr[0]+' '+pr[1]+'</span>'; }).join('');
+    return '<article class="card" style="--c:'+p.c+';--cd:'+p.cd+'"><div class="pad">'+
+      '<div class="chead"><div class="l"><div class="ptype">'+p.type+'</div><h2>'+p.name+'</h2><p class="pos">'+p.gets+'</p></div>'+
+        '<div class="grade"><span class="g" style="background:'+gcolor(ov)+'">'+grade(ov)+'</span><div class="o tabnum">'+ov+'/100</div></div></div>'+
+      '<div class="cols">'+
+        '<div><h3 class="k">What the client gets</h3><ul class="dlist">'+dl+'</ul>'+intlHint+'</div>'+
+        '<div><h3 class="k">Scorecard</h3>'+bars+
+          '<div class="ovl"><span class="lab">Overall</span><span class="val" style="color:'+gcolor(ov)+'">'+grade(ov)+' · '+ov+'</span></div></div>'+
+      '</div>'+
+      '</div>'+
+      '<div class="foot"><p class="bl"><b>Bottom line.</b> '+p.bottom+'</p>'+
+        '<div class="row"><div class="tf"><div class="h">To finish</div><div class="chips">'+chips+'</div></div>'+
+        '<div class="prices"><div class="h">Pricing</div><div class="pl">'+prices+'</div></div></div>'+
+      '</div>'+
+    '</article>';
+  }).join('');
+  }
+  renderCards();
+
+  document.getElementById('date').textContent = new Date().toLocaleDateString('en-GB',{year:'numeric',month:'long'});
+
+  // theme toggle
+  document.getElementById('themeBtn').addEventListener('click', function(){
+    var r=document.documentElement;
+    var cur=r.getAttribute('data-theme') || (matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');
+    r.setAttribute('data-theme', cur==='dark'?'light':'dark');
+  });
+  document.getElementById('intlBtn').addEventListener('click', function(){
+    showInternal=!showInternal;
+    this.textContent='◱ Internal: '+(showInternal?'on':'off');
+    this.style.color=showInternal?'var(--gold)':'';
+    renderCards();
+  });
+})();
+</script>

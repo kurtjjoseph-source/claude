@@ -1,0 +1,15 @@
+{
+  "url": "https://church-f-god-amersfoort-prelaunch.vercel.app",
+  "target": "vercel",
+  "deployed": "2026-08-04 21:11",
+  "run": "20260804-191108",
+  "threshold": 25,
+  "signups": [
+    {
+      "name": "Kurt Joseph",
+      "email": "kurtjjoseph@hotmail.com",
+      "note": "yes",
+      "date": "2026-08-05"
+    }
+  ]
+}

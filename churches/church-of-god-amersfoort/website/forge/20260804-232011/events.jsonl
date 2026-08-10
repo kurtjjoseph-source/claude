@@ -1,0 +1,59 @@
+{"seq": 1, "ts": "2026-08-04T23:20:11Z", "t": 0.0, "kind": "run_start", "stage": "", "level": "info", "msg": "CHURCHforge · church f god amersfoort", "data": {"archetype": "church", "target": "vercel", "fingerprint": "sha256:d4d648a57b5243926a1b8a79bb0a8d6b", "stages": 11}}
+{"seq": 2, "ts": "2026-08-04T23:20:11Z", "t": 0.0, "kind": "stage_start", "stage": "resolve", "level": "info", "msg": "Read the spec"}
+{"seq": 3, "ts": "2026-08-04T23:20:11Z", "t": 0.002, "kind": "log", "stage": "resolve", "level": "info", "msg": "Church / faith community · 10 modules · 7 pages"}
+{"seq": 4, "ts": "2026-08-04T23:20:11Z", "t": 0.003, "kind": "log", "stage": "resolve", "level": "info", "msg": "authorization: unattended (6b2030bb04c0ab8f)"}
+{"seq": 5, "ts": "2026-08-04T23:20:11Z", "t": 0.003, "kind": "log", "stage": "resolve", "level": "warn", "msg": "6 value(s) filled from the archetype because the profile did not supply them", "data": {"assumptions": ["city", "tagline", "offer_line", "leadership", "pricing", "services"]}}
+{"seq": 6, "ts": "2026-08-04T23:20:11Z", "t": 0.003, "kind": "stage_end", "stage": "resolve", "level": "info", "msg": "Read the spec", "data": {"state": "ok"}}
+{"seq": 7, "ts": "2026-08-04T23:20:11Z", "t": 0.004, "kind": "stage_start", "stage": "scaffold", "level": "info", "msg": "Lay out the build"}
+{"seq": 8, "ts": "2026-08-04T23:20:11Z", "t": 0.008, "kind": "log", "stage": "scaffold", "level": "info", "msg": "build tree at forge/20260804-232011/build"}
+{"seq": 9, "ts": "2026-08-04T23:20:11Z", "t": 0.008, "kind": "stage_end", "stage": "scaffold", "level": "info", "msg": "Lay out the build", "data": {"state": "ok"}}
+{"seq": 10, "ts": "2026-08-04T23:20:11Z", "t": 0.009, "kind": "stage_start", "stage": "brand", "level": "info", "msg": "Apply the brand"}
+{"seq": 11, "ts": "2026-08-04T23:20:11Z", "t": 0.011, "kind": "log", "stage": "brand", "level": "info", "msg": "CHURCHforge · accent #F97316 · Manrope"}
+{"seq": 12, "ts": "2026-08-04T23:20:11Z", "t": 0.011, "kind": "stage_end", "stage": "brand", "level": "info", "msg": "Apply the brand", "data": {"state": "ok"}}
+{"seq": 13, "ts": "2026-08-04T23:20:11Z", "t": 0.013, "kind": "stage_start", "stage": "platform", "level": "info", "msg": "Build the platform · 10 modules"}
+{"seq": 14, "ts": "2026-08-04T23:20:11Z", "t": 0.016, "kind": "log", "stage": "platform", "level": "info", "msg": "Events, Giving, Sermons, Serving rota, People, Messages, Content, Mailing list, Finances, New here"}
+{"seq": 15, "ts": "2026-08-04T23:20:11Z", "t": 0.016, "kind": "log", "stage": "platform", "level": "info", "msg": "9 seed record(s) so it opens with something in it"}
+{"seq": 16, "ts": "2026-08-04T23:20:11Z", "t": 0.016, "kind": "stage_end", "stage": "platform", "level": "info", "msg": "Build the platform · 10 modules", "data": {"state": "ok"}}
+{"seq": 17, "ts": "2026-08-04T23:20:11Z", "t": 0.018, "kind": "stage_start", "stage": "site", "level": "info", "msg": "Write the site · 7 pages"}
+{"seq": 18, "ts": "2026-08-04T23:20:11Z", "t": 0.023, "kind": "log", "stage": "site", "level": "info", "msg": "index.html  (39 KB)"}
+{"seq": 19, "ts": "2026-08-04T23:20:11Z", "t": 0.023, "kind": "log", "stage": "site", "level": "info", "msg": "visit.html  (38 KB)"}
+{"seq": 20, "ts": "2026-08-04T23:20:11Z", "t": 0.024, "kind": "log", "stage": "site", "level": "info", "msg": "about.html  (37 KB)"}
+{"seq": 21, "ts": "2026-08-04T23:20:11Z", "t": 0.024, "kind": "log", "stage": "site", "level": "info", "msg": "sermons.html  (36 KB)"}
+{"seq": 22, "ts": "2026-08-04T23:20:11Z", "t": 0.025, "kind": "log", "stage": "site", "level": "info", "msg": "events.html  (37 KB)"}
+{"seq": 23, "ts": "2026-08-04T23:20:11Z", "t": 0.025, "kind": "log", "stage": "site", "level": "info", "msg": "give.html  (38 KB)"}
+{"seq": 24, "ts": "2026-08-04T23:20:11Z", "t": 0.026, "kind": "log", "stage": "site", "level": "info", "msg": "contact.html  (37 KB)"}
+{"seq": 25, "ts": "2026-08-04T23:20:11Z", "t": 0.026, "kind": "stage_end", "stage": "site", "level": "info", "msg": "Write the site · 7 pages", "data": {"state": "ok"}}
+{"seq": 26, "ts": "2026-08-04T23:20:11Z", "t": 0.027, "kind": "stage_start", "stage": "wire", "level": "info", "msg": "Wire the rails"}
+{"seq": 27, "ts": "2026-08-04T23:20:11Z", "t": 0.03, "kind": "log", "stage": "wire", "level": "warn", "msg": "built but not switched on: payments=stripe, email=brevo, analytics=engage_ai"}
+{"seq": 28, "ts": "2026-08-04T23:20:11Z", "t": 0.03, "kind": "log", "stage": "wire", "level": "warn", "msg": "needs from the operator: BREVO_API_KEY, BREVO_SENDER_EMAIL, ENGAGE_AI_BASE_URL, STRIPE_PUBLISHABLE_KEY, STRIPE_SECRET_KEY"}
+{"seq": 29, "ts": "2026-08-04T23:20:11Z", "t": 0.03, "kind": "stage_end", "stage": "wire", "level": "info", "msg": "Wire the rails", "data": {"state": "ok"}}
+{"seq": 30, "ts": "2026-08-04T23:20:11Z", "t": 0.032, "kind": "stage_start", "stage": "package", "level": "info", "msg": "Package"}
+{"seq": 31, "ts": "2026-08-04T23:20:11Z", "t": 0.039, "kind": "log", "stage": "package", "level": "info", "msg": "site at the root, platform at /platform, manifest + readme written"}
+{"seq": 32, "ts": "2026-08-04T23:20:11Z", "t": 0.039, "kind": "stage_end", "stage": "package", "level": "info", "msg": "Package", "data": {"state": "ok"}}
+{"seq": 33, "ts": "2026-08-04T23:20:11Z", "t": 0.041, "kind": "stage_start", "stage": "verify", "level": "info", "msg": "Check the work"}
+{"seq": 34, "ts": "2026-08-04T23:20:11Z", "t": 0.045, "kind": "log", "stage": "verify", "level": "info", "msg": "PASS  spec_fingerprint — spec fingerprint matches its contents"}
+{"seq": 35, "ts": "2026-08-04T23:20:11Z", "t": 0.048, "kind": "log", "stage": "verify", "level": "info", "msg": "PASS  no_placeholders — no unresolved token reached a page"}
+{"seq": 36, "ts": "2026-08-04T23:20:11Z", "t": 0.048, "kind": "log", "stage": "verify", "level": "info", "msg": "PASS  pages_written — 7/7 present and non-trivial"}
+{"seq": 37, "ts": "2026-08-04T23:20:11Z", "t": 0.049, "kind": "log", "stage": "verify", "level": "info", "msg": "PASS  platform_written — 2/2 present and non-trivial"}
+{"seq": 38, "ts": "2026-08-04T23:20:11Z", "t": 0.049, "kind": "log", "stage": "verify", "level": "info", "msg": "PASS  nav_resolves — every nav link points at a written page"}
+{"seq": 39, "ts": "2026-08-04T23:20:11Z", "t": 0.049, "kind": "log", "stage": "verify", "level": "info", "msg": "PASS  module_titles_unique — every module has its own name"}
+{"seq": 40, "ts": "2026-08-04T23:20:11Z", "t": 0.049, "kind": "log", "stage": "verify", "level": "info", "msg": "PASS  visit_path — A first-time visitor can reach 'Plan your visit' from the home page in one click."}
+{"seq": 41, "ts": "2026-08-04T23:20:11Z", "t": 0.05, "kind": "log", "stage": "verify", "level": "info", "msg": "PASS  giving_present — module 'donations'"}
+{"seq": 42, "ts": "2026-08-04T23:20:11Z", "t": 0.05, "kind": "log", "stage": "verify", "level": "info", "msg": "PASS  events_seeded — 'events' opens with records in it"}
+{"seq": 43, "ts": "2026-08-04T23:20:11Z", "t": 0.05, "kind": "log", "stage": "verify", "level": "info", "msg": "PASS  no_ask_before_welcome — The home page welcomes before it asks for money."}
+{"seq": 44, "ts": "2026-08-04T23:20:11Z", "t": 0.05, "kind": "log", "stage": "verify", "level": "info", "msg": "all 10 checks passed"}
+{"seq": 45, "ts": "2026-08-04T23:20:11Z", "t": 0.051, "kind": "stage_end", "stage": "verify", "level": "info", "msg": "Check the work", "data": {"state": "ok"}}
+{"seq": 46, "ts": "2026-08-04T23:20:11Z", "t": 0.053, "kind": "stage_start", "stage": "deploy", "level": "info", "msg": "Deploy · vercel"}
+{"seq": 47, "ts": "2026-08-04T23:20:15Z", "t": 4.041, "kind": "log", "stage": "deploy", "level": "info", "msg": "linked to project 'church-f-god-amersfoort'"}
+{"seq": 48, "ts": "2026-08-04T23:20:23Z", "t": 12.254, "kind": "log", "stage": "deploy", "level": "info", "msg": "deployment protection disabled — the site is reachable without a Vercel login"}
+{"seq": 49, "ts": "2026-08-04T23:20:26Z", "t": 15.086, "kind": "log", "stage": "deploy", "level": "info", "msg": "stable address: https://church-f-god-amersfoort.vercel.app"}
+{"seq": 50, "ts": "2026-08-04T23:20:26Z", "t": 15.086, "kind": "log", "stage": "deploy", "level": "info", "msg": "https://church-f-god-amersfoort-4az6oc3wi-kurtjjoseph-6989s-projects.vercel.app"}
+{"seq": 51, "ts": "2026-08-04T23:20:26Z", "t": 15.087, "kind": "stage_end", "stage": "deploy", "level": "info", "msg": "Deploy · vercel", "data": {"state": "ok"}}
+{"seq": 52, "ts": "2026-08-04T23:20:26Z", "t": 15.088, "kind": "stage_start", "stage": "smoke", "level": "info", "msg": "Prove it is up"}
+{"seq": 53, "ts": "2026-08-04T23:20:27Z", "t": 15.516, "kind": "log", "stage": "smoke", "level": "info", "msg": "HTTP 200 from https://church-f-god-amersfoort-4az6oc3wi-kurtjjoseph-6989s-projects.vercel.app — serving 'church f god amersfoort' (40070 bytes)"}
+{"seq": 54, "ts": "2026-08-04T23:20:27Z", "t": 15.866, "kind": "log", "stage": "smoke", "level": "info", "msg": "stable address confirmed: https://church-f-god-amersfoort.vercel.app"}
+{"seq": 55, "ts": "2026-08-04T23:20:27Z", "t": 15.866, "kind": "stage_end", "stage": "smoke", "level": "info", "msg": "Prove it is up", "data": {"state": "ok"}}
+{"seq": 56, "ts": "2026-08-04T23:20:27Z", "t": 15.868, "kind": "stage_start", "stage": "seal", "level": "info", "msg": "Seal the run"}
+{"seq": 57, "ts": "2026-08-04T23:20:27Z", "t": 15.87, "kind": "log", "stage": "seal", "level": "info", "msg": "receipt written · 15.87s"}
+{"seq": 58, "ts": "2026-08-04T23:20:27Z", "t": 15.871, "kind": "stage_end", "stage": "seal", "level": "info", "msg": "Seal the run", "data": {"state": "ok"}}
+{"seq": 59, "ts": "2026-08-04T23:20:27Z", "t": 15.872, "kind": "run_end", "stage": "", "level": "info", "msg": "church f god amersfoort is launched", "data": {"outcome": "launched", "elapsed": 15.87, "url": "https://church-f-god-amersfoort-4az6oc3wi-kurtjjoseph-6989s-projects.vercel.app"}}

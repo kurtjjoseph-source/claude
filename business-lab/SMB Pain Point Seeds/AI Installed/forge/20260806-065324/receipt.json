@@ -1,0 +1,38 @@
+{
+  "run": "20260806-065324",
+  "sealed": "2026-08-06T06:53:39Z",
+  "fingerprint": "sha256:487db21fc4535b07a55a54611b770f96",
+  "business": "AI Installed",
+  "archetype": "prelaunch",
+  "forge": "PRELAUNCHforge",
+  "target": "vercel",
+  "artifacts": {
+    "logo": "drawn monogram — no client logo was supplied",
+    "brand_manual": "/Users/kurtjoseph/Business Ideas/SMB Pain Point Seeds/AI Installed/forge/20260806-065324/build/brand-manual.html",
+    "brand_kit": "Waitlist Green (default)",
+    "platform": "/Users/kurtjoseph/Business Ideas/SMB Pain Point Seeds/AI Installed/forge/20260806-065324/build/platform/index.html",
+    "photos": "6 placeholder photographs (CC0/PDM)",
+    "site": "/Users/kurtjoseph/Business Ideas/SMB Pain Point Seeds/AI Installed/forge/20260806-065324/build/site/index.html",
+    "pages": [
+      "faq.html",
+      "index.html"
+    ],
+    "url": "https://ai-installed-prelaunch-4p52l7sw3-kurtjjoseph-6989s-projects.vercel.app",
+    "platform_url": "https://ai-installed-prelaunch-4p52l7sw3-kurtjjoseph-6989s-projects.vercel.app/platform/",
+    "alias": "https://ai-installed-prelaunch.vercel.app"
+  },
+  "checks_passed": 10,
+  "elapsed_seconds": 14.71,
+  "authorization": {
+    "mode": "unattended",
+    "targets": [
+      "vercel"
+    ],
+    "scope": "unattended forge build + deploy to 'vercel' for this business, limited to: composing the platform modules, writing the public site, wiring rails that already have credentials, publishing the result, and — for a hosting target that gates new projects behind a login — making that one deployment publicly reachable. Does not authorize sending email, charging anyone, or posting to any channel.",
+    "consent_ref": "34d56089605a6943",
+    "consent_seq": 1,
+    "granted_by": "VOM",
+    "granted_at": "2026-08-06T06:53:24Z",
+    "channel": "standing service authorization"
+  }
+}

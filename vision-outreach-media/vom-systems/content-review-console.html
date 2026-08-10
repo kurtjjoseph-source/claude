@@ -1,0 +1,284 @@
+<meta charset="utf-8">
+<title>VOM Content Review Console</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root{
+    --bg:#f6f5f1; --surface:#ffffff; --surface-2:#f1efe8; --line:#e1dfd4;
+    --ink:#1a1d1b; --ink-soft:#535b56; --ink-faint:#868f89;
+    --gold:#e8843c; --good:#2f9e63; --warn:#c9862a; --bad:#c0523a; --flag:#c0523a;
+    --serif:ui-serif,Georgia,"Times New Roman",serif;
+    --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  }
+  @media (prefers-color-scheme:dark){ :root{
+    --bg:#0e100f; --surface:#161a18; --surface-2:#1c211e; --line:#2a322d;
+    --ink:#f0f2ee; --ink-soft:#a8b1aa; --ink-faint:#79837c;
+    --gold:#f0a05c; --good:#38d07f; --warn:#e0a94b; --bad:#e8785c; --flag:#e8785c;
+  } }
+  :root[data-theme="light"]{ --bg:#f6f5f1; --surface:#ffffff; --surface-2:#f1efe8; --line:#e1dfd4; --ink:#1a1d1b; --ink-soft:#535b56; --ink-faint:#868f89; --gold:#e8843c; --good:#2f9e63; --warn:#c9862a; --bad:#c0523a; --flag:#c0523a; }
+  :root[data-theme="dark"]{ --bg:#0e100f; --surface:#161a18; --surface-2:#1c211e; --line:#2a322d; --ink:#f0f2ee; --ink-soft:#a8b1aa; --ink-faint:#79837c; --gold:#f0a05c; --good:#38d07f; --warn:#e0a94b; --bad:#e8785c; --flag:#e8785c; }
+  *{ box-sizing:border-box; }
+  body{ margin:0; background:var(--bg); color:var(--ink); font-family:var(--sans); line-height:1.55; -webkit-font-smoothing:antialiased; }
+  .wrap{ max-width:1000px; margin:0 auto; padding:0 20px; }
+  a{ color:inherit; }
+  .tabnum{ font-variant-numeric:tabular-nums; }
+  .topbar{ position:sticky; top:0; z-index:20; background:color-mix(in srgb,var(--bg) 88%,transparent); backdrop-filter:blur(10px); border-bottom:1px solid var(--line); }
+  .topbar .wrap{ padding:14px 20px; display:flex; align-items:center; gap:14px; flex-wrap:wrap; }
+  .brand{ font-family:var(--serif); font-weight:600; font-size:19px; letter-spacing:-.01em; }
+  .brand em{ color:var(--gold); font-style:italic; }
+  .spacer{ flex:1; }
+  .prog{ display:flex; align-items:center; gap:10px; font-size:12.5px; color:var(--ink-soft); }
+  .prog .track{ width:120px; height:8px; background:var(--surface-2); border:1px solid var(--line); border-radius:99px; overflow:hidden; }
+  .prog .track i{ display:block; height:100%; background:var(--good); width:0; transition:width .3s; }
+  .btn{ font-family:var(--mono); font-size:12px; font-weight:700; color:var(--ink-soft); background:var(--surface); border:1px solid var(--line); border-radius:8px; padding:7px 11px; cursor:pointer; }
+  .btn:hover{ color:var(--ink); }
+  .filters{ display:flex; gap:8px; flex-wrap:wrap; padding:16px 0 4px; }
+  .filters button{ font-family:var(--mono); font-size:12px; font-weight:700; color:var(--ink-soft); background:transparent; border:1px solid var(--line); border-radius:999px; padding:7px 14px; cursor:pointer; }
+  .filters button.on{ color:#fff; background:var(--gold); border-color:var(--gold); }
+  .filters .count{ opacity:.7; }
+  .intro{ font-size:14px; color:var(--ink-soft); margin:18px 0 6px; max-width:70ch; }
+  .group{ margin-top:26px; }
+  .ghead{ display:flex; align-items:baseline; gap:12px; margin-bottom:12px; padding-bottom:8px; border-bottom:1px solid var(--line); }
+  .ghead h2{ font-family:var(--serif); font-weight:600; font-size:22px; margin:0; }
+  .ghead .grade{ font-family:var(--mono); font-size:12px; font-weight:700; color:#fff; background:var(--gold); border-radius:6px; padding:2px 8px; }
+  .ghead .gc{ font-size:12px; color:var(--ink-faint); margin-left:auto; }
+  .item{ background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:13px 15px; margin-bottom:10px; }
+  .item.done{ border-color:color-mix(in srgb,var(--good) 45%,var(--line)); background:color-mix(in srgb,var(--good) 5%,var(--surface)); }
+  .item.flagged{ border-color:color-mix(in srgb,var(--flag) 50%,var(--line)); }
+  .irow{ display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+  .pill{ flex:none; font-size:10px; font-weight:800; letter-spacing:.03em; text-transform:uppercase; border-radius:6px; padding:3px 8px; white-space:nowrap; }
+  .p-live{ color:#fff; background:var(--good); } .p-paid{ color:#fff; background:var(--gold); }
+  .p-spec{ color:var(--ink-soft); background:var(--surface-2); border:1px solid var(--line); }
+  .p-partial{ color:#fff; background:var(--warn); } .p-planned{ color:var(--ink-faint); background:transparent; border:1px dashed var(--line); }
+  .pill-int{ color:var(--ink-soft); background:var(--surface-2); border:1px solid color-mix(in srgb,var(--ink-faint) 40%,var(--line)); }
+  .item.intl{ opacity:.82; }
+  .iname{ flex:1; min-width:200px; }
+  .iname b{ font-size:14.5px; } .iname span{ display:block; font-size:12.5px; color:var(--ink-soft); }
+  .acts{ display:flex; align-items:center; gap:7px; }
+  .open{ font-family:var(--mono); font-size:12px; font-weight:700; text-decoration:none; color:var(--gold); border:1px solid color-mix(in srgb,var(--gold) 45%,var(--line)); border-radius:8px; padding:6px 11px; white-space:nowrap; }
+  .open:hover{ background:color-mix(in srgb,var(--gold) 12%,transparent); }
+  .open.dead{ color:var(--ink-faint); border-style:dashed; pointer-events:none; opacity:.6; }
+  .tog{ font-family:var(--sans); font-size:13px; font-weight:700; border:1px solid var(--line); background:var(--surface-2); color:var(--ink-soft); border-radius:8px; padding:6px 11px; cursor:pointer; white-space:nowrap; }
+  .tog.rev.on{ color:#fff; background:var(--good); border-color:var(--good); }
+  .tog.flg.on{ color:#fff; background:var(--flag); border-color:var(--flag); }
+  .notes{ margin-top:10px; display:none; }
+  .notes.show{ display:block; }
+  .notes textarea{ width:100%; font-family:inherit; font-size:13.5px; color:var(--ink); background:var(--bg); border:1px solid var(--line); border-radius:9px; padding:9px 11px; resize:vertical; min-height:56px; }
+  .notetoggle{ font-family:var(--mono); font-size:11px; color:var(--ink-faint); background:none; border:none; cursor:pointer; padding:6px 0 0; }
+  .notetoggle:hover{ color:var(--ink-soft); }
+  .hasnote{ color:var(--gold); }
+  .copybox{ display:none; margin-top:14px; }
+  .copybox textarea{ width:100%; min-height:180px; font-family:var(--mono); font-size:12px; background:var(--surface); color:var(--ink); border:1px solid var(--line); border-radius:10px; padding:12px; }
+  footer{ margin-top:40px; padding:22px 0; border-top:1px solid var(--line); color:var(--ink-faint); font-size:12px; }
+</style>
+<div data-vom-badge style="display:flex;align-items:center;gap:10px;padding:9px 18px;background:#1B2A4A;color:#fff;font-family:-apple-system,system-ui,'Segoe UI',Roboto,sans-serif"><a href="https://vom-systems.vercel.app" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:10px;text-decoration:none;color:#fff"><img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAASABIAAD/4QBMRXhpZgAATU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAgKADAAQAAAABAAAAgAAAAAD/4QnSaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLwA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJYTVAgQ29yZSA2LjAuMCI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnBob3Rvc2hvcD0iaHR0cDovL25zLmFkb2JlLmNvbS9waG90b3Nob3AvMS4wLyIgcGhvdG9zaG9wOkluc3RydWN0aW9ucz0iRkJNRDBhMDAwYTA3MDIwMDAwYmQwYTAwMDBjMzE0MDAwMDU3MTYwMDAwNTkxODAwMDBhMjIxMDAwMDBhMzIwMDAwYmMzNDAwMDA2OTM2MDAwMDMxMzgwMDAwMmI0YzAwMDAiLz4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8P3hwYWNrZXQgZW5kPSJ3Ij8+AP/tAK5QaG90b3Nob3AgMy4wADhCSU0EBAAAAAAAdhwBWgADGyVHHAIAAAIAAhwCKABiRkJNRDBhMDAwYTA3MDIwMDAwYmQwYTAwMDBjMzE0MDAwMDU3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" alt="Vision Outreach Media" width="128" height="128" style="width:28px;height:28px;border-radius:7px;object-fit:cover;background:#fff;display:block"><span style="font-weight:700;font-size:13.5px;letter-spacing:.02em">Vision Outreach Media</span><span style="font-size:11px;opacity:.7;font-weight:600;letter-spacing:.09em;text-transform:uppercase">&middot; The House</span></a></div>
+
+<div class="topbar"><div class="wrap">
+  <div class="brand">Content <em>review</em> console</div>
+  <div class="spacer"></div>
+  <div class="prog"><span id="progtxt" class="tabnum">0 / 0</span><span class="track"><i id="progbar"></i></span></div>
+  <button class="btn" id="copyBtn">⧉ Summary</button>
+  <button class="btn" id="themeBtn">◐</button>
+</div></div>
+
+<div class="wrap">
+  <p class="intro">Every live deliverable in the house, in one place. Open each one, mark it <b>Reviewed</b>, <b>🚩 Flag</b> anything that needs work, and jot a note. Your progress and notes are saved on this device. Gated links are included — keep this private.</p>
+  <div class="filters" id="filters"></div>
+  <div class="copybox" id="copybox"><textarea id="copyta" readonly></textarea></div>
+  <div id="groups"></div>
+  <footer>Vision Outreach Media — internal review tool. State saved locally (<span class="tabnum" id="savedcount">0</span> items tracked). Not a substitute for the source files.</footer>
+</div>
+
+<script>
+(function(){
+  var A = "https://claude.ai/code/artifact/";
+  var G = [
+    { product:"Hundred", grade:"A", items:[
+      {n:"Hundred OS \u2014 the whole flow", w:"The Map + the five moves + the Pipeline + the Turnkey upsell, combined into one structured flow", s:"live", u:A+"cb7efb35-9ed0-417d-8b8b-f8201749d72d"},
+      {n:"$100K Blueprint (source)", w:"The Map \u2014 now folded into the OS", s:"live", i:1, u:A+"702717b4-da1a-49f8-a966-cba9a27724b8"},
+      {n:"$100K Workflow (source)", w:"The Engine \u2014 folded into the OS (gated)", s:"paid", i:1, u:A+"dbcf62cd-e198-4da9-b839-30d6a752b171"},
+      {n:"100-Deal Pipeline (source)", w:"The Pipeline \u2014 folded into the OS (gated)", s:"paid", i:1, u:A+"62cb9e6f-14da-458d-a803-e9e4c6bc62e1"},
+      {n:"Product site", w:"The live landing page", s:"live", u:"https://vom-hundred.vercel.app"}
+    ]},
+    { product:"Turnkey", grade:"B", items:[
+      {n:"Onboarding Orchestrator", w:"CLIENT-FACING PRODUCT — /onboard-business engine + biz-* subagents. Built this session (engine + gates); not a web page", s:"spec", u:""},
+      {n:"Kanalen instellen", w:"The Localization Kit — NL channel setup (client-facing)", s:"live", u:A+"66448728-5143-49e7-8180-4f1abfe9f5ff"},
+      {n:"The Business Model", w:"The Thesis — why it works + unit economics", s:"live", i:1, u:A+"a59cded3-5ee9-4af3-9dcc-317b94243168"},
+      {n:"Onboarding System", w:"The Intake — how a raw idea enters production", s:"live", i:1, u:A+"68462135-6d23-4713-862a-acc9009b766b"},
+      {n:"Launch Console", w:"The Cockpit — run every build in flight", s:"live", i:1, u:A+"eedc93e5-5131-47a0-ba0a-b4c7341166e3"},
+      {n:"Compliance Dashboard", w:"The Trust Layer — security for serious clients", s:"live", i:1, u:A+"b584fbe6-89af-469d-bce6-07f1c79e3dc6"},
+      {n:"Presence Sprint", w:"The First Win — a productized delivery VOM runs", s:"live", i:1, u:A+"f62dfc28-ae4b-42e9-8583-cdd0786f2dea"},
+      {n:"Product site", w:"The live landing page", s:"live", u:"https://vom-turnkey.vercel.app"}
+    ]},
+    { product:"Ministry AI", grade:"A-", items:[
+      {n:"Ministry AI Assessment (funnel)", w:"The live VOM-branded church funnel — €295 founding rate, FOUNDINGCHURCH code", s:"live", u:"https://vom-ministry-ai.vercel.app"},
+      {n:"Ministry AI funnel (review copy)", w:"Private artifact copy of the funnel", s:"live", i:1, u:A+"00688f69-3830-42d8-a678-95af10b8e567"},
+      {n:"Ministry AI mini-audit", w:"The free 2-min wizard — church front-door tripwire", s:"live", u:A+"f08718c8-eb05-45ef-a1cf-b16230f4a1f3"}
+    ]},
+    { product:"Church Media Academy", grade:"A-", items:[
+      {n:"90-Day Program", w:"13-week curriculum + copy-ready SOPs & templates", s:"live", u:A+"2299de00-0346-43ce-bc93-43bf3274b3d1"},
+      {n:"90-Day Program (early cut)", w:"The earlier overview of the program", s:"live", i:1, u:A+"31e62816-2938-47c0-9033-c87b069596e4"},
+      {n:"Owner's Report", w:"VOM's internal ROI / sales case", s:"live", i:1, u:A+"6a01dffe-c14d-4cda-8621-df77a84d9284"},
+      {n:"Product site", w:"The live landing page", s:"live", u:"https://vom-church-media-academy.vercel.app"}
+    ]},
+    { product:"The Operator's Academy", grade:"A-", items:[
+      {n:"Automate Your Business With Claude", w:"Core Curriculum — the flagship study guide", s:"live", u:A+"6703264d-ab93-4266-ae80-d57cc000a7dd"},
+      {n:"The Leverage Stack", w:"Four leverage layers + audit→optimize→automate loop", s:"live", u:A+"065494b1-9f23-447d-b7d3-8cb8ba7471c1"},
+      {n:"The Distribution Console", w:"7 distribution plays to get customers", s:"live", u:A+"635f9c97-8b53-40b4-ad77-16921c0275b2"},
+      {n:"The Cohort", w:"Community + cross-brand lessons (planned)", s:"planned", u:""},
+      {n:"Product site", w:"The live landing page", s:"live", u:"https://vom-operators-academy.vercel.app"}
+    ]},
+    { product:"Launch Kits", grade:"A", items:[
+      {n:"KDP Ebook Launch Wizard", w:"Publish & launch a Kindle book (gated)", s:"paid", u:A+"554c1990-0786-47ec-b7ad-a385fd7ee553"},
+      {n:"Course Launch Kit", w:"Launch & sell an online course (gated)", s:"paid", u:A+"d63c831f-28bb-4a8d-b676-1132c1880eac"},
+      {n:"Newsletter Launch Kit", w:"Launch & grow a paid newsletter (gated)", s:"paid", u:A+"5c713e17-c3ff-4025-9203-b48d6e24fd7d"},
+      {n:"Membership Club Ops Wizard", w:"Run a recurring membership club (gated)", s:"paid", u:A+"d89993c2-74f5-493c-9a8c-edfadb92738c"},
+      {n:"Product site", w:"The live landing page", s:"live", u:"https://vom-launch-kits.vercel.app"}
+    ]},
+    { product:"vital.", grade:"B+", items:[
+      {n:"vital. training site & companion", w:"App + Academy — one coherent product", s:"live", u:A+"c0df87f8-e618-4a50-8d1b-f7317977a396"},
+      {n:"vital. Tracker", w:"Local profile, six-system protocols, streaks, vitality score", s:"live", u:A+"eb9e85cc-65ce-4b05-8961-aca0dd5a652f"},
+      {n:"Get vital. on your phone", w:"The install / app landing page", s:"live", u:A+"03178885-17f5-4d24-93ff-2d2735fb3491"},
+      {n:"6-body-systems research trilogy", w:"The Science Spine (research content, no single page)", s:"spec", u:""},
+      {n:"Product site", w:"The live landing page", s:"live", u:"https://vom-vital.vercel.app"}
+    ]},
+    { product:"Engage AI", grade:"B+", items:[
+      {n:"The Engagement Scorecard", w:"Free self-serve benchmark + roadmap (LIVE, capturing leads)", s:"live", u:"https://vom-scorecard.vercel.app"},
+      {n:"Engage AI control panel", w:"Internal benchmarking/agents dashboard (not client-facing)", s:"partial", i:1, u:"https://engage-ai-api.onrender.com/dashboard"},
+      {n:"Managed Engagement", w:"Done-for-you cycle (delivered as a service)", s:"planned", u:""}
+    ]},
+    { product:"House & go-to-market", grade:"", items:[
+      {n:"VOM Brand Kit", w:"The house design system — tokens + components (single source of truth)", s:"live", i:1, u:A+"c37d1725-bc4b-4194-9d46-25e31a798f7e"},
+      {n:"Brand Proposition", w:"The 'house of operating systems' pitch", s:"live", i:1, u:A+"27f53925-9186-49b0-955f-497d023520c5"},
+      {n:"Grow With Us — funnels page", w:"The 3-path public funnel (on visionoutreachmedia.nl)", s:"live", u:"https://vom-grow.vercel.app"},
+      {n:"Two Funnels, One House", w:"The internal go-to-market ladder view", s:"live", i:1, u:A+"170d2e2a-b6be-4d59-9f53-80e3b1baf024"},
+      {n:"Product Report Cards", w:"Per-product grades & deliverables", s:"live", i:1, u:A+"8db0edf9-68aa-4a7d-b811-02ccca252e6d"},
+      {n:"Studio Index hub", w:"Searchable menu of all artifacts", s:"live", u:"https://artifact-hub-nu.vercel.app"},
+      {n:"Products hub", w:"The house — all products", s:"live", u:"https://vom-systems.vercel.app"},
+      {n:"Completion Report", w:"Promise-vs-delivery audit", s:"live", i:1, u:A+"37ae4ed4-5796-4fc7-a3b9-14b1c6bfd2b7"},
+      {n:"Go-Live Plan", w:"Phased launch tracker (saved progress)", s:"live", i:1, u:A+"271cddd3-8ccf-4467-9276-f8a02d1853c6"}
+    ]},
+    { product:"Other / experiments", grade:"", items:[
+      {n:"Buzz × The House — Implementation Wizard", w:"Mapping Jack Dorsey's Buzz onto the house", s:"live", i:1, u:A+"87961c05-a8c4-4879-9ee4-84dde05d82eb"},
+      {n:"Lazy AI Income — Interactive Trainer", w:"A standalone interactive trainer", s:"live", u:A+"f03f88db-da0e-4a55-af70-551942df1d1b"},
+      {n:"AFTERTOUCH — Crash Mode Prototype", w:"An experimental prototype", s:"live", u:A+"d606755f-a18d-47c3-a7e7-1f324c788762"},
+      {n:"radar_preview", w:"A radar-chart preview snippet", s:"live", u:A+"ee8e5f31-84f4-498c-be72-e19367d816f0"}
+    ]}
+  ];
+
+  var PILL={live:["p-live","Live"],paid:["p-paid","Gated"],spec:["p-spec","Spec"],partial:["p-partial","Partial"],planned:["p-planned","Planned"]};
+
+  var KEY="vom_review_v1";
+  var st={}; try{ st=JSON.parse(localStorage.getItem(KEY))||{}; }catch(e){ st={}; }
+  function save(){ try{ localStorage.setItem(KEY, JSON.stringify(st)); }catch(e){} }
+  function slug(s){ return s.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,''); }
+  function id(g,it){ return slug(g.product)+"::"+slug(it.n); }
+
+  var filter="all";
+  var reviewable = [];
+  G.forEach(function(g){ g.items.forEach(function(it){ if(it.u) reviewable.push(id(g,it)); }); });
+
+  function counts(){
+    var done=0,flag=0; reviewable.forEach(function(k){ var s=st[k]||{}; if(s.r)done++; if(s.f)flag++; });
+    return {done:done, flag:flag, total:reviewable.length};
+  }
+
+  function matches(g,it){
+    var s=st[id(g,it)]||{};
+    if(filter==="todo") return it.u && !s.r;
+    if(filter==="done") return !!s.r;
+    if(filter==="flag") return !!s.f;
+    if(filter==="int") return !!it.i;
+    return true;
+  }
+
+  function render(){
+    var c=counts();
+    document.getElementById('progtxt').textContent=c.done+" / "+c.total;
+    document.getElementById('progbar').style.width=(c.total? (c.done/c.total*100):0)+"%";
+    document.getElementById('savedcount').textContent=Object.keys(st).length;
+
+    document.getElementById('filters').innerHTML=[
+      ["all","All","&nbsp;"+G.reduce(function(a,g){return a+g.items.length;},0)],
+      ["todo","To review",c.total-c.done],
+      ["done","Reviewed",c.done],
+      ["flag","🚩 Flagged",c.flag],
+      ["int","🔒 Internal",G.reduce(function(a,g){return a+g.items.filter(function(x){return x.i;}).length;},0)]
+    ].map(function(f){ return '<button data-f="'+f[0]+'" class="'+(filter===f[0]?'on':'')+'">'+f[1]+' <span class="count">'+f[2]+'</span></button>'; }).join('');
+
+    var html="";
+    G.forEach(function(g){
+      var vis=g.items.filter(function(it){return matches(g,it);});
+      if(!vis.length) return;
+      var gc=g.items.filter(function(it){return it.u && (st[id(g,it)]||{}).r;}).length;
+      var gt=g.items.filter(function(it){return it.u;}).length;
+      html+='<div class="group"><div class="ghead"><h2>'+g.product+'</h2>'+
+        (g.grade?'<span class="grade">'+g.grade+'</span>':'')+
+        '<span class="gc tabnum">'+gc+' / '+gt+' reviewed</span></div>';
+      vis.forEach(function(it){
+        var k=id(g,it), s=st[k]||{}, pl=PILL[it.s];
+        var cls="item"+(s.r?" done":"")+(s.f?" flagged":"")+(it.i?" intl":"");
+        var open = it.u ? '<a class="open" href="'+it.u+'" target="_blank" rel="noopener">Open ↗</a>' : '<span class="open dead">no live page</span>';
+        html+='<div class="'+cls+'" data-k="'+k+'">'+
+          '<div class="irow">'+
+            '<span class="pill '+pl[0]+'">'+pl[1]+'</span>'+
+            (it.i?'<span class="pill pill-int">🔒 VOM-internal</span>':'')+
+            '<span class="iname"><b>'+it.n+'</b><span>'+it.w+'</span></span>'+
+            '<span class="acts">'+open+
+              (it.u?'<button class="tog rev'+(s.r?' on':'')+'" data-a="r">'+(s.r?'✓ Reviewed':'Mark reviewed')+'</button>':'')+
+              (it.u?'<button class="tog flg'+(s.f?' on':'')+'" data-a="f" title="Flag">🚩</button>':'')+
+            '</span>'+
+          '</div>'+
+          (it.u?'<button class="notetoggle'+(s.n?' hasnote':'')+'" data-a="note">'+(s.n?'✎ note':'+ add note')+'</button>':'')+
+          '<div class="notes'+(s.n?' show':'')+'"><textarea placeholder="What did you find? What needs fixing?">'+(s.n||"").replace(/</g,"&lt;")+'</textarea></div>'+
+        '</div>';
+      });
+      html+='</div>';
+    });
+    document.getElementById('groups').innerHTML=html;
+  }
+
+  document.getElementById('filters').addEventListener('click',function(e){
+    var b=e.target.closest('button[data-f]'); if(!b)return; filter=b.dataset.f; render();
+  });
+  document.getElementById('groups').addEventListener('click',function(e){
+    var b=e.target.closest('button[data-a]'); if(!b)return;
+    var item=b.closest('.item'), k=item.dataset.k; st[k]=st[k]||{};
+    var a=b.dataset.a;
+    if(a==="r"){ st[k].r=!st[k].r; save(); render(); }
+    else if(a==="f"){ st[k].f=!st[k].f; save(); render(); }
+    else if(a==="note"){ item.querySelector('.notes').classList.toggle('show'); item.querySelector('textarea').focus(); }
+  });
+  document.getElementById('groups').addEventListener('input',function(e){
+    if(e.target.tagName!=="TEXTAREA")return;
+    var item=e.target.closest('.item'), k=item.dataset.k; st[k]=st[k]||{};
+    st[k].n=e.target.value; save();
+    document.getElementById('savedcount').textContent=Object.keys(st).length;
+  });
+
+  document.getElementById('themeBtn').addEventListener('click',function(){
+    var r=document.documentElement, cur=r.getAttribute('data-theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');
+    r.setAttribute('data-theme',cur==='dark'?'light':'dark');
+  });
+
+  document.getElementById('copyBtn').addEventListener('click',function(){
+    var lines=["# VOM content review — "+new Date().toLocaleString(),""];
+    var c=counts(); lines.push("Reviewed "+c.done+"/"+c.total+"  ·  Flagged "+c.flag,"");
+    G.forEach(function(g){
+      var rows=g.items.filter(function(it){return it.u && ((st[id(g,it)]||{}).r || (st[id(g,it)]||{}).f || (st[id(g,it)]||{}).n);});
+      if(!rows.length) return;
+      lines.push("## "+g.product);
+      rows.forEach(function(it){ var s=st[id(g,it)]||{};
+        lines.push("- ["+(s.r?"x":" ")+"] "+(s.f?"🚩 ":"")+it.n+(s.n?" — "+s.n:""));
+      });
+      lines.push("");
+    });
+    var txt=lines.join("\n");
+    var box=document.getElementById('copybox'), ta=document.getElementById('copyta');
+    ta.value=txt; box.style.display='block'; ta.focus(); ta.select();
+    try{ navigator.clipboard.writeText(txt); }catch(e){}
+  });
+
+  render();
+})();
+</script>

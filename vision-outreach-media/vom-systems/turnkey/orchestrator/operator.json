@@ -1,0 +1,59 @@
+{
+  "schema": 1,
+  "_comment": "The Turnkey OPERATOR profile — one per Turnkey instance (per franchisee). This is the ONLY file a white-label operator must replace: the engine, gates, consent log, and agents are all brand-agnostic and read the operator's identity from here. This file = instance #1 (Vision Outreach Media, the franchisor dogfooding its own product).",
+
+  "operator": {
+    "id": "vom",
+    "name": "Vision Outreach Media",
+    "short": "VOM",
+    "author_as": "Vision Outreach Media (VOM)",
+    "tagline": "We launch and run a turnkey business for you — and it is genuinely yours.",
+    "voice": "Mission-driven, plain-spoken, trust-first, and (for the church niche) faith-friendly. Never hype, never jargon. Speak like a helpful expert, not a salesperson. Deliverables say \"Vision Outreach Media (VOM)\" or \"the operator\" — never a personal name.",
+    "model": "operator-run",
+    "niche_focus": "churches / faith-based organizations (VOM's specialization; not a constraint of the tool)"
+  },
+
+  "brand": {
+    "note": "The operator's HOUSE brand. An individual launched business may carry its own product brand (e.g. the church AI-assessment uses a liturgical violet/gold system); this house brand is the default and the franchisor identity.",
+    "logo": "blue-megaphone mark",
+    "palette": {
+      "navy": "#1B2A4A",
+      "orange": "#E8843C",
+      "teal": "#2FA8A0",
+      "ink": "#1B2233",
+      "paper": "#FFFFFF"
+    },
+    "typography": {
+      "display": "Manrope",
+      "body": "Manrope"
+    },
+    "web": "visionoutreachmedia.nl"
+  },
+
+  "platform": {
+    "note": "The operator's provisioned rails. These back the generic gate-matrix keys in launch-state.json; agents read the concrete values from here when a workstream needs them.",
+    "dns_zone": "clients.visionoutreachmedia.nl",
+    "apex_domain": "visionoutreachmedia.nl",
+    "registrar": "one.com (legacy — apex + existing owned domains only, frozen for new client domains)",
+    "registrar_wholesale": "Openprovider Membership Basic S — the account NEW client domains are registered through, at registry cost, with the CLIENT as registrant and VOM as admin/tech contact. No markup; transfer-out free and unconditional (rail D4). Decision + signup runbook: vom-systems/domains/registrar-decision.md. STATUS: account not yet provisioned.",
+    "dns_provider": "Cloudflare (delegated clients zone)",
+    "email_sender": "Brevo",
+    "stripe": "VOM platform account (operator-run = direct charges; Connect Express is for client tenants)",
+    "hosting": "Vercel (scope kurtjjoseph-6989)",
+    "bookkeeping": "operator's NL bookkeeping",
+    "cms_default": "wordpress",
+    "wordpress_hosting": "one.com managed WordPress (VOM's own apex); client WordPress sites are hosted per-client and DNS-pointed from the delegated clients zone",
+    "wordpress_capability": "VOM ships the Engage AI WordPress plugin — on a WordPress site the owner gets the Content Studio, publishing and ground-truth analytics inside their own wp-admin. This is a tie-breaker advantage, not a reason to force WordPress on a business that structurally needs an application.",
+    "_blueprint_note": "cms_default / wordpress_capability feed the deterministic site-platform decision in engine/blueprints.py. A franchisee without a WordPress product should set cms_default to \"custom\" and drop wordpress_capability."
+  },
+
+  "gate_matrix_status": {
+    "note": "Optional per-operator overrides for the one-time-ever bootstrap prereqs. `init` seeds a fresh business's gate matrix from these so business #2+ inherits what business #1 cleared. Omit a key to leave it 'pending'.",
+    "stripe_connect": "done",
+    "provisioned_accounts": "done",
+    "cloudflare_delegation": "pending",
+    "credential_baseline": "pending",
+    "dutch_lawyer_terms": "pending",
+    "registrar_nl": "pending"
+  }
+}

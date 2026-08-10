@@ -1,0 +1,29 @@
+{
+  "run": "20260805-213930",
+  "sealed": "2026-08-05T21:39:30Z",
+  "fingerprint": "sha256:58945c86b5a5f2c1ec681cf422df4e46",
+  "business": "AI Installed",
+  "archetype": "prelaunch",
+  "forge": "PRELAUNCHforge",
+  "target": "local",
+  "artifacts": {
+    "logo": "drawn monogram — no client logo was supplied",
+    "brand_manual": "/Users/kurtjoseph/Business Ideas/SMB Pain Point Seeds/AI Installed/forge/20260805-213930/build/brand-manual.html",
+    "brand_kit": "Waitlist Green (default)",
+    "platform": "/Users/kurtjoseph/Business Ideas/SMB Pain Point Seeds/AI Installed/forge/20260805-213930/build/platform/index.html",
+    "site": "/Users/kurtjoseph/Business Ideas/SMB Pain Point Seeds/AI Installed/forge/20260805-213930/build/site/index.html",
+    "pages": [
+      "faq.html",
+      "index.html"
+    ],
+    "url": "file:///Users/kurtjoseph/Business Ideas/SMB Pain Point Seeds/AI Installed/forge/20260805-213930/build/index.html",
+    "platform_url": "file:///Users/kurtjoseph/Business Ideas/SMB Pain Point Seeds/AI Installed/forge/20260805-213930/build/platform/index.html"
+  },
+  "checks_passed": 10,
+  "elapsed_seconds": 0.06,
+  "authorization": {
+    "mode": "none",
+    "scope": [],
+    "note": "no unattended-run authorization on file — Forge will build, and will refuse any deploy target the public can reach"
+  }
+}

@@ -1,0 +1,263 @@
+<title>Vision Outreach Media — Three Ways We Help You Grow</title>
+<style>
+  :root{
+    --navy:#061629; --navy-2:#0c2f63; --teal:#00A6A6; --teal-deep:#068B8B; --orange:#FF8A3D; --orange-deep:#F0762A;
+    --ink:#111315; --ink-soft:#515863; --ink-faint:#8a919b;
+    --paper:#FFFFFF; --wash:#F4F7FA; --line:#E5E9EF; --line-soft:#EFF2F6;
+    --blue:#2C6BE0;
+    --font:"Manrope",system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --shadow:0 2px 4px rgba(6,22,41,.04), 0 20px 44px -20px rgba(6,22,41,.20);
+  }
+  *{ box-sizing:border-box; }
+  body{ margin:0; background:var(--paper); color:var(--ink); font-family:var(--font); line-height:1.6; -webkit-font-smoothing:antialiased; }
+  .wrap{ max-width:1120px; margin:0 auto; padding:0 24px; }
+  a{ color:inherit; }
+
+  /* ---------- brand bar (illustrative — your WP nav replaces this) ---------- */
+  .bar{ background:var(--paper); border-bottom:1px solid var(--line); }
+  .bar .wrap{ display:flex; align-items:center; gap:14px; height:66px; }
+  .logo{ display:flex; align-items:center; gap:11px; font-weight:800; font-size:17px; letter-spacing:-.01em; }
+  .logo .mk{ width:38px; height:38px; border-radius:8px; object-fit:contain; display:block; }
+  .bar .sp{ flex:1; }
+  .bar .nav{ display:none; gap:26px; font-weight:600; font-size:15px; color:var(--ink-soft); }
+  @media (min-width:820px){ .bar .nav{ display:flex; } }
+  .pill-cta{ background:var(--orange); color:#fff; font-weight:700; font-size:15px; text-decoration:none; border-radius:999px; padding:10px 22px; }
+  .pill-cta:hover{ background:var(--orange-deep); }
+  .bar .nav a, a.logo{ text-decoration:none; color:inherit; }
+  .bar .nav a:hover{ color:var(--ink); }
+
+  /* ---------- hero (navy, teal glow, dot mesh) ---------- */
+  .hero{ position:relative; overflow:hidden; color:#fff;
+    background:
+      radial-gradient(closest-side at 100% 0%, rgba(0,166,166,.34), transparent 62%),
+      radial-gradient(circle, rgba(255,255,255,.10) 1px, transparent 1.4px) 0 0 / 26px 26px,
+      linear-gradient(135deg, var(--navy-2), var(--navy) 62%); }
+  .hero .wrap{ padding:76px 24px 82px; }
+  .eyebrow{ display:inline-block; font-size:12px; font-weight:700; letter-spacing:.16em; text-transform:uppercase; color:#fff;
+    border:1.5px solid rgba(255,255,255,.4); border-radius:999px; padding:8px 18px; margin:0 0 26px; }
+  h1{ font-weight:800; font-size:clamp(38px,6.6vw,66px); line-height:1.03; letter-spacing:-.02em; margin:0 0 18px; text-wrap:balance; max-width:17ch; }
+  h1 .u{ color:var(--orange); }
+  .sub{ font-size:clamp(16px,2.1vw,20px); line-height:1.55; color:rgba(255,255,255,.82); max-width:62ch; margin:0; }
+  .sub b{ color:#fff; }
+  .hero-note{ margin-top:24px; font-size:13.5px; color:rgba(255,255,255,.66); }
+  .hero-note b{ color:var(--teal); font-weight:700; }
+
+  /* ---------- funnels ---------- */
+  .section{ padding:clamp(46px,7vw,80px) 0; }
+  .sec-head{ text-align:center; max-width:60ch; margin:0 auto clamp(30px,4vw,48px); }
+  .sec-head .k{ font-size:12px; font-weight:800; letter-spacing:.14em; text-transform:uppercase; color:var(--teal); margin-bottom:12px; }
+  .sec-head h2{ font-weight:800; font-size:clamp(26px,3.6vw,38px); letter-spacing:-.02em; margin:0 0 10px; line-height:1.1; }
+  .sec-head p{ font-size:16px; color:var(--ink-soft); margin:0; }
+
+  .grid{ display:grid; grid-template-columns:1fr 1fr; gap:clamp(20px,2.6vw,32px); align-items:start; }
+  @media (max-width:840px){ .grid{ grid-template-columns:1fr; gap:40px; } }
+
+  .col{ --c:var(--blue); }
+  .col.op{ --c:var(--teal); }
+  .col-head{ display:flex; align-items:center; gap:12px; margin-bottom:18px; }
+  .col-head .badge{ width:44px; height:44px; border-radius:13px; flex:none; display:grid; place-items:center; color:#fff; font-size:20px;
+    background:linear-gradient(135deg, color-mix(in srgb,var(--c) 78%,#fff 0%), var(--c)); }
+  .col-head h3{ font-weight:800; font-size:22px; letter-spacing:-.01em; margin:0 0 2px; }
+  .col-head .aud{ font-size:13.5px; color:var(--ink-soft); }
+  .edge{ font-size:13.5px; line-height:1.5; color:var(--ink-soft); background:var(--wash); border-radius:12px; padding:12px 15px; margin-bottom:18px; }
+  .edge b{ color:var(--ink); }
+
+  .funnel{ display:flex; flex-direction:column; align-items:center; }
+  .tier{ width:100%; background:var(--paper); border:1px solid var(--line); border-radius:18px; padding:18px 20px; box-shadow:var(--shadow); }
+  .tier.t2{ width:90%; } .tier.t3{ width:80%; }
+  @media (max-width:840px){ .tier.t2,.tier.t3{ width:100%; } }
+  .tier .lab{ display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:8px; }
+  .tier .stage{ font-size:10.5px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--c); }
+  .tier .price{ font-size:12.5px; font-weight:800; color:var(--ink); background:color-mix(in srgb,var(--c) 12%,#fff); border-radius:999px; padding:3px 12px; white-space:nowrap; }
+  .tier .name{ font-weight:800; font-size:18px; letter-spacing:-.01em; line-height:1.2; margin:0 0 6px; }
+  .tier .role{ font-size:13.5px; color:var(--ink-soft); line-height:1.5; }
+  .tier .role .lift{ color:var(--ink); font-weight:700; }
+  .duo{ display:flex; gap:9px; flex-wrap:wrap; margin:0 0 10px; }
+  .duo .p{ flex:1; min-width:118px; border:1px solid var(--line); border-radius:12px; padding:9px 12px; }
+  .duo .p .pn{ font-weight:800; font-size:15px; }
+  .duo .p .pp{ font-size:12px; font-weight:800; color:var(--c); }
+
+  .flow{ height:24px; display:grid; place-items:center; color:var(--c); font-size:14px; }
+
+  .tier.core{ border:none; color:#fff; background:linear-gradient(135deg, var(--orange), var(--orange-deep));
+    box-shadow:0 20px 44px -16px rgba(240,118,42,.55); }
+  .tier.core .stage{ color:#fff; opacity:.92; }
+  .tier.core .price{ background:rgba(0,0,0,.18); color:#fff; }
+  .tier.core .name{ font-size:21px; }
+  .tier.core .role{ color:rgba(255,255,255,.92); }
+
+  .enter{ width:100%; margin-top:16px; border:1.5px dashed color-mix(in srgb,var(--c) 40%,var(--line)); border-radius:14px; padding:13px 16px; }
+  .enter .k{ font-size:10.5px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--c); margin-bottom:5px; }
+  .enter .v{ font-size:13px; color:var(--ink-soft); line-height:1.5; } .enter .v b{ color:var(--ink); }
+
+  /* clickable free front-door cards */
+  a.tier.free-link{ display:block; text-decoration:none; color:inherit; cursor:pointer; transition:transform .15s ease, box-shadow .15s ease; }
+  a.tier.free-link:hover{ transform:translateY(-2px); box-shadow:0 26px 52px -18px rgba(6,22,41,.30); }
+  .tier .go{ margin-top:11px; font-weight:800; font-size:13px; color:var(--c); }
+  .close .contact-link{ font-weight:700; font-size:14px; color:var(--ink-soft); text-decoration:none; white-space:nowrap; }
+  .close .contact-link:hover{ color:var(--ink); }
+
+  /* ---------- Engage AI band (third path — existing businesses) ---------- */
+  .engage{ background:var(--wash); border-top:1px solid var(--line); }
+  .engage .wrap{ padding:clamp(46px,7vw,78px) 24px; }
+  .eng-head{ text-align:center; max-width:66ch; margin:0 auto clamp(28px,4vw,42px); }
+  .eng-head .k{ font-size:12px; font-weight:800; letter-spacing:.14em; text-transform:uppercase; color:var(--teal-deep); margin-bottom:12px; }
+  .eng-head h2{ font-weight:800; font-size:clamp(26px,3.6vw,40px); letter-spacing:-.02em; margin:0 0 12px; line-height:1.08; text-wrap:balance; }
+  .eng-head h2 .u2{ color:var(--teal); }
+  .eng-head p{ font-size:16px; color:var(--ink-soft); margin:0; }
+  .eng-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(16px,2vw,22px); align-items:stretch; }
+  @media (max-width:820px){ .eng-grid{ grid-template-columns:1fr; } }
+  .ecard{ background:var(--paper); border:1px solid var(--line); border-radius:18px; padding:22px; box-shadow:var(--shadow); display:flex; flex-direction:column; }
+  .ecard .et{ display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:12px; }
+  .ecard .es{ font-size:10.5px; font-weight:800; letter-spacing:.09em; text-transform:uppercase; color:var(--teal-deep); }
+  .ecard .ep{ font-size:13px; font-weight:800; color:var(--ink); background:color-mix(in srgb,var(--teal) 13%,#fff); border-radius:999px; padding:4px 13px; white-space:nowrap; }
+  .ecard .en{ font-weight:800; font-size:20px; letter-spacing:-.01em; margin:0 0 8px; }
+  .ecard .er{ font-size:14px; color:var(--ink-soft); line-height:1.55; }
+  a.ecard.free{ text-decoration:none; color:inherit; border:1.5px solid color-mix(in srgb,var(--teal) 55%,var(--line)); cursor:pointer; transition:transform .15s ease, box-shadow .15s ease; }
+  a.ecard.free:hover{ transform:translateY(-3px); box-shadow:0 26px 52px -18px rgba(0,166,166,.4); }
+  .ecard .ego{ margin-top:auto; padding-top:14px; font-weight:800; font-size:14px; color:var(--teal-deep); }
+  .ecard.core{ border:none; color:#fff; background:linear-gradient(135deg,var(--teal),#065e7e); box-shadow:0 20px 44px -16px rgba(0,166,166,.5); }
+  .ecard.core .es{ color:#fff; opacity:.9; } .ecard.core .ep{ background:rgba(0,0,0,.2); color:#fff; } .ecard.core .er{ color:rgba(255,255,255,.9); }
+  .eng-steps{ display:flex; justify-content:center; flex-wrap:wrap; gap:10px 26px; margin-top:28px; font-size:13.5px; color:var(--ink-soft); }
+  .eng-steps b{ color:var(--ink); }
+
+  /* ---------- closing strip ---------- */
+  .close{ background:var(--wash); border-top:1px solid var(--line); }
+  .close .wrap{ padding:36px 24px; display:flex; align-items:center; justify-content:space-between; gap:18px; flex-wrap:wrap; }
+  .close .msg{ font-size:15px; color:var(--ink-soft); max-width:64ch; } .close .msg b{ color:var(--ink); }
+  footer{ background:var(--navy); color:rgba(255,255,255,.7); }
+  footer .wrap{ padding:22px 24px; font-size:12.5px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; }
+
+  @media (prefers-reduced-motion:no-preference){
+    .tier,.enter{ animation:rise .5s cubic-bezier(.2,.7,.2,1) both; }
+    @keyframes rise{ from{ opacity:0; transform:translateY(12px); } to{ opacity:1; transform:none; } }
+  }
+</style>
+
+<div class="bar"><div class="wrap">
+  <a class="logo" href="https://visionoutreachmedia.nl/"><img class="mk" src="vom-logo.jpg" alt="Vision Outreach Media">Vision Outreach Media</a>
+  <span class="sp"></span>
+  <nav class="nav"><a href="https://visionoutreachmedia.nl/">Home</a><a href="https://visionoutreachmedia.nl/services/">Services</a><a href="https://visionoutreachmedia.nl/projects/">Projects</a><a href="https://visionoutreachmedia.nl/about/">About</a></nav>
+  <a class="pill-cta" href="https://visionoutreachmedia.nl/contact/">Contact</a>
+</div></div>
+
+<section class="hero"><div class="wrap">
+  <span class="eyebrow">Vision Outreach Media</span>
+  <h1>Three ways we help you <span class="u">grow.</span></h1>
+  <p class="sub">Whether you're launching a ministry, building a business, or growing the audience you've already earned — there's a clear path forward: <b>start free, see it work, then let us build the rest with you.</b></p>
+  <p class="hero-note"><b>No signup, no commitment</b> — pick your path and start today.</p>
+</div></section>
+
+<section class="section"><div class="wrap">
+  <div class="sec-head">
+    <div class="k">Choose your path</div>
+    <h2>Start free. Grow at your pace.</h2>
+    <p>A free resource to get you moving, an affordable next step that proves it works, and a done-for-you option when you're ready to scale.</p>
+  </div>
+
+  <div class="grid">
+
+    <!-- CHURCH -->
+    <div class="col">
+      <div class="col-head">
+        <div class="badge">✝</div>
+        <div><h3>For churches &amp; ministries</h3><div class="aud">Pastors, media directors &amp; volunteer teams</div></div>
+      </div>
+      <div class="edge">Turn an ad-hoc livestream into a <b>media ministry that reaches more people</b> — without burning out your team.</div>
+      <div class="funnel">
+        <a class="tier t1 free-link" href="https://vom-church-media-academy.vercel.app">
+          <div class="lab"><span class="stage">Start here · free</span><span class="price">Free</span></div>
+          <div class="name">See what your church media can become</div>
+          <div class="role">Explore the approach and free resources — and see the first things you can improve about your church's presence online.</div>
+          <div class="go">Start free →</div>
+        </a>
+        <div class="flow">▼</div>
+        <div class="tier t2">
+          <div class="lab"><span class="stage">When you're ready · with you</span><span class="price">€1K / mo</span></div>
+          <div class="name">The 90-Day Program</div>
+          <div class="role">We build your media system <em>with</em> you, week by week — from scattered volunteers to a team that runs itself.</div>
+        </div>
+        <div class="flow">▼</div>
+        <div class="tier t3 core">
+          <div class="lab"><span class="stage">★ Done for you</span><span class="price">€10K</span></div>
+          <div class="name">Church Media Academy</div>
+          <div class="role">We build and run the whole thing, so your team can focus on ministry — not production.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- OPERATOR -->
+    <div class="col op">
+      <div class="col-head">
+        <div class="badge">◆</div>
+        <div><h3>For operators &amp; builders</h3><div class="aud">Founders, freelancers &amp; small-business owners</div></div>
+      </div>
+      <div class="edge">Get the leverage to launch and grow — <b>from free playbooks to a business we build for you.</b></div>
+      <div class="funnel">
+        <a class="tier t1 free-link" href="https://vom-operators-academy.vercel.app">
+          <div class="lab"><span class="stage">Start here · free</span><span class="price">Free</span></div>
+          <div class="name">The Operator's Academy</div>
+          <div class="role">Free courses — The Leverage Stack &amp; The Distribution Console — that show you how to build leverage and win customers.</div>
+          <div class="go">Start free →</div>
+        </a>
+        <div class="flow">▼</div>
+        <div class="tier t2">
+          <div class="lab"><span class="stage">Next step · low cost</span><span class="price">€99 – €199</span></div>
+          <div class="duo">
+            <div class="p"><div class="pn">Hundred</div><div class="pp">€99</div></div>
+            <div class="p"><div class="pn">Launch Kits</div><div class="pp">€199</div></div>
+          </div>
+          <div class="role">Affordable kits that give you a fast, real win — your first-$100K path, or a business launched this week.</div>
+        </div>
+        <div class="flow">▼</div>
+        <div class="tier t3 core">
+          <div class="lab"><span class="stage">★ Done for you</span><span class="price">from €2K/mo</span></div>
+          <div class="name">Turnkey</div>
+          <div class="role">Bring an idea — we launch the whole business for you, or license the system to run it yourself.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div></section>
+
+<section class="engage" id="engage"><div class="wrap">
+  <div class="eng-head">
+    <div class="k">Already running a business?</div>
+    <h2>Reach the audience you've already <span class="u2">earned.</span></h2>
+    <p>Launching is one thing — being <em>seen</em> is another. Engage AI measures your engagement across every channel, finds the reach you're missing, and runs a monthly cycle to close it. Growth you can watch on a number.</p>
+  </div>
+  <div class="eng-grid">
+    <a class="ecard free" href="https://vom-scorecard.vercel.app">
+      <div class="et"><span class="es">Start free · self-serve</span><span class="ep">Free</span></div>
+      <div class="en">The Engagement Scorecard</div>
+      <div class="er">Score your presence across 8 channels in 2 minutes — see your white space and the exact fixes that move it. No signup.</div>
+      <div class="ego">Get your score →</div>
+    </a>
+    <div class="ecard">
+      <div class="et"><span class="es">Platform · monthly</span><span class="ep">€99 / mo</span></div>
+      <div class="en">Engage AI</div>
+      <div class="er">The engagement cycle, self-serve: continuous benchmarking, a Content Studio where AI agents draft channel-native posts, you approve, and analytics prove the lift.</div>
+    </div>
+    <div class="ecard core">
+      <div class="et"><span class="es">★ Done for you · monthly</span><span class="ep">€1,500 / mo</span></div>
+      <div class="en">Managed Engagement</div>
+      <div class="er">We run your whole engagement cycle — content created, scheduled, and optimized every month. You just approve.</div>
+    </div>
+  </div>
+  <div class="eng-steps">
+    <span><b>1 · Benchmark</b> where you stand</span>
+    <span><b>2 · Create</b> what's missing</span>
+    <span><b>3 · Prove</b> the lift, every month</span>
+  </div>
+</div></section>
+
+<div class="close"><div class="wrap">
+  <div class="msg"><b>Start free above</b> — no signup, no commitment. When you're ready to go further, we'll build it with you.</div>
+  <a class="contact-link" href="https://visionoutreachmedia.nl/contact/">Prefer to talk first? Contact us →</a>
+</div></div>
+
+<footer><div class="wrap">
+  <span>© Vision Outreach Media — churches, ministries &amp; mission-driven organizations.</span>
+  <span>visionoutreachmedia.nl</span>
+</div></footer>

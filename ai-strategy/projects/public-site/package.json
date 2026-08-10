@@ -1,0 +1,13 @@
+{
+  "name": "kurt-joseph-site",
+  "version": "1.0.0",
+  "description": "Kurt Joseph — AI-optimized personal website (Project 3).",
+  "main": "server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}

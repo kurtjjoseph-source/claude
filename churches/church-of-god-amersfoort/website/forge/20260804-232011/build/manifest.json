@@ -1,0 +1,61 @@
+{
+  "schema": 1,
+  "run": "20260804-232011",
+  "built": "2026-08-04T23:20:11Z",
+  "fingerprint": "sha256:d4d648a57b5243926a1b8a79bb0a8d6b",
+  "business": {
+    "name": "church f god amersfoort",
+    "slug": "church-f-god-amersfoort",
+    "tagline": "Church / faith community",
+    "city": "your city",
+    "email": "kurtjjoseph@hotmail.com",
+    "offer_line": "church f god amersfoort — A gathering-led community funded by giving. The platform runs Sunday and the week around it: services and sermons, events, giving, the people who serve, and the messages that come in.",
+    "org_type": "church",
+    "org_label": "Church / faith community"
+  },
+  "archetype": {
+    "id": "church",
+    "label": "Church / faith community",
+    "curated": true,
+    "source": "org type 'church' builds as Church / faith community",
+    "voice": "Warm, plain, unhurried. Welcoming before it is informative, informative before it asks for anything. No hype, no jargon, no pressure.",
+    "summary": "A gathering-led community funded by giving. The platform runs Sunday and the week around it: services and sermons, events, giving, the people who serve, and the messages that come in.",
+    "type_preset": "editorial",
+    "site_scheme": "light",
+    "skin": "house",
+    "product_app": null,
+    "forge": {
+      "name": "CHURCHforge",
+      "scheme": "dark",
+      "base": "#0A0A0B",
+      "base_soft": "#141416",
+      "accent": "#F97316",
+      "accent_2": "#FDBA74",
+      "accent_site": "#e2670a",
+      "on_accent": "#0A0A0B",
+      "line": "Building a church platform."
+    }
+  },
+  "modules": [
+    "events",
+    "donations",
+    "media_library",
+    "people_roster",
+    "crm",
+    "support_inbox",
+    "content_publishing",
+    "email_marketing",
+    "finance_admin",
+    "lead_capture"
+  ],
+  "pages": [
+    "index.html",
+    "visit.html",
+    "about.html",
+    "sermons.html",
+    "events.html",
+    "give.html",
+    "contact.html"
+  ],
+  "target": "vercel"
+}

@@ -1,0 +1,478 @@
+<title>Compliance Dashboard — Onboarding Platform</title>
+<style>
+  :root {
+    --paper: #F4F6F8; --card: #FFFFFF; --ink: #1C2733; --ink-soft: #596B7D;
+    --line: #D8DFE6; --accent: #2E5AA4; --accent-soft: #E7EDF7;
+    --ok: #2E7D4F; --ok-soft: #E2EFE7; --warn: #B45309; --warn-soft: #F7ECDA;
+    --stop: #B3372E; --stop-soft: #F7E3E1; --dim: #8A97A3;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --paper:#0F161E; --card:#17212C; --ink:#E4EBF2; --ink-soft:#97A7B6; --line:#2A3746;
+      --accent:#82A9E6; --accent-soft:#1D2B40; --ok:#6DBA8C; --ok-soft:#17301F;
+      --warn:#D99A4E; --warn-soft:#33270F; --stop:#D97C72; --stop-soft:#3A1B17; --dim:#647383; }
+  }
+  :root[data-theme="dark"] { --paper:#0F161E; --card:#17212C; --ink:#E4EBF2; --ink-soft:#97A7B6; --line:#2A3746;
+    --accent:#82A9E6; --accent-soft:#1D2B40; --ok:#6DBA8C; --ok-soft:#17301F;
+    --warn:#D99A4E; --warn-soft:#33270F; --stop:#D97C72; --stop-soft:#3A1B17; --dim:#647383; }
+  :root[data-theme="light"] { --paper:#F4F6F8; --card:#FFFFFF; --ink:#1C2733; --ink-soft:#596B7D; --line:#D8DFE6;
+    --accent:#2E5AA4; --accent-soft:#E7EDF7; --ok:#2E7D4F; --ok-soft:#E2EFE7;
+    --warn:#B45309; --warn-soft:#F7ECDA; --stop:#B3372E; --stop-soft:#F7E3E1; --dim:#8A97A3; }
+
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--paper); color:var(--ink);
+    font: 15px/1.55 "Avenir Next", Seravek, "Segoe UI", -apple-system, sans-serif; }
+  .mono, .num { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-variant-numeric: tabular-nums; }
+  .shell { max-width: 1020px; margin: 0 auto; padding: 36px 20px 90px; display:flex; flex-direction:column; gap:40px; }
+
+  header.top { display:flex; flex-wrap:wrap; gap:18px; justify-content:space-between; align-items:flex-end;
+    border-bottom:2px solid var(--ink); padding-bottom:22px; }
+  .wordmark .eyebrow { font-size:11.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--accent); font-weight:600; }
+  .wordmark h1 { margin:2px 0 4px; font-size:clamp(24px,4vw,34px); font-weight:600; line-height:1.15; text-wrap:balance; }
+  .wordmark .sub { color:var(--ink-soft); font-size:13.5px; max-width:60ch; }
+  .scorebox { text-align:right; }
+  .scorebox .v { font-size:40px; font-weight:700; font-variant-numeric:tabular-nums; }
+  .scorebox .k { font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-soft); font-weight:600; }
+  .score-ok { color:var(--ok); } .score-warn { color:var(--warn); } .score-stop { color:var(--stop); }
+
+  section { display:flex; flex-direction:column; gap:14px; }
+  .sec-head { display:flex; align-items:baseline; gap:12px; border-bottom:1px solid var(--line); padding-bottom:8px; }
+  .sec-head .idx { font-family:ui-monospace,Menlo,monospace; font-size:13px; color:var(--accent); font-weight:700; }
+  .sec-head h2 { margin:0; font-size:20px; font-weight:600; }
+  .sec-note { color:var(--ink-soft); max-width:70ch; margin:0; font-size:14px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:6px; padding:16px 18px; }
+  .scroll { overflow-x:auto; }
+
+  .badge { display:inline-block; font-size:11px; font-weight:700; padding:2px 9px; border-radius:999px; white-space:nowrap; }
+  .badge.ok { background:var(--ok-soft); color:var(--ok); }
+  .badge.warn { background:var(--warn-soft); color:var(--warn); }
+  .badge.stop { background:var(--stop-soft); color:var(--stop); }
+  .badge.dim { background:var(--paper); color:var(--dim); border:1px solid var(--line); }
+
+  /* recommendations */
+  #recs { display:flex; flex-direction:column; gap:8px; }
+  .rec { display:flex; gap:10px; align-items:flex-start; background:var(--card); border:1px solid var(--line);
+    border-left:4px solid var(--warn); border-radius:6px; padding:10px 14px; font-size:13.5px; }
+  .rec.crit { border-left-color: var(--stop); }
+  .rec.done-all { border-left-color: var(--ok); color:var(--ink-soft); }
+  .rec .tag { flex:none; margin-top:1px; }
+
+  /* decision pillars */
+  .pillars { display:grid; grid-template-columns:repeat(auto-fit,minmax(290px,1fr)); gap:14px; }
+  .pillar { background:var(--card); border:1px solid var(--line); border-radius:6px; padding:14px 16px; display:flex; flex-direction:column; gap:10px; }
+  .pillar h3 { margin:0; font-size:14.5px; display:flex; justify-content:space-between; gap:8px; align-items:baseline; }
+  .pillar .ratify { display:flex; gap:8px; align-items:center; font-size:12.5px; font-weight:600;
+    background:var(--paper); border:1px solid var(--line); border-radius:6px; padding:6px 10px; }
+  ul.checks { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:6px; }
+  ul.checks li { display:flex; gap:9px; align-items:flex-start; font-size:13px; }
+  ul.checks input[type="checkbox"] { width:16px; height:16px; margin-top:1px; accent-color:var(--accent); flex:none; }
+  ul.checks li.checked label { color:var(--ink-soft); text-decoration:line-through; }
+  .capline { display:flex; align-items:center; gap:10px; font-size:13px; }
+  .capline input { width:64px; padding:5px 8px; border:1px solid var(--line); border-radius:6px; background:var(--paper); color:var(--ink); font:inherit; }
+
+  /* implications */
+  .imp-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  @media (max-width:760px) { .imp-grid { grid-template-columns:1fr; } }
+  .imp { background:var(--card); border:1px solid var(--line); border-radius:6px; padding:14px 16px; }
+  .imp h4 { margin:0 0 6px; font-size:14px; display:flex; gap:8px; align-items:baseline; }
+  .imp h4 .n { font-family:ui-monospace,Menlo,monospace; font-size:11.5px; color:var(--accent); font-weight:700; }
+  .imp p { margin:0 0 8px; font-size:13.5px; }
+  .imp p.nl { color:var(--ink-soft); font-size:13px; border-top:1px dashed var(--line); padding-top:8px; }
+  .imp p.nl::before { content:"NL · "; font-weight:700; color:var(--accent); }
+  .fees { display:flex; flex-wrap:wrap; gap:12px; align-items:flex-end; }
+  .fees label { font-size:12px; font-weight:600; display:flex; flex-direction:column; gap:4px; }
+  .fees input { width:110px; padding:6px 9px; border:1px solid var(--line); border-radius:6px; background:var(--paper); color:var(--ink); font:inherit; }
+
+  /* tenants */
+  table { border-collapse:collapse; width:100%; font-size:13px; }
+  th, td { text-align:left; padding:8px 10px; border-bottom:1px solid var(--line); vertical-align:middle; }
+  th { font-size:11px; letter-spacing:.07em; text-transform:uppercase; color:var(--ink-soft); white-space:nowrap; }
+  td input[type="checkbox"] { width:16px; height:16px; accent-color:var(--accent); }
+  .addrow { display:flex; gap:10px; margin-top:10px; flex-wrap:wrap; }
+  .addrow input[type="text"] { flex:1; min-width:180px; padding:8px 11px; border:1px solid var(--line); border-radius:6px; background:var(--paper); color:var(--ink); font:inherit; }
+  .btn { display:inline-flex; align-items:center; gap:6px; border:1px solid var(--ink); background:var(--ink); color:var(--paper);
+    font:inherit; font-size:13px; font-weight:600; padding:8px 14px; border-radius:6px; cursor:pointer; }
+  .btn.secondary { background:none; color:var(--ink); }
+  .btn.small { padding:4px 10px; font-size:12px; }
+  .btn:focus-visible, input:focus-visible { outline:2px solid var(--accent); outline-offset:1px; }
+
+  /* terms clauses */
+  .clause { border:1px solid var(--line); border-radius:6px; background:var(--card); padding:12px 14px; margin-bottom:10px; }
+  .clause .row { display:flex; gap:10px; align-items:flex-start; }
+  .clause .row input { width:16px; height:16px; margin-top:2px; accent-color:var(--accent); flex:none; }
+  .clause h4 { margin:0; font-size:13.5px; }
+  .clause .map { font-size:11.5px; color:var(--ink-soft); }
+  .clause details { margin-top:8px; }
+  .clause summary { cursor:pointer; font-size:12.5px; color:var(--accent); font-weight:600; }
+  .clause .draft { font-size:13px; color:var(--ink-soft); background:var(--paper); border:1px solid var(--line);
+    border-radius:6px; padding:10px 12px; margin-top:8px; }
+  .disclaimer { border:1px solid var(--warn); border-left-width:4px; background:var(--warn-soft); border-radius:6px; padding:12px 16px; font-size:13px; }
+  .disclaimer strong { color:var(--warn); }
+  footer { border-top:1px solid var(--line); padding-top:16px; color:var(--ink-soft); font-size:12.5px; }
+</style>
+
+<div class="shell">
+  <header class="top">
+    <div class="wordmark">
+      <span class="eyebrow">Vision Outreach Media (VOM) · Operator console — never shown to clients</span>
+      <h1>Compliance &amp; Client-Clarity Dashboard</h1>
+      <span class="sub">Tracks conformity to the five ratified security decisions and — first among equals — whether every client, as a business owner, clearly understands the implications of using this product before their first YES.</span>
+    </div>
+    <div class="scorebox">
+      <div class="v" id="score">—</div>
+      <div class="k">Overall compliance</div>
+    </div>
+  </header>
+
+  <!-- 01 RECOMMENDATIONS -->
+  <section>
+    <div class="sec-head"><span class="idx">01</span><h2>Recommendations</h2></div>
+    <p class="sec-note">Generated from every unchecked item below, most critical first. Clear the list and the platform conforms to its own rules.</p>
+    <div id="recs"></div>
+  </section>
+
+  <!-- 02 CLIENT CLARITY -->
+  <section>
+    <div class="sec-head"><span class="idx">02</span><h2>Client clarity — "What this means for you"</h2></div>
+    <p class="sec-note">The plain-language disclosure every client sees on the profile + terms approval screen, before anything is signed. Eight implications, no jargon, English and Dutch. Fill the fee fields — the text updates live and the brackets disappear.</p>
+    <div class="card fees">
+      <label>Setup fee (€)<input type="number" id="feeSetup" min="0" placeholder="—"></label>
+      <label>Monthly fee (€)<input type="number" id="feeMonthly" min="0" placeholder="—"></label>
+      <label>Fee per payment (%)<input type="number" id="feePct" min="0" step="0.1" placeholder="—"></label>
+      <label>Notice period (days)<input type="number" id="noticeDays" min="0" placeholder="30"></label>
+      <span class="badge dim" id="feeState">fees not set</span>
+    </div>
+    <div class="imp-grid">
+      <div class="imp"><h4><span class="n">1</span>What you own</h4>
+        <p>Your name, your domain, your content and your customers are yours. Your domain is bought in your name — it is yours from day one. If you ever leave, we hand over all your content; the technology behind the website belongs to our platform, and we would help you rebuild elsewhere.</p>
+        <p class="nl">Uw naam, uw domein, uw teksten en uw klanten zijn van u. Uw domein wordt op uw naam gekocht — het is vanaf dag één van u. Als u stopt, krijgt u al uw inhoud mee. De techniek achter de website is van ons platform.</p></div>
+      <div class="imp"><h4><span class="n">2</span>Your money goes straight to you</h4>
+        <p>Payments from your customers go directly to your own bank account. We never hold your money. Our fee of <strong class="pctOut">[—]%</strong> per payment is taken automatically and shown on your monthly statement.</p>
+        <p class="nl">Betalingen van uw klanten gaan rechtstreeks naar uw eigen bankrekening. Wij houden uw geld nooit vast. Onze vergoeding van <strong class="pctOut">[—]%</strong> per betaling wordt automatisch verrekend en staat op uw maandoverzicht.</p></div>
+      <div class="imp"><h4><span class="n">3</span>Nothing happens without your YES</h4>
+        <p>We never publish, send, or change anything in your name without your approval. Every YES is saved with date and time. For big things — prices, refunds, your domain — we double-check by phone.</p>
+        <p class="nl">Wij publiceren, versturen of wijzigen nooit iets uit uw naam zonder uw akkoord. Elk JA wordt bewaard met datum en tijd. Bij grote zaken — prijzen, terugbetalingen, uw domein — bellen we u ter bevestiging.</p></div>
+      <div class="imp"><h4><span class="n">4</span>One-time identity check</h4>
+        <p>To receive payments you confirm once who you are, directly with our payment partner Stripe: a photo of your ID and your bank number, on your own phone. We never see those documents.</p>
+        <p class="nl">Om betalingen te ontvangen bevestigt u één keer wie u bent, rechtstreeks bij onze betaalpartner Stripe: een foto van uw legitimatie en uw rekeningnummer, op uw eigen telefoon. Wij zien die documenten nooit.</p></div>
+      <div class="imp"><h4><span class="n">5</span>We run the technology for you</h4>
+        <p>Website, email, online presence: we operate it all so you don't have to. That means you depend on us for these — and we commit to the exit guarantees in point 1, with <strong class="noticeOut">[30]</strong> days notice if anything changes.</p>
+        <p class="nl">Website, e-mail, online zichtbaarheid: wij beheren het allemaal, zodat u dat niet hoeft te doen. U bent daarvoor dus van ons afhankelijk — en wij garanderen de afspraken uit punt 1, met <strong class="noticeOut">[30]</strong> dagen aankondiging als er iets verandert.</p></div>
+      <div class="imp"><h4><span class="n">6</span>Your data</h4>
+        <p>We store your contact details, your business content, and the record of your approvals. Nothing is sold or shared beyond what is needed to run your business. You may always ask what we hold and have it corrected or deleted.</p>
+        <p class="nl">Wij bewaren uw contactgegevens, uw bedrijfsinhoud en het overzicht van uw akkoorden. Niets wordt verkocht of gedeeld buiten wat nodig is om uw bedrijf te laten draaien. U mag altijd opvragen wat wij bewaren en het laten corrigeren of verwijderen.</p></div>
+      <div class="imp"><h4><span class="n">7</span>What we ask of you</h4>
+        <p>Answer approval messages (or tell us to wait), keep your phone number current, and run a legitimate business — we verify every business we work with before we start.</p>
+        <p class="nl">Reageer op akkoord-berichten (of zeg dat het moet wachten), houd uw telefoonnummer actueel, en voer een bonafide bedrijf — wij controleren elk bedrijf waarmee we werken voordat we beginnen.</p></div>
+      <div class="imp"><h4><span class="n">8</span>What it costs</h4>
+        <p>Setup <strong class="setupOut">[—]</strong> · monthly <strong class="monthlyOut">[—]</strong> · <strong class="pctOut">[—]%</strong> per payment. No hidden costs; any price change is announced <strong class="noticeOut">[30]</strong> days ahead and needs your YES.</p>
+        <p class="nl">Eenmalig <strong class="setupOut">[—]</strong> · per maand <strong class="monthlyOut">[—]</strong> · <strong class="pctOut">[—]%</strong> per betaling. Geen verborgen kosten; elke prijswijziging kondigen we <strong class="noticeOut">[30]</strong> dagen vooraf aan en vraagt uw JA.</p></div>
+    </div>
+    <div class="card">
+      <ul class="checks" id="discList"></ul>
+    </div>
+  </section>
+
+  <!-- 03 FIVE DECISIONS -->
+  <section>
+    <div class="sec-head"><span class="idx">03</span><h2>The five security decisions — conformity</h2></div>
+    <p class="sec-note">Each pillar needs VOM's ratification plus its implementation items. Nothing here is client-facing; it is the platform holding itself to the threat model in <span class="mono">gate-minimization/security.md</span>.</p>
+    <div class="pillars" id="pillars"></div>
+  </section>
+
+  <!-- 04 PER-CLIENT STATUS -->
+  <section>
+    <div class="sec-head"><span class="idx">04</span><h2>Per-client compliance</h2></div>
+    <p class="sec-note">One row per client business. A client is compliant when verified, informed, and consented — before their tenant goes live.</p>
+    <div class="card scroll">
+      <table>
+        <thead><tr>
+          <th>Client</th><th>KYB verified</th><th>Disclosure approved</th><th>Terms approved</th>
+          <th>Domain clause / n.a.</th><th>Phone bound</th><th>Consent log active</th><th>Status</th><th></th>
+        </tr></thead>
+        <tbody id="tenantRows"></tbody>
+      </table>
+      <div class="addrow">
+        <input type="text" id="tenantName" placeholder="Client business name (e.g. Church of God Amersfoort)">
+        <button class="btn" id="addTenant" type="button">Add client</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 TERMS COVERAGE -->
+  <section>
+    <div class="sec-head"><span class="idx">05</span><h2>Terms of use — required coverage</h2></div>
+    <p class="sec-note">Every clause the terms must contain to make the five decisions and the eight implications legally real. Tick a clause when it is present in the current terms version. Draft language is a starting point.</p>
+    <div class="card capline">
+      <label for="termsVersion" style="font-weight:600">Current terms version</label>
+      <input type="text" id="termsVersion" style="width:120px" placeholder="v1.0">
+      <span class="badge dim" id="clauseState">0 / 9 covered</span>
+    </div>
+    <div id="clauses"></div>
+    <div class="disclaimer"><strong>Drafts, not legal advice.</strong> Have a Dutch lawyer review the final algemene voorwaarden before the first client signs — especially the domain-ownership, liability, and GDPR clauses.</div>
+  </section>
+
+  <footer>
+    Operator console · state is saved only in this browser (localStorage) · sources:
+    <span class="mono">gate-minimization/security.md</span> · <span class="mono">gate-minimization/client-ux.md</span> ·
+    <span class="mono">gate-minimization/gate-minimization.md</span>
+    &nbsp;·&nbsp; <button class="btn secondary small" id="exportBtn" type="button">Export JSON</button>
+    <button class="btn secondary small" id="resetBtn" type="button">Reset</button>
+  </footer>
+</div>
+
+<script>
+(function () {
+  "use strict";
+  var LS = "compliance-dashboard-v1";
+
+  /* ---------- static config ---------- */
+  var DECISIONS = [
+    { id:"d1", name:"1 · KYB — automated checks, flags to VOM", crit:true, items:[
+      "Automated KYB checks live (KVK register, website, contact plausibility)",
+      "Flagged/anomalous cases reviewed by VOM BEFORE account creation",
+      "Audit: no connected account exists for a client that failed or skipped checks" ]},
+    { id:"d2", name:"2 · Second factor for high-stakes actions", crit:true, items:[
+      "Client phone number bound at onboarding (identity behind every YES)",
+      "OTP or verbal-confirmation mechanism chosen and documented",
+      "High-stakes list enforced: publish · pricing · refund · domain · payout change" ]},
+    { id:"d3", name:"3 · Blast-radius cap", crit:false, items:[
+      "Cap operator-set + run throttling configured (runs pause at the cap)",
+      "Human-only list confirmed: tenant deletion · apex/NS DNS · payouts · domain transfer",
+      "Every automated run logs how many tenants it touched" ]},
+    { id:"d4", name:"4 · Domain ownership", crit:false, items:[
+      "Clause drafted: client purchases and owns the domain; VOM = technical manager only",
+      "Clause present in current terms version",
+      "Every custom-domain registration follows the clause" ]},
+    { id:"d5", name:"5 · Credential baseline (simple, low-maintenance)", crit:true, items:[
+      "Password manager adopted (unique generated password per account; API keys as secure notes)",
+      "Separate authenticator app set up WITH encrypted cloud backup (lost phone ≠ lockout)",
+      "Gmail hardened first: unique password + TOTP + backup codes saved in the manager",
+      "Stripe · Vercel · Cloudflare · Brevo · registrar — each: unique password + TOTP + saved recovery codes",
+      "Scoped agent keys created & stored (restricted Stripe, clients-zone Cloudflare, team Vercel, Brevo) — never in the repo",
+      "Exposed VERCEL_OIDC_TOKEN in church-media-academy/deploy/.env.local rotated + file removed",
+      "One-page recovery kit written and stored offline" ]}
+  ];
+
+  var DISC_ITEMS = [
+    { id:"disc0", t:"Disclosure text finalized — fee fields filled, no [brackets] left", crit:true },
+    { id:"disc1", t:"Disclosure shown on the profile + terms approval screen (steps 1+8) BEFORE the YES", crit:true },
+    { id:"disc2", t:"Read-aloud / large-text version available for every client", crit:false },
+    { id:"disc3", t:"Invite offers a phone call to answer questions before the first YES", crit:false },
+    { id:"disc4", t:"Disclosure version recorded in the consent log with each approval", crit:true }
+  ];
+
+  var CLAUSES = [
+    { id:"c1", t:"Mandate & services", map:"Implication 5", d:"Vision Outreach Media operates the client's website, email sending, and online presence on the client's behalf, under the client's name and instructions. The platform acts only within approvals the client has given." },
+    { id:"c2", t:"Client verification (KYB)", map:"Decision 1 · Implication 7", d:"Service is conditional on verification of the client's organization. The client warrants that the information provided is accurate and that the business operates lawfully. The platform may decline or suspend service if verification fails." },
+    { id:"c3", t:"Approvals & consent record", map:"Decision 2 · Implication 3", d:"An approval sent by the client (e.g. a YES via WhatsApp) constitutes binding consent to exactly the content shown, and is recorded with timestamp and content reference. Absence of a reply is never treated as consent." },
+    { id:"c4", t:"Extra verification for significant changes", map:"Decision 2 · Implication 3", d:"For price changes, refunds, domain changes, and payout details, the platform requires an additional confirmation (one-time code or verbal confirmation by phone) before acting." },
+    { id:"c5", t:"Domain ownership & transfer", map:"Decision 4 · Implication 1", d:"Domains are purchased by and owned by the client — registrant, billing, and ownership are the client's from day one; the platform assists with setup, DNS, and renewals as technical manager. Upon ending the agreement, all client content is handed over within [14] days; the domain never changes hands because it was always the client's." },
+    { id:"c6", t:"Payments & fees", map:"Implications 2 & 8", d:"Customer payments flow directly to the client's bank account via Stripe. The platform's fees are [setup] + [monthly] + [percentage] per transaction, deducted automatically and itemized monthly. Fee changes require [30] days notice and the client's consent." },
+    { id:"c7", t:"Automation limits & suspension", map:"Decision 3", d:"Automated operations are capped and logged. The platform may suspend automated actions for a client where errors, abuse, or security concerns arise, and will inform the client of any suspension and its reason." },
+    { id:"c8", t:"Privacy & data (GDPR)", map:"Implication 6", d:"The platform processes the client's contact details, business content, and approval records solely to deliver the service. Clients may access, correct, or request deletion of their data. A processing agreement (verwerkersovereenkomst) is available on request." },
+    { id:"c9", t:"Termination & offboarding", map:"Implications 1 & 5", d:"Either party may end the agreement with [30] days notice. On termination the platform transfers the domain, exports all client content in a common format, and deletes remaining tenant data after [60] days, except records required by law." }
+  ];
+
+  /* ---------- state ---------- */
+  function load() { try { return JSON.parse(localStorage.getItem(LS)) || {}; } catch (e) { return {}; } }
+  var S = load();
+  S.ratified = S.ratified || {}; S.items = S.items || {}; S.disc = S.disc || {};
+  S.clauses = S.clauses || {}; S.tenants = S.tenants || []; S.fees = S.fees || {};
+  if (S.cap === undefined) S.cap = 5;
+  function save() { try { localStorage.setItem(LS, JSON.stringify(S)); } catch (e) {} }
+
+  /* ---------- build pillars ---------- */
+  var pillarsEl = document.getElementById("pillars");
+  DECISIONS.forEach(function (d) {
+    var div = document.createElement("div"); div.className = "pillar";
+    var items = d.items.map(function (t, i) {
+      var id = d.id + "i" + i;
+      return '<li data-check="' + id + '"><input type="checkbox" id="' + id + '"><label for="' + id + '">' + t + "</label></li>";
+    }).join("");
+    var capExtra = d.id === "d3"
+      ? '<div class="capline"><label for="cap" style="font-weight:600">Cap value</label><input type="number" id="cap" min="1" max="50"><span class="sec-note" style="font-size:12px">max tenants per automated run</span></div>'
+      : "";
+    div.innerHTML = '<h3>' + d.name + ' <span class="badge dim" id="' + d.id + 'b">—</span></h3>' +
+      '<div class="ratify"><input type="checkbox" id="' + d.id + 'r"><label for="' + d.id + 'r">Ratified by VOM</label></div>' +
+      capExtra + '<ul class="checks">' + items + "</ul>";
+    pillarsEl.appendChild(div);
+  });
+
+  /* ---------- build disclosure checklist ---------- */
+  var discEl = document.getElementById("discList");
+  DISC_ITEMS.forEach(function (it) {
+    var li = document.createElement("li"); li.setAttribute("data-check", it.id);
+    li.innerHTML = '<input type="checkbox" id="' + it.id + '"><label for="' + it.id + '">' + it.t + "</label>";
+    discEl.appendChild(li);
+  });
+
+  /* ---------- build clauses ---------- */
+  var clausesEl = document.getElementById("clauses");
+  CLAUSES.forEach(function (c) {
+    var div = document.createElement("div"); div.className = "clause";
+    div.innerHTML = '<div class="row"><input type="checkbox" id="' + c.id + '">' +
+      '<div><h4><label for="' + c.id + '">' + c.t + '</label></h4><span class="map">covers: ' + c.map + "</span>" +
+      '<details><summary>draft clause</summary><div class="draft">' + c.d + "</div></details></div></div>";
+    clausesEl.appendChild(div);
+  });
+
+  /* ---------- wire generic checkboxes ---------- */
+  function allBoxes() { return Array.prototype.slice.call(document.querySelectorAll('input[type="checkbox"]')); }
+  allBoxes().forEach(function (b) {
+    var bucket = /r$/.test(b.id) && b.id.length === 3 ? S.ratified
+               : b.id.indexOf("disc") === 0 ? S.disc
+               : b.id.indexOf("c") === 0 && b.id.length <= 3 && b.id !== "cap" ? S.clauses
+               : S.items;
+    if (bucket[b.id]) b.checked = true;
+    b.addEventListener("change", function () { bucket[b.id] = b.checked; save(); refresh(); });
+  });
+  var capEl = document.getElementById("cap");
+  if (capEl) { capEl.value = S.cap; capEl.addEventListener("input", function () { S.cap = parseInt(capEl.value || "0", 10); save(); refresh(); }); }
+
+  /* ---------- fees ---------- */
+  var feeIds = { feeSetup:"setup", feeMonthly:"monthly", feePct:"pct", noticeDays:"notice" };
+  Object.keys(feeIds).forEach(function (id) {
+    var el = document.getElementById(id);
+    if (S.fees[feeIds[id]] !== undefined) el.value = S.fees[feeIds[id]];
+    el.addEventListener("input", function () { S.fees[feeIds[id]] = el.value; save(); refresh(); });
+  });
+  function feesSet() { return S.fees.setup !== undefined && S.fees.setup !== "" &&
+    S.fees.monthly !== undefined && S.fees.monthly !== "" && S.fees.pct !== undefined && S.fees.pct !== ""; }
+  function paintFees() {
+    var eur = function (v) { return (v === undefined || v === "") ? "[—]" : "€" + v; };
+    var pct = (S.fees.pct === undefined || S.fees.pct === "") ? "[—]" : S.fees.pct;
+    var notice = (S.fees.notice === undefined || S.fees.notice === "") ? "[30]" : S.fees.notice;
+    Array.prototype.forEach.call(document.querySelectorAll(".setupOut"), function (e) { e.textContent = eur(S.fees.setup); });
+    Array.prototype.forEach.call(document.querySelectorAll(".monthlyOut"), function (e) { e.textContent = eur(S.fees.monthly); });
+    Array.prototype.forEach.call(document.querySelectorAll(".pctOut"), function (e) { e.textContent = pct; });
+    Array.prototype.forEach.call(document.querySelectorAll(".noticeOut"), function (e) { e.textContent = notice; });
+    var fs = document.getElementById("feeState");
+    fs.textContent = feesSet() ? "fees set" : "fees not set";
+    fs.className = "badge " + (feesSet() ? "ok" : "dim");
+  }
+
+  /* ---------- terms version ---------- */
+  var tv = document.getElementById("termsVersion");
+  if (S.termsVersion) tv.value = S.termsVersion;
+  tv.addEventListener("input", function () { S.termsVersion = tv.value; save(); refresh(); });
+
+  /* ---------- tenants ---------- */
+  var TCOLS = ["kyb", "disc", "terms", "domain", "phone", "consent"];
+  var rowsEl = document.getElementById("tenantRows");
+  function renderTenants() {
+    rowsEl.innerHTML = "";
+    S.tenants.forEach(function (t, i) {
+      var tr = document.createElement("tr");
+      var done = TCOLS.every(function (c) { return t[c]; });
+      var cells = TCOLS.map(function (c) {
+        return '<td><input type="checkbox" data-t="' + i + '" data-c="' + c + '"' + (t[c] ? " checked" : "") + ' aria-label="' + c + " for " + t.name + '"></td>';
+      }).join("");
+      tr.innerHTML = "<td><strong>" + t.name + "</strong></td>" + cells +
+        '<td><span class="badge ' + (done ? "ok" : "warn") + '">' + (done ? "compliant" : "incomplete") + "</span></td>" +
+        '<td><button class="btn secondary small" data-del="' + i + '" type="button">remove</button></td>';
+      rowsEl.appendChild(tr);
+    });
+    Array.prototype.forEach.call(rowsEl.querySelectorAll("input[data-t]"), function (b) {
+      b.addEventListener("change", function () {
+        S.tenants[+b.getAttribute("data-t")][b.getAttribute("data-c")] = b.checked; save(); refresh();
+      });
+    });
+    Array.prototype.forEach.call(rowsEl.querySelectorAll("button[data-del]"), function (b) {
+      b.addEventListener("click", function () {
+        var t = S.tenants[+b.getAttribute("data-del")];
+        if (confirm("Remove client row “" + t.name + "” from the dashboard? (Does not touch any real tenant.)")) {
+          S.tenants.splice(+b.getAttribute("data-del"), 1); save(); renderTenants(); refresh();
+        }
+      });
+    });
+  }
+  document.getElementById("addTenant").addEventListener("click", function () {
+    var n = document.getElementById("tenantName").value.trim();
+    if (!n) return;
+    S.tenants.push({ name: n, kyb: false, disc: false, terms: false, domain: false, phone: false, consent: false });
+    document.getElementById("tenantName").value = ""; save(); renderTenants(); refresh();
+  });
+
+  /* ---------- recommendations + score ---------- */
+  function refresh() {
+    paintFees();
+    var recs = [], total = 0, done = 0;
+    function tally(ok) { total++; if (ok) done++; }
+
+    DECISIONS.forEach(function (d) {
+      tally(!!S.ratified[d.id + "r"]);
+      if (!S.ratified[d.id + "r"]) recs.push({ crit: d.crit, t: "Ratify decision " + d.name.replace(/ ·.*/, "") + " — it is still pending VOM's sign-off." });
+      var open = [];
+      d.items.forEach(function (t, i) { var ok = !!S.items[d.id + "i" + i]; tally(ok); if (!ok) open.push(t); });
+      var b = document.getElementById(d.id + "b");
+      var pct = Math.round(((d.items.filter(function (t, i) { return S.items[d.id + "i" + i]; }).length) / d.items.length) * 100);
+      b.textContent = pct + "%"; b.className = "badge " + (pct === 100 ? "ok" : pct >= 50 ? "warn" : "stop");
+      if (open.length) recs.push({ crit: d.crit, t: d.name.replace(/^\d+ · /, "") + ": " + open[0] + (open.length > 1 ? " (+" + (open.length - 1) + " more)" : "") });
+    });
+
+    DISC_ITEMS.forEach(function (it) {
+      var ok = !!S.disc[it.id]; tally(ok);
+      if (!ok) recs.push({ crit: it.crit, t: "Client clarity: " + it.t });
+    });
+    if (!feesSet()) { recs.push({ crit: true, t: "Client clarity: fee fields are empty — the disclosure still shows [brackets], so implication 8 is not honest yet." }); }
+
+    var covered = CLAUSES.filter(function (c) { return S.clauses[c.id]; }).length;
+    CLAUSES.forEach(function (c) { var ok = !!S.clauses[c.id]; tally(ok);
+      if (!ok) recs.push({ crit: c.id === "c3" || c.id === "c6", t: "Terms coverage: clause “" + c.t + "” (" + c.map + ") is not yet in the terms." }); });
+    var cs = document.getElementById("clauseState");
+    cs.textContent = covered + " / " + CLAUSES.length + " covered" + (S.termsVersion ? " · " + S.termsVersion : "");
+    cs.className = "badge " + (covered === CLAUSES.length ? "ok" : "dim");
+
+    S.tenants.forEach(function (t) {
+      TCOLS.forEach(function (c) { tally(!!t[c]); });
+      if (!t.kyb) recs.push({ crit: true, t: "Client “" + t.name + "”: KYB not verified — no connected account may be created yet." });
+      else if (!t.disc || !t.terms) recs.push({ crit: true, t: "Client “" + t.name + "”: has not approved the " + (!t.disc ? "disclosure" : "terms") + " — tenant must not go live." });
+      else TCOLS.forEach(function (c) {
+        if (!t[c]) recs.push({ crit: false, t: "Client “" + t.name + "”: " + ({ domain: "domain clause not applied (tick if n.a. — subdomain only)", phone: "phone not bound — second factor impossible", consent: "consent log not active" }[c] || c) });
+      });
+    });
+    if (!S.cap || S.cap < 1) recs.push({ crit: false, t: "Set the blast-radius cap value (decision 3)." });
+
+    recs.sort(function (a, b) { return (b.crit ? 1 : 0) - (a.crit ? 1 : 0); });
+    var el = document.getElementById("recs"); el.innerHTML = "";
+    if (!recs.length) {
+      el.innerHTML = '<div class="rec done-all"><span class="tag badge ok">clear</span><span>Everything checks out — the platform conforms to all five decisions, the disclosure is live, the terms cover it, and every client is verified, informed, and consented.</span></div>';
+    } else {
+      recs.slice(0, 14).forEach(function (r) {
+        var d = document.createElement("div"); d.className = "rec" + (r.crit ? " crit" : "");
+        d.innerHTML = '<span class="tag badge ' + (r.crit ? "stop" : "warn") + '">' + (r.crit ? "critical" : "advise") + "</span><span>" + r.t + "</span>";
+        el.appendChild(d);
+      });
+      if (recs.length > 14) {
+        var m = document.createElement("div"); m.className = "rec";
+        m.innerHTML = '<span class="tag badge dim">more</span><span>' + (recs.length - 14) + " further items — clear the list above and they surface.</span>";
+        el.appendChild(m);
+      }
+    }
+
+    var pct = total ? Math.round((done / total) * 100) : 0;
+    var sc = document.getElementById("score");
+    sc.textContent = pct + "%";
+    sc.className = "v " + (pct >= 90 ? "score-ok" : pct >= 50 ? "score-warn" : "score-stop");
+
+    Array.prototype.forEach.call(document.querySelectorAll("li[data-check]"), function (li) {
+      var b = li.querySelector("input"); li.classList.toggle("checked", b && b.checked);
+    });
+  }
+
+  /* ---------- export / reset ---------- */
+  document.getElementById("exportBtn").addEventListener("click", function () {
+    var blob = new Blob([JSON.stringify(S, null, 2)], { type: "application/json" });
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(blob); a.download = "compliance-state.json"; a.click();
+    URL.revokeObjectURL(a.href);
+  });
+  document.getElementById("resetBtn").addEventListener("click", function () {
+    if (confirm("Reset the dashboard? All checkboxes, clients, and fees in this browser are cleared.")) {
+      localStorage.removeItem(LS); location.reload();
+    }
+  });
+
+  renderTenants(); refresh();
+})();
+</script>

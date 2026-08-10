@@ -1,0 +1,1522 @@
+<title>The Agent Factory — implementation wizard</title>
+
+<style>
+html{font-size:17px}
+:root[data-fs="l"]{font-size:19px}
+:root[data-fs="xl"]{font-size:21px}
+
+:root{
+  --paper:#E6E3DD; --sheet:#F4F2ED; --sheet-2:#ECE9E3; --sheet-3:#DDD9D1;
+  --ink:#17161A; --ink-soft:#57545C; --ink-faint:#8C8892;
+  --line:#C9C5BC; --line-soft:#DCD8D0;
+  --ember:#B8410F; --steel:#1F4E9C; --moss:#3A6B22; --plum:#6E2E7A; --slate:#4A5560; --gold:#8A6408;
+  --ember-w:#F7DFD3; --steel-w:#D9E2F5; --moss-w:#DEEAD3; --plum-w:#EEDDF1; --slate-w:#E0E4E8; --gold-w:#F0E7CB;
+  --plate:var(--steel); --plate-w:var(--steel-w); --plate-on:#FFFFFF;
+  --grain:rgba(23,22,26,.055); --misreg:multiply;
+  --mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --shadow:0 1px 1px rgba(23,22,26,.05), 0 8px 24px rgba(23,22,26,.07);
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --paper:#131215; --sheet:#1A191E; --sheet-2:#201F25; --sheet-3:#2A2830;
+    --ink:#EAE7E1; --ink-soft:#9E9AA3; --ink-faint:#6E6A74;
+    --line:#302E37; --line-soft:#26242C;
+    --ember:#FF8A57; --steel:#7FA3F0; --moss:#84C264; --plum:#C58ED2; --slate:#9AAAB8; --gold:#DCAE3C;
+    --ember-w:#3A1D11; --steel-w:#17233F; --moss-w:#1A2C13; --plum-w:#2D1932; --slate-w:#1D242A; --gold-w:#2E2410;
+    --plate-on:#0E0D10;
+    --grain:rgba(234,231,225,.05); --misreg:screen;
+    --shadow:0 1px 1px rgba(0,0,0,.4), 0 10px 30px rgba(0,0,0,.42);
+  }
+}
+:root[data-theme="light"]{
+  --paper:#E6E3DD; --sheet:#F4F2ED; --sheet-2:#ECE9E3; --sheet-3:#DDD9D1;
+  --ink:#17161A; --ink-soft:#57545C; --ink-faint:#8C8892;
+  --line:#C9C5BC; --line-soft:#DCD8D0;
+  --ember:#B8410F; --steel:#1F4E9C; --moss:#3A6B22; --plum:#6E2E7A; --slate:#4A5560; --gold:#8A6408;
+  --ember-w:#F7DFD3; --steel-w:#D9E2F5; --moss-w:#DEEAD3; --plum-w:#EEDDF1; --slate-w:#E0E4E8; --gold-w:#F0E7CB;
+  --plate-on:#FFFFFF; --grain:rgba(23,22,26,.055); --misreg:multiply;
+  --shadow:0 1px 1px rgba(23,22,26,.05), 0 8px 24px rgba(23,22,26,.07);
+}
+:root[data-theme="dark"]{
+  --paper:#131215; --sheet:#1A191E; --sheet-2:#201F25; --sheet-3:#2A2830;
+  --ink:#EAE7E1; --ink-soft:#9E9AA3; --ink-faint:#6E6A74;
+  --line:#302E37; --line-soft:#26242C;
+  --ember:#FF8A57; --steel:#7FA3F0; --moss:#84C264; --plum:#C58ED2; --slate:#9AAAB8; --gold:#DCAE3C;
+  --ember-w:#3A1D11; --steel-w:#17233F; --moss-w:#1A2C13; --plum-w:#2D1932; --slate-w:#1D242A; --gold-w:#2E2410;
+  --plate-on:#0E0D10; --grain:rgba(234,231,225,.05); --misreg:screen;
+  --shadow:0 1px 1px rgba(0,0,0,.4), 0 10px 30px rgba(0,0,0,.42);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0; color:var(--ink); background:var(--paper);
+  background-image:radial-gradient(var(--grain) .5px, transparent .5px);
+  background-size:4px 4px;
+  font-family:var(--sans); font-size:1.03125rem; line-height:1.55; -webkit-font-smoothing:antialiased;
+}
+button,input,select,textarea{font:inherit; color:inherit}
+:focus-visible{outline:2px solid var(--plate); outline-offset:2px}
+@media (prefers-reduced-motion:reduce){ *{transition:none !important; animation:none !important} }
+
+/* ---------- chrome ---------- */
+.bar{position:sticky; top:0; z-index:60; background:color-mix(in srgb,var(--paper) 88%,transparent); backdrop-filter:saturate(1.4) blur(10px); border-bottom:1px solid var(--line)}
+.bar-in{max-width:1380px; margin:0 auto; padding:0 clamp(12px,2.4vw,24px); height:56px; display:flex; align-items:center; gap:14px}
+.brand{display:flex; align-items:center; gap:9px; font-family:var(--mono); font-size:0.8125rem; letter-spacing:.16em; text-transform:uppercase; white-space:nowrap}
+.brand i{width:7px; height:7px; background:var(--ember); border-radius:50%; flex:none; box-shadow:2px 0 0 var(--steel)}
+.brand span{color:var(--ink-faint)}
+.bar .grow{flex:1; min-width:0}
+.sname{font-family:var(--mono); font-size:0.875rem; background:transparent; border:1px solid transparent; border-radius:2px; padding:5px 8px; width:100%; max-width:340px}
+.sname:hover{border-color:var(--line)}
+.sname:focus{border-color:var(--plate); background:var(--sheet)}
+.prog{display:flex; align-items:center; gap:9px; font-family:var(--mono); font-size:0.84375rem; letter-spacing:.1em; color:var(--ink-faint); white-space:nowrap; font-variant-numeric:tabular-nums}
+.track{width:88px; height:5px; background:var(--sheet-3); border-radius:99px; overflow:hidden}
+.fill{height:100%; width:0; background:var(--plate); transition:width .45s cubic-bezier(.2,.7,.2,1)}
+.btn{font-family:var(--mono); font-size:0.84375rem; letter-spacing:.11em; text-transform:uppercase; background:transparent; border:1px solid var(--line); color:var(--ink-soft); padding:8px 12px; border-radius:2px; cursor:pointer; transition:.15s; white-space:nowrap}
+.btn:hover{color:var(--ink); border-color:var(--plate)}
+.btn.primary{background:var(--plate); border-color:var(--plate); color:var(--plate-on)}
+.btn.primary:hover{filter:brightness(1.1)}
+.btn.ghost{border-color:transparent; color:var(--ink-faint)}
+.btn.ghost:hover{color:var(--ink); border-color:var(--line)}
+.btn[disabled]{opacity:.34; cursor:not-allowed}
+.btn.sm{padding:5px 9px; font-size:0.75rem}
+.hide-sm{display:none}
+@media(min-width:900px){ .hide-sm{display:inline} }
+
+.rail{display:flex; gap:4px; overflow-x:auto; padding:9px clamp(12px,2.4vw,24px); border-bottom:1px solid var(--line); background:color-mix(in srgb,var(--paper) 72%,transparent); position:sticky; top:56px; z-index:50; scrollbar-width:thin}
+.rail button{font-family:var(--mono); font-size:0.8125rem; letter-spacing:.09em; text-transform:uppercase; background:transparent; border:1px solid transparent; color:var(--ink-faint); padding:6px 10px; border-radius:2px; cursor:pointer; white-space:nowrap; transition:.15s}
+.rail button:hover{color:var(--ink)}
+.rail button[aria-current="true"]{color:var(--plate-on); background:var(--plate); border-color:var(--plate)}
+.rail button.done{color:var(--plate)}
+.rail button.done::before{content:"\2713\00a0"}
+
+/* ---------- layout ---------- */
+.stage{max-width:1380px; margin:0 auto; padding:clamp(16px,2.8vw,30px) clamp(12px,2.4vw,24px) 90px; display:grid; gap:20px; align-items:start}
+@media(min-width:1060px){ .stage{grid-template-columns:minmax(0,1fr) minmax(360px,36%)} .col-side{position:sticky; top:112px} }
+
+.panel{background:var(--sheet); border:1px solid var(--line); border-radius:3px; box-shadow:var(--shadow); overflow:hidden}
+.panel-head{padding:15px 20px; border-bottom:1px solid var(--line-soft); background:var(--sheet-2); display:flex; align-items:baseline; gap:12px; flex-wrap:wrap}
+.panel-head .sno{font-family:var(--mono); font-size:0.84375rem; letter-spacing:.14em; color:var(--plate)}
+.panel-head h2{font-family:var(--mono); font-size:1rem; letter-spacing:.01em; text-transform:uppercase; margin:0; font-weight:600}
+.panel-head .hint{margin-left:auto; font-family:var(--mono); font-size:0.8125rem; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-faint)}
+.panel-body{padding:clamp(16px,2.4vw,24px); display:flex; flex-direction:column; gap:18px}
+.nav{display:flex; align-items:center; gap:8px; padding:13px 20px; border-top:1px solid var(--line-soft); background:var(--sheet-2)}
+.nav .sp{flex:1}
+
+.lede{font-family:var(--serif); font-size:1.15625rem; line-height:1.5; color:var(--ink-soft); margin:0; max-width:64ch; text-wrap:pretty}
+.lede strong{color:var(--ink); font-weight:600}
+h3.sec{font-family:var(--mono); font-size:0.8125rem; letter-spacing:.13em; text-transform:uppercase; color:var(--ink-faint); margin:8px 0 -4px; font-weight:600}
+
+/* ---------- fields ---------- */
+.f{display:flex; flex-direction:column; gap:6px}
+.f > label, .f .flab{font-family:var(--mono); font-size:0.8125rem; letter-spacing:.09em; text-transform:uppercase; color:var(--ink); font-weight:600}
+.f .help{font-size:0.96875rem; color:var(--ink-soft); line-height:1.45; margin:-2px 0 2px; max-width:66ch}
+.f .help b{color:var(--ink); font-weight:600}
+input[type=text], input[type=number], textarea, select{
+  width:100%; background:var(--sheet-2); border:1px solid var(--line); border-radius:2px;
+  padding:9px 11px; font-size:1rem; transition:.15s;
+}
+input[type=text]:focus, input[type=number]:focus, textarea:focus, select:focus{border-color:var(--plate); background:var(--sheet)}
+textarea{resize:vertical; min-height:74px; line-height:1.5}
+.numwrap{display:flex; align-items:stretch; max-width:340px}
+.numwrap .pre,.numwrap .suf{display:flex; align-items:center; padding:0 10px; background:var(--sheet-3); border:1px solid var(--line); font-family:var(--mono); font-size:0.875rem; color:var(--ink-soft)}
+.numwrap .pre{border-right:0; border-radius:2px 0 0 2px}
+.numwrap .suf{border-left:0; border-radius:0 2px 2px 0; white-space:nowrap}
+.numwrap input{border-radius:0}
+.numwrap .pre + input{border-radius:0}
+.numwrap input:first-child{border-radius:2px 0 0 2px}
+
+/* choices */
+.opts{display:grid; gap:9px; grid-template-columns:1fr}
+@media(min-width:620px){ .opts.two{grid-template-columns:1fr 1fr} }
+.opt{position:relative; text-align:left; background:var(--sheet-2); border:1px solid var(--line); border-radius:3px; padding:12px 14px 13px 40px; cursor:pointer; transition:.16s; width:100%; display:block}
+.opt:hover{border-color:var(--plate); background:var(--sheet)}
+.opt[aria-pressed="true"]{border-color:var(--plate); background:var(--plate-w); box-shadow:inset 3px 0 0 var(--plate)}
+.opt .mk{position:absolute; left:13px; top:14px; width:14px; height:14px; border:1.5px solid var(--line); border-radius:50%; transition:.16s}
+.opt[aria-pressed="true"] .mk{border-color:var(--plate); background:var(--plate); box-shadow:inset 0 0 0 2.5px var(--plate-w)}
+.opt.sq .mk{border-radius:2px}
+.opt[aria-pressed="true"].sq .mk{box-shadow:none; background:var(--plate)}
+.opt[aria-pressed="true"].sq .mk::after{content:"\2713"; position:absolute; inset:-1px 0 0 1px; color:var(--plate-w); font-size:0.8125rem; line-height:14px; font-weight:700}
+.opt h4{margin:0 0 2px; font-size:1rem; font-weight:650; letter-spacing:-.01em}
+.opt p{margin:0; font-size:0.9375rem; color:var(--ink-soft); line-height:1.45}
+.opt .tag{position:absolute; right:11px; top:11px; font-family:var(--mono); font-size:0.71875rem; letter-spacing:.1em; text-transform:uppercase; color:var(--plate); background:var(--plate-w); padding:2px 6px; border-radius:2px}
+
+/* rows table */
+.rows{border:1px solid var(--line); border-radius:3px; overflow:hidden; background:var(--sheet-2)}
+.rowsh{display:flex; gap:0; background:var(--sheet-3); border-bottom:1px solid var(--line)}
+.rowsh span{font-family:var(--mono); font-size:0.75rem; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-soft); padding:7px 9px; border-right:1px solid var(--line)}
+.rowsh span:last-child{border-right:0}
+.rw{display:flex; border-bottom:1px solid var(--line-soft)}
+.rw:last-of-type{border-bottom:0}
+.rw > div{border-right:1px solid var(--line-soft); min-width:0}
+.rw > div:last-child{border-right:0}
+.rw input{border:0; background:transparent; border-radius:0; padding:8px 9px; font-size:1rem}
+.rw input:focus{background:var(--sheet); outline-offset:-2px}
+.rw .del{flex:none; width:34px; display:flex; align-items:center; justify-content:center}
+.rw .del button{background:transparent; border:0; color:var(--ink-faint); cursor:pointer; font-size:1.03125rem; line-height:1; padding:4px 6px}
+.rw .del button:hover{color:var(--ember)}
+.rowsf{display:flex; align-items:center; gap:10px; padding:8px 10px; background:var(--sheet-3); border-top:1px solid var(--line)}
+.rowsf .tot{margin-left:auto; font-family:var(--mono); font-size:0.8125rem; color:var(--ink-soft); font-variant-numeric:tabular-nums}
+.rowsf .tot b{color:var(--ink); font-size:0.96875rem}
+
+/* notes */
+.note{border:1px solid var(--line); border-left:3px solid var(--slate); background:var(--sheet-2); border-radius:2px; padding:12px 14px; font-size:1rem; color:var(--ink-soft); line-height:1.5}
+.note b{display:block; color:var(--ink); font-family:var(--mono); font-size:0.8125rem; letter-spacing:.12em; text-transform:uppercase; margin-bottom:5px}
+.note.warn{border-left-color:var(--ember); background:var(--ember-w)}
+.note.warn b{color:var(--ember)}
+.note.quote{border-left-color:var(--gold); font-family:var(--serif); font-size:1.0625rem; font-style:italic}
+.note.quote b{font-style:normal; color:var(--gold)}
+.note.ok{border-left-color:var(--moss); background:var(--moss-w)}
+.note.ok b{color:var(--moss)}
+.note code{font-family:var(--mono); font-size:0.9375rem; background:var(--sheet-3); padding:1px 4px; border-radius:2px}
+
+/* calculator */
+.calc{border:1px solid var(--line); border-radius:3px; background:var(--sheet-2); overflow:hidden}
+.calc-h{padding:10px 14px; background:var(--sheet-3); border-bottom:1px solid var(--line); font-family:var(--mono); font-size:0.84375rem; letter-spacing:.12em; text-transform:uppercase; color:var(--ink); font-weight:600; display:flex; gap:10px; align-items:center}
+.calc-h em{margin-left:auto; font-style:normal; font-size:0.75rem; color:var(--ink-faint); letter-spacing:.1em}
+.calc-in{display:grid; gap:10px; padding:14px; grid-template-columns:1fr}
+@media(min-width:560px){ .calc-in{grid-template-columns:1fr 1fr} }
+@media(min-width:900px){ .calc-in.three{grid-template-columns:1fr 1fr 1fr} }
+.ci{display:flex; flex-direction:column; gap:4px}
+.ci label{font-family:var(--mono); font-size:0.75rem; letter-spacing:.09em; text-transform:uppercase; color:var(--ink-faint)}
+.calc-out{border-top:1px solid var(--line); background:var(--sheet); padding:14px; display:grid; gap:12px; grid-template-columns:repeat(auto-fit,minmax(128px,1fr))}
+.kpi{display:flex; flex-direction:column; gap:2px}
+.kpi .v{font-family:var(--mono); font-size:1.59375rem; font-weight:700; letter-spacing:-.03em; line-height:1.1; color:var(--plate); font-variant-numeric:tabular-nums}
+.kpi .v.dim{color:var(--ink-faint)}
+.kpi .l{font-family:var(--mono); font-size:0.75rem; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-faint)}
+.calc-note{padding:0 14px 14px; font-size:0.9375rem; color:var(--ink-soft); line-height:1.45}
+.calc-note b{color:var(--ink)}
+
+/* side column */
+.side{display:flex; flex-direction:column; gap:14px}
+.card{background:var(--sheet); border:1px solid var(--line); border-radius:3px; box-shadow:var(--shadow); overflow:hidden}
+.card-h{padding:11px 15px; border-bottom:1px solid var(--line-soft); background:var(--sheet-2); font-family:var(--mono); font-size:0.84375rem; letter-spacing:.13em; text-transform:uppercase; color:var(--ink-soft); display:flex; align-items:center; gap:8px}
+.card-h i{width:6px; height:6px; border-radius:50%; background:var(--plate); flex:none}
+.card-b{padding:14px 15px; display:flex; flex-direction:column; gap:11px; font-size:1rem}
+.kv{display:flex; gap:10px; align-items:baseline; border-bottom:1px dotted var(--line); padding-bottom:8px}
+.kv:last-child{border-bottom:0; padding-bottom:0}
+.kv .k{font-family:var(--mono); font-size:0.75rem; letter-spacing:.09em; text-transform:uppercase; color:var(--ink-faint); flex:none; width:96px}
+.kv .v{color:var(--ink); min-width:0; word-break:break-word}
+.kv .v.empty{color:var(--ink-faint); font-style:italic}
+.tri{display:flex; gap:6px}
+.tri div{flex:1; text-align:center; padding:9px 5px; border:1px solid var(--line); border-radius:2px; background:var(--sheet-2)}
+.tri div.on{border-color:var(--plate); background:var(--plate-w); box-shadow:inset 0 -2px 0 var(--plate)}
+.tri div b{display:block; font-family:var(--mono); font-size:0.8125rem; letter-spacing:.1em; text-transform:uppercase; color:var(--ink)}
+.tri div span{font-size:0.84375rem; color:var(--ink-faint)}
+.tri div.on b{color:var(--plate)}
+.seq{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:7px}
+.seq li{display:flex; gap:9px; align-items:flex-start; font-size:0.96875rem; color:var(--ink-soft); line-height:1.4}
+.seq li i{font-family:var(--mono); font-size:0.75rem; color:var(--plate); flex:none; width:16px; padding-top:2px; font-style:normal}
+.seq li.done{color:var(--ink)}
+.seq li.done i::before{content:"\2713"}
+
+/* export */
+textarea#out, textarea#manualtx{font-family:var(--mono); font-size:0.875rem; line-height:1.5; min-height:220px; background:var(--sheet-2)}
+.outbar{display:flex; align-items:center; gap:8px; flex-wrap:wrap}
+.outbar .t{font-family:var(--mono); font-size:0.8125rem; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-faint); margin-right:auto}
+.done-grid{display:grid; gap:10px; grid-template-columns:1fr}
+@media(min-width:640px){ .done-grid{grid-template-columns:1fr 1fr} }
+.dc{border:1px solid var(--line); border-radius:3px; background:var(--sheet-2); padding:12px 14px}
+.dc h5{margin:0 0 4px; font-family:var(--mono); font-size:0.84375rem; letter-spacing:.11em; text-transform:uppercase; color:var(--plate)}
+.dc p{margin:0; font-size:0.96875rem; color:var(--ink-soft); line-height:1.45}
+.dc p b{color:var(--ink)}
+
+.foot{max-width:1380px; margin:0 auto; padding:0 clamp(12px,2.4vw,24px) 40px; font-size:0.875rem; color:var(--ink-faint); line-height:1.6}
+.foot a{color:var(--ink-soft)}
+</style>
+
+<div class="bar">
+  <div class="bar-in">
+    <div class="brand"><i></i>The Agent Factory <span class="hide-sm">&mdash; implementation wizard</span></div>
+    <div class="grow"><input class="sname" id="sname" type="text" placeholder="Name this build (e.g. Church media, NL)" aria-label="Plan name"></div>
+    <div class="prog"><span id="pct">0%</span><span class="track"><i class="fill" id="fill"></i></span></div>
+    <button class="btn ghost sm" data-a="fs" type="button" title="Text size" aria-label="Text size">A</button>
+    <button class="btn ghost sm" data-a="theme" type="button" title="Toggle light/dark">&#9681;</button>
+  </div>
+</div>
+
+<nav class="rail" id="rail" aria-label="Steps"></nav>
+
+<main class="stage">
+  <section>
+    <div class="panel">
+      <div class="panel-head">
+        <span class="sno" id="sno">STEP 01</span>
+        <h2 id="stitle">&nbsp;</h2>
+        <span class="hint" id="shint"></span>
+      </div>
+      <div class="panel-body" id="body"></div>
+      <div class="nav">
+        <button class="btn" data-a="prev" id="prev" type="button">&larr; Back</button>
+        <span class="sp"></span>
+        <button class="btn ghost sm" data-a="reset" type="button">Clear</button>
+        <button class="btn primary" data-a="next" id="next" type="button">Next &rarr;</button>
+      </div>
+    </div>
+  </section>
+
+  <aside class="col-side">
+    <div class="side" id="side"></div>
+  </aside>
+</main>
+
+<div class="foot">
+  Built from <a href="https://www.youtube.com/watch?v=mD7JpNHLT70" target="_blank" rel="noopener">&ldquo;These AI Marketing Agents Get You Customers&rdquo;</a> by Greg Isenberg with Cody Schneider.
+  His figures &mdash; $22 CPM, ~80% enrichment find rate, ~$200/month of infrastructure, 10,000 sends a month &mdash; are one US agency&rsquo;s numbers in one market. Treat them as targets to test. The compliance answer in the episode is American; nothing here is legal advice.
+  Everything you type stays in this browser (localStorage); nothing is sent anywhere.
+</div>
+
+<script>
+/* ============================================================
+   The Agent Factory — implementation wizard
+   Single file, no dependencies, state in localStorage.
+
+   AUTHORING MAP — everything you change per wizard is in the four
+   blocks marked ▼ AUTHOR. The engine below them never changes.
+     1. STEPS      — the whole wizard: steps, copy, fields
+     2. CALCS      — live calculators, keyed by {t:"calc", id:"…"}
+     3. CALC_MD    — what those calculators add to the exported plan
+     4. SIDE       — the sticky right column
+   ============================================================ */
+var KEY = "agent-factory.v1";      /* localStorage key — bump the .vN suffix on breaking changes */
+var CUR = "€";            /* currency symbol used by money() */
+
+/* ============================================================
+   ▼ AUTHOR 1 — STEPS
+   ============================================================ */
+var STEPS = [
+
+/* 01 ---------------------------------------------------------- */
+{k:"job", nav:"The job", title:"The job to be done", hint:"Pick one agent",
+ lede:"Two agents were taught in this episode. <strong>Build one.</strong> They share an architecture but not a week &mdash; the outbound agent pays back in a month and needs a compliance answer first, the content agent pays back in a quarter and needs nothing but a recording.",
+ fields:[
+  {t:"note", title:"What an agent actually is", tone:"quote",
+   body:"&ldquo;It&rsquo;s code, maybe a thinking loop, and a live data stream.&rdquo; Every step in this wizard is one of those three things. If a step you are planning is none of them, it is a person&rsquo;s job you have not automated yet."},
+  {t:"choice", k:"agent_first", label:"Which one you are building first",
+   help:"Pick the one whose <b>input already exists</b>. If nobody at the org is recording anything weekly, the content agent has no fuel and you are choosing outbound whether you like it or not.",
+   opts:[
+     {v:"Outbound", h:"The outbound SDR", tag:"~30 days", d:"Signal → qualify → enrich → validate → send → reply agent → booked call. Costs money monthly and needs the jurisdiction question answered before a single send."},
+     {v:"Content",  h:"The content engine", tag:"~90 days", d:"Recorded conversation → insights → posts → multi-account scheduling → impressions → remix. Costs almost nothing and compounds, but nothing happens in week one."}
+   ]},
+  {t:"text", k:"buyer", label:"Who you are going after", help:"Specific enough that you could name ten of them from memory.", ph:"e.g. Dutch churches with a media team and a livestream"},
+  {t:"text", k:"offer", label:"What they book a call about", ph:"e.g. the €999 AI ministry assessment"},
+  {t:"num",  k:"deal_value", label:"What one closed client is worth", pre:"€", help:"First contract value, not lifetime. Every cost in this wizard gets checked against this number.", ph:"999"}
+ ]},
+
+/* 02 ---------------------------------------------------------- */
+{k:"signal", nav:"Signal", title:"The signal list", hint:"10 to 20 accounts",
+ lede:"The whole edge is here. You are not buying a list of people who <em>look like</em> your buyer &mdash; you are watching the accounts your buyer engages with and harvesting the people who <strong>just raised their hand this week</strong>.",
+ fields:[
+  {t:"note", title:"The outlier rule", tone:"quote",
+   body:"&ldquo;There&rsquo;s a handful of outliers within any niche and everybody is engaging with those outliers. If you just monitor those, you get 80% surface area coverage for that entire industry.&rdquo; Ten to twenty accounts. Company pages count &mdash; a vendor&rsquo;s page your buyer follows is as good a source as a creator."},
+  {t:"rows", k:"sources", label:"Accounts you will monitor", min:5,
+   help:"<b>LinkedIn accounts</b> — creators or company pages. Build the list from your own <b>For You feed</b> rather than search: the algorithm already knows what is relevant in your niche. The client always knows this list; ask them before you go looking.",
+   cols:[{k:"acct", label:"Account", w:"32%"}, {k:"kind", label:"Person / page", w:"20%"}, {k:"why", label:"Why their engagers are your buyer", w:"48%"}]},
+  {t:"sec", label:"What that list is worth per month"},
+  {t:"num", k:"posts_wk", label:"Posts per account per week", ph:"3", help:"Only count posts that get real engagement. A dormant account is a row you should delete."},
+  {t:"num", k:"engagers", label:"Reactions + comments on a typical post", ph:"40"},
+  {t:"num", k:"dedupe", label:"Unique after dedupe", suf:"%", ph:"55", help:"The same people engage with everything in a niche. Below 50% is normal and is <b>not</b> a problem — it is proof you found the right accounts."},
+  {t:"calc", id:"signal"},
+  {t:"note", title:"The harvest", body:"Everything here reads LinkedIn through <strong>Apify</strong>, with the API Maestro actors: <code>profile post scraper</code> daily for net-new post URLs, then <code>post reactions</code> and <code>post comments</code> for the engagers. One API key covers all of it. Your coding agent reads the endpoint docs and writes the script — you deploy the script, not the chat."},
+  {t:"calc", id:"scrapeprompt"}
+ ]},
+
+/* 03 ---------------------------------------------------------- */
+{k:"icp", nav:"Qualifier", title:"The qualifier", hint:"The first thinking loop",
+ lede:"Enrichment costs money per lookup. Qualification costs one cheap model call. So the judgement goes <strong>in front of</strong> the spending, not after it &mdash; research the person and their company, and only fits go down the waterfall.",
+ fields:[
+  {t:"multi", k:"icp_checks", label:"What the qualifier checks",
+   help:"Everything here is a field the agent has to fetch. Each one you add is another call and another failure mode — pick the two or three that actually disqualify people.",
+   opts:[
+     {v:"Employee count",     d:"The cheapest hard filter, and usually the one that matters."},
+     {v:"Country / language", d:"Decides the jurisdiction and which sequence they enter. For VOM this is load-bearing."},
+     {v:"Role or seniority",  d:"Are they the person who signs, or the person who forwards it?"},
+     {v:"Sector fit",         d:"Church, non-profit, SMB — whichever your offer is actually built for."},
+     {v:"Existing tooling",   d:"What they already run tells you what you would be replacing."},
+     {v:"Already in the CRM", d:"Suppression. Outbounding an existing client is the one unrecoverable mistake."}
+   ]},
+  {t:"area", k:"icp_rules", label:"Write the rule the agent applies", rows:4,
+   help:"Plain sentences, not a schema. This text becomes the qualifier prompt, so it should read like an instruction you would give a new hire: <b>who is in, who is out, and what to do when it is unclear</b> (the answer to that last one should be: drop them).",
+   ph:"In: Dutch churches or ministries, 3+ staff, running a weekly livestream, engaging with church-media content.\nOut: individual creators, anyone outside NL/BE, anyone already in the CRM.\nUnclear: drop, do not enrich."},
+  {t:"num", k:"pass_rate", label:"Share you expect to pass", suf:"%", ph:"35",
+   help:"Be pessimistic. This number is a spending forecast, and being wrong in the optimistic direction is what makes the enrichment bill a surprise."},
+  {t:"note", title:"Where inference belongs", tone:"ok",
+   body:"This is one of only two or three places in the whole system that should call a model at run time. Harvesting, deduping, waterfalling, validating and sending are all deterministic code on a cron. <strong>Pay the model to write those; do not pay it to run them.</strong>"}
+ ]},
+
+/* 04 ---------------------------------------------------------- */
+{k:"enrich", nav:"Waterfall", title:"The enrichment waterfall", hint:"Cheapest first",
+ lede:"A profile is not a contact. The waterfall turns one into the other: cheapest and most accurate tool first, whatever it misses falls to the next one, and you stop when the remainder is not worth the price.",
+ fields:[
+  {t:"rows", k:"waterfall", label:"Your ladder, in order", min:3,
+   help:"His stack: <b>GetLeads.io → Apollo → Prospeo / Origami</b>, plus Lead Magic for mobile numbers. Origami will run the whole waterfall for you from a LinkedIn URL if you would rather buy the ladder than build it. Hit rate is the share of <i>what reaches that tier</i>, not of the original list.",
+   cols:[{k:"tool", label:"Tool", w:"38%"}, {k:"hit", label:"Hit rate %", w:"22%"}, {k:"cost", label:"€ per hit", w:"22%"}]},
+  {t:"calc", id:"waterfall"},
+  {t:"choice", k:"validate", label:"Before anything is sent",
+   help:"Addresses out of these databases are stale. Deliverability is the asset — once it is gone, every future send from those domains is wasted money.",
+   opts:[
+     {v:"Validate every address", tag:"do this", d:"MillionVerifier: good / catch-all / risky / bad. Send to valid only, and treat catch-all as a separate, smaller experiment."},
+     {v:"Send what the databases return", d:"Saves a few euro and burns the domains you just paid to warm up."}
+   ]}
+ ]},
+
+/* 05 ---------------------------------------------------------- */
+{k:"law", nav:"Jurisdiction", title:"Where you are allowed to send", hint:"Answer before you build",
+ lede:"The episode&rsquo;s compliance answer is <strong>American</strong>: CAN-SPAM, buying from a data broker is legal, do your own research. That answer does not travel. Decide this now, because it changes which half of the machine you are allowed to build.",
+ fields:[
+  {t:"choice", k:"jurisdiction", label:"Where your prospects sit",
+   opts:[
+     {v:"EU", h:"EU / Netherlands", d:"GDPR plus the Dutch Telecommunicatiewet. Business recipients are covered too, and an enriched broker address is personal data that arrives with disclosure duties attached."},
+     {v:"US", h:"United States", d:"CAN-SPAM: opt-out, honest headers, physical address. The playbook as taught applies more or less directly."},
+     {v:"Mixed", h:"Both", d:"Then the qualifier must route by country, and the EU branch gets the stricter treatment. Not a reason to build two machines — one machine, two sequences."}
+   ]},
+  {t:"calc", id:"compliance"},
+  {t:"multi", k:"safeguards", label:"Safeguards you are actually implementing",
+   help:"Every one of these is a few lines of code or a paragraph of copy. Skipping them is not a shortcut, it is the thing that turns a channel into a complaint.",
+   opts:[
+     {v:"One-click opt-out in every send",   d:"Honoured automatically and permanently, not by hand."},
+     {v:"Global suppression list",           d:"Opt-outs, existing clients, anyone who ever said no. Checked before every send."},
+     {v:"Real sender identity",              d:"Org name, real address, a reply that reaches a human."},
+     {v:"Say where the data came from",      d:"On request, and ideally in the first message. It is also a good opener."},
+     {v:"DPA with each enrichment vendor",   d:"You are the controller; they are processors. Get the paperwork."},
+     {v:"Delete non-responders on a clock",  d:"90 or 180 days. Retention limits are the cheapest compliance you can buy."}
+   ]},
+  {t:"text", k:"counsel", label:"Who reviews this before the first send", ph:"e.g. the Dutch lawyer already queued for the Turnkey terms review",
+   help:"This wizard is not legal advice and neither was the episode. One named person signs off, once, in writing."}
+ ]},
+
+/* 06 ---------------------------------------------------------- */
+{k:"infra", nav:"Sending", title:"Sending infrastructure", hint:"Burner domains only",
+ lede:"You never send cold from the domain the company runs on. Ten thousand cold sends will nuke the deliverability of your real domain, and there is no undo.",
+ fields:[
+  {t:"multi", k:"domains", label:"Domain separation in place",
+   help:"Four separate sets. Mixing any two of them means one bad campaign takes the others down with it.",
+   opts:[
+     {v:"Cold — burner domains",  d:"Bought for this, expendable by design."},
+     {v:"Email marketing",        d:"Newsletters and broadcasts to people who opted in."},
+     {v:"Transactional",          d:"Product mail: receipts, resets, notifications."},
+     {v:"Business",               d:"What the team actually uses. Never touched by any of the above."}
+   ]},
+  {t:"sec", label:"Capacity and cost"},
+  {t:"num", k:"inboxes",      label:"Inboxes", ph:"6", help:"Hypertide, Inboxkit, or Instantly&rsquo;s own. You are buying inboxes on burner domains, not seats."},
+  {t:"num", k:"per_inbox_day",label:"Sends per inbox per day", ph:"30", help:"Conservative is 20–30 after warm-up. Warm every inbox for two weeks before it sends anything real."},
+  {t:"num", k:"infra_cost",   label:"Inbox infrastructure", pre:"€", suf:"/mo", ph:"100", help:"His figure: ~$100/month for roughly 10,000 sends."},
+  {t:"num", k:"send_cost",    label:"Sending platform", pre:"€", suf:"/mo", ph:"90", help:"Instantly from ~$97/month. HeyReach or BotDog if you are running the LinkedIn DM side too."},
+  {t:"calc", id:"capacity"}
+ ]},
+
+/* 07 ---------------------------------------------------------- */
+{k:"linkedin", nav:"LinkedIn", title:"LinkedIn — the platform you are renting", hint:"Three jobs, one account",
+ lede:"Nearly all of this runs on <strong>one company&rsquo;s platform</strong>. The signal is LinkedIn engagement, the second channel is LinkedIn DMs, and the content engine publishes to LinkedIn profiles. Decide deliberately how much weight to put on an account you do not own.",
+ fields:[
+  {t:"note", title:"What LinkedIn is doing here", body:
+   "Three separate jobs, all on the same login. <strong>Signal</strong> — the Apify actors read LinkedIn posts, reactions and comments. <strong>Channel</strong> — HeyReach or BotDog run DM campaigns from your account, and plain InMail is reportedly working well on this same strategy. <strong>Content</strong> — Ordinal publishes to LinkedIn profiles and reads the impressions back. If the account is restricted, all three stop on the same day."},
+  {t:"choice", k:"li_sender", label:"Which account does the outreach",
+   help:"The DM tools send <strong>as you</strong>. Whatever the automation does, it does under a real person&rsquo;s name.",
+   opts:[
+     {v:"A dedicated account", tag:"safest", d:"Built for this, warmed for a month first, and expendable if it gets restricted. Costs you the founder&rsquo;s credibility on the first message."},
+     {v:"The operator's own profile", d:"Far better reply rates — a real person with a history. Also the account that runs client work, so a restriction takes real business with it."},
+     {v:"Team accounts", d:"Spreads volume and looks natural. Needs each person&rsquo;s explicit consent, and one person&rsquo;s bad sequence reflects on all of them."}
+   ]},
+  {t:"multi", k:"li_tools", label:"How the DMs go out",
+   help:"Both tools named in the episode expose an API, so the agent can drive them the same way it drives the email side.",
+   opts:[
+     {v:"HeyReach", d:"LinkedIn DM campaigns with an API. Named first in the episode."},
+     {v:"BotDog", d:"The alternative he also likes. Same shape, same API access."},
+     {v:"LinkedIn InMail", d:"Paid, native, no automation risk — &ldquo;people are seeing incredible success right now&rdquo; with it on this strategy."},
+     {v:"By hand, for now", tag:"start here", d:"Fifty DMs typed by a human teaches you the message. Automate the message you already know works."}
+   ]},
+  {t:"sec", label:"Capacity"},
+  {t:"num", k:"li_invites_day", label:"Connection requests per day", ph:"20",
+   help:"Conservative is what keeps the account. LinkedIn enforces its own weekly ceiling and does not announce where it is."},
+  {t:"num", k:"li_accept_rate", label:"Acceptance rate", suf:"%", ph:"30",
+   help:"Higher when the invite mentions the post you both engaged with — which you know, because that is how you found them."},
+  {t:"calc", id:"linkedin"},
+  {t:"multi", k:"li_guard", label:"How you protect the account",
+   help:"The episode does not cover this at all. Automated outreach runs against LinkedIn&rsquo;s user agreement, and the platform enforces quietly — a restriction arrives with no appeal and no warning.",
+   opts:[
+     {v:"Warm the account for a month first", d:"Post, comment, connect by hand. A new account running campaigns is the clearest possible signal."},
+     {v:"Human pacing and daily caps",        d:"Spread over working hours in the account&rsquo;s own timezone. Never a burst at 03:00."},
+     {v:"A personal line in every invite",    d:"Reference the post they engaged with. Better acceptance and it is not a template."},
+     {v:"Never the account that runs client work", d:"Separate the risk from the relationships."},
+     {v:"A fallback channel if it goes",      d:"Email or the content page. Do not let one login be the only way you reach anyone."}
+   ]}
+ ]},
+
+/* 08 ---------------------------------------------------------- */
+{k:"inbox", nav:"Reply agent", title:"The reply agent", hint:"The second thinking loop",
+ lede:"This is the part that makes it an agent rather than a sequence. A positive reply fires a webhook into a small server-side process that answers, books, and re-touches &mdash; and knows whether the call actually happened.",
+ fields:[
+  {t:"text", k:"booking_link", label:"The link it is driving to", ph:"https://cal.com/..."},
+  {t:"area", k:"agent_goal", label:"Its goal, in one sentence", rows:2,
+   ph:"Get a fit prospect onto a 20-minute call about the assessment, or a clean no.",
+   help:"One goal. An inbox agent with two goals negotiates with itself and sends worse email than a template."},
+  {t:"multi", k:"agent_can", label:"What it is allowed to do",
+   help:"Everything unchecked stays with a human. That is a feature — the machine should escalate more than it improvises.",
+   opts:[
+     {v:"Answer questions from a fixed context",  d:"Your offer, pricing, process. From a file it can quote, not from memory."},
+     {v:"Send the booking link",                  d:"The one action worth optimising for."},
+     {v:"Check the calendar for the booking",     d:"Calendly or Cal.com. Without this it cannot tell a win from a polite reply."},
+     {v:"Re-touch people who went cold",          d:"Programmed months out. This is where the compounding is."},
+     {v:"Escalate anything it is unsure about",   d:"With the thread attached, to a named human."},
+     {v:"Never invent a fact or a price",         d:"Non-negotiable. One hallucinated price is worth more damage than the channel earns in a quarter."}
+   ]},
+  {t:"num", k:"followup_days", label:"Re-touch the cold ones after", suf:"days", ph:"180"},
+  {t:"calc", id:"agentprompt"}
+ ]},
+
+/* 09 ---------------------------------------------------------- */
+{k:"build", nav:"Build", title:"Build it and run it", hint:"Code, not tokens",
+ lede:"&ldquo;You should not be paying Anthropic to make an API call. You should be paying them to <strong>make the software</strong> that uses CPU to do the call.&rdquo; Decide here where inference is genuinely required, and make everything else a script.",
+ fields:[
+  {t:"choice", k:"harness", label:"What builds it",
+   opts:[{v:"Claude Code", d:"Reads the Apify and enrichment docs, writes the scripts, you review and deploy them."},
+         {v:"Codex", d:"Same shape. Use whichever you already have in your terminal."}]},
+  {t:"choice", k:"host", label:"Where it runs",
+   help:"&ldquo;A server is just a computer that is on all the time somewhere else that you&rsquo;re putting code onto.&rdquo;",
+   opts:[{v:"Railway", d:"His pick. Cron plus a small always-on service, minutes to set up."},
+         {v:"Render / VPS", d:"Fine. VOM already runs Engage AI on Render."},
+         {v:"A laptop", tag:"no", d:"It sleeps, it travels, it misses the daily run. This is not a host."}]},
+  {t:"multi", k:"inference_points", label:"Where the model runs at run time",
+   help:"Two or three ticks is a healthy system. Six means you built a token furnace with a marketing theme.",
+   opts:[
+     {v:"ICP judgement",        d:"Does this engager fit. Cheap, high leverage."},
+     {v:"Personalising a send", d:"One or two real lines per contact, from their post."},
+     {v:"Drafting replies",     d:"The inbox agent. Unavoidable."},
+     {v:"Writing content",      d:"The content engine. Sonnet is more than good enough."},
+     {v:"Picking what to remix",d:"Reading the analytics stream and choosing winners."},
+     {v:"Harvesting and dedupe",tag:"code", d:"This is a script. If it is ticked, you are paying tokens for a for-loop."}
+   ]},
+  {t:"sec", label:"What that costs per month"},
+  {t:"num", k:"runs_day",      label:"Runs per day", ph:"1", help:"Daily is his cadence. Hourly buys you nothing when the source posts three times a week."},
+  {t:"num", k:"llm_calls_run", label:"Model calls per run", ph:"60"},
+  {t:"num", k:"cost_call",     label:"Cost per call", pre:"€", ph:"0.02"},
+  {t:"calc", id:"inference"}
+ ]},
+
+/* 10 ---------------------------------------------------------- */
+{k:"stack", nav:"The stack", title:"The stack, in full", hint:"Every tool named",
+ lede:"&ldquo;I&rsquo;m also going to share all of the tools that you need. There&rsquo;s no gatekeeping here.&rdquo; This is that list &mdash; every tool named in the episode, in the order the data moves. Tick what you are actually signing up for.",
+ fields:[
+  {t:"multi", k:"stack_data", label:"Harvest and run it",
+   opts:[
+     {v:"Apify", d:"One scraping API key — LinkedIn, X, the rest. This is how data gets into the agent's context."},
+     {v:"API Maestro actors", d:"The LinkedIn actors he uses on Apify: profile post scraper, post reactions, post comments. Picked because they are actually maintained."},
+     {v:"Claude Code / Codex", d:"The harness that reads the docs and writes the scripts. You deploy the script, not the chat."},
+     {v:"Railway", d:"The always-on server the agents run on — \u201cjust a computer that is on all the time somewhere else.\u201d"},
+     {v:"ClickHouse", d:"The open-source route to the data pipeline and warehouse behind the live data stream."}
+   ]},
+  {t:"multi", k:"stack_enrich", label:"Turn a profile into a contact",
+   help:"Cheapest and most accurate first, then down the ladder. You priced your own order back in step 04.",
+   opts:[
+     {v:"GetLeads.io", d:"Aggregated B2B contact database with an API. First tier."},
+     {v:"Apollo", d:"Second tier, for what GetLeads misses."},
+     {v:"Prospeo", d:"Further down the ladder — more expensive, catches more of the tail."},
+     {v:"Origami", d:"Also aggregates the whole waterfall: send a LinkedIn URL, it walks the options for you."},
+     {v:"Lead Magic", d:"What he uses specifically for mobile numbers."},
+     {v:"MillionVerifier", d:"Validation before send: good / catch-all / risky / bad. Skipping it is how you burn the domains."}
+   ]},
+  {t:"multi", k:"stack_outbound", label:"Reach them",
+   opts:[
+     {v:"Hypertide", d:"Inboxes and burner domains — his partner, ~$100/month for roughly 10,000 sends."},
+     {v:"Inboxkit", d:"Same job, similar pricing, frequent sales."},
+     {v:"Instantly", d:"Sending platform from ~$97/month. Also sells inboxes. The API and the positive-reply webhook are what make the reply agent possible."},
+     {v:"HeyReach / BotDog", d:"LinkedIn DM campaigns with APIs. Step 07."},
+     {v:"Cal.com / Calendly", d:"The booking link, and the calendar the agent reads to know whether the call actually happened."}
+   ]},
+  {t:"multi", k:"stack_content", label:"Publish and learn",
+   opts:[
+     {v:"Ordinal", d:"Multi-account LinkedIn scheduling with an API and an MCP — and it hands the impressions back, which is what closes the loop."},
+     {v:"Claude Sonnet", d:"\u201cProbably good enough on the writing side.\u201d One call per insight."},
+     {v:"Gong", d:"Call transcripts as source material — query them instead of interviewing from scratch."},
+     {v:"Notion / Slack", d:"Internal comms as source material. Enormous context already sitting there."}
+   ]},
+  {t:"note", title:"Disclosure, stated in the episode", body:
+   "Hypertide, Ordinal and Origami are named as <strong>partners</strong> of the guest&rsquo;s company, and <strong>Graft</strong> (graft.com) is his own &mdash; it sells this exact system as a platform plus forward-deployed engineers. The architecture is sound regardless; the specific vendor in each row is a choice you get to make."},
+  {t:"rows", k:"stack_cost", label:"What you are actually paying", min:4,
+   help:"Only the lines you have signed up for. His all-in figure to start was about <strong>$200/month</strong> — inboxes plus the sending platform — before enrichment credits.",
+   cols:[{k:"tool", label:"Tool", w:"34%"}, {k:"job", label:"What it does", w:"44%"}, {k:"mo", label:"€ / month", w:"22%"}]},
+  {t:"calc", id:"stackcost"}
+ ]},
+
+/* 11 ---------------------------------------------------------- */
+{k:"content", nav:"Content", title:"The content engine", hint:"Agent two",
+ lede:"Same architecture, different fuel. And the fuel is the entire trick: <strong>an agent told to &ldquo;write good LinkedIn content&rdquo; produces the most mid thing imaginable</strong> &mdash; and now gets flagged by the platform&rsquo;s own slop detection.",
+ fields:[
+  {t:"choice", k:"source_kind", label:"Your source material",
+   help:"Something a human actually said this week. Without it there is no content engine, only a spam engine with better manners.",
+   opts:[
+     {v:"Weekly recorded interview", d:"15 minutes per person: what jumped out at you this week? No agenda. Works for technical staff too."},
+     {v:"Sales and discovery calls", d:"Already recorded. The best post is a prospect explaining why they did not buy."},
+     {v:"Internal comms",            d:"Slack, Notion, call transcripts, queried by an agent. Enormous context already sitting there."}
+   ]},
+  {t:"rows", k:"accounts", label:"Accounts that publish", min:3,
+   help:"Team members&rsquo; own profiles, or a <b>theme page</b> if nobody wants a personal brand — Julian Shapiro built @GrowthTactics, not @demandcurve, and the topic collected the audience.",
+   cols:[{k:"who", label:"Person or page", w:"40%"}, {k:"handle", label:"Account", w:"32%"}, {k:"per_wk", label:"Posts / week", w:"28%"}]},
+  {t:"text", k:"scheduler", label:"What schedules and reports", ph:"Ordinal (API + MCP, multi-account, returns impressions)",
+   help:"The scheduler has to hand the impressions <b>back</b>. A scheduler that only posts leaves the loop open and the agent guessing."},
+  {t:"num", k:"impressions", label:"Impressions per post", ph:"900", help:"A 500-follower account doing ~1,000 impressions a post is the example he gives. Start low; this is the number you will actually measure."},
+  {t:"num", k:"cpm", label:"What those impressions cost to buy", pre:"€", suf:"/1000", ph:"22", help:"LinkedIn averages around $22 CPM. That is the earned-media value of doing it organically."},
+  {t:"calc", id:"earned"}
+ ]},
+
+/* 12 ---------------------------------------------------------- */
+{k:"loop", nav:"The loop", title:"The loop that keeps it alive", hint:"Prospect, don't invent",
+ lede:"Both agents die the same way: they run open-loop, nobody reads the output, and six weeks later someone quietly turns the cron off. The fix is one number that decides next month&rsquo;s work.",
+ fields:[
+  {t:"note", title:"The 90-day remix", tone:"quote",
+   body:"&ldquo;My Twitter and my LinkedIn are the exact same thing remixed every 90 days, full stop. I have posts I&rsquo;ve used for the last two years. You can&rsquo;t post it every day — you post it every 90 days.&rdquo; Prospect for winners; do not invent."},
+  {t:"num", k:"remix_days", label:"Remix a proven winner every", suf:"days", ph:"90"},
+  {t:"multi", k:"metrics", label:"What the loop reads",
+   help:"Pick the fewest numbers that would make you change something. Impressions alone is a vanity loop; booked calls alone is too slow to steer by.",
+   opts:[
+     {v:"Positive reply rate",  d:"The honest health metric for outbound. It moves before anything else does."},
+     {v:"Booked calls",         d:"The action the whole machine optimises for."},
+     {v:"Cost per booked call", d:"Stack cost ÷ calls. The number that decides whether this survives a budget review."},
+     {v:"Bounce / spam rate",   d:"Deliverability early-warning. Above 2% you stop sending and fix it."},
+     {v:"Impressions per post", d:"Feeds the remix decision."},
+     {v:"Unsubscribes",         d:"Not a failure metric — a targeting metric."}
+   ]},
+  {t:"area", k:"winners", label:"What you will remix when you find a winner", rows:3,
+   help:"Write the rule now, while nothing is working yet. In three months you will have data and no plan for it.",
+   ph:"Any post over 3,000 impressions gets reposted at 90 days with a new hook; the top hook format each month becomes the opening line of the next outbound sequence."},
+  {t:"calc", id:"scoreboard"}
+ ]},
+
+/* 13 ---------------------------------------------------------- */
+{k:"plan", nav:"Your plan", title:"Your plan", hint:"Take it with you",
+ lede:"Everything you entered, as one markdown file &mdash; the build brief for the first version of the machine.",
+ fields:[{t:"export"}]}
+];
+
+/* ============================================================
+   ▼ AUTHOR 2 — CALCS
+   ============================================================ */
+
+/* shared pipeline maths ------------------------------------- */
+/* money() rounds to whole euro; per-lookup costs need the cents */
+function money2(n){ return (isFinite(n) && n < 10) ? CUR + n.toFixed(2) : money(n); }
+/* thin-space thousands, matching money() — a locale-formatted 27.279 reads as a decimal here */
+function count(n){ return Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " "); }
+function srcCount(){ return rowsOf("sources").filter(rowFilled).length; }
+function uniquePerMonth(){
+  var s = srcCount(), p = num("posts_wk"), e = num("engagers"), d = num("dedupe", 55);
+  return s * p * e * (d/100) * 4.33;
+}
+function icpLeads(){ return uniquePerMonth() * num("pass_rate", 35) / 100; }
+
+/* walk the waterfall: returns {found, rate, cost, tiers:[…]} */
+function waterfall(){
+  var into = icpLeads(), left = into, found = 0, cost = 0, tiers = [];
+  var rs = rowsOf("waterfall").filter(rowFilled);
+  for(var i=0;i<rs.length;i++){
+    var hit = parseFloat(rs[i].hit)||0, per = parseFloat(rs[i].cost)||0;
+    var got = left * hit/100;
+    tiers.push({tool: rs[i].tool||("Tier "+(i+1)), got: got, cost: got*per, into: left});
+    found += got; cost += got*per; left -= got;
+  }
+  return {into: into, found: found, rate: into ? found/into*100 : 0, cost: cost, left: left, tiers: tiers};
+}
+function liInvitesMonth(){ return num("li_invites_day")*30; }
+function liAccepted(){ return liInvitesMonth() * num("li_accept_rate",30)/100; }
+function stackRowsCost(){
+  var rs = rowsOf("stack_cost").filter(rowFilled), t = 0;
+  for(var i=0;i<rs.length;i++) t += (parseFloat(rs[i].mo)||0);
+  return t;
+}
+function capacityPerMonth(){ return num("inboxes") * num("per_inbox_day") * 30; }
+function inferenceCost(){ return num("runs_day") * num("llm_calls_run") * num("cost_call") * 30; }
+function stackCost(){ return num("infra_cost") + num("send_cost") + waterfall().cost + inferenceCost(); }
+function postsPerMonth(){
+  var rs = rowsOf("accounts").filter(rowFilled), n = 0;
+  for(var i=0;i<rs.length;i++) n += (parseFloat(rs[i].per_wk)||0);
+  return n * 4.33;
+}
+function earnedMedia(){ return postsPerMonth() * num("impressions") / 1000 * num("cpm", 22); }
+
+var CALCS = {
+
+  /* ---- the signal list is worth this much raw material ---- */
+  signal: function(){
+    var s = srcCount(), p = num("posts_wk"), e = num("engagers"), d = num("dedupe",55);
+    var raw = s*p*e, uniq = raw*d/100, mo = uniquePerMonth();
+    var note;
+    if(!s || !p || !e) note = 'Add the accounts you will monitor and the two averages. Guess from three real posts rather than leaving it blank — an order of magnitude is enough to size the rest of the machine.';
+    else if(s < 10) note = '<b>'+s+' accounts is under the ten to twenty the playbook calls for.</b> The coverage claim — 80% of a niche — assumes you got the outliers. Keep adding until new accounts stop surfacing new names.';
+    else if(mo < 100) note = 'About '+Math.round(mo)+' fresh hand-raisers a month. That is a <b>real but narrow</b> channel: enough to keep a pipeline warm, not enough to carry a revenue target on its own. Pair it with the content engine.';
+    else note = Math.round(mo)+' fresh hand-raisers a month, and every one of them engaged with your topic <b>in the last 30 days</b>. That recency is the entire advantage over a bought list — spend it fast, not in a quarterly batch.';
+    return '<div class="calc"><div class="calc-h">What the list produces <em>before qualification</em></div>'+
+      '<div class="calc-out">'+
+      '<div class="kpi"><span class="v'+(s>=10?'':' dim')+'">'+(s||"—")+'</span><span class="l">Accounts tracked</span></div>'+
+      '<div class="kpi"><span class="v">'+(raw?Math.round(raw):"—")+'</span><span class="l">Raw engagers / wk</span></div>'+
+      '<div class="kpi"><span class="v">'+(uniq?Math.round(uniq):"—")+'</span><span class="l">Unique / wk</span></div>'+
+      '<div class="kpi"><span class="v">'+(mo?Math.round(mo):"—")+'</span><span class="l">Unique / month</span></div>'+
+      '</div><div class="calc-note">'+note+'</div></div>';
+  },
+
+  /* ---- generated build prompt for the harvest script ---- */
+  scrapeprompt: function(){
+    var rs = rowsOf("sources").filter(rowFilled);
+    var list = rs.length ? rs.map(function(r){ return "  - "+(r.acct||"?")+(r.why?"  ("+r.why+")":""); }).join("\n") : "  - (add your accounts in the table above)";
+    var p =
+"Build me a harvest script, not a chat session. Deliverable: a repo I can deploy to "+(val("host")||"a server")+" and run on a daily cron.\n\n"+
+"WHAT IT DOES\n"+
+"1. For each monitored account below, call the Apify API Maestro *profile post scraper* and collect post URLs published since the last run.\n"+
+"2. For each new post URL, call *post reactions* and *post comments* and collect everyone who engaged.\n"+
+"3. Dedupe by public profile URL across the whole run and against everyone already stored.\n"+
+"4. Write to a table with: profile URL, name, headline, source account, source post URL, engagement type, first seen.\n\n"+
+"MONITORED ACCOUNTS\n"+list+"\n\n"+
+"RULES\n"+
+"- No LLM calls anywhere in this script. It is deterministic code on a cron; the judgement happens in a separate qualifier step.\n"+
+"- APIFY_TOKEN from the environment, never in the source.\n"+
+"- Idempotent: re-running the same day must not create duplicates.\n"+
+"- Log per run: accounts checked, new posts, raw engagers, unique after dedupe.\n"+
+"- Fail loudly on an actor error; never write a partial run silently.\n\n"+
+"Read the Apify actor docs before writing anything, then show me the plan and wait.";
+    return '<div class="calc"><div class="calc-h">Build prompt — the harvest script <em>paste into '+esc(val("harness")||"Claude Code")+'</em></div>'+
+      '<div style="padding:14px"><textarea id="p_scrape" readonly rows="10" style="font-family:var(--mono);font-size:0.875rem">'+esc(p)+'</textarea>'+
+      '<div class="outbar" style="margin-top:8px"><span class="t">generated from your answers</span>'+
+      '<button class="btn primary" type="button" data-a="copy" data-src="#p_scrape">Copy prompt</button></div></div>'+
+      '<div class="calc-note">It updates as you fill the table above. Note what it forbids: <b>no model calls in the harvester</b>. That single rule is most of the cost discipline in this episode.</div></div>';
+  },
+
+  /* ---- the waterfall ---- */
+  waterfall: function(){
+    var w = waterfall(), dv = num("deal_value");
+    var per = w.found ? w.cost/w.found : 0;
+    var note;
+    if(!w.into) note = 'Fill in the signal list and the pass rate first — the waterfall runs on whatever survives qualification.';
+    else if(!w.tiers.length) note = 'Add your tiers. His ladder: <b>GetLeads.io → Apollo → Prospeo / Origami</b>, cheapest and most accurate first. Typical hit rates run 60% / 55% / 40% down the ladder.';
+    else if(w.rate < 60) note = 'A <b>'+Math.round(w.rate)+'% find rate</b> is below the ~80% the ladder is supposed to reach. Add a tier rather than accepting the loss — the tail is cheap relative to what you already spent to identify these people.';
+    else note = 'About '+Math.round(w.found)+' contacts a month at '+money2(per)+' each'+(dv&&w.cost?'. <b>One closed client at '+money(dv)+' pays for '+Math.round(dv/w.cost)+' months of enrichment</b> — the data is never what makes or breaks this':'')+'. '+(w.left>=1?Math.round(w.left)+' qualified people a month still fall through the bottom; they are the LinkedIn DM list.':'');
+    var rows = "";
+    for(var i=0;i<w.tiers.length;i++){
+      var t = w.tiers[i];
+      rows += '<div class="kpi"><span class="v">'+Math.round(t.got)+'</span><span class="l">'+esc(t.tool)+'</span></div>';
+    }
+    return '<div class="calc"><div class="calc-h">Waterfall yield <em>per month</em></div>'+
+      '<div class="calc-out">'+
+      '<div class="kpi"><span class="v">'+(w.into?Math.round(w.into):"—")+'</span><span class="l">Qualified in</span></div>'+
+      rows+
+      '<div class="kpi"><span class="v'+(w.rate>=60?'':' dim')+'">'+(w.rate?Math.round(w.rate)+"%":"—")+'</span><span class="l">Find rate</span></div>'+
+      '<div class="kpi"><span class="v">'+(w.cost?money(w.cost):"—")+'</span><span class="l">Enrichment / mo</span></div>'+
+      '</div><div class="calc-note">'+note+'</div></div>';
+  },
+
+  /* ---- jurisdiction verdicts ---- */
+  compliance: function(){
+    var j = val("jurisdiction");
+    if(!j) return '<div class="calc"><div class="calc-h">Channel verdicts <em>pick a jurisdiction</em></div>'+
+      '<div class="calc-note">This is the one question in the wizard that can invalidate a whole month of building. Answer it before you buy a single inbox.</div></div>';
+    var rowsFor = {
+      EU: [["Cold email","Restricted","dim"],["LinkedIn DM / InMail","Workable","" ],["Content → inbound","Clear",""],["Broker-enriched data","Disclose",""]],
+      US: [["Cold email","Workable",""],["LinkedIn DM / InMail","Workable",""],["Content → inbound","Clear",""],["Broker-enriched data","Legal",""]],
+      Mixed:[["Cold email","Route by country","dim"],["LinkedIn DM / InMail","Workable",""],["Content → inbound","Clear",""],["Broker-enriched data","Disclose",""]]
+    }[j];
+    var h = "";
+    for(var i=0;i<rowsFor.length;i++) h += '<div class="kpi"><span class="v'+(rowsFor[i][2]?' dim':'')+'" style="font-size:1.03125rem">'+rowsFor[i][1]+'</span><span class="l">'+rowsFor[i][0]+'</span></div>';
+    var note = j==="US"
+      ? 'The playbook as taught applies. Opt-out, honest headers, a physical address, and a suppression list that is actually honoured.'
+      : (j==="EU"
+        ? '<b>Under GDPR and the Dutch Telecommunicatiewet, unsolicited commercial email reaches business recipients too</b>, and an address bought from a broker is personal data you have to account for. The half of this machine that survives intact is the valuable half: the signal harvest, the qualifier, the LinkedIn conversation, and content-led inbound. Rebuild the send step around those and put the plan in front of a Dutch lawyer before the first message leaves. Nothing here is legal advice.'
+        : 'One machine, two sequences. The qualifier decides country before enrichment, and the EU branch inherits the stricter rules — including for anyone whose country you could not determine.');
+    return '<div class="calc"><div class="calc-h">Channel verdicts <em>'+esc(j==="EU"?"EU / Netherlands":j)+'</em></div>'+
+      '<div class="calc-out">'+h+'</div><div class="calc-note">'+note+'</div></div>';
+  },
+
+  /* ---- sending capacity vs demand ---- */
+  capacity: function(){
+    var cap = capacityPerMonth(), w = waterfall(), demand = w.found * 3; /* ~3 touches per contact */
+    var cost = num("infra_cost") + num("send_cost");
+    var util = cap ? demand/cap*100 : 0;
+    var note;
+    if(!cap) note = 'His figures: about <b>€100/month of inbox infrastructure for ~10,000 sends</b>, plus a sending platform from ~€90. Roughly €200/month all in.';
+    else if(!demand) note = 'Capacity without a list is money on fire. Finish the signal and waterfall steps and come back — the list is almost always the constraint, not the sending.';
+    else if(util < 35) note = '<b>You are paying for '+Math.round(cap)+' sends and using '+Math.round(demand)+'.</b> Cut inboxes, or accept the cost as headroom for a second campaign. Sending capacity is the easiest thing here to over-buy.';
+    else if(util > 100) note = '<b>Your list outruns your inboxes.</b> You need about '+Math.ceil(demand/(num("per_inbox_day")*30))+' inboxes at this send rate — or slow the sequence down. Never fix this by raising sends per inbox.';
+    else note = 'Sensible: '+Math.round(util)+'% utilisation, with room to grow the list before you buy more infrastructure. Warm every new inbox for two weeks before it sends anything real.';
+    return '<div class="calc"><div class="calc-h">Sending capacity <em>~3 touches per contact</em></div>'+
+      '<div class="calc-out">'+
+      '<div class="kpi"><span class="v">'+(cap?Math.round(cap):"—")+'</span><span class="l">Capacity / mo</span></div>'+
+      '<div class="kpi"><span class="v">'+(demand?Math.round(demand):"—")+'</span><span class="l">Sends needed</span></div>'+
+      '<div class="kpi"><span class="v'+(util&&util<=100?'':' dim')+'">'+(util?Math.round(util)+"%":"—")+'</span><span class="l">Utilisation</span></div>'+
+      '<div class="kpi"><span class="v">'+(cost?money(cost):"—")+'</span><span class="l">Sending / mo</span></div>'+
+      '</div><div class="calc-note">'+note+'</div></div>';
+  },
+
+  /* ---- LinkedIn as a channel ---- */
+  linkedin: function(){
+    var inv = liInvitesMonth(), acc = liAccepted(), w = waterfall(), orphans = w.left;
+    var perDay = num("li_invites_day"), j = val("jurisdiction");
+    var note;
+    if(!perDay) note = 'Set a daily number. Twenty a day is a working default — it is the channel, not the ceiling, that decides your volume here.';
+    else if(perDay > 25) note = '<b>'+perDay+' invitations a day is restriction territory.</b> LinkedIn enforces a weekly ceiling it does not publish, and enforcement is silent and unappealable. Nothing in this machine is worth the account: come down to about twenty and add accounts instead of volume.';
+    else if(orphans >= 1 && acc < orphans) note = 'You have <b>'+Math.round(orphans)+' qualified people a month that the waterfall cannot find an email for</b>, and room for '+Math.round(acc)+' accepted connections. LinkedIn is where those people are reachable — raise the invite rate or accept that some of the list goes unworked.';
+    else if(j==="EU") note = 'Under the EU answer you gave in step 05, <b>this is your primary channel, not your second one.</b> '+Math.round(acc)+' accepted connections a month is the real top of your funnel — size the rest of the machine off this number rather than off the email capacity.';
+    else note = Math.round(acc)+' accepted connections a month at '+Math.round(perDay)+' invites a day. Mention the post you both engaged with in the invite: you know it, almost nobody else does, and it is the difference between a connection and a template.';
+    return '<div class="calc"><div class="calc-h">LinkedIn capacity <em>per month</em></div>'+
+      '<div class="calc-in three">'+
+        ci("li_invites_day","Invites / day", val("li_invites_day"), "×") +
+        ci("li_accept_rate","Acceptance", val("li_accept_rate"), "%") +
+      '</div>'+
+      '<div class="calc-out">'+
+      '<div class="kpi"><span class="v">'+(inv?Math.round(inv):"—")+'</span><span class="l">Invites / mo</span></div>'+
+      '<div class="kpi"><span class="v">'+(acc?Math.round(acc):"—")+'</span><span class="l">Accepted</span></div>'+
+      '<div class="kpi"><span class="v'+(orphans>=1?'':' dim')+'">'+(orphans>=1?Math.round(orphans):"—")+'</span><span class="l">No email found</span></div>'+
+      '<div class="kpi"><span class="v'+(perDay&&perDay<=25?'':' dim')+'">'+(perDay?(perDay<=25?"OK":"High"):"—")+'</span><span class="l">Account risk</span></div>'+
+      '</div><div class="calc-note">'+note+'</div></div>';
+  },
+
+  /* ---- the whole stack, priced ---- */
+  stackcost: function(){
+    var rows = stackRowsCost(), enrich = waterfall().cost, inf = inferenceCost();
+    var picked = ((val("stack_data")||[]).length + (val("stack_enrich")||[]).length +
+                  (val("stack_outbound")||[]).length + (val("stack_content")||[]).length);
+    var total = rows + enrich + inf, dv = num("deal_value");
+    var note;
+    if(!picked) note = 'Tick what you are signing up for. The point of the list is that nothing here is secret — the episode names every tool, including the ones its author is paid to name.';
+    else if(!rows) note = picked+' tools ticked, nothing priced yet. Fill the table: the number you cannot say out loud is the one that kills the project at the first budget review.';
+    else note = money(total)+' a month all in — '+money(rows)+' in subscriptions, '+money(enrich)+' in enrichment credits, '+money(inf)+' in inference.'+
+      (dv ? ' <b>One closed client at '+money(dv)+' covers '+(total?(dv/total).toFixed(1):"—")+' months of the entire stack.</b>' : '')+
+      ' His own all-in starting figure was about €200 for inboxes plus sending, before credits.';
+    return '<div class="calc"><div class="calc-h">The stack, priced <em>per month</em></div>'+
+      '<div class="calc-out">'+
+      '<div class="kpi"><span class="v">'+picked+'</span><span class="l">Tools chosen</span></div>'+
+      '<div class="kpi"><span class="v">'+(rows?money(rows):"—")+'</span><span class="l">Subscriptions</span></div>'+
+      '<div class="kpi"><span class="v">'+(enrich?money(enrich):"—")+'</span><span class="l">Enrichment</span></div>'+
+      '<div class="kpi"><span class="v">'+(total?money(total):"—")+'</span><span class="l">All in</span></div>'+
+      '</div><div class="calc-note">'+note+'</div></div>';
+  },
+
+  /* ---- generated base prompt for the reply agent ---- */
+  agentprompt: function(){
+    var can = val("agent_can")||[];
+    var p =
+"You are the reply agent for "+(val("buyer")?"outbound to "+val("buyer"):"our outbound")+".\n\n"+
+"GOAL\n"+(val("agent_goal")||"(set the goal in the field above)")+"\n\n"+
+"CONTEXT YOU MAY QUOTE\n"+
+"- What we sell: "+(val("offer")||"(set the offer in step 1)")+"\n"+
+"- Booking link: "+(val("booking_link")||"(add the link above)")+"\n"+
+"- Everything else lives in ./context/*.md. If it is not in those files, you do not know it.\n\n"+
+"YOU MAY\n"+(can.length ? can.map(function(c){ return "- "+c; }).join("\n") : "- (tick the permissions above)")+"\n\n"+
+"YOU MAY NOT\n"+
+"- Invent a price, a date, a client name or a capability.\n"+
+"- Argue. One clarification, then either the link or a clean close.\n"+
+"- Send more than two messages without a human reading the thread.\n\n"+
+"STYLE\n"+
+"- Short. Lower case is fine. No em dashes, no \"I hope this finds you well\", no restating their question.\n"+
+"- Match the language they wrote in.\n"+
+"- One question per message, at most.\n\n"+
+"WHEN THEY GO COLD\n"+
+"Wait "+(val("followup_days")||"180")+" days, then one message referencing what they were engaging with when we first found them.\n\n"+
+"ALWAYS\n"+
+"Log every decision with the thread id. If you are unsure, escalate with the thread attached rather than guessing.";
+    return '<div class="calc"><div class="calc-h">Base prompt — the reply agent <em>webhook → server → this</em></div>'+
+      '<div style="padding:14px"><textarea id="p_agent" readonly rows="10" style="font-family:var(--mono);font-size:0.875rem">'+esc(p)+'</textarea>'+
+      '<div class="outbar" style="margin-top:8px"><span class="t">generated from your answers</span>'+
+      '<button class="btn primary" type="button" data-a="copy" data-src="#p_agent">Copy prompt</button></div></div>'+
+      '<div class="calc-note">Wire it to the sending platform&rsquo;s <b>positive-reply webhook</b>, give it calendar read access, and keep its knowledge in files it can quote. An inbox agent that answers from memory is the fastest way to put a wrong price in writing.</div></div>';
+  },
+
+  /* ---- inference budget ---- */
+  inference: function(){
+    var inf = inferenceCost(), stack = stackCost();
+    var pts = (val("inference_points")||[]);
+    var share = stack ? inf/stack*100 : 0;
+    var harvestTicked = pts.indexOf("Harvesting and dedupe")>=0;
+    var note;
+    if(!inf) note = 'Estimate it. A daily run over a few dozen qualified profiles is a small number — and knowing the number is what keeps it small.';
+    else if(harvestTicked) note = '<b>Harvesting and dedupe is ticked.</b> That is a for-loop over an API response; it needs no model. Untick it, have the coding agent write the script once, and the same work costs nothing per run forever.';
+    else if(share > 50) note = '<b>Inference is '+Math.round(share)+'% of your stack cost.</b> That is the shape the episode argues against — pay the model to write the software, not to run the loop. Look for the step that runs on every record and make it code.';
+    else note = money(inf)+' a month, '+Math.round(share)+'% of the stack, at '+pts.length+' judgement point'+(pts.length===1?'':'s')+'. That is the right shape: inference where a human would have had to think, code everywhere else.';
+    return '<div class="calc"><div class="calc-h">Inference budget <em>only where judgement is required</em></div>'+
+      '<div class="calc-in three">'+
+        ci("runs_day","Runs / day", val("runs_day"), "×") +
+        ci("llm_calls_run","Calls / run", val("llm_calls_run"), "×") +
+        ci("cost_call","€ / call", val("cost_call"), "€") +
+      '</div>'+
+      '<div class="calc-out">'+
+      '<div class="kpi"><span class="v">'+(inf?money(inf):"—")+'</span><span class="l">Inference / mo</span></div>'+
+      '<div class="kpi"><span class="v">'+(stack?money(stack):"—")+'</span><span class="l">Whole stack / mo</span></div>'+
+      '<div class="kpi"><span class="v'+(share<=50?'':' dim')+'">'+(share?Math.round(share)+"%":"—")+'</span><span class="l">Tokens as share</span></div>'+
+      '<div class="kpi"><span class="v">'+pts.length+'</span><span class="l">Judgement points</span></div>'+
+      '</div><div class="calc-note">'+note+'</div></div>';
+  },
+
+  /* ---- earned media ---- */
+  earned: function(){
+    var posts = postsPerMonth(), imp = posts*num("impressions"), val_ = earnedMedia();
+    var stack = stackCost();
+    var note;
+    if(!posts) note = 'Add the publishing accounts. One person posting twice a week is a real channel; the reason to run several accounts is that the same source material fills all of them.';
+    else if(!num("impressions")) note = 'Add an impressions estimate — a 500-follower account doing around 1,000 impressions a post is the example given.';
+    else note = money(val_)+' a month of earned media'+(stack?', against '+money(stack)+' of outbound stack cost':'')+'. '+(stack && val_>stack ? '<b>The organic side out-earns the paid side of this machine</b> — which is the argument for building it first, and it needs no jurisdiction question answered.' : 'It compounds: the same weekly recording fills every account, and the winners get remixed rather than rewritten.');
+    return '<div class="calc"><div class="calc-h">Earned media <em>at '+money(num("cpm",22))+' CPM</em></div>'+
+      '<div class="calc-out">'+
+      '<div class="kpi"><span class="v">'+(posts?Math.round(posts):"—")+'</span><span class="l">Posts / month</span></div>'+
+      '<div class="kpi"><span class="v">'+(imp?count(imp):"—")+'</span><span class="l">Impressions / mo</span></div>'+
+      '<div class="kpi"><span class="v">'+(val_?money(val_):"—")+'</span><span class="l">Earned media / mo</span></div>'+
+      '<div class="kpi"><span class="v">'+(val_&&stack?(val_/stack).toFixed(1)+"×":"—")+'</span><span class="l">vs stack cost</span></div>'+
+      '</div><div class="calc-note">'+note+'</div></div>';
+  },
+
+  /* ---- the whole machine on one line ---- */
+  scoreboard: function(){
+    var w = waterfall(), stack = stackCost(), dv = num("deal_value");
+    var contacts = w.found, accepted = liAccepted();
+    var emailReplies = contacts*0.06, liReplies = accepted*0.25;
+    var replies = emailReplies + liReplies, calls = replies*0.4, cpc = calls ? stack/calls : 0;
+    var note;
+    if((!contacts && !accepted) || !stack) note = 'This fills in once the signal, waterfall, LinkedIn and cost steps are done. It is the number to put in front of anyone who has to approve the machine.';
+    else note = 'At 6% positive replies on email, a quarter of accepted connections turning into a conversation, and 40% of those booking — <b>assumptions, not results</b> — that is '+calls.toFixed(1)+' calls a month at '+money(cpc)+' each'+(dv?', against a '+money(dv)+' contract':'')+'. '+
+      (liReplies>emailReplies ? '<b>LinkedIn is carrying more of this than email is.</b> Fund it accordingly. ' : '')+
+      'Every rate here is a guess until you have run it for a month; replace them the moment you have thirty real sends.';
+    return '<div class="calc"><div class="calc-h">The machine, end to end <em>modelled monthly</em></div>'+
+      '<div class="calc-out">'+
+      '<div class="kpi"><span class="v">'+(contacts?Math.round(contacts):"—")+'</span><span class="l">Email contacts</span></div>'+
+      '<div class="kpi"><span class="v">'+(accepted?Math.round(accepted):"—")+'</span><span class="l">LinkedIn accepts</span></div>'+
+      '<div class="kpi"><span class="v">'+(replies?replies.toFixed(1):"—")+'</span><span class="l">Positive replies</span></div>'+
+      '<div class="kpi"><span class="v">'+(calls?calls.toFixed(1):"—")+'</span><span class="l">Booked calls</span></div>'+
+      '<div class="kpi"><span class="v'+(dv&&cpc&&cpc<dv/4?'':' dim')+'">'+(cpc?money(cpc):"—")+'</span><span class="l">€ / booked call</span></div>'+
+      '</div><div class="calc-note">'+note+'</div></div>';
+  }
+};
+
+var ROW_TOTALS = {
+  sources: function(rs){
+    var n = rs.filter(rowFilled).length;
+    return n ? n+' accounts <b>'+(n>=10?'enough':'keep going, aim for 10–20')+'</b>' : null;
+  },
+  waterfall: function(){
+    var w = waterfall();
+    return w.found ? 'Contacts found <b>'+Math.round(w.found)+' / mo</b>' : null;
+  },
+  stack_cost: function(rs){
+    var t = 0;
+    for(var i=0;i<rs.length;i++) t += (parseFloat(rs[i].mo)||0);
+    return t ? 'Subscriptions <b>'+money(t)+' / mo</b>' : null;
+  },
+  accounts: function(){
+    var p = postsPerMonth();
+    return p ? 'Posts per month <b>'+Math.round(p)+'</b>' : null;
+  }
+};
+
+/* ============================================================
+   ▼ AUTHOR 3 — CALC_MD
+   ============================================================ */
+var CALC_MD = {
+  signal: function(){
+    var m = uniquePerMonth();
+    if(!m) return [];
+    return ["", "- **Signal yield:** "+srcCount()+" accounts → ~"+Math.round(m)+" unique hand-raisers/month"];
+  },
+  enrich: function(){
+    var w = waterfall();
+    if(!w.found) return [];
+    var L = ["", "**Waterfall**", "", "| Tier | Into | Found | Cost |", "|---|---|---|---|"];
+    for(var i=0;i<w.tiers.length;i++){
+      var t = w.tiers[i];
+      L.push("| "+t.tool+" | "+Math.round(t.into)+" | "+Math.round(t.got)+" | "+money(t.cost)+" |");
+    }
+    L.push("| **Total** | "+Math.round(w.into)+" | **"+Math.round(w.found)+"** ("+Math.round(w.rate)+"%) | **"+money(w.cost)+"** |");
+    L.push("");
+    if(w.left>=1) L.push("- "+Math.round(w.left)+" qualified people/month find no email — that is the LinkedIn DM list.");
+    return L;
+  },
+  linkedin: function(){
+    var acc = liAccepted();
+    if(!acc) return [];
+    var L = ["", "- **LinkedIn:** "+Math.round(liInvitesMonth())+" invites/month at "+num("li_invites_day")+"/day → ~"+Math.round(acc)+" accepted connections"];
+    if(val("li_sender")) L.push("- **Sending account:** "+val("li_sender"));
+    return L;
+  },
+  stack: function(){
+    /* the four multis and the price table are already emitted by the field
+       exporter — only the totals belong here */
+    var rows = stackRowsCost(), total = rows + waterfall().cost + inferenceCost();
+    if(!rows) return [];
+    var picked = [].concat(val("stack_data")||[], val("stack_enrich")||[], val("stack_outbound")||[], val("stack_content")||[]).length;
+    return ["", "- **Stack cost:** "+money(rows)+"/month in subscriptions across "+picked+" tools · "+money(total)+"/month all in, with enrichment credits and inference"];
+  },
+  infra: function(){
+    var cap = capacityPerMonth();
+    if(!cap) return [];
+    return ["", "- **Sending capacity:** "+Math.round(cap)+" sends/month across "+num("inboxes")+" inboxes · "+money(num("infra_cost")+num("send_cost"))+"/mo"];
+  },
+  build: function(){
+    var inf = inferenceCost(), stack = stackCost();
+    if(!inf) return [];
+    return ["", "- **Inference:** "+money(inf)+"/month ("+(stack?Math.round(inf/stack*100):0)+"% of a "+money(stack)+" stack) across "+(val("inference_points")||[]).length+" judgement points"];
+  },
+  content: function(){
+    var e = earnedMedia();
+    if(!e) return [];
+    return ["", "- **Earned media:** "+Math.round(postsPerMonth())+" posts/month → "+count(postsPerMonth()*num("impressions"))+" impressions ≈ "+money(e)+"/month at "+money(num("cpm",22))+" CPM"];
+  },
+  loop: function(){
+    var w = waterfall(), stack = stackCost();
+    if(!w.found || !stack) return [];
+    var calls = w.found*0.06*0.4;
+    return ["", "- **Modelled outcome:** ~"+calls.toFixed(1)+" booked calls/month at "+money(calls?stack/calls:0)+" each _(6% reply, 40% book — assumptions to replace with real numbers after 30 sends)_"];
+  }
+};
+
+function startHere(){
+  var a = val("agent_first");
+  if(a==="Outbound") return "Your first agent is <strong>outbound</strong>. Week one is not code: it is the account list and the jurisdiction answer. Build the harvest script only once you can name ten accounts and one lawyer.";
+  if(a==="Content")  return "Your first agent is <strong>content</strong>. Book the weekly recording into the calendar before you write a line of code — every other part of this is downstream of a human saying something worth publishing.";
+  return "Go back to step 1 and pick one agent. Building both at once is how neither ships.";
+}
+
+function mdIntro(){
+  return ["_Built with the Agent Factory implementation wizard, from “These AI Marketing Agents Get You Customers” — Greg Isenberg with Cody Schneider — https://www.youtube.com/watch?v=mD7JpNHLT70_"];
+}
+function mdOutro(){
+  return [
+    "### The order to build it",
+    "",
+    "1. Name the ten to twenty accounts. No code until that list exists.",
+    "2. Answer the jurisdiction question in writing, with a named reviewer.",
+    "3. Have the coding agent write the harvest script — deterministic, no model calls, daily cron.",
+    "4. Add the qualifier. It is the first place inference is allowed.",
+    "5. Buy inboxes and warm them for two weeks while you build the waterfall. Warm the LinkedIn account for a month — it is slower to replace than a domain.",
+    "6. Send to fifty people by hand before any of it is automated. What you do manually becomes the spec.",
+    "7. Wire the reply webhook to the agent. Read every thread for the first two weeks.",
+    "8. Start the weekly recording for the content engine in parallel — it costs nothing and compounds.",
+    "",
+    "_The benchmarks in this wizard — $22 CPM, ~80% enrichment find rate, ~$200/month of infrastructure, 10,000 sends — are one US agency's numbers in one market. Targets to test, not inputs to a plan. Nothing here is legal advice._"
+  ];
+}
+
+/* ============================================================
+   ▼ AUTHOR 4 — SIDE
+   ============================================================ */
+function renderSide(){
+  var a = val("agent_first"), w = waterfall(), stack = stackCost();
+  var h = "";
+
+  h += card("The build",
+    kv("Agent first", a==="Outbound" ? "Outbound SDR" : (a==="Content" ? "Content engine" : "")) +
+    kv("Buyer", val("buyer")) +
+    kv("Offer", val("offer")) +
+    kv("Deal value", val("deal_value") ? money(num("deal_value")) : ""));
+
+  if(uniquePerMonth() || w.found){
+    h += card("Pipeline / month",
+      kv("Hand-raisers", uniquePerMonth() ? Math.round(uniquePerMonth()) : "") +
+      kv("Qualified", icpLeads() ? Math.round(icpLeads()) : "") +
+      kv("Email contacts", w.found ? Math.round(w.found) : "") +
+      kv("LinkedIn accepts", liAccepted() ? Math.round(liAccepted()) : "") +
+      kv("Stack cost", stack ? money(stack)+" / mo" : ""));
+  }
+
+  var j = val("jurisdiction");
+  if(j==="EU" || j==="Mixed"){
+    h += card("Jurisdiction",
+      '<div class="note warn" style="border-left-color:var(--ember)"><b>EU rules apply</b>'+
+      'Cold email to business recipients is restricted here. The signal harvest, the qualifier, LinkedIn and inbound all survive intact — the send step is what needs rebuilding, and a named human signs it off.</div>');
+  }
+
+  h += card("Build order", seqList([
+    {t:"One agent chosen",                 ok: !!val("agent_first")},
+    {t:"10+ signal accounts listed",       ok: srcCount()>=10},
+    {t:"Qualifier rule written",           ok: !!val("icp_rules")},
+    {t:"Jurisdiction answered + reviewer", ok: !!(val("jurisdiction") && val("counsel"))},
+    {t:"Waterfall priced",                 ok: rowsOf("waterfall").filter(rowFilled).length>=2},
+    {t:"Domains separated",                ok: (val("domains")||[]).length>=3},
+    {t:"LinkedIn account + caps decided",   ok: !!(val("li_sender") && val("li_invites_day"))},
+    {t:"Reply agent scoped",               ok: !!(val("agent_goal") && (val("agent_can")||[]).length>=3)},
+    {t:"Inference kept to judgement",      ok: (val("inference_points")||[]).length>0 && (val("inference_points")||[]).indexOf("Harvesting and dedupe")<0},
+    {t:"Content source booked",            ok: !!val("source_kind")},
+    {t:"Stack priced",                     ok: stackRowsCost()>0},
+    {t:"Loop metrics chosen",              ok: (val("metrics")||[]).length>=2}
+  ]));
+
+  h += progressCard();
+  return h;
+}
+
+/* ============================================================
+   ENGINE — no edits needed below this line
+   ============================================================ */
+var BYKEY = {}; for(var i=0;i<STEPS.length;i++) BYKEY[STEPS[i].k] = STEPS[i];
+
+/* ---------- state ---------- */
+function blank(){ return {name:"", step:0, v:{}}; }
+var store = blank();
+(function(){
+  try{
+    var raw = localStorage.getItem(KEY);
+    if(raw){ var p = JSON.parse(raw); if(p && typeof p==="object"){ store = p; store.v = store.v || {}; } }
+  }catch(e){}
+})();
+function save(){ try{ localStorage.setItem(KEY, JSON.stringify(store)); }catch(e){} }
+function val(k){ return store.v[k]; }
+function setv(k,x){ store.v[k]=x; save(); }
+
+/* ---------- helpers ---------- */
+function esc(s){ return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
+function num(k, d){ var n = parseFloat(val(k)); return isFinite(n) ? n : (d===undefined?0:d); }
+function money(n){
+  if(!isFinite(n)) return "—";
+  return CUR + Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+}
+function slug(s){ return String(s||"").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"").slice(0,60) || "agent-factory-plan"; }
+function rowsOf(k){ var r = val(k); return (r && r.length) ? r : []; }
+function rowFilled(r){ if(!r) return false; for(var q in r){ if(r[q] && String(r[q]).trim()) return true; } return false; }
+function fieldOf(k){
+  for(var i=0;i<STEPS.length;i++) for(var j=0;j<STEPS[i].fields.length;j++)
+    if(STEPS[i].fields[j].k===k) return STEPS[i].fields[j];
+  return null;
+}
+
+/* fields that count towards progress */
+function countable(f){ return f.t==="text"||f.t==="area"||f.t==="num"||f.t==="choice"||f.t==="multi"||f.t==="rows"; }
+function filled(f){
+  if(f.t==="rows"){ var rs = rowsOf(f.k); for(var i=0;i<rs.length;i++) if(rowFilled(rs[i])) return true; return false; }
+  if(f.t==="multi"){ var a = val(f.k); return !!(a && a.length); }
+  var v = val(f.k); return !!(v!==undefined && v!==null && String(v).trim());
+}
+function stepStats(st){
+  var t=0,d=0;
+  for(var i=0;i<st.fields.length;i++){ var f=st.fields[i]; if(!countable(f)) continue; t++; if(filled(f)) d++; }
+  return {t:t, d:d};
+}
+function overall(){
+  var t=0,d=0;
+  for(var i=0;i<STEPS.length;i++){ var s=stepStats(STEPS[i]); t+=s.t; d+=s.d; }
+  return {t:t, d:d, pct: t? Math.round(d/t*100):0};
+}
+function curStepIdx(){ var n = store.step||0; return Math.max(0, Math.min(STEPS.length-1, n)); }
+function curStep(){ return STEPS[curStepIdx()]; }
+
+/* ---------- rendering ---------- */
+var body = document.getElementById("body");
+var rail = document.getElementById("rail");
+
+function renderRail(){
+  var h = "";
+  for(var i=0;i<STEPS.length;i++){
+    var st = STEPS[i], s = stepStats(st);
+    var done = s.t>0 && s.d===s.t;
+    h += '<button type="button" data-go="'+i+'"'+(i===curStepIdx()?' aria-current="true"':'')+(done&&i!==curStepIdx()?' class="done"':'')+'>'+
+         (i<STEPS.length-1 ? ("0"+(i+1)).slice(-2)+" " : "")+esc(st.nav)+'</button>';
+  }
+  rail.innerHTML = h;
+}
+
+function renderFields(fields){
+  var h = "";
+  for(var i=0;i<fields.length;i++){
+    var f = fields[i];
+    switch(f.t){
+      case "sec": h += '<h3 class="sec">'+esc(f.label)+'</h3>'; break;
+      case "note":
+        h += '<div class="note '+(f.tone||"")+'"><b>'+esc(f.title)+'</b>'+f.body+'</div>'; break;
+      case "text":
+        h += '<div class="f"><label for="fld_'+f.k+'">'+esc(f.label)+'</label>'+
+             (f.help?'<div class="help">'+f.help+'</div>':'')+
+             '<input type="text" id="fld_'+f.k+'" data-k="'+f.k+'" placeholder="'+esc(f.ph||"")+'" value="'+esc(val(f.k)||"")+'"></div>';
+        break;
+      case "area":
+        h += '<div class="f"><label for="fld_'+f.k+'">'+esc(f.label)+'</label>'+
+             (f.help?'<div class="help">'+f.help+'</div>':'')+
+             '<textarea id="fld_'+f.k+'" data-k="'+f.k+'" rows="'+(f.rows||4)+'" placeholder="'+esc(f.ph||"")+'">'+esc(val(f.k)||"")+'</textarea></div>';
+        break;
+      case "num":
+        h += '<div class="f"><label for="fld_'+f.k+'">'+esc(f.label)+'</label>'+
+             (f.help?'<div class="help">'+f.help+'</div>':'')+
+             '<div class="numwrap">'+(f.pre?'<span class="pre">'+esc(f.pre)+'</span>':'')+
+             '<input type="number" id="fld_'+f.k+'" data-k="'+f.k+'" placeholder="'+esc(f.ph||"")+'" value="'+esc(val(f.k)||"")+'">'+
+             (f.suf?'<span class="suf">'+esc(f.suf)+'</span>':'')+'</div></div>';
+        break;
+      case "choice":
+        h += '<div class="f"><span class="flab">'+esc(f.label)+'</span>'+
+             (f.help?'<div class="help">'+f.help+'</div>':'')+'<div class="opts'+(f.opts.length>2?'':' two')+'">';
+        for(var a=0;a<f.opts.length;a++){
+          var o = f.opts[a], on = val(f.k)===o.v;
+          h += '<button type="button" class="opt" data-pick="'+f.k+'" data-v="'+esc(o.v)+'" aria-pressed="'+(on?"true":"false")+'">'+
+               '<span class="mk"></span>'+(o.tag?'<span class="tag">'+esc(o.tag)+'</span>':'')+
+               '<h4>'+esc(o.h||o.v)+'</h4><p>'+esc(o.d)+'</p></button>';
+        }
+        h += '</div></div>';
+        break;
+      case "multi":
+        var sel = val(f.k) || [];
+        h += '<div class="f"><span class="flab">'+esc(f.label)+'</span>'+
+             (f.help?'<div class="help">'+f.help+'</div>':'')+'<div class="opts">';
+        for(var b=0;b<f.opts.length;b++){
+          var o2 = f.opts[b], on2 = sel.indexOf(o2.v)>=0;
+          h += '<button type="button" class="opt sq" data-toggle="'+f.k+'" data-v="'+esc(o2.v)+'" aria-pressed="'+(on2?"true":"false")+'">'+
+               '<span class="mk"></span>'+(o2.tag?'<span class="tag">'+esc(o2.tag)+'</span>':'')+
+               '<h4>'+esc(o2.v)+'</h4><p>'+esc(o2.d)+'</p></button>';
+        }
+        h += '</div></div>';
+        break;
+      case "rows": h += renderRows(f); break;
+      case "calc": h += renderCalc(f.id); break;
+      case "export": h += renderExport(); break;
+    }
+  }
+  return h;
+}
+
+function renderRows(f){
+  var rs = rowsOf(f.k).slice();
+  while(rs.length < (f.min||3)) rs.push({});
+  var h = '<div class="f"><span class="flab">'+esc(f.label)+'</span>'+
+          (f.help?'<div class="help">'+f.help+'</div>':'')+'<div class="rows" data-rows="'+f.k+'"><div class="rowsh">';
+  for(var c=0;c<f.cols.length;c++) h += '<span style="width:'+f.cols[c].w+'">'+esc(f.cols[c].label)+'</span>';
+  h += '<span style="width:34px"></span></div>';
+  for(var r=0;r<rs.length;r++){
+    h += '<div class="rw">';
+    for(var c2=0;c2<f.cols.length;c2++){
+      var col = f.cols[c2];
+      h += '<div style="width:'+col.w+'"><input type="text" data-rk="'+f.k+'" data-ri="'+r+'" data-rc="'+col.k+'" value="'+esc(rs[r][col.k]||"")+'" aria-label="'+esc(col.label)+' row '+(r+1)+'"></div>';
+    }
+    h += '<div class="del"><button type="button" data-rowdel="'+f.k+'" data-ri="'+r+'" title="Remove row">&times;</button></div></div>';
+  }
+  var tot = ROW_TOTALS[f.k] ? ROW_TOTALS[f.k](rs) : null;
+  h += '<div class="rowsf"><button class="btn sm" type="button" data-rowadd="'+f.k+'">+ Row</button>'+
+       (tot?'<span class="tot">'+tot+'</span>':'')+'</div></div></div>';
+  return h;
+}
+
+function renderCalc(id){ return CALCS[id] ? CALCS[id]() : ""; }
+
+/* one labelled number input inside a .calc-in block */
+function ci(k, label, v, unit){
+  var isPct = unit==="%";
+  return '<div class="ci"><label>'+esc(label)+'</label><div class="numwrap">'+
+    (isPct?'':'<span class="pre">'+esc(unit||CUR)+'</span>')+
+    '<input type="number" data-k="'+k+'" value="'+esc(v===undefined||v===null?"":v)+'">'+
+    (isPct?'<span class="suf">%</span>':'')+'</div></div>';
+}
+
+/* ---------- export step ---------- */
+function renderExport(){
+  var o = overall();
+  var gaps = [];
+  for(var i=0;i<STEPS.length-1;i++){
+    var s = stepStats(STEPS[i]);
+    if(s.t && s.d < s.t) gaps.push(STEPS[i].nav+" ("+s.d+"/"+s.t+")");
+  }
+  return '<div class="done-grid">'+
+    '<div class="dc"><h5>Completed</h5><p><b>'+o.d+' of '+o.t+'</b> fields across '+(STEPS.length-1)+' steps.</p></div>'+
+    '<div class="dc"><h5>Still open</h5><p>'+(gaps.length?esc(gaps.join(" · ")):"Nothing — every step is filled.")+'</p></div>'+
+    '</div>'+
+    '<div class="note"><b>Where to start</b>'+startHere()+'</div>'+
+    '<div class="f"><span class="flab">Your plan, as markdown</span><textarea id="out" readonly aria-label="Your plan in markdown"></textarea></div>'+
+    '<div class="outbar"><span class="t" id="outlen"></span>'+
+    '<button class="btn" type="button" data-a="copy">Copy</button>'+
+    '<button class="btn primary" type="button" data-a="download">Download .md</button></div>'+
+    '<div id="manual"></div>';
+}
+
+/* ---------- markdown ---------- */
+function markdown(){
+  var L = [], o = overall();
+  L.push("# "+(store.name || "The Agent Factory plan"));
+  L.push("");
+  L = L.concat(mdIntro());
+  L.push("");
+  L.push("**Completeness:** "+o.d+"/"+o.t+" fields ("+o.pct+"%)");
+  L.push("");
+  L.push("---");
+
+  for(var i=0;i<STEPS.length-1;i++){
+    var st = STEPS[i];
+    var chunk = [];
+    for(var j=0;j<st.fields.length;j++){
+      var f = st.fields[j];
+      if(!countable(f) || !filled(f)) continue;
+      /* a block (list, table, quote) after a bullet needs a blank line or it joins the list */
+      if(f.t!=="text" && f.t!=="num" && f.t!=="choice" && chunk.length && chunk[chunk.length-1]) chunk.push("");
+      if(f.t==="multi"){
+        var sel = val(f.k)||[];
+        chunk.push("**"+f.label+"**"); chunk.push("");
+        for(var a=0;a<sel.length;a++) chunk.push("- "+sel[a]);
+        chunk.push("");
+      } else if(f.t==="rows"){
+        var rs = rowsOf(f.k).filter(rowFilled);
+        if(!rs.length) continue;
+        chunk.push("**"+f.label+"**"); chunk.push("");
+        chunk.push("| "+f.cols.map(function(c){return c.label;}).join(" | ")+" |");
+        chunk.push("|"+f.cols.map(function(){return "---";}).join("|")+"|");
+        for(var r=0;r<rs.length;r++){
+          chunk.push("| "+f.cols.map(function(c){ return String(rs[r][c.k]||"").replace(/\|/g,"\\|"); }).join(" | ")+" |");
+        }
+        chunk.push("");
+      } else if(f.t==="area"){
+        chunk.push("**"+f.label+"**"); chunk.push("");
+        var lines = String(val(f.k)).split(/\n/);
+        for(var q=0;q<lines.length;q++) chunk.push("> "+lines[q]);
+        chunk.push("");
+      } else {
+        var pre = f.pre||"", suf = f.suf?(" "+f.suf):"";
+        chunk.push("- **"+f.label+":** "+pre+String(val(f.k))+suf);
+      }
+    }
+    if(CALC_MD[st.k]) chunk = chunk.concat(CALC_MD[st.k]());
+    while(chunk.length && !chunk[0]) chunk.shift();
+    if(!chunk.length) continue;
+    L.push("");
+    L.push("## "+(i+1)+" · "+st.title);
+    L.push("");
+    L = L.concat(chunk);
+  }
+
+  L.push("");
+  L.push("---");
+  L.push("");
+  L.push("## Where to start");
+  L.push("");
+  L.push(startHere().replace(/<\/?(b|strong)>/g,"**"));
+  L.push("");
+  L = L.concat(mdOutro());
+  return L.join("\n");
+}
+
+/* ---------- side column ---------- */
+function card(title, inner){
+  return '<div class="card"><div class="card-h"><i></i>'+esc(title)+'</div><div class="card-b">'+inner+'</div></div>';
+}
+function kv(k,v){
+  return '<div class="kv"><span class="k">'+esc(k)+'</span><span class="v'+(v?'':' empty')+'">'+esc(v||"not set")+'</span></div>';
+}
+function seqList(items){
+  var h = "";
+  for(var i=0;i<items.length;i++) h += '<li class="'+(items[i].ok?"done":"")+'"><i>'+(items[i].ok?"":("0"+(i+1)).slice(-2))+'</i><span>'+esc(items[i].t)+'</span></li>';
+  return '<ul class="seq">'+h+'</ul>';
+}
+function progressCard(){
+  var o = overall();
+  return card("Progress",
+    '<div class="kv"><span class="k">Filled</span><span class="v">'+o.d+' / '+o.t+' fields</span></div>'+
+    '<div class="track" style="width:100%"><i class="fill" style="width:'+o.pct+'%"></i></div>');
+}
+function repaintSide(){ document.getElementById("side").innerHTML = renderSide(); }
+
+/* ---------- paint ---------- */
+function paint(){
+  var st = curStep(), idx = curStepIdx();
+  document.getElementById("sno").textContent = "STEP "+("0"+(idx+1)).slice(-2)+" / "+("0"+STEPS.length).slice(-2);
+  document.getElementById("stitle").textContent = st.title;
+  document.getElementById("shint").textContent = st.hint||"";
+  body.innerHTML = (st.lede ? '<p class="lede">'+st.lede+'</p>' : "") + renderFields(st.fields);
+
+  document.getElementById("prev").disabled = idx===0;
+  var nx = document.getElementById("next");
+  nx.textContent = idx===STEPS.length-1 ? "Done" : "Next →";
+  nx.disabled = idx===STEPS.length-1;
+
+  bumpProgress();
+  repaintSide();
+
+  if(st.fields.length && st.fields[st.fields.length-1].t==="export"){
+    var md = markdown(), out = document.getElementById("out");
+    if(out){ out.value = md; document.getElementById("outlen").textContent = md.length+" characters"; }
+  }
+  window.scrollTo({top:0, behavior:"instant"});
+}
+
+/* ---------- events ---------- */
+document.addEventListener("input", function(e){
+  var t = e.target;
+  if(t.id==="sname"){ store.name = t.value; save(); return; }
+
+  var k = t.getAttribute("data-k");
+  if(k){
+    setv(k, t.value);
+    repaintCalcs();
+    bumpProgress(); repaintSide();
+    return;
+  }
+  var rk = t.getAttribute("data-rk");
+  if(rk){
+    var ri = parseInt(t.getAttribute("data-ri"),10), rc = t.getAttribute("data-rc");
+    var arr = (val(rk)||[]).slice();
+    while(arr.length<=ri) arr.push({});
+    arr[ri] = Object.assign({}, arr[ri]); arr[ri][rc] = t.value;
+    setv(rk, arr);
+    repaintRowTotal(rk);
+    repaintCalcs();
+    bumpProgress(); repaintSide();
+  }
+});
+
+document.addEventListener("click", function(e){
+  var t = e.target.closest ? e.target.closest("[data-a],[data-go],[data-pick],[data-toggle],[data-rowadd],[data-rowdel]") : null;
+  if(!t) return;
+
+  var go = t.getAttribute("data-go");
+  if(go!==null && go!==undefined){ store.step = parseInt(go,10); save(); paint(); return; }
+
+  var pick = t.getAttribute("data-pick");
+  if(pick){
+    var v = t.getAttribute("data-v");
+    setv(pick, val(pick)===v ? "" : v);
+    paint(); return;
+  }
+  var tog = t.getAttribute("data-toggle");
+  if(tog){
+    var v2 = t.getAttribute("data-v");
+    var arr = (val(tog)||[]).slice();
+    var i2 = arr.indexOf(v2);
+    if(i2>=0) arr.splice(i2,1); else arr.push(v2);
+    setv(tog, arr);
+    t.setAttribute("aria-pressed", i2>=0 ? "false" : "true");
+    repaintCalcs(); bumpProgress(); repaintSide();
+    return;
+  }
+  var add = t.getAttribute("data-rowadd");
+  if(add){
+    var f = fieldOf(add), a2 = (val(add)||[]).slice();
+    while(a2.length < ((f&&f.min)||3)) a2.push({});
+    a2.push({}); setv(add, a2); paint(); return;
+  }
+  var del = t.getAttribute("data-rowdel");
+  if(del){
+    var ri2 = parseInt(t.getAttribute("data-ri"),10);
+    var a3 = (val(del)||[]).slice();
+    if(a3.length>ri2) a3.splice(ri2,1);
+    setv(del, a3); paint(); return;
+  }
+
+  switch(t.getAttribute("data-a")){
+    case "next": if(curStepIdx()<STEPS.length-1){ store.step=curStepIdx()+1; save(); paint(); } break;
+    case "prev": if(curStepIdx()>0){ store.step=curStepIdx()-1; save(); paint(); } break;
+    case "theme": toggleTheme(); break;
+    case "fs": cycleSize(); break;
+    /* data-src="#someTextarea" copies that field instead of the whole plan —
+       used by prompt generators inside calculators */
+    case "copy":
+      var src = t.getAttribute("data-src");
+      var el = src ? document.querySelector(src) : null;
+      copy(el ? (el.value!==undefined ? el.value : el.textContent) : markdown(), t);
+      break;
+    case "download": download(); break;
+    case "reset":
+      if(confirm("Clear this plan? Everything you typed is deleted from this browser.")){
+        store = blank(); save(); document.getElementById("sname").value=""; paint();
+      }
+      break;
+  }
+});
+
+function bumpProgress(){
+  var o = overall();
+  document.getElementById("pct").textContent = o.pct+"%";
+  document.getElementById("fill").style.width = o.pct+"%";
+  renderRail();
+}
+
+/* re-render calculators in place, without stealing focus from the field being typed in */
+function repaintCalcs(){
+  var st = curStep(), ids = [];
+  for(var j=0;j<st.fields.length;j++) if(st.fields[j].t==="calc") ids.push(st.fields[j].id);
+  if(!ids.length) return;
+  var active = document.activeElement;
+  var nodes = body.querySelectorAll(".calc");
+  for(var n=0;n<nodes.length;n++){
+    if(!ids[n]) continue;
+    var tmp = document.createElement("div"); tmp.innerHTML = renderCalc(ids[n]);
+    var fresh = tmp.firstChild;
+    if(!fresh) continue;
+    if(nodes[n].contains(active)){
+      /* never replace the block you are typing in — swap only the computed parts */
+      var live = nodes[n];
+      ["calc-out","calc-note"].forEach(function(cls){
+        var a = live.querySelector("."+cls), b = fresh.querySelector("."+cls);
+        if(a && b) a.innerHTML = b.innerHTML;
+      });
+      continue;
+    }
+    nodes[n].parentNode.replaceChild(fresh, nodes[n]);
+  }
+}
+
+/* update a rows table's footer total without re-rendering its inputs */
+function repaintRowTotal(rk){
+  if(!ROW_TOTALS[rk]) return;
+  var box = body.querySelector('[data-rows="'+rk+'"]');
+  if(!box) return;
+  var html = ROW_TOTALS[rk](rowsOf(rk));
+  var foot = box.querySelector(".rowsf"), tot = foot.querySelector(".tot");
+  if(!html){ if(tot) tot.remove(); return; }
+  if(!tot){ tot = document.createElement("span"); tot.className = "tot"; foot.appendChild(tot); }
+  tot.innerHTML = html;
+}
+
+/* ---------- output helpers ---------- */
+function copy(text, btn){
+  var done = function(){ var o = btn.textContent; btn.textContent = "Copied"; setTimeout(function(){ btn.textContent = o; }, 1400); };
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(done, function(){ fallback(text); done(); });
+  } else { fallback(text); done(); }
+}
+function fallback(text){
+  var ta = document.createElement("textarea");
+  ta.value = text; ta.style.position="fixed"; ta.style.opacity="0";
+  document.body.appendChild(ta); ta.select();
+  try{ document.execCommand("copy"); }catch(e){}
+  document.body.removeChild(ta);
+}
+function download(){
+  var md = markdown(), name = slug(store.name)+".md", worked = false;
+  try{
+    var blob = new Blob([md], {type:"text/markdown;charset=utf-8"});
+    var url = URL.createObjectURL(blob), a = document.createElement("a");
+    a.href = url; a.download = name; a.rel = "noopener";
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 2000);
+    worked = true;
+  }catch(e){ worked = false; }
+  /* Embedded pages block file downloads, and the block is silent — always offer the manual path there. */
+  if(!worked || window.self !== window.top) manualSave(md, name);
+}
+function manualSave(md, name){
+  var host = document.getElementById("manual");
+  if(!host) return;
+  host.innerHTML =
+    '<div class="note warn"><b>If nothing saved</b>This page is embedded, and browsers block file downloads inside an embedded page. '+
+    'Copy the text below and save it as <code>'+esc(name)+'</code> — it is the same file.</div>'+
+    '<textarea id="manualtx" rows="10" readonly aria-label="Your plan in markdown"></textarea>'+
+    '<div class="outbar"><span class="t">'+md.length+' characters</span>'+
+    '<button class="btn primary" data-a="copy" type="button">Copy the plan</button></div>';
+  var tx = document.getElementById("manualtx");
+  tx.value = md; tx.focus(); tx.select();
+}
+/* text size — one root font-size knob; every size in the CSS is rem */
+var FS = ["m","l","xl"];
+function applySize(v){
+  var r = document.documentElement;
+  if(v==="m") r.removeAttribute("data-fs"); else r.setAttribute("data-fs", v);
+  var b = document.querySelector('[data-a="fs"]');
+  if(b) b.textContent = v==="m" ? "A" : (v==="l" ? "A+" : "A++");
+}
+function cycleSize(){
+  var cur = document.documentElement.getAttribute("data-fs") || "m";
+  var next = FS[(FS.indexOf(cur)+1) % FS.length];
+  applySize(next);
+  try{ localStorage.setItem(KEY+".fs", next); }catch(e){}
+}
+function toggleTheme(){
+  var r = document.documentElement;
+  var cur2 = r.getAttribute("data-theme");
+  var sysDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+  var next = cur2 ? (cur2==="dark" ? "light" : "dark") : (sysDark ? "light" : "dark");
+  r.setAttribute("data-theme", next);
+  try{ localStorage.setItem(KEY+".theme", next); }catch(e){}
+}
+
+/* ---------- boot ---------- */
+(function(){
+  try{ var th = localStorage.getItem(KEY+".theme"); if(th) document.documentElement.setAttribute("data-theme", th); }catch(e){}
+  try{ applySize(localStorage.getItem(KEY+".fs") || "m"); }catch(e){ applySize("m"); }
+  document.getElementById("sname").value = store.name || "";
+  paint();
+})();
+</script>

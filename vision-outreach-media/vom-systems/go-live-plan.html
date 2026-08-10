@@ -1,0 +1,344 @@
+<meta charset="utf-8">
+<title>VOM House — Go-Live Plan</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root{ --bg:#f6f5f1; --surface:#ffffff; --surface-2:#f1efe8; --line:#e1dfd4; --line-soft:#ece9df;
+    --ink:#1a1d1b; --ink-soft:#535b56; --ink-faint:#868f89; --accent:#e8843c; --brand-navy:#1B2A4A;
+    --todo:#868f89; --doing:#c9862a; --done:#2f9e63; --blocked:#c0523a;
+    --serif:ui-serif,Georgia,"Times New Roman",serif; --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace; }
+  @media (prefers-color-scheme:dark){ :root{ --bg:#0e100f; --surface:#161a18; --surface-2:#1c211e; --line:#2a322d; --line-soft:#232a26; --ink:#f0f2ee; --ink-soft:#a8b1aa; --ink-faint:#79837c; --accent:#f0a05c; --todo:#79837c; --doing:#e0a94b; --done:#38d07f; --blocked:#e8785c; } }
+  :root[data-theme="light"]{ --bg:#f6f5f1; --surface:#ffffff; --surface-2:#f1efe8; --line:#e1dfd4; --line-soft:#ece9df; --ink:#1a1d1b; --ink-soft:#535b56; --ink-faint:#868f89; --accent:#e8843c; --todo:#868f89; --doing:#c9862a; --done:#2f9e63; --blocked:#c0523a; }
+  :root[data-theme="dark"]{ --bg:#0e100f; --surface:#161a18; --surface-2:#1c211e; --line:#2a322d; --line-soft:#232a26; --ink:#f0f2ee; --ink-soft:#a8b1aa; --ink-faint:#79837c; --accent:#f0a05c; --todo:#79837c; --doing:#e0a94b; --done:#38d07f; --blocked:#e8785c; }
+  *{ box-sizing:border-box; } body{ margin:0; background:var(--bg); color:var(--ink); font-family:var(--sans); line-height:1.55; -webkit-font-smoothing:antialiased; }
+  .wrap{ max-width:1000px; margin:0 auto; padding:0 22px; }
+  .hero{ padding:30px 0 20px; border-bottom:1px solid var(--line); }
+  .eyebrow{ font-family:var(--mono); font-size:11.5px; letter-spacing:.18em; text-transform:uppercase; color:var(--accent); margin:0 0 12px; }
+  .hero h1{ font-family:var(--serif); font-weight:600; font-size:clamp(28px,4.6vw,42px); letter-spacing:-.02em; margin:0 0 14px; line-height:1.04; }
+  .lede{ font-size:14px; color:var(--ink-soft); max-width:88ch; margin:0 0 18px; } .lede b{ color:var(--ink); }
+  .statline{ display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px; margin-bottom:12px; }
+  .stat{ background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:12px 14px; }
+  .stat .v{ font-family:var(--serif); font-weight:600; font-size:24px; display:block; } .stat .v.go{ color:var(--done); } .stat .v.gap{ color:var(--blocked); }
+  .stat .k{ font-size:11.5px; color:var(--ink-soft); }
+  .savehint{ font-size:12px; color:var(--ink-faint); margin-bottom:10px; } .savehint b{ color:var(--ink-soft); }
+  .links{ display:flex; gap:14px; flex-wrap:wrap; }
+  .lk{ font-family:var(--mono); font-size:12px; font-weight:700; color:var(--accent); text-decoration:none; } .lk .ar{ opacity:.7; }
+  main.wrap, .wrap.body{ padding-top:8px; }
+  .phase{ margin-top:26px; }
+  .ph-head{ display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:10px; }
+  .ph-head .idx{ font-family:var(--mono); font-size:11px; font-weight:700; color:#fff; background:var(--accent); border-radius:6px; padding:3px 8px; }
+  .ph-head h2{ font-family:var(--serif); font-weight:600; font-size:20px; margin:0; }
+  .ph-head .par{ font-family:var(--mono); font-size:10px; text-transform:uppercase; letter-spacing:.06em; color:var(--doing); border:1px solid var(--doing); border-radius:5px; padding:1px 6px; margin-left:8px; }
+  .ph-head .goal{ font-size:12.5px; color:var(--ink-soft); flex:1; min-width:180px; }
+  .ph-head .pcount{ font-family:var(--mono); font-size:12px; color:var(--ink-faint); }
+  .ph-bar{ height:6px; background:var(--surface-2); border:1px solid var(--line); border-radius:99px; overflow:hidden; margin-bottom:14px; } .ph-bar i{ display:block; height:100%; background:var(--done); }
+  .tasks{ display:flex; flex-direction:column; gap:10px; }
+  .task{ background:var(--surface); border:1px solid var(--line); border-left:4px solid var(--todo); border-radius:10px; padding:13px 15px; }
+  .task.s-doing{ border-left-color:var(--doing); } .task.s-done{ border-left-color:var(--done); } .task.s-blocked{ border-left-color:var(--blocked); }
+  .thead{ display:flex; align-items:center; gap:10px; }
+  .sdot{ width:9px; height:9px; border-radius:50%; background:var(--todo); flex:none; }
+  .task.s-doing .sdot{ background:var(--doing); } .task.s-done .sdot{ background:var(--done); } .task.s-blocked .sdot{ background:var(--blocked); }
+  .tt{ flex:1; font-weight:700; font-size:14px; }
+  .statusbtns{ display:inline-flex; border:1px solid var(--line); border-radius:8px; overflow:hidden; flex:none; }
+  .statusbtns button{ font:inherit; font-size:11.5px; font-weight:600; color:var(--ink-soft); background:var(--surface); border:none; border-left:1px solid var(--line); padding:5px 10px; cursor:pointer; }
+  .statusbtns button:first-child{ border-left:none; }
+  .statusbtns button.on{ color:#fff; background:var(--ink-soft); }
+  .statusbtns button[data-s="doing"].on{ background:var(--doing); } .statusbtns button[data-s="done"].on{ background:var(--done); } .statusbtns button[data-s="blocked"].on{ background:var(--blocked); }
+  .td{ font-size:12.5px; color:var(--ink-soft); margin:8px 0; }
+  .meta{ display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+  .owner{ font-family:var(--mono); font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.04em; color:var(--ink-soft); background:var(--surface-2); border:1px solid var(--line); border-radius:5px; padding:2px 7px; }
+  .crit-tag{ font-family:var(--mono); font-size:10px; font-weight:700; color:var(--blocked); }
+  .chip{ font-size:11px; color:var(--ink-soft); background:var(--surface-2); border:1px solid var(--line); border-radius:6px; padding:2px 8px; }
+  .noterow{ margin-top:10px; }
+  .taskactions{ display:flex; gap:8px; flex-wrap:wrap; }
+  .promptBtn, .noteToggle{ font:inherit; font-size:11.5px; font-weight:600; color:var(--ink-soft); background:var(--surface-2); border:1px solid var(--line); border-radius:7px; padding:5px 10px; cursor:pointer; }
+  .promptBtn:hover, .noteToggle:hover{ color:var(--ink); } .noteToggle.has{ color:var(--accent); border-color:color-mix(in srgb,var(--accent) 45%,var(--line)); }
+  .note{ display:none; width:100%; margin-top:9px; font-family:inherit; font-size:13px; color:var(--ink); background:var(--bg); border:1px solid var(--line); border-radius:8px; padding:9px 11px; resize:vertical; min-height:54px; }
+  .note.show{ display:block; } .note-ts{ font-size:10.5px; color:var(--ink-faint); margin-top:4px; }
+  .matrix{ margin-top:30px; } .matrix h2, .mh{ font-family:var(--serif); font-weight:600; font-size:20px; }
+  .node{ background:var(--surface); border:1px solid var(--line); border-radius:8px; padding:8px 10px; font-size:12px; }
+  .toast{ position:fixed; bottom:20px; left:50%; transform:translateX(-50%) translateY(20px); background:var(--ink); color:var(--bg); font-size:13px; font-weight:600; padding:10px 16px; border-radius:10px; opacity:0; pointer-events:none; transition:.25s; z-index:50; }
+  .toast.show{ opacity:1; transform:translateX(-50%) translateY(0); }
+  .ctrls{ position:fixed; top:14px; right:16px; display:flex; gap:8px; z-index:30; }
+  footer{ padding:24px 0 60px; margin-top:24px; border-top:1px solid var(--line); color:var(--ink-faint); font-size:12px; }
+</style>
+<div style="display:flex;align-items:center;gap:10px;padding:9px 18px;background:var(--brand-navy);color:#fff;font-family:-apple-system,system-ui,sans-serif"><a href="https://vom-systems.vercel.app" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:10px;text-decoration:none;color:#fff"><img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAASABIAAD/4QBMRXhpZgAATU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAgKADAAQAAAABAAAAgAAAAAD/4QnSaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLwA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJYTVAgQ29yZSA2LjAuMCI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnBob3Rvc2hvcD0iaHR0cDovL25zLmFkb2JlLmNvbS9waG90b3Nob3AvMS4wLyIgcGhvdG9zaG9wOkluc3RydWN0aW9ucz0iRkJNRDBhMDAwYTA3MDIwMDAwYmQwYTAwMDBjMzE0MDAwMDU3MTYwMDAwNTkxODAwMDBhMjIxMDAwMDBhMzIwMDAwYmMzNDAwMDA2OTM2MDAwMDMxMzgwMDAwMmI0YzAwMDAiLz4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8P3hwYWNrZXQgZW5kPSJ3Ij8+AP/tAK5QaG90b3Nob3AgMy4wADhCSU0EBAAAAAAAdhwBWgADGyVHHAIAAAIAAhwCKABiRkJNRDBhMDAwYTA3MDIwMDAwYmQwYTAwMDBjMzE0MDAwMDU3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" alt="Vision Outreach Media" width="128" height="128" style="width:28px;height:28px;border-radius:7px;object-fit:cover;background:#fff;display:block"><b style="font-weight:700;font-size:13.5px;letter-spacing:.02em">Vision Outreach Media</b><span style="font-size:11px;opacity:.7;font-weight:600;letter-spacing:.09em;text-transform:uppercase">&middot; The House</span></a></div>
+<header class="hero"><div class="wrap">
+  <p class="eyebrow">Vision Outreach Media · Execution workspace</p>
+  <h1>Work the plan. Save your progress.</h1>
+  <p class="lede">The house is <b>built</b>; this is where you take it live. Set each step's status — <b>To do · Doing · Done · Blocked</b> — and write your decisions and notes right on the task. Not sure how to do a step? Hit <b>⧉ Copy prompt</b> and paste it into Claude — it interviews you for what it needs, then runs the step with you. Everything auto-saves in this browser. Because a browser can be cleared, use <b>⤓ Backup</b> to download a file you keep (or move to another device), and <b>⤒ Restore</b> to load it back.</p>
+  <div class="statline">
+    <div class="stat"><span class="v go" id="sBuilt">40%</span><span class="k">Built (from the audit)</span></div>
+    <div class="stat"><span class="v" id="sDone">0%</span><span class="k">Go-live tasks done</span></div>
+    <div class="stat"><span class="v" id="sDoing">0</span><span class="k">In progress</span></div>
+    <div class="stat"><span class="v gap" id="sCrit">0 / 0</span><span class="k">Critical-path done</span></div>
+  </div>
+  <div class="savehint"><span id="saveState">Auto-saved on this device</span> · <b>tip:</b> download a Backup after a work session so nothing is ever lost.</div>
+  <div class="links">
+    <a class="lk" href="https://claude.ai/code/artifact/37ae4ed4-5796-4fc7-a3b9-14b1c6bfd2b7" target="_blank" rel="noopener">Completion Report <span class="ar">↗</span></a>
+    <a class="lk" href="https://vom-systems.vercel.app" target="_blank" rel="noopener">The House <span class="ar">↗</span></a>
+  </div>
+
+  <div class="cp">
+    <div class="h">The critical path — the shortest line to first revenue</div>
+    <div class="row">
+      <div class="node"><div class="n">A</div><div class="t">Decide & unblock</div><div class="d">Pick the commerce stack; clear the security & legal blockers.</div></div>
+      <div class="node"><div class="n">B</div><div class="t">One wedge sale</div><div class="d">Wire Hundred's $99 tier end to end — buy → deliver → refund.</div></div>
+      <div class="node"><div class="n">C</div><div class="t">Template it</div><div class="d">Turn that loop into a pattern every product reuses.</div></div>
+      <div class="node"><div class="n">D</div><div class="t">Roll the house</div><div class="d">Apply buy→deliver to all tiers; stand up subscriptions.</div></div>
+      <div class="node"><div class="n">E</div><div class="t">Prove & launch</div><div class="d">One real customer each, then switch on distribution.</div></div>
+    </div>
+  </div>
+</div></header>
+
+<main class="wrap"><div id="phases"></div>
+
+  <div class="matrix">
+    <div class="mh"><h3>Per-product path to sellable</h3><p>Each product's own steps: it's already <b>built</b>, then needs to become <b>buyable</b> and <b>provable</b>. Green = done.</p></div>
+    <div id="matrix"></div>
+  </div>
+</main>
+
+<footer><div class="wrap">
+  <p>Owners: <b style="color:var(--you)">YOU</b> = needs your accounts / money / real customers / legal · <b style="color:var(--agent)">AGENT</b> = I can build it now · <b style="color:var(--both)">BOTH</b> = I build, you connect the live account. Nothing here handles payments or credentials automatically. Progress + notes auto-save on this device; <b>Backup</b> downloads them as a file, <b>Restore</b> loads one back — that's your durable, portable save.</p>
+</div></footer>
+<div class="toast" id="toast"></div>
+
+<script>
+"use strict";
+(function(){
+  var KEY="vom_golive_v2", THEME_KEY="vom_golive_theme";
+  var CHK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>';
+  var PC={money:"var(--money)",vom:"var(--vom)",church:"var(--church)",guides:"var(--guides)",tools:"var(--tools)",health:"var(--health)"};
+  var STATUSES=[["todo","To do"],["doing","Doing"],["done","Done"],["blocked","Blocked"]];
+
+  var PHASES=[
+    { n:"Phase 0", title:"Decide & unblock", goal:"clear the blockers before building anything sellable", par:false, tasks:[
+      {id:"p0a",crit:true,o:"both",t:"Choose one commerce stack for the whole house",d:"Recommend a merchant-of-record (Lemon Squeezy / Paddle / Gumroad) for digital products — they handle EU VAT and act as reseller, far less setup than raw Stripe. Use Stripe directly only where you need Connect (Turnkey). Decide once; every product reuses it.",chips:["all"]},
+      {id:"p0b",crit:true,o:"you",t:"Rotate the exposed VERCEL_OIDC_TOKEN + run the security baseline",d:"Rotate the token flagged in the Launch Console, set up the password manager + authenticator, and scope restricted API keys. Do this before anything touches money.",chips:["vom"]},
+      {id:"p0c",o:"you",t:"Dutch-lawyer review of terms + fill the disclosure fee values",d:"Required before the first paid client, especially Turnkey licences and the Church/Academy cohorts. Fill the blank fee fields in the compliance disclosure.",chips:["vom","church"]},
+      {id:"p0d",o:"both",t:"Pick the wedge product for the first real sale",d:"Recommend Hundred's $99 self-serve tier — lowest price, no subscription, no backend, fully built. Prove the buy→deliver loop once here before rolling out.",chips:["money"]}
+    ]},
+    { n:"Phase 1", title:"The wedge — one product buyable", goal:"prove the whole buy → deliver → refund loop once", par:false, tasks:[
+      {id:"p1a",crit:true,o:"both",t:"Wire checkout for Hundred's $99 tier",d:"Create the product + payment link in the chosen stack; drop a Buy button on the Hundred page. I build the button/flow; you connect the live account and keys.",chips:["money"]},
+      {id:"p1b",crit:true,o:"both",t:"Deliver access on purchase",d:"On paid webhook, grant access to the paid artifacts — simplest first version: email the private links / a license, or a light gate. I build the fulfillment page; you host the secret.",chips:["money"]},
+      {id:"p1c",crit:true,o:"you",t:"Run a live test purchase + refund",d:"Buy it yourself end to end, confirm delivery, then refund. This certifies the loop before anyone else touches it.",chips:["money"]},
+      {id:"p1d",o:"agent",t:"Add a one-screen preview/demo so buyers see before they pay",d:"A gated teaser of the Pipeline so the $99 has an obvious 'try it' on-ramp.",chips:["money"]}
+    ]},
+    { n:"Phase 2", title:"Template & roll across the house", goal:"reuse the proven loop on every product's one-off tiers", par:true, tasks:[
+      {id:"p2a",o:"agent",t:"Turn the wedge into a reusable buy→deliver component",d:"A single embeddable checkout+gate pattern the build script can drop into any product page. Build once, configure per product.",chips:["all"]},
+      {id:"p2b",o:"both",t:"Launch Kits: wire single / bundle / pro checkout + gate the kits",d:"Closest product to buyable — four kits on the shelf; just needs the paywall the wedge established.",chips:["tools"]},
+      {id:"p2c",o:"both",t:"Academy: wire the €199 course purchase",d:"One-off course sale using the same pattern (the €29/mo cohort is Phase 3).",chips:["guides"]},
+      {id:"p2d",o:"agent",t:"Academy: add email capture to the free taster",d:"The highest-value non-payment move — turns readers into the house's list. I can build this now, independent of checkout.",chips:["guides"]},
+      {id:"p2e",o:"both",t:"Hundred: enable the Core / DWY tiers + define what each delivers",d:"Extend the wedge to the higher tiers once the $99 loop is proven.",chips:["money"]}
+    ]},
+    { n:"Phase 3", title:"Backends — subscriptions, accounts, gating", goal:"stand up the recurring + account infrastructure", par:false, tasks:[
+      {id:"p3a",crit:true,o:"both",t:"Recurring billing for all subscription tiers",d:"Academy cohort €29/mo, Church cohort €1K/mo, vital. Plus/Full. Needs the provider's subscription mode + entitlement checks.",chips:["guides","church","health"]},
+      {id:"p3b",o:"both",t:"vital.: real accounts + cloud sync",d:"The biggest single lift — the tracker works offline today; a consumer subscription needs cross-device accounts and a data backend.",chips:["health"]},
+      {id:"p3c",o:"both",t:"Shared access-gating service",d:"So paid artifacts stop being open links. One entitlement check the whole house calls.",chips:["all"]},
+      {id:"p3d",o:"both",t:"Church & Academy cohort spaces",d:"Community + scheduling + enrolment behind the cohort tiers.",chips:["church","guides"]}
+    ]},
+    { n:"Phase 4", title:"Turnkey platform bootstrap", goal:"make the flagship's engine actually runnable", par:true, tasks:[
+      {id:"p4a",crit:true,o:"you",t:"Enable Stripe Connect (Express + destination charges)",d:"Verify the platform capability on the live account — the prerequisite for launching client businesses.",chips:["vom"]},
+      {id:"p4b",o:"you",t:"Delegate the Cloudflare clients-zone (paste the NS delegation at one.com)",d:"One-time DNS delegation so agents can provision client subdomains.",chips:["vom"]},
+      {id:"p4c",o:"agent",t:"Register the /onboard-business orchestrator + biz-* subagents into .claude",d:"The engine spec is built; wire it into the runtime so it can actually execute.",chips:["vom"]},
+      {id:"p4d",o:"both",t:"Run one pilot launch end-to-end through the console",d:"At low throttle — proves the factory and becomes Turnkey's proof reel.",chips:["vom"]}
+    ]},
+    { n:"Phase 5", title:"Proof — one real run per product", goal:"replace 'no case study' with real outcomes", par:false, tasks:[
+      {id:"p5a",crit:true,o:"you",t:"Land one real customer for the wedge and document the result",d:"The first genuine sale + outcome. Proof unlocks every other product's credibility.",chips:["money"]},
+      {id:"p5b",o:"you",t:"Run one church through the 90-Day Program → before/after case study",d:"Church Media Academy's proof.",chips:["church"]},
+      {id:"p5c",o:"both",t:"Seed vital. early users → outcome stories/reviews",d:"Consumer proof for the wellness arm.",chips:["health"]},
+      {id:"p5d",o:"agent",t:"Add a testimonials/case-study strip to each product page",d:"I can build the UI now; it fills as real proof arrives.",chips:["all"]}
+    ]},
+    { n:"Phase 6", title:"Switch on distribution", goal:"drive traffic to the now-buyable house", par:false, tasks:[
+      {id:"p6a",o:"both",t:"Run the Distribution Console plays on the house itself",d:"Pick two per the playbook — the free tool + programmatic SEO are natural fits — and ship this week.",chips:["guides"]},
+      {id:"p6b",o:"agent",t:"Wire the front doors into the funnel",d:"Academy taster + Church assessment capture emails and route to the paid next step.",chips:["guides","church"]},
+      {id:"p6c",o:"you",t:"Announce & drive the first traffic",d:"Warm audience first, then the acquisition plays. Distribution is the moat you build last but run forever.",chips:["all"]}
+    ]}
+  ];
+
+  var PRODUCTS=[
+    {n:"Hundred",c:"money",steps:[["Built","done"],["Buyable — wire $99","now"],["Provable — 1 sale",""]]},
+    {n:"Launch Kits",c:"tools",steps:[["Built (4 kits)","done"],["Buyable — paywall","now"],["Provable — 1 launch",""]]},
+    {n:"Operator's Academy",c:"guides",steps:[["Built","done"],["Email capture","now"],["Buyable — course+cohort",""],["Provable",""]]},
+    {n:"Church Media Academy",c:"church",steps:[["Built","done"],["Buyable — enrol/bill",""],["Provable — 1 church",""]]},
+    {n:"vital.",c:"health",steps:[["Built","done"],["Accounts + billing",""],["Provable — reviews",""]]},
+    {n:"Turnkey",c:"vom",steps:[["Built (engine spec)","done"],["Bootstrap (Stripe/CF)","now"],["Register skill",""],["Pilot launch",""]]}
+  ];
+
+  var TASKMAP={}, PHASEOF={}; PHASES.forEach(function(p){ p.tasks.forEach(function(t){ TASKMAP[t.id]=t; PHASEOF[t.id]=p; }); });
+  var ALL=Object.keys(TASKMAP), CRIT=ALL.filter(function(i){return TASKMAP[i].crit;});
+  var PROD={money:"Hundred",vom:"Turnkey",church:"Church Media Academy",guides:"The Operator's Academy",tools:"Launch Kits",health:"vital."};
+
+  function ownerClose(o){
+    if(o==="you") return "This step is mine to do — walk me through it with exact, concrete steps and the precise settings/values to enter, in order.";
+    if(o==="agent") return "You can build this — once you have my answers, produce the actual deliverable (the code / page / copy), don't just describe it.";
+    return "Build everything you can right now, then give me a short list of exactly what only I can connect (live accounts, API keys, money movement, legal sign-off).";
+  }
+  function buildPrompt(t,p){
+    var touches=t.chips.map(function(c){ return c==="all"?"the whole house":(PROD[c]||c); }).join(", ");
+    return [
+      "I'm executing one step of my go-live plan for Vision Outreach Media (VOM) — a house of six productized operating systems (Hundred · Turnkey · Church Media Academy · The Operator's Academy · Launch Kits · vital.). The products are already built; I'm now taking the house live — making each one buyable, deliverable, and provable.",
+      "",
+      "THE STEP TO EXECUTE",
+      "• Phase: "+p.title+" — "+p.goal,
+      "• Task: "+t.t,
+      "• What it means: "+t.d,
+      "• Owner: "+ownerLabel(t.o),
+      "• Touches: "+touches,
+      "",
+      "Help me actually complete this step now:",
+      "1. FIRST, interview me — ask ONE question at a time, and wait for my answer before the next. Ask everything you need: my current setup, which accounts/tools I already have, budget, constraints, and preferences. Do not assume or invent details about my situation.",
+      "2. THEN deliver the concrete result: a clear recommendation or decision, the exact steps (or the built thing), and a short checklist I can act on today.",
+      ownerClose(t.o),
+      "Keep everything specific to VOM and this exact step. Flag anything that needs my money, credentials, or a lawyer that you can't do for me."
+    ].join("\n");
+  }
+  function copyText(text){
+    function done(){ toast("Prompt copied — paste it into Claude (or any AI) to run this step."); }
+    function fb(){ var ta=document.createElement("textarea"); ta.value=text; ta.style.position="fixed"; ta.style.opacity="0"; document.body.appendChild(ta); ta.select(); var ok=false; try{ ok=document.execCommand("copy"); }catch(e){} document.body.removeChild(ta); ok?done():toast("Couldn't copy automatically — select the text and copy it manually."); }
+    if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(text).then(done,fb); } else { fb(); }
+  }
+
+  // ---- state (migrates v1 booleans) ----
+  var state=migrate(loadRaw());
+  function loadRaw(){ try{ var r=localStorage.getItem(KEY); if(r) return JSON.parse(r);
+      var old=localStorage.getItem("vom_golive_v1"); if(old) return JSON.parse(old); }catch(e){} return {}; }
+  function migrate(obj){
+    var envelope = obj && obj.state && typeof obj.state==="object" ? obj.state : obj;
+    var out={};
+    Object.keys(envelope||{}).forEach(function(k){
+      var v=envelope[k];
+      if(v===true) out[k]={s:"done",note:"",ts:""};
+      else if(v && typeof v==="object" && v.s) out[k]={s:v.s,note:v.note||"",ts:v.ts||""};
+    });
+    return out;
+  }
+  function save(){ try{ localStorage.setItem(KEY,JSON.stringify(state)); }catch(e){}
+    var el=document.getElementById("saveState"); if(el){ el.textContent="Saved "+new Date().toLocaleTimeString([], {hour:"2-digit",minute:"2-digit"})+" on this device"; } }
+  function get(id){ return state[id] || {s:"todo",note:"",ts:""}; }
+  function setStatus(id,s){ var t=get(id); t.s=s; t.ts=new Date().toISOString(); state[id]=t; save(); render(); meters(); }
+  function setNote(id,txt){ var t=get(id); t.note=txt; t.ts=new Date().toISOString(); state[id]=t; save(); }
+
+  function ownerLabel(o){ return o==="you"?"You":o==="agent"?"Agent":"Both"; }
+  function chipHTML(c){
+    if(c==="all") return '<span class="chip">whole house</span>';
+    var col=PC[c]||"var(--accent)";
+    var lbl={money:"Hundred",vom:"Turnkey",church:"Church",guides:"Academy",tools:"Launch Kits",health:"vital."}[c]||c;
+    return '<span class="chip"><span class="cd" style="background:'+col+'"></span>'+lbl+'</span>';
+  }
+  function esc(s){ return String(s==null?"":s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];}); }
+
+  function render(){
+    var host=document.getElementById("phases");
+    host.innerHTML=PHASES.map(function(p){
+      var ids=p.tasks.map(function(t){return t.id;});
+      var done=ids.filter(function(i){return get(i).s==="done";}).length;
+      var pctv=Math.round(done/ids.length*100);
+      return '<section class="phase">'+
+        '<div class="ph-head"><span class="idx">'+p.n+'</span><h2>'+p.title+(p.par?'<span class="par">parallel track</span>':'')+'</h2>'+
+        '<span class="goal">'+p.goal+'</span><span class="pcount">'+done+' / '+ids.length+' done</span></div>'+
+        '<div class="ph-bar"><i style="width:'+pctv+'%"></i></div>'+
+        '<div class="tasks">'+p.tasks.map(function(t){
+          var st=get(t.id), hasNote=!!(st.note&&st.note.trim());
+          return '<div class="task s-'+st.s+'" data-id="'+t.id+'">'+
+            '<div class="thead"><span class="sdot"></span><div class="tt">'+t.t+'</div>'+
+              '<div class="statusbtns" role="group" aria-label="Status">'+STATUSES.map(function(sv){
+                return '<button data-s="'+sv[0]+'" class="'+(st.s===sv[0]?'on':'')+'" aria-pressed="'+(st.s===sv[0])+'">'+sv[1]+'</button>';
+              }).join('')+'</div></div>'+
+            '<div class="td">'+t.d+'</div>'+
+            '<div class="meta"><span class="owner '+t.o+'">'+ownerLabel(t.o)+'</span>'+
+              (t.crit?'<span class="crit-tag">◆ critical path</span>':'')+t.chips.map(chipHTML).join('')+'</div>'+
+            '<div class="noterow">'+
+              '<div class="taskactions">'+
+                '<button class="promptBtn" title="Copy a prompt that has an AI run this step with you">⧉ Copy prompt to run this step</button>'+
+                '<button class="noteToggle'+(hasNote?' has':'')+'" aria-expanded="'+hasNote+'">'+(hasNote?'✎ Notes / decision':'＋ Notes / decision')+'</button>'+
+              '</div>'+
+              '<textarea class="note" placeholder="Record your decision, links, keys location (not the keys themselves), who did it, what happened…" '+(hasNote?'':'hidden')+'>'+esc(st.note)+'</textarea>'+
+              (st.ts?'<span class="note-ts">updated '+new Date(st.ts).toLocaleString()+'</span>':'')+
+            '</div></div>';
+        }).join('')+'</div></section>';
+    }).join('');
+
+    host.querySelectorAll(".task").forEach(function(el){
+      var id=el.getAttribute("data-id");
+      el.querySelector(".promptBtn").addEventListener("click",function(){ copyText(buildPrompt(TASKMAP[id],PHASEOF[id])); });
+      el.querySelectorAll(".statusbtns button").forEach(function(b){
+        b.addEventListener("click",function(){ setStatus(id,b.getAttribute("data-s")); });
+      });
+      var toggle=el.querySelector(".noteToggle"), ta=el.querySelector(".note");
+      toggle.addEventListener("click",function(){ var show=ta.hasAttribute("hidden"); if(show){ ta.removeAttribute("hidden"); ta.focus(); } else if(!ta.value.trim()){ ta.setAttribute("hidden",""); } });
+      var tmr; ta.addEventListener("input",function(){ clearTimeout(tmr); tmr=setTimeout(function(){ setNote(id,ta.value); toggle.classList.toggle("has",!!ta.value.trim()); toggle.textContent=(ta.value.trim()?'✎':'＋')+' Notes / decision'; },350); });
+    });
+
+    document.getElementById("matrix").innerHTML=PRODUCTS.map(function(pr){
+      return '<div class="mrow"><div class="pn"><span class="cd" style="background:'+(PC[pr.c])+'"></span>'+pr.n+'</div>'+
+        '<div class="steps">'+pr.steps.map(function(s){ return '<span class="st '+(s[1])+'">'+s[0]+'</span>'; }).join('<span style="color:var(--ink-faint)">›</span>')+'</div></div>';
+    }).join('');
+  }
+
+  function meters(){
+    var done=ALL.filter(function(i){return get(i).s==="done";}).length;
+    var doing=ALL.filter(function(i){return get(i).s==="doing";}).length;
+    var pctv=Math.round(done/ALL.length*100);
+    document.getElementById("sDone").textContent=pctv+"%";
+    document.getElementById("sDoing").textContent=doing;
+    document.getElementById("miniPct").textContent=pctv+"%";
+    document.getElementById("miniFill").style.width=pctv+"%";
+    document.getElementById("sCrit").textContent=CRIT.filter(function(i){return get(i).s==="done";}).length+" / "+CRIT.length;
+  }
+
+  // ---- toast ----
+  var toastT; function toast(msg){ var t=document.getElementById("toast"); t.textContent=msg; t.classList.add("show"); clearTimeout(toastT); toastT=setTimeout(function(){ t.classList.remove("show"); },2600); }
+
+  // ---- backup / restore ----
+  function envelope(){ return JSON.stringify({app:"vom-go-live",v:2,savedAt:new Date().toISOString(),state:state},null,2); }
+  function statLabel(s){ return {todo:"[ ] TODO",doing:"[~] DOING",done:"[x] DONE",blocked:"[!] BLOCKED"}[s]||s; }
+  function markdown(){
+    var done=ALL.filter(function(i){return get(i).s==="done";}).length;
+    var out="# VOM House — Go-Live Runbook\n\nSaved "+new Date().toLocaleString()+" · "+done+" / "+ALL.length+" tasks done ("+Math.round(done/ALL.length*100)+"%)\n";
+    PHASES.forEach(function(p){
+      out+="\n## "+p.n+" — "+p.title+(p.par?" (parallel track)":"")+"\n_"+p.goal+"_\n\n";
+      p.tasks.forEach(function(t){ var st=get(t.id);
+        out+="- "+statLabel(st.s)+" **"+t.t+"** — _("+ownerLabel(t.o)+")_"+(t.crit?" ◆ critical":"")+"\n";
+        if(st.note&&st.note.trim()) out+="    - note: "+st.note.trim().replace(/\n/g,"\n      ")+"\n";
+      });
+    });
+    out+="\n---\nOwners: YOU = your accounts/money/legal · AGENT = buildable now · BOTH = built + you connect the live account.\n";
+    return out;
+  }
+  function canDownload(){ return !!(window.claude && window.claude.downloads); }
+  function offer(filename,data){
+    if(!canDownload()){ toast("Downloads aren't available here — open the published page on claude.ai to back up."); return; }
+    window.claude.downloads.save({filename:filename,data:data}).then(function(){ toast("Saved "+filename); },
+      function(e){ var c=e&&e.code; toast(c==="declined"?"Backup cancelled.":c==="rate_limited"?"One save at a time — try again in a moment.":"Couldn't save ("+(c||"error")+")."); });
+  }
+  document.getElementById("backupJson").addEventListener("click",function(){ offer("vom-go-live-progress.json",envelope()); });
+  document.getElementById("backupMd").addEventListener("click",function(){ offer("vom-go-live-runbook.md",markdown()); });
+
+  var fileInput=document.getElementById("importFile");
+  document.getElementById("restoreBtn").addEventListener("click",function(){ fileInput.click(); });
+  fileInput.addEventListener("change",function(e){
+    var f=e.target.files&&e.target.files[0]; if(!f){ return; }
+    var r=new FileReader();
+    r.onload=function(){ try{ var obj=JSON.parse(r.result); var merged=migrate(obj);
+        if(!Object.keys(merged).length) throw new Error("empty");
+        state=merged; save(); render(); meters(); toast("Progress restored from "+f.name);
+      }catch(err){ toast("That file isn't a valid backup."); } };
+    r.onerror=function(){ toast("Couldn't read that file."); };
+    r.readAsText(f); e.target.value="";
+  });
+
+  // hide backup buttons if downloads truly unavailable (leave restore — it's local)
+  window.addEventListener("load",function(){ if(!canDownload()){ document.getElementById("backupMd").style.display="none";
+    var bj=document.getElementById("backupJson"); bj.textContent="⤓ Backup (open on claude.ai)"; } });
+
+  // ---- theme ----
+  var tb=document.getElementById("themeBtn");
+  tb.onclick=function(){ var c=document.documentElement.getAttribute("data-theme");
+    var n=c==="dark"?"light":(c==="light"?"dark":(matchMedia("(prefers-color-scheme: dark)").matches?"light":"dark"));
+    document.documentElement.setAttribute("data-theme",n); try{localStorage.setItem(THEME_KEY,n);}catch(e){} };
+  try{var th=localStorage.getItem(THEME_KEY); if(th) document.documentElement.setAttribute("data-theme",th);}catch(e){}
+
+  render(); meters();
+})();
+</script>

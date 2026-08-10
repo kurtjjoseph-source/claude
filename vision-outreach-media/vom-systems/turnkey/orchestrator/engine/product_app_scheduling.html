@@ -1,0 +1,1146 @@
+<!doctype html>
+<html lang="en" data-scheme="aurora">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{{NAME}} — Rota</title>
+<meta name="theme-color" content="#06070C">
+<style>
+:root{
+  --ink:#F2F4FF; --dim:#A8ADC8; --faint:#6E7391; --line:rgba(255,255,255,.11);
+  --line-2:rgba(255,255,255,.06); --panel:rgba(255,255,255,.035);
+  --ok:#34D399; --warn:#FBBF24; --bad:#FB7185;
+  --sans:ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
+  --mono:ui-monospace,'SF Mono','Cascadia Code',Menlo,Consolas,monospace;
+}
+[data-scheme="aurora"]{--a:#6366F1;--b:#22D3EE;--c:#A855F7;--glow:#4F46E5;--bg:#06070C}
+[data-scheme="ember"] {--a:#FB7185;--b:#FBBF24;--c:#F472B6;--glow:#E11D48;--bg:#0B0608}
+[data-scheme="toxic"] {--a:#A3E635;--b:#2DD4BF;--c:#4ADE80;--glow:#65A30D;--bg:#05090A}
+[data-scheme="solar"] {--a:#FDBA74;--b:#F97316;--c:#FDE047;--glow:#EA580C;--bg:#0A0705}
+[data-scheme="mono"]  {--a:#E2E8F0;--b:#94A3B8;--c:#CBD5E1;--glow:#64748B;--bg:#08090B}
+
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;
+  line-height:1.55;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(60% 42% at 12% -6%,color-mix(in srgb,var(--a) 16%,transparent),transparent 70%),
+             radial-gradient(52% 38% at 92% 0,color-mix(in srgb,var(--c) 13%,transparent),transparent 72%)}
+a{color:inherit}
+button{font:inherit;font-family:var(--sans)}
+:focus-visible{outline:2px solid var(--b);outline-offset:2px;border-radius:6px}
+.app{position:relative;z-index:1;max-width:1440px;margin:0 auto;padding:0 22px 70px}
+
+/* the gate */
+.gate{position:fixed;inset:0;z-index:90;display:grid;place-items:center;padding:24px;
+  background:color-mix(in srgb,var(--bg) 94%,transparent);backdrop-filter:blur(8px)}
+.gate[hidden]{display:none}
+.gate form{width:min(380px,94vw);border:1px solid var(--line);border-radius:18px;
+  background:#0D0F17;padding:28px;display:grid;gap:14px;box-shadow:0 40px 90px rgba(0,0,0,.7)}
+.gate h3{margin:0;font-size:1.1rem;letter-spacing:-.02em}
+.gate .g-sub{margin:0;color:var(--dim);font-size:.88rem}
+.gate label{display:grid;gap:7px;font-size:.8rem;font-weight:650;color:var(--dim)}
+.gate input{font:inherit;font-size:1.2rem;letter-spacing:.3em;text-align:center;padding:12px;
+  border-radius:11px;border:1px solid var(--line);background:rgba(0,0,0,.4);color:var(--ink)}
+.gate input:focus{outline:none;border-color:var(--b)}
+.gate .g-err{margin:0;color:var(--bad);font-size:.84rem}
+.gate .g-err[hidden]{display:none}
+.gate .g-demo{margin:0;color:var(--faint);font-size:.78rem;border-top:1px solid var(--line-2);
+  padding-top:12px;font-family:var(--mono)}
+.gate .g-demo[hidden]{display:none}
+.gate .g-alt{margin:0;font-size:.82rem}
+.gate .g-alt a{color:var(--b);text-decoration:none;font-weight:650}
+
+/* ------------------------------------------------------------------ chrome */
+header.bar{display:flex;align-items:center;gap:16px;padding:16px 0;flex-wrap:wrap;
+  border-bottom:1px solid var(--line);position:sticky;top:0;z-index:30;
+  background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(12px)}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:-.03em;
+  font-size:1.05rem;text-decoration:none}
+.brand img{height:24px;border-radius:5px}
+.brand .orb{width:10px;height:10px;border-radius:50%;
+  background:conic-gradient(from 0deg,var(--a),var(--b),var(--c),var(--a))}
+.brand small{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--faint);font-weight:500;padding-left:9px;margin-left:3px;border-left:1px solid var(--line)}
+.spacer{margin-left:auto}
+.schemes{display:flex;gap:6px;padding:5px 8px;border-radius:999px;border:1px solid var(--line);
+  background:var(--panel)}
+.schemes button{width:16px;height:16px;border-radius:50%;border:1.5px solid transparent;
+  cursor:pointer;padding:0;transition:transform .18s,border-color .18s}
+.schemes button:hover{transform:scale(1.15)}
+.schemes button[aria-pressed="true"]{border-color:var(--ink)}
+.btn{display:inline-flex;align-items:center;gap:8px;border-radius:999px;padding:9px 17px;
+  font-weight:700;font-size:.87rem;cursor:pointer;border:1px solid var(--line);
+  background:var(--panel);color:var(--ink);transition:transform .15s,border-color .2s,box-shadow .2s}
+.btn:hover{transform:translateY(-1px);border-color:color-mix(in srgb,var(--b) 55%,transparent)}
+.btn.pri{border-color:transparent;color:#08090C;
+  background:linear-gradient(120deg,var(--a),var(--b) 60%,var(--c));
+  box-shadow:0 6px 22px color-mix(in srgb,var(--glow) 40%,transparent)}
+.btn.pri:hover{box-shadow:0 10px 30px color-mix(in srgb,var(--glow) 55%,transparent)}
+.btn.qt{background:transparent;border-color:transparent;color:var(--dim);padding:8px 11px}
+.btn.qt:hover{color:var(--ink);background:var(--panel)}
+.btn[disabled]{opacity:.45;cursor:not-allowed;transform:none;box-shadow:none}
+
+/* ------------------------------------------------------------------ toolbar */
+.tools{display:flex;align-items:center;gap:14px;padding:18px 0 20px;flex-wrap:wrap}
+.wk{display:flex;align-items:center;gap:6px}
+.wk .lbl{font-weight:750;font-size:1.16rem;letter-spacing:-.02em;min-width:210px}
+.wk .lbl em{font-style:normal;color:var(--faint);font-weight:500;font-size:.86rem;display:block;
+  letter-spacing:0}
+.state{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+  border:1px solid var(--line);border-radius:999px;padding:5px 12px;color:var(--faint)}
+.state.pub{color:var(--ok);border-color:color-mix(in srgb,var(--ok) 45%,transparent);
+  background:color-mix(in srgb,var(--ok) 12%,transparent)}
+
+/* ------------------------------------------------------------------ layout */
+.cols{display:grid;grid-template-columns:246px minmax(0,1fr);gap:18px;align-items:start}
+aside{position:sticky;top:88px;display:grid;gap:14px}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--panel);overflow:hidden}
+.card > h2{margin:0;padding:14px 16px;font-family:var(--mono);font-size:10.5px;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--faint);font-weight:500;
+  border-bottom:1px solid var(--line-2);display:flex;align-items:center;gap:8px}
+.card > h2 .n{margin-left:auto;color:var(--b)}
+.card .in{padding:12px 14px}
+
+/* staff */
+.person{display:grid;grid-template-columns:26px minmax(0,1fr) auto;gap:10px;align-items:center;
+  padding:9px 10px;border-radius:11px;cursor:grab;border:1px solid transparent;position:relative;
+  transition:background .18s,border-color .18s}
+.person:hover{background:rgba(255,255,255,.05);border-color:var(--line-2)}
+.person .ed{position:absolute;top:6px;right:6px;width:20px;height:20px;border-radius:6px;
+  border:0;background:transparent;color:var(--faint);cursor:pointer;opacity:0;font-size:11px;
+  line-height:1;transition:opacity .18s}
+.person:hover .ed{opacity:1}
+.person .ed:hover{background:color-mix(in srgb,var(--b) 22%,transparent);color:var(--b)}
+.person.drag{opacity:.4}
+.person.sel{border-color:var(--b);background:color-mix(in srgb,var(--b) 12%,transparent)}
+.av{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-size:10.5px;
+  font-weight:800;color:#08090C;background:linear-gradient(135deg,var(--a),var(--b))}
+.person .nm{font-weight:650;font-size:.88rem;white-space:nowrap;overflow:hidden;
+  text-overflow:ellipsis}
+.person .rl{color:var(--faint);font-size:.73rem}
+.person .hr{font-family:var(--mono);font-size:.73rem;color:var(--dim);text-align:right;
+  font-variant-numeric:tabular-nums}
+.person .hr b{display:block;font-weight:600}
+.person .hr.over{color:var(--bad)}
+.person .hr.near{color:var(--warn)}
+
+/* totals */
+.tot{display:grid;gap:9px}
+.tot .r{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.tot .r span{color:var(--faint);font-size:.82rem}
+.tot .r b{font-family:var(--mono);font-variant-numeric:tabular-nums;font-weight:600}
+.tot .big{font-size:1.85rem;font-weight:800;letter-spacing:-.04em;line-height:1;
+  font-variant-numeric:tabular-nums;
+  background:linear-gradient(100deg,var(--a),var(--b));-webkit-background-clip:text;
+  background-clip:text;color:transparent;transition:filter .3s}
+.tot .big.bump{filter:brightness(1.5) drop-shadow(0 0 14px var(--glow))}
+.tot .r b.warn{color:var(--warn)}
+.tot .r b.bad{color:var(--bad)}
+.tot .r b.ok{color:var(--ok)}
+
+/* swaps */
+.swap{border:1px solid color-mix(in srgb,var(--c) 40%,transparent);border-radius:12px;
+  padding:12px 13px;background:color-mix(in srgb,var(--c) 9%,transparent);display:grid;gap:9px}
+.swap .t{font-size:.84rem;line-height:1.45}
+.swap .t b{font-weight:700}
+.swap .note{color:var(--dim);font-size:.78rem}
+.swap .go{display:flex;gap:7px}
+.swap .go button{flex:1;padding:7px;font-size:.78rem;border-radius:9px}
+.none{color:var(--faint);font-size:.82rem;padding:4px 2px}
+
+/* ------------------------------------------------------------------- grid */
+.grid{border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--panel)}
+.gh{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));border-bottom:1px solid var(--line)}
+.gh div{padding:12px 14px;border-left:1px solid var(--line-2);font-size:.8rem}
+.gh div:first-child{border-left:0}
+.gh .d{font-weight:750;letter-spacing:-.01em}
+.gh .n{color:var(--faint);font-family:var(--mono);font-size:.72rem}
+.gh .c{color:var(--b);font-family:var(--mono);font-size:.72rem;font-variant-numeric:tabular-nums}
+.gh .cov{display:flex;gap:5px;flex-wrap:wrap;margin-top:5px}
+.gh .cov span{font-family:var(--mono);font-size:.6rem;color:var(--warn);
+  border:1px solid color-mix(in srgb,var(--warn) 45%,transparent);
+  background:color-mix(in srgb,var(--warn) 12%,transparent);border-radius:6px;padding:1px 6px}
+.gb{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));min-height:440px}
+.col{border-left:1px solid var(--line-2);padding:10px;display:grid;gap:8px;
+  align-content:start;transition:background .2s}
+.col:first-child{border-left:0}
+.col.over{background:color-mix(in srgb,var(--b) 12%,transparent)}
+.col.today{background:rgba(255,255,255,.022)}
+
+.shift{border:1px solid var(--line);border-radius:12px;padding:10px 11px;background:var(--bg);
+  display:grid;gap:7px;cursor:pointer;position:relative;
+  transition:transform .18s,border-color .2s,box-shadow .2s}
+.shift:hover{transform:translateY(-2px);border-color:color-mix(in srgb,var(--b) 45%,transparent);
+  box-shadow:0 10px 24px rgba(0,0,0,.45)}
+.shift .tm{font-family:var(--mono);font-size:.74rem;color:var(--b);letter-spacing:.02em;
+  display:flex;align-items:center;gap:6px}
+.shift .tm .rl{margin-left:auto;color:var(--faint);letter-spacing:.1em;text-transform:uppercase;
+  font-size:.62rem}
+.shift .who{display:flex;align-items:center;gap:8px;min-width:0}
+.shift .who .av{width:22px;height:22px;font-size:9px}
+.shift .who .nm{font-size:.83rem;font-weight:650;white-space:nowrap;overflow:hidden;
+  text-overflow:ellipsis}
+.shift.open{border-style:dashed;border-color:color-mix(in srgb,var(--warn) 50%,transparent)}
+.shift.open .who .nm{color:var(--warn);font-weight:700}
+.shift .x{position:absolute;top:6px;right:6px;width:20px;height:20px;border-radius:6px;
+  border:0;background:transparent;color:var(--faint);cursor:pointer;opacity:0;font-size:14px;
+  line-height:1;transition:opacity .18s}
+.shift:hover .x{opacity:1}
+.shift .x:hover{background:color-mix(in srgb,var(--bad) 22%,transparent);color:var(--bad)}
+.shift .cost{font-family:var(--mono);font-size:.68rem;color:var(--faint);
+  font-variant-numeric:tabular-nums}
+.shift .warns{display:flex;gap:5px;flex-wrap:wrap}
+.shift .warn{font-family:var(--mono);font-size:.6rem;letter-spacing:.02em;color:var(--warn);
+  border:1px solid color-mix(in srgb,var(--warn) 45%,transparent);
+  background:color-mix(in srgb,var(--warn) 12%,transparent);border-radius:6px;padding:2px 6px;
+  white-space:nowrap}
+.shift .warn.bad{color:var(--bad);border-color:color-mix(in srgb,var(--bad) 45%,transparent);
+  background:color-mix(in srgb,var(--bad) 12%,transparent)}
+.add{border:1px dashed var(--line);border-radius:12px;padding:9px;color:var(--faint);
+  background:transparent;cursor:pointer;font-size:.78rem;transition:all .18s}
+.add:hover{border-color:var(--b);color:var(--b);background:color-mix(in srgb,var(--b) 8%,transparent)}
+
+/* ---------------------------------------------------------------- dialog */
+dialog{border:1px solid var(--line);border-radius:18px;background:#0D0F17;color:var(--ink);
+  padding:0;width:min(430px,94vw);box-shadow:0 40px 90px rgba(0,0,0,.7)}
+dialog::backdrop{background:rgba(4,5,9,.7);backdrop-filter:blur(3px)}
+dialog h3{margin:0;padding:18px 22px;border-bottom:1px solid var(--line-2);font-size:1.02rem;
+  letter-spacing:-.02em}
+dialog .bd{padding:20px 22px;display:grid;gap:14px}
+dialog label{display:grid;gap:6px;font-size:.8rem;font-weight:650;color:var(--dim)}
+dialog input,dialog select{font:inherit;font-size:.92rem;padding:10px 12px;border-radius:10px;
+  border:1px solid var(--line);background:rgba(0,0,0,.4);color:var(--ink)}
+dialog input:focus,dialog select:focus{outline:none;border-color:var(--b)}
+dialog .two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+dialog .ft{display:flex;gap:9px;justify-content:flex-end;padding:16px 22px;
+  border-top:1px solid var(--line-2)}
+
+/* toast */
+.toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,20px);z-index:80;
+  border:1px solid var(--line);border-radius:999px;padding:11px 20px;background:#0D0F17;
+  font-size:.86rem;font-weight:650;opacity:0;pointer-events:none;transition:all .3s;
+  box-shadow:0 18px 40px rgba(0,0,0,.6)}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+.toast b{color:var(--b)}
+
+.hint{color:var(--faint);font-size:.78rem;padding:10px 2px 0;text-align:center}
+.demo{margin-top:18px;border:1px solid var(--line);border-radius:14px;padding:14px 16px;
+  background:var(--panel);color:var(--dim);font-size:.84rem;display:flex;gap:12px;
+  flex-wrap:wrap;align-items:center}
+.demo b{color:var(--ink)}
+.demo a{color:var(--b);text-decoration:none;font-weight:700}
+
+@media(max-width:1080px){.cols{grid-template-columns:1fr}aside{position:static}
+  .gb,.gh{grid-template-columns:repeat(7,minmax(128px,1fr));overflow-x:auto}
+  .grid{overflow-x:auto}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="gate" id="gate" hidden>
+  <form id="gateform">
+    <h3>{{NAME}} &middot; rota</h3>
+    <p class="g-sub">This is the manager's view. It changes what everyone works, so it
+      asks who you are.</p>
+    <label>Manager PIN<input id="gatepin" type="password" inputmode="numeric"
+      autocomplete="off" maxlength="12" required></label>
+    <p class="g-err" id="gateerr" hidden></p>
+    <button class="btn pri" type="submit">Open the rota</button>
+    <p class="g-demo" id="gatedemo" hidden></p>
+    <p class="g-alt"><a href="../team/">I'm on the team, not the manager &rarr;</a></p>
+  </form>
+</div>
+
+<div class="app">
+
+<header class="bar">
+  <a class="brand" href="../index.html">{{LOGO_MARK}}{{NAME}}<small>Rota</small></a>
+  <span class="spacer"></span>
+  <div class="schemes" role="group" aria-label="Colour scheme">
+    <button data-id="aurora" aria-pressed="true"  aria-label="Aurora" style="background:linear-gradient(135deg,#6366F1,#22D3EE)"></button>
+    <button data-id="ember"  aria-pressed="false" aria-label="Ember"  style="background:linear-gradient(135deg,#FB7185,#FBBF24)"></button>
+    <button data-id="toxic"  aria-pressed="false" aria-label="Toxic"  style="background:linear-gradient(135deg,#A3E635,#2DD4BF)"></button>
+    <button data-id="solar"  aria-pressed="false" aria-label="Solar"  style="background:linear-gradient(135deg,#FDBA74,#F97316)"></button>
+    <button data-id="mono"   aria-pressed="false" aria-label="Mono"   style="background:linear-gradient(135deg,#E2E8F0,#94A3B8)"></button>
+  </div>
+  <a class="btn" href="../team/">What the team sees</a>
+  <button class="btn" id="export">Export payroll</button>
+  <button class="btn pri" id="publish">Publish week</button>
+</header>
+
+<div class="tools">
+  <div class="wk">
+    <button class="btn qt" id="prev" aria-label="Previous week">&larr;</button>
+    <div class="lbl" id="wklbl">—<em id="wksub"></em></div>
+    <button class="btn qt" id="next" aria-label="Next week">&rarr;</button>
+  </div>
+  <button class="btn qt" id="today">This week</button>
+  <span class="state" id="pubstate">draft</span>
+  <span class="state" id="syncstate" title="">…</span>
+  <span class="spacer"></span>
+  <button class="btn qt" id="copy">Copy last week</button>
+  <button class="btn qt" id="fill">Fill open shifts</button>
+  <button class="btn qt" id="reset">Start over</button>
+  <button class="btn qt" id="undo" disabled>Undo</button>
+</div>
+
+<div class="cols">
+  <aside>
+    <div class="card">
+      <h2>Team <span class="n" id="stcount">0</span></h2>
+      <div class="in" id="staff"></div>
+      <div style="padding:0 14px 12px">
+        <button class="add" id="addPerson" style="width:100%">+ Add someone</button>
+      </div>
+      <div class="hint">Drag a name onto a shift, or click a shift to assign.</div>
+    </div>
+
+    <div class="card">
+      <h2>This week<button class="btn qt" id="editBudget" title="Edit weekly budget"
+        style="margin-left:auto;padding:4px 10px;font-size:10px">Budget ✎</button></h2>
+      <div class="in tot">
+        <div class="big" id="cost">€0</div>
+        <div class="r"><span>Hours rostered</span><b id="hours">0</b></div>
+        <div class="r"><span>Shifts</span><b id="nshifts">0</b></div>
+        <div class="r"><span>Unassigned</span><b id="nopen">0</b></div>
+        <div class="r"><span>Conflicts</span><b id="nconflict">0</b></div>
+        <div class="r"><span>Rest warnings</span><b id="nrest">0</b></div>
+        <div class="r"><span>Away warnings</span><b id="naway">0</b></div>
+        <div class="r"><span>Coverage gaps</span><b id="ncoverage">0</b></div>
+        <div class="r"><span>Vs labour target</span><b id="budgetline">—</b></div>
+        <div class="r"><span>% of revenue</span><b id="budgetpct">—</b></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Swap requests <span class="n" id="swcount">0</span></h2>
+      <div class="in" id="swaps"></div>
+    </div>
+
+    <div class="card" id="claimsCard" style="display:none">
+      <h2>Claims approval <span class="n" id="clcount">0</span></h2>
+      <div class="in" id="claims"></div>
+    </div>
+
+    <div class="card" id="acksCard" style="display:none">
+      <h2>Read status <span class="n" id="ackscount">0</span></h2>
+      <div class="in" id="acks"></div>
+    </div>
+  </aside>
+
+  <main>
+    <div class="grid">
+      <div class="gh" id="head"></div>
+      <div class="gb" id="body"></div>
+    </div>
+    <div class="demo">
+      <b>This is the product, not a picture of it.</b>
+      <span>Drag people, add shifts, approve the swap, export the CSV — it all works.
+        Records live in this browser, so your changes are yours alone.</span>
+      <a href="../team/">what the team sees &rarr;</a>
+      <a href="../platform/">the owner's back office &rarr;</a>
+      <a href="../index.html">&larr; back to the site</a>
+    </div>
+  </main>
+</div>
+</div>
+
+<dialog id="dlg">
+  <form method="dialog">
+    <h3 id="dlgtitle">Add a shift</h3>
+    <div class="bd">
+      <div class="two">
+        <label>Starts<input type="time" id="f_start" value="17:00" required></label>
+        <label>Ends<input type="time" id="f_end" value="23:00" required></label>
+      </div>
+      <label>Role<select id="f_role"></select></label>
+      <label>Who<select id="f_who"></select></label>
+    </div>
+    <div class="ft">
+      <button class="btn" formnovalidate value="cancel">Cancel</button>
+      <button class="btn pri" id="f_save" value="save">Save shift</button>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="dlgStaff">
+  <form method="dialog">
+    <h3 id="stafftitle">Add someone</h3>
+    <div class="bd">
+      <label>Name<input type="text" id="s_name" required></label>
+      <div class="two">
+        <label>Role<select id="s_role"></select></label>
+        <label>Rate (€/h)<input type="number" id="s_rate" min="0" step="0.5" required></label>
+      </div>
+      <label>Weekly hour cap<input type="number" id="s_max" min="1" step="1" required></label>
+    </div>
+    <div class="ft">
+      <button type="button" class="btn" id="s_remove" style="margin-right:auto;color:var(--bad)">Remove</button>
+      <button class="btn" formnovalidate value="cancel">Cancel</button>
+      <button class="btn pri" id="s_save" value="save">Save</button>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="dlgBudget">
+  <form method="dialog">
+    <h3>This week's budget</h3>
+    <div class="bd">
+      <label>Weekly labour target (€)<input type="number" id="b_target" min="0" step="10" required></label>
+      <label>Forecast revenue (€)<input type="number" id="b_revenue" min="0" step="50" required></label>
+    </div>
+    <div class="ft">
+      <button class="btn" formnovalidate value="cancel">Cancel</button>
+      <button class="btn pri" value="save">Save</button>
+    </div>
+  </form>
+</dialog>
+
+<div class="toast" id="toast"></div>
+
+<script>{{SYNC_JS}}</script>
+<script>
+const CONFIG = {{CONFIG}};
+
+/* ---------------------------------------------------------------- storage
+   Same contract as the platform: `local` keeps everything in this browser, which is
+   what makes a public demo honest — your week is yours and nobody else loads it. A
+   real account syncs the identical shape through the hub. */
+const KEY = 'vom_app_' + CONFIG.business.toLowerCase().replace(/[^a-z0-9]+/g, '_');
+let DB;
+try { DB = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (e) { DB = null; }
+/* The shape changed when weeks became real. A half-read old payload is worse than a
+   fresh one, so the version decides and there is no migration to get subtly wrong. */
+if (!DB || DB.v !== CONFIG.seed.v) { DB = JSON.parse(JSON.stringify(CONFIG.seed)); save(); }
+if (!DB.weekOffset) DB.weekOffset = 0;
+if (!DB.availability) DB.availability = [];
+if (!DB.claims) DB.claims = [];
+if (!DB.acks) DB.acks = {};
+/* This tab holds DB in memory from the moment it loaded. The team page is writing to the
+   same key from a phone in the same building — a claim, a day marked off, an
+   acknowledgement — and a plain setItem here would serialize our older copy straight over
+   the top of theirs. Somebody's request would simply cease to exist, with no error and
+   nothing in the interface to suggest it ever arrived.
+
+   So the rows the team owns are merged on the way out rather than assumed. Union by id:
+   anything they created that we have never seen is kept, and where we both know a row,
+   ours wins, because the manager approving or declining it is the newer decision. */
+function mergeById(theirs, ours){
+  const out = (ours || []).slice();
+  const known = new Set(out.map(r => r.id));
+  (theirs || []).forEach(r => { if (!known.has(r.id)) out.push(r); });
+  return out;
+}
+
+function save(){
+  try {
+    const stored = JSON.parse(localStorage.getItem(KEY) || 'null');
+    if (stored && stored.v === DB.v) {
+      DB.availability = mergeById(stored.availability, DB.availability);
+      DB.claims       = mergeById(stored.claims,       DB.claims);
+      DB.swaps        = mergeById(stored.swaps,        DB.swaps);
+      /* acks only ever grow, and only the person themselves can add their own name */
+      Object.keys(stored.acks || {}).forEach(k => {
+        const mine = new Set(DB.acks[k] || []);
+        (stored.acks[k] || []).forEach(id => mine.add(id));
+        DB.acks[k] = [...mine];
+      });
+    }
+  } catch(e){}
+  try { localStorage.setItem(KEY, JSON.stringify(DB)); } catch(e){}
+}
+
+const DAYS = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+const ROLES = ['Bar','Kitchen','Floor'];
+const $ = s => document.querySelector(s);
+const el = (t, c, h) => { const n = document.createElement(t); if (c) n.className = c;
+  if (h != null) n.innerHTML = h; return n; };
+const esc = s => { const d = document.createElement('div'); d.textContent = s == null ? '' : s;
+  return d.innerHTML; };
+
+/* ------------------------------------------------------------------ dates */
+function monday(offset){
+  const d = new Date(); const day = (d.getDay() + 6) % 7;
+  d.setDate(d.getDate() - day + offset * 7); d.setHours(0,0,0,0); return d;
+}
+function dayDate(i){ const d = monday(DB.weekOffset); d.setDate(d.getDate() + i); return d; }
+/* Shifts carry the week they belong to. Everything below asks for "this week" rather
+   than for "the shifts", which is the whole difference between a rota and a template. */
+const wk = () => DB.weekOffset;
+const inWeek = s => s.wk === wk();
+const weekShifts = () => DB.shifts.filter(inWeek);
+const isPublished = (o) => !!DB.published[String(o === undefined ? wk() : o)];
+const fmt = new Intl.DateTimeFormat('en-GB', {day:'numeric', month:'short'});
+const money = n => '€' + n.toLocaleString('nl-NL', {maximumFractionDigits:0});
+
+/* ------------------------------------------------------------------- maths */
+function hours(s){
+  const [h1,m1] = s.start.split(':').map(Number), [h2,m2] = s.end.split(':').map(Number);
+  let mins = (h2*60+m2) - (h1*60+m1);
+  if (mins <= 0) mins += 24*60;            /* a shift that ends after midnight */
+  return mins / 60;
+}
+const person = id => DB.staff.find(p => p.id === id);
+function shiftCost(s){ const p = person(s.who); return p ? hours(s) * p.rate : 0; }
+function weekTotals(){
+  let cost = 0, hrs = 0, open = 0;
+  const rows = weekShifts();
+  rows.forEach(s => { hrs += hours(s); cost += shiftCost(s); if (!s.who) open++; });
+  return {cost, hrs, open, n: rows.length};
+}
+/* A cap is a weekly cap, so it is counted against the week on screen. */
+function personHours(id){
+  return weekShifts().filter(s => s.who === id).reduce((a,s) => a + hours(s), 0);
+}
+const initials = n => n.split(/\s+/).map(w => w[0]).slice(0,2).join('').toUpperCase();
+
+/* --------------------------------------------------------------- conflicts
+   A shift only has a real-world start/end once it is pinned to a date, so the daily-
+   rest rule (and the overlap check that is really the same arithmetic at gap=0) works
+   off real Date objects rather than day-index bookkeeping. Crossing midnight is handled
+   exactly the way hours() handles it: end<=start means the shift lands on the next day. */
+function shiftInterval(s){
+  const d = monday(s.wk); d.setDate(d.getDate() + s.day);
+  const [h1,m1] = s.start.split(':').map(Number);
+  const start = new Date(d); start.setHours(h1,m1,0,0);
+  const [h2,m2] = s.end.split(':').map(Number);
+  const end = new Date(d); end.setHours(h2,m2,0,0);
+  if (end <= start) end.setDate(end.getDate() + 1);
+  return [start, end];
+}
+/* Never a block — a manager may double-book on purpose (someone covering two roles for
+   an hour) or run a legitimately short turnaround. This only ever informs. Availability
+   marks (off/prefer_not) are also informational — they warn about a person's availability
+   but never prevent assignment. */
+function shiftWarnings(s){
+  if (!s.who) return {overlap:false, rest:false, away:false, prefer_not:false};
+  const [st, en] = shiftInterval(s);
+  let overlap = false, rest = false, away = false, prefer_not = false;
+
+  DB.shifts.forEach(x => {
+    if (x.id === s.id || x.who !== s.who) return;
+    const [xs, xe] = shiftInterval(x);
+    if (st < xe && xs < en) { overlap = true; return; }
+    const gapHrs = (xs >= en ? (xs - en) : (st - xe)) / 3600000;
+    if (gapHrs < 11) rest = true;
+  });
+
+  const avail = (DB.availability || []).find(a => a.person === s.who && a.wk === s.wk && a.day === s.day);
+  if (avail){
+    if (avail.kind === 'off') away = true;
+    else if (avail.kind === 'prefer_not') prefer_not = true;
+  }
+
+  return {overlap, rest, away, prefer_not};
+}
+
+/* ------------------------------------------------------------------ render */
+function renderStaff(){
+  const box = $('#staff'); box.innerHTML = '';
+  DB.staff.forEach(p => {
+    const h = personHours(p.id);
+    const cls = h > p.max ? 'over' : (h > p.max * 0.9 ? 'near' : '');
+    const row = el('div', 'person' + (selected === p.id ? ' sel' : ''));
+    row.draggable = true;
+    row.innerHTML = '<div class="av">' + esc(initials(p.name)) + '</div>' +
+      '<div><div class="nm">' + esc(p.name) + '</div><div class="rl">' + esc(p.role) +
+      ' · €' + p.rate.toFixed(2).replace('.', ',') + '/h</div></div>' +
+      '<div class="hr ' + cls + '"><b>' + h.toFixed(1) + 'h</b>of ' + p.max + '</div>' +
+      '<button class="ed" title="Edit ' + esc(p.name) + '">&#9998;</button>';
+    row.addEventListener('dragstart', ev => {
+      dragging = p.id; row.classList.add('drag');
+      ev.dataTransfer.setData('text/plain', p.id);
+    });
+    row.addEventListener('dragend', () => { dragging = null; row.classList.remove('drag');
+      document.querySelectorAll('.col.over').forEach(c => c.classList.remove('over')); });
+    row.addEventListener('click', () => { selected = selected === p.id ? null : p.id;
+      renderStaff(); toast(selected ? 'Now click a shift to give it to <b>' +
+        esc(p.name.split(' ')[0]) + '</b>' : 'Nobody selected'); });
+    row.querySelector('.ed').addEventListener('click', ev => {
+      ev.stopPropagation(); openStaffDialog(p);
+    });
+    box.appendChild(row);
+  });
+  $('#stcount').textContent = DB.staff.length;
+}
+
+function renderGrid(){
+  const head = $('#head'), body = $('#body');
+  head.innerHTML = ''; body.innerHTML = '';
+  const todayISO = new Date().toDateString();
+  DAYS.forEach((name, i) => {
+    const d = dayDate(i);
+    const dayShifts = weekShifts().filter(s => s.day === i);
+    const dayCost = dayShifts.reduce((a,s) => a + shiftCost(s), 0);
+    /* coverage is a required *count* of staffed slots per day/role, so an unfilled shift
+       does not count as coverage — it is exactly the gap the manager still has to close. */
+    const req = (DB.coverage && DB.coverage[String(i)]) || {};
+    const short = ROLES.map(r => {
+      const need = req[r] || 0;
+      if (!need) return null;
+      const have = dayShifts.filter(s => s.role === r && s.who).length;
+      return have < need ? {r, have, need} : null;
+    }).filter(Boolean);
+
+    const h = el('div');
+    h.innerHTML = '<div class="d">' + name + '</div><div class="n">' + fmt.format(d) +
+      '</div><div class="c">' + money(dayCost) + '</div>' +
+      (short.length ? '<div class="cov">' + short.map(x => '<span>' + esc(x.r) + ' ' +
+        x.have + '/' + x.need + '</span>').join('') + '</div>' : '');
+    head.appendChild(h);
+
+    const col = el('div', 'col' + (d.toDateString() === todayISO ? ' today' : ''));
+    col.dataset.day = i;
+    dayShifts.sort((a,b) => a.start.localeCompare(b.start)).forEach(s => {
+      col.appendChild(shiftCard(s));
+    });
+    const add = el('button', 'add', '+ shift');
+    add.addEventListener('click', () => openDialog(i));
+    col.appendChild(add);
+
+    col.addEventListener('dragover', ev => { ev.preventDefault(); col.classList.add('over'); });
+    col.addEventListener('dragleave', () => col.classList.remove('over'));
+    col.addEventListener('drop', ev => {
+      ev.preventDefault(); col.classList.remove('over');
+      const id = ev.dataTransfer.getData('text/plain');
+      const card = ev.target.closest('.shift');
+      if (card) { assign(card.dataset.id, id); }
+      else { const p = person(id);
+        DB.shifts.push({id: 'x' + Date.now(), wk: wk(), day: i, start: '17:00',
+                        end: '23:00', role: p ? p.role : 'Floor', who: id});
+        commit('Shift added for <b>' + esc((p||{}).name || '') + '</b>'); }
+    });
+    body.appendChild(col);
+  });
+}
+
+function shiftCard(s){
+  const p = person(s.who);
+  const w = shiftWarnings(s);
+  const card = el('div', 'shift' + (p ? '' : ' open'));
+  card.dataset.id = s.id;
+  card.innerHTML =
+    '<div class="tm">' + esc(s.start) + '–' + esc(s.end) +
+      '<span class="rl">' + esc(s.role) + '</span></div>' +
+    '<div class="who">' + (p
+      ? '<div class="av">' + esc(initials(p.name)) + '</div><div class="nm">' + esc(p.name) + '</div>'
+      : '<div class="nm">Unassigned</div>') + '</div>' +
+    (w.overlap || w.rest || w.away || w.prefer_not ? '<div class="warns">' +
+      (w.overlap ? '<span class="warn bad">double-booked</span>' : '') +
+      (w.rest ? '<span class="warn">&lt;11h rest</span>' : '') +
+      (w.away ? '<span class="warn bad">away</span>' : '') +
+      (w.prefer_not ? '<span class="warn">prefer not</span>' : '') + '</div>' : '') +
+    '<div class="cost">' + hours(s).toFixed(1) + 'h · ' + money(shiftCost(s)) + '</div>' +
+    '<button class="x" title="Remove shift">&times;</button>';
+  card.querySelector('.x').addEventListener('click', ev => {
+    ev.stopPropagation();
+    withUndo(() => {
+      DB.shifts = DB.shifts.filter(x => x.id !== s.id);
+      DB.swaps = DB.swaps.filter(w => w.shift !== s.id);
+      DB.claims = DB.claims.filter(c => c.shift !== s.id);
+    });
+    commit('Shift removed');
+  });
+  card.addEventListener('click', () => {
+    if (selected){ assign(s.id, selected); selected = null; renderStaff(); }
+    else openDialog(s.day, s);
+  });
+  card.addEventListener('dragover', ev => ev.preventDefault());
+  card.addEventListener('drop', ev => {
+    ev.preventDefault(); ev.stopPropagation();
+    assign(s.id, ev.dataTransfer.getData('text/plain'));
+  });
+  return card;
+}
+
+function assign(shiftId, personId){
+  const s = DB.shifts.find(x => x.id === shiftId), p = person(personId);
+  if (!s || !p) return;
+  s.who = personId;
+  const h = personHours(personId);
+  commit('<b>' + esc(p.name.split(' ')[0]) + '</b> is on ' + DAYS[s.day].toLowerCase() +
+         (h > p.max ? ' — that takes them over ' + p.max + 'h' : ''));
+}
+
+function renderSwaps(){
+  const box = $('#swaps'); box.innerHTML = '';
+  const open = DB.swaps.filter(w => {
+    const s = DB.shifts.find(x => x.id === w.shift);
+    return w.state === 'pending' && s && inWeek(s);
+  });
+  $('#swcount').textContent = open.length;
+  if (!open.length){ box.appendChild(el('div','none','Nothing waiting on you.')); return; }
+  open.forEach(w => {
+    const s = DB.shifts.find(x => x.id === w.shift);
+    const a = person(w.from), b = person(w.to);
+    if (!s || !a || !b) return;
+    const box2 = el('div', 'swap');
+    box2.innerHTML =
+      '<div class="t"><b>' + esc(a.name.split(' ')[0]) + '</b> wants <b>' +
+      esc(b.name.split(' ')[0]) + '</b> to take ' + DAYS[s.day].toLowerCase() + ' ' +
+      esc(s.start) + '–' + esc(s.end) + '</div>' +
+      '<div class="note">' + esc(w.note) + '</div>' +
+      '<div class="go"><button class="btn pri">Approve</button>' +
+      '<button class="btn">Decline</button></div>';
+    const [ok, no] = box2.querySelectorAll('button');
+    ok.addEventListener('click', () => { s.who = w.to; w.state = 'approved';
+      commit('Swap approved — <b>' + esc(b.name.split(' ')[0]) + '</b> takes it'); });
+    no.addEventListener('click', () => { w.state = 'declined'; commit('Swap declined'); });
+    box.appendChild(box2);
+  });
+}
+
+function renderClaims(){
+  const card = $('#claimsCard');
+  const box = $('#claims'); box.innerHTML = '';
+  const open = DB.claims.filter(c => {
+    const s = DB.shifts.find(x => x.id === c.shift);
+    return c.state === 'pending' && s && inWeek(s);
+  });
+  $('#clcount').textContent = open.length;
+  card.style.display = open.length ? '' : 'none';
+  if (!open.length){ return; }
+  open.forEach(c => {
+    const s = DB.shifts.find(x => x.id === c.shift);
+    const p = person(c.person);
+    if (!s || !p) return;
+    const box2 = el('div', 'swap');
+    box2.innerHTML =
+      '<div class="t"><b>' + esc(p.name.split(' ')[0]) + '</b> wants ' +
+      DAYS[s.day].toLowerCase() + ' ' + esc(s.start) + '–' + esc(s.end) + '</div>' +
+      (c.note ? '<div class="note">' + esc(c.note) + '</div>' : '') +
+      '<div class="go"><button class="btn pri">Approve</button>' +
+      '<button class="btn">Decline</button></div>';
+    const [ok, no] = box2.querySelectorAll('button');
+    ok.addEventListener('click', () => {
+      withUndo(() => {
+        s.who = c.person;
+        c.state = 'approved';
+      });
+      commit('Claim approved — <b>' + esc(p.name.split(' ')[0]) + '</b> assigned');
+    });
+    no.addEventListener('click', () => {
+      withUndo(() => { c.state = 'declined'; });
+      commit('Claim declined');
+    });
+    box.appendChild(box2);
+  });
+}
+
+function renderAcks(){
+  const card = $('#acksCard');
+  const box = $('#acks'); box.innerHTML = '';
+  const pub = isPublished();
+  card.style.display = pub ? '' : 'none';
+  if (!pub) return;
+
+  const acked = ((DB.acks || {})[String(wk())] || []);
+  const notAcked = DB.staff.filter(p => !acked.includes(p.id));
+  $('#ackscount').textContent = notAcked.length;
+
+  if (!notAcked.length){
+    box.innerHTML = '<div class="none">Everyone has acknowledged.</div>';
+    return;
+  }
+
+  const part1 = acked.length ? (acked.length + ' confirmed') : 'None confirmed yet';
+  box.innerHTML = '<div style="font-size:.82rem;color:var(--dim);margin-bottom:8px">' +
+    part1 + '</div>' +
+    '<div style="display:grid;gap:4px">' +
+    notAcked.map(p => '<div style="font-size:.82rem;padding:4px 6px;color:var(--dim)">' +
+      esc(p.name) + '</div>').join('') +
+    '</div>';
+}
+
+function renderTotals(){
+  const t = weekTotals();
+  const c = $('#cost');
+  c.textContent = money(t.cost);
+  c.classList.add('bump'); setTimeout(() => c.classList.remove('bump'), 320);
+  $('#hours').textContent = t.hrs.toFixed(1) + 'h';
+  $('#nshifts').textContent = t.n;
+  $('#nopen').textContent = t.open;
+  const d = monday(DB.weekOffset), end = dayDate(6);
+  $('#wklbl').firstChild.textContent = 'Week of ' + fmt.format(d);
+  $('#wksub').textContent = fmt.format(d) + ' – ' + fmt.format(end) +
+    (DB.weekOffset === 0 ? ' · this week' : '');
+  const st = $('#pubstate');
+  const pub = isPublished();
+  st.textContent = pub ? 'published' : 'planning';
+  st.classList.toggle('pub', pub);
+  $('#publish').textContent = pub ? 'Published ✓' : 'Publish week';
+
+  /* conflicts + rest + away: tallied over the shifts on screen. Availability is a warning
+     but never a block — a manager may have already spoken to someone marked off. */
+  let conflicts = 0, rest = 0, away = 0;
+  weekShifts().forEach(s => {
+    const w = shiftWarnings(s);
+    if (w.overlap) conflicts++;
+    if (w.rest) rest++;
+    if (w.away) away++;
+  });
+  const ncf = $('#nconflict'); ncf.textContent = conflicts; ncf.className = conflicts ? 'bad' : '';
+  const nrs = $('#nrest'); nrs.textContent = rest; nrs.className = rest ? 'warn' : '';
+  const naw = $('#naway'); naw.textContent = away; naw.className = away ? 'warn' : '';
+
+  /* coverage: an unfilled shift is not coverage, it is the gap. */
+  let covGap = 0;
+  DAYS.forEach((_, i) => {
+    const req = (DB.coverage && DB.coverage[String(i)]) || {};
+    ROLES.forEach(r => {
+      const need = req[r] || 0;
+      if (!need) return;
+      const have = weekShifts().filter(s => s.day === i && s.role === r && s.who).length;
+      if (have < need) covGap += need - have;
+    });
+  });
+  const ncv = $('#ncoverage'); ncv.textContent = covGap; ncv.className = covGap ? 'bad' : '';
+
+  /* budget: sensible defaults if the field predates this payload, per the additive rule. */
+  const budget = DB.budget || {target: 2200, revenue: 9000};
+  const bl = $('#budgetline');
+  bl.textContent = money(t.cost) + ' / ' + money(budget.target);
+  bl.className = t.cost > budget.target ? 'bad' : 'ok';
+  const bp = $('#budgetpct');
+  bp.textContent = budget.revenue ? (t.cost / budget.revenue * 100).toFixed(1) + '%' : '—';
+}
+
+function render(){ renderStaff(); renderGrid(); renderSwaps(); renderClaims(); renderAcks(); renderTotals(); renderUndo(); }
+function commit(msg){ save(); render(); if (msg) toast(msg); }
+
+/* -------------------------------------------------------------------- undo
+   A stack, not a single slot — a manager who fills, then copies, then thinks better of
+   both needs to walk back two steps, not one. Every entry is a full snapshot including
+   weekOffset, so restoring it always puts them back on the week they were looking at. */
+const undoStack = [];
+function pushSnapshot(str){ undoStack.push(str); if (undoStack.length > 50) undoStack.shift(); }
+function pushUndo(){ pushSnapshot(JSON.stringify(DB)); }
+/* Only keeps the snapshot if the action actually changed something — an empty "fill"
+   or a cancelled "copy" should not cost the manager an undo step later. */
+function withUndo(action){
+  const before = JSON.stringify(DB);
+  action();
+  if (JSON.stringify(DB) !== before) pushSnapshot(before);
+}
+function undo(){
+  if (!undoStack.length){ toast('Nothing to undo'); return; }
+  DB = JSON.parse(undoStack.pop());
+  save(); render();
+  toast('Undone');
+}
+function renderUndo(){ const b = $('#undo'); if (b) b.disabled = !undoStack.length; }
+
+/* ------------------------------------------------------------------ dialog */
+const dlg = $('#dlg');
+let editing = null, dialogDay = 0, selected = null, dragging = null;
+
+function openDialog(day, shift){
+  editing = shift || null; dialogDay = day;
+  $('#dlgtitle').textContent = shift ? 'Edit the shift' : 'Add a shift on ' + DAYS[day];
+  $('#f_role').innerHTML = ROLES.map(r =>
+    '<option' + (shift && shift.role === r ? ' selected' : '') + '>' + r + '</option>').join('');
+  $('#f_who').innerHTML = '<option value="">— leave it open —</option>' + DB.staff.map(p => {
+    const avail = (DB.availability || []).find(a => a.person === p.id && a.wk === wk() && a.day === day);
+    let label = esc(p.name) + ' · ' + esc(p.role);
+    if (avail){
+      label += ' (' + (avail.kind === 'off' ? 'away' : 'prefer not') + ')';
+    }
+    return '<option value="' + p.id + '"' + (shift && shift.who === p.id ? ' selected' : '') + '>' + label + '</option>';
+  }).join('');
+  $('#f_start').value = shift ? shift.start : '17:00';
+  $('#f_end').value = shift ? shift.end : '23:00';
+  dlg.showModal();
+}
+dlg.addEventListener('close', () => {
+  if (dlg.returnValue !== 'save') return;
+  const data = {start: $('#f_start').value, end: $('#f_end').value,
+                role: $('#f_role').value, who: $('#f_who').value};
+  if (!data.start || !data.end) return;
+  if (editing) { Object.assign(editing, data); commit('Shift updated'); }
+  else { DB.shifts.push(Object.assign({id: 'x' + Date.now(), wk: wk(), day: dialogDay}, data));
+         commit('Shift added'); }
+});
+
+/* -------------------------------------------------------------- staff CRUD */
+const dlgStaff = $('#dlgStaff');
+let editingStaff = null;
+
+function openStaffDialog(p){
+  editingStaff = p || null;
+  $('#stafftitle').textContent = p ? 'Edit ' + p.name.split(' ')[0] : 'Add someone';
+  $('#s_role').innerHTML = ROLES.map(r =>
+    '<option' + (p && p.role === r ? ' selected' : '') + '>' + r + '</option>').join('');
+  $('#s_name').value = p ? p.name : '';
+  $('#s_rate').value = p ? p.rate : '';
+  $('#s_max').value = p ? p.max : '';
+  $('#s_remove').style.display = p ? '' : 'none';
+  dlgStaff.showModal();
+}
+dlgStaff.addEventListener('close', () => {
+  const wasEditing = editingStaff;
+  editingStaff = null;
+  if (dlgStaff.returnValue !== 'save') return;
+  const name = $('#s_name').value.trim();
+  const role = $('#s_role').value;
+  const rate = parseFloat($('#s_rate').value);
+  const max = parseInt($('#s_max').value, 10);
+  if (!name || !ROLES.includes(role) || !(rate >= 0) || !(max > 0)) return;
+  if (wasEditing) { Object.assign(wasEditing, {name, role, rate, max}); commit(esc(name) + ' updated'); }
+  else { DB.staff.push({id: 'p' + Date.now(), name, role, rate, max});
+         commit(esc(name) + ' added to the team'); }
+});
+$('#s_remove').addEventListener('click', () => {
+  if (!editingStaff) return;
+  const id = editingStaff.id;
+  dlgStaff.close('cancel');
+  removePerson(id);
+});
+$('#addPerson').addEventListener('click', () => openStaffDialog(null));
+
+/* Removing someone who is rostered must not silently orphan shifts — they go back to
+   open, and the manager is told exactly how many just need a new name. */
+function removePerson(id){
+  const p = person(id);
+  if (!p) return;
+  let opened = 0;
+  withUndo(() => {
+    DB.staff = DB.staff.filter(x => x.id !== id);
+    DB.shifts.forEach(s => { if (s.who === id){ s.who = ''; opened++; } });
+  });
+  if (selected === id) selected = null;
+  commit(esc(p.name) + ' removed' + (opened
+    ? ' — ' + opened + ' shift' + (opened > 1 ? 's are' : ' is') + ' now open'
+    : ''));
+}
+
+/* ------------------------------------------------------------------- budget */
+$('#editBudget').addEventListener('click', () => {
+  DB.budget = DB.budget || {target: 2200, revenue: 9000};
+  $('#b_target').value = DB.budget.target;
+  $('#b_revenue').value = DB.budget.revenue;
+  $('#dlgBudget').showModal();
+});
+$('#dlgBudget').addEventListener('close', () => {
+  if ($('#dlgBudget').returnValue !== 'save') return;
+  const target = parseFloat($('#b_target').value);
+  const revenue = parseFloat($('#b_revenue').value);
+  if (!(target >= 0) || !(revenue >= 0)) return;
+  DB.budget = {target, revenue};
+  commit('Budget updated');
+});
+
+/* ------------------------------------------------------------------ actions */
+$('#prev').addEventListener('click', () => { DB.weekOffset--; commit(); });
+$('#next').addEventListener('click', () => { DB.weekOffset++; commit(); });
+$('#today').addEventListener('click', () => { DB.weekOffset = 0; commit(); });
+
+$('#publish').addEventListener('click', () => {
+  const t = weekTotals();
+  if (!DB.published && t.open){
+    toast(t.open + ' shift' + (t.open > 1 ? 's are' : ' is') + ' still unassigned');
+    return;
+  }
+  const key = String(wk());
+  if (DB.published[key]) delete DB.published[key]; else DB.published[key] = true;
+  commit(DB.published[key] ? 'Week published — the team can see it it'.replace(' it it',' it')
+                           : 'Back to draft — the team sees it as planning');
+});
+
+$('#copy').addEventListener('click', () => {
+  /* The actual job. Almost every week is last week with three things different, and a
+     scheduler that makes you rebuild it from nothing is why people still use paper. */
+  const prev = DB.shifts.filter(s => s.wk === wk() - 1);
+  if (!prev.length){ toast('Nothing in the week before this one'); return; }
+  if (weekShifts().length &&
+      !confirm('Replace this week with a copy of the one before it?')) return;
+  withUndo(() => {
+    DB.shifts = DB.shifts.filter(s => !inWeek(s))
+      .concat(prev.map((s, i) => Object.assign({}, s, {id: 'c' + Date.now() + '_' + i, wk: wk()})));
+    delete DB.published[String(wk())];      /* a copy is a draft, never a published week */
+  });
+  commit('Copied ' + prev.length + ' shifts — change what is different, then publish');
+});
+
+$('#fill').addEventListener('click', () => {
+  /* Give each open shift to whoever has the most room left and the right role. It is a
+     starting point, not a scheduler — the manager still decides. */
+  let filled = 0;
+  withUndo(() => {
+    weekShifts().filter(s => !s.who).forEach(s => {
+      const fit = DB.staff
+        .filter(p => p.role === s.role)
+        .map(p => ({p, room: p.max - personHours(p.id)}))
+        .filter(x => x.room >= hours(s))
+        .sort((a,b) => b.room - a.room)[0];
+      if (fit){ s.who = fit.p.id; filled++; }
+    });
+  });
+  commit(filled ? 'Filled ' + filled + ' shift' + (filled > 1 ? 's' : '') +
+                  ' — check it before you publish'
+                : 'Nobody has the hours left for those');
+});
+
+$('#reset').addEventListener('click', () => {
+  withUndo(() => { DB = JSON.parse(JSON.stringify(CONFIG.seed)); DB.weekOffset = 0; });
+  commit('Back to the three starting weeks');
+});
+
+$('#undo').addEventListener('click', undo);
+
+$('#export').addEventListener('click', () => {
+  const rows = [['Staff','Role','Day','Date','Start','End','Hours','Rate','Cost']];
+  weekShifts().slice().sort((a,b) => a.day - b.day || a.start.localeCompare(b.start))
+    .forEach(s => {
+      const p = person(s.who);
+      rows.push([p ? p.name : 'UNASSIGNED', s.role, DAYS[s.day],
+                 dayDate(s.day).toISOString().slice(0,10), s.start, s.end,
+                 hours(s).toFixed(2), p ? p.rate.toFixed(2) : '',
+                 p ? shiftCost(s).toFixed(2) : '']);
+    });
+  const t = weekTotals();
+  rows.push([], ['TOTAL','','','','','', t.hrs.toFixed(2), '', t.cost.toFixed(2)]);
+  const csv = rows.map(r => r.map(v => /[",;\n]/.test(String(v))
+    ? '"' + String(v).replace(/"/g,'""') + '"' : v).join(',')).join('\n');
+  const url = URL.createObjectURL(new Blob([csv], {type:'text/csv;charset=utf-8'}));
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'payroll-' + monday(DB.weekOffset).toISOString().slice(0,10) + '.csv';
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+  toast('payroll CSV downloaded — <b>' + t.hrs.toFixed(1) + 'h</b>, ' + money(t.cost));
+});
+
+const SKEY = KEY + '_scheme';
+try { const s = localStorage.getItem(SKEY);
+  if (s) document.documentElement.setAttribute('data-scheme', s); } catch(e){}
+document.querySelectorAll('.schemes button').forEach(b => {
+  b.addEventListener('click', () => {
+    const id = b.dataset.id;
+    document.documentElement.setAttribute('data-scheme', id);
+    try { localStorage.setItem(SKEY, id); } catch(e){}
+    document.querySelectorAll('.schemes button').forEach(o =>
+      o.setAttribute('aria-pressed', o === b ? 'true' : 'false'));
+  });
+});
+(function(){ const cur = document.documentElement.getAttribute('data-scheme');
+  document.querySelectorAll('.schemes button').forEach(o =>
+    o.setAttribute('aria-pressed', o.dataset.id === cur ? 'true' : 'false')); })();
+
+let toastT = null;
+function toast(msg){
+  const t = $('#toast'); t.innerHTML = msg; t.classList.add('on');
+  clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove('on'), 2600);
+}
+
+addEventListener('keydown', ev => {
+  if (ev.key === 'Escape' && selected){ selected = null; renderStaff(); }
+  if (ev.key === 'ArrowLeft' && ev.altKey) $('#prev').click();
+  if (ev.key === 'ArrowRight' && ev.altKey) $('#next').click();
+  if ((ev.metaKey || ev.ctrlKey) && ev.key.toLowerCase() === 'z'){
+    if (/^(INPUT|TEXTAREA|SELECT)$/.test((ev.target || {}).tagName)) return;
+    ev.preventDefault(); undo();
+  }
+});
+
+/* ---------------------------------------------------------------- the server
+   localStorage keeps this tab working with no network at all; the server is what makes
+   the rota the same object on the manager's laptop and a bartender's phone. Order matters:
+   local first so nothing is ever lost to a failed request, then push. */
+const sync = CONFIG.sync ? new Sync({url: CONFIG.sync.url, team: CONFIG.sync.team,
+                                     role: '{{ROLE}}'}) : null;
+
+function syncBadge(state, detail){
+  const el = $('#syncstate');
+  if (!el) return;
+  el.textContent = state === 'online' ? 'shared'
+                 : (state === 'connecting' ? '…'
+                 : (state === 'signedout' ? 'signed out' : 'this device only'));
+  el.className = 'state' + (state === 'online' ? ' pub' : '');
+  el.title = state === 'online'
+    ? 'Everyone on this rota sees the same thing. Changes appear within a few seconds.'
+    : 'The server is unreachable' + (detail ? ' (' + detail + ')' : '') +
+      ', so changes are being kept in this browser and are not shared.';
+}
+
+async function openGate(){
+  const gate = $('#gate'), err = $('#gateerr'), demo = $('#gatedemo');
+  const who = await sync.whoCanSignIn();
+  if (who.demo){ demo.hidden = false; demo.textContent = 'demo manager PIN 2468'; }
+  gate.hidden = false;
+  $('#gatepin').focus();
+  return new Promise(resolve => {
+    $('#gateform').addEventListener('submit', async ev => {
+      ev.preventDefault();
+      err.hidden = true;
+      const r = await sync.signIn('manager', $('#gatepin').value);
+      if (!r.ok){
+        err.hidden = false;
+        err.textContent = r.error + (typeof r.attempts_left === 'number'
+          ? ' — ' + r.attempts_left + ' tries left' : '');
+        $('#gatepin').select();
+        return;
+      }
+      gate.hidden = true;
+      resolve();
+    });
+  });
+}
+
+if (sync){
+  sync.onstate = syncBadge;
+  syncBadge('connecting');
+  sync.onremote = doc => {
+    /* Nothing of ours is unsent at this point — every commit pushes — so the server's copy
+       is simply the newer one. Defending our roster here is how a second manager's edits
+       become invisible forever. */
+    DB = Sync.adopt(doc, DB);
+    save(); render();
+    toast('The rota changed');
+  };
+  (async () => {
+    /* Nothing is read or shown until the manager is known. The local copy stays untouched
+       behind the gate rather than being displayed to whoever opened the link. */
+    if (!sync.signedIn()) await openGate();
+    const doc = await sync.pull();
+    if (sync.state === 'signedout'){ await openGate(); location.reload(); return; }
+    if (doc && doc.v === CONFIG.seed.v){
+      /* On boot the local copy is a cache, not a contribution — it may be days stale and
+         nothing in it has gone unsent. The server is simply the truth, so take it. */
+      DB = Sync.adopt(doc, DB);
+      save(); render();
+    } else {
+      /* Nothing on the server yet, or a payload from an older shape: this tab seeds it. */
+      await sync.push(() => DB, merged => { DB = merged; save(); render(); });
+    }
+    sync.watch(5000);
+  })();
+}
+
+/* Every local commit becomes a push. Debounced by the sync layer itself, which collapses a
+   burst of drags into one write rather than a queue of conflicting ones. */
+const _commit = commit;
+commit = function(msg){
+  _commit(msg);
+  if (sync) sync.push(() => DB, merged => {
+    const at = DB.weekOffset; DB = merged; DB.weekOffset = at; save(); render();
+  });
+};
+
+/* Still useful with a server in play: two tabs in the SAME browser share localStorage and
+   would otherwise only find out about each other on the next poll. */
+addEventListener('storage', ev => {
+  if (ev.key !== KEY) return;
+  let incoming = null;
+  try { incoming = JSON.parse(ev.newValue || 'null'); } catch(e) { return; }
+  if (!incoming || incoming.v !== DB.v) return;
+  const at = DB.weekOffset;
+  DB = incoming;
+  DB.weekOffset = at;          /* their write must not drag our week out from under us */
+  render();
+  toast('The rota changed in another window');
+});
+
+render();
+</script>
+</body>
+</html>

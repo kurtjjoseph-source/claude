@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VOM 100 — Business Command Center</title>
+<style>
+  :root{
+    --navy:#071a2f; --navy2:#092033; --blue:#0b3d91; --teal:#00a6a6; --teal2:#8be8e8;
+    --orange:#ff8a3d; --ink:#102033; --muted:#5f6b7a; --soft:#f5f8fb; --line:#e4ebf2;
+    --card:#ffffff; --good:#1f9d6b; --warn:#e0a516;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    color:var(--ink);background:var(--soft);line-height:1.5;-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  .wrap{max-width:1240px;margin:0 auto;padding:0 22px}
+
+  /* Header */
+  header{background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 55%,var(--blue) 140%);color:#fff;padding:30px 0 26px}
+  .hrow{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}
+  .brand{display:flex;align-items:center;gap:14px}
+  .logo{width:46px;height:46px;border-radius:12px;background:linear-gradient(135deg,var(--teal),var(--blue));
+    display:flex;align-items:center;justify-content:center;font-weight:800;font-size:19px;letter-spacing:.5px;
+    box-shadow:0 6px 20px rgba(0,166,166,.35)}
+  h1{font-size:22px;font-weight:800;letter-spacing:.2px}
+  .sub{color:var(--teal2);font-size:13px;font-weight:500;margin-top:2px}
+  .addbtn{background:var(--orange);color:#231000;border:none;font-weight:700;font-size:14px;
+    padding:11px 18px;border-radius:10px;cursor:pointer;box-shadow:0 6px 18px rgba(255,138,61,.35);transition:.15s}
+  .addbtn:hover{transform:translateY(-1px);filter:brightness(1.05)}
+
+  /* Progress to 100 */
+  .goal{margin-top:22px}
+  .goal .lab{display:flex;justify-content:space-between;font-size:12.5px;color:#cfe0f2;margin-bottom:7px;font-weight:600}
+  .bar{height:12px;background:rgba(255,255,255,.14);border-radius:20px;overflow:hidden}
+  .bar>span{display:block;height:100%;background:linear-gradient(90deg,var(--teal),var(--teal2));border-radius:20px;transition:width .6s ease}
+
+  /* KPIs */
+  .kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:22px}
+  .kpi{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.13);border-radius:12px;padding:13px 15px}
+  .kpi b{display:block;font-size:26px;font-weight:800;line-height:1}
+  .kpi span{font-size:11.5px;color:#bcd0e6;text-transform:uppercase;letter-spacing:.6px;font-weight:600}
+  .kpi.k-live b{color:var(--teal2)} .kpi.k-built b{color:#a9e5ff} .kpi.k-proto b{color:#ffd7b0} .kpi.k-idea b{color:#ffb98f}
+
+  /* Controls */
+  .controls{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:24px 0 18px}
+  .search{flex:1;min-width:220px;position:relative}
+  .search input{width:100%;padding:11px 14px 11px 38px;border:1px solid var(--line);border-radius:10px;font-size:14px;background:#fff}
+  .search svg{position:absolute;left:12px;top:11px;opacity:.45}
+  .chips{display:flex;gap:8px;flex-wrap:wrap}
+  .chip{border:1px solid var(--line);background:#fff;color:var(--muted);font-size:12.5px;font-weight:600;
+    padding:8px 13px;border-radius:20px;cursor:pointer;transition:.12s;white-space:nowrap}
+  .chip:hover{border-color:var(--teal)}
+  .chip.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+
+  /* Groups */
+  .group{margin-bottom:30px}
+  .ghead{display:flex;align-items:center;gap:10px;margin:0 0 13px}
+  .ghead h2{font-size:15px;font-weight:800;letter-spacing:.2px}
+  .ghead .dot{width:9px;height:9px;border-radius:50%}
+  .ghead .cnt{font-size:12px;color:var(--muted);font-weight:600;background:#fff;border:1px solid var(--line);padding:2px 9px;border-radius:20px}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:15px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 17px;position:relative;
+    transition:.15s;box-shadow:0 1px 2px rgba(16,32,51,.04)}
+  .card:hover{box-shadow:0 10px 26px rgba(16,32,51,.10);transform:translateY(-2px)}
+  .ctop{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+  .cname{font-size:15.5px;font-weight:800;letter-spacing:.1px}
+  .stage{font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;padding:3px 9px;border-radius:20px;white-space:nowrap}
+  .s-Live{background:#dff5ec;color:#0e7a52} .s-Built{background:#e2f0ff;color:#0b3d91}
+  .s-Prototype{background:#fff0e2;color:#b85c14} .s-Exploring{background:#f0e9ff;color:#5b3ea8} .s-Idea{background:#f1f4f8;color:#5f6b7a}
+  .cdesc{font-size:13px;color:#3a4658;margin:10px 0 12px}
+  .meta{font-size:11.5px;color:var(--muted);display:flex;flex-direction:column;gap:4px}
+  .meta .row{display:flex;gap:6px}
+  .meta .row b{color:var(--ink);font-weight:700;min-width:64px}
+  .cfoot{display:flex;justify-content:space-between;align-items:center;margin-top:13px;padding-top:11px;border-top:1px solid var(--line)}
+  .src{font-size:11px;color:var(--muted)}
+  .cbtns{display:flex;gap:6px;opacity:0;transition:.15s}
+  .card:hover .cbtns{opacity:1}
+  .icb{border:1px solid var(--line);background:#fff;border-radius:7px;width:28px;height:28px;cursor:pointer;font-size:13px;color:var(--muted)}
+  .icb:hover{border-color:var(--teal);color:var(--ink)}
+
+  .empty{text-align:center;color:var(--muted);padding:50px 0;font-size:14px}
+
+  footer{color:var(--muted);font-size:12px;text-align:center;padding:26px 0 40px}
+
+  /* Modal */
+  .ov{position:fixed;inset:0;background:rgba(7,26,47,.55);backdrop-filter:blur(3px);display:none;align-items:flex-start;justify-content:center;z-index:50;padding:40px 16px;overflow:auto}
+  .ov.show{display:flex}
+  .modal{background:#fff;border-radius:16px;width:100%;max-width:560px;padding:24px;box-shadow:0 24px 60px rgba(7,26,47,.4)}
+  .modal h3{font-size:18px;font-weight:800;margin-bottom:18px}
+  .fg{margin-bottom:14px}
+  .fg label{display:block;font-size:12px;font-weight:700;color:var(--ink);margin-bottom:5px;text-transform:uppercase;letter-spacing:.4px}
+  .fg input,.fg textarea,.fg select{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:9px;font-size:14px;font-family:inherit}
+  .fg textarea{resize:vertical;min-height:64px}
+  .frow{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .mfoot{display:flex;justify-content:space-between;gap:10px;margin-top:20px}
+  .mfoot .right{display:flex;gap:10px}
+  .btn{padding:10px 18px;border-radius:9px;font-size:14px;font-weight:700;cursor:pointer;border:1px solid var(--line);background:#fff;color:var(--ink)}
+  .btn.primary{background:var(--blue);color:#fff;border-color:var(--blue)}
+  .btn.danger{color:#c0392b;border-color:#f0d0cc}
+  .btn:hover{filter:brightness(.97)}
+
+  @media(max-width:720px){.kpis{grid-template-columns:repeat(2,1fr)}.frow{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="hrow">
+      <div class="brand">
+        <div class="logo">V100</div>
+        <div>
+          <h1>VOM 100 — Business Command Center</h1>
+          <div class="sub">Vision Outreach Media · portfolio of businesses & ideas</div>
+        </div>
+      </div>
+      <button class="addbtn" onclick="openModal()">+ Register venture</button>
+    </div>
+
+    <div class="goal">
+      <div class="lab"><span>Progress to 100 ventures</span><span id="goalTxt">0 / 100</span></div>
+      <div class="bar"><span id="goalBar" style="width:0%"></span></div>
+    </div>
+
+    <div class="kpis" id="kpis"></div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="controls">
+    <div class="search">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      <input id="q" placeholder="Search ventures…" oninput="render()">
+    </div>
+    <div class="chips" id="stageChips"></div>
+  </div>
+
+  <div id="groups"></div>
+  <footer id="foot"></footer>
+</div>
+
+<!-- Modal -->
+<div class="ov" id="ov">
+  <div class="modal">
+    <h3 id="mTitle">Register venture</h3>
+    <div class="fg"><label>Name</label><input id="f_name" placeholder="e.g. FaithSite AI Agency"></div>
+    <div class="fg"><label>Concept / one-liner</label><textarea id="f_desc" placeholder="What it is, in a sentence"></textarea></div>
+    <div class="frow">
+      <div class="fg"><label>Category</label><select id="f_cat"></select></div>
+      <div class="fg"><label>Stage</label><select id="f_stage"></select></div>
+    </div>
+    <div class="frow">
+      <div class="fg"><label>Revenue model</label><input id="f_rev" placeholder="e.g. €29/mo retainer"></div>
+      <div class="fg"><label>Next action</label><input id="f_next" placeholder="e.g. Build landing page"></div>
+    </div>
+    <div class="fg"><label>Source (chat / note)</label><input id="f_src" placeholder="e.g. Finding a way to earn money"></div>
+    <div class="mfoot">
+      <button class="btn danger" id="delBtn" onclick="delItem()" style="visibility:hidden">Delete</button>
+      <div class="right">
+        <button class="btn" onclick="closeModal()">Cancel</button>
+        <button class="btn primary" onclick="saveItem()">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const CATS = ["Core Services","FaithSite SaaS","Products & Tools","Content & Games","Emerging Tech","Ops & Infrastructure"];
+const CATDOT = {"Core Services":"#00a6a6","FaithSite SaaS":"#0b3d91","Products & Tools":"#ff8a3d","Content & Games":"#8e44ad","Emerging Tech":"#1f9d6b","Ops & Infrastructure":"#5f6b7a"};
+const STAGES = ["Idea","Exploring","Prototype","Built","Live"];
+const GOAL = 100;
+
+const SEED = [
+  {name:"Vision Outreach Media (VOM)",cat:"Core Services",stage:"Live",desc:"Done-for-you websites, media design & ongoing digital support for churches, ministries and nonprofits (NL).",rev:"Project fees + monthly care plans",next:"Land testimonials; publish blog",src:"visionoutreachmedia.nl"},
+  {name:"FaithSite AI Agency (turnkey)",cat:"FaithSite SaaS",stage:"Prototype",desc:"AI web agency with a live demo copy-generator, cold-outreach email generator and tiered pricing.",rev:"$497–1,997 one-time + $97/mo care",next:"Host demo; send 10 outreach emails",src:"Finding a way to earn money"},
+  {name:"FaithSite Publisher",cat:"FaithSite SaaS",stage:"Built",desc:"BYO-key WordPress content publisher that pushes pages & posts across a fleet of client sites.",rev:"Part of FaithSite suite",next:"Wire to shared fleet store",src:"AI automation for WordPress"},
+  {name:"FaithSite Campaign Builder",cat:"FaithSite SaaS",stage:"Built",desc:"Fleet-wide, multi-client campaign roadmap + multilingual content studio + SEO/schema + Google Ad Grants toolkit.",rev:"Part of FaithSite suite",next:"Unify fleet with Hub",src:"AI automation for WordPress"},
+  {name:"FaithSite Hub",cat:"FaithSite SaaS",stage:"Built",desc:"Orchestration home: one shared fleet + connections (AI key, per-site WordPress); launches Publisher & Campaign.",rev:"Part of FaithSite suite",next:"Rewire Publisher/Campaign to shared key",src:"AI automation for WordPress"},
+  {name:"FaithSite Engagement Platform",cat:"FaithSite SaaS",stage:"Prototype",desc:"Multi-org SaaS: engagement studio (6 types), distribution (email/Meta/webhooks), analytics, 7 AI agents, audience segments, agency panel. Next.js/Supabase/Clerk.",rev:"Per-org SaaS subscription",next:"Scaffold foundation + migrations",src:"Audience engagement workflow application"},
+  {name:"AI Website SaaS (bait & hook)",cat:"FaithSite SaaS",stage:"Idea",desc:"AI builds ~80% of a site; subscription hosting + edits for churches/faith orgs/SMBs.",rev:"Build fee + €29–59/mo retainer",next:"Pick AI builder; make sample church site",src:"Applying bait and hook to AI products"},
+  {name:"Niche AI Writing Tool",cat:"Products & Tools",stage:"Idea",desc:"Vertical AI copy tool for one niche (realtors, coaches, Etsy). Free trial → paid; saved history = stickiness.",rev:"€9 / €29 / €99 tiers",next:"Choose niche; no-code MVP via Zapier",src:"Applying bait and hook to AI products"},
+  {name:"VOM Event Registration (WP plugin)",cat:"Products & Tools",stage:"Built",desc:"Church/ministry event sign-ups + potluck 'what to bring' coordination with still-needed highlighting + .ics export. Backend-editable per event.",rev:"Plugin / add-on to care plans",next:"Prefill real picnic; add form types",src:"Picnic registration app"},
+  {name:"QR Code Generator",cat:"Products & Tools",stage:"Built",desc:"Client-side QR generator (PNG/SVG, adjustable size, download, copy to clipboard).",rev:"Free tool / lead magnet",next:"Bundle into VOM toolkit",src:"QR Code Generator"},
+  {name:"Star Quest 64",cat:"Content & Games",stage:"Prototype",desc:"Retro N64-style 3D collect-athon platformer web game (WebGL).",rev:"TBD — portfolio / fun",next:"Finish playable build",src:"N64 era game concept"},
+  {name:"Meta Quest VR Experiences",cat:"Emerging Tech",stage:"Exploring",desc:"VR/MR apps (potential faith / training niche) for Meta Quest via Unity or Unreal + Meta XR SDK.",rev:"App sales / commissioned builds",next:"Pick first experience concept",src:"Developing virtual experiences for Meta Quest"},
+  {name:"Aladewura",cat:"Emerging Tech",stage:"Exploring",desc:"Local-first AI memory/context browser extension + desktop store; session continuity / crash recovery while vibe-coding.",rev:"Freemium extension",next:"Validate crash-recovery pain; prototype",src:"Aladewura"},
+  {name:"VOM Agent Swarm / DevOps Orchestrator",cat:"Ops & Infrastructure",stage:"Built",desc:"6 agent teams, 22 defined agents to run the agency end-to-end with human escalation gates. Productizable as agency-in-a-box.",rev:"Internal — or license as product",next:"Turn Care team into runnable skills",src:"Business teams for agent swarms"},
+  {name:"SEO Agent Team",cat:"Ops & Infrastructure",stage:"Built",desc:"Automated technical + content SEO (Rank Math workflow).",rev:"Internal enabler",next:"Roll across fleet sites",src:"Seo Agent team"},
+  {name:"Faith-based Social Media Team / Engage AI",cat:"Ops & Infrastructure",stage:"Built",desc:"Social-content agent roles + recurring engagement cadence.",rev:"Internal enabler / add-on",next:"Define monthly cadence per client",src:"Engage AI engagement cycle"}
+];
+
+const KEY = "vom100:ventures:v1";
+let data = load();
+let activeStage = "All";
+
+function load(){
+  try{ const r = localStorage.getItem(KEY); if(r) return JSON.parse(r); }catch(e){}
+  return SEED.map((v,i)=>({id:"v"+i+"_"+Math.floor(1000+i*37), ...v}));
+}
+function save(){ try{ localStorage.setItem(KEY, JSON.stringify(data)); }catch(e){} }
+
+// ---- KPIs + goal ----
+function stats(){
+  const s = {Live:0,Built:0,Prototype:0,Exploring:0,Idea:0};
+  data.forEach(v=>{ if(s[v.stage]!==undefined) s[v.stage]++; });
+  return s;
+}
+function paintTop(){
+  const s = stats();
+  document.getElementById("kpis").innerHTML = `
+    <div class="kpi"><b>${data.length}</b><span>Registered</span></div>
+    <div class="kpi k-live"><b>${s.Live}</b><span>Live</span></div>
+    <div class="kpi k-built"><b>${s.Built}</b><span>Built</span></div>
+    <div class="kpi k-proto"><b>${s.Prototype+s.Exploring}</b><span>In build</span></div>
+    <div class="kpi k-idea"><b>${s.Idea}</b><span>Ideas</span></div>`;
+  const pct = Math.min(100, Math.round(data.length/GOAL*100));
+  document.getElementById("goalBar").style.width = pct+"%";
+  document.getElementById("goalTxt").textContent = data.length+" / "+GOAL;
+}
+
+function paintChips(){
+  const opts = ["All",...STAGES];
+  document.getElementById("stageChips").innerHTML = opts.map(o=>
+    `<button class="chip ${activeStage===o?'on':''}" onclick="setStage('${o}')">${o}</button>`).join("");
+}
+function setStage(s){ activeStage=s; paintChips(); render(); }
+
+function esc(t){ return (t||"").replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+
+function render(){
+  paintTop();
+  const q = document.getElementById("q").value.trim().toLowerCase();
+  let items = data.filter(v=>{
+    if(activeStage!=="All" && v.stage!==activeStage) return false;
+    if(q){ const hay=(v.name+" "+v.desc+" "+v.cat+" "+(v.src||"")).toLowerCase(); if(!hay.includes(q)) return false; }
+    return true;
+  });
+  const host = document.getElementById("groups");
+  if(!items.length){ host.innerHTML = `<div class="empty">No ventures match. Try a different filter, or <a href="#" onclick="openModal();return false" style="color:var(--blue);font-weight:700">register a new one</a>.</div>`; foot(); return; }
+  let html="";
+  CATS.forEach(cat=>{
+    const inCat = items.filter(v=>v.cat===cat);
+    if(!inCat.length) return;
+    html += `<div class="group"><div class="ghead"><span class="dot" style="background:${CATDOT[cat]}"></span><h2>${cat}</h2><span class="cnt">${inCat.length}</span></div><div class="grid">`;
+    inCat.forEach(v=>{ html += cardHTML(v); });
+    html += `</div></div>`;
+  });
+  host.innerHTML = html;
+  foot();
+}
+
+function cardHTML(v){
+  return `<div class="card">
+    <div class="ctop"><div class="cname">${esc(v.name)}</div><div class="stage s-${v.stage}">${v.stage}</div></div>
+    <div class="cdesc">${esc(v.desc)}</div>
+    <div class="meta">
+      ${v.rev?`<div class="row"><b>Revenue</b><span>${esc(v.rev)}</span></div>`:""}
+      ${v.next?`<div class="row"><b>Next</b><span>${esc(v.next)}</span></div>`:""}
+    </div>
+    <div class="cfoot">
+      <div class="src">${v.src?"↳ "+esc(v.src):""}</div>
+      <div class="cbtns">
+        <button class="icb" title="Edit" onclick='editItem("${v.id}")'>✎</button>
+      </div>
+    </div>
+  </div>`;
+}
+function foot(){
+  document.getElementById("foot").innerHTML =
+    `${data.length} ventures registered · ${GOAL-data.length>0?(GOAL-data.length)+' to reach 100':'goal reached 🎉'} · edits saved on this device`;
+}
+
+// ---- Modal ----
+let editing = null;
+function fillSelects(){
+  document.getElementById("f_cat").innerHTML = CATS.map(c=>`<option>${c}</option>`).join("");
+  document.getElementById("f_stage").innerHTML = STAGES.map(s=>`<option>${s}</option>`).join("");
+}
+function openModal(){
+  editing=null;
+  document.getElementById("mTitle").textContent="Register venture";
+  document.getElementById("delBtn").style.visibility="hidden";
+  ["f_name","f_desc","f_rev","f_next","f_src"].forEach(id=>document.getElementById(id).value="");
+  document.getElementById("f_cat").value=CATS[1];
+  document.getElementById("f_stage").value="Idea";
+  document.getElementById("ov").classList.add("show");
+}
+function editItem(id){
+  const v = data.find(x=>x.id===id); if(!v) return;
+  editing=id;
+  document.getElementById("mTitle").textContent="Edit venture";
+  document.getElementById("delBtn").style.visibility="visible";
+  document.getElementById("f_name").value=v.name;
+  document.getElementById("f_desc").value=v.desc;
+  document.getElementById("f_cat").value=v.cat;
+  document.getElementById("f_stage").value=v.stage;
+  document.getElementById("f_rev").value=v.rev||"";
+  document.getElementById("f_next").value=v.next||"";
+  document.getElementById("f_src").value=v.src||"";
+  document.getElementById("ov").classList.add("show");
+}
+function closeModal(){ document.getElementById("ov").classList.remove("show"); }
+function saveItem(){
+  const name=document.getElementById("f_name").value.trim();
+  if(!name){ document.getElementById("f_name").focus(); return; }
+  const obj={
+    name, desc:document.getElementById("f_desc").value.trim(),
+    cat:document.getElementById("f_cat").value, stage:document.getElementById("f_stage").value,
+    rev:document.getElementById("f_rev").value.trim(), next:document.getElementById("f_next").value.trim(),
+    src:document.getElementById("f_src").value.trim()
+  };
+  if(editing){ const v=data.find(x=>x.id===editing); Object.assign(v,obj); }
+  else{ obj.id="v"+Date.now(); data.unshift(obj); }
+  save(); closeModal(); render();
+}
+function delItem(){
+  if(!editing) return;
+  data = data.filter(x=>x.id!==editing);
+  save(); closeModal(); render();
+}
+document.getElementById("ov").addEventListener("click",e=>{ if(e.target.id==="ov") closeModal(); });
+document.addEventListener("keydown",e=>{ if(e.key==="Escape") closeModal(); });
+
+fillSelects(); paintChips(); render();
+</script>
+</body>
+</html>

@@ -1,0 +1,112 @@
+{
+  "schema": 1,
+  "business": "Digital Membership Club Business",
+  "idea_folder": "/Users/kurtjoseph/Business Ideas/Digital Membership Club Business",
+  "operator": {
+    "id": "vom",
+    "name": "Vision Outreach Media",
+    "short": "VOM",
+    "author_as": "Vision Outreach Media (VOM)",
+    "voice": "Mission-driven, plain-spoken, trust-first, and (for the church niche) faith-friendly. Never hype, never jargon. Speak like a helpful expert, not a salesperson. Deliverables say \"Vision Outreach Media (VOM)\" or \"the operator\" — never a personal name.",
+    "model": "operator-run",
+    "profile_source": "/Users/kurtjoseph/Business Ideas/vom-systems/turnkey/orchestrator/operator.json"
+  },
+  "started": "2026-08-01T10:35:08Z",
+  "updated": "2026-08-01T10:35:08Z",
+  "stage": "intake",
+  "throttle": "single",
+  "gate_matrix": {
+    "stripe_connect": "done",
+    "cloudflare_delegation": "pending",
+    "credential_baseline": "pending",
+    "dutch_lawyer_terms": "pending",
+    "registrar_nl": "pending",
+    "provisioned_accounts": "done"
+  },
+  "workstreams": {
+    "intake": {
+      "status": "not_started",
+      "actor_waiting": null,
+      "blocked_by": [],
+      "note": null,
+      "updated": "2026-08-01T10:35:08Z"
+    },
+    "W1_profile": {
+      "status": "not_started",
+      "actor_waiting": null,
+      "blocked_by": [],
+      "note": null,
+      "updated": "2026-08-01T10:35:08Z"
+    },
+    "W2_legal": {
+      "status": "not_started",
+      "actor_waiting": null,
+      "blocked_by": [],
+      "note": null,
+      "updated": "2026-08-01T10:35:08Z"
+    },
+    "W3_domain": {
+      "status": "not_started",
+      "actor_waiting": null,
+      "blocked_by": [],
+      "note": null,
+      "updated": "2026-08-01T10:35:08Z"
+    },
+    "W4_website": {
+      "status": "not_started",
+      "actor_waiting": null,
+      "blocked_by": [],
+      "note": null,
+      "updated": "2026-08-01T10:35:08Z"
+    },
+    "W5_payments": {
+      "status": "not_started",
+      "actor_waiting": null,
+      "blocked_by": [],
+      "note": null,
+      "updated": "2026-08-01T10:35:08Z"
+    },
+    "W6_products": {
+      "status": "not_started",
+      "actor_waiting": null,
+      "blocked_by": [],
+      "note": null,
+      "updated": "2026-08-01T10:35:08Z"
+    },
+    "W7_presence": {
+      "status": "not_started",
+      "actor_waiting": null,
+      "blocked_by": [],
+      "note": null,
+      "updated": "2026-08-01T10:35:08Z"
+    },
+    "W8_social": {
+      "status": "not_started",
+      "actor_waiting": null,
+      "blocked_by": [],
+      "note": null,
+      "updated": "2026-08-01T10:35:08Z"
+    },
+    "W9_leads": {
+      "status": "not_started",
+      "actor_waiting": null,
+      "blocked_by": [],
+      "note": null,
+      "updated": "2026-08-01T10:35:08Z"
+    },
+    "W10_crm": {
+      "status": "not_started",
+      "actor_waiting": null,
+      "blocked_by": [],
+      "note": null,
+      "updated": "2026-08-01T10:35:08Z"
+    },
+    "W11_followups": {
+      "status": "not_started",
+      "actor_waiting": null,
+      "blocked_by": [],
+      "note": null,
+      "updated": "2026-08-01T10:35:08Z"
+    }
+  }
+}

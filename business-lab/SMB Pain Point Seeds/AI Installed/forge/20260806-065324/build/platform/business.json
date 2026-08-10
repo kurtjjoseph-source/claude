@@ -1,0 +1,309 @@
+{
+  "schema": 1,
+  "business": {
+    "name": "AI Installed",
+    "org_type": "service_business",
+    "org_label": "Service business / consultancy / agency",
+    "platform_choice": "WordPress",
+    "operator": "Vision Outreach Media",
+    "operator_short": "",
+    "offer": "You have the ChatGPT subscription and nothing in your business actually runs on it. Three AI systems installed and working in two weeks — enquiry answering, marketing drafts, and one back-office job — for a fixed price, without anyone on your team learning a new tool.",
+    "organization": "One page that turns an idea into evidence. It states the promise, asks for a name and an email, and counts. Nothing else is built until enough people say they want it.",
+    "generated": "2026-08-06T06:53:24Z"
+  },
+  "modules": [
+    {
+      "title": "Waitlist",
+      "icon": "◌",
+      "record": "enquiry",
+      "blurb": "People who put their hand up, before they become contacts.",
+      "fields": [
+        {
+          "k": "name",
+          "label": "Name",
+          "type": "text",
+          "required": true
+        },
+        {
+          "k": "email",
+          "label": "Email",
+          "type": "text"
+        },
+        {
+          "k": "asked",
+          "label": "What they want",
+          "type": "textarea"
+        },
+        {
+          "k": "date",
+          "label": "When",
+          "type": "date"
+        },
+        {
+          "k": "handled",
+          "label": "Handled",
+          "type": "check"
+        }
+      ],
+      "tiles": [
+        {
+          "label": "New enquiries",
+          "calc": "count_false:handled"
+        }
+      ],
+      "key": "lead_capture"
+    },
+    {
+      "title": "People",
+      "icon": "◍",
+      "record": "contact",
+      "blurb": "Everyone this business deals with, and where each one stands.",
+      "view": "pipeline",
+      "stages": [
+        "Lead",
+        "Contacted",
+        "In conversation",
+        "Customer",
+        "Lapsed"
+      ],
+      "fields": [
+        {
+          "k": "name",
+          "label": "Name",
+          "type": "text",
+          "required": true
+        },
+        {
+          "k": "email",
+          "label": "Email",
+          "type": "text"
+        },
+        {
+          "k": "phone",
+          "label": "Phone",
+          "type": "text"
+        },
+        {
+          "k": "stage",
+          "label": "Stage",
+          "type": "select",
+          "from": "stages"
+        },
+        {
+          "k": "value",
+          "label": "Value",
+          "type": "money"
+        },
+        {
+          "k": "note",
+          "label": "Notes",
+          "type": "textarea"
+        }
+      ],
+      "tiles": [
+        {
+          "label": "Contacts",
+          "calc": "count"
+        },
+        {
+          "label": "In pipeline",
+          "calc": "sum:value",
+          "money": true
+        }
+      ],
+      "key": "crm"
+    },
+    {
+      "title": "Announcements",
+      "icon": "✦",
+      "record": "subscriber",
+      "blurb": "The list, and what has been sent to it.",
+      "fields": [
+        {
+          "k": "email",
+          "label": "Email",
+          "type": "text",
+          "required": true
+        },
+        {
+          "k": "name",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "k": "source",
+          "label": "Came from",
+          "type": "text"
+        },
+        {
+          "k": "date",
+          "label": "Joined",
+          "type": "date"
+        },
+        {
+          "k": "subscribed",
+          "label": "Subscribed",
+          "type": "check"
+        }
+      ],
+      "tiles": [
+        {
+          "label": "On the list",
+          "calc": "count_true:subscribed"
+        }
+      ],
+      "key": "email_marketing"
+    },
+    {
+      "title": "Content",
+      "icon": "✎",
+      "record": "post",
+      "blurb": "Posts and announcements, drafted here before they go out.",
+      "fields": [
+        {
+          "k": "title",
+          "label": "Title",
+          "type": "text",
+          "required": true
+        },
+        {
+          "k": "status",
+          "label": "Status",
+          "type": "select",
+          "options": [
+            "Idea",
+            "Draft",
+            "Ready",
+            "Published"
+          ]
+        },
+        {
+          "k": "channel",
+          "label": "Channel",
+          "type": "select",
+          "options": [
+            "Website",
+            "Newsletter",
+            "Facebook",
+            "Instagram",
+            "LinkedIn",
+            "YouTube"
+          ]
+        },
+        {
+          "k": "date",
+          "label": "Planned for",
+          "type": "date"
+        },
+        {
+          "k": "body",
+          "label": "The piece",
+          "type": "textarea"
+        }
+      ],
+      "tiles": [
+        {
+          "label": "Ready to publish",
+          "calc": "count_eq:status:Ready"
+        },
+        {
+          "label": "Published",
+          "calc": "count_eq:status:Published"
+        }
+      ],
+      "key": "content_publishing"
+    },
+    {
+      "title": "Inbox",
+      "icon": "✉",
+      "record": "message",
+      "blurb": "Questions coming in, and what was sent back.",
+      "fields": [
+        {
+          "k": "who",
+          "label": "From",
+          "type": "text",
+          "required": true
+        },
+        {
+          "k": "subject",
+          "label": "About",
+          "type": "text"
+        },
+        {
+          "k": "date",
+          "label": "Received",
+          "type": "date"
+        },
+        {
+          "k": "status",
+          "label": "Status",
+          "type": "select",
+          "options": [
+            "New",
+            "Replied",
+            "Closed"
+          ]
+        },
+        {
+          "k": "message",
+          "label": "What they said",
+          "type": "textarea"
+        },
+        {
+          "k": "reply",
+          "label": "Draft reply",
+          "type": "textarea"
+        }
+      ],
+      "tiles": [
+        {
+          "label": "Needs a reply",
+          "calc": "count_eq:status:New"
+        }
+      ],
+      "key": "support_inbox"
+    }
+  ],
+  "seed": {
+    "lead_capture": [
+      {
+        "name": "Example — replace me",
+        "email": "someone@example.com",
+        "date": "2026-08-06",
+        "handled": false,
+        "asked": "Seed record so the waitlist view is not empty. Delete it when the first real name arrives."
+      }
+    ],
+    "content_publishing": [
+      {
+        "title": "Why I am building this",
+        "status": "Draft",
+        "channel": "Website",
+        "date": "2026-08-06",
+        "body": "The founding post. Say what you noticed, who it hurts, and what you intend to do about it. This is what people share."
+      }
+    ]
+  },
+  "archetype": {
+    "id": "prelaunch",
+    "forge": {
+      "name": "PRELAUNCHforge",
+      "scheme": "dark",
+      "base": "#0A0A0B",
+      "base_soft": "#141416",
+      "accent": "#38D07F",
+      "accent_2": "#7BE3AC",
+      "accent_site": "#2f9e63",
+      "on_accent": "#0A0A0B",
+      "line": "Building a validation funnel."
+    }
+  },
+  "kit": {
+    "id": "waitlist-green",
+    "name": "Waitlist Green",
+    "accent": "#278453",
+    "accent_bright": "#38D07F",
+    "on_accent": "#FFFFFF"
+  }
+}

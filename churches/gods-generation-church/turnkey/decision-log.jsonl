@@ -1,0 +1,5 @@
+{"data":{"business":"Gods Generation Church","operator":"vom","throttle":"single"},"kind":"init","ts":"2026-08-01T08:38:12Z"}
+{"data":{"actor_waiting":null,"note":null,"status":"done","workstream":"intake"},"kind":"set_status","ts":"2026-08-01T09:31:02Z"}
+{"data":{"forced":false,"from":"intake","missing":[],"to":"foundation"},"kind":"advance","ts":"2026-08-01T09:31:10Z"}
+{"data":{"classified":"classifier","confidence":"high","core":["analytics_reporting","content_publishing","crm","donations","events","finance_admin","media_library","people_roster","web_presence"],"org_type":"church","overrides":{"added":[],"removed":[]},"platform":"wordpress","platform_source":"engine","wordpress_used":true},"kind":"blueprint","ts":"2026-08-01T09:32:23Z"}
+{"data":{"forced":true,"from":"foundation","missing":["W1_profile not done (profile must be locked)","W3_domain has no working/pending hostname to build on"],"to":"build"},"kind":"advance","ts":"2026-08-01T09:32:37Z"}

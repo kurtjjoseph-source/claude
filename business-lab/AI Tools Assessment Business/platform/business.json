@@ -1,0 +1,509 @@
+{
+  "schema": 1,
+  "business": {
+    "name": "AI Tools Assessment Business",
+    "org_type": "service_business",
+    "org_label": "Service business / consultancy / agency",
+    "platform_choice": "Custom app (Vercel)",
+    "wordpress": false,
+    "operator": "Vision Outreach Media",
+    "operator_short": "VOM",
+    "offer": "A productized AI-tools consulting service sold in three tiers:\n\n1. **AI Tools Assessment ($999, door-opener).** A 45-minute recorded discovery call with a small-business owner, followed by AI-assisted analysis of the transcript, resulting in a client-facing report (Claude Designer / Gamma-built, ~9 slides) prescribing 3–7 off-the-shelf AI/SaaS tools that reclaim 5–10 hours/week. Risk-reversed: 100% money back if fewer than 5 hours/week of opportunity is found. No building or implementation at this stage — prescription only.\n2. **Implementation upsells (à la carte, ~50% of clients).** Process r",
+    "organization": "",
+    "generated": "2026-08-01T09:44:36Z"
+  },
+  "modules": [
+    {
+      "key": "crm",
+      "title": "Contacts",
+      "icon": "◍",
+      "record": "contact",
+      "blurb": "Everyone this business deals with, and where each one stands.",
+      "view": "pipeline",
+      "stages": [
+        "Lead",
+        "Contacted",
+        "In conversation",
+        "Customer",
+        "Lapsed"
+      ],
+      "fields": [
+        {
+          "k": "name",
+          "label": "Name",
+          "type": "text",
+          "required": true
+        },
+        {
+          "k": "email",
+          "label": "Email",
+          "type": "text"
+        },
+        {
+          "k": "phone",
+          "label": "Phone",
+          "type": "text"
+        },
+        {
+          "k": "stage",
+          "label": "Stage",
+          "type": "select",
+          "from": "stages"
+        },
+        {
+          "k": "value",
+          "label": "Value",
+          "type": "money"
+        },
+        {
+          "k": "note",
+          "label": "Notes",
+          "type": "textarea"
+        }
+      ],
+      "tiles": [
+        {
+          "label": "Contacts",
+          "calc": "count"
+        },
+        {
+          "label": "In pipeline",
+          "calc": "sum:value",
+          "money": true
+        }
+      ]
+    },
+    {
+      "key": "content_publishing",
+      "title": "Content",
+      "icon": "✎",
+      "record": "post",
+      "blurb": "Posts and announcements, drafted here before they go out.",
+      "fields": [
+        {
+          "k": "title",
+          "label": "Title",
+          "type": "text",
+          "required": true
+        },
+        {
+          "k": "status",
+          "label": "Status",
+          "type": "select",
+          "options": [
+            "Idea",
+            "Draft",
+            "Ready",
+            "Published"
+          ]
+        },
+        {
+          "k": "channel",
+          "label": "Channel",
+          "type": "select",
+          "options": [
+            "Website",
+            "Newsletter",
+            "Facebook",
+            "Instagram",
+            "LinkedIn",
+            "YouTube"
+          ]
+        },
+        {
+          "k": "date",
+          "label": "Planned for",
+          "type": "date"
+        },
+        {
+          "k": "body",
+          "label": "The piece",
+          "type": "textarea"
+        }
+      ],
+      "tiles": [
+        {
+          "label": "Ready to publish",
+          "calc": "count_eq:status:Ready"
+        },
+        {
+          "label": "Published",
+          "calc": "count_eq:status:Published"
+        }
+      ]
+    },
+    {
+      "key": "booking",
+      "title": "Bookings",
+      "icon": "◔",
+      "record": "booking",
+      "blurb": "Appointments, who they are with, and whether they are confirmed.",
+      "view": "upcoming",
+      "fields": [
+        {
+          "k": "title",
+          "label": "What",
+          "type": "text",
+          "required": true
+        },
+        {
+          "k": "who",
+          "label": "With",
+          "type": "text"
+        },
+        {
+          "k": "date",
+          "label": "Date",
+          "type": "date",
+          "required": true
+        },
+        {
+          "k": "time",
+          "label": "Time",
+          "type": "text"
+        },
+        {
+          "k": "status",
+          "label": "Status",
+          "type": "select",
+          "options": [
+            "Requested",
+            "Confirmed",
+            "Done",
+            "No-show"
+          ]
+        },
+        {
+          "k": "note",
+          "label": "Notes",
+          "type": "textarea"
+        }
+      ],
+      "tiles": [
+        {
+          "label": "Upcoming",
+          "calc": "count_future:date"
+        },
+        {
+          "label": "Awaiting confirmation",
+          "calc": "count_eq:status:Requested"
+        }
+      ]
+    },
+    {
+      "key": "checkout_payments",
+      "title": "Orders",
+      "icon": "€",
+      "record": "order",
+      "blurb": "What has been sold and whether the money arrived.",
+      "view": "ledger",
+      "fields": [
+        {
+          "k": "customer",
+          "label": "Customer",
+          "type": "text",
+          "required": true
+        },
+        {
+          "k": "item",
+          "label": "What they bought",
+          "type": "text"
+        },
+        {
+          "k": "amount",
+          "label": "Amount",
+          "type": "money",
+          "required": true
+        },
+        {
+          "k": "date",
+          "label": "Date",
+          "type": "date"
+        },
+        {
+          "k": "status",
+          "label": "Status",
+          "type": "select",
+          "options": [
+            "Pending",
+            "Paid",
+            "Refunded",
+            "Failed"
+          ]
+        }
+      ],
+      "tiles": [
+        {
+          "label": "Paid this month",
+          "calc": "sum_month_eq:amount:status:Paid",
+          "money": true
+        },
+        {
+          "label": "Awaiting payment",
+          "calc": "count_eq:status:Pending"
+        },
+        {
+          "label": "Revenue all time",
+          "calc": "sum_eq:amount:status:Paid",
+          "money": true
+        }
+      ]
+    },
+    {
+      "key": "support_inbox",
+      "title": "Inbox",
+      "icon": "✉",
+      "record": "message",
+      "blurb": "Questions coming in, and what was sent back.",
+      "fields": [
+        {
+          "k": "who",
+          "label": "From",
+          "type": "text",
+          "required": true
+        },
+        {
+          "k": "subject",
+          "label": "About",
+          "type": "text"
+        },
+        {
+          "k": "date",
+          "label": "Received",
+          "type": "date"
+        },
+        {
+          "k": "status",
+          "label": "Status",
+          "type": "select",
+          "options": [
+            "New",
+            "Replied",
+            "Closed"
+          ]
+        },
+        {
+          "k": "message",
+          "label": "What they said",
+          "type": "textarea"
+        },
+        {
+          "k": "reply",
+          "label": "Draft reply",
+          "type": "textarea"
+        }
+      ],
+      "tiles": [
+        {
+          "label": "Needs a reply",
+          "calc": "count_eq:status:New"
+        }
+      ]
+    },
+    {
+      "key": "email_marketing",
+      "title": "Mailing list",
+      "icon": "✦",
+      "record": "subscriber",
+      "blurb": "The list, and what has been sent to it.",
+      "fields": [
+        {
+          "k": "email",
+          "label": "Email",
+          "type": "text",
+          "required": true
+        },
+        {
+          "k": "name",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "k": "source",
+          "label": "Came from",
+          "type": "text"
+        },
+        {
+          "k": "date",
+          "label": "Joined",
+          "type": "date"
+        },
+        {
+          "k": "subscribed",
+          "label": "Subscribed",
+          "type": "check"
+        }
+      ],
+      "tiles": [
+        {
+          "label": "On the list",
+          "calc": "count_true:subscribed"
+        }
+      ]
+    },
+    {
+      "key": "finance_admin",
+      "title": "Invoices",
+      "icon": "◫",
+      "record": "invoice",
+      "blurb": "What has been billed, what has been paid, and the VAT on it.",
+      "view": "ledger",
+      "fields": [
+        {
+          "k": "number",
+          "label": "Invoice no.",
+          "type": "text",
+          "required": true
+        },
+        {
+          "k": "client",
+          "label": "To",
+          "type": "text",
+          "required": true
+        },
+        {
+          "k": "amount",
+          "label": "Amount (excl. VAT)",
+          "type": "money",
+          "required": true
+        },
+        {
+          "k": "vat",
+          "label": "VAT %",
+          "type": "number"
+        },
+        {
+          "k": "date",
+          "label": "Date",
+          "type": "date"
+        },
+        {
+          "k": "status",
+          "label": "Status",
+          "type": "select",
+          "options": [
+            "Draft",
+            "Sent",
+            "Paid",
+            "Overdue"
+          ]
+        }
+      ],
+      "tiles": [
+        {
+          "label": "Outstanding",
+          "calc": "sum_eq:amount:status:Sent",
+          "money": true
+        },
+        {
+          "label": "Paid this month",
+          "calc": "sum_month_eq:amount:status:Paid",
+          "money": true
+        },
+        {
+          "label": "VAT collected",
+          "calc": "sum_vat",
+          "money": true
+        }
+      ]
+    },
+    {
+      "key": "documents_contracts",
+      "title": "Quotes",
+      "icon": "◨",
+      "record": "quote",
+      "blurb": "Proposals out, and which ones came back signed.",
+      "fields": [
+        {
+          "k": "title",
+          "label": "Proposal",
+          "type": "text",
+          "required": true
+        },
+        {
+          "k": "client",
+          "label": "For",
+          "type": "text"
+        },
+        {
+          "k": "amount",
+          "label": "Value",
+          "type": "money"
+        },
+        {
+          "k": "sent",
+          "label": "Sent",
+          "type": "date"
+        },
+        {
+          "k": "status",
+          "label": "Status",
+          "type": "select",
+          "options": [
+            "Drafting",
+            "Sent",
+            "Accepted",
+            "Declined"
+          ]
+        },
+        {
+          "k": "scope",
+          "label": "Scope",
+          "type": "textarea"
+        }
+      ],
+      "tiles": [
+        {
+          "label": "Out for decision",
+          "calc": "count_eq:status:Sent"
+        },
+        {
+          "label": "Won",
+          "calc": "sum_eq:amount:status:Accepted",
+          "money": true
+        }
+      ]
+    },
+    {
+      "key": "lead_capture",
+      "title": "Enquiries",
+      "icon": "◌",
+      "record": "enquiry",
+      "blurb": "People who put their hand up, before they become contacts.",
+      "fields": [
+        {
+          "k": "name",
+          "label": "Name",
+          "type": "text",
+          "required": true
+        },
+        {
+          "k": "email",
+          "label": "Email",
+          "type": "text"
+        },
+        {
+          "k": "asked",
+          "label": "What they want",
+          "type": "textarea"
+        },
+        {
+          "k": "date",
+          "label": "When",
+          "type": "date"
+        },
+        {
+          "k": "handled",
+          "label": "Handled",
+          "type": "check"
+        }
+      ],
+      "tiles": [
+        {
+          "label": "New enquiries",
+          "calc": "count_false:handled"
+        }
+      ]
+    }
+  ]
+}

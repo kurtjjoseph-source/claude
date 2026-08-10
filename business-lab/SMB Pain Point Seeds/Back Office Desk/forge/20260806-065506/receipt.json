@@ -1,0 +1,38 @@
+{
+  "run": "20260806-065506",
+  "sealed": "2026-08-06T06:55:21Z",
+  "fingerprint": "sha256:475f499791d12bc537c41147a8445e12",
+  "business": "Back Office Desk",
+  "archetype": "prelaunch",
+  "forge": "PRELAUNCHforge",
+  "target": "vercel",
+  "artifacts": {
+    "logo": "drawn monogram — no client logo was supplied",
+    "brand_manual": "/Users/kurtjoseph/Business Ideas/SMB Pain Point Seeds/Back Office Desk/forge/20260806-065506/build/brand-manual.html",
+    "brand_kit": "Waitlist Green (default)",
+    "platform": "/Users/kurtjoseph/Business Ideas/SMB Pain Point Seeds/Back Office Desk/forge/20260806-065506/build/platform/index.html",
+    "photos": "6 placeholder photographs (CC0/PDM)",
+    "site": "/Users/kurtjoseph/Business Ideas/SMB Pain Point Seeds/Back Office Desk/forge/20260806-065506/build/site/index.html",
+    "pages": [
+      "faq.html",
+      "index.html"
+    ],
+    "url": "https://back-office-desk-prelaunch-425bkp0fu-kurtjjoseph-6989s-projects.vercel.app",
+    "platform_url": "https://back-office-desk-prelaunch-425bkp0fu-kurtjjoseph-6989s-projects.vercel.app/platform/",
+    "alias": "https://back-office-desk-prelaunch.vercel.app"
+  },
+  "checks_passed": 10,
+  "elapsed_seconds": 14.82,
+  "authorization": {
+    "mode": "unattended",
+    "targets": [
+      "vercel"
+    ],
+    "scope": "unattended forge build + deploy to 'vercel' for this business, limited to: composing the platform modules, writing the public site, wiring rails that already have credentials, publishing the result, and — for a hosting target that gates new projects behind a login — making that one deployment publicly reachable. Does not authorize sending email, charging anyone, or posting to any channel.",
+    "consent_ref": "c162e557cc346124",
+    "consent_seq": 1,
+    "granted_by": "VOM",
+    "granted_at": "2026-08-06T06:55:06Z",
+    "channel": "standing service authorization"
+  }
+}

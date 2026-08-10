@@ -1,0 +1,55 @@
+{"seq": 1, "ts": "2026-08-06T06:53:53Z", "t": 0.0, "kind": "run_start", "stage": "", "level": "info", "msg": "PRELAUNCHforge · Paid on Time", "data": {"archetype": "prelaunch", "target": "vercel", "fingerprint": "sha256:f69589d7bed9c18db1bb8ce618c3e919", "stages": 11}}
+{"seq": 2, "ts": "2026-08-06T06:53:53Z", "t": 0.0, "kind": "stage_start", "stage": "resolve", "level": "info", "msg": "Read the spec"}
+{"seq": 3, "ts": "2026-08-06T06:53:53Z", "t": 0.002, "kind": "log", "stage": "resolve", "level": "info", "msg": "Prelaunch validation funnel · 5 modules · 2 pages"}
+{"seq": 4, "ts": "2026-08-06T06:53:53Z", "t": 0.003, "kind": "log", "stage": "resolve", "level": "info", "msg": "authorization: unattended (1044275eb01e8539)"}
+{"seq": 5, "ts": "2026-08-06T06:53:53Z", "t": 0.003, "kind": "log", "stage": "resolve", "level": "warn", "msg": "4 value(s) filled from the archetype because the profile did not supply them", "data": {"assumptions": ["tagline", "about", "leadership", "brand_kit"]}}
+{"seq": 6, "ts": "2026-08-06T06:53:53Z", "t": 0.003, "kind": "stage_end", "stage": "resolve", "level": "info", "msg": "Read the spec", "data": {"state": "ok"}}
+{"seq": 7, "ts": "2026-08-06T06:53:53Z", "t": 0.004, "kind": "stage_start", "stage": "scaffold", "level": "info", "msg": "Lay out the build"}
+{"seq": 8, "ts": "2026-08-06T06:53:53Z", "t": 0.008, "kind": "log", "stage": "scaffold", "level": "info", "msg": "build tree at forge/20260806-065353/build"}
+{"seq": 9, "ts": "2026-08-06T06:53:53Z", "t": 0.008, "kind": "stage_end", "stage": "scaffold", "level": "info", "msg": "Lay out the build", "data": {"state": "ok"}}
+{"seq": 10, "ts": "2026-08-06T06:53:53Z", "t": 0.009, "kind": "stage_start", "stage": "brand", "level": "info", "msg": "Apply the brand · Waitlist Green"}
+{"seq": 11, "ts": "2026-08-06T06:53:53Z", "t": 0.012, "kind": "log", "stage": "brand", "level": "info", "msg": "Waitlist Green · accent #278453 · grotesk type · light ground · default · built by PRELAUNCHforge"}
+{"seq": 12, "ts": "2026-08-06T06:53:53Z", "t": 0.012, "kind": "stage_end", "stage": "brand", "level": "info", "msg": "Apply the brand · Waitlist Green", "data": {"state": "ok"}}
+{"seq": 13, "ts": "2026-08-06T06:53:53Z", "t": 0.013, "kind": "stage_start", "stage": "platform", "level": "info", "msg": "Build the platform · 5 modules"}
+{"seq": 14, "ts": "2026-08-06T06:53:53Z", "t": 0.016, "kind": "log", "stage": "platform", "level": "info", "msg": "Waitlist, People, Announcements, Content, Inbox"}
+{"seq": 15, "ts": "2026-08-06T06:53:53Z", "t": 0.016, "kind": "log", "stage": "platform", "level": "info", "msg": "2 seed record(s) so it opens with something in it"}
+{"seq": 16, "ts": "2026-08-06T06:53:53Z", "t": 0.016, "kind": "stage_end", "stage": "platform", "level": "info", "msg": "Build the platform · 5 modules", "data": {"state": "ok"}}
+{"seq": 17, "ts": "2026-08-06T06:53:53Z", "t": 0.017, "kind": "stage_start", "stage": "site", "level": "info", "msg": "Write the site · 2 pages"}
+{"seq": 18, "ts": "2026-08-06T06:53:53Z", "t": 0.024, "kind": "log", "stage": "site", "level": "info", "msg": "6 photographs installed at site/img/ — placeholders, credited in img/CREDITS.md"}
+{"seq": 19, "ts": "2026-08-06T06:53:53Z", "t": 0.028, "kind": "log", "stage": "site", "level": "info", "msg": "index.html  (49 KB)"}
+{"seq": 20, "ts": "2026-08-06T06:53:53Z", "t": 0.029, "kind": "log", "stage": "site", "level": "info", "msg": "faq.html  (45 KB)"}
+{"seq": 21, "ts": "2026-08-06T06:53:53Z", "t": 0.029, "kind": "stage_end", "stage": "site", "level": "info", "msg": "Write the site · 2 pages", "data": {"state": "ok"}}
+{"seq": 22, "ts": "2026-08-06T06:53:53Z", "t": 0.031, "kind": "stage_start", "stage": "wire", "level": "info", "msg": "Wire the rails"}
+{"seq": 23, "ts": "2026-08-06T06:53:53Z", "t": 0.033, "kind": "log", "stage": "wire", "level": "warn", "msg": "built but not switched on: email=brevo, analytics=engage_ai"}
+{"seq": 24, "ts": "2026-08-06T06:53:53Z", "t": 0.033, "kind": "log", "stage": "wire", "level": "warn", "msg": "needs from the operator: BREVO_API_KEY, BREVO_SENDER_EMAIL, ENGAGE_AI_BASE_URL"}
+{"seq": 25, "ts": "2026-08-06T06:53:53Z", "t": 0.033, "kind": "stage_end", "stage": "wire", "level": "info", "msg": "Wire the rails", "data": {"state": "ok"}}
+{"seq": 26, "ts": "2026-08-06T06:53:53Z", "t": 0.035, "kind": "stage_start", "stage": "package", "level": "info", "msg": "Package"}
+{"seq": 27, "ts": "2026-08-06T06:53:53Z", "t": 0.044, "kind": "log", "stage": "package", "level": "info", "msg": "site at the root, platform at /platform, manifest + readme written"}
+{"seq": 28, "ts": "2026-08-06T06:53:53Z", "t": 0.044, "kind": "stage_end", "stage": "package", "level": "info", "msg": "Package", "data": {"state": "ok"}}
+{"seq": 29, "ts": "2026-08-06T06:53:53Z", "t": 0.045, "kind": "stage_start", "stage": "verify", "level": "info", "msg": "Check the work"}
+{"seq": 30, "ts": "2026-08-06T06:53:53Z", "t": 0.047, "kind": "log", "stage": "verify", "level": "info", "msg": "PASS  spec_fingerprint — spec fingerprint matches its contents"}
+{"seq": 31, "ts": "2026-08-06T06:53:53Z", "t": 0.048, "kind": "log", "stage": "verify", "level": "info", "msg": "PASS  no_placeholders — no unresolved token reached a page"}
+{"seq": 32, "ts": "2026-08-06T06:53:53Z", "t": 0.048, "kind": "log", "stage": "verify", "level": "info", "msg": "PASS  pages_written — 2/2 present and non-trivial"}
+{"seq": 33, "ts": "2026-08-06T06:53:53Z", "t": 0.049, "kind": "log", "stage": "verify", "level": "info", "msg": "PASS  platform_written — 2/2 present and non-trivial"}
+{"seq": 34, "ts": "2026-08-06T06:53:53Z", "t": 0.049, "kind": "log", "stage": "verify", "level": "info", "msg": "PASS  nav_resolves — every nav link points at a written page"}
+{"seq": 35, "ts": "2026-08-06T06:53:53Z", "t": 0.049, "kind": "log", "stage": "verify", "level": "info", "msg": "PASS  module_titles_unique — every module has its own name"}
+{"seq": 36, "ts": "2026-08-06T06:53:53Z", "t": 0.05, "kind": "log", "stage": "verify", "level": "info", "msg": "PASS  brand_kit_applied — Waitlist Green — #278453 is in the stylesheet"}
+{"seq": 37, "ts": "2026-08-06T06:53:53Z", "t": 0.05, "kind": "log", "stage": "verify", "level": "info", "msg": "PASS  waitlist_present — module 'lead_capture'"}
+{"seq": 38, "ts": "2026-08-06T06:53:53Z", "t": 0.05, "kind": "log", "stage": "verify", "level": "info", "msg": "PASS  ask_on_first_screen — The ask is reachable without leaving the first page."}
+{"seq": 39, "ts": "2026-08-06T06:53:53Z", "t": 0.05, "kind": "log", "stage": "verify", "level": "info", "msg": "PASS  no_payment_rail — module 'crm'"}
+{"seq": 40, "ts": "2026-08-06T06:53:53Z", "t": 0.05, "kind": "log", "stage": "verify", "level": "info", "msg": "all 10 checks passed"}
+{"seq": 41, "ts": "2026-08-06T06:53:53Z", "t": 0.05, "kind": "stage_end", "stage": "verify", "level": "info", "msg": "Check the work", "data": {"state": "ok"}}
+{"seq": 42, "ts": "2026-08-06T06:53:53Z", "t": 0.052, "kind": "stage_start", "stage": "deploy", "level": "info", "msg": "Deploy · vercel"}
+{"seq": 43, "ts": "2026-08-06T06:53:56Z", "t": 2.205, "kind": "log", "stage": "deploy", "level": "info", "msg": "linked to project 'paid-on-time-prelaunch'"}
+{"seq": 44, "ts": "2026-08-06T06:54:05Z", "t": 11.316, "kind": "log", "stage": "deploy", "level": "info", "msg": "deployment protection disabled — the site is reachable without a Vercel login"}
+{"seq": 45, "ts": "2026-08-06T06:54:07Z", "t": 14.176, "kind": "log", "stage": "deploy", "level": "info", "msg": "stable address: https://paid-on-time-prelaunch.vercel.app"}
+{"seq": 46, "ts": "2026-08-06T06:54:08Z", "t": 14.176, "kind": "log", "stage": "deploy", "level": "info", "msg": "https://paid-on-time-prelaunch-l49hxod2i-kurtjjoseph-6989s-projects.vercel.app"}
+{"seq": 47, "ts": "2026-08-06T06:54:08Z", "t": 14.176, "kind": "stage_end", "stage": "deploy", "level": "info", "msg": "Deploy · vercel", "data": {"state": "ok"}}
+{"seq": 48, "ts": "2026-08-06T06:54:08Z", "t": 14.178, "kind": "stage_start", "stage": "smoke", "level": "info", "msg": "Prove it is up"}
+{"seq": 49, "ts": "2026-08-06T06:54:08Z", "t": 14.632, "kind": "log", "stage": "smoke", "level": "info", "msg": "HTTP 200 from https://paid-on-time-prelaunch-l49hxod2i-kurtjjoseph-6989s-projects.vercel.app — serving 'Paid on Time' (50822 bytes)"}
+{"seq": 50, "ts": "2026-08-06T06:54:08Z", "t": 14.966, "kind": "log", "stage": "smoke", "level": "info", "msg": "stable address confirmed: https://paid-on-time-prelaunch.vercel.app"}
+{"seq": 51, "ts": "2026-08-06T06:54:08Z", "t": 14.967, "kind": "stage_end", "stage": "smoke", "level": "info", "msg": "Prove it is up", "data": {"state": "ok"}}
+{"seq": 52, "ts": "2026-08-06T06:54:08Z", "t": 14.968, "kind": "stage_start", "stage": "seal", "level": "info", "msg": "Seal the run"}
+{"seq": 53, "ts": "2026-08-06T06:54:08Z", "t": 14.97, "kind": "log", "stage": "seal", "level": "info", "msg": "receipt written · 14.97s"}
+{"seq": 54, "ts": "2026-08-06T06:54:08Z", "t": 14.97, "kind": "stage_end", "stage": "seal", "level": "info", "msg": "Seal the run", "data": {"state": "ok"}}
+{"seq": 55, "ts": "2026-08-06T06:54:08Z", "t": 14.972, "kind": "run_end", "stage": "", "level": "info", "msg": "Paid on Time is launched", "data": {"outcome": "launched", "elapsed": 14.97, "url": "https://paid-on-time-prelaunch-l49hxod2i-kurtjjoseph-6989s-projects.vercel.app"}}

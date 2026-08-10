@@ -1,0 +1,296 @@
+{
+  "schema": 1,
+  "business": "Second Visit",
+  "idea_folder": "/Users/kurtjoseph/Business Ideas/SMB Pain Point Seeds/Second Visit",
+  "operator": {
+    "id": "vom",
+    "name": "Vision Outreach Media",
+    "short": "VOM",
+    "author_as": "Vision Outreach Media (VOM)",
+    "voice": "Mission-driven, plain-spoken, trust-first, and (for the church niche) faith-friendly. Never hype, never jargon. Speak like a helpful expert, not a salesperson. Deliverables say \"Vision Outreach Media (VOM)\" or \"the operator\" — never a personal name.",
+    "model": "operator-run",
+    "profile_source": "/Users/kurtjoseph/Business Ideas/vom-systems/turnkey/orchestrator/operator.json"
+  },
+  "started": "2026-08-05T21:29:46Z",
+  "updated": "2026-08-07T07:50:19Z",
+  "stage": "intake",
+  "throttle": "single",
+  "gate_matrix": {
+    "stripe_connect": "done",
+    "cloudflare_delegation": "pending",
+    "credential_baseline": "pending",
+    "dutch_lawyer_terms": "pending",
+    "registrar_nl": "pending",
+    "provisioned_accounts": "done"
+  },
+  "workstreams": {
+    "intake": {
+      "status": "not_started",
+      "actor_waiting": null,
+      "blocked_by": [],
+      "note": null,
+      "updated": "2026-08-05T21:29:46Z"
+    },
+    "W1_profile": {
+      "status": "not_started",
+      "actor_waiting": null,
+      "blocked_by": [],
+      "note": null,
+      "updated": "2026-08-05T21:29:46Z"
+    },
+    "W2_legal": {
+      "status": "not_started",
+      "actor_waiting": null,
+      "blocked_by": [],
+      "note": null,
+      "updated": "2026-08-05T21:29:46Z"
+    },
+    "W3_domain": {
+      "status": "not_started",
+      "actor_waiting": null,
+      "blocked_by": [],
+      "note": null,
+      "updated": "2026-08-05T21:29:46Z"
+    },
+    "W4_website": {
+      "status": "not_started",
+      "actor_waiting": null,
+      "blocked_by": [],
+      "note": null,
+      "updated": "2026-08-05T21:29:46Z"
+    },
+    "W5_payments": {
+      "status": "not_started",
+      "actor_waiting": null,
+      "blocked_by": [],
+      "note": null,
+      "updated": "2026-08-05T21:29:46Z"
+    },
+    "W6_products": {
+      "status": "not_started",
+      "actor_waiting": null,
+      "blocked_by": [],
+      "note": null,
+      "updated": "2026-08-05T21:29:46Z"
+    },
+    "W7_presence": {
+      "status": "not_started",
+      "actor_waiting": null,
+      "blocked_by": [],
+      "note": null,
+      "updated": "2026-08-05T21:29:46Z"
+    },
+    "W8_social": {
+      "status": "not_started",
+      "actor_waiting": null,
+      "blocked_by": [],
+      "note": null,
+      "updated": "2026-08-05T21:29:46Z"
+    },
+    "W9_leads": {
+      "status": "not_started",
+      "actor_waiting": null,
+      "blocked_by": [],
+      "note": null,
+      "updated": "2026-08-05T21:29:46Z"
+    },
+    "W10_crm": {
+      "status": "not_started",
+      "actor_waiting": null,
+      "blocked_by": [],
+      "note": null,
+      "updated": "2026-08-05T21:29:46Z"
+    },
+    "W11_followups": {
+      "status": "not_started",
+      "actor_waiting": null,
+      "blocked_by": [],
+      "note": null,
+      "updated": "2026-08-05T21:29:46Z"
+    }
+  },
+  "blueprint": {
+    "schema": 1,
+    "org_type": "service_business",
+    "org_label": "Service business / consultancy / agency",
+    "classified": {
+      "source": "operator",
+      "confidence": "explicit"
+    },
+    "platform": {
+      "decision": "wordpress",
+      "label": "WordPress",
+      "wordpress_used": true,
+      "hosting": "one.com managed WordPress (VOM's own apex); client WordPress sites are hosted per-client and DNS-pointed from the delegated clients zone",
+      "confidence": "medium",
+      "scores": {
+        "wordpress": 3.0,
+        "vercel_app": 1.0
+      },
+      "headline": "WordPress — the owner keeps control of content without a developer.",
+      "source": "engine"
+    },
+    "functions": {
+      "web_presence": {
+        "tier": "core",
+        "workstream": "W4_website",
+        "title": "Public web presence",
+        "gated": true,
+        "implementation": "WordPress site (block theme) — home, offer, about, contact"
+      },
+      "crm": {
+        "tier": "core",
+        "workstream": "W10_crm",
+        "title": "CRM — contacts, pipeline, running inventory",
+        "gated": false,
+        "implementation": "Operator-side CRM (not in WordPress); site forms feed it"
+      },
+      "finance_admin": {
+        "tier": "core",
+        "workstream": "W2_legal",
+        "title": "Finance & admin (invoicing, VAT, bookkeeping)",
+        "gated": false,
+        "implementation": "NL bookkeeping tool + Stripe payouts reconciled monthly"
+      },
+      "analytics_reporting": {
+        "tier": "core",
+        "workstream": "W7_presence",
+        "title": "Analytics & presence reporting",
+        "gated": false,
+        "implementation": "Engage AI plugin reports real page/post counts as ground truth"
+      },
+      "lead_capture": {
+        "tier": "core",
+        "workstream": "W9_leads",
+        "title": "Lead capture (forms, lead magnet, CTA)",
+        "gated": false,
+        "implementation": "Form plugin → CRM + Brevo list"
+      },
+      "email_marketing": {
+        "tier": "recommended",
+        "workstream": "W9_leads",
+        "title": "Email list & broadcasts",
+        "gated": true,
+        "implementation": "Brevo list + form plugin; broadcasts sent from Brevo"
+      },
+      "social_publishing": {
+        "tier": "recommended",
+        "workstream": "W8_social",
+        "title": "Social content production & scheduling",
+        "gated": true,
+        "implementation": "Engage AI Content Studio inside wp-admin (owner-operable)"
+      },
+      "documents_contracts": {
+        "tier": "core",
+        "workstream": "W10_crm",
+        "title": "Quotes, proposals & contracts",
+        "gated": false,
+        "implementation": "Template pack + e-sign SaaS, tracked on the CRM record"
+      },
+      "booking": {
+        "tier": "core",
+        "workstream": "W4_website",
+        "title": "Appointment booking / scheduling",
+        "gated": false,
+        "implementation": "Booking plugin, or embed the operator's scheduling SaaS"
+      },
+      "checkout_payments": {
+        "tier": "core",
+        "workstream": "W5_payments",
+        "title": "Checkout & payments",
+        "gated": true,
+        "implementation": "Stripe checkout (hosted) linked from Woo/pages; iDEAL enabled for NL"
+      },
+      "content_publishing": {
+        "tier": "recommended",
+        "workstream": "W4_website",
+        "title": "Content publishing (blog / news / articles)",
+        "gated": false,
+        "implementation": "WordPress posts + categories; owner edits without a developer"
+      },
+      "support_inbox": {
+        "tier": "recommended",
+        "workstream": "W11_followups",
+        "title": "Support inbox & FAQ",
+        "gated": true,
+        "implementation": "Shared mailbox + FAQ pages; replies drafted, human-approved"
+      },
+      "product_catalog": {
+        "tier": "optional",
+        "workstream": "W6_products",
+        "title": "Product catalog (what is for sale, at what price)",
+        "gated": false,
+        "implementation": "WooCommerce products/variations; Stripe as the gateway"
+      },
+      "membership_access": {
+        "tier": "optional",
+        "workstream": "W6_products",
+        "title": "Member area & access control",
+        "gated": false,
+        "implementation": "Membership plugin gating pages by plan; login lives on the client's site"
+      },
+      "courses_lms": {
+        "tier": "optional",
+        "workstream": "W6_products",
+        "title": "Course delivery (LMS)",
+        "gated": false,
+        "implementation": "LMS plugin (LearnDash/TutorLMS) — lessons, progress, certificates"
+      },
+      "subscriptions": {
+        "tier": "optional",
+        "workstream": "W5_payments",
+        "title": "Subscriptions / recurring billing",
+        "gated": true,
+        "implementation": "Stripe Billing (portal hosted by Stripe), membership plugin for access"
+      }
+    },
+    "workstream_scope": {
+      "W4_website": [
+        "web_presence",
+        "booking",
+        "content_publishing"
+      ],
+      "W10_crm": [
+        "crm",
+        "documents_contracts"
+      ],
+      "W2_legal": [
+        "finance_admin"
+      ],
+      "W7_presence": [
+        "analytics_reporting"
+      ],
+      "W9_leads": [
+        "lead_capture",
+        "email_marketing"
+      ],
+      "W8_social": [
+        "social_publishing"
+      ],
+      "W5_payments": [
+        "checkout_payments"
+      ],
+      "W11_followups": [
+        "support_inbox"
+      ]
+    },
+    "overrides": {
+      "added": [],
+      "removed": []
+    },
+    "doc": "turnkey/blueprint.md",
+    "decided": "2026-08-06T01:49:48Z"
+  },
+  "forge_authorization": {
+    "mode": "unattended",
+    "targets": [
+      "vercel"
+    ],
+    "scope": "unattended forge build + deploy to 'vercel' for this business, limited to: composing the platform modules, writing the public site, wiring rails that already have credentials, publishing the result, and — for a hosting target that gates new projects behind a login — making that one deployment publicly reachable. Does not authorize sending email, charging anyone, or posting to any channel.",
+    "consent_ref": "5b34d67a12c7db69",
+    "consent_seq": 2,
+    "granted_by": "VOM",
+    "granted_at": "2026-08-07T07:50:19Z",
+    "channel": "standing service authorization"
+  }
+}

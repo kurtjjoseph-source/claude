@@ -1,0 +1,937 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark"></head><body><title>Vision Outreach Media — a walk through the house</title>
+<script>
+/* Paint-blocking bootstrap: deploy-wizard.sh supplies a bare <html>/<body>, so the
+   accent slot and the kit body class must be set here or the page ships in the kit's
+   default amber instead of VOM orange. */
+(function(){
+  var d = document.documentElement;
+  d.setAttribute("data-brand","vom");
+  try{ var t = localStorage.getItem("vom.house.theme"); if(t) d.setAttribute("data-theme",t); }catch(e){}
+  document.addEventListener("DOMContentLoaded",function(){ document.body.className="vk-body"; });
+})();
+</script>
+<style>
+/* ==== VOM Kit v2 ==== */
+/* ============================================================================
+   VOM KIT v2 — the Vision Outreach Media design system
+   Vision Outreach Media · 2026-08-02
+
+   v1 was written as theory and adopted by exactly one page (its own demo), so
+   four palettes drifted apart in practice: the kit's cream/gold, the six product
+   sites' warm paper, Forge's cold white, and the Forge console's near-black.
+
+   v2 is taken from what actually ships. The six live product sites already agreed
+   on a ground, an ink scale, a line colour and a per-product accent; that is the
+   real system, so it is the one written down here. Everything else — Forge's
+   generated client sites, the build console, the house consoles — moves onto it.
+
+   ONE GROUND, ONE INK SCALE, ONE ACCENT SLOT.
+
+     --c            the accent. Everything brand-coloured reads from it.
+     [data-brand]   swaps the accent (and only the accent) per product.
+     [data-theme]   forces light/dark; otherwise the OS decides.
+     --display      the display face — serif for VOM's own surfaces, sans for a
+                    client's, because a church should not inherit our editorial voice.
+
+   Adoption rule: a page may add layout, never a second palette. If you need a
+   colour that is not a token here, the token is missing — add it here first.
+   ========================================================================== */
+
+/* ---------------------------------------------------------------- tokens */
+:root{
+  /* ground + ink — the part every surface shares */
+  --bg:#f6f5f1;
+  --surface:#ffffff;
+  --surface-2:#f1efe8;
+  --line:#e1dfd4;
+  --line-soft:#ece9df;
+  --ink:#1a1d1b;
+  --ink-soft:#535b56;
+  --ink-faint:#868f89;
+
+  /* the accent slot — [data-brand] below is the only thing that should change it */
+  --c:#c47716;
+  --c-bright:#f0a24b;
+  --c-ink:#ffffff;                                   /* readable text ON the accent */
+  --c-wash:color-mix(in srgb, var(--c) 9%, var(--surface));
+  --c-line:color-mix(in srgb, var(--c) 38%, var(--line));
+
+  /* semantic */
+  --good:#2f9e63; --warn:#c9862a; --bad:#c0523a; --info:#2b86bd;
+
+  /* the logo bar navy is a constant — it is the mark's own field, not a theme */
+  --brand-navy:#1B2A4A;
+
+  /* shape + depth */
+  --radius:14px; --radius-sm:9px; --radius-pill:999px;
+  --shadow-sm:0 1px 2px rgba(26,29,27,.05), 0 2px 8px rgba(26,29,27,.04);
+  --shadow:0 2px 6px rgba(26,29,27,.06), 0 14px 34px rgba(26,29,27,.08);
+
+  /* type */
+  --serif:ui-serif,Georgia,"Times New Roman",serif;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --mono:ui-monospace,"SF Mono","Cascadia Code",Menlo,Consolas,monospace;
+  --display:var(--serif);      /* VOM's own surfaces. Client surfaces set --sans. */
+
+  /* rhythm — one scale, so spacing never gets invented per page */
+  --s1:6px; --s2:10px; --s3:14px; --s4:20px; --s5:28px; --s6:40px; --s7:60px; --s8:88px;
+  --wrap:1080px;
+}
+
+:root[data-surface="client"]{
+  /* What Forge builds for a church or a solo business. Same ground, same rhythm,
+     but the display face is the client's own voice, not our editorial serif. */
+  --display:var(--sans);
+  --surface:#ffffff;
+}
+
+@media (prefers-color-scheme:dark){
+  :root{
+    --bg:#0e100f; --surface:#161a18; --surface-2:#1c211e;
+    --line:#2a322d; --line-soft:#232a26;
+    --ink:#f0f2ee; --ink-soft:#a8b1aa; --ink-faint:#79837c;
+    --c:var(--c-bright);
+    --good:#38d07f; --warn:#e0a94b; --bad:#e8785c; --info:#5fb9e8;
+    --shadow-sm:0 1px 2px rgba(0,0,0,.4); --shadow:0 14px 34px rgba(0,0,0,.5);
+  }
+}
+:root[data-theme="light"]{
+  --bg:#f6f5f1; --surface:#ffffff; --surface-2:#f1efe8; --line:#e1dfd4; --line-soft:#ece9df;
+  --ink:#1a1d1b; --ink-soft:#535b56; --ink-faint:#868f89;
+  --good:#2f9e63; --warn:#c9862a; --bad:#c0523a; --info:#2b86bd;
+}
+:root[data-theme="dark"]{
+  --bg:#0e100f; --surface:#161a18; --surface-2:#1c211e; --line:#2a322d; --line-soft:#232a26;
+  --ink:#f0f2ee; --ink-soft:#a8b1aa; --ink-faint:#79837c; --c:var(--c-bright);
+  --good:#38d07f; --warn:#e0a94b; --bad:#e8785c; --info:#5fb9e8;
+}
+
+/* ---------------------------------------------------- the house of brands */
+/* Each product owns an accent and nothing else. That is the whole difference
+   between them, and it is why they read as one house.                        */
+[data-brand="vom"]         { --c:#e8843c; --c-bright:#f0a05c; }
+[data-brand="hundred"]     { --c:#2f9e63; --c-bright:#38d07f; }
+[data-brand="turnkey"]     { --c:#c47716; --c-bright:#f0a24b; }
+[data-brand="vital"]       { --c:#0f9f8f; --c-bright:#3fd0c0; }
+[data-brand="launch-kits"] { --c:#d1522f; --c-bright:#f2765c; }
+[data-brand="cma"]         { --c:#6b56d6; --c-bright:#a48cf5; }
+[data-brand="operators"]   { --c:#2b86bd; --c-bright:#5fb9e8; }
+/* Forge archetypes — the accent a built platform carries, and the colour its
+   build console runs under. */
+/* Two values per forge, and they are not interchangeable: `--c-forge` is the bright one
+   the build console runs on black, `--c` is the darkened sibling a client's site uses on
+   the warm paper, where the bright value fails contrast. Same hue, honest ratios. */
+[data-brand="churchforge"]    { --c:#e2670a; --c-bright:#fb923c; --c-forge:#F97316; }
+[data-brand="bizforge"]       { --c:#0d87c4; --c-bright:#38bdf8; --c-forge:#38BDF8; }
+[data-brand="nonprofitforge"] { --c:#047857; --c-bright:#34d399; --c-forge:#10B981; }
+[data-brand="shopforge"]      { --c:#be123c; --c-bright:#fb7185; --c-forge:#F43F5E; }
+[data-brand="digitalforge"]   { --c:#6d28d9; --c-bright:#a78bfa; --c-forge:#8B5CF6; }
+[data-brand="memberforge"]    { --c:#b45309; --c-bright:#fbbf24; --c-forge:#F59E0B; }
+[data-brand="learnforge"]     { --c:#0f766e; --c-bright:#5eead4; --c-forge:#14B8A6; }
+[data-brand="venueforge"]     { --c:#a21caf; --c-bright:#f0abfc; --c-forge:#D946EF; }
+[data-brand="saasforge"]      { --c:#4338ca; --c-bright:#a5b4fc; --c-forge:#6366F1; }
+[data-brand="prelaunchforge"] { --c:#2f9e63; --c-bright:#38d07f; --c-forge:#38D07F; }
+[data-brand="forge"]          { --c:#0f8f86; --c-bright:#3fd0c0; --c-forge:#2FA8A0; }
+
+/* ------------------------------------------------------------------- base */
+*,*::before,*::after{ box-sizing:border-box; }
+.vk-body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:var(--sans); line-height:1.6; -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+.vk-wrap{ max-width:var(--wrap); margin:0 auto; padding:0 var(--s4); }
+.vk-wrap--narrow{ max-width:760px; }
+a{ color:inherit; }
+.vk-num{ font-variant-numeric:tabular-nums; }
+.vk-sec{ padding:var(--s7) 0; }
+.vk-sec + .vk-sec{ border-top:1px solid var(--line); }
+
+/* ------------------------------------------------------------------- type */
+.vk-eyebrow{
+  display:inline-block; font-family:var(--mono); font-size:11.5px; font-weight:600;
+  letter-spacing:.18em; text-transform:uppercase; color:var(--c); margin:0 0 var(--s3);
+}
+.vk-h1{
+  font-family:var(--display); font-weight:600; font-size:clamp(32px,5.2vw,52px);
+  letter-spacing:-.025em; line-height:1.04; margin:0 0 var(--s3);
+}
+.vk-h1 em{ font-style:italic; color:var(--c); }
+.vk-h2{
+  font-family:var(--display); font-weight:600; font-size:clamp(21px,2.8vw,30px);
+  letter-spacing:-.018em; line-height:1.14; margin:0 0 var(--s3);
+}
+.vk-h3{ font-size:16px; font-weight:700; letter-spacing:-.008em; margin:0 0 var(--s1); }
+.vk-lede{ font-size:clamp(15px,1.6vw,18px); color:var(--ink-soft); max-width:64ch; margin:0 0 var(--s4); }
+.vk-shead{
+  font-family:var(--mono); font-size:11px; font-weight:600; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--ink-faint); margin:0 0 var(--s3);
+}
+.vk-p{ margin:0 0 var(--s3); color:var(--ink-soft); }
+.vk-p strong{ color:var(--ink); }
+
+/* --------------------------------------------------------------- logo bar */
+/* <div class="vom-bar"><a href="…"><img …><b>Vision Outreach Media</b><span>· The House</span></a></div> */
+.vom-bar{
+  display:flex; align-items:center; gap:var(--s2); padding:9px 18px;
+  background:var(--brand-navy); color:#fff; font-family:var(--sans);
+}
+.vom-bar a{ display:flex; align-items:center; gap:var(--s2); text-decoration:none; color:#fff; }
+.vom-bar img{ width:28px; height:28px; border-radius:7px; object-fit:cover; background:#fff; display:block; }
+.vom-bar b{ font-weight:700; font-size:13.5px; letter-spacing:.02em; }
+.vom-bar span{ font-size:11px; opacity:.72; font-weight:600; letter-spacing:.09em; text-transform:uppercase; }
+
+/* ---------------------------------------------------------------- buttons */
+.vk-btn{
+  display:inline-flex; align-items:center; gap:8px; font:inherit; font-weight:700; font-size:14px;
+  padding:11px 20px; border-radius:var(--radius-pill); border:1px solid var(--line);
+  background:var(--surface); color:var(--ink); cursor:pointer; text-decoration:none;
+  white-space:nowrap; transition:background .15s, border-color .15s, color .15s;
+}
+.vk-btn:hover{ border-color:var(--ink-faint); }
+.vk-btn--accent{ background:var(--c); border-color:var(--c); color:var(--c-ink); }
+.vk-btn--accent:hover{ background:var(--c-bright); border-color:var(--c-bright); }
+.vk-btn--ghost{ background:transparent; color:var(--c); border-color:var(--c-line); }
+.vk-btn--ghost:hover{ background:var(--c-wash); border-color:var(--c); }
+.vk-btn--quiet{ background:transparent; color:var(--ink-soft); border-color:transparent; padding-inline:10px; }
+.vk-btn--quiet:hover{ color:var(--ink); background:var(--surface-2); border-color:transparent; }
+.vk-btn--sm{ font-size:13px; padding:8px 15px; }
+.vk-btn[disabled],.vk-btn--off{ opacity:.5; cursor:not-allowed; }
+.vk-btns{ display:flex; gap:var(--s2); flex-wrap:wrap; }
+
+/* ------------------------------------------------------------------ pills */
+.vk-pill{
+  display:inline-block; font-family:var(--mono); font-size:10px; font-weight:700;
+  letter-spacing:.06em; text-transform:uppercase; border-radius:6px; padding:4px 8px; white-space:nowrap;
+}
+.vk-pill--live   { color:#fff; background:var(--good); }
+.vk-pill--paid   { color:var(--c-ink); background:var(--c); }
+.vk-pill--spec   { color:var(--ink-soft); background:var(--surface-2); border:1px solid var(--line); }
+.vk-pill--partial{ color:#fff; background:var(--warn); }
+.vk-pill--planned{ color:var(--ink-faint); background:transparent; border:1px dashed var(--line); }
+.vk-pill--bad    { color:#fff; background:var(--bad); }
+
+/* ------------------------------------------------------------------ cards */
+.vk-card{
+  background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
+  padding:var(--s4);
+}
+.vk-card--pad0{ padding:0; }
+.vk-card--rail{ position:relative; overflow:hidden; }
+.vk-card--rail::before{ content:""; position:absolute; inset:0 auto 0 0; width:4px; background:var(--c); }
+.vk-card--rail{ padding-left:calc(var(--s4) + 4px); }
+.vk-card.is-done   { border-color:color-mix(in srgb,var(--good) 45%,var(--line)); background:color-mix(in srgb,var(--good) 5%,var(--surface)); }
+.vk-card.is-flagged{ border-color:color-mix(in srgb,var(--bad) 50%,var(--line)); }
+.vk-card .vk-h3{ margin-top:0; }
+.vk-card p:last-child{ margin-bottom:0; }
+.vk-grid{ display:grid; gap:var(--s3); grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); }
+
+/* ------------------------------------------------------------- facts strip */
+/* Dividers are drawn by each cell, so a row that does not divide evenly leaves
+   ground behind rather than an empty filled box. */
+.vk-facts{
+  display:grid; gap:1px; background:var(--surface); border:1px solid var(--line);
+  border-radius:var(--radius); overflow:hidden;
+  grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+}
+.vk-fact{ background:var(--surface); padding:var(--s3) var(--s4); box-shadow:0 0 0 1px var(--line); }
+.vk-fact .k{ font-family:var(--mono); font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-faint); font-weight:700; margin-bottom:4px; }
+.vk-fact .v{ font-weight:700; font-size:16px; }
+
+/* ------------------------------------------------------------------ steps */
+.vk-steps{ counter-reset:s; list-style:none; padding:0; margin:0; display:grid; gap:var(--s2); }
+.vk-steps li{
+  counter-increment:s; position:relative; padding:var(--s3) var(--s4) var(--s3) 58px;
+  background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
+}
+.vk-steps li::before{
+  content:counter(s); position:absolute; left:var(--s4); top:var(--s3);
+  width:26px; height:26px; border-radius:50%; background:var(--c); color:var(--c-ink);
+  display:grid; place-items:center; font-weight:800; font-size:13px;
+}
+.vk-steps h4{ margin:0 0 2px; font-size:15px; font-weight:700; }
+.vk-steps p{ margin:0; color:var(--ink-soft); font-size:14px; }
+
+/* -------------------------------------------------------------------- faq */
+.vk-faq{
+  border:1px solid var(--line); border-radius:var(--radius); padding:var(--s3) var(--s4);
+  margin-bottom:var(--s2); background:var(--surface);
+}
+.vk-faq summary{ cursor:pointer; font-weight:700; list-style:none; }
+.vk-faq summary::-webkit-details-marker{ display:none; }
+.vk-faq summary::after{ content:"+"; float:right; color:var(--c); font-weight:800; }
+.vk-faq[open] summary::after{ content:"–"; }
+.vk-faq p{ margin:var(--s2) 0 0; color:var(--ink-soft); }
+
+/* ------------------------------------------------------------------- feed */
+.vk-feed{ display:grid; gap:var(--s2); }
+.vk-item{
+  display:flex; gap:var(--s3); align-items:baseline; padding:var(--s3) var(--s4);
+  border:1px solid var(--line); border-radius:var(--radius); background:var(--surface);
+}
+.vk-item .when{ font-family:var(--mono); font-variant-numeric:tabular-nums; font-weight:700; color:var(--c); font-size:12.5px; min-width:96px; }
+.vk-item .what{ font-weight:650; }
+.vk-item .sub{ color:var(--ink-soft); font-size:14px; }
+.vk-empty{ color:var(--ink-faint); font-style:italic; padding:var(--s3) var(--s4); border:1px dashed var(--line); border-radius:var(--radius); }
+
+/* ------------------------------------------------------------------ forms */
+.vk-form{ display:grid; gap:var(--s3); max-width:560px; }
+.vk-form label{ display:grid; gap:5px; font-weight:650; font-size:14px; }
+.vk-form input,.vk-form textarea,.vk-form select{
+  font:inherit; padding:11px 13px; border-radius:var(--radius-sm);
+  border:1px solid var(--line); background:var(--surface); color:var(--ink); width:100%;
+}
+.vk-form input:focus-visible,.vk-form textarea:focus-visible{
+  outline:2px solid var(--c); outline-offset:1px; border-color:var(--c);
+}
+.vk-form textarea{ min-height:120px; resize:vertical; }
+.vk-note{ font-size:13px; color:var(--ink-soft); }
+
+/* ---------------------------------------------------------------- pricing */
+.vk-tiers{ display:grid; gap:var(--s3); grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); }
+.vk-tier{ border:1px solid var(--line); border-radius:var(--radius); padding:var(--s4); background:var(--surface); }
+.vk-tier--pick{ border-color:var(--c-line); background:var(--c-wash); }
+.vk-tier .amt{ font-family:var(--display); font-size:34px; font-weight:600; letter-spacing:-.03em; margin:6px 0 var(--s2); }
+.vk-tier ul{ margin:0; padding-left:1.1em; color:var(--ink-soft); font-size:14px; }
+
+/* ---------------------------------------------------------------- chooser */
+/* Amount / frequency / fund pickers — giving, checkout, plan selection. */
+.vk-chips{ display:flex; gap:8px; flex-wrap:wrap; }
+.vk-chip{
+  padding:8px 15px; border-radius:var(--radius-pill); border:1px solid var(--line);
+  font-weight:650; font-size:14px; background:var(--surface); cursor:pointer;
+}
+.vk-chip[aria-pressed="true"],.vk-chip.is-on{ background:var(--c); color:var(--c-ink); border-color:var(--c); }
+.vk-panel{ display:grid; gap:var(--s3); border:1px solid var(--line); border-radius:var(--radius); padding:var(--s4); background:var(--surface); }
+.vk-notice{ font-size:13.5px; color:var(--ink-soft); border-left:3px solid var(--c); padding-left:var(--s2); }
+
+/* ------------------------------------------------------------------ meter */
+.vk-meter{ display:flex; align-items:center; gap:var(--s2); margin-bottom:8px; }
+.vk-meter .k{ width:96px; font-size:13px; color:var(--ink-soft); }
+.vk-meter .track{ flex:1; height:8px; background:var(--surface-2); border:1px solid var(--line); border-radius:var(--radius-pill); overflow:hidden; }
+.vk-meter .track i{ display:block; height:100%; border-radius:var(--radius-pill); background:var(--c); }
+.vk-meter .v{ width:34px; text-align:right; font-size:13px; font-weight:700; font-variant-numeric:tabular-nums; }
+
+/* ------------------------------------------------------------------ table */
+.vk-tablewrap{ overflow-x:auto; }
+.vk-table{ width:100%; border-collapse:collapse; font-size:14px; }
+.vk-table th{ font-family:var(--mono); font-size:10.5px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-faint); font-weight:700; padding:9px 8px; text-align:left; border-bottom:1px solid var(--line); }
+.vk-table td{ padding:11px 8px; border-bottom:1px solid var(--line-soft); }
+.vk-table tr:last-child td{ border-bottom:0; }
+
+/* ------------------------------------------------------------ site header */
+.vk-head{ position:sticky; top:0; z-index:20; background:color-mix(in srgb,var(--bg) 88%,transparent); backdrop-filter:blur(10px); border-bottom:1px solid var(--line); }
+.vk-bar{ display:flex; align-items:center; gap:var(--s3); min-height:64px; flex-wrap:wrap; }
+.vk-brand{ display:flex; align-items:center; gap:var(--s2); font-weight:800; text-decoration:none; letter-spacing:-.02em; margin-right:auto; white-space:nowrap; }
+.vk-brand img{ height:26px; width:auto; border-radius:5px; }
+.vk-brand .dot{ width:9px; height:9px; border-radius:50%; background:var(--c); }
+.vk-nav{ display:flex; gap:2px; flex-wrap:wrap; }
+.vk-nav a{ text-decoration:none; font-size:14px; font-weight:600; color:var(--ink-soft); padding:7px 11px; border-radius:var(--radius-sm); }
+.vk-nav a:hover{ color:var(--ink); background:var(--surface-2); }
+.vk-nav a[aria-current]{ color:var(--ink); background:var(--surface-2); }
+@media (max-width:1040px){
+  /* padding-block only — the shorthand would wipe the wrapper's side gutters */
+  .vk-nav{ order:3; width:100%; padding-top:7px; border-top:1px solid var(--line); }
+  .vk-nav a{ padding-left:0; padding-right:16px; }
+  .vk-bar{ padding-top:9px; padding-bottom:9px; min-height:0; }
+}
+@media (max-width:640px){
+  .vk-nav{ border-top:0; padding-top:0; overflow-x:auto; flex-wrap:nowrap; scrollbar-width:none; }
+  .vk-nav::-webkit-scrollbar{ display:none; }
+}
+
+/* -------------------------------------------------------------------- CTA */
+.vk-band{
+  background:var(--brand-navy); color:#fff; border-radius:var(--radius);
+  padding:clamp(28px,4vw,48px); text-align:center;
+}
+.vk-band .vk-h2{ color:#fff; }
+.vk-band p{ color:#fff; opacity:.82; max-width:56ch; margin:0 auto var(--s4); }
+.vk-band--accent{ background:var(--c); color:var(--c-ink); }
+.vk-band--accent .vk-h2{ color:var(--c-ink); }
+
+/* ----------------------------------------------------------------- footer */
+.vk-footer{ padding:var(--s5) 0 var(--s7); margin-top:var(--s5); color:var(--ink-faint); font-size:14px; border-top:1px solid var(--line); }
+.vk-footer .cols{ display:flex; gap:var(--s5); justify-content:space-between; flex-wrap:wrap; }
+
+/* ============================================================ FORGE surfaces
+   The build console runs dark under the archetype's forge colour, so an operator
+   always knows which kind of platform is being made. This is the ONE place the
+   ground legitimately differs — it is a tool, not a page.                      */
+.vk-forge{
+  --bg:#0e100f; --surface:#161a18; --surface-2:#1c211e; --line:#2a322d; --line-soft:#232a26;
+  --ink:#f0f2ee; --ink-soft:#a8b1aa; --ink-faint:#79837c;
+  --c:var(--c-forge, var(--c-bright)); --c-ink:#0e100f;
+  background:var(--bg); color:var(--ink);
+}
+.vk-rail{ list-style:none; margin:0; padding:var(--s1) 0; }
+.vk-rail li{ display:flex; gap:var(--s3); padding:9px var(--s4); position:relative; }
+.vk-rail li::before{ content:""; position:absolute; left:33px; top:0; bottom:0; width:1px; background:var(--line); }
+.vk-rail li:first-child::before{ top:22px; }
+.vk-rail li:last-child::before{ bottom:calc(100% - 22px); }
+.vk-cue{
+  width:30px; height:30px; border-radius:9px; flex:none; display:grid; place-items:center;
+  font-size:14px; background:var(--surface-2); color:var(--ink-faint);
+  border:1px solid var(--line); position:relative; z-index:1; transition:.25s;
+}
+.is-running > .vk-cue{ background:var(--c); color:var(--c-ink); border-color:var(--c); animation:vk-pulse 1.15s ease-in-out infinite; }
+@keyframes vk-pulse{ 0%,100%{ box-shadow:0 0 0 0 color-mix(in srgb,var(--c) 55%,transparent); } 70%{ box-shadow:0 0 0 9px transparent; } }
+.is-ok > .vk-cue{ background:color-mix(in srgb,var(--good) 16%,var(--surface-2)); color:var(--good); border-color:color-mix(in srgb,var(--good) 40%,transparent); }
+.is-failed > .vk-cue{ background:color-mix(in srgb,var(--bad) 18%,var(--surface-2)); color:var(--bad); border-color:color-mix(in srgb,var(--bad) 50%,transparent); }
+.is-skipped > .vk-cue{ opacity:.45; }
+.vk-rail .body{ flex:1; min-width:0; padding-top:3px; }
+.vk-rail .t{ font-weight:700; font-size:15px; display:flex; gap:var(--s2); align-items:baseline; }
+.vk-rail .d{ color:var(--ink-soft); font-size:13px; }
+.is-pending > .body{ opacity:.42; }
+.is-running > .body .t{ color:var(--c); }
+.vk-rail .ms{ margin-left:auto; font-family:var(--mono); font-size:12px; color:var(--ink-faint); flex:none; }
+
+@media (prefers-reduced-motion:reduce){ *{ animation:none!important; transition:none!important; } }
+</style>
+<style>
+/* layout only — every colour is a vom-kit-v2 token or a color-mix of them */
+html{scroll-behavior:smooth}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+.h-top{position:sticky;top:0;z-index:50;background:var(--brand-navy)}
+.h-shell{display:grid;grid-template-columns:255px minmax(0,1fr);gap:var(--s6);
+  max-width:1180px;margin:0 auto;padding:var(--s5) var(--s4) 190px}
+/* grid children default to min-width:auto, so a nowrap table would blow the
+   column out instead of scrolling inside its own wrapper. */
+.h-shell > *{min-width:0}
+@media(max-width:920px){.h-shell{grid-template-columns:minmax(0,1fr);gap:var(--s4);padding-bottom:230px}}
+
+/* ---- the map ---- */
+.h-map{position:sticky;top:78px;align-self:start}
+@media(max-width:920px){.h-map{position:static}}
+.h-map ol{list-style:none;margin:0;padding:0}
+.h-maprow{display:block;width:100%;text-align:left;font:inherit;cursor:pointer;
+  background:transparent;border:0;border-left:2px solid var(--line);
+  padding:9px var(--s3);color:var(--ink-faint);position:relative}
+.h-maprow:hover{color:var(--ink);background:var(--surface-2)}
+.h-maprow .n{font-family:var(--mono);font-size:10px;letter-spacing:.1em;display:block;opacity:.8}
+.h-maprow .t{font-size:13.5px;font-weight:650;display:block;line-height:1.25}
+.h-maprow[aria-current="true"]{border-left-color:var(--c);color:var(--ink);background:var(--c-wash)}
+.h-maprow.seen .t::after{content:" ✓";color:var(--good);font-weight:700}
+.h-prog{margin-top:var(--s3);font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--ink-faint)}
+@media(max-width:920px){
+  .h-map ol{display:flex;gap:6px;overflow-x:auto;padding-bottom:6px;scrollbar-width:none}
+  .h-map ol::-webkit-scrollbar{display:none}
+  .h-maprow{white-space:nowrap;border-left:0;border-bottom:2px solid var(--line);padding:7px 11px}
+  .h-maprow[aria-current="true"]{border-left:0;border-bottom-color:var(--c)}
+  .h-maprow .n{display:none}
+}
+
+/* ---- the room ---- */
+.h-room{min-height:60vh}
+/* the room is focused on arrival so assistive tech lands in the new content.
+   It is a landing target, not an interactive control, so it carries no ring —
+   every real control on the page keeps its own :focus-visible outline. */
+.h-room:focus,.h-room:focus-visible{outline:none}
+.h-eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--c);margin:0 0 var(--s2)}
+.h-room h2{font-family:var(--display);font-weight:600;font-size:clamp(26px,4.2vw,42px);
+  letter-spacing:-.025em;line-height:1.05;margin:0 0 var(--s3)}
+.h-room .lede{font-size:clamp(15px,1.6vw,17px);color:var(--ink-soft);max-width:62ch;margin:0 0 var(--s5)}
+
+.h-facts{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);
+  border-radius:var(--radius);overflow:hidden;grid-template-columns:repeat(auto-fit,minmax(178px,1fr))}
+.h-fact{background:var(--surface);padding:var(--s3) var(--s4)}
+.h-fact .v{font-family:var(--display);font-size:clamp(23px,3vw,31px);font-weight:600;
+  letter-spacing:-.03em;line-height:1;margin-bottom:5px}
+.h-fact .k{font-family:var(--mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--ink-faint);font-weight:700;margin-bottom:7px}
+.h-fact .n{font-size:12.5px;color:var(--ink-soft);line-height:1.45;margin-bottom:8px}
+
+.h-src{display:inline-flex;align-items:center;gap:5px;font-family:var(--mono);font-size:9.5px;
+  font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:3px 7px;border-radius:6px;
+  border:1px solid var(--line);background:var(--surface-2);color:var(--ink-soft);
+  text-decoration:none;max-width:100%}
+.h-src::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--c);flex:none}
+.h-src:hover,.h-src:focus-visible{border-color:var(--c);color:var(--ink);background:var(--c-wash)}
+
+.h-tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);
+  background:var(--surface);margin-top:var(--s4)}
+.h-table{width:100%;border-collapse:collapse;font-size:13.5px}
+.h-table th{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--ink-faint);font-weight:700;padding:10px var(--s3);text-align:left;
+  border-bottom:1px solid var(--line);white-space:nowrap}
+.h-table td{padding:10px var(--s3);border-bottom:1px solid var(--line-soft);white-space:nowrap}
+.h-table tr:last-child td{border-bottom:0}
+.h-table .num{font-variant-numeric:tabular-nums;color:var(--ink-soft)}
+.h-bar{display:inline-block;height:7px;border-radius:var(--radius-pill);background:var(--c);
+  vertical-align:middle;margin-right:7px;min-width:3px}
+
+.h-note{margin-top:var(--s4);font-size:13px;color:var(--ink-soft);border-left:3px solid var(--c-line);
+  padding-left:var(--s3)}
+.h-open{display:inline-flex;align-items:center;gap:7px;font-weight:700;font-size:14px;
+  text-decoration:none;color:var(--c);margin-top:var(--s4)}
+.h-open:hover{text-decoration:underline}
+
+/* ---- the butler ---- */
+.h-dock{position:fixed;left:0;right:0;bottom:0;z-index:60;
+  background:color-mix(in srgb,var(--surface) 94%,transparent);backdrop-filter:blur(11px);
+  border-top:1px solid var(--line);box-shadow:0 -8px 28px color-mix(in srgb,var(--ink) 9%,transparent)}
+.h-dockin{max-width:1180px;margin:0 auto;padding:var(--s3) var(--s4);
+  display:grid;grid-template-columns:auto 1fr;gap:var(--s3);align-items:start}
+.h-face{width:42px;height:42px;border-radius:11px;object-fit:cover;background:var(--brand-navy);
+  border:1px solid var(--line)}
+.h-who{font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--ink-faint);font-weight:700;margin:0 0 4px}
+.h-say{margin:0 0 var(--s2);font-size:14.5px;line-height:1.5;color:var(--ink);max-width:74ch}
+.h-say em{font-style:italic;color:var(--c)}
+.h-moves{display:flex;gap:7px;flex-wrap:wrap}
+.h-move{font:inherit;font-size:13px;font-weight:650;cursor:pointer;padding:7px 13px;
+  border-radius:var(--radius-pill);border:1px solid var(--c-line);background:var(--c-wash);
+  color:var(--ink);text-align:left}
+.h-move:hover{border-color:var(--c)}
+.h-move--quiet{background:transparent;border-color:var(--line);color:var(--ink-soft)}
+.h-move--quiet:hover{color:var(--ink);border-color:var(--ink-faint)}
+.h-askrow{display:flex;gap:7px;margin-top:var(--s2);flex-wrap:wrap}
+.h-askrow input{flex:1 1 240px;min-width:0;font:inherit;font-size:14px;padding:8px 12px;
+  border:1px solid var(--line);border-radius:var(--radius-sm);background:var(--bg);color:var(--ink)}
+.h-askrow input:focus-visible{outline:2px solid var(--c);outline-offset:1px;border-color:var(--c)}
+.h-scripted{font-size:11.5px;color:var(--ink-faint);margin:var(--s2) 0 0}
+
+:where(button,input,a[href],[tabindex]:not([tabindex="-1"])){scroll-margin-top:96px}
+.h-skip{position:absolute;left:-9999px}
+.h-skip:focus{position:static;display:inline-block;margin:var(--s2)}
+</style>
+
+<div class="h-top">
+  <div class="vom-bar" style="max-width:1180px;margin:0 auto">
+    <a href="https://visionoutreachmedia.nl">
+      <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAASABIAAD/4QBMRXhpZgAATU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAgKADAAQAAAABAAAAgAAAAAD/4QnSaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLwA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJYTVAgQ29yZSA2LjAuMCI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnBob3Rvc2hvcD0iaHR0cDovL25zLmFkb2JlLmNvbS9waG90b3Nob3AvMS4wLyIgcGhvdG9zaG9wOkluc3RydWN0aW9ucz0iRkJNRDBhMDAwYTA3MDIwMDAwYmQwYTAwMDBjMzE0MDAwMDU3MTYwMDAwNTkxODAwMDBhMjIxMDAwMDBhMzIwMDAwYmMzNDAwMDA2OTM2MDAwMDMxMzgwMDAwMmI0YzAwMDAiLz4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8P3hwYWNrZXQgZW5kPSJ3Ij8+AP/tAK5QaG90b3Nob3AgMy4wADhCSU0EBAAAAAAAdhwBWgADGyVHHAIAAAIAAhwCKABiRkJNRDBhMDAwYTA3MDIwMDAwYmQwYTAwMDBjMzE0MDAwMDU3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" alt="Vision Outreach Media">
+      <b>Vision Outreach Media</b><span>· The house</span>
+    </a>
+  </div>
+</div>
+
+<a class="h-skip vk-btn vk-btn--sm" href="#h-room">Skip to the room</a>
+
+<div class="h-shell">
+  <nav class="h-map" aria-label="Rooms in the house">
+    <p class="vk-shead">The house</p>
+    <ol id="h-map"></ol>
+    <p class="h-prog" id="h-prog"></p>
+    <button class="vk-btn vk-btn--quiet vk-btn--sm" id="h-theme" type="button"
+            style="margin-top:var(--s3)">Dark</button>
+  </nav>
+
+  <main class="h-room" id="h-room" tabindex="-1"></main>
+</div>
+
+<div class="h-dock">
+  <div class="h-dockin">
+    <img class="h-face" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAASABIAAD/4QBMRXhpZgAATU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAgKADAAQAAAABAAAAgAAAAAD/4QnSaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLwA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJYTVAgQ29yZSA2LjAuMCI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnBob3Rvc2hvcD0iaHR0cDovL25zLmFkb2JlLmNvbS9waG90b3Nob3AvMS4wLyIgcGhvdG9zaG9wOkluc3RydWN0aW9ucz0iRkJNRDBhMDAwYTA3MDIwMDAwYmQwYTAwMDBjMzE0MDAwMDU3MTYwMDAwNTkxODAwMDBhMjIxMDAwMDBhMzIwMDAwYmMzNDAwMDA2OTM2MDAwMDMxMzgwMDAwMmI0YzAwMDAiLz4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8P3hwYWNrZXQgZW5kPSJ3Ij8+AP/tAK5QaG90b3Nob3AgMy4wADhCSU0EBAAAAAAAdhwBWgADGyVHHAIAAAIAAhwCKABiRkJNRDBhMDAwYTA3MDIwMDAwYmQwYTAwMDBjMzE0MDAwMDU3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" alt="">
+    <div>
+      <p class="h-who">Bram · your guide</p>
+      <p class="h-say" id="h-say" aria-live="polite"></p>
+      <div class="h-moves" id="h-moves"></div>
+      <form class="h-askrow" id="h-ask">
+        <input id="h-q" type="text" autocomplete="off" aria-label="Ask the guide something"
+               placeholder="Ask me something — how long a build takes, what it costs…">
+        <button class="vk-btn vk-btn--sm" type="submit">Ask</button>
+      </form>
+      <p class="h-scripted">Bram is a <b>scripted guide</b>, not a live model. He knows this
+      house and says so when you ask him something outside it. Every number he quotes links to
+      the page it came from.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+"use strict";
+
+/* ------------------------------------------------------------------ sources
+   Real, live Vision Outreach Media surfaces. Everything quoted in a room is
+   read off one of these, so a visitor can check the guide.                  */
+var S = {
+  core   :{n:"visionoutreachmedia.nl", u:"https://visionoutreachmedia.nl"},
+  gallery:{n:"What we build",          u:"https://vom-gallery.vercel.app"},
+  forge  :{n:"Turnkey · Forge",        u:"https://vom-forge.vercel.app"},
+  engage :{n:"Engage AI",              u:"https://engage-ai-api.onrender.com/dashboard"},
+  grow   :{n:"Three ways we grow",     u:"https://vom-grow.vercel.app"},
+  hundred:{n:"Hundred — Growth OS",    u:"https://hundred-theta.vercel.app"},
+  studio :{n:"Studio Index",           u:"https://artifact-hub-nu.vercel.app"},
+  intent :{n:"Intent browsing",        u:"https://vom-intent.vercel.app"},
+  door   :{n:"The front door",         u:"https://vom-front-door.vercel.app"}
+};
+
+/* the ten build types, with the figures the gallery states for each */
+var KINDS = [
+  ["Churches",7,10],["One-person studios",7,9],["Charities",6,10],["Shops",5,9],
+  ["Digital products",5,8],["Clubs & memberships",5,10],["Courses & schools",5,11],
+  ["Venues",5,10],["Software",5,8],["Ideas not yet built",2,5]
+];
+var CHANNELS = ["Website","Google Business","YouTube","Facebook","Instagram","LinkedIn","X","News coverage"];
+
+/* --------------------------------------------------------------------- rooms */
+var ROOMS = [
+{ id:"hall", n:"The entrance hall", eyebrow:"Where you are",
+  h:"A studio that builds the website and the office behind it as one thing.",
+  lede:"Most businesses end up with a site from one supplier and a pile of spreadsheets from "
+     + "another, then spend years typing everything into both. Everything in this house exists "
+     + "to stop that. Walk through it in any order — the map on the left is the whole building.",
+  facts:[
+    {k:"Where",v:"Netherlands",n:"A studio working with churches, ministries, nonprofits and small businesses.",s:"core"},
+    {k:"What is built",v:"Two halves",n:"The public site and the back office behind it, made together rather than joined later.",s:"gallery"},
+    {k:"Rooms in this house",v:"7",n:"Each one is a real part of the studio with its own working output.",s:"door"}
+  ],
+  link:"core", linkText:"Open the studio's own site",
+  say:"Good afternoon. You're in the entrance hall — nothing to read here, it's just where I "
+    + "explain the shape of the place. The house has seven rooms and you may see them in any "
+    + "order. <em>Shall I take you to the workshop first?</em> It's where most of the work is." },
+
+{ id:"workshop", n:"The workshop", eyebrow:"Room one",
+  h:"Ten kinds of business, each fully worked out.",
+  lede:"A church and a venue do not need the same website with a different photo on it, so they "
+     + "do not get one. Each of these is built in its own world, and each ends at a working "
+     + "example you can click through. The two numbers are how many pages the platform has and "
+     + "how many back-office modules sit behind it.",
+  table:true,
+  facts:[
+    {k:"Kinds of business",v:"10",n:"Each one fully worked out, not a template with the words swapped.",s:"gallery"},
+    {k:"Live examples",v:"10",n:"One per kind, openable right now without asking anybody.",s:"gallery"},
+    {k:"Your keys held by us",v:"0",n:"Payments, email and analytics are wired to the owner's own accounts.",s:"gallery"}
+  ],
+  link:"gallery", linkText:"Walk the workshop yourself",
+  say:"This is the workshop. Ten kinds of business, and I'd point you at the table rather than "
+    + "the headline — the page and module counts differ per kind, which is the whole argument. "
+    + "<em>Courses need eleven modules; a shop needs nine.</em>" },
+
+{ id:"instruments", n:"The instrument room", eyebrow:"Room two",
+  h:"Your public footprint, scored across eight channels.",
+  lede:"Measured on the same rubric every month, so “we should post more” becomes a ranked list "
+     + "of what is actually costing you. The same analysis runs on competitors, which is usually "
+     + "the more uncomfortable half.",
+  channels:true,
+  facts:[
+    {k:"Channels scored",v:"8",n:"Each measured separately rather than rolled into one vanity number.",s:"gallery"},
+    {k:"Cadence",v:"Monthly",n:"The same rubric each time, so the movement means something.",s:"gallery"},
+    {k:"Also runs on",v:"Competitors",n:"The same eight channels, scored the same way.",s:"gallery"}
+  ],
+  link:"engage", linkText:"Open the control room",
+  say:"The instrument room. Eight dials, read every month against the same rubric. I'll be "
+    + "honest about why that matters: one score for “social” tells you nothing, but eight "
+    + "separate ones tell you <em>which room the draught is coming from</em>." },
+
+{ id:"floor", n:"The machine floor", eyebrow:"Room three",
+  h:"The part that builds a platform with nobody in the loop.",
+  lede:"Turnkey decides what a business needs and compiles it into a blueprint. Forge executes "
+     + "that blueprint end to end — composing the modules, writing the site, checking its own "
+     + "work, deploying, and proving what it deployed is answering.",
+  facts:[
+    {k:"Archetype platforms",v:"10",n:"One per kind of business in the workshop.",s:"forge"},
+    {k:"To build all ten",v:"0.63s",n:"The whole set, start to finish, in one run.",s:"forge"},
+    {k:"Stages, each checked",v:"11",n:"It refuses an unready spec rather than producing a half-decided platform.",s:"forge"},
+    {k:"Human steps in a run",v:"0",n:"Nobody stands in the middle translating between documents.",s:"forge"}
+  ],
+  link:"forge", linkText:"See the machine floor",
+  say:"Mind the noise. Ten platforms in <em>0.63 seconds</em>, eleven checked stages, nobody in "
+    + "the loop. The number people disbelieve is the last one, so I'd rather you clicked through "
+    + "and read the stage list than took my word." },
+
+{ id:"proving", n:"The proving ground", eyebrow:"Room four",
+  h:"Evidence before investment.",
+  lede:"A single page that makes one promise and counts who says yes. Deployed on its own, so it "
+     + "keeps collecting while the real thing is built — or tells you not to build it. An "
+     + "afternoon, against six months of building the wrong thing.",
+  facts:[
+    {k:"What it is",v:"One page",n:"One promise, and a count of who said yes to it.",s:"gallery"},
+    {k:"Costs you",v:"An afternoon",n:"Set against six months of building something nobody wanted.",s:"gallery"},
+    {k:"Can also say",v:"Don't build it",n:"Which is the outcome that saves the most money.",s:"gallery"}
+  ],
+  link:"grow", linkText:"The three engagements, written plainly",
+  say:"The proving ground, and my favourite room. Everything else here builds something. "
+    + "<em>This one is allowed to tell you not to.</em>" },
+
+{ id:"library", n:"The library", eyebrow:"Room five",
+  h:"Everything the studio has published, in one menu.",
+  lede:"Tools, guides, dashboards and wizards, added automatically as they ship. The house keeps "
+     + "an audit of its own readiness on the same page, which is a slightly uncomfortable thing "
+     + "to publish and the reason it is worth reading.",
+  facts:[
+    {k:"Operating systems",v:"6",n:"All six now deliver what they promise.",s:"studio"},
+    {k:"House readiness",v:"40%",n:"The studio's own audit of itself. The gap is the storefront layer: buyable, deliverable, provable.",s:"studio"},
+    {k:"Index updates",v:"Daily",n:"New artifacts are added automatically rather than by hand.",s:"studio"}
+  ],
+  link:"studio", linkText:"Open the index",
+  say:"The library. I'll draw your attention to the forty per cent — that's the studio's audit "
+    + "<em>of itself</em>, published where anyone can read it. Most houses don't hang that in "
+    + "the hallway." },
+
+{ id:"lab", n:"The workbench", eyebrow:"Room six",
+  h:"Where the house experiments on itself.",
+  lede:"This tour is one of the experiments. The interface you are using — a guide instead of a "
+     + "navigation bar — comes out of work on intent-led browsing, where you state an outcome "
+     + "and the surface composes itself around it rather than making you hunt for a page.",
+  facts:[
+    {k:"You are inside",v:"An experiment",n:"A guided walk rather than a menu. There is no navigation bar anywhere on this page.",s:"door"},
+    {k:"The model",v:"Intent-led",n:"State an outcome; the surface composes. The thinking is written out in full.",s:"intent"},
+    {k:"Also built on it",v:"The front door",n:"The same idea applied to a landing page that answers instead of listing.",s:"door"}
+  ],
+  link:"intent", linkText:"Read the thinking behind this interface",
+  say:"The workbench — and you're standing in the experiment. There's no navigation on this "
+    + "page at all; you've been getting around by <em>asking me</em>. Whether that's better "
+    + "than a menu is exactly the open question." },
+
+{ id:"office", n:"The office", eyebrow:"The way out",
+  h:"Four steps, and you are running it.",
+  lede:"Tell us what the business is — a paragraph is enough. We build it and you look at the "
+     + "actual thing, live on a real address, not a wireframe. You say what is wrong and it gets "
+     + "rebuilt rather than patched, which is why changing your mind is cheap here. Then you run "
+     + "it, on your own accounts.",
+  steps:["Tell us what the business is. A paragraph is enough: what it does, who for, what it charges.",
+         "We build it and you look at it — the actual site and back office, live, seeded so it opens with something in it.",
+         "You say what is wrong. It gets rebuilt, not patched.",
+         "You run it. Payments, email and analytics wired to your own accounts."],
+  facts:[
+    {k:"Steps",v:"4",n:"From a paragraph to a system you run yourself.",s:"gallery"},
+    {k:"What you're shown",v:"The real thing",n:"Not a wireframe and not a slide.",s:"gallery"},
+    {k:"Changing your mind",v:"Cheap",n:"Because it is rebuilt rather than patched.",s:"gallery"}
+  ],
+  link:"core", linkText:"Start a conversation on the studio's site",
+  say:"And this is the office, where a tour normally turns into a sales pitch. I'll spare you: "
+    + "<em>nothing on this page sends anything to anybody.</em> When you want to talk to a "
+    + "person, the studio's own site is the door." }
+];
+
+/* ------------------------------------------------------------------ answers
+   A small, honest question set. Bram answers from the rooms; when he cannot,
+   he says so and does not invent.                                          */
+var QA = [
+  [/how long|how fast|speed|quick|time to build|0\.63|\bsecond/i,
+   "Ten archetype platforms build in <em>0.63 seconds</em>, across eleven checked stages with no "
+ + "human steps in the run. That is machine time, not project time — a real engagement still has "
+ + "a conversation at the front of it.", "floor"],
+  [/cost|price|pricing|budget|how much|charge|fee|euro|€/i,
+   "I won't quote you a number, because there isn't an honest one on this page to quote. What I "
+ + "can tell you is the shape: you're shown the real thing before you commit, and revisions are "
+ + "rebuilds rather than patches. <em>Pricing is a conversation the studio has directly.</em>",
+   "office"],
+  [/channel|social|instagram|facebook|linkedin|youtube|seo|found|visib|reach/i,
+   "Eight channels, scored separately on the same rubric every month — website, Google Business, "
+ + "YouTube, Facebook, Instagram, LinkedIn, X and news coverage. The same run works on your "
+ + "competitors too.", "instruments"],
+  [/church|ministr|nonprofit|charit|faith/i,
+   "That's the work this studio was built for. Churches take seven pages and ten back-office "
+ + "modules; charities six and ten. There's a worked example for each you can open.", "workshop"],
+  [/example|proof|show me|see it|demo|portfolio|work/i,
+   "Ten live examples, one per kind of business, openable right now without asking anyone. "
+ + "That's the workshop.", "workshop"],
+  [/idea|not sure|validate|test|maybe|before i|risk/i,
+   "Then you want the proving ground rather than the workshop — one page, one promise, a count "
+ + "of who says yes. It's allowed to tell you not to build the thing.", "proving"],
+  [/who are you|what are you|are you\b[^?]{0,20}\b(ai|bot|real|human|person|scripted)|chatgpt|model|llm/i,
+   "A scripted guide. I'm a few hundred lines of rules that know this house — there's no model "
+ + "behind me and nothing you type leaves your browser. <em>I'd rather tell you that than have "
+ + "you assume otherwise.</em>", null],
+  [/contact|talk|call|email|human|person|hire|start/i,
+   "The office is the way out, and the studio's own site is where a real conversation starts. "
+ + "Nothing on this page sends anything.", "office"],
+  [/back office|spreadsheet|admin|module|system/i,
+   "That's the whole argument of the house: the site and the back office are built together, so "
+ + "what the owner types into Events is what a visitor reads on the site. Module counts differ "
+ + "per kind of business.", "workshop"]
+];
+
+/* ------------------------------------------------------------------- state */
+var at = 0, seen = {}, asked = 0;
+
+function $(id){ return document.getElementById(id); }
+function el(t,c,x){ var n=document.createElement(t); if(c)n.className=c; if(x!=null)n.textContent=x; return n; }
+function esc(s){ return String(s).replace(/[&<>"]/g,function(c){
+  return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c];}); }
+function src(key){
+  var s=S[key], a=el("a","h-src",s.n);
+  a.href=s.u; a.target="_blank"; a.rel="noopener"; a.title="Opens "+s.u;
+  return a;
+}
+
+/* --------------------------------------------------------------- rendering */
+function paintMap(){
+  var ol=$("h-map"); ol.textContent="";
+  ROOMS.forEach(function(r,i){
+    var li=document.createElement("li");
+    var b=el("button","h-maprow"+(seen[r.id]?" seen":""));
+    b.type="button";
+    b.setAttribute("aria-current", i===at ? "true":"false");
+    b.appendChild(el("span","n", i===0 ? "ENTRANCE" : i===ROOMS.length-1 ? "EXIT" : "ROOM "+i));
+    b.appendChild(el("span","t", r.n));
+    b.addEventListener("click",function(){ go(i,"map"); });
+    li.appendChild(b); ol.appendChild(li);
+  });
+  var n=0; for(var k in seen) if(seen[k]) n++;
+  $("h-prog").textContent = n+" of "+ROOMS.length+" rooms seen";
+}
+
+function paintRoom(){
+  var r=ROOMS[at], m=$("h-room"); m.textContent="";
+  m.appendChild(el("p","h-eyebrow", r.eyebrow+" · "+r.n));
+  m.appendChild(el("h2",null,r.h));
+  m.appendChild(el("p","lede",r.lede));
+
+  var f=el("div","h-facts");
+  r.facts.forEach(function(x){
+    var c=el("div","h-fact");
+    c.appendChild(el("p","k",x.k));
+    c.appendChild(el("p","v",x.v));
+    c.appendChild(el("p","n",x.n));
+    c.appendChild(src(x.s));
+    f.appendChild(c);
+  });
+  m.appendChild(f);
+
+  if (r.table){
+    var w=el("div","h-tablewrap"), t=el("table","h-table");
+    var th=document.createElement("thead");
+    th.innerHTML="<tr><th>Kind of business</th><th>Pages</th><th>Back-office modules</th><th>Shape</th></tr>";
+    t.appendChild(th);
+    var tb=document.createElement("tbody");
+    KINDS.forEach(function(k){
+      var tr=document.createElement("tr");
+      tr.appendChild(el("td",null,k[0]));
+      tr.appendChild(el("td","num",String(k[1])));
+      tr.appendChild(el("td","num",String(k[2])));
+      var td=el("td","num");
+      var bar=el("span","h-bar"); bar.style.width=(k[2]*9)+"px";
+      td.appendChild(bar); td.appendChild(document.createTextNode(k[1]+" + "+k[2]));
+      tr.appendChild(td);
+      tb.appendChild(tr);
+    });
+    t.appendChild(tb); w.appendChild(t); m.appendChild(w);
+    var note=el("p","h-note","Read down the module column rather than across the row — that is "
+      + "where the kinds actually differ. Courses carry eleven modules; software and digital "
+      + "products carry eight.");
+    note.appendChild(document.createTextNode(" "));
+    note.appendChild(src("gallery"));
+    m.appendChild(note);
+  }
+
+  if (r.channels){
+    var cw=el("div","h-tablewrap"), ct=el("table","h-table");
+    var cth=document.createElement("thead");
+    cth.innerHTML="<tr><th>Channel scored, every month</th><th>Same rubric</th><th>Run on competitors</th></tr>";
+    ct.appendChild(cth);
+    var ctb=document.createElement("tbody");
+    CHANNELS.forEach(function(c){
+      var tr=document.createElement("tr");
+      tr.appendChild(el("td",null,c));
+      tr.appendChild(el("td","num","yes"));
+      tr.appendChild(el("td","num","yes"));
+      ctb.appendChild(tr);
+    });
+    ct.appendChild(ctb); cw.appendChild(ct); m.appendChild(cw);
+  }
+
+  if (r.steps){
+    var ol=el("ol","vk-steps"); ol.style.marginTop="var(--s4)";
+    r.steps.forEach(function(s){
+      var li=document.createElement("li");
+      var p=el("p",null,s); li.appendChild(p); ol.appendChild(li);
+    });
+    m.appendChild(ol);
+  }
+
+  var a=el("a","h-open", r.linkText+" →");
+  a.href=S[r.link].u; a.target="_blank"; a.rel="noopener";
+  m.appendChild(a);
+}
+
+function moves(){
+  var box=$("h-moves"); box.textContent="";
+  function add(label,fn,quiet){
+    var b=el("button","h-move"+(quiet?" h-move--quiet":""),label);
+    b.type="button"; b.addEventListener("click",fn); box.appendChild(b);
+  }
+  var nextUnseen=-1;
+  for (var i=0;i<ROOMS.length;i++) if(!seen[ROOMS[i].id]){ nextUnseen=i; break; }
+
+  if (at+1 < ROOMS.length) add("Lead on → "+ROOMS[at+1].n, function(){ go(at+1,"next"); });
+  if (nextUnseen>=0 && nextUnseen!==at+1)
+    add("Take me to "+ROOMS[nextUnseen].n, function(){ go(nextUnseen,"skip"); }, true);
+  if (at>0) add("Back to "+ROOMS[at-1].n, function(){ go(at-1,"back"); }, true);
+  var n=0; for(var k in seen) if(seen[k]) n++;
+  if (n===ROOMS.length) add("Start the walk again", function(){ seen={}; go(0,"restart"); }, true);
+}
+
+function say(html){ $("h-say").innerHTML = html; }
+
+function go(i, how){
+  at=i; var r=ROOMS[i];
+  var first=!seen[r.id];
+  seen[r.id]=true;
+  paintMap(); paintRoom(); moves();
+
+  var n=0; for(var k in seen) if(seen[k]) n++;
+  var line = r.say;
+  if (!first) line = "Back in "+r.n.toLowerCase()+". "+r.say;
+  else if (how==="skip") line = "Straight there, then. "+r.say;
+  if (n===ROOMS.length && first)
+    line += " That's the whole house — <em>you've now seen all seven rooms and the office.</em>";
+  say(line);
+
+  var m=$("h-room");
+  if (how!=="boot"){ m.focus({preventScroll:true}); m.scrollIntoView({block:"start"}); }
+}
+
+/* ---------------------------------------------------------------- the ask */
+$("h-ask").addEventListener("submit", function(e){
+  e.preventDefault();
+  var q=$("h-q").value.trim();
+  if(!q) { $("h-q").focus(); return; }
+  asked++;
+  for (var i=0;i<QA.length;i++){
+    if (QA[i][0].test(q)){
+      say(QA[i][1]);
+      var room=QA[i][2];
+      if (room){
+        var box=$("h-moves"); box.textContent="";
+        for (var j=0;j<ROOMS.length;j++){
+          if (ROOMS[j].id===room){
+            (function(idx){
+              var b=el("h-move"===""?"button":"button","h-move","Show me — "+ROOMS[idx].n);
+              b.type="button"; b.addEventListener("click",function(){ go(idx,"ask"); });
+              box.appendChild(b);
+            })(j);
+          }
+        }
+        var back=el("button","h-move h-move--quiet","Stay here");
+        back.type="button"; back.addEventListener("click",moves);
+        box.appendChild(back);
+      } else { moves(); }
+      $("h-q").value="";
+      return;
+    }
+  }
+  say("That one's outside what I know. I'm scripted, so I'd rather say so than guess at you — "
+    + "I can speak to what gets built, the eight channels, how a build runs, validating an idea "
+    + "before building it, and how an engagement starts. <em>For anything else the studio's own "
+    + "site is the place to ask a person.</em>");
+  moves();
+  $("h-q").value="";
+});
+
+/* ---------------------------------------------------------------- theme */
+$("h-theme").addEventListener("click", function(){
+  var d=document.documentElement;
+  var now=d.getAttribute("data-theme")
+    || (window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches ? "dark":"light");
+  var next = now==="dark" ? "light":"dark";
+  d.setAttribute("data-theme",next);
+  try{ localStorage.setItem("vom.house.theme",next); }catch(e){}
+  this.textContent = next==="dark" ? "Light":"Dark";
+});
+(function(){
+  var d=document.documentElement.getAttribute("data-theme");
+  if(!d && window.matchMedia) d = matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";
+  $("h-theme").textContent = d==="dark" ? "Light":"Dark";
+})();
+
+go(0,"boot");
+})();
+</script>
+</body></html>

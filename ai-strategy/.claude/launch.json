@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "vom-ops-tracker",
+      "runtimeExecutable": "/Users/kurtjoseph/.nvm/versions/node/v24.18.0/bin/node",
+      "runtimeArgs": ["projects/niche-command-center/server.js"],
+      "port": 4100
+    },
+    {
+      "name": "public-site",
+      "runtimeExecutable": "/Users/kurtjoseph/.nvm/versions/node/v24.18.0/bin/node",
+      "runtimeArgs": ["projects/public-site/server.js"],
+      "port": 4200
+    }
+  ]
+}

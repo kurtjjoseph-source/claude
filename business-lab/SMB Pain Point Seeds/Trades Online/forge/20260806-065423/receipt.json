@@ -1,0 +1,38 @@
+{
+  "run": "20260806-065423",
+  "sealed": "2026-08-06T06:54:38Z",
+  "fingerprint": "sha256:d7bda910e9e000b2f40022e6bd7767b5",
+  "business": "Trades Online",
+  "archetype": "prelaunch",
+  "forge": "PRELAUNCHforge",
+  "target": "vercel",
+  "artifacts": {
+    "logo": "drawn monogram — no client logo was supplied",
+    "brand_manual": "/Users/kurtjoseph/Business Ideas/SMB Pain Point Seeds/Trades Online/forge/20260806-065423/build/brand-manual.html",
+    "brand_kit": "Waitlist Green (default)",
+    "platform": "/Users/kurtjoseph/Business Ideas/SMB Pain Point Seeds/Trades Online/forge/20260806-065423/build/platform/index.html",
+    "photos": "6 placeholder photographs (CC0/PDM)",
+    "site": "/Users/kurtjoseph/Business Ideas/SMB Pain Point Seeds/Trades Online/forge/20260806-065423/build/site/index.html",
+    "pages": [
+      "faq.html",
+      "index.html"
+    ],
+    "url": "https://trades-online-prelaunch-ap3ml19wr-kurtjjoseph-6989s-projects.vercel.app",
+    "platform_url": "https://trades-online-prelaunch-ap3ml19wr-kurtjjoseph-6989s-projects.vercel.app/platform/",
+    "alias": "https://trades-online-prelaunch.vercel.app"
+  },
+  "checks_passed": 10,
+  "elapsed_seconds": 15.01,
+  "authorization": {
+    "mode": "unattended",
+    "targets": [
+      "vercel"
+    ],
+    "scope": "unattended forge build + deploy to 'vercel' for this business, limited to: composing the platform modules, writing the public site, wiring rails that already have credentials, publishing the result, and — for a hosting target that gates new projects behind a login — making that one deployment publicly reachable. Does not authorize sending email, charging anyone, or posting to any channel.",
+    "consent_ref": "84079c4164f8dd66",
+    "consent_seq": 1,
+    "granted_by": "VOM",
+    "granted_at": "2026-08-06T06:54:23Z",
+    "channel": "standing service authorization"
+  }
+}

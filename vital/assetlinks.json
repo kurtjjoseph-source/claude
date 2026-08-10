@@ -1,0 +1,8 @@
+[{
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "nl.visionoutreachmedia.vital",
+        "sha256_cert_fingerprints": ["60:39:8D:DB:C3:D1:85:5E:E4:1F:CF:27:EB:76:A0:AA:97:B6:FC:5A:56:DE:EA:BB:8B:B1:83:66:33:21:86:75"]
+      }
+    }]

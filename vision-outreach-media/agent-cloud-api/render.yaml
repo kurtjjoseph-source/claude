@@ -1,0 +1,26 @@
+services:
+  - type: web
+    name: agent-cloud-api
+    runtime: docker
+    plan: starter
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: JWT_SECRET
+        generateValue: true
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: ANTHROPIC_MODEL
+        value: claude-sonnet-5
+      - key: ENABLE_SCHEDULER
+        value: "true"
+      - key: CYCLE_INTERVAL_HOURS
+        value: "24"
+      - key: DATABASE_URL
+        fromDatabase:
+          name: agent-cloud-db
+          property: connectionString
+
+databases:
+  - name: agent-cloud-db
+    plan: basic-256mb

@@ -1,0 +1,481 @@
+<title>Ministry AI Assessment — Vision Outreach Media</title>
+<style>
+  :root {
+    --paper:#FFFFFF; --surface:#F5F8FC; --raise:#FFFFFF;
+    --ink:#16233F; --ink-soft:#586880; --line:#E5EAF1; --line-strong:#D3DBE6;
+    --navy:#1B2A4A; --navy-ink:#FFFFFF; --navy-soft:#EAEEF6; --navy-deep:#122240;
+    --orange:#E8843C; --orange-soft:#FDEEE0; --orange-deep:#C15F1F;
+    --teal:#1F9E93; --teal-soft:#E2F3F1;
+    --shadow-sm:0 1px 2px rgba(22,35,63,.06), 0 2px 8px rgba(22,35,63,.05);
+    --shadow:0 2px 6px rgba(22,35,63,.07), 0 14px 36px rgba(22,35,63,.10);
+    --sans:"Manrope","Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper:#0F1626; --surface:#172033; --raise:#1D283E;
+      --ink:#EAF0F8; --ink-soft:#9DABC2; --line:#28344C; --line-strong:#37455F;
+      --navy:#6E97D6; --navy-ink:#0F1626; --navy-soft:#1E2C46; --navy-deep:#8FB0E4;
+      --orange:#F0A05C; --orange-soft:#33261A; --orange-deep:#F6B778;
+      --teal:#4FC0B5; --teal-soft:#10302C;
+      --shadow-sm:0 1px 2px rgba(0,0,0,.4); --shadow:0 2px 8px rgba(0,0,0,.45), 0 16px 40px rgba(0,0,0,.4);
+    }
+  }
+  :root[data-theme="light"] {
+    --paper:#FFFFFF; --surface:#F5F8FC; --raise:#FFFFFF; --ink:#16233F; --ink-soft:#586880;
+    --line:#E5EAF1; --line-strong:#D3DBE6; --navy:#1B2A4A; --navy-ink:#FFFFFF; --navy-soft:#EAEEF6;
+    --navy-deep:#122240; --orange:#E8843C; --orange-soft:#FDEEE0; --orange-deep:#C15F1F; --teal:#1F9E93; --teal-soft:#E2F3F1;
+    --shadow-sm:0 1px 2px rgba(22,35,63,.06), 0 2px 8px rgba(22,35,63,.05);
+    --shadow:0 2px 6px rgba(22,35,63,.07), 0 14px 36px rgba(22,35,63,.10);
+  }
+  :root[data-theme="dark"] {
+    --paper:#0F1626; --surface:#172033; --raise:#1D283E; --ink:#EAF0F8; --ink-soft:#9DABC2;
+    --line:#28344C; --line-strong:#37455F; --navy:#6E97D6; --navy-ink:#0F1626; --navy-soft:#1E2C46;
+    --navy-deep:#8FB0E4; --orange:#F0A05C; --orange-soft:#33261A; --orange-deep:#F6B778; --teal:#4FC0B5; --teal-soft:#10302C;
+    --shadow-sm:0 1px 2px rgba(0,0,0,.4); --shadow:0 2px 8px rgba(0,0,0,.45), 0 16px 40px rgba(0,0,0,.4);
+  }
+
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--paper); color:var(--ink); font-family:var(--sans); font-size:17px; line-height:1.6; -webkit-font-smoothing:antialiased; }
+  h1,h2,h3 { margin:0; font-weight:800; letter-spacing:-.022em; text-wrap:balance; line-height:1.1; }
+  p { margin:0; }
+  a { color:inherit; }
+  .wrap { max-width:1080px; margin:0 auto; padding:0 24px; }
+  .eyebrow { font-size:.74rem; text-transform:uppercase; letter-spacing:.15em; font-weight:800; color:var(--navy); }
+  :root[data-theme="dark"] .eyebrow, .band .eyebrow { color:var(--navy); }
+  .muted { color:var(--ink-soft); }
+  .reveal { opacity:0; transform:translateY(16px); transition:opacity .7s ease, transform .7s ease; }
+  .reveal.in { opacity:1; transform:none; }
+  @media (prefers-reduced-motion: reduce) { .reveal { opacity:1; transform:none; transition:none; } html { scroll-behavior:auto; } }
+  html { scroll-behavior:smooth; }
+
+  .btn { display:inline-flex; align-items:center; gap:8px; font:inherit; font-weight:700; font-size:.98rem;
+    padding:13px 22px; border-radius:10px; border:1px solid transparent; cursor:pointer; text-decoration:none; transition:transform .15s ease, box-shadow .15s ease, background .15s ease; }
+  .btn:focus-visible { outline:3px solid var(--orange); outline-offset:2px; }
+  .btn-primary { background:var(--navy); color:var(--navy-ink); box-shadow:var(--shadow-sm); }
+  .btn-primary:hover { transform:translateY(-1px); box-shadow:var(--shadow); }
+  .btn-accent { background:var(--orange); color:#fff; box-shadow:var(--shadow-sm); }
+  .btn-accent:hover { transform:translateY(-1px); box-shadow:var(--shadow); }
+  .btn-ghost { background:transparent; color:var(--ink); border-color:var(--line-strong); }
+  .btn-ghost:hover { border-color:var(--navy); color:var(--navy); }
+
+  .top-bar { background:var(--navy-deep); color:#fff; font-size:.83rem; text-align:center; padding:9px 24px; letter-spacing:.01em; }
+  .top-bar b { font-weight:800; color:#fff; }
+  .top-bar .o { color:var(--orange); font-weight:800; }
+
+  header.site { position:sticky; top:0; z-index:50; background:color-mix(in srgb, var(--paper) 88%, transparent); backdrop-filter:blur(10px); border-bottom:1px solid var(--line); }
+  .nav { display:flex; align-items:center; justify-content:space-between; height:68px; }
+  .brand { display:flex; align-items:center; gap:12px; text-decoration:none; color:var(--ink); }
+  .mark { width:42px; height:42px; border-radius:10px; background:#fff; border:1px solid var(--line-strong); display:grid; place-items:center; overflow:hidden; box-shadow:var(--shadow-sm); flex-shrink:0; }
+  .mark .logo-img { width:100%; height:100%; object-fit:cover; display:block; }
+  .brand .bt { line-height:1.15; }
+  .brand .bt b { font-size:1.04rem; font-weight:800; display:block; letter-spacing:-.01em; }
+  .brand .bt span { font-size:.66rem; text-transform:uppercase; letter-spacing:.14em; color:var(--ink-soft); font-weight:600; }
+  .nav-links { display:flex; align-items:center; gap:26px; }
+  .nav-links a.lnk { text-decoration:none; color:var(--ink-soft); font-size:.92rem; font-weight:600; }
+  .nav-links a.lnk:hover { color:var(--navy); }
+  @media (max-width:820px){ .nav-links a.lnk { display:none; } }
+
+  .hero { position:relative; overflow:hidden; padding:74px 0 60px; }
+  .hero-grid { display:grid; grid-template-columns:1.15fr .85fr; gap:52px; align-items:center; }
+  @media (max-width:880px){ .hero-grid { grid-template-columns:1fr; gap:36px; } }
+  .badge { display:inline-flex; align-items:center; gap:8px; background:var(--orange-soft); color:var(--orange-deep); border:1px solid color-mix(in srgb, var(--orange) 40%, transparent); font-size:.78rem; font-weight:800; padding:6px 13px; border-radius:999px; letter-spacing:.01em; }
+  .badge .dot { width:7px; height:7px; border-radius:50%; background:var(--orange); }
+  h1.head { font-size:clamp(2.3rem, 5vw, 3.5rem); margin:20px 0 18px; }
+  h1.head em { font-style:normal; color:var(--orange); }
+  .lede { font-size:1.14rem; color:var(--ink-soft); max-width:34em; }
+  .hero-cta { display:flex; gap:14px; flex-wrap:wrap; margin-top:30px; }
+  .guarantee-inline { display:flex; align-items:center; gap:9px; margin-top:22px; font-size:.9rem; color:var(--ink-soft); }
+  .guarantee-inline svg { width:18px; height:18px; color:var(--teal); flex-shrink:0; }
+
+  .report-card { background:var(--surface); border:1px solid var(--line); border-radius:16px; box-shadow:var(--shadow); padding:26px; }
+  .report-card .rc-top { display:flex; justify-content:space-between; align-items:flex-start; gap:12px; padding-bottom:16px; border-bottom:1px solid var(--line); }
+  .report-card h3 { font-size:1.12rem; }
+  .rc-tag { font-size:.68rem; font-weight:800; text-transform:uppercase; letter-spacing:.09em; color:var(--navy); background:var(--navy-soft); padding:5px 9px; border-radius:6px; white-space:nowrap; }
+  .rc-row { display:flex; align-items:center; gap:12px; padding:12px 0; border-bottom:1px dashed var(--line); }
+  .rc-row:last-child { border-bottom:0; }
+  .rc-ico { width:34px; height:34px; border-radius:9px; background:var(--navy-soft); color:var(--navy); display:grid; place-items:center; flex-shrink:0; }
+  .rc-ico svg { width:17px; height:17px; }
+  .rc-row .rc-main { flex:1; min-width:0; }
+  .rc-row .rc-main b { font-size:.94rem; font-weight:700; display:block; }
+  .rc-row .rc-main span { font-size:.82rem; color:var(--ink-soft); }
+  .rc-hrs { font-size:1.1rem; color:var(--teal); font-weight:800; white-space:nowrap; }
+
+  section { padding:64px 0; }
+  .sec-head { max-width:38em; margin-bottom:40px; }
+  .sec-head h2 { font-size:clamp(1.7rem, 3.4vw, 2.4rem); margin:12px 0 14px; }
+  .sec-head p { font-size:1.06rem; color:var(--ink-soft); }
+  .band { background:var(--surface); border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+
+  .pains { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+  @media (max-width:760px){ .pains { grid-template-columns:1fr; } }
+  .pain { background:var(--paper); border:1px solid var(--line); border-radius:13px; padding:20px; }
+  .pain b { font-size:1.05rem; font-weight:800; display:block; margin-bottom:5px; }
+  .pain p { font-size:.92rem; color:var(--ink-soft); }
+  .pain .k { font-size:.72rem; font-weight:800; text-transform:uppercase; letter-spacing:.1em; color:var(--orange-deep); }
+
+  .steps { display:grid; grid-template-columns:repeat(4,1fr); gap:20px; }
+  @media (max-width:860px){ .steps { grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:520px){ .steps { grid-template-columns:1fr; } }
+  .step { padding-top:14px; }
+  .step .num { font-size:.9rem; font-weight:800; color:var(--navy-ink); background:var(--navy); width:30px; height:30px; border-radius:8px; display:grid; place-items:center; margin-bottom:14px; box-shadow:var(--shadow-sm); }
+  .step h3 { font-size:1.1rem; margin-bottom:7px; }
+  .step p { font-size:.93rem; color:var(--ink-soft); }
+  .step .dur { font-size:.76rem; font-weight:700; color:var(--orange-deep); margin-top:9px; display:block; }
+
+  .offer { display:grid; grid-template-columns:1.1fr .9fr; gap:0; background:var(--surface); border:1px solid var(--line-strong); border-radius:18px; overflow:hidden; box-shadow:var(--shadow); }
+  @media (max-width:820px){ .offer { grid-template-columns:1fr; } }
+  .offer-main { padding:38px; }
+  .offer-side { padding:38px; background:linear-gradient(160deg, var(--navy), var(--navy-deep)); color:#fff; display:flex; flex-direction:column; }
+  .offer-side .price-lab { font-size:.76rem; text-transform:uppercase; letter-spacing:.13em; opacity:.85; font-weight:800; color:#fff; }
+  .offer-side .price { font-size:2.6rem; line-height:1.05; margin:8px 0 2px; font-weight:800; letter-spacing:-.02em; }
+  .offer-side .price small { font-size:.92rem; opacity:.8; font-weight:600; display:block; letter-spacing:0; margin-top:4px; }
+  .offer-side .price-note { font-size:.84rem; opacity:.9; border-top:1px solid rgba(255,255,255,.22); margin-top:16px; padding-top:16px; }
+  .incl { list-style:none; margin:18px 0 0; padding:0; display:flex; flex-direction:column; gap:11px; }
+  .incl li { display:flex; gap:11px; align-items:flex-start; font-size:.95rem; }
+  .incl svg { width:19px; height:19px; color:var(--teal); flex-shrink:0; margin-top:2px; }
+  .guarantee { display:flex; gap:14px; align-items:flex-start; background:var(--teal-soft); border:1px solid color-mix(in srgb, var(--teal) 34%, transparent); border-radius:12px; padding:16px 18px; margin-top:24px; }
+  .guarantee svg { width:26px; height:26px; color:var(--teal); flex-shrink:0; }
+  .guarantee b { font-weight:800; }
+  .offer-side .btn { margin-top:auto; background:var(--orange); color:#fff; justify-content:center; }
+  .offer-side .btn:hover { background:var(--orange-deep); }
+  .offer-side .btn:disabled { opacity:.7; cursor:default; }
+  .offer-side .reserve-alt { display:block; text-align:center; color:#fff; opacity:.85; text-decoration:underline; font-size:.85rem; margin-top:11px; }
+  .offer-side .reserve-alt:hover { opacity:1; }
+  .offer-side .pay-msg { font-size:.8rem; color:#fff; opacity:.92; text-align:center; margin-top:10px; min-height:1em; }
+  .offer-side .spots { font-size:.8rem; opacity:.92; text-align:center; margin-top:12px; }
+
+  .audit { display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:center; }
+  @media (max-width:820px){ .audit { grid-template-columns:1fr; gap:26px; } }
+  .audit-visual { background:var(--surface); border:1px solid var(--line); border-radius:16px; box-shadow:var(--shadow); padding:22px; }
+  .wiz-row { display:flex; align-items:center; gap:12px; padding:11px 0; border-bottom:1px solid var(--line); }
+  .wiz-row:last-child { border-bottom:0; }
+  .wiz-check { width:24px; height:24px; border-radius:50%; border:2px solid var(--line-strong); flex-shrink:0; display:grid; place-items:center; }
+  .wiz-row.on .wiz-check { background:var(--navy); border-color:var(--navy); }
+  .wiz-row.on .wiz-check svg { width:13px; height:13px; color:#fff; }
+  .wiz-row .wl { flex:1; font-size:.93rem; }
+  .wiz-row .wp { font-size:.78rem; color:var(--ink-soft); }
+  .wiz-bar { height:7px; border-radius:4px; background:var(--navy-soft); overflow:hidden; margin-top:14px; }
+  .wiz-bar i { display:block; height:100%; width:62%; background:linear-gradient(90deg, var(--navy), var(--orange)); border-radius:4px; }
+
+  .ladder { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+  @media (max-width:820px){ .ladder { grid-template-columns:1fr 1fr; } }
+  @media (max-width:520px){ .ladder { grid-template-columns:1fr; } }
+  .rung { background:var(--surface); border:1px solid var(--line); border-radius:13px; padding:20px; display:flex; flex-direction:column; gap:6px; }
+  .rung h3 { font-size:1.02rem; }
+  .rung .from { color:var(--navy); font-size:.9rem; font-weight:800; margin-top:auto; padding-top:10px; }
+  .rung p { font-size:.9rem; color:var(--ink-soft); }
+
+  .concierge { display:grid; grid-template-columns:.9fr 1.1fr; gap:40px; align-items:center; }
+  @media (max-width:820px){ .concierge { grid-template-columns:1fr; } }
+  .aoa { display:flex; gap:10px; margin-top:20px; }
+  .aoa .a { flex:1; text-align:center; background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:16px 10px; }
+  .aoa .a b { display:block; color:var(--navy); font-size:1.3rem; font-weight:800; }
+  .aoa .a span { font-size:.8rem; color:var(--ink-soft); }
+
+  .reserve { background:linear-gradient(160deg, var(--navy), var(--navy-deep)); color:#fff; border-radius:20px; padding:48px; text-align:center; box-shadow:var(--shadow); }
+  .reserve h2 { font-size:clamp(1.7rem,3.4vw,2.4rem); color:#fff; }
+  .reserve p { color:rgba(255,255,255,.86); max-width:34em; margin:14px auto 0; }
+  .reserve form { display:grid; grid-template-columns:1fr 1fr; gap:10px; max-width:520px; margin:28px auto 0; }
+  @media (max-width:520px){ .reserve form { grid-template-columns:1fr; } }
+  .reserve input { font:inherit; padding:13px 16px; border-radius:10px; border:1px solid rgba(255,255,255,.3); background:rgba(255,255,255,.12); color:#fff; }
+  .reserve input::placeholder { color:rgba(255,255,255,.7); }
+  .reserve input:focus-visible { outline:2px solid var(--orange); }
+  .reserve input.wide, .reserve .btn { grid-column:1 / -1; }
+  .reserve .btn { background:var(--orange); color:#fff; justify-content:center; }
+  .reserve .btn:hover { background:var(--orange-deep); }
+  .reserve .btn:disabled { opacity:.85; cursor:default; }
+  .reserve .rmsg { grid-column:1 / -1; font-size:.9rem; color:#fff; background:rgba(255,255,255,.14); border-radius:10px; padding:12px 14px; margin:0; }
+  .reserve .note { font-size:.78rem; color:rgba(255,255,255,.72); margin-top:16px; }
+
+  footer.site { border-top:1px solid var(--line); padding:44px 0 34px; }
+  .foot-grid { display:flex; justify-content:space-between; gap:24px; flex-wrap:wrap; align-items:flex-start; }
+  .foot-links { display:flex; gap:22px; flex-wrap:wrap; font-size:.88rem; }
+  .foot-links a { color:var(--ink-soft); text-decoration:none; font-weight:600; }
+  .foot-links a:hover { color:var(--navy); }
+  .foot-note { font-size:.78rem; color:var(--ink-soft); margin-top:22px; max-width:52em; }
+  .pending { display:inline-flex; align-items:center; gap:6px; font-size:.72rem; font-weight:700; color:var(--orange-deep); background:var(--orange-soft); padding:2px 8px; border-radius:5px; }
+</style>
+
+<div class="top-bar">
+  <b>Founding-church cohort is open</b> — <span class="o">limited spots</span> at our lowest rate ever, backed by our money-back promise.
+</div>
+
+<header class="site">
+  <div class="wrap nav">
+    <a class="brand" href="#top" aria-label="Vision Outreach Media home">
+      <span class="mark" aria-hidden="true">
+        <img class="logo-img" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAASABIAAD/4QBMRXhpZgAATU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAgKADAAQAAAABAAAAgAAAAAD/4QnSaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLwA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJYTVAgQ29yZSA2LjAuMCI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnBob3Rvc2hvcD0iaHR0cDovL25zLmFkb2JlLmNvbS9waG90b3Nob3AvMS4wLyIgcGhvdG9zaG9wOkluc3RydWN0aW9ucz0iRkJNRDBhMDAwYTA3MDIwMDAwYmQwYTAwMDBjMzE0MDAwMDU3MTYwMDAwNTkxODAwMDBhMjIxMDAwMDBhMzIwMDAwYmMzNDAwMDA2OTM2MDAwMDMxMzgwMDAwMmI0YzAwMDAiLz4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8P3hwYWNrZXQgZW5kPSJ3Ij8+AP/tAK5QaG90b3Nob3AgMy4wADhCSU0EBAAAAAAAdhwBWgADGyVHHAIAAAIAAhwCKABiRkJNRDBhMDAwYTA3MDIwMDAwYmQwYTAwMDBjMzE0MDAwMDU3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" alt="Vision Outreach Media logo" width="128" height="128">
+      </span>
+      <span class="bt"><b>Vision Outreach Media</b><span>Ministry AI Assessment</span></span>
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a class="lnk" href="#how">How it works</a>
+      <a class="lnk" href="#assessment">The assessment</a>
+      <a class="lnk" href="#audit">Free mini-audit</a>
+      <a class="lnk" href="#concierge">Ongoing support</a>
+      <a class="btn btn-primary" href="#reserve">Reserve a spot</a>
+    </nav>
+  </div>
+</header>
+
+<a id="top"></a>
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="reveal in">
+      <span class="badge"><span class="dot"></span> Founding-church cohort — limited spots</span>
+      <h1 class="head">Give your ministry back <em>5–10 hours a week</em> — without hiring anyone.</h1>
+      <p class="lede">Your team is stretched across services, media, member care and admin. There are simple, proven AI tools that quietly take the busywork off their plate — you just don't have time to find them. Vision Outreach Media does that for you, and hands you a plain-English plan.</p>
+      <div class="hero-cta">
+        <a class="btn btn-accent" href="#reserve">Reserve your assessment</a>
+        <a class="btn btn-ghost" href="#audit">Try the free 2-minute mini-audit</a>
+      </div>
+      <div class="guarantee-inline">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><path d="M12 3l7 4v5c0 4.4-3 8-7 9-4-1-7-4.6-7-9V7z"/></svg>
+        If we can't find at least 5 hours a week, you pay nothing. Worst case, you lose 45 minutes.
+      </div>
+    </div>
+    <div class="reveal in">
+      <div class="report-card" role="img" aria-label="Example of the plain-English report a church receives">
+        <div class="rc-top">
+          <div><h3>Your Ministry AI Plan</h3><p class="muted" style="font-size:.85rem; margin-top:2px;">Grace Community Church · sample</p></div>
+          <span class="rc-tag">Quick wins</span>
+        </div>
+        <div class="rc-row">
+          <span class="rc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v12H4z"/><path d="M4 20h16"/></svg></span>
+          <span class="rc-main"><b>Sermon &amp; service media</b><span>Auto-clips, captions &amp; show notes</span></span>
+          <span class="rc-hrs">+4 hrs</span>
+        </div>
+        <div class="rc-row">
+          <span class="rc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"/><path d="M4 9h16"/></svg></span>
+          <span class="rc-main"><b>Member communications</b><span>Drafting emails, bulletins &amp; replies</span></span>
+          <span class="rc-hrs">+3 hrs</span>
+        </div>
+        <div class="rc-row">
+          <span class="rc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 7V3M16 7V3M4 11h16M5 5h14v16H5z"/></svg></span>
+          <span class="rc-main"><b>Volunteer scheduling</b><span>Rosters, reminders &amp; swaps</span></span>
+          <span class="rc-hrs">+2 hrs</span>
+        </div>
+        <div class="rc-row" style="border-top:1px solid var(--line); margin-top:4px; padding-top:14px;">
+          <span class="rc-main"><b style="font-weight:800;">Reclaimed each week</b></span>
+          <span class="rc-hrs" style="font-size:1.35rem;">≈ 9 hours</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Where the week goes</span>
+      <h2>You didn't get into ministry to spend evenings on admin.</h2>
+      <p>Roughly 95% of small organizations use no AI beyond the occasional ChatGPT question — not because they don't want to, but because nobody has time to figure out which tools are worth it. Here's where it usually piles up.</p>
+    </div>
+    <div class="pains">
+      <div class="pain reveal"><span class="k">Every week</span><b>The media grind</b><p>Editing the service, cutting clips, writing captions and posting everywhere — hours that repeat every single Sunday.</p></div>
+      <div class="pain reveal"><span class="k">Every week</span><b>The inbox &amp; bulletin</b><p>Announcements, pastoral replies, newsletters, prayer-chain updates — all written from scratch, by hand.</p></div>
+      <div class="pain reveal"><span class="k">Every week</span><b>Herding volunteers</b><p>Rosters, reminders, last-minute swaps, event sign-ups and follow-ups that live in one person's head.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="how">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">How it works</span>
+      <h2>A simple, honest look at your week — then a prescription, like a doctor's visit.</h2>
+      <p>No software to install, nothing to build. We find the tools; you decide what to adopt. The whole assessment is designed so a busy team can act on it in five-minute steps.</p>
+    </div>
+    <div class="steps">
+      <div class="step reveal"><span class="num">1</span><h3>A conversation</h3><p>A relaxed, recorded 45-minute call. We walk through a normal week and find where the time actually goes. We only listen — no pitching.</p><span class="dur">45 minutes · recorded</span></div>
+      <div class="step reveal"><span class="num">2</span><h3>We do the research</h3><p>We match your real pain points to proven, off-the-shelf AI &amp; software tools — and sanity-check that each one fits a ministry your size, not an enterprise.</p><span class="dur">Done for you</span></div>
+      <div class="step reveal"><span class="num">3</span><h3>Your plain-English plan</h3><p>A short, clear report: your top time-drains, 3–7 recommended tools, what each costs and saves, and a four-day quick-start so nobody freezes.</p><span class="dur">Yours to keep</span></div>
+      <div class="step reveal"><span class="num">4</span><h3>We walk it through</h3><p>A 30-minute review call where we screen-share and go tool by tool. You leave knowing exactly what to do first — and we're here if you want help doing it.</p><span class="dur">30 minutes</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="assessment" class="band">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">The assessment</span>
+      <h2>The Ministry AI Assessment</h2>
+      <p>One flat, church-friendly engagement. You end up with a concrete plan and hours back — or you pay nothing.</p>
+    </div>
+    <div class="offer reveal">
+      <div class="offer-main">
+        <ul class="incl">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> A recorded 45-minute discovery conversation with your team</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Research done for you — tools matched to a ministry your size</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> A clear written plan: 3–7 tools, costs, hours saved, and why</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> A four-day quick-start — one five-minute step a day</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> A 30-minute review call to walk through every recommendation</li>
+        </ul>
+        <div class="guarantee">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><path d="M12 3l7 4v5c0 4.4-3 8-7 9-4-1-7-4.6-7-9V7z"/></svg>
+          <div><b>Our promise.</b> If we can't find at least five hours a week of opportunity, the assessment is 100% free. The most you can lose is the 45 minutes.</div>
+        </div>
+      </div>
+      <div class="offer-side">
+        <span class="price-lab">Founding-church rate</span>
+        <div class="price">€295<small>one-time · money-back promise</small></div>
+        <p class="price-note">Our lowest rate ever, for a small founding group of churches — and we credit it back toward your first month if you continue with ongoing support. Founders keep founding pricing as we grow.</p>
+        <button class="btn" type="button" data-checkout>Book &amp; pay — €295</button>
+        <p class="pay-msg" id="payMsg" role="status"></p>
+        <a class="reserve-alt" href="#reserve">or reserve &amp; talk first →</a>
+        <div class="spots">Founding churches: enter code <b>FOUNDINGCHURCH</b> at checkout</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="audit">
+  <div class="wrap audit">
+    <div class="reveal">
+      <span class="eyebrow">Start free</span>
+      <h2 style="font-size:clamp(1.6rem,3.2vw,2.2rem); margin:12px 0 14px;">See one opportunity in two minutes.</h2>
+      <p class="muted" style="font-size:1.05rem;">Not ready for the full assessment? Our free <b>Ministry AI mini-audit</b> asks a handful of quick questions about your church and shows you one concrete tool you could use this week — no call, no commitment.</p>
+      <div class="hero-cta" style="margin-top:24px;">
+        <a class="btn btn-primary" href="#reserve">Open the mini-audit</a>
+      </div>
+      <p class="muted" style="font-size:.82rem; margin-top:14px;">Opens the interactive Ministry AI wizard.</p>
+    </div>
+    <div class="audit-visual reveal" aria-hidden="true">
+      <div class="wiz-row on"><span class="wiz-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span class="wl">What's your church size?</span><span class="wp">Under 150</span></div>
+      <div class="wiz-row on"><span class="wiz-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span class="wl">Biggest weekly time-drain?</span><span class="wp">Service media</span></div>
+      <div class="wiz-row on"><span class="wiz-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span class="wl">Who handles communications?</span><span class="wp">One volunteer</span></div>
+      <div class="wiz-row"><span class="wiz-check"></span><span class="wl muted">Your recommended first tool…</span></div>
+      <div class="wiz-bar"><i></i></div>
+      <p class="muted" style="font-size:.78rem; margin-top:10px;">Sample of the free mini-audit flow.</p>
+    </div>
+  </div>
+</section>
+
+<section id="implementation" class="band">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">When you're ready for more</span>
+      <h2>Most churches start with the plan. Some ask us to do it with them.</h2>
+      <p>The assessment stands on its own — there's never any pressure. But when a church wants a hand actually putting a tool in place, here's what that looks like. <span class="pending">example pricing — being finalized</span></p>
+    </div>
+    <div class="ladder">
+      <div class="rung reveal"><h3>Set up one tool</h3><p>We configure a single recommended tool with your team and train whoever runs it — the fastest path to hours back.</p><span class="from">Starting engagement</span></div>
+      <div class="rung reveal"><h3>Fix a broken process</h3><p>Before automating, we redraw a tangled workflow (16 steps → 7) so you're not paving a cow-path. You get the new process map.</p><span class="from">Project</span></div>
+      <div class="rung reveal"><h3>A custom helper</h3><p>A tailored assistant trained on your church's own material — bulletins, policies, FAQs — so repetitive questions answer themselves.</p><span class="from">Project or retainer</span></div>
+      <div class="rung reveal"><h3>Team workflows</h3><p>Reusable AI workflows for your proprietary processes, with the team trained to run and adjust them.</p><span class="from">Project + support</span></div>
+      <div class="rung reveal"><h3>Full setup</h3><p>Any combination of the above, bundled — we handle the whole first wave of adoption for you.</p><span class="from">Bundle</span></div>
+      <div class="rung reveal" style="background:var(--navy-soft); border-color:color-mix(in srgb, var(--navy) 26%, transparent);"><h3>Ongoing partner →</h3><p>Prefer steady help instead of a project? See the AI Concierge below — two working sessions a month.</p><span class="from">From €350/mo (founding)</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="concierge">
+  <div class="wrap concierge">
+    <div class="reveal">
+      <span class="eyebrow">Ongoing support</span>
+      <h2 style="font-size:clamp(1.6rem,3.2vw,2.2rem); margin:12px 0 14px;">The AI Concierge</h2>
+      <p class="muted" style="font-size:1.05rem;">For churches that want a steady hand: two focused 45-minute working sessions each month, plus async access when a question comes up between them. Every session, we take one real workflow and run it through a simple loop.</p>
+      <div class="aoa">
+        <div class="a"><b>A</b><span>Audit<br>how you do it now</span></div>
+        <div class="a"><b>O</b><span>Optimize<br>trim the steps</span></div>
+        <div class="a"><b>A</b><span>Automate<br>hand it to a tool</span></div>
+      </div>
+    </div>
+    <div class="report-card reveal">
+      <div class="rc-top"><div><h3>What partners get each month</h3></div><span class="rc-tag">From €350/mo</span></div>
+      <div class="rc-row"><span class="rc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><span class="rc-main"><b>Two 45-minute sessions</b><span>Working alongside your team, screen-shared</span></span></div>
+      <div class="rc-row"><span class="rc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/></svg></span><span class="rc-main"><b>Async access between calls</b><span>A quick question answered within a day</span></span></div>
+      <div class="rc-row"><span class="rc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"/><path d="M8 4v16M4 9h4"/></svg></span><span class="rc-main"><b>A running record of wins</b><span>Everything we've set up, in one place — yours</span></span></div>
+      <p class="price-note muted" style="border-top:1px solid var(--line); margin-top:14px; padding-top:14px; font-size:.84rem;">Founding partners lock €350/month for life, kept church-friendly. Confirmed on your call.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div id="reserve" class="reserve reveal">
+      <h2>Reserve a founding-church spot.</h2>
+      <p>Leave your details and we'll be in touch to schedule your assessment. No online payment — just a conversation. Have a founding access code? Enter it below.</p>
+      <form id="reserveForm">
+        <input type="text" name="church" placeholder="Your church or ministry" aria-label="Your church or ministry" required>
+        <input type="email" name="email" placeholder="Email address" aria-label="Email address" required>
+        <input class="wide" type="text" name="code" placeholder="Founding access code (optional)" aria-label="Founding access code (optional)">
+        <button class="btn" type="submit">Request my spot</button>
+        <p class="rmsg" hidden></p>
+      </form>
+      <p class="note">Founding-church cohort · money-back promise · your data stays yours.</p>
+    </div>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-grid">
+      <a class="brand" href="#top">
+        <span class="mark" aria-hidden="true"><img class="logo-img" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAASABIAAD/4QBMRXhpZgAATU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAgKADAAQAAAABAAAAgAAAAAD/4QnSaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLwA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJYTVAgQ29yZSA2LjAuMCI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnBob3Rvc2hvcD0iaHR0cDovL25zLmFkb2JlLmNvbS9waG90b3Nob3AvMS4wLyIgcGhvdG9zaG9wOkluc3RydWN0aW9ucz0iRkJNRDBhMDAwYTA3MDIwMDAwYmQwYTAwMDBjMzE0MDAwMDU3MTYwMDAwNTkxODAwMDBhMjIxMDAwMDBhMzIwMDAwYmMzNDAwMDA2OTM2MDAwMDMxMzgwMDAwMmI0YzAwMDAiLz4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8P3hwYWNrZXQgZW5kPSJ3Ij8+AP/tAK5QaG90b3Nob3AgMy4wADhCSU0EBAAAAAAAdhwBWgADGyVHHAIAAAIAAhwCKABiRkJNRDBhMDAwYTA3MDIwMDAwYmQwYTAwMDBjMzE0MDAwMDU3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" alt="Vision Outreach Media logo" width="128" height="128"></span>
+        <span class="bt"><b>Vision Outreach Media</b><span>Ministry AI Assessment</span></span>
+      </a>
+      <div class="foot-links">
+        <a href="#how">How it works</a>
+        <a href="#assessment">The assessment</a>
+        <a href="#audit">Free mini-audit</a>
+        <a href="#concierge">AI Concierge</a>
+        <a href="#reserve">Reserve</a>
+      </div>
+    </div>
+    <p class="foot-note">
+      A service of Vision Outreach Media. We help churches and ministries reclaim staff and volunteer time with proven, off-the-shelf AI tools — you own every tool, account, and file we set up. <span class="pending">Terms, Privacy &amp; Refund policy — in preparation</span>. Founding pricing is confirmed at booking.
+    </p>
+    <p class="foot-note" style="opacity:.7;">© <span id="yr"></span> Vision Outreach Media · visionoutreachmedia.nl</p>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold:.12, rootMargin:'0px 0px -8% 0px' });
+  document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+
+  var rf = document.getElementById('reserveForm');
+  if (rf) rf.addEventListener('submit', function(e){
+    e.preventDefault();
+    var code = (rf.code.value || '').trim().toUpperCase();
+    var msg = rf.querySelector('.rmsg');
+    var btn = rf.querySelector('.btn');
+    if (code === 'FOUNDINGCHURCH') {
+      msg.textContent = 'Founding Church — free-forever access confirmed. We’ll reach out to schedule your assessment.';
+      btn.textContent = 'Free access confirmed ✓';
+    } else {
+      msg.textContent = 'Thanks — we’ve got your request and will be in touch to schedule your assessment.';
+      btn.textContent = 'Received — we’ll be in touch';
+    }
+    msg.hidden = false;
+    btn.disabled = true;
+  });
+
+  // Stripe Checkout — hits the serverless endpoint; the FOUNDINGCHURCH promo code
+  // is entered on Stripe's page (allow_promotion_codes). Fails gracefully until the
+  // operator adds STRIPE_SECRET_KEY.
+  document.querySelectorAll('[data-checkout]').forEach(function(b){
+    b.addEventListener('click', function(){
+      var msg = document.getElementById('payMsg');
+      var old = b.textContent;
+      b.disabled = true; b.textContent = 'Starting checkout…'; if (msg) msg.textContent = '';
+      fetch('/api/checkout', { method:'POST', headers:{'Accept':'application/json'} })
+        .then(function(r){ return r.json().then(function(d){ return { ok:r.ok, d:d }; }); })
+        .then(function(x){
+          if (x.ok && x.d && x.d.url) { window.location.href = x.d.url; return; }
+          b.disabled = false; b.textContent = old;
+          if (msg) msg.textContent = (x.d && x.d.error) ? x.d.error : 'Checkout isn’t available right now — please use “reserve & talk first”.';
+        })
+        .catch(function(){ b.disabled = false; b.textContent = old; if (msg) msg.textContent = 'Checkout isn’t available right now — please use “reserve & talk first”.'; });
+    });
+  });
+
+  // Post-payment thank-you
+  if (/[?&]paid=1/.test(location.search)) {
+    var tb = document.querySelector('.top-bar');
+    if (tb) tb.innerHTML = '<b>Payment received — thank you!</b> We’ll email you within one business day to schedule your assessment.';
+  }
+</script>

@@ -1,0 +1,1834 @@
+<!doctype html>
+<html lang="en" data-brand="turnkey">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Platform Factory · Turnkey</title>
+<style>
+/* VOM Kit v2 — tokens only; this console adds layout, never a second palette. */
+:root{
+  --bg:#f6f5f1; --surface:#fff; --surface-2:#f1efe8; --line:#e1dfd4; --line-soft:#ece9df;
+  --ink:#1a1d1b; --ink-soft:#535b56; --ink-faint:#868f89;
+  --c:#c47716; --c-bright:#f0a24b; --c-ink:#fff;
+  --good:#2f9e63; --warn:#c9862a; --bad:#c0523a; --navy:#1B2A4A;
+  --radius:14px; --radius-sm:9px;
+  --s1:6px; --s2:10px; --s3:14px; --s4:20px; --s5:28px; --s6:40px; --s7:60px;
+  --serif:ui-serif,Georgia,"Times New Roman",serif;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --mono:ui-monospace,"SF Mono","Cascadia Code",Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#0e100f; --surface:#161a18; --surface-2:#1c211e; --line:#2a322d; --line-soft:#232a26;
+  --ink:#f0f2ee; --ink-soft:#a8b1aa; --ink-faint:#79837c; --c:#f0a24b;
+  --good:#38d07f; --warn:#e0a94b; --bad:#e8785c; }}
+*,*::before,*::after{box-sizing:border-box}
+/* `display:grid` on .shell outranks the hidden attribute's UA rule, so a hidden view
+   would stay on screen. Say it once, here, rather than per view. */
+[hidden]{display:none !important}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.6;
+  -webkit-font-smoothing:antialiased}
+.bar{display:flex;align-items:center;gap:10px;padding:9px 18px;background:var(--navy);color:#fff}
+.bar b{font-size:13.5px} .bar span{font-size:11px;opacity:.72;letter-spacing:.09em;
+  text-transform:uppercase;font-weight:600}
+.bar .who{font-family:var(--mono);font-size:12px;opacity:.8}
+.bar nav{margin-left:auto;display:flex;gap:4px;align-items:center}
+.bar nav button{font:inherit;font-size:12.5px;font-weight:700;color:#fff;background:transparent;
+  border:1px solid transparent;border-radius:999px;padding:5px 13px;cursor:pointer;opacity:.7}
+.bar nav button:hover{opacity:1}
+.bar nav button[aria-current="page"]{opacity:1;background:rgba(255,255,255,.14);
+  border-color:rgba(255,255,255,.22)}
+.bar nav button .c{font-family:var(--mono);font-size:10.5px;opacity:.75;margin-left:5px}
+
+.shell{display:grid;grid-template-columns:290px minmax(0,1fr);gap:var(--s6);
+  max-width:1180px;margin:0 auto;padding:var(--s6) var(--s4) var(--s7)}
+@media(max-width:900px){.shell{grid-template-columns:1fr;gap:var(--s4)}}
+
+/* ---------- the summary: what has been decided, carried at the top of every step ----
+   A wizard that hides its own answers makes people click Back to check them, and Back is
+   where progress goes to die. Everything decided so far stays on screen, and the step is
+   the only thing that changes. */
+.sum{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 92%,transparent);
+  backdrop-filter:blur(10px);border-bottom:1px solid var(--line);
+  margin:0 0 var(--s5);padding:var(--s3) 0 var(--s3)}
+.sum .top{display:flex;align-items:baseline;gap:var(--s3);flex-wrap:wrap}
+.sum .biz{font-weight:800;font-size:1.02rem;letter-spacing:-.02em}
+.sum .biz .none{color:var(--ink-faint);font-weight:500}
+.sum .of{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--ink-faint)}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.chip{font-size:11.5px;border:1px solid var(--line);border-radius:999px;padding:3px 10px;
+  background:var(--surface);color:var(--ink-soft);white-space:nowrap;max-width:280px;
+  overflow:hidden;text-overflow:ellipsis}
+.chip b{color:var(--ink);font-weight:700}
+.chip.ac{border-color:var(--c-line);background:var(--c-wash)}
+.chip.good{border-color:color-mix(in srgb,var(--good) 40%,var(--line));
+  background:color-mix(in srgb,var(--good) 8%,transparent)}
+.chip a{color:var(--c);text-decoration:none}
+.sum .empty{color:var(--ink-faint);font-size:12px;margin-top:9px}
+
+h1{font-family:var(--serif);font-weight:600;font-size:30px;letter-spacing:-.025em;margin:0 0 4px}
+h2{font-family:var(--serif);font-weight:600;font-size:24px;letter-spacing:-.02em;margin:0 0 4px}
+.sub{color:var(--ink-faint);font-size:13.5px;margin:0 0 var(--s5);max-width:64ch}
+.shead{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-faint);font-weight:700;margin:0 0 var(--s3)}
+
+/* ---------- the tree: steps, and the artifact each one must leave ----------
+   Two levels on purpose. The step is what you do; the child is the file that proves you
+   did it, and its state is read from the filesystem rather than from what was clicked. */
+.rail .kid{position:relative;margin:3px 0 0 0;padding-left:14px;font-family:var(--mono);
+  font-size:11px;color:var(--ink-faint);display:flex;gap:6px;align-items:baseline}
+.rail .kid::before{content:"";position:absolute;left:0;top:7px;width:8px;height:1px;
+  background:var(--line)}
+.rail .kid.has{color:var(--good)}
+.rail .kid.skip{color:var(--warn)}
+.rail .kid .sz{margin-left:auto;opacity:.7}
+.rail li.blocked .t{color:var(--ink-faint);cursor:not-allowed}
+.rail li.blocked .n{opacity:.5}
+/* An optional milestone that was waived is settled, not done: dashed rather than filled,
+   because nothing was built — a tick here would claim a funnel that does not exist. */
+.rail li.skip .n{border-style:dashed;border-color:var(--warn);color:var(--warn);
+  background:var(--surface)}
+.rail li.skip .t{color:var(--ink-soft)}
+.rail .hd{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-faint);margin:0 0 var(--s3);font-weight:700}
+.rail .pct{height:3px;border-radius:2px;background:var(--line);margin:0 0 var(--s4);
+  overflow:hidden}
+.rail .pct i{display:block;height:100%;background:var(--good);transition:width .4s}
+
+/* ---------- the rail: milestones, measured by artifacts ---------- */
+.rail{position:sticky;top:var(--s4);align-self:start}
+@media(max-width:900px){.rail{position:static}}
+.rail ol{list-style:none;margin:0;padding:0}
+.rail li{position:relative;padding:0 0 var(--s4) 42px}
+.rail li::before{content:"";position:absolute;left:15px;top:28px;bottom:4px;width:1px;background:var(--line)}
+.rail li:last-child::before{display:none}
+.rail .n{position:absolute;left:0;top:0;width:30px;height:30px;border-radius:50%;display:grid;
+  place-items:center;font-weight:800;font-size:13px;background:var(--surface);
+  border:1px solid var(--line);color:var(--ink-faint)}
+.rail li.on .n{background:var(--c);border-color:var(--c);color:var(--c-ink)}
+.rail li.done .n{background:color-mix(in srgb,var(--good) 16%,var(--surface));
+  border-color:var(--good);color:var(--good)}
+.rail .t{font-weight:700;font-size:14.5px;cursor:pointer}
+.rail li.on .t{color:var(--c)}
+.rail .p{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);display:block}
+.rail .p.has{color:var(--good)}
+
+/* ---------- forms ---------- */
+.step{display:none} .step.on{display:block}
+label.f{display:grid;gap:5px;margin-bottom:var(--s3);font-weight:650;font-size:13.5px}
+label.f .h{font-weight:400;color:var(--ink-faint);font-size:12.5px}
+input,textarea,select{font:inherit;padding:11px 13px;border-radius:var(--radius-sm);
+  border:1px solid var(--line);background:var(--surface);color:var(--ink);width:100%}
+input:focus-visible,textarea:focus-visible{outline:2px solid var(--c);outline-offset:1px}
+textarea{min-height:84px;resize:vertical}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:var(--s3)}
+@media(max-width:620px){.two{grid-template-columns:1fr}}
+.btn{display:inline-flex;align-items:center;gap:8px;font:inherit;font-weight:700;font-size:14px;
+  padding:11px 20px;border-radius:999px;border:1px solid var(--line);background:var(--surface);
+  color:var(--ink);cursor:pointer;text-decoration:none;white-space:nowrap}
+.btn:hover{border-color:var(--ink-faint)}
+.btn.pri{background:var(--c);border-color:var(--c);color:var(--c-ink)}
+.btn.pri:hover{background:var(--c-bright);border-color:var(--c-bright)}
+.btn[disabled]{opacity:.5;cursor:not-allowed}
+.btn.sm{padding:7px 14px;font-size:13px}
+.nav{display:flex;gap:var(--s2);margin-top:var(--s5);padding-top:var(--s4);
+  border-top:1px solid var(--line);flex-wrap:wrap;align-items:center}
+.nav .sp{flex:1}
+
+/* ---------- results ---------- */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+  padding:var(--s4);margin-bottom:var(--s3)}
+.out{font-family:var(--mono);font-size:12.5px;line-height:1.7;white-space:pre-wrap;
+  color:var(--ink-soft);margin:0;max-height:280px;overflow:auto}
+.ok{color:var(--good);font-weight:700} .err{color:var(--bad);font-weight:700}
+.live{display:flex;align-items:center;gap:10px;padding:13px var(--s4);border-radius:var(--radius);
+  background:color-mix(in srgb,var(--good) 8%,var(--surface));
+  border:1px solid color-mix(in srgb,var(--good) 40%,var(--line));margin-bottom:var(--s3)}
+.live .dot{width:9px;height:9px;border-radius:50%;background:var(--good);flex:none}
+.live a{font-family:var(--mono);font-size:13px;word-break:break-all}
+.files{display:grid;gap:6px;margin-top:var(--s3)}
+.file{display:flex;gap:var(--s3);align-items:baseline;padding:9px var(--s3);border:1px solid var(--line);
+  border-radius:var(--radius-sm);background:var(--surface);font-size:13.5px}
+.file b{font-family:var(--mono);font-weight:600;flex:1}
+.file .sz{color:var(--ink-faint);font-family:var(--mono);font-size:12px}
+.wl{display:flex;gap:var(--s3);align-items:baseline;padding:9px var(--s3);border:1px solid var(--line);
+  border-radius:var(--radius-sm);margin-bottom:5px;background:var(--surface);font-size:13.5px}
+.wl b{min-width:140px} .wl span{color:var(--ink-soft);flex:1}
+.wl button{all:unset;cursor:pointer;color:var(--ink-faint)} .wl button:hover{color:var(--bad)}
+.gauge{height:10px;border-radius:999px;background:var(--surface-2);border:1px solid var(--line);
+  overflow:hidden;margin:var(--s2) 0}
+.gauge i{display:block;height:100%;background:var(--c);transition:width .4s}
+.verdict{font-family:var(--serif);font-size:20px;font-weight:600}
+.verdict.go{color:var(--good)} .verdict.wait{color:var(--warn)}
+.spin{display:inline-block;width:13px;height:13px;border:2px solid currentColor;
+  border-right-color:transparent;border-radius:50%;animation:sp .7s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+.note{font-size:13px;color:var(--ink-soft);border-left:3px solid var(--c);padding-left:12px;margin:var(--s3) 0}
+.tag{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+  border:1px solid var(--line);border-radius:999px;padding:2px 9px;vertical-align:middle;
+  color:var(--ink-faint);font-weight:700}
+.tag.warn{border-color:color-mix(in srgb,var(--warn) 45%,var(--line));color:var(--warn)}
+
+/* two ways to answer one question, side by side — a choice you can see is a choice you
+   can make; a checkbox labelled "skip prelaunch" is a setting you scroll past */
+.modes{display:grid;grid-template-columns:1fr 1fr;gap:var(--s3);margin-bottom:var(--s3)}
+@media(max-width:620px){.modes{grid-template-columns:1fr}}
+.mode{display:grid;gap:5px;text-align:left;font:inherit;cursor:pointer;padding:15px 16px;
+  border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);
+  color:var(--ink);transition:border-color .18s,box-shadow .2s,transform .16s}
+.mode:hover{transform:translateY(-2px);border-color:var(--ink-faint)}
+.mode[aria-pressed="true"]{border-color:var(--c);box-shadow:0 0 0 1px var(--c)}
+.mode .lb{font-weight:750;font-size:.97rem;letter-spacing:-.015em}
+.mode .sm{color:var(--ink-soft);font-size:.8rem;line-height:1.45}
+.mode .ft{font-family:var(--mono);font-size:10.5px;color:var(--ink-faint);margin-top:3px}
+.mode code{font-family:var(--mono);font-size:.95em}
+
+/* the brand kits — a palette described in words is a palette nobody can choose between.
+   Every card renders a miniature page in its own kit: the same three decisions (ground,
+   ink scale, one accent) the built site makes, so what is on the card is what ships. */
+.kits{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(248px,1fr))}
+.kit{position:relative;text-align:left;border:1px solid var(--line);border-radius:14px;
+  background:var(--surface);cursor:pointer;overflow:hidden;padding:0;font:inherit;
+  color:var(--ink);transition:transform .16s,border-color .18s,box-shadow .2s}
+.kit:hover{transform:translateY(-2px);box-shadow:var(--shadow-sm)}
+.kit[aria-pressed="true"]{border-color:var(--kc);box-shadow:0 0 0 1px var(--kc),var(--shadow-sm)}
+/* the miniature page — the kit's own ground, ink and accent, nothing else */
+.kit .prev{background:var(--kp);color:var(--ki);padding:13px 14px 15px;
+  border-bottom:1px solid var(--kl)}
+.kit .prev .top{display:flex;align-items:center;gap:7px;margin-bottom:9px}
+.kit .prev .dot{width:8px;height:8px;border-radius:50%;background:var(--kc);flex:none}
+.kit .prev .nm{font-family:var(--kf);font-weight:650;font-size:12.5px;letter-spacing:-.01em}
+.kit .prev .lk{margin-left:auto;font-size:9.5px;opacity:.55;letter-spacing:.02em}
+.kit .prev h4{font-family:var(--kf);margin:0 0 5px;font-size:17px;line-height:1.12;
+  letter-spacing:-.018em;font-weight:650}
+.kit .prev p{margin:0 0 10px;font-size:11px;line-height:1.45;opacity:.68}
+.kit .prev .b{display:inline-block;background:var(--kc);color:var(--kci);font-size:10px;
+  font-weight:700;padding:5px 11px;border-radius:7px}
+.kit .meta{padding:11px 14px 13px}
+.kit .meta .lb{font-weight:750;font-size:.95rem;letter-spacing:-.015em}
+.kit .meta .sm{color:var(--ink-soft);font-size:.79rem;line-height:1.4;margin-top:2px;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.kit .sws{display:flex;gap:3px;margin-top:9px}
+.kit .sws i{flex:1;height:15px;border-radius:3px;
+  box-shadow:inset 0 0 0 1px rgba(128,128,128,.22)}
+.kit .tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:9px;font-family:var(--mono);
+  font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);
+  font-weight:700}
+.kit .tags i{font-style:normal;border:1px solid var(--line);border-radius:999px;padding:1px 7px}
+.kit .tags i.rec{border-color:var(--kc);color:var(--kc)}
+
+/* the chosen kit, in full — the palette a printer needs, the type, the two paragraphs */
+.kitfull{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+  padding:var(--s4);margin:var(--s3) 0}
+.kitfull h3{font-family:var(--serif);font-weight:600;font-size:19px;margin:0 0 2px;
+  letter-spacing:-.02em}
+.kitfull .pal{width:100%;border-collapse:collapse;font-size:13px;margin-top:var(--s3)}
+.kitfull .pal td{padding:7px 10px 7px 0;border-bottom:1px solid var(--line-soft)}
+.kitfull .pal tr:last-child td{border-bottom:0}
+.kitfull .pal .sw{display:block;width:26px;height:26px;border-radius:6px;
+  box-shadow:inset 0 0 0 1px rgba(128,128,128,.25)}
+.kitfull .pal .nm{font-weight:650}
+.kitfull .pal .nm em{display:block;font-style:normal;font-size:10px;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--ink-faint);font-weight:700}
+.kitfull .pal .mono{font-family:var(--mono);font-size:11.5px;color:var(--ink-soft);
+  white-space:nowrap}
+.kitfull .two2{display:grid;grid-template-columns:1fr 1fr;gap:var(--s4);margin-top:var(--s4)}
+@media(max-width:620px){.kitfull .two2{grid-template-columns:1fr}}
+.kitfull .say{font-size:13px;color:var(--ink-soft);line-height:1.55;margin:4px 0 0}
+.kitfull .cx{list-style:none;margin:var(--s3) 0 0;padding:0;font-size:12.5px}
+.kitfull .cx li{display:flex;gap:9px;align-items:baseline;padding:5px 0;
+  border-bottom:1px solid var(--line-soft)}
+.kitfull .cx li:last-child{border-bottom:0}
+.kitfull .cx span{flex:1;color:var(--ink-soft)}
+.kitfull .cx b{font-family:var(--mono);font-size:12px;color:var(--good)}
+.kitfull .cx b.no{color:var(--bad)}
+
+/* the directory — each card wears the accent of the platform it would build, because the
+   difference between these choices is visual before it is verbal */
+.dir{display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(215px,1fr))}
+.dir .a{position:relative;text-align:left;border:1px solid var(--line);border-radius:14px;
+  padding:14px 15px 13px;background:var(--surface);cursor:pointer;overflow:hidden;
+  transition:transform .16s,border-color .18s,box-shadow .2s}
+.dir .a:hover{transform:translateY(-2px);box-shadow:var(--shadow-sm)}
+.dir .a::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;
+  background:var(--ac)}
+.dir .a[aria-pressed="true"]{border-color:var(--ac);
+  box-shadow:0 0 0 1px var(--ac), var(--shadow-sm)}
+.dir .a .fg{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ac);font-weight:700}
+.dir .a .lb{font-weight:750;font-size:.97rem;letter-spacing:-.015em;margin:3px 0 4px}
+.dir .a .sm{color:var(--ink-soft);font-size:.8rem;line-height:1.45;
+  display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.dir .a .ft{display:flex;gap:8px;align-items:center;margin-top:9px;
+  font-family:var(--mono);font-size:10px;color:var(--ink-faint)}
+.dir .a .ft a{color:var(--ac);text-decoration:none;font-weight:700;margin-left:auto}
+.dir .a .ft a:hover{text-decoration:underline}
+.dir .a .tagx{border:1px solid var(--line);border-radius:999px;padding:1px 7px}
+
+/* ---------- the directory of launched sites ----------
+   The factory builds one business and then forgets it: every address it published lived
+   in a run.json nobody opens. This is the other half — every site it has launched, the
+   addresses it actually serves on, and the few things an operator does to one afterwards.
+   Nothing here is remembered; it is read off disk each time it is drawn. */
+.wide{max-width:1180px;margin:0 auto;padding:var(--s6) var(--s4) var(--s7)}
+.dhead{display:flex;align-items:baseline;gap:var(--s3);flex-wrap:wrap;margin-bottom:var(--s3)}
+.dhead .sp{flex:1}
+.filters{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-bottom:var(--s4);
+  padding-bottom:var(--s3);border-bottom:1px solid var(--line)}
+.filters button{font:inherit;font-size:12.5px;font-weight:650;padding:5px 12px;border-radius:999px;
+  border:1px solid var(--line);background:var(--surface);color:var(--ink-soft);cursor:pointer}
+.filters button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.filters button .c{font-family:var(--mono);font-size:10.5px;opacity:.65;margin-left:5px}
+.filters input{max-width:210px;padding:6px 11px;font-size:13px;border-radius:999px}
+
+.sites{display:grid;gap:var(--s3);grid-template-columns:repeat(auto-fill,minmax(345px,1fr))}
+.site{position:relative;border:1px solid var(--line);border-radius:var(--radius);
+  background:var(--surface);padding:var(--s4) var(--s4) var(--s3);overflow:hidden}
+.site::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--ac)}
+.site .fg{font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--ac);font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.site h3{margin:3px 0 2px;font-family:var(--serif);font-weight:600;font-size:1.12rem;
+  letter-spacing:-.02em}
+.site .mt{font-family:var(--mono);font-size:11px;color:var(--ink-faint);line-height:1.7}
+.site .top{display:flex;gap:var(--s3);align-items:flex-start}
+/* min-width:0 or the one-line kind label refuses to shrink and pushes the status pill
+   out of the card entirely. */
+.site .top > div:first-child{flex:1;min-width:0}
+.site .top .sp{display:none}
+.pill{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  font-weight:700;border-radius:999px;padding:3px 9px;border:1px solid var(--line);
+  color:var(--ink-faint);white-space:nowrap}
+.pill.live{color:var(--good);border-color:color-mix(in srgb,var(--good) 45%,var(--line));
+  background:color-mix(in srgb,var(--good) 9%,transparent)}
+.pill.built{color:var(--warn);border-color:color-mix(in srgb,var(--warn) 45%,var(--line))}
+.pill.bad{color:var(--bad);border-color:color-mix(in srgb,var(--bad) 45%,var(--line))}
+.site .links{display:flex;gap:6px;flex-wrap:wrap;margin:var(--s3) 0 0}
+.site .links a{font-size:12.5px;font-weight:650;text-decoration:none;color:var(--ink);
+  border:1px solid var(--line);border-radius:999px;padding:5px 11px;background:var(--surface-2)}
+.site .links a:hover{border-color:var(--ac);color:var(--ac)}
+.site .links a.pri{background:var(--ac);border-color:var(--ac);color:#fff}
+.site .links a.pri:hover{color:#fff;filter:brightness(1.08)}
+.site .adm{display:flex;gap:6px;flex-wrap:wrap;margin-top:var(--s3);padding-top:var(--s3);
+  border-top:1px solid var(--line-soft)}
+.site .adm button{font:inherit;font-size:12px;font-weight:650;padding:5px 11px;border-radius:999px;
+  border:1px solid var(--line);background:transparent;color:var(--ink-soft);cursor:pointer}
+.site .adm button:hover:not([disabled]){color:var(--ink);border-color:var(--ink-faint)}
+.site .adm button[disabled]{opacity:.45;cursor:not-allowed}
+.site .adm .warn{color:var(--bad)}
+.site .warnline{font-size:12px;color:var(--warn);margin-top:var(--s2)}
+.site .ck{font-family:var(--mono);font-size:11.5px;line-height:1.75;margin-top:var(--s2)}
+.site .ck .up{color:var(--good)} .site .ck .down{color:var(--bad)}
+.site .addr{font-family:var(--mono);font-size:11px;color:var(--ink-faint);word-break:break-all;
+  margin-top:var(--s2)}
+.empty-dir{border:1px dashed var(--line);border-radius:var(--radius);padding:var(--s6);
+  text-align:center;color:var(--ink-faint)}
+
+/* ---------- manage: renaming a business, and taking one down ----------
+   It opens inside the card it belongs to rather than in a modal, because everything it
+   is about to change is described on that card — the name, the addresses, the disk. A
+   dialog would cover the one thing you need to read while deciding. */
+/* A card with its manage panel open takes the whole row. The panel carries addresses,
+   a name field and a confirmation field side by side, and none of that is legible in a
+   345px grid column — the card is a summary, the panel is work. */
+.site.managing{grid-column:1/-1}
+.site.managing .mng .grp{max-width:760px}
+.mng{margin-top:var(--s3);padding-top:var(--s3);border-top:1px solid var(--line-soft)}
+.mng[hidden]{display:none}
+.mng .grp{margin-bottom:var(--s4)}
+.mng .grp:last-child{margin-bottom:0}
+.mng .gh{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-faint);font-weight:700;margin:0 0 6px}
+.mng .gs{font-size:12.5px;color:var(--ink-soft);margin:0 0 var(--s2);line-height:1.55}
+.mng .row{display:flex;gap:7px;align-items:center;flex-wrap:wrap}
+.mng input[type=text],.mng input[type=number]{font:inherit;font-size:13px;padding:7px 10px;
+  border-radius:var(--radius-sm);border:1px solid var(--line);background:var(--surface);
+  color:var(--ink);width:auto;flex:1;min-width:150px}
+.mng input[type=number]{flex:none;width:74px;min-width:0}
+.mng button{font:inherit;font-size:12.5px;font-weight:650;padding:7px 13px;border-radius:999px;
+  border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;
+  white-space:nowrap}
+.mng button:hover:not([disabled]){border-color:var(--ink-faint)}
+.mng button[disabled]{opacity:.45;cursor:not-allowed}
+.mng button.go{background:var(--ac);border-color:var(--ac);color:#fff}
+.mng button.danger{color:var(--bad);border-color:color-mix(in srgb,var(--bad) 40%,var(--line))}
+.mng button.danger:hover:not([disabled]){background:color-mix(in srgb,var(--bad) 10%,transparent);
+  border-color:var(--bad)}
+.mng .becomes{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);margin-top:6px}
+.mng .becomes b{color:var(--ink-soft);font-weight:600}
+.mng .proj{display:flex;gap:9px;align-items:baseline;padding:7px 10px;border:1px solid var(--line);
+  border-radius:var(--radius-sm);margin-bottom:5px;background:var(--surface);font-size:12.5px}
+.mng .proj input{flex:none;margin:0;width:auto;min-width:0}
+.mng .proj code{font-family:var(--mono);font-size:12px}
+.mng .proj .tag{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;
+  border:1px solid var(--line);border-radius:999px;padding:1px 7px;color:var(--ink-faint)}
+.mng .proj .tag.orph{color:var(--warn);border-color:color-mix(in srgb,var(--warn) 45%,var(--line))}
+.mng .proj a{color:var(--ac);text-decoration:none;font-family:var(--mono);font-size:11.5px;
+  word-break:break-all}
+.mng .proj .none{color:var(--ink-faint);font-family:var(--mono);font-size:11.5px}
+.mng .say{font-size:12.5px;line-height:1.65;border-left:3px solid var(--line);padding-left:10px;
+  color:var(--ink-soft);margin:var(--s2) 0 0}
+.mng .say.warn{border-color:var(--warn)} .mng .say.bad{border-color:var(--bad);color:var(--bad)}
+.mng .say.good{border-color:var(--good)}
+.mng .say b{color:var(--ink)}
+.trash{border:1px solid var(--line);border-radius:var(--radius);background:var(--surface-2);
+  padding:var(--s3) var(--s4);margin-bottom:var(--s4)}
+.trash[hidden]{display:none}
+.trash .th{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-faint);font-weight:700;margin:0 0 var(--s2)}
+.trash .tr{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;padding:6px 0;
+  border-top:1px solid var(--line-soft);font-size:13px}
+.trash .tr:first-of-type{border-top:0}
+.trash .tr b{font-weight:700} .trash .tr .m{color:var(--ink-faint);font-size:12px;
+  font-family:var(--mono)}
+.trash .tr .sp{flex:1}
+.trash .tr button{font:inherit;font-size:12px;font-weight:650;padding:4px 11px;border-radius:999px;
+  border:1px solid var(--line);background:var(--surface);color:var(--ink-soft);cursor:pointer}
+.trash .tr button:hover:not([disabled]){color:var(--ink);border-color:var(--ink-faint)}
+.trash .tr button.danger{color:var(--bad)}
+.trash .tr input{font:inherit;font-size:12px;padding:4px 9px;border-radius:var(--radius-sm);
+  border:1px solid var(--line);background:var(--surface);color:var(--ink);width:150px}
+</style>
+</head>
+<body>
+
+<div class="bar"><b>Vision Outreach Media</b><span>· Platform Factory</span>
+  <nav>
+    <button id="tabFactory" data-view="factory" aria-current="page">Factory</button>
+    <button id="tabDir" data-view="dir">Launched sites<span class="c" id="tabDirCount"></span></button>
+    <span class="who" id="who"></span>
+  </nav></div>
+
+<div class="shell" id="viewFactory">
+  <nav class="rail">
+    <p class="shead">Milestones</p>
+    <ol id="rail"></ol>
+    <p class="shead" style="margin-top:var(--s5)">Artifacts</p>
+    <div class="files" id="files"><span class="sub" style="margin:0">Nothing produced yet.</span></div>
+    <div style="margin-top:var(--s3)"><a class="btn sm" id="bundleBtn" href="#">Download bundle.zip</a></div>
+  </nav>
+
+  <main>
+    <div class="sum" id="sum">
+      <div class="top">
+        <span class="biz" id="sumBiz"><span class="none">No business yet</span></span>
+        <span class="of" id="sumOf"></span>
+      </div>
+      <div class="chips" id="chips"></div>
+      <div class="empty" id="sumEmpty">Nothing chosen yet.</div>
+    </div>
+
+    <!-- 0 · pick or create ------------------------------------------------ -->
+    <section class="step on" data-s="0">
+      <h1>Platform Factory</h1>
+      <p class="sub">Six milestones. Each one leaves a real file behind, and the next one
+        reads it. Nothing here is a checkbox — a step is done when its artifact exists.</p>
+      <div class="card" id="pickBox" style="margin-bottom:var(--s4)">
+        <p class="shead" style="margin-bottom:var(--s2)">What kind of business is it?</p>
+        <p class="sub" style="margin:0 0 var(--s3)">Pick one and the rest of the pipeline is
+          briefed on it — the pages that get written, the back office it runs on, and the
+          voice it is written in. Each has a working example you can open first.</p>
+        <div class="dir" id="dir"></div>
+        <p class="note" id="pickNote" style="margin-top:var(--s3)">Nothing chosen yet.</p>
+      </div>
+
+      <div class="card" id="aiBox" style="margin-bottom:var(--s4)">
+        <p class="shead" style="margin-bottom:var(--s2)">Describe it — <span id="aiModel">AI</span> drafts the rest</p>
+        <label class="f"><span style="font-weight:400;color:var(--ink-faint);font-size:13px">
+          One or two sentences. Who it's for and what it does.</span>
+          <textarea id="ai_desc" style="min-height:70px"
+            placeholder="A bookkeeping service for independent hairdressers in Utrecht who file their own VAT and hate it."></textarea></label>
+        <div class="nav" style="margin:0;padding:0;border:0">
+          <button class="btn pri" data-act="ideate">Draft the business</button>
+          <span class="sp"></span>
+          <span class="note" id="aiWhy" style="margin:0;border:0;padding:0;font-size:12.5px"></span>
+        </div>
+        <div id="r0"></div>
+      </div>
+      <label class="f"><span>Business name <span class="h">Becomes the folder, the idea file and the platform.</span></span>
+        <input id="a_name" placeholder="Vale Studio"></label>
+      <div id="existing"></div>
+      <div class="nav"><span class="sp"></span>
+        <button class="btn pri" id="openBtn">Open the factory →</button></div>
+      <div class="nav"><span class="sp"></span><button class="btn pri" data-go="1">Next: the idea &rarr;</button></div>
+    </section>
+
+    <!-- 1 · idea ---------------------------------------------------------- -->
+    <section class="step" data-s="1">
+      <h2>1 · The idea</h2>
+      <p class="sub">Produces <code>business-idea.md</code> — the file every later stage reads.</p>
+      <label class="f"><span>Who is it for? <span class="h">Be narrow.</span></span>
+        <input id="a_who" placeholder="Solo designers in NL billing under €5k/month"></label>
+      <label class="f"><span>What problem do they have? <span class="h">Their words.</span></span>
+        <textarea id="a_problem"></textarea></label>
+      <label class="f"><span>What would you do about it?</span><textarea id="a_solution"></textarea></label>
+      <label class="f"><span>The promise, in one sentence</span><textarea id="a_promise"></textarea></label>
+      <label class="f"><span>What they get <span class="h">One per line.</span></span>
+        <textarea id="a_gets"></textarea></label>
+      <div class="two">
+        <label class="f"><span>Price <span class="h">€ per sale</span></span><input type="number" id="a_price"></label>
+        <label class="f"><span>Target per month <span class="h">€</span></span><input type="number" id="a_target"></label>
+      </div>
+      <div class="two">
+        <label class="f"><span>City</span><input id="a_city"></label>
+        <label class="f"><span>Contact email</span><input id="a_email" type="email"></label>
+      </div>
+      <div class="nav"><span class="sp"></span>
+        <button class="btn pri" data-act="save">Write business-idea.md</button></div>
+      <div id="r1"></div>
+      <div class="nav"><button class="btn" data-go="0">&larr; Back</button><span class="sp"></span><button class="btn pri" data-go="2">Next: prelaunch &rarr;</button></div>
+    </section>
+
+    <!-- 2 · prelaunch ----------------------------------------------------- -->
+    <section class="step" data-s="2">
+      <h2>2 · Prelaunch <span class="tag warn" id="p_skipTag" hidden>skipped</span></h2>
+      <p class="sub">A waitlist earns the right to build something nobody has asked for yet.
+        Not every business needs one — a church has a congregation, a service business has a
+        phone that rings. Choose, and whichever you choose is written down.</p>
+
+      <div class="modes" id="p_modes">
+        <button type="button" class="mode" data-mode="run" aria-pressed="false">
+          <span class="lb">Run a prelaunch funnel</span>
+          <span class="sm">Forge builds and deploys a waitlist page. The names it collects
+            become the evidence in <code>business-profile.md</code>.</span>
+          <span class="ft" id="p_runFt">→ prelaunch/signal.json</span></button>
+        <button type="button" class="mode" data-mode="skip" aria-pressed="false">
+          <span class="lb">Skip it — go straight to the platform</span>
+          <span class="sm">The demand is already there, or the site itself is the first
+            deliverable. The milestone is settled by a dated waiver instead.</span>
+          <span class="ft">→ turnkey/prelaunch-waived.md</span></button>
+      </div>
+      <p class="note" id="p_advice" hidden></p>
+
+      <!-- skipping ------------------------------------------------------ -->
+      <div id="p_skipBox" hidden>
+        <label class="f"><span>Why is no funnel needed? <span class="h">Goes into the waiver
+          and into the profile. One line.</span></span>
+          <input id="p_reason" placeholder="The congregation already exists — the site is the first deliverable."></label>
+        <div class="nav" style="margin-top:var(--s3)"><span class="sp"></span>
+          <button class="btn pri" data-act="skip_prelaunch">Write the waiver &amp; skip</button></div>
+        <div id="r2s"></div>
+      </div>
+
+      <!-- running it ---------------------------------------------------- -->
+      <div id="p_runBox" hidden>
+      <div id="funnelLive"></div>
+      <div class="two">
+        <label class="f"><span>Where</span>
+          <select id="p_target"><option value="local">local — a folder, private</option>
+            <option value="vercel">vercel — a public URL</option></select></label>
+        <p class="note" style="margin:0">Building a <strong id="p_orgShow">—</strong>.
+          <a href="#" data-go="0">change</a><input type="hidden" id="p_org"></p>
+      </div>
+      <button class="btn pri" data-act="deploy_funnel">Build &amp; deploy the funnel</button>
+      <div id="r2"></div>
+
+      <p class="shead" style="margin-top:var(--s6)">The signal</p>
+      <div class="two">
+        <label class="f"><span>Name</span><input id="w_name"></label>
+        <label class="f"><span>Email</span><input id="w_email"></label>
+      </div>
+      <label class="f"><span>What they said</span><input id="w_note"></label>
+      <div style="display:flex;gap:var(--s2);align-items:flex-end;flex-wrap:wrap">
+        <button class="btn" data-act="add_signup">Add a signup</button>
+        <label class="f" style="max-width:190px;margin:0"><span>Enough to build it</span>
+          <input type="number" id="w_threshold" value="25"></label>
+      </div>
+      <div class="gauge"><i id="gauge"></i></div>
+      <p class="verdict" id="verdict">—</p>
+      <div id="wl"></div>
+      </div><!-- /p_runBox -->
+      <div class="nav"><button class="btn" data-go="1">&larr; Back</button><span class="sp"></span><button class="btn pri" data-go="3">Next: the profile &rarr;</button></div>
+    </section>
+
+    <!-- 3 · profile ------------------------------------------------------- -->
+    <section class="step" data-s="3">
+      <h2>3 · The profile</h2>
+      <p class="sub">Produces <code>business-profile.md</code> — the document the spec compiler
+        reads to generate every page of the site. Prelaunch evidence is written into it.</p>
+      <label class="f"><span>Positioning <span class="h">Blank uses "who it is for".</span></span>
+        <textarea id="a_positioning"></textarea></label>
+      <label class="f"><span>Brand voice</span><textarea id="a_voice"></textarea></label>
+      <div class="two">
+        <label class="f"><span>Domain intent</span><input id="a_domain" placeholder="valestudio.nl"></label>
+        <label class="f"><span>Channels</span><input id="a_channels" placeholder="LinkedIn, referral, newsletter"></label>
+      </div>
+      <div class="nav"><span class="sp"></span>
+        <button class="btn pri" data-act="profile">Write business-profile.md</button></div>
+      <div id="r3"></div>
+      <div class="nav"><button class="btn" data-go="2">&larr; Back</button><span class="sp"></span><button class="btn pri" data-go="4">Next: the brand &rarr;</button></div>
+    </section>
+
+    <!-- 4 · brand --------------------------------------------------------- -->
+    <section class="step" data-s="4">
+      <h2>4 · The brand</h2>
+      <p class="sub">Produces <code>brand-kit.md</code> and a printable manual. Every kit
+        below was drawn and contrast-checked in advance — nothing is generated here and no
+        build waits on a designer. What you pick is what the site, the back office and the
+        manual all compile from.</p>
+      <div class="kits" id="kits"></div>
+      <p class="note" id="kitNote">Loading the kits…</p>
+      <div id="kitPanel"></div>
+      <div class="nav"><span class="sp"></span>
+        <button class="btn pri" data-act="brand">Write brand-kit.md</button></div>
+      <div id="r4"></div>
+      <div class="nav"><button class="btn" data-go="3">&larr; Back</button><span class="sp"></span>
+        <button class="btn pri" data-go="5">Next: provisioning &rarr;</button></div>
+    </section>
+
+    <!-- 5 · provisioning -------------------------------------------------- -->
+    <section class="step" data-s="5">
+      <h2>5 · Provisioning</h2>
+      <p class="sub">Decides the blueprint, compiles the build order, then writes
+        <code>provisioning.md</code>: the hostname, the DNS, the rails and their credentials,
+        in the order they must exist — and what still blocks an unattended build.</p>
+      <div class="two">
+        <label class="f"><span>Org type</span>
+          <span class="note" style="margin:0;display:block"><strong id="v_orgShow">—</strong>
+            <a href="#" data-go="0">change</a></span><input type="hidden" id="v_org"></label>
+        <label class="f"><span>Where it will live</span>
+          <select id="v_target"><option value="local">local</option>
+            <option value="vercel">vercel</option></select></label>
+      </div>
+      <div class="nav"><span class="sp"></span>
+        <button class="btn pri" data-act="provision">Compile the build order</button></div>
+      <div id="r5"></div>
+      <div class="nav"><button class="btn" data-go="4">&larr; Back</button><span class="sp"></span><button class="btn pri" data-go="6">Next: the platform &rarr;</button></div>
+    </section>
+
+    <!-- 6 · build --------------------------------------------------------- -->
+    <section class="step" data-s="6">
+      <h2>6 · The platform</h2>
+      <p class="sub">Forge composes the modules, writes the site, checks its own work and
+        deploys. Eleven stages, nobody in the loop.</p>
+      <div id="platformLive"></div>
+      <label class="f" style="max-width:280px"><span>Where</span>
+        <select id="b_target"><option value="local">local</option>
+          <option value="vercel">vercel — a public URL</option></select></label>
+      <div class="nav"><span class="sp"></span>
+        <button class="btn pri" data-act="build">Build the platform</button></div>
+      <div id="r6"></div>
+      <div class="nav"><button class="btn" data-go="5">&larr; Back</button><span class="sp"></span></div>
+    </section>
+  </main>
+</div>
+
+<!-- the directory ------------------------------------------------------- -->
+<div class="wide" id="viewDir" hidden>
+  <div class="dhead">
+    <div>
+      <h1>Launched sites</h1>
+      <p class="sub" style="margin:0">Every business this factory has built, the addresses
+        it publishes on, and what you can do to one after it is live. Read from disk and
+        from each build's own record — not from a list anybody maintains.</p>
+    </div>
+  </div>
+  <div class="filters" id="dirFilters"></div>
+  <div class="trash" id="trashBox" hidden></div>
+  <div class="sites" id="sites"></div>
+</div>
+
+<script>
+"use strict";
+var T = new URLSearchParams(location.search).get("t") || "";
+var BIZ = null, ST = null, BUSY = false;
+var FIELDS = ["name","who","problem","solution","promise","gets","price","target","city",
+              "email","positioning","voice","domain","channels"];
+function $(id){ return document.getElementById(id); }
+function esc(x){ var d=document.createElement("div"); d.textContent=x==null?"":x; return d.innerHTML; }
+/* A business is addressed by its path relative to the ideas root — the ones the
+   directory opens can be several folders down — but it is *called* by its name. */
+function bizLabel(){ return BIZ ? BIZ.split("/").pop() : ""; }
+
+function api(path, opts){
+  var sep = path.indexOf("?")>-1 ? "&" : "?";
+  return fetch(path + sep + "t=" + encodeURIComponent(T), opts).then(function(r){
+    return r.json().catch(function(){ return {error:"bad response"}; });
+  });
+}
+function post(action, body){
+  return api("/api/" + "?action=" + action, {method:"POST",
+    headers:{"Content-Type":"application/json"}, body: JSON.stringify(body||{})});
+}
+function answers(){
+  var a = {}; FIELDS.forEach(function(k){ var el=$("a_"+k); if(el && el.value!=="") a[k]=el.value; });
+  return a;
+}
+
+/* ------------------------------------------------------------- rendering */
+/* Step 0 is a real page, so it is a real node. Leaving it out of the tree meant you could
+   stand on a page the tree did not show, which is the one thing a progress tree must never
+   do. It has no artifact of its own — its output is the answers the next step writes. */
+function treeNodes(){
+  var chosen = CHOSEN ? CHOSEN.label : ((ST && ST.answers && ST.answers.org_type) || "");
+  var nodes = [{
+    step: 0, title: "Choose & describe",
+    kids: [{ label: chosen || "no kind chosen yet", has: !!chosen },
+           { label: BIZ ? "named: " + bizLabel() : "not named yet", has: !!BIZ }],
+    done: !!(chosen && BIZ),
+  }];
+  ((ST && ST.milestones) || []).forEach(function(m, i){
+    /* A waived milestone is settled, not done — it counts as answered so the tree can
+       reach the end, but it never wears a tick, because nothing was built. */
+    nodes.push({ step: i + 1, title: m.title, done: !!m.done, skipped: !!m.skipped,
+      kids: [ m.skipped
+        ? { label: "skipped — " + (m.settled_by || "waived"), skip: true }
+        : { label: m.produces, has: !!m.done,
+            sz: (m.done && m.bytes != null) ? m.bytes + " B" : "" } ] });
+  });
+  return nodes;
+}
+
+/* One chosen kind, shown in three places and asked for in one. */
+function paintChoice(){
+  var org = (CHOSEN && CHOSEN.org_type) ||
+            ($("p_org") && $("p_org").value) ||
+            (ST && ST.answers && ST.answers.org_type) || "";
+  var label = (CHOSEN && CHOSEN.label) || (ORG_LABELS[org] || org || "—");
+  ["p_org","v_org"].forEach(function(id){ var el = $(id); if (el && org) el.value = org; });
+  ["p_orgShow","v_orgShow"].forEach(function(id){
+    var el = $(id); if (el) el.textContent = label; });
+}
+var ORG_LABELS = {};
+
+/* Everything decided so far, carried at the top of every step.
+   A wizard that hides its own answers makes people click Back to check them, and a person
+   who has clicked Back is no longer moving forward. The chips are read from the same three
+   places the pipeline itself reads: the chosen archetype, the saved answers, and the
+   artifacts on disk. */
+function paintSummary(){
+  var a = (ST && ST.answers) || {};
+  var org = (CHOSEN && CHOSEN.org_type) || a.org_type || "";
+  var kind = (CHOSEN && CHOSEN.label) || ORG_LABELS[org] || "";
+  var forge = (CHOSEN && CHOSEN.forge) || "";
+
+  $("sumBiz").innerHTML = BIZ
+    ? esc(bizLabel())
+    : '<span class="none">No business yet</span>';
+
+  var here = +(sessionStorage.getItem("step") || 0);
+  /* Read from the milestones the server sent rather than a second list kept in step with
+     it by hand — the titles here disagreed with the tree the moment a milestone was added. */
+  var titles = ["Choose & describe"].concat(
+    ((ST && ST.milestones) || []).map(function(m){ return m.title; }));
+  $("sumOf").textContent = "Step " + here + " of " + (titles.length - 1) + " · " +
+    (titles[here] || "");
+
+  var chips = [];
+  function chip(label, value, cls){
+    if (!value) return;
+    chips.push('<span class="chip ' + (cls || '') + '"><b>' + esc(label) + '</b> ' +
+               esc(String(value)) + '</span>');
+  }
+  if (kind) chips.push('<span class="chip ac"><b>' + esc(kind) + '</b>' +
+                       (forge ? ' · ' + esc(forge) : '') + '</span>');
+  chip("for", a.who);
+  chip("promise", a.promise);
+  chip("price", a.price ? "€" + a.price : "");
+  chip("target", a.target ? "€" + a.target + "/mo" : "");
+  chip("in", a.city);
+
+  /* Once something is live, its address is the most useful thing on the screen. */
+  if (ST && ST.funnel_url)
+    chips.push('<span class="chip good"><b>funnel</b> <a href="' + esc(ST.funnel_url) +
+               '" target="_blank" rel="noopener">open &rarr;</a></span>');
+  if (ST && ST.platform_url)
+    chips.push('<span class="chip good"><b>platform</b> <a href="' + esc(ST.platform_url) +
+               '" target="_blank" rel="noopener">open &rarr;</a></span>');
+  if (ST && ST.signal && ST.signal.count)
+    chip("signal", ST.signal.count + " signed up", "good");
+  if (ST && ST.prelaunch && ST.prelaunch.waived)
+    chip("prelaunch", "skipped");
+
+  $("chips").innerHTML = chips.join("");
+  $("sumEmpty").style.display = chips.length ? "none" : "";
+}
+
+function paintRail(){
+  var rail = $("rail");
+  if (!ST) { rail.innerHTML=""; return; }
+  paintChoice();
+  paintSummary();
+  var nodes = treeNodes();
+  var here = +(sessionStorage.getItem("step") || 0);
+  /* Settled, not finished: a waived milestone fills the bar, because the pipeline really
+     has no more to do there — but its own node stays dashed rather than ticked. */
+  var done = nodes.filter(function(n){ return n.done || n.skipped; }).length;
+
+  rail.innerHTML =
+    '<p class="hd">Progress · ' + done + ' of ' + nodes.length + '</p>' +
+    '<div class="pct"><i style="width:' + Math.round(done / nodes.length * 100) + '%"></i></div>' +
+    '<ol>' + nodes.map(function(n){
+      /* A step is reachable once the business exists, except step 0 which is where it comes
+         from. Nothing is gated on the step before it having been *visited* — the artifact
+         either exists or it does not, and jumping back to fix one is normal. */
+      var blocked = n.step > 0 && !BIZ;
+      return '<li class="' + (n.done ? "done " : "") + (n.skipped ? "skip " : "") +
+        (here === n.step ? "on " : "") + (blocked ? "blocked" : "") + '">' +
+        '<span class="n">' + (n.done ? "✓" : (n.skipped ? "–" : n.step)) + '</span>' +
+        '<span class="t"' + (blocked ? '' : ' data-go="' + n.step + '"') + '>' +
+          esc(n.title) + '</span>' +
+        n.kids.map(function(k){
+          return '<span class="kid' + (k.has ? " has" : "") + (k.skip ? " skip" : "") + '">' +
+            (k.has ? "✓ " : (k.skip ? "– " : "· ")) + esc(k.label) +
+            (k.sz ? '<span class="sz">' + esc(k.sz) + '</span>' : '') + '</span>';
+        }).join("") +
+      '</li>';
+    }).join("") + '</ol>';
+}
+function paintFiles(){
+  var f = (ST && ST.files) || [];
+  $("files").innerHTML = f.length ? f.map(function(x){
+    return '<div class="file"><b>'+esc(x.name)+'</b><span class="sz">'+x.bytes+' B</span>'+
+      '<a class="sz" href="/api/file?business='+encodeURIComponent(BIZ)+'&rel='+
+      encodeURIComponent(x.rel)+'&t='+encodeURIComponent(T)+'" target="_blank">open</a></div>';
+  }).join("") : '<span class="sub" style="margin:0">Nothing produced yet.</span>';
+  $("bundleBtn").href = "/api/bundle?business="+encodeURIComponent(BIZ||"")+"&t="+encodeURIComponent(T);
+}
+function liveBox(url, label){
+  if (!url) return "";
+  var href = /^https?:/.test(url) ? url : "file://" + url;
+  return '<div class="live"><span class="dot"></span><div><strong>'+esc(label)+'</strong><br>'+
+    '<a href="'+esc(href)+'" target="_blank" rel="noopener">'+esc(url)+'</a></div></div>';
+}
+function paintSignal(){
+  var sig = (ST && ST.signal) || {}, ups = sig.signups || [];
+  var need = Math.max(1, +sig.threshold || 25);
+  if (sig.threshold) $("w_threshold").value = sig.threshold;
+  $("gauge").style.width = Math.min(100, Math.round(100*ups.length/need)) + "%";
+  var v = $("verdict");
+  if (!ups.length){ v.className="verdict"; v.textContent = "No signal yet — "+need+" to go."; }
+  else if (ups.length >= need){ v.className="verdict go"; v.textContent = ups.length+" of "+need+" · build it."; }
+  else { v.className="verdict wait"; v.textContent = ups.length+" of "+need+" · "+(need-ups.length)+" more."; }
+  $("wl").innerHTML = ups.map(function(w,i){
+    return '<div class="wl"><b>'+esc(w.name)+'</b><span>'+esc(w.email||"")+
+      (w.note?" — "+esc(w.note):"")+'</span><button data-del="'+i+'">×</button></div>';
+  }).join("");
+  $("funnelLive").innerHTML = liveBox(ST && ST.funnel_url, "The funnel is live");
+  $("platformLive").innerHTML = liveBox(ST && ST.platform_url, "The platform is live");
+}
+
+/* Which of the two prelaunch paths this business is on.
+   MODE is only ever a *pending* choice — what is on screen before a button is pressed. The
+   settled answer is the waiver on disk, so the moment one exists the screen follows it. */
+var MODE = null, MODE_BIZ = null;
+function paintPrelaunch(){
+  var pre = (ST && ST.prelaunch) || {};
+  /* A pending choice belongs to the business it was made for — carrying it to the next
+     one shows a decision nobody took about a business they just opened. */
+  var pending = MODE_BIZ === BIZ ? MODE : null;
+  var mode = pre.waived ? "skip" : (pre.ran ? "run" : pending);
+
+  $("p_skipTag").hidden = !pre.waived;
+  $("p_skipBox").hidden = mode !== "skip";
+  $("p_runBox").hidden  = mode !== "run";
+  document.querySelectorAll("#p_modes .mode").forEach(function(b){
+    b.setAttribute("aria-pressed", b.dataset.mode === mode ? "true" : "false");
+  });
+  if (pre.reason && $("p_reason") && !$("p_reason").value) $("p_reason").value = pre.reason;
+  /* Once a waiver exists the same button is for correcting the reason, not for deciding. */
+  var sb = document.querySelector('[data-act="skip_prelaunch"]');
+  if (sb && !BUSY){
+    sb.innerHTML = pre.waived ? "Update the waiver" : "Write the waiver &amp; skip";
+    sb.dataset.label = sb.innerHTML;
+  }
+
+  /* Advice, not a rule — say what this kind of business usually does and let it be
+     overruled, because the operator knows things the archetype does not. */
+  var advice = pre.advice || (CHOSEN && CHOSEN.prelaunch) || "";
+  var kind = (CHOSEN && CHOSEN.label) || "";
+  var el = $("p_advice"), txt = "";
+  if (pre.ran && !pre.waived){
+    /* A deployed funnel is a fact, so the choice is over — say that, rather than letting
+       the skip card look broken when clicking it changes nothing. */
+    txt = "This business <strong>already has a funnel</strong>, so the milestone is done. " +
+      "Skipping is only for a business that never ran one.";
+  } else if (pre.waived){
+    txt = "<strong>Skipped.</strong> The milestone is settled by " +
+      "<code>turnkey/prelaunch-waived.md</code>" +
+      (pre.reason ? " — " + esc(pre.reason) : ".") +
+      ' <a href="#" data-mode-set="run">Run one after all</a>.';
+  } else if (advice === "optional"){
+    txt = "For " + esc(kind ? kind.toLowerCase() : "this kind of business") +
+      " a funnel is usually <strong>unnecessary</strong> — the audience already exists, " +
+      "and the platform is the first deliverable.";
+  } else if (advice === "recommended"){
+    txt = "For " + esc(kind ? kind.toLowerCase() : "this kind of business") +
+      " a funnel is <strong>worth running</strong> — it is sold to people who have not " +
+      "met it yet, and the waitlist is the cheapest evidence you will ever buy.";
+  }
+  el.innerHTML = txt; el.hidden = !txt;
+}
+
+function paint(){
+  paintRail(); paintFiles(); paintSignal(); paintPrelaunch(); loadKits();
+  $("who").textContent = bizLabel();
+  if (ST && ST.answers) FIELDS.forEach(function(k){
+    var el=$("a_"+k); if(el && !el.value && ST.answers[k]!=null) el.value = ST.answers[k];
+  });
+}
+
+/* ------------------------------------------------------------ navigation */
+function go(n){
+  sessionStorage.setItem("step", n);
+  document.querySelectorAll(".step").forEach(function(el){
+    el.classList.toggle("on", +el.dataset.s === n);
+  });
+  paintRail(); window.scrollTo({top:0,behavior:"smooth"});
+}
+document.addEventListener("click", function(e){
+  /* Choosing a path only changes what is on screen. Nothing is decided until the funnel
+     is built or the waiver is written — both of which leave a file. */
+  var m = e.target.closest("#p_modes .mode") || e.target.closest("[data-mode-set]");
+  if (m){
+    e.preventDefault();
+    var want = m.dataset.mode || m.dataset.modeSet;
+    MODE_BIZ = BIZ;
+    if (want === "run" && ST && ST.prelaunch && ST.prelaunch.waived){
+      /* Undoing the waiver is a change to disk, so it goes through the engine. */
+      post("prelaunch", {business: BIZ, mode: "run"}).then(function(){
+        MODE = "run"; refresh(); });
+      return;
+    }
+    MODE = want; paintPrelaunch(); return;
+  }
+  var g = e.target.closest("[data-go]");
+  if (g){ var n = +g.dataset.go; if (BIZ || n === 0) go(n); return; }
+  var d = e.target.closest("[data-del]");
+  if (d){ post("signal", {business:BIZ, remove:+d.dataset.del}).then(refresh); return; }
+  var a = e.target.closest("[data-act]");
+  if (a) act(a.dataset.act, a);
+});
+
+/* --------------------------------------------------------------- actions */
+function busy(btn, on, label){
+  BUSY = on; btn.disabled = on;
+  btn.innerHTML = on ? '<span class="spin"></span> ' + (label||"working…") : btn.dataset.label;
+}
+function act(name, btn){
+  if (BUSY) return;
+  if (!btn.dataset.label) btn.dataset.label = btn.innerHTML;
+  var body = {business: BIZ}, slot = null, wait = "working…";
+
+  if (name === "ideate"){
+    /* The choice from the directory travels with the request, so the draft is written for
+       the pages that will actually exist rather than for "a business". */
+    body.org_type = CHOSEN ? CHOSEN.org_type : ($("p_org") ? $("p_org").value : "");
+    slot = "r0"; wait = "drafting…";
+  }
+  else if (name === "save"){ body.answers = answers(); slot = "r1"; wait = "writing…"; }
+  else if (name === "skip_prelaunch"){
+    name = "prelaunch";
+    body.mode = "skip"; body.reason = $("p_reason").value;
+    slot = "r2s"; wait = "writing the waiver…";
+  }
+  else if (name === "deploy_funnel"){
+    body.target = $("p_target").value; body.org_type = $("p_org").value;
+    slot = "r2"; wait = body.target === "local" ? "building…" : "building & deploying…";
+  }
+  else if (name === "add_signup"){
+    name = "signal";
+    body.add = {name:$("w_name").value, email:$("w_email").value, note:$("w_note").value};
+    body.threshold = $("w_threshold").value;
+    if (!body.add.name) return;
+  }
+  else if (name === "profile"){ body.answers = answers(); slot = "r3"; wait = "writing…"; }
+  else if (name === "brand"){
+    if (!KIT) return;
+    body.kit = KIT.id;
+    body.org_type = $("v_org").value ||
+                    ((ST && ST.answers && ST.answers.org_type) || "");
+    slot = "r4"; wait = "writing the manual…";
+  }
+  else if (name === "provision"){
+    body.org_type = $("v_org").value; body.target = $("v_target").value;
+    body.domain = $("a_domain") ? $("a_domain").value : "";
+    slot = "r5"; wait = "compiling…";
+  }
+  else if (name === "build"){ body.target = $("b_target").value; slot = "r6";
+    wait = body.target === "local" ? "building…" : "building & deploying…"; }
+
+  busy(btn, true, wait);
+  post(name, body).then(function(r){
+    busy(btn, false);
+    if (name === "signal"){ $("w_name").value=$("w_email").value=$("w_note").value=""; }
+    if (name === "ideate" && r.ok && r.answers){
+      FIELDS.forEach(function(k){ var el=$("a_"+k); if(el && r.answers[k]!=null && r.answers[k]!=="") el.value=r.answers[k]; });
+      ["v_org","p_org"].forEach(function(id){ var el=$(id); if(el && r.answers.org_type) el.value=r.answers.org_type; });
+    }
+    if (slot) $(slot).innerHTML = result(r);
+    refresh();
+  }).catch(function(e){
+    busy(btn, false);
+    if (slot) $(slot).innerHTML = '<div class="card"><span class="err">'+esc(e.message)+'</span></div>';
+  });
+}
+function result(r){
+  if (r.error || r.ok === false){
+    return '<div class="card"><p class="err">It did not work — here is exactly why:</p>'+
+      '<pre class="out">'+esc(r.error || "unknown")+'</pre></div>';
+  }
+  var h = '<div class="card"><p class="ok">Done.</p>';
+  if (r.wrote) h += '<pre class="out">'+r.wrote.map(function(w){return "wrote  "+w;}).join("\n")+'</pre>';
+  if (r.url) h += '<p class="out">live   '+esc(r.url)+'</p>';
+  if (r.elapsed != null) h += '<p class="out">in     '+r.elapsed+'s</p>';
+  if (r.blocking && r.blocking.length){
+    h += '<p class="note"><strong>Not ready for an unattended build yet:</strong><br>'+
+      r.blocking.map(function(b){ return "· "+esc(b.what)+" — "+esc(b.fix); }).join("<br>")+'</p>';
+  } else if (r.ready) {
+    h += '<p class="note">The spec is <strong>ready</strong> — Forge can run it unattended.</p>';
+  }
+  if (r.kit){
+    h += '<p class="note"><strong>' + esc(r.name) + '</strong> is now this business\u2019s ' +
+      'brand. Open <code>brand-manual.html</code> from the artifacts list and print it to ' +
+      'PDF — that is the copy the owner hands to a printer or a sign maker.' +
+      ((r.contrast && r.contrast.length) ?
+        '<br><span class="err">Contrast warnings: ' + esc(r.contrast.join("; ")) + '</span>' : '') +
+      '</p>';
+  }
+  if (r.evidence) h += '<p class="note">The prelaunch evidence was written into the profile.</p>';
+  if (r.waived === true && r.wrote)
+    h += '<p class="note">The funnel is skipped. The profile will say so, and the waiver ' +
+         'travels in the bundle — you can still run one later.</p>';
+  if (r.waived === true && !r.wrote)
+    h += '<p class="note">Written into the profile: no waitlist was run, and why.</p>';
+  if (r.unwaived) h += '<p class="note">The earlier waiver was removed — this business runs ' +
+                       'a funnel after all.</p>';
+  if (r.answers){
+    h += '<p class="out">drafted <strong>'+esc(r.answers.name)+'</strong> · '+esc(r.answers.org_type)+
+         '</p><p class="note"><strong>It decided these for you</strong> — every one is real copy on a '+
+         'real page, so correct anything wrong in the form below:<br>'+
+         (r.assumptions||[]).map(function(a){ return "· "+esc(a); }).join("<br>")+'</p>';
+  }
+  return h + '</div>';
+}
+
+/* ------------------------------------------------- the directory of sites */
+/* The factory's own memory of what it has launched. Every field on a card is measured:
+   the addresses come from the run that actually published, the check comes from fetching
+   them now. Nothing is a label somebody has to keep true by hand. */
+var DIR = null, DIRF = "all", DIRQ = "";
+/* What each card last reported — a check, or a build. Held here rather than in the card
+   itself because rebuilding repaints the directory, and a result that vanishes the moment
+   it arrives is the same as no result. */
+var DIRMSG = {};
+/* The open manage panels, keyed the same way and for the same reason: renaming repaints
+   the whole directory, and a panel that closed itself the moment it succeeded would take
+   its own report with it. The value is the inventory the panel is drawn from. */
+var MNG = {};
+
+function showView(v){
+  $("viewFactory").hidden = v !== "factory";
+  $("viewDir").hidden = v !== "dir";
+  document.querySelectorAll(".bar nav button").forEach(function(b){
+    if (b.dataset.view === v) b.setAttribute("aria-current", "page");
+    else b.removeAttribute("aria-current");
+  });
+  if (v === "dir") loadDir();
+  window.scrollTo({top:0});
+}
+function loadDir(){
+  return api("/api/directory").then(function(d){ DIR = d; paintDir(); });
+}
+/* A local build is only openable if this server hands it out: a page served over http
+   cannot follow a file:// link, and the build's nav is relative, so it is served under a
+   path prefix rather than a query parameter. */
+function localLink(e, k){
+  return e.local && e.local[k]
+    ? "/b/" + encodeURIComponent(T) + "/" + e.token + "/" + e.local[k] : "";
+}
+function bizq(b){ return "business=" + encodeURIComponent(b) + "&t=" + encodeURIComponent(T); }
+
+var DIR_FILTERS = [
+  {id:"all",      label:"All",            test:function(){ return true; }},
+  {id:"live",     label:"Live",           test:function(e){ return e.status === "live"; }},
+  {id:"built",    label:"Not published",  test:function(e){ return e.status === "built"; }},
+  {id:"progress", label:"In progress",
+   test:function(e){ return e.status === "building" || e.status === "started"; }},
+  {id:"demo",     label:"Demos",          test:function(e){ return e.demo; }}
+];
+
+function paintDir(){
+  var all = (DIR && DIR.entries) || [];
+  $("tabDirCount").textContent = all.length ? all.length : "";
+
+  var f = DIR_FILTERS.filter(function(x){ return x.id === DIRF; })[0] || DIR_FILTERS[0];
+  var q = DIRQ.trim().toLowerCase();
+  var rows = all.filter(f.test).filter(function(e){
+    return !q || (e.name + " " + (e.kind||"") + " " + (e.live||"")).toLowerCase().indexOf(q) > -1;
+  });
+
+  $("dirFilters").innerHTML =
+    DIR_FILTERS.map(function(x){
+      var n = all.filter(x.test).length;
+      return '<button data-filter="' + x.id + '" aria-pressed="' + (x.id === DIRF) + '">' +
+        esc(x.label) + '<span class="c">' + n + '</span></button>';
+    }).join("") +
+    '<input id="dirSearch" placeholder="Filter by name…" value="' + esc(DIRQ) + '">' +
+    '<span style="flex:1"></span>' +
+    '<button data-checkall="1">Check every live address</button>';
+
+  paintTrash();
+
+  $("sites").innerHTML = rows.length ? rows.map(siteCard).join("") :
+    '<div class="empty-dir">Nothing here yet. A business appears in this directory the ' +
+    'moment its first artifact is written.</div>';
+}
+
+/* An archived business is invisible everywhere else on purpose — which is exactly why it
+   has to be visible here. Without this, archiving would be indistinguishable from
+   deleting, and the whole point of archiving is that it is not. */
+function paintTrash(){
+  var t = (DIR && DIR.trash) || [];
+  var box = $("trashBox");
+  box.hidden = !t.length;
+  if (!t.length) return;
+  box.innerHTML = '<p class="th">Archived · ' + t.length + '</p>' + t.map(function(x){
+    var live = (x.live_sites || []).length;
+    return '<div class="tr"><b>' + esc(x.business) + '</b>' +
+      '<span class="m">' + esc(x.at || "") + ' · ' + esc(x.human || "") +
+        (live ? ' · ' + live + ' site(s) still serving' : '') + '</span>' +
+      (x.reason ? '<span class="m">“' + esc(x.reason) + '”</span>' : '') +
+      '<span class="sp"></span>' +
+      '<button data-trash="restore" data-entry="' + esc(x.entry) + '">Restore</button>' +
+      (live ? '<span class="m" title="restore it, take the sites down, then archive again">' +
+              'purge blocked — still published</span>'
+            : '<input type="text" data-trash="confirm" data-entry="' + esc(x.entry) +
+              '" placeholder="type ' + esc(x.business) + '">' +
+              '<button class="danger" data-trash="purge" data-entry="' + esc(x.entry) +
+              '">Purge for good</button>') +
+      '</div>';
+  }).join("") + '<p class="gs" style="margin:var(--s2) 0 0;font-size:12px;color:var(--ink-faint)">' +
+    'Restoring puts a business back exactly where it was. Purging is the only thing in ' +
+    'this console that destroys anything, and it can only ever reach this list.</p>';
+}
+
+function siteCard(e){
+  var site  = e.live || localLink(e, "site");
+  var admin = e.admin || localLink(e, "platform");
+  var pill  = e.status === "live"  ? ['live', 'Live']
+            : e.status === "built" ? ['built', 'Built · not published']
+            : ['', 'In progress'];
+  if (e.failed && e.failed.length) pill = ['bad', e.failed.length + ' checks failed'];
+
+  var meta = [];
+  if (e.run) meta.push((e.at || "") + " · last build " + (e.target || "local"));
+  else meta.push(e.at ? "last touched " + e.at : "not built yet");
+  if (e.pages) meta.push(e.pages + " pages");
+  if (e.checks_total) meta.push(e.checks_ok + "/" + e.checks_total + " checks");
+  if (e.signups) meta.push(e.signups + " signed up");
+  else if (e.waived) meta.push("no funnel — waived");
+  meta.push("milestones " + e.milestones + "/" + e.of);
+
+  var links = [];
+  function link(href, label, pri, external){
+    if (!href) return;
+    links.push('<a href="' + esc(href) + '"' + (external ? ' target="_blank" rel="noopener"' : ' target="_blank"') +
+      (pri ? ' class="pri"' : '') + '>' + label + '</a>');
+  }
+  link(site,  "Open the site &nearr;", true, true);
+  link(admin, "Admin &nearr;", false, true);
+  link(e.funnel, "Funnel &nearr;", false, true);
+  if (e.live && localLink(e, "site")) link(localLink(e, "site"), "Local build", false, false);
+  if (e.console) link("/api/console?" + bizq(e.business), "Build log", false, false);
+  link("/api/bundle?" + bizq(e.business), "bundle.zip", false, false);
+
+  return '<article class="site' + (MNG[e.business] ? ' managing' : '') +
+      '" style="--ac:' + esc(e.accent || "#868f89") + '" data-card="' +
+      esc(e.business) + '">' +
+    '<div class="top"><div>' +
+      '<div class="fg">' + esc(e.forge || "not built") +
+        (e.kind ? ' · ' + esc(e.kind) : '') + (e.demo ? ' · demo' : '') + '</div>' +
+      '<h3>' + esc(e.name) + '</h3>' +
+      '<div class="mt">' + esc(meta.join(" · ")) + '</div>' +
+    '</div><span class="sp"></span><span class="pill ' + pill[0] + '">' + esc(pill[1]) + '</span></div>' +
+    (e.live ? '<div class="addr">' + esc(e.live) + '</div>' : '') +
+    (e.stale ? '<div class="warnline">The build on disk is newer than what is published — ' +
+               'publish again to make the live site match it.</div>' : '') +
+    '<div class="links">' + (links.join("") || '<span class="mt">Nothing published yet.</span>') + '</div>' +
+    '<div class="adm">' +
+      '<button data-dir="open" data-biz="' + esc(e.business) + '">Continue in the factory</button>' +
+      '<button data-dir="check" data-biz="' + esc(e.business) + '"' +
+        (site && /^https?:/.test(site) ? '' : ' disabled title="nothing public to check"') +
+        '>Check it is live</button>' +
+      '<button data-dir="rebuild" data-biz="' + esc(e.business) + '">Rebuild</button>' +
+      '<button data-dir="publish" data-biz="' + esc(e.business) + '">Publish to Vercel</button>' +
+      '<span style="flex:1"></span>' +
+      '<button data-dir="manage" data-biz="' + esc(e.business) + '">Rename or clean up…</button>' +
+    '</div><div class="ck">' + (DIRMSG[e.business] || "") + '</div>' +
+    '<div class="mng"' + (MNG[e.business] ? '' : ' hidden') + '>' +
+      (MNG[e.business] ? managePanel(e, MNG[e.business]) : '') + '</div></article>';
+}
+
+/* ---------------------------------------------- manage: rename, and take down
+   Four things, in the order somebody actually needs them: what it is called, what is
+   published under that name, what it is costing on disk, and how to put it away. Each
+   one states what it is about to do before the button that does it, because every one of
+   them is either irreversible or reaches somebody else's browser. */
+function slugOf(s){
+  return (s || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 64)
+         || "business";
+}
+
+function managePanel(e, inv){
+  var biz = e.business, name = inv.business || e.name;
+  var sites = inv.sites || [], runs = (inv.runs && inv.runs.runs) || [];
+  var live = sites.filter(function(s){ return s.deployed; });
+  var prunable = Math.max(0, runs.length - 2);
+  var msg = MNGMSG[biz] || "";
+
+  /* --- rename ------------------------------------------------------------ */
+  var h = '<div class="grp"><p class="gh">The name</p>' +
+    '<p class="gs">Renames the folder, the answers, every generated document, the launch ' +
+    'state and the paths inside past builds — then recompiles the spec, so the slug and ' +
+    'the hosting project are genuinely the new ones. The consent log is never rewritten; ' +
+    'its chain is re-anchored instead.</p>' +
+    '<div class="row">' +
+      '<input type="text" data-mng="newname" data-biz="' + esc(biz) + '" placeholder="' +
+        esc(name) + '" value="' + esc(MNGNEW[biz] || "") + '">' +
+      '<button class="go" data-mng="rename" data-biz="' + esc(biz) + '">Rename</button>' +
+    '</div>' +
+    '<div class="becomes" data-becomes="' + esc(biz) + '">' + becomesLine(name, MNGNEW[biz]) + '</div>';
+  if (live.length)
+    h += '<div class="row" style="margin-top:7px">' +
+      '<input type="text" data-mng="renameconfirm" data-biz="' + esc(biz) + '" placeholder="type ' +
+      esc(name) + ' to confirm"></div>' +
+      /* The live address is the one thing a rename can move or leave, and the choice is
+         not obvious — so it is a decision on screen, unticked, with its consequence in
+         the label rather than in a paragraph somebody scrolls past. */
+      '<label class="proj" style="margin-top:7px">' +
+        '<input type="checkbox" data-mng="movesites" data-biz="' + esc(biz) + '">' +
+        '<span>Move the live address' + (live.length > 1 ? 'es' : '') + ' too — ' +
+          '<b data-newslug="' + esc(biz) + '">' + moveLine(live, MNGNEW[biz] || name) +
+          '</b>, and the old one' + (live.length > 1 ? 's' : '') + ' stop' +
+          (live.length > 1 ? '' : 's') + ' answering for everyone who has ' +
+          (live.length > 1 ? 'them' : 'it') + '</span>' +
+      '</label>' +
+      '<p class="say warn">This one has published. Left unticked, ' + live.length +
+      ' address(es) keep serving under their current names and are listed below as ' +
+      'orphans. Either way the site only reads the new name after a rebuild.</p>';
+  h += '</div>';
+
+  /* --- sites -------------------------------------------------------------- */
+  h += '<div class="grp"><p class="gh">Published sites</p>';
+  if (!sites.length) {
+    h += '<p class="gs">Nothing is deployed under this business.</p>';
+  } else {
+    h += '<p class="gs">Deleting a hosting project removes every deployment under it. ' +
+         'The address stops answering, for everyone who has it. Local artifacts are ' +
+         'untouched.</p>' +
+      sites.map(function(s){
+        return '<label class="proj">' +
+          '<input type="checkbox" data-proj="' + esc(s.project) + '" data-biz="' + esc(biz) + '"' +
+            (s.deployed ? '' : ' disabled') + '>' +
+          '<code>' + esc(s.project) + '</code>' +
+          '<span class="tag' + (s.current ? '' : ' orph') + '">' +
+            (s.current ? esc(s.role || "project") : "orphan") + '</span>' +
+          (s.deployed
+            ? '<a href="' + esc(s.url) + '" target="_blank" rel="noopener">' + esc(s.url) + '</a>'
+            : '<span class="none">never deployed</span>') +
+        '</label>';
+      }).join("") +
+      '<div class="row" style="margin-top:7px">' +
+        '<input type="text" data-mng="siteconfirm" data-biz="' + esc(biz) + '" placeholder="type ' +
+          esc(name) + ' to confirm">' +
+        '<button class="danger" data-mng="delsites" data-biz="' + esc(biz) + '">' +
+          'Take the ticked sites down</button></div>';
+    if (sites.some(function(s){ return !s.current; }))
+      h += '<p class="say warn">An <b>orphan</b> was deployed under an older name. Nothing ' +
+           'points at it any more, and it is still serving.</p>';
+  }
+  h += '</div>';
+
+  /* --- disk --------------------------------------------------------------- */
+  h += '<div class="grp"><p class="gh">Disk</p>' +
+    '<p class="gs">' + esc(inv.human || "0 B") + ' in all, ' +
+      esc((inv.runs && inv.runs.human) || "0 B") + ' of it in ' + runs.length +
+      ' build' + (runs.length === 1 ? '' : 's') + '. Every build keeps a whole copy of the ' +
+      'site; the newest is what the live address and the local preview are read from.</p>' +
+    '<div class="row">' +
+      '<span class="gs" style="margin:0">keep the newest</span>' +
+      '<input type="number" min="1" value="2" data-mng="keep" data-biz="' + esc(biz) + '">' +
+      '<button data-mng="prune" data-biz="' + esc(biz) + '"' +
+        (prunable ? '' : ' disabled title="nothing old enough to prune"') + '>' +
+        'Delete the older builds' + (prunable ? ' (' + prunable + ')' : '') + '</button>' +
+    '</div></div>';
+
+  /* --- archive ------------------------------------------------------------ */
+  h += '<div class="grp"><p class="gh">Put it away</p>' +
+    '<p class="gs">Moves the whole folder into <code>.factory-trash/</code>. It leaves ' +
+    'every list in this console and stays one restore away — nothing is destroyed, and ' +
+    'nothing is taken off the internet.</p>' +
+    '<div class="row">' +
+      '<input type="text" data-mng="archconfirm" data-biz="' + esc(biz) + '" placeholder="type ' +
+        esc(name) + ' to confirm">' +
+      '<input type="text" data-mng="reason" data-biz="' + esc(biz) + '" placeholder="why (optional)">' +
+      '<button class="danger" data-mng="archive" data-biz="' + esc(biz) + '">Archive</button>' +
+    '</div></div>';
+
+  return h + (msg ? '<div data-mngmsg="1">' + msg + '</div>' : '');
+}
+
+/* What ticking "move the live addresses" would actually do, named project by project.
+   The obvious version — "<current slug> becomes <new slug>" — is wrong the moment a
+   previous rename left an orphan, because the address that is really serving carries a
+   slug that is neither of those. So each live project is shown by its own name. */
+function moveLine(live, nextName){
+  var to = slugOf(nextName);
+  return live.map(function(s){
+    return esc(s.project) + ".vercel.app → " +
+           esc(to + (/-prelaunch$/.test(s.project) ? "-prelaunch" : "")) + ".vercel.app";
+  }).join(", ");
+}
+
+function becomesLine(current, next){
+  var n = (next || "").trim();
+  if (!n || n === current) return 'slug <b>' + esc(slugOf(current)) + '</b> · unchanged';
+  return 'becomes slug <b>' + esc(slugOf(n)) + '</b> · projects <b>' + esc(slugOf(n)) +
+         '</b> and <b>' + esc(slugOf(n)) + '-prelaunch</b>';
+}
+
+var MNGMSG = {}, MNGNEW = {};
+
+function say(kind, text){ return '<p class="say ' + kind + '">' + text + '</p>'; }
+
+function manageResult(r){
+  if (r.error || r.ok === false)
+    return say("bad", esc(r.error || "it did not work"));
+  var h = "";
+  if (r.changed)
+    h += say("good", '<b>Renamed to ' + esc(r.to) + '.</b><br>' +
+             r.changed.map(function(c){ return "· " + esc(c); }).join("<br>"));
+  if (r.notes && r.notes.length)
+    h += say("warn", r.notes.map(function(n){ return esc(n); }).join("<br>"));
+  /* A rename that could not recompile is renamed everywhere a person reads and nowhere
+     the builder reads — the next deploy would still go to the old project. That is the
+     one outcome here worth showing the actual error for, because nothing downstream can
+     be trusted until it is fixed. */
+  if (r.recompiled && r.recompiled.ok === false)
+    h += say("bad", "<b>The spec did not recompile.</b> Until it does, the build order " +
+             "still names the old slug:<br><span style=\"font-family:var(--mono);" +
+             "font-size:11.5px\">" + esc(r.recompiled.error || "no output") + "</span>");
+  /* Taking sites down and pruning builds both report a `removed` list, and describing a
+     deleted build directory as an address that stopped answering would be alarming and
+     wrong. `results` is only ever present on a takedown, so that is what they are told
+     apart by — not by which one happens to have a list. */
+  if (r.results) {
+    h += say(r.removed && r.removed.length ? "good" : "warn",
+             r.removed && r.removed.length
+               ? "Taken down: " + r.removed.map(esc).join(", ") +
+                 ". The decision is on this business's consent log."
+               : "Nothing was taken down.");
+    h += r.results.filter(function(x){ return !x.ok; })
+          .map(function(x){ return say("bad", esc(x.project) + " — " + esc(x.error || "failed")); })
+          .join("");
+  } else if (r.freed !== undefined && r.kept) {
+    h += r.removed.length
+      ? say("good", "Removed " + r.removed.length + " old build" +
+                    (r.removed.length === 1 ? "" : "s") + ", " + esc(r.human) +
+                    " freed. Kept " + r.kept.map(esc).join(", ") + ".")
+      : say("warn", "Nothing to prune — every build on disk is one you asked to keep.");
+  }
+  if (r.archived_to)
+    h += say(r.live_sites && r.live_sites.length ? "warn" : "good",
+             "<b>Archived.</b> " + esc(r.note || "") + "<br>It is in the trash at the top " +
+             "of this page until you restore or purge it.");
+  return h || say("good", "Done.");
+}
+
+function checkResult(r){
+  if (r.error && !(r.results||[]).length)
+    return '<span class="down">' + esc(r.error) + '</span>';
+  return (r.results || []).map(function(x){
+    return '<div class="' + (x.ok ? "up" : "down") + '">' + (x.ok ? "✓ " : "✗ ") +
+      esc(x.label) + " — " + (x.ok ? x.status + " in " + x.ms + "ms, serving this business"
+                                   : esc(x.error || ("HTTP " + (x.status || "?")))) + '</div>';
+  }).join("") + '<div style="color:var(--ink-faint)">checked ' + esc(r.checked || "") + '</div>';
+}
+
+/* One field out of an open manage panel, by the name it was drawn with. */
+function mfield(biz, key){
+  var el = document.querySelector('.mng [data-mng="' + key + '"][data-biz="' +
+                                  CSS.escape(biz) + '"]');
+  return el ? el.value.trim() : "";
+}
+
+function manageAction(btn){
+  var kind = btn.dataset.mng, biz = btn.dataset.biz;
+  var label = btn.textContent, card = btn.closest(".site");
+  var name = (MNG[biz] && MNG[biz].business) || biz.split("/").pop();
+
+  var body = {business: biz}, action = "cleanup", ask = "";
+
+  if (kind === "rename") {
+    var mv = card.querySelector('[data-mng="movesites"]');
+    body = {business: biz, new_name: mfield(biz, "newname"),
+            confirm: mfield(biz, "renameconfirm"), move_sites: !!(mv && mv.checked)};
+    action = "rename";
+    if (!body.new_name) { flashManage(biz, say("bad", "Give it a new name first.")); return; }
+    if (body.new_name === name) { flashManage(biz, say("warn", "That is already its name.")); return; }
+    if (body.move_sites) {
+      var deployed = ((MNG[biz] && MNG[biz].sites) || []).filter(function(s){ return s.deployed; });
+      ask = "Move the live address" + (deployed.length > 1 ? "es" : "") + " as well?\n\n  " +
+            deployed.map(function(s){
+              return s.project + ".vercel.app  →  " + slugOf(body.new_name) +
+                     (/-prelaunch$/.test(s.project) ? "-prelaunch" : "") + ".vercel.app";
+            }).join("\n  ") +
+            "\n\nThe old address" + (deployed.length > 1 ? "es" : "") + " stop" +
+            (deployed.length > 1 ? "" : "s") + " answering immediately, for everyone who " +
+            "has " + (deployed.length > 1 ? "them" : "it") +
+            " — links, printed cards, search results.";
+    }
+  }
+  else if (kind === "delsites") {
+    var picked = [].slice.call(card.querySelectorAll('[data-proj]:checked'))
+                   .map(function(x){ return x.dataset.proj; });
+    if (!picked.length) { flashManage(biz, say("warn", "Tick the sites to take down first.")); return; }
+    body = {business: biz, projects: picked, confirm: mfield(biz, "siteconfirm")};
+    action = "delete_sites";
+    ask = "Take these down for good?\n\n  " + picked.join("\n  ") +
+          "\n\nEvery deployment under them is deleted and the addresses stop answering, " +
+          "for everyone who has them. This cannot be undone from here.";
+  }
+  else if (kind === "prune") {
+    body = {business: biz, what: "prune", keep: +mfield(biz, "keep") || 2};
+  }
+  else if (kind === "archive") {
+    body = {business: biz, what: "archive", confirm: mfield(biz, "archconfirm"),
+            reason: mfield(biz, "reason")};
+  }
+  else return;
+
+  if (ask && !confirm(ask)) return;
+
+  btn.disabled = true; btn.textContent = "working…";
+  post(action, body).then(function(r){
+    btn.disabled = false; btn.textContent = label;
+    MNGMSG[biz] = manageResult(r);
+    if (r.ok === false) { flashManage(biz, MNGMSG[biz]); return; }
+
+    /* A rename changes the key everything is filed under, and an archive removes it from
+       the directory entirely — so the panel's state moves with it rather than being left
+       pointing at a business that no longer answers to that name. */
+    if (kind === "rename" && r.business) {
+      var report = MNGMSG[biz];
+      delete MNG[biz]; delete MNGMSG[biz]; delete MNGNEW[biz];
+      MNGMSG[r.business] = report;
+      if (BIZ === biz) BIZ = r.business;
+      post("inventory", {business: r.business}).then(function(inv){
+        if (inv.ok !== false) MNG[r.business] = inv;
+        loadDir();
+      });
+      return;
+    }
+    if (kind === "archive") { delete MNG[biz]; delete MNGNEW[biz]; }
+    /* Anything else changed what the inventory says, so re-read it rather than patching
+       a copy that is now a guess. */
+    post("inventory", {business: biz}).then(function(inv){
+      if (inv.ok !== false) MNG[biz] = inv;
+      loadDir();
+    });
+  }).catch(function(err){
+    btn.disabled = false; btn.textContent = label;
+    flashManage(biz, say("bad", esc(err.message)));
+  });
+}
+
+function flashManage(biz, html){
+  MNGMSG[biz] = html;
+  var card = document.querySelector('[data-card="' + CSS.escape(biz) + '"]');
+  var box = card && card.querySelector('[data-mngmsg]');
+  if (box) box.innerHTML = html;
+  else if (card) card.querySelector(".mng").insertAdjacentHTML("beforeend",
+    '<div data-mngmsg="1">' + html + '</div>');
+}
+
+function trashAction(btn){
+  var kind = btn.dataset.trash, entry = btn.dataset.entry, label = btn.textContent;
+  var row = btn.closest(".tr");
+  var body = {what: kind, entry: entry};
+  if (kind === "purge") {
+    var f = row.querySelector('[data-trash="confirm"]');
+    body.confirm = f ? f.value.trim() : "";
+    if (!confirm("Destroy this archived business permanently?\n\nThe folder and everything " +
+                 "in it — the idea, the profile, the consent log, every build — is deleted " +
+                 "from disk. Nothing restores it."))
+      return;
+  }
+  btn.disabled = true; btn.textContent = "working…";
+  post("cleanup", body).then(function(r){
+    btn.disabled = false; btn.textContent = label;
+    if (r.ok === false || r.error) {
+      row.insertAdjacentHTML("beforeend",
+        '<span class="m" style="color:var(--bad);flex-basis:100%">' + esc(r.error) + '</span>');
+      return;
+    }
+    loadDir();
+  }).catch(function(err){
+    btn.disabled = false; btn.textContent = label;
+    row.insertAdjacentHTML("beforeend",
+      '<span class="m" style="color:var(--bad);flex-basis:100%">' + esc(err.message) + '</span>');
+  });
+}
+
+document.addEventListener("click", function(ev){
+  var t = ev.target.closest("[data-view]");
+  if (t) { showView(t.dataset.view); return; }
+
+  var f = ev.target.closest("[data-filter]");
+  if (f) { DIRF = f.dataset.filter; paintDir(); return; }
+
+  if (ev.target.closest("[data-checkall]")) {
+    /* Every live address at once. The server is threaded and each check is one fetch, so
+       these run together rather than one behind the other. */
+    var b = ev.target.closest("[data-checkall]");
+    var live = ((DIR && DIR.entries) || []).filter(function(e){ return e.live; });
+    b.disabled = true; b.textContent = "checking " + live.length + "…";
+    Promise.all(live.map(function(e){
+      return post("check", {business: e.business}).then(function(r){
+        DIRMSG[e.business] = checkResult(r);
+        var card = document.querySelector('[data-card="' + CSS.escape(e.business) + '"]');
+        if (card) card.querySelector(".ck").innerHTML = DIRMSG[e.business];
+        return r.ok;
+      }).catch(function(){ return false; });
+    })).then(function(oks){
+      b.disabled = false;
+      b.textContent = oks.filter(Boolean).length + " of " + oks.length + " serving — check again";
+    });
+    return;
+  }
+
+  var tr = ev.target.closest("[data-trash]");
+  if (tr && tr.tagName === "BUTTON") { trashAction(tr); return; }
+
+  var m = ev.target.closest("[data-mng]");
+  if (m && m.tagName === "BUTTON") { manageAction(m); return; }
+
+  var d = ev.target.closest("[data-dir]");
+  if (!d) return;
+  var kind = d.dataset.dir, biz = d.dataset.biz;
+  var card = d.closest(".site"), out = card ? card.querySelector(".ck") : null;
+
+  if (kind === "manage") {
+    /* Closing throws away nothing but the panel — a second open re-reads the inventory,
+       which is the only honest way to show what is deployed right now. */
+    if (MNG[biz]) { delete MNG[biz]; delete MNGMSG[biz]; paintDir(); return; }
+    /* A report belongs to the panel session that produced it. Carrying one into the next
+       opening would show somebody the outcome of something they did ten minutes ago as if
+       it had just happened. */
+    delete MNGMSG[biz];
+    d.disabled = true; d.textContent = "reading…";
+    post("inventory", {business: biz}).then(function(r){
+      d.disabled = false; d.textContent = "Rename or clean up…";
+      if (r.ok === false) { DIRMSG[biz] = '<span class="down">' + esc(r.error) + '</span>'; }
+      else MNG[biz] = r;
+      paintDir();
+    }).catch(function(err){
+      d.disabled = false; d.textContent = "Rename or clean up…";
+      if (out) out.innerHTML = '<span class="down">' + esc(err.message) + '</span>';
+    });
+    return;
+  }
+
+  if (kind === "open") {
+    BIZ = biz;
+    showView("factory");
+    refresh().then(function(){ go(1); });
+    return;
+  }
+  if (d.disabled) return;
+  var name = card ? card.querySelector("h3").textContent : biz;
+  var label = d.textContent;
+  if (kind === "publish" &&
+      !confirm("Publish " + name + " to Vercel?\n\nThis builds the current spec and puts it " +
+               "on a public address. The decision is written to this business's consent log."))
+    return;
+
+  d.disabled = true;
+  d.textContent = kind === "check" ? "checking…" : "building…";
+  var body = kind === "check" ? {business: biz}
+           : {business: biz, target: kind === "publish" ? "vercel" : "local"};
+  post(kind === "check" ? "check" : "build", body).then(function(r){
+    d.disabled = false; d.textContent = label;
+    DIRMSG[biz] = kind === "check" ? checkResult(r)
+      : (r.ok ? '<span class="up">✓ ' + esc(r.outcome || "built") +
+                (r.elapsed != null ? " in " + r.elapsed + "s" : "") +
+                (r.url && /^https?:/.test(r.url) ? " — " + esc(r.url)
+                  : " — open it with “Local build” above") + '</span>'
+              : '<span class="down">' + esc((r.error || "it did not work").slice(0, 400)) + '</span>');
+    if (out) out.innerHTML = DIRMSG[biz];
+    if (kind !== "check") loadDir();
+  }).catch(function(err){
+    d.disabled = false; d.textContent = label;
+    if (out) out.innerHTML = '<span class="down">' + esc(err.message) + '</span>';
+  });
+});
+document.addEventListener("input", function(ev){
+  if (ev.target.id === "dirSearch") {
+    DIRQ = ev.target.value;
+    var box = $("sites");
+    paintDir();
+    var s = $("dirSearch"); if (s) { s.focus(); s.setSelectionRange(DIRQ.length, DIRQ.length); }
+    void box;
+    return;
+  }
+  /* The new name is echoed as the slug and the hosting projects it will produce, live.
+     A rename's real consequence is the address, not the label, so it is shown before the
+     button rather than reported after it. Held in MNGNEW so a repaint keeps what was
+     typed — the panel is redrawn by the same function that draws the card. */
+  if (ev.target.dataset && ev.target.dataset.mng === "newname") {
+    var biz = ev.target.dataset.biz;
+    MNGNEW[biz] = ev.target.value;
+    var current = (MNG[biz] && MNG[biz].business) || biz.split("/").pop();
+    var line = document.querySelector('[data-becomes="' + CSS.escape(biz) + '"]');
+    if (line) line.innerHTML = becomesLine(current, MNGNEW[biz]);
+    var slug = document.querySelector('[data-newslug="' + CSS.escape(biz) + '"]');
+    if (slug) slug.innerHTML = moveLine(
+      ((MNG[biz] && MNG[biz].sites) || []).filter(function(s){ return s.deployed; }),
+      MNGNEW[biz] || current);
+  }
+});
+
+/* ------------------------------------------------------------------ boot */
+function refresh(){
+  /* With no business chosen this still fetches: the tree draws step 0 and the shape of what
+     is to come, which is the state a person is actually in when they arrive. */
+  var q = BIZ ? "/api/state?business=" + encodeURIComponent(BIZ) : "/api/state";
+  return api(q).then(function(s){ ST = s; paint(); });
+}
+$("openBtn").addEventListener("click", function(){
+  var n = $("a_name").value.trim(); if (!n) return;
+  BIZ = n;
+  api("/api/state?business=" + encodeURIComponent(n)).then(function(s){
+    if (s.exists){ ST = s; paint(); go(1); return; }
+    post("start", {answers:{name:n}}).then(function(){ refresh().then(function(){ go(1); }); });
+  });
+});
+/* The directory is drawn from the engine's own catalog, so an archetype written tomorrow
+   appears here without anyone remembering to add it. */
+api("/api/archetypes").then(function(r){
+  var box = $("dir"); if (!box || !r.archetypes) return;
+  r.archetypes.forEach(function(a){
+    ORG_LABELS[a.org_type] = a.label;
+    var b = document.createElement("button");
+    b.type = "button"; b.className = "a"; b.style.setProperty("--ac", a.accent);
+    b.setAttribute("aria-pressed", "false");
+    b.dataset.org = a.org_type;
+    b.innerHTML =
+      '<div class="fg">' + esc(a.forge) + (a.curated ? '' : ' · generic') + '</div>' +
+      '<div class="lb">' + esc(a.label) + '</div>' +
+      '<div class="sm">' + esc(a.summary) + '</div>' +
+      '<div class="ft"><span class="tagx">' + a.pages + ' pages</span>' +
+      '<span class="tagx">' + a.modules + ' modules</span>' +
+      (a.prelaunch === "recommended" ? '<span class="tagx">funnel first</span>' :
+       a.prelaunch === "optional" ? '<span class="tagx">no funnel needed</span>' : '') +
+      (a.demo ? '<a href="' + esc(a.demo) + '" target="_blank" rel="noopener">example &rarr;</a>' : '') +
+      '</div>';
+    b.addEventListener("click", function(ev){
+      // The example link is a link, not a choice.
+      if (ev.target.tagName === "A") return;
+      document.querySelectorAll('.dir .a').forEach(function(o){
+        o.setAttribute("aria-pressed", o === b ? "true" : "false"); });
+      ["p_org","v_org"].forEach(function(id){ var el=$(id); if (el) el.value = a.org_type; });
+      CHOSEN = a;
+      $("pickNote").innerHTML = '<strong>' + esc(a.label) + '</strong> &middot; ' +
+        esc(a.forge) + ' writes ' + a.pages + ' pages onto ' + a.modules + ' modules' +
+        (a.product_app ? ', and builds the product itself' : '') + '.';
+      var d = $("ai_desc");
+      if (d) d.placeholder = "One or two sentences about this " +
+        a.label.toLowerCase().replace(/ or .*/, "") + " — who it is for and what it does.";
+      paintRail();   /* the tree is the status display; a choice that does not reach it lies */
+      paintPrelaunch();   /* and the advice on step 2 is about the kind just chosen */
+      loadKits(true);     /* which kits are recommended is a fact about the kind chosen */
+    });
+    box.appendChild(b);
+  });
+  /* Reopening a half-finished business should show what it already is, not a blank slate. */
+  var known = ST && ST.answers && ST.answers.org_type;
+  if (known){
+    var pre = [...document.querySelectorAll('.dir .a')].find(function(x){ return x.dataset.org === known; });
+    if (pre) pre.click();
+  }
+  paintRail();
+});
+var CHOSEN = null;
+
+/* ------------------------------------------------------- the brand kits */
+/* Fetched from the same library the spec compiler reads, and re-fetched whenever the kind
+   of business changes, because which kits are recommended — and which one is the default —
+   is a fact about the archetype. A gallery that kept its first answer would recommend a
+   church's kits to a shop. */
+var KITS = null, KIT = null, KITARCH = null, KITDEFAULT = "";
+var KFONT = {
+  editorial: "'Iowan Old Style','Palatino Linotype',Palatino,Georgia,ui-serif,serif",
+  gallery:   "'Didot','Bodoni 72','Playfair Display',Georgia,ui-serif,serif",
+  grotesk:   "ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,sans-serif",
+  humanist:  "'Avenir Next','Segoe UI',ui-sans-serif,system-ui,sans-serif"
+};
+
+function kitArchetype(){
+  return (CHOSEN && CHOSEN.archetype) ||
+         ((ST && ST.answers && ST.answers.brand_kit_archetype) || "");
+}
+
+function loadKits(force){
+  var at = kitArchetype();
+  /* The cache key is the whole request, not just the archetype. Keyed on the archetype
+     alone, the first paint (no business, no archetype) cached an unsorted list and every
+     later paint reused it — so a church was shown the alphabet instead of its own kits. */
+  var key = at + "|" + (BIZ || "");
+  if (!force && KITS && KITARCH === key) { renderKits(); return Promise.resolve(); }
+  KITARCH = key;
+  var q = "/api/kits" + (at ? "?archetype=" + encodeURIComponent(at)
+                            : (BIZ ? "?business=" + encodeURIComponent(BIZ) : ""));
+  return api(q).then(function(r){
+    /* Two paints can be in flight at once — the page's own boot and a business being
+       opened — and they do not come back in the order they were sent. Without this the
+       earlier, business-less answer lands last and replaces the right one, which is how
+       a church ended up looking at the alphabet. */
+    if (KITARCH !== key) return;
+    KITS = r.kits || []; KITDEFAULT = r.default || "";
+    /* What this business already chose wins; otherwise the archetype's default is
+       pre-selected, so pressing Write without touching anything is still a real decision
+       rather than an empty one. */
+    var saved = ST && ST.answers && ST.answers.brand_kit;
+    var want = saved || KITDEFAULT || (KITS[0] && KITS[0].id);
+    KIT = KITS.filter(function(k){ return k.id === want; })[0] || KITS[0] || null;
+    renderKits();
+  });
+}
+
+function kitPreview(k){
+  /* The same three decisions the built site makes — ground, ink, one accent — and nothing
+     else. What is on the card is what ships. */
+  return '<div class="prev">' +
+    '<div class="top"><i class="dot"></i><span class="nm">Your business</span>' +
+      '<span class="lk">Home · About · Contact</span></div>' +
+    '<h4>A heading in this kit.</h4>' +
+    '<p>And the line of quieter text that sits under it on every page.</p>' +
+    '<span class="b">Primary action</span></div>';
+}
+
+function renderKits(){
+  var box = $("kits"); if (!box) return;
+  if (!KITS){ box.innerHTML = ""; return; }
+  box.innerHTML = KITS.map(function(k){
+    return '<button type="button" class="kit" data-kit="' + esc(k.id) + '" ' +
+      'aria-pressed="' + (KIT && KIT.id === k.id ? "true" : "false") + '" ' +
+      'style="--kc:' + esc(k.accent) + ';--kci:' + esc(k.on_accent) + ';--kp:' + esc(k.paper) +
+      ';--ki:' + esc(k.ink) + ';--kl:' + esc(k.line) + ';--kf:' + KFONT[k.type.preset] + '">' +
+      kitPreview(k) +
+      '<div class="meta"><div class="lb">' + esc(k.name) + '</div>' +
+      '<div class="sm">' + esc(k.best_for) + '</div>' +
+      '<div class="sws">' + k.swatches.map(function(c){
+        return '<i style="background:' + esc(c.hex) + '"></i>'; }).join("") + '</div>' +
+      '<div class="tags">' +
+        (k.is_default ? '<i class="rec">default</i>' :
+         k.recommended ? '<i class="rec">suits this</i>' : '') +
+        '<i>' + esc(k.family) + '</i><i>' + esc(k.type.preset) + '</i>' +
+        (k.scheme === "dark" ? '<i>dark</i>' : '') +
+      '</div></div></button>';
+  }).join("");
+  paintKit();
+}
+
+function paintKit(){
+  var note = $("kitNote"), panel = $("kitPanel");
+  if (!KIT){ if (note) note.textContent = "No kits loaded."; if (panel) panel.innerHTML = ""; return; }
+  var chosen = ST && ST.answers && ST.answers.brand_kit;
+  note.innerHTML = '<strong>' + esc(KIT.name) + '</strong> — ' + esc(KIT.best_for) + '. ' +
+    (KIT.is_default ? 'This is the default for this kind of business; choosing it changes ' +
+       'nothing about what would have been built. ' : '') +
+    (chosen === KIT.id ? 'Already written for this business.' :
+     'Press <em>Write brand-kit.md</em> to make it this business\\u2019s brand.');
+
+  var rows = KIT.swatches.map(function(c){
+    return '<tr><td><i class="sw" style="background:' + esc(c.hex) + '"></i></td>' +
+      '<td class="nm">' + esc(c.name) + '<em>' + esc(c.role) + '</em></td>' +
+      '<td class="mono">' + esc(c.hex) + '</td><td class="mono">' + esc(c.rgb) + '</td>' +
+      '<td class="mono">' + esc(c.cmyk) + '</td></tr>'; }).join("");
+
+  panel.innerHTML = '<div class="kitfull">' +
+    '<h3>' + esc(KIT.name) + '</h3>' +
+    '<p class="sub" style="margin:0">' + esc(KIT.family) + ' · ' + esc(KIT.type.preset) +
+      ' type on a ' + (KIT.scheme === "dark" ? "dark" : "light") + ' ground</p>' +
+    '<table class="pal">' + rows + '</table>' +
+    '<p class="sub" style="margin:var(--s2) 0 0;font-size:12px">CMYK is an unmanaged ' +
+      'conversion, printed for guidance — give the printer the HEX.</p>' +
+    '<div class="two2">' +
+      '<div><p class="shead" style="margin:0">Typography</p>' +
+        '<p class="say"><strong>' + esc(KIT.type.heading) + '</strong> for headings, ' +
+        '<strong>' + esc(KIT.type.body) + '</strong> for body. The weight, tracking and ' +
+        'scale come with the pairing — they are not a separate choice.</p></div>' +
+      '<div><p class="shead" style="margin:0">Voice</p>' +
+        '<p class="say">' + esc(KIT.voice) + '</p></div>' +
+    '</div>' +
+    '<div class="two2"><div><p class="shead" style="margin:0">Usage</p>' +
+      '<p class="say">' + esc(KIT.usage) + '</p></div>' +
+      '<div><p class="shead" style="margin:0">Contrast</p><ul class="cx">' +
+      kitContrast(KIT).map(function(c){
+        return '<li><span>' + esc(c.what) + '</span><b class="' + (c.ok ? "" : "no") + '">' +
+          c.ratio + ':1</b></li>'; }).join("") + '</ul></div></div>' +
+    '</div>';
+}
+
+/* The same pairs the engine audits, recomputed here so the number on screen is measured
+   rather than reported. A kit that failed would never reach this page — the point is that
+   the operator can see the margin, not take it on trust. */
+function kitContrast(k){
+  function lum(hex){
+    var v = [1,3,5].map(function(i){
+      var c = parseInt(hex.slice(i, i+2), 16) / 255;
+      return c <= 0.04045 ? c/12.92 : Math.pow((c+0.055)/1.055, 2.4); });
+    return 0.2126*v[0] + 0.7152*v[1] + 0.0722*v[2];
+  }
+  function ratio(a, b){
+    var x = lum(a), y = lum(b), hi = Math.max(x,y), lo = Math.min(x,y);
+    return Math.round((hi+0.05)/(lo+0.05) * 100) / 100;
+  }
+  return [
+    ["Body text on the ground", k.ink, k.paper, 7],
+    ["Label on a primary fill", k.on_accent, k.accent, 4.5],
+    ["Primary as a mark", k.accent, k.paper, 3],
+    ["Text on the band", k.on_band, k.band, 4.5]
+  ].map(function(p){
+    var r = ratio(p[1], p[2]);
+    return {what: p[0], ratio: r, ok: r >= p[3]};
+  });
+}
+
+document.addEventListener("click", function(e){
+  var b = e.target.closest("[data-kit]"); if (!b) return;
+  KIT = KITS.filter(function(k){ return k.id === b.dataset.kit; })[0] || KIT;
+  document.querySelectorAll(".kit").forEach(function(o){
+    o.setAttribute("aria-pressed", o === b ? "true" : "false"); });
+  paintKit();
+});
+
+/* The count is on the tab from the first paint: a directory you have to open to discover
+   is not a directory. It is cheap — a scan of the ideas root and one run.json each. */
+loadDir();
+
+api("/api/state").then(function(s){
+  ST = ST || s; paint();
+  if (s.ai){
+    $("aiModel").textContent = s.ai.available ? (s.ai.model || "AI") : "AI";
+    if (!s.ai.available){
+      $("aiWhy").textContent = s.ai.why || "";
+      var b = document.querySelector('[data-act="ideate"]');
+      if (b){ b.disabled = true; b.textContent = "Draft the business — unavailable"; }
+      $("ai_desc").disabled = true;
+    }
+  }
+  if (s.businesses && s.businesses.length){
+    $("existing").innerHTML = '<p class="shead" style="margin-top:var(--s4)">Or continue one</p>' +
+      '<div class="files">' + s.businesses.slice(0,12).map(function(b){
+        return '<div class="file"><b>'+esc(b)+'</b><button class="btn sm" data-open="'+
+          esc(b)+'">open</button></div>'; }).join("") + '</div>';
+    document.addEventListener("click", function(e){
+      var o = e.target.closest("[data-open]"); if(!o) return;
+      BIZ = o.dataset.open; $("a_name").value = BIZ; refresh().then(function(){ go(1); });
+    });
+  }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+{"seq": 1, "ts": "2026-08-04T19:11:08Z", "t": 0.0, "kind": "run_start", "stage": "", "level": "info", "msg": "PRELAUNCHforge · church f god amersfoort", "data": {"archetype": "prelaunch", "target": "vercel", "fingerprint": "sha256:dfeb9c8afc60a302bb04adc20bf1315a", "stages": 11}}
+{"seq": 2, "ts": "2026-08-04T19:11:08Z", "t": 0.001, "kind": "stage_start", "stage": "resolve", "level": "info", "msg": "Read the spec"}
+{"seq": 3, "ts": "2026-08-04T19:11:08Z", "t": 0.002, "kind": "log", "stage": "resolve", "level": "info", "msg": "Prelaunch validation funnel · 6 modules · 2 pages"}
+{"seq": 4, "ts": "2026-08-04T19:11:08Z", "t": 0.002, "kind": "log", "stage": "resolve", "level": "info", "msg": "authorization: unattended (6b1b2513ace373ee)"}
+{"seq": 5, "ts": "2026-08-04T19:11:08Z", "t": 0.002, "kind": "log", "stage": "resolve", "level": "warn", "msg": "8 value(s) filled from the archetype because the profile did not supply them", "data": {"assumptions": ["city", "email", "tagline", "offer_line", "about", "leadership", "pricing", "services"]}}
+{"seq": 6, "ts": "2026-08-04T19:11:08Z", "t": 0.002, "kind": "stage_end", "stage": "resolve", "level": "info", "msg": "Read the spec", "data": {"state": "ok"}}
+{"seq": 7, "ts": "2026-08-04T19:11:08Z", "t": 0.004, "kind": "stage_start", "stage": "scaffold", "level": "info", "msg": "Lay out the build"}
+{"seq": 8, "ts": "2026-08-04T19:11:08Z", "t": 0.007, "kind": "log", "stage": "scaffold", "level": "info", "msg": "build tree at forge/20260804-191108/build"}
+{"seq": 9, "ts": "2026-08-04T19:11:08Z", "t": 0.007, "kind": "stage_end", "stage": "scaffold", "level": "info", "msg": "Lay out the build", "data": {"state": "ok"}}
+{"seq": 10, "ts": "2026-08-04T19:11:08Z", "t": 0.008, "kind": "stage_start", "stage": "brand", "level": "info", "msg": "Apply the brand"}
+{"seq": 11, "ts": "2026-08-04T19:11:08Z", "t": 0.011, "kind": "log", "stage": "brand", "level": "info", "msg": "PRELAUNCHforge · accent #38D07F · Manrope"}
+{"seq": 12, "ts": "2026-08-04T19:11:08Z", "t": 0.011, "kind": "stage_end", "stage": "brand", "level": "info", "msg": "Apply the brand", "data": {"state": "ok"}}
+{"seq": 13, "ts": "2026-08-04T19:11:08Z", "t": 0.012, "kind": "stage_start", "stage": "platform", "level": "info", "msg": "Build the platform · 6 modules"}
+{"seq": 14, "ts": "2026-08-04T19:11:08Z", "t": 0.015, "kind": "log", "stage": "platform", "level": "info", "msg": "Waitlist, People, Announcements, Content, Inbox, Events"}
+{"seq": 15, "ts": "2026-08-04T19:11:08Z", "t": 0.016, "kind": "log", "stage": "platform", "level": "info", "msg": "2 seed record(s) so it opens with something in it"}
+{"seq": 16, "ts": "2026-08-04T19:11:08Z", "t": 0.016, "kind": "stage_end", "stage": "platform", "level": "info", "msg": "Build the platform · 6 modules", "data": {"state": "ok"}}
+{"seq": 17, "ts": "2026-08-04T19:11:08Z", "t": 0.017, "kind": "stage_start", "stage": "site", "level": "info", "msg": "Write the site · 2 pages"}
+{"seq": 18, "ts": "2026-08-04T19:11:08Z", "t": 0.02, "kind": "log", "stage": "site", "level": "info", "msg": "index.html  (38 KB)"}
+{"seq": 19, "ts": "2026-08-04T19:11:08Z", "t": 0.02, "kind": "log", "stage": "site", "level": "info", "msg": "faq.html  (37 KB)"}
+{"seq": 20, "ts": "2026-08-04T19:11:08Z", "t": 0.02, "kind": "stage_end", "stage": "site", "level": "info", "msg": "Write the site · 2 pages", "data": {"state": "ok"}}
+{"seq": 21, "ts": "2026-08-04T19:11:08Z", "t": 0.022, "kind": "stage_start", "stage": "wire", "level": "info", "msg": "Wire the rails"}
+{"seq": 22, "ts": "2026-08-04T19:11:08Z", "t": 0.023, "kind": "log", "stage": "wire", "level": "warn", "msg": "built but not switched on: email=brevo, analytics=engage_ai"}
+{"seq": 23, "ts": "2026-08-04T19:11:08Z", "t": 0.024, "kind": "log", "stage": "wire", "level": "warn", "msg": "needs from the operator: BREVO_API_KEY, BREVO_SENDER_EMAIL, ENGAGE_AI_BASE_URL"}
+{"seq": 24, "ts": "2026-08-04T19:11:08Z", "t": 0.024, "kind": "stage_end", "stage": "wire", "level": "info", "msg": "Wire the rails", "data": {"state": "ok"}}
+{"seq": 25, "ts": "2026-08-04T19:11:08Z", "t": 0.025, "kind": "stage_start", "stage": "package", "level": "info", "msg": "Package"}
+{"seq": 26, "ts": "2026-08-04T19:11:08Z", "t": 0.029, "kind": "log", "stage": "package", "level": "info", "msg": "site at the root, platform at /platform, manifest + readme written"}
+{"seq": 27, "ts": "2026-08-04T19:11:08Z", "t": 0.029, "kind": "stage_end", "stage": "package", "level": "info", "msg": "Package", "data": {"state": "ok"}}
+{"seq": 28, "ts": "2026-08-04T19:11:08Z", "t": 0.03, "kind": "stage_start", "stage": "verify", "level": "info", "msg": "Check the work"}
+{"seq": 29, "ts": "2026-08-04T19:11:08Z", "t": 0.032, "kind": "log", "stage": "verify", "level": "info", "msg": "PASS  spec_fingerprint — spec fingerprint matches its contents"}
+{"seq": 30, "ts": "2026-08-04T19:11:08Z", "t": 0.033, "kind": "log", "stage": "verify", "level": "info", "msg": "PASS  no_placeholders — no unresolved token reached a page"}
+{"seq": 31, "ts": "2026-08-04T19:11:08Z", "t": 0.033, "kind": "log", "stage": "verify", "level": "info", "msg": "PASS  pages_written — 2/2 present and non-trivial"}
+{"seq": 32, "ts": "2026-08-04T19:11:08Z", "t": 0.033, "kind": "log", "stage": "verify", "level": "info", "msg": "PASS  platform_written — 2/2 present and non-trivial"}
+{"seq": 33, "ts": "2026-08-04T19:11:08Z", "t": 0.033, "kind": "log", "stage": "verify", "level": "info", "msg": "PASS  nav_resolves — every nav link points at a written page"}
+{"seq": 34, "ts": "2026-08-04T19:11:08Z", "t": 0.033, "kind": "log", "stage": "verify", "level": "info", "msg": "PASS  module_titles_unique — every module has its own name"}
+{"seq": 35, "ts": "2026-08-04T19:11:08Z", "t": 0.033, "kind": "log", "stage": "verify", "level": "info", "msg": "PASS  waitlist_present — module 'lead_capture'"}
+{"seq": 36, "ts": "2026-08-04T19:11:08Z", "t": 0.034, "kind": "log", "stage": "verify", "level": "info", "msg": "PASS  ask_on_first_screen — The ask is reachable without leaving the first page."}
+{"seq": 37, "ts": "2026-08-04T19:11:08Z", "t": 0.034, "kind": "log", "stage": "verify", "level": "info", "msg": "PASS  no_payment_rail — module 'crm'"}
+{"seq": 38, "ts": "2026-08-04T19:11:08Z", "t": 0.034, "kind": "log", "stage": "verify", "level": "info", "msg": "all 9 checks passed"}
+{"seq": 39, "ts": "2026-08-04T19:11:08Z", "t": 0.034, "kind": "stage_end", "stage": "verify", "level": "info", "msg": "Check the work", "data": {"state": "ok"}}
+{"seq": 40, "ts": "2026-08-04T19:11:08Z", "t": 0.035, "kind": "stage_start", "stage": "deploy", "level": "info", "msg": "Deploy · vercel"}
+{"seq": 41, "ts": "2026-08-04T19:11:11Z", "t": 3.13, "kind": "log", "stage": "deploy", "level": "info", "msg": "linked to project 'church-f-god-amersfoort-prelaunch'"}
+{"seq": 42, "ts": "2026-08-04T19:11:20Z", "t": 11.546, "kind": "log", "stage": "deploy", "level": "info", "msg": "deployment protection disabled — the site is reachable without a Vercel login"}
+{"seq": 43, "ts": "2026-08-04T19:11:23Z", "t": 14.714, "kind": "log", "stage": "deploy", "level": "info", "msg": "stable address: https://church-f-god-amersfoort-prelaunch.vercel.app"}
+{"seq": 44, "ts": "2026-08-04T19:11:23Z", "t": 14.715, "kind": "log", "stage": "deploy", "level": "info", "msg": "https://church-f-god-amersfoort-prelaunch-gqc9av1ht.vercel.app"}
+{"seq": 45, "ts": "2026-08-04T19:11:23Z", "t": 14.715, "kind": "stage_end", "stage": "deploy", "level": "info", "msg": "Deploy · vercel", "data": {"state": "ok"}}
+{"seq": 46, "ts": "2026-08-04T19:11:23Z", "t": 14.716, "kind": "stage_start", "stage": "smoke", "level": "info", "msg": "Prove it is up"}
+{"seq": 47, "ts": "2026-08-04T19:11:24Z", "t": 15.187, "kind": "log", "stage": "smoke", "level": "info", "msg": "HTTP 200 from https://church-f-god-amersfoort-prelaunch-gqc9av1ht.vercel.app — serving 'church f god amersfoort' (39899 bytes)"}
+{"seq": 48, "ts": "2026-08-04T19:11:24Z", "t": 15.625, "kind": "log", "stage": "smoke", "level": "info", "msg": "stable address confirmed: https://church-f-god-amersfoort-prelaunch.vercel.app"}
+{"seq": 49, "ts": "2026-08-04T19:11:24Z", "t": 15.625, "kind": "stage_end", "stage": "smoke", "level": "info", "msg": "Prove it is up", "data": {"state": "ok"}}
+{"seq": 50, "ts": "2026-08-04T19:11:24Z", "t": 15.627, "kind": "stage_start", "stage": "seal", "level": "info", "msg": "Seal the run"}
+{"seq": 51, "ts": "2026-08-04T19:11:24Z", "t": 15.629, "kind": "log", "stage": "seal", "level": "info", "msg": "receipt written · 15.63s"}
+{"seq": 52, "ts": "2026-08-04T19:11:24Z", "t": 15.629, "kind": "stage_end", "stage": "seal", "level": "info", "msg": "Seal the run", "data": {"state": "ok"}}
+{"seq": 53, "ts": "2026-08-04T19:11:24Z", "t": 15.631, "kind": "run_end", "stage": "", "level": "info", "msg": "church f god amersfoort is launched", "data": {"outcome": "launched", "elapsed": 15.63, "url": "https://church-f-god-amersfoort-prelaunch-gqc9av1ht.vercel.app"}}

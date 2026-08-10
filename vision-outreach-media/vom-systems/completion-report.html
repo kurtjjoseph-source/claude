@@ -1,0 +1,368 @@
+<meta charset="utf-8">
+<title>VOM House — Completion Report</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root{ --bg:#f6f5f1; --surface:#ffffff; --surface-2:#f1efe8; --line:#e1dfd4; --line-soft:#ece9df;
+    --ink:#1a1d1b; --ink-soft:#535b56; --ink-faint:#868f89; --accent:#e8843c; --brand-navy:#1B2A4A;
+    --ok:#2f9e63; --partial:#c9862a; --gap:#c0523a;
+    --serif:ui-serif,Georgia,"Times New Roman",serif; --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace; }
+  @media (prefers-color-scheme:dark){ :root{ --bg:#0e100f; --surface:#161a18; --surface-2:#1c211e; --line:#2a322d; --line-soft:#232a26; --ink:#f0f2ee; --ink-soft:#a8b1aa; --ink-faint:#79837c; --accent:#f0a05c; --ok:#38d07f; --partial:#e0a94b; --gap:#e8785c; } }
+  :root[data-theme="light"]{ --bg:#f6f5f1; --surface:#ffffff; --surface-2:#f1efe8; --line:#e1dfd4; --line-soft:#ece9df; --ink:#1a1d1b; --ink-soft:#535b56; --ink-faint:#868f89; --accent:#e8843c; --ok:#2f9e63; --partial:#c9862a; --gap:#c0523a; }
+  :root[data-theme="dark"]{ --bg:#0e100f; --surface:#161a18; --surface-2:#1c211e; --line:#2a322d; --line-soft:#232a26; --ink:#f0f2ee; --ink-soft:#a8b1aa; --ink-faint:#79837c; --accent:#f0a05c; --ok:#38d07f; --partial:#e0a94b; --gap:#e8785c; }
+  *{ box-sizing:border-box; } body{ margin:0; background:var(--bg); color:var(--ink); font-family:var(--sans); line-height:1.55; -webkit-font-smoothing:antialiased; }
+  .wrap{ max-width:1080px; margin:0 auto; padding:0 22px; }
+  header.pg{ padding:32px 0 18px; border-bottom:1px solid var(--line); }
+  .eyebrow{ font-family:var(--mono); font-size:11.5px; letter-spacing:.18em; text-transform:uppercase; color:var(--accent); margin:0 0 12px; }
+  header.pg h1{ font-family:var(--serif); font-weight:600; font-size:clamp(28px,4.6vw,42px); letter-spacing:-.02em; margin:0 0 16px; line-height:1.04; }
+  header.pg h1 em{ font-style:italic; color:var(--accent); }
+  .verdict-line{ font-size:15px; color:var(--ink-soft); max-width:80ch; margin:0 0 16px; } .verdict-line b{ color:var(--ink); }
+  .pattern{ display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:10px; }
+  .pat{ background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:12px 14px; }
+  .pat .k{ display:flex; align-items:center; gap:8px; font-weight:700; font-size:13px; margin-bottom:5px; }
+  .pat .v{ font-size:12.5px; color:var(--ink-soft); }
+  .dot{ width:9px; height:9px; border-radius:50%; flex:none; } .dot.ok{ background:var(--ok); } .dot.gap{ background:var(--gap); } .dot.partial{ background:var(--partial); }
+  .controls{ display:flex; align-items:center; gap:14px; flex-wrap:wrap; padding:18px 0 0; }
+  .lbl{ font-family:var(--mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-faint); }
+  .seg{ display:inline-flex; border:1px solid var(--line); border-radius:8px; overflow:hidden; }
+  .seg button{ font:inherit; font-size:12.5px; font-weight:600; color:var(--ink-soft); background:var(--surface); border:none; padding:7px 13px; cursor:pointer; }
+  .seg button.on{ color:#fff; background:var(--accent); }
+  .theme-btn{ font-family:var(--mono); font-size:12px; font-weight:700; color:var(--ink-soft); background:var(--surface); border:1px solid var(--line); border-radius:8px; padding:7px 12px; cursor:pointer; }
+  .legend{ display:flex; gap:14px; margin-left:auto; font-size:12px; color:var(--ink-soft); } .legend span{ display:inline-flex; align-items:center; gap:5px; }
+  .ic{ display:inline-flex; align-items:center; justify-content:center; } .ic svg{ width:13px; height:13px; }
+  .ic.ok{ color:#fff; background:var(--ok); } .ic.partial{ color:#fff; background:var(--partial); } .ic.gap{ color:#fff; background:var(--gap); }
+  main.wrap{ padding-top:22px; padding-bottom:10px; }
+  .grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(340px,1fr)); gap:14px; }
+  .card{ background:var(--surface); border:1px solid var(--line); border-radius:14px; overflow:hidden; position:relative; }
+  .card::before{ content:""; position:absolute; inset:0 auto 0 0; width:4px; background:var(--ac,var(--accent)); }
+  .card-head{ padding:16px 18px; cursor:pointer; display:grid; grid-template-columns:1fr auto; gap:10px 14px; align-items:start; }
+  .row1{ display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom:7px; }
+  .flag{ font-family:var(--mono); font-size:10px; letter-spacing:.08em; text-transform:uppercase; color:var(--ac,var(--accent)); }
+  .verdict-badge{ font-size:10px; font-weight:800; text-transform:uppercase; letter-spacing:.03em; border-radius:5px; padding:2px 7px; }
+  .vb-delivers{ color:#fff; background:var(--ok); } .vb-partial{ color:#fff; background:var(--partial); } .vb-blueprint{ color:var(--ink-soft); background:var(--surface-2); border:1px solid var(--line); }
+  .pname{ font-family:var(--serif); font-weight:600; font-size:22px; margin:0 0 3px; }
+  .ptype{ font-size:12.5px; color:var(--ink-soft); }
+  .headright{ display:flex; align-items:center; gap:8px; }
+  .mini-ring{ position:relative; width:52px; height:52px; } .mini-ring .v{ position:absolute; inset:0; display:grid; place-items:center; font-size:12px; font-weight:800; font-variant-numeric:tabular-nums; }
+  .chev{ color:var(--ink-faint); transition:transform .25s; } .card.open .chev{ transform:rotate(180deg); }
+  .promise{ grid-column:1 / -1; margin:4px 0 0; } .promise .q{ font-family:var(--serif); font-style:italic; font-size:14px; color:var(--ink-soft); }
+  .body{ max-height:0; overflow:hidden; transition:max-height .35s ease; }
+  .card.open .body{ max-height:1600px; }
+  .body-inner{ padding:4px 18px 18px; display:grid; grid-template-columns:1fr 1fr; gap:20px; border-top:1px solid var(--line-soft); }
+  @media(max-width:640px){ .body-inner{ grid-template-columns:1fr; } .grid{ grid-template-columns:1fr; } }
+  .body-inner h4{ font-family:var(--mono); font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-faint); margin:14px 0 10px; }
+  .score{ display:flex; flex-direction:column; gap:9px; }
+  .srow{ display:grid; grid-template-columns:20px 130px 1fr; gap:9px; align-items:start; font-size:12px; }
+  .srow .ic{ width:18px; height:18px; border-radius:5px; margin-top:1px; } .srow .dim{ font-weight:600; } .srow .snote{ color:var(--ink-soft); }
+  .lists > div + div{ margin-top:6px; }
+  .lst{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:6px; }
+  .lst li{ font-size:12.5px; color:var(--ink-soft); position:relative; padding-left:16px; }
+  .lst li::before{ content:"›"; position:absolute; left:2px; color:var(--ink-faint); }
+  .lst.built li{ color:var(--ink); } .lst.built li.fresh{ color:var(--ok); } .lst.built li.future{ color:var(--ink-faint); }
+  .lst.todo li .prio{ font-family:var(--mono); font-size:9.5px; text-transform:uppercase; color:var(--ink-faint); margin-left:6px; }
+  .gapline{ grid-column:1 / -1; background:var(--surface-2); border-radius:10px; padding:12px 14px; }
+  .gapline .k{ font-family:var(--mono); font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-faint); margin-bottom:4px; } .gapline p{ margin:0; font-size:13px; }
+  footer{ padding:22px 0 50px; margin-top:20px; border-top:1px solid var(--line); } footer p{ font-size:12px; color:var(--ink-faint); margin:0; max-width:90ch; }
+  .ctrlfix{ position:fixed; top:14px; right:16px; z-index:30; }
+</style>
+<div style="display:flex;align-items:center;gap:10px;padding:9px 18px;background:var(--brand-navy);color:#fff;font-family:-apple-system,system-ui,sans-serif"><a href="https://vom-systems.vercel.app" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:10px;text-decoration:none;color:#fff"><img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAASABIAAD/4QBMRXhpZgAATU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAgKADAAQAAAABAAAAgAAAAAD/4QnSaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLwA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJYTVAgQ29yZSA2LjAuMCI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnBob3Rvc2hvcD0iaHR0cDovL25zLmFkb2JlLmNvbS9waG90b3Nob3AvMS4wLyIgcGhvdG9zaG9wOkluc3RydWN0aW9ucz0iRkJNRDBhMDAwYTA3MDIwMDAwYmQwYTAwMDBjMzE0MDAwMDU3MTYwMDAwNTkxODAwMDBhMjIxMDAwMDBhMzIwMDAwYmMzNDAwMDA2OTM2MDAwMDMxMzgwMDAwMmI0YzAwMDAiLz4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8P3hwYWNrZXQgZW5kPSJ3Ij8+AP/tAK5QaG90b3Nob3AgMy4wADhCSU0EBAAAAAAAdhwBWgADGyVHHAIAAAIAAhwCKABiRkJNRDBhMDAwYTA3MDIwMDAwYmQwYTAwMDBjMzE0MDAwMDU3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" alt="Vision Outreach Media" width="128" height="128" style="width:28px;height:28px;border-radius:7px;object-fit:cover;background:#fff;display:block"><b style="font-weight:700;font-size:13.5px;letter-spacing:.02em">Vision Outreach Media</b><span style="font-size:11px;opacity:.7;font-weight:600;letter-spacing:.09em;text-transform:uppercase">&middot; The House</span></a></div>
+<header class="pg"><div class="wrap">
+  <p class="eyebrow">Vision Outreach Media &middot; Completion Report</p>
+  <h1>From demo, <em>toward storefront</em>.</h1>
+  <div class="verdictwrap">
+<p class="verdict-line"><b>Verdict:</b> the house has moved from <b>demo</b> toward <b>storefront</b>. The build gaps are closed — each product now delivers what it promises, and the flagship's engine is specified and ready to register. Readiness rose from 25% to ~40%. The ceiling now is one shared layer: <b>none can yet be bought, and none is backed by proof.</b></p>
+      <div class="pattern">
+        <div class="pat"><div class="k"><span class="dot ok"></span>Build gaps — closed</div><div class="v">7 new parts shipped this wave. Every product's own components now exist; no product is waiting on a missing artifact.</div></div>
+        <div class="pat"><div class="k"><span class="dot gap"></span>Buyable</div><div class="v">Still zero checkout anywhere — every price is a number on a page. Needs real payment wiring (yours).</div></div>
+        <div class="pat"><div class="k"><span class="dot partial"></span>Deliverable</div><div class="v">Free & self-guided tiers deliver now; paid cohorts, accounts, and billing still need a backend.</div></div>
+        <div class="pat"><div class="k"><span class="dot gap"></span>Provable</div><div class="v">Still no case study or reference client on any product. Needs one real run per product.</div></div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <span class="lbl">Sort</span>
+      <div class="seg" id="sortSeg">
+        <button data-sort="ready" class="on">Readiness</button>
+        <button data-sort="house">House order</button>
+      </div>
+      <button class="theme-btn" id="themeBtn">Theme</button>
+      <div class="legend">
+        <span><span class="ic ok" style="width:12px;height:12px;border-radius:4px"></span>Done</span>
+        <span><span class="ic partial" style="width:12px;height:12px;border-radius:4px"></span>Partial</span>
+        <span><span class="ic gap" style="width:12px;height:12px;border-radius:4px"></span>Missing</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="grid" id="grid"></div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Method: graded against each product's own stated promise and parts (house products.json), the Business Onboarding System status, and the repo-wide confirmation that no payment, access-gating, or proof assets exist. This revision reflects the build wave of 2026-07-27: the newly shipped parts are marked ✚. Delivery of built parts was spot-checked by opening representative artifacts. The remaining gaps — checkout, account/billing backends, a lawyer's terms review, and proof — are the commercial layer that needs the operator.</p>
+  </div>
+</footer>
+
+<script>
+const CHK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>';
+const HALF='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"><path d="M6 12h12"/></svg>';
+const X='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>';
+
+const DIMS=["Delivers the promise","Complete (no gaps)","Buyable","Deliverable on purchase","Provable"];
+const PRODUCTS=[
+  {
+    id:"turnkey", name:"Turnkey", flag:"Flagship · Launch OS", type:"Idea in → launched business out",
+    ac:"#c47716", acD:"#f0a24b", houseOrder:2,
+    promise:"A governed pipeline that turns any validated idea into a launched, running business.",
+    verdict:"partial", vlabel:"Engine built; needs bootstrap to run",
+    scores:[.5,1,0,0,0],
+    notes:[
+      "Architecture, governance, cockpit — and now the execution engine — are all built. Delivering the promise now waits on the human platform bootstrap and a first real run.",
+      "Every product component now exists, including the /onboard-business orchestrator spec + biz-* subagents. Platform bootstrap is a prerequisite, not a missing part.",
+      "Licence/DFY pricing is sales-led with no book-a-call or contract flow.",
+      "Can't run a launch end-to-end until the platform is bootstrapped, so there's nothing to hand a paying licensee yet.",
+      "No business has been launched through it — no reference/proof."
+    ],
+    built:[
+      {t:"The Business Model — thesis + unit economics"},
+      {t:"Onboarding System — how a raw idea enters production"},
+      {t:"Launch Console — the run-every-build cockpit"},
+      {t:"Compliance Dashboard — the trust layer"},
+      {t:"Presence Sprint — a productized first win"},
+      {t:"Kanalen instellen — NL channel-setup kit"},
+      {t:"Onboarding Orchestrator — /onboard-business skill + biz-* subagents (the execution engine)",fresh:true},
+      {t:"Platform bootstrap: Stripe Connect + Cloudflare clients-zone (human, one-time)",future:true}
+    ],
+    todo:[
+      {t:"Bootstrap the platform: enable Stripe Connect, delegate the clients-zone, scope agent keys",p:"you"},
+      {t:"Rotate the exposed VERCEL_OIDC_TOKEN and run the security baseline runbook",p:"security"},
+      {t:"Run one pilot launch end-to-end through the orchestrator and film it as proof",p:"proof"},
+      {t:"Add a licensee funnel: demo booking + a lawyer-reviewed contract",p:"sell"}
+    ],
+    gap:"The missing piece is no longer code — the engine is specified and ready to register into .claude. What remains is the one-time platform bootstrap (Stripe, Cloudflare, keys) and a first real launch to prove it. That's the handoff to you."
+  },
+  {
+    id:"church-media-academy", name:"Church Media Academy", flag:"Vertical System · Faith", type:"90 days to a media ministry that runs itself",
+    ac:"#6b56d6", acD:"#a48cf5", houseOrder:3,
+    promise:"From ad-hoc volunteers to a repeatable, owned media system in one quarter.",
+    verdict:"partial", vlabel:"Full delivery built; not yet buyable",
+    scores:[1,1,0,.5,0],
+    notes:[
+      "Front door, the real 13-week program, and the ROI report — the full funnel and the delivery now exist end to end.",
+      "All three parts built; the old 90-Day Plan outline is now a real week-by-week curriculum (52 tasks + templates).",
+      "Assessment is free; cohort (€1K/mo) and DFY (€10K) still have no enrolment or payment path.",
+      "The assessment and the self-guided program are deliverable now; the paid cohort community/enrolment still needs a backend.",
+      "No church case study or testimonial yet."
+    ],
+    built:[
+      {t:"AI Ministry Assessment — full engagement wizard (front door)"},
+      {t:"90-Day Program — the real 13-week curriculum, 52 tasks + copy-ready SOPs",fresh:true},
+      {t:"Owner's Report — the ROI / decision-maker case"},
+      {t:"Cohort delivery: community, enrolment, cross-device",future:true}
+    ],
+    todo:[
+      {t:"Wire enrolment + billing for the cohort and DFY tiers",p:"sell"},
+      {t:"Run one church through the program and capture before/after as a case study",p:"proof"},
+      {t:"Stand up the cohort space (community + call cadence)",p:"deliver"}
+    ],
+    gap:"The strongest funnel in the house now has a real product behind it, end to end. What's left is purely commercial: a way to enrol and pay, and one proof story."
+  },
+  {
+    id:"hundred", name:"Hundred", flag:"Growth OS · Operators", type:"Do the math backwards. Build the month forwards",
+    ac:"#2f9e63", acD:"#38d07f", houseOrder:1,
+    promise:"A named, repeatable path to $100K/month — no more guessing what to sell, to whom, or how.",
+    verdict:"partial", vlabel:"Full path built; not yet buyable",
+    scores:[1,1,0,0,0],
+    notes:[
+      "The path now runs end to end: the map, the asset engine, and the new Pipeline that closes and tracks to $100K.",
+      "All three parts built — no gaps left in the product itself.",
+      "Self-serve $99 / Core $1K / DWY $10K — still no checkout.",
+      "Nothing is delivered or unlocked on purchase.",
+      "No operator has been walked to a result through it yet."
+    ],
+    built:[
+      {t:"$100K Blueprint — the five moves, taught visually"},
+      {t:"$100K Workflow — the wizard that fills every prompt & asset"},
+      {t:"100-Deal Pipeline — CRM board + \"100 no's\" tracker that closes to $100K",fresh:true}
+    ],
+    todo:[
+      {t:"Wire the $99 self-serve tier to checkout — the easiest first sale in the house",p:"sell"},
+      {t:"Gate Core/DWY and define what each tier delivers",p:"deliver"},
+      {t:"Document one operator's run to first revenue as proof of \"repeatable\"",p:"proof"}
+    ],
+    gap:"The product is complete, and the $99 tier is the simplest first sale in the whole house. The only thing between it and revenue is a checkout button and one proof story."
+  },
+  {
+    id:"operators-academy", name:"The Operator's Academy", flag:"Front Door · Education", type:"Learn the leverage before you need it",
+    ac:"#2b86bd", acD:"#5fb9e8", houseOrder:4,
+    promise:"The mental models & AI workflows that make every other system click.",
+    verdict:"partial", vlabel:"Curriculum built; not yet buyable",
+    scores:[1,.5,0,.5,0],
+    notes:[
+      "Three real interactive modules now — the core guide, the Leverage Stack, and the Distribution Console — real coverage of the leverage the promise names.",
+      "Good breadth now; the paid cohort/community is still unbuilt, and the free taster still lacks email capture.",
+      "Taster free, course €199, cohort €29/mo — none purchasable.",
+      "The free modules are deliverable now; the paid course/cohort aren't gated or built.",
+      "No student outcomes or testimonials yet."
+    ],
+    built:[
+      {t:"Automate Your Business With Claude — core study guide"},
+      {t:"The Leverage Stack — 5-lesson course on the leverage every system runs on",fresh:true},
+      {t:"The Distribution Console — 7 growth plays"},
+      {t:"The Cohort — community + certificates",future:true},
+      {t:"Email capture on the free taster",future:true}
+    ],
+    todo:[
+      {t:"Add an email capture to the free taster so it feeds the whole house",p:"sell"},
+      {t:"Wire the €199 course purchase and €29/mo membership",p:"sell"},
+      {t:"Stand up the cohort and collect first student wins",p:"proof"}
+    ],
+    gap:"The curriculum is now substantive enough to sell. Its highest-value missing piece is still the free email capture — the thing that turns readers into the list every paid system draws from."
+  },
+  {
+    id:"launch-kits", name:"Launch Kits", flag:"Vertical Kits · Productized", type:"Pick your vertical. Launch this week",
+    ac:"#d1522f", acD:"#f2765c", houseOrder:5,
+    promise:"A specific business, pre-assembled — skip the strategy, run the wizard.",
+    verdict:"partial", vlabel:"Four-kit shelf; not yet buyable",
+    scores:[1,1,0,0,0],
+    notes:[
+      "Each kit genuinely delivers — a real wizard that pre-assembles one specific business, end to end.",
+      "Four kits now make a real catalogue and give the €299 bundle actual value; the shelf can keep growing.",
+      "Single/bundle/pro pricing with no checkout.",
+      "Paid kits are open artifact links — nothing is gated, so there's nothing to unlock on purchase.",
+      "No \"someone launched X with this kit\" proof."
+    ],
+    built:[
+      {t:"KDP Ebook Launch Wizard — publish a Kindle book end to end"},
+      {t:"Membership Club Ops Wizard — run a recurring club"},
+      {t:"Course Launch Kit — launch & sell an online course",fresh:true},
+      {t:"Newsletter Launch Kit — launch & grow a paid newsletter",fresh:true},
+      {t:"More kits — the shelf keeps growing",future:true}
+    ],
+    todo:[
+      {t:"Gate each kit behind purchase and wire single/bundle/pro checkout",p:"sell"},
+      {t:"Add a one-screen demo/preview per kit so buyers see before they pay",p:"proof"},
+      {t:"Publish one launched-with-a-kit story",p:"proof"}
+    ],
+    gap:"With four kits the shelf and the bundle are real. This is the closest product to buyable — all it needs now is a paywall and a proof story."
+  },
+  {
+    id:"vital", name:"vital.", flag:"Consumer Spin-off · Wellness", type:"Learn it. Build it. Track it",
+    ac:"#0f9f8f", acD:"#3fd0c0", houseOrder:6,
+    promise:"A structured, science-backed path to rebuild your health, system by system.",
+    verdict:"partial", vlabel:"Real app built; needs billing",
+    scores:[1,1,0,0,0],
+    notes:[
+      "Learn, build, and now genuinely track — the Tracker persists a daily protocol across the six systems and builds a vitality score over time.",
+      "App, tracker, and the science spine are all present; the product is coherent.",
+      "Free trial / Plus €9 / Full €29 — still no billing.",
+      "Tracking works locally per-device; multi-device accounts + paid tiers still need a backend.",
+      "No user results or reviews yet."
+    ],
+    built:[
+      {t:"vital. training site & companion — learn/build UI"},
+      {t:"vital. Tracker — real on-device tracking, streaks, vitality score",fresh:true},
+      {t:"6-body-systems research trilogy — the science spine"},
+      {t:"Multi-device accounts + subscription billing",future:true}
+    ],
+    todo:[
+      {t:"Add recurring subscription billing (Plus / Full)",p:"sell"},
+      {t:"Add cloud accounts so tracking syncs across devices",p:"deliver"},
+      {t:"Seed early users and gather outcome stories/reviews",p:"proof"}
+    ],
+    gap:"\"Track it\" is now real — the app works offline today. As a consumer subscription its remaining gaps are a backend for accounts and billing: the biggest single infrastructure lift in the house."
+  }
+];
+
+function pct(p){ return Math.round(p.scores.reduce((a,b)=>a+b,0)/p.scores.length*100); }
+const grid=document.getElementById('grid');
+let sortMode='ready';
+
+function icClass(s){ return s===1?'ok':s===.5?'partial':'gap'; }
+function icGlyph(s){ return s===1?CHK:s===.5?HALF:X; }
+
+function render(){
+  const list=[...PRODUCTS].sort((a,b)=> sortMode==='ready' ? pct(b)-pct(a) : a.houseOrder-b.houseOrder);
+  grid.innerHTML=list.map(p=>{
+    const r=pct(p), R=157, off=R-R*r/100;
+    const vb = p.verdict==='delivers'?'vb-delivers':p.verdict==='partial'?'vb-partial':'vb-blueprint';
+    return `<article class="card" style="--ac:${p.ac}" data-id="${p.id}" tabindex="0" aria-expanded="false">
+      <div class="card-head">
+        <div class="ident">
+          <div class="row1">
+            <span class="flag">${p.flag}</span>
+            <span class="verdict-badge ${vb}">${p.vlabel}</span>
+          </div>
+          <h3 class="pname">${p.name}</h3>
+          <span class="ptype">${p.type}</span>
+        </div>
+        <div class="headright">
+          <div class="mini-ring">
+            <svg width="52" height="52" viewBox="0 0 52 52"><circle cx="26" cy="26" r="25" fill="none" stroke="var(--surface-2)" stroke-width="4"/><circle cx="26" cy="26" r="25" fill="none" stroke="${p.ac}" stroke-width="4" stroke-linecap="round" stroke-dasharray="157" stroke-dashoffset="${off}" transform="rotate(-90 26 26)"/></svg>
+            <span class="v">${r}%</span>
+          </div>
+          <svg class="chev" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </div>
+        <p class="promise"><span class="q">“${p.promise}”</span></p>
+      </div>
+      <div class="body">
+        <div class="body-inner">
+          <div class="col">
+            <h4>Promise vs. delivery</h4>
+            <div class="score">
+              ${p.scores.map((s,i)=>`<div class="srow"><span class="ic ${icClass(s)}">${icGlyph(s)}</span><span class="dim">${DIMS[i]}</span><span class="snote">${p.notes[i]}</span></div>`).join('')}
+            </div>
+          </div>
+          <div class="col">
+            <div class="lists">
+              <div>
+                <h4>What's built</h4>
+                <ul class="lst built">${p.built.map(b=>`<li class="${b.future?'future':(b.fresh?'fresh':'')}">${b.t}${b.future?' — not yet':(b.fresh?' · new':'')}</li>`).join('')}</ul>
+              </div>
+              <div>
+                <h4>To make it marketable</h4>
+                <ul class="lst todo">${p.todo.map(t=>`<li>${t.t}<span class="prio">${t.p}</span></li>`).join('')}</ul>
+              </div>
+            </div>
+          </div>
+          <div class="gapline">
+            <div class="k">The one thing</div>
+            <p>${p.gap}</p>
+          </div>
+        </div>
+      </div>
+    </article>`;
+  }).join('');
+
+  grid.querySelectorAll('.card').forEach(c=>{
+    const toggle=()=>{ c.classList.toggle('open'); c.setAttribute('aria-expanded', c.classList.contains('open')); };
+    c.querySelector('.card-head').addEventListener('click',toggle);
+    c.addEventListener('keydown',e=>{ if((e.key==='Enter'||e.key===' ')&&e.target===c){ e.preventDefault(); toggle(); }});
+  });
+}
+
+function houseMeter(){
+  const avg=Math.round(PRODUCTS.reduce((a,p)=>a+pct(p),0)/PRODUCTS.length);
+  document.getElementById('housePct').textContent=avg+'%';
+  document.getElementById('houseFill').style.width=avg+'%';
+}
+
+document.getElementById('sortSeg').addEventListener('click',e=>{
+  const b=e.target.closest('button'); if(!b) return;
+  sortMode=b.dataset.sort;
+  document.querySelectorAll('#sortSeg button').forEach(x=>x.classList.toggle('on',x===b));
+  render();
+});
+
+const tb=document.getElementById('themeBtn');
+tb.addEventListener('click',()=>{
+  const cur=document.documentElement.getAttribute('data-theme');
+  const sys=matchMedia('(prefers-color-scheme:dark)').matches;
+  const now=cur||(sys?'dark':'light');
+  document.documentElement.setAttribute('data-theme', now==='dark'?'light':'dark');
+});
+
+houseMeter(); render();
+setTimeout(houseMeter,50);
+</script>

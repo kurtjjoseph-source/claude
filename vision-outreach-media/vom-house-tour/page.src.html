@@ -1,0 +1,559 @@
+<title>Vision Outreach Media — a walk through the house</title>
+<script>
+/* Paint-blocking bootstrap: deploy-wizard.sh supplies a bare <html>/<body>, so the
+   accent slot and the kit body class must be set here or the page ships in the kit's
+   default amber instead of VOM orange. */
+(function(){
+  var d = document.documentElement;
+  d.setAttribute("data-brand","vom");
+  try{ var t = localStorage.getItem("vom.house.theme"); if(t) d.setAttribute("data-theme",t); }catch(e){}
+  document.addEventListener("DOMContentLoaded",function(){ document.body.className="vk-body"; });
+})();
+</script>
+<!--INLINE_CSS-->
+<style>
+/* layout only — every colour is a vom-kit-v2 token or a color-mix of them */
+html{scroll-behavior:smooth}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+.h-top{position:sticky;top:0;z-index:50;background:var(--brand-navy)}
+.h-shell{display:grid;grid-template-columns:255px minmax(0,1fr);gap:var(--s6);
+  max-width:1180px;margin:0 auto;padding:var(--s5) var(--s4) 190px}
+/* grid children default to min-width:auto, so a nowrap table would blow the
+   column out instead of scrolling inside its own wrapper. */
+.h-shell > *{min-width:0}
+@media(max-width:920px){.h-shell{grid-template-columns:minmax(0,1fr);gap:var(--s4);padding-bottom:230px}}
+
+/* ---- the map ---- */
+.h-map{position:sticky;top:78px;align-self:start}
+@media(max-width:920px){.h-map{position:static}}
+.h-map ol{list-style:none;margin:0;padding:0}
+.h-maprow{display:block;width:100%;text-align:left;font:inherit;cursor:pointer;
+  background:transparent;border:0;border-left:2px solid var(--line);
+  padding:9px var(--s3);color:var(--ink-faint);position:relative}
+.h-maprow:hover{color:var(--ink);background:var(--surface-2)}
+.h-maprow .n{font-family:var(--mono);font-size:10px;letter-spacing:.1em;display:block;opacity:.8}
+.h-maprow .t{font-size:13.5px;font-weight:650;display:block;line-height:1.25}
+.h-maprow[aria-current="true"]{border-left-color:var(--c);color:var(--ink);background:var(--c-wash)}
+.h-maprow.seen .t::after{content:" ✓";color:var(--good);font-weight:700}
+.h-prog{margin-top:var(--s3);font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--ink-faint)}
+@media(max-width:920px){
+  .h-map ol{display:flex;gap:6px;overflow-x:auto;padding-bottom:6px;scrollbar-width:none}
+  .h-map ol::-webkit-scrollbar{display:none}
+  .h-maprow{white-space:nowrap;border-left:0;border-bottom:2px solid var(--line);padding:7px 11px}
+  .h-maprow[aria-current="true"]{border-left:0;border-bottom-color:var(--c)}
+  .h-maprow .n{display:none}
+}
+
+/* ---- the room ---- */
+.h-room{min-height:60vh}
+/* the room is focused on arrival so assistive tech lands in the new content.
+   It is a landing target, not an interactive control, so it carries no ring —
+   every real control on the page keeps its own :focus-visible outline. */
+.h-room:focus,.h-room:focus-visible{outline:none}
+.h-eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--c);margin:0 0 var(--s2)}
+.h-room h2{font-family:var(--display);font-weight:600;font-size:clamp(26px,4.2vw,42px);
+  letter-spacing:-.025em;line-height:1.05;margin:0 0 var(--s3)}
+.h-room .lede{font-size:clamp(15px,1.6vw,17px);color:var(--ink-soft);max-width:62ch;margin:0 0 var(--s5)}
+
+.h-facts{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);
+  border-radius:var(--radius);overflow:hidden;grid-template-columns:repeat(auto-fit,minmax(178px,1fr))}
+.h-fact{background:var(--surface);padding:var(--s3) var(--s4)}
+.h-fact .v{font-family:var(--display);font-size:clamp(23px,3vw,31px);font-weight:600;
+  letter-spacing:-.03em;line-height:1;margin-bottom:5px}
+.h-fact .k{font-family:var(--mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--ink-faint);font-weight:700;margin-bottom:7px}
+.h-fact .n{font-size:12.5px;color:var(--ink-soft);line-height:1.45;margin-bottom:8px}
+
+.h-src{display:inline-flex;align-items:center;gap:5px;font-family:var(--mono);font-size:9.5px;
+  font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:3px 7px;border-radius:6px;
+  border:1px solid var(--line);background:var(--surface-2);color:var(--ink-soft);
+  text-decoration:none;max-width:100%}
+.h-src::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--c);flex:none}
+.h-src:hover,.h-src:focus-visible{border-color:var(--c);color:var(--ink);background:var(--c-wash)}
+
+.h-tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);
+  background:var(--surface);margin-top:var(--s4)}
+.h-table{width:100%;border-collapse:collapse;font-size:13.5px}
+.h-table th{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--ink-faint);font-weight:700;padding:10px var(--s3);text-align:left;
+  border-bottom:1px solid var(--line);white-space:nowrap}
+.h-table td{padding:10px var(--s3);border-bottom:1px solid var(--line-soft);white-space:nowrap}
+.h-table tr:last-child td{border-bottom:0}
+.h-table .num{font-variant-numeric:tabular-nums;color:var(--ink-soft)}
+.h-bar{display:inline-block;height:7px;border-radius:var(--radius-pill);background:var(--c);
+  vertical-align:middle;margin-right:7px;min-width:3px}
+
+.h-note{margin-top:var(--s4);font-size:13px;color:var(--ink-soft);border-left:3px solid var(--c-line);
+  padding-left:var(--s3)}
+.h-open{display:inline-flex;align-items:center;gap:7px;font-weight:700;font-size:14px;
+  text-decoration:none;color:var(--c);margin-top:var(--s4)}
+.h-open:hover{text-decoration:underline}
+
+/* ---- the butler ---- */
+.h-dock{position:fixed;left:0;right:0;bottom:0;z-index:60;
+  background:color-mix(in srgb,var(--surface) 94%,transparent);backdrop-filter:blur(11px);
+  border-top:1px solid var(--line);box-shadow:0 -8px 28px color-mix(in srgb,var(--ink) 9%,transparent)}
+.h-dockin{max-width:1180px;margin:0 auto;padding:var(--s3) var(--s4);
+  display:grid;grid-template-columns:auto 1fr;gap:var(--s3);align-items:start}
+.h-face{width:42px;height:42px;border-radius:11px;object-fit:cover;background:var(--brand-navy);
+  border:1px solid var(--line)}
+.h-who{font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--ink-faint);font-weight:700;margin:0 0 4px}
+.h-say{margin:0 0 var(--s2);font-size:14.5px;line-height:1.5;color:var(--ink);max-width:74ch}
+.h-say em{font-style:italic;color:var(--c)}
+.h-moves{display:flex;gap:7px;flex-wrap:wrap}
+.h-move{font:inherit;font-size:13px;font-weight:650;cursor:pointer;padding:7px 13px;
+  border-radius:var(--radius-pill);border:1px solid var(--c-line);background:var(--c-wash);
+  color:var(--ink);text-align:left}
+.h-move:hover{border-color:var(--c)}
+.h-move--quiet{background:transparent;border-color:var(--line);color:var(--ink-soft)}
+.h-move--quiet:hover{color:var(--ink);border-color:var(--ink-faint)}
+.h-askrow{display:flex;gap:7px;margin-top:var(--s2);flex-wrap:wrap}
+.h-askrow input{flex:1 1 240px;min-width:0;font:inherit;font-size:14px;padding:8px 12px;
+  border:1px solid var(--line);border-radius:var(--radius-sm);background:var(--bg);color:var(--ink)}
+.h-askrow input:focus-visible{outline:2px solid var(--c);outline-offset:1px;border-color:var(--c)}
+.h-scripted{font-size:11.5px;color:var(--ink-faint);margin:var(--s2) 0 0}
+
+:where(button,input,a[href],[tabindex]:not([tabindex="-1"])){scroll-margin-top:96px}
+.h-skip{position:absolute;left:-9999px}
+.h-skip:focus{position:static;display:inline-block;margin:var(--s2)}
+</style>
+
+<div class="h-top">
+  <div class="vom-bar" style="max-width:1180px;margin:0 auto">
+    <a href="https://visionoutreachmedia.nl">
+      <img src="__LOGO_DATA_URI__" alt="Vision Outreach Media">
+      <b>Vision Outreach Media</b><span>· The house</span>
+    </a>
+  </div>
+</div>
+
+<a class="h-skip vk-btn vk-btn--sm" href="#h-room">Skip to the room</a>
+
+<div class="h-shell">
+  <nav class="h-map" aria-label="Rooms in the house">
+    <p class="vk-shead">The house</p>
+    <ol id="h-map"></ol>
+    <p class="h-prog" id="h-prog"></p>
+    <button class="vk-btn vk-btn--quiet vk-btn--sm" id="h-theme" type="button"
+            style="margin-top:var(--s3)">Dark</button>
+  </nav>
+
+  <main class="h-room" id="h-room" tabindex="-1"></main>
+</div>
+
+<div class="h-dock">
+  <div class="h-dockin">
+    <img class="h-face" src="__LOGO_DATA_URI__" alt="">
+    <div>
+      <p class="h-who">Bram · your guide</p>
+      <p class="h-say" id="h-say" aria-live="polite"></p>
+      <div class="h-moves" id="h-moves"></div>
+      <form class="h-askrow" id="h-ask">
+        <input id="h-q" type="text" autocomplete="off" aria-label="Ask the guide something"
+               placeholder="Ask me something — how long a build takes, what it costs…">
+        <button class="vk-btn vk-btn--sm" type="submit">Ask</button>
+      </form>
+      <p class="h-scripted">Bram is a <b>scripted guide</b>, not a live model. He knows this
+      house and says so when you ask him something outside it. Every number he quotes links to
+      the page it came from.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+"use strict";
+
+/* ------------------------------------------------------------------ sources
+   Real, live Vision Outreach Media surfaces. Everything quoted in a room is
+   read off one of these, so a visitor can check the guide.                  */
+var S = {
+  core   :{n:"visionoutreachmedia.nl", u:"https://visionoutreachmedia.nl"},
+  gallery:{n:"What we build",          u:"https://vom-gallery.vercel.app"},
+  forge  :{n:"Turnkey · Forge",        u:"https://vom-forge.vercel.app"},
+  engage :{n:"Engage AI",              u:"https://engage-ai-api.onrender.com/dashboard"},
+  grow   :{n:"Three ways we grow",     u:"https://vom-grow.vercel.app"},
+  hundred:{n:"Hundred — Growth OS",    u:"https://hundred-theta.vercel.app"},
+  studio :{n:"Studio Index",           u:"https://artifact-hub-nu.vercel.app"},
+  intent :{n:"Intent browsing",        u:"https://vom-intent.vercel.app"},
+  door   :{n:"The front door",         u:"https://vom-front-door.vercel.app"}
+};
+
+/* the ten build types, with the figures the gallery states for each */
+var KINDS = [
+  ["Churches",7,10],["One-person studios",7,9],["Charities",6,10],["Shops",5,9],
+  ["Digital products",5,8],["Clubs & memberships",5,10],["Courses & schools",5,11],
+  ["Venues",5,10],["Software",5,8],["Ideas not yet built",2,5]
+];
+var CHANNELS = ["Website","Google Business","YouTube","Facebook","Instagram","LinkedIn","X","News coverage"];
+
+/* --------------------------------------------------------------------- rooms */
+var ROOMS = [
+{ id:"hall", n:"The entrance hall", eyebrow:"Where you are",
+  h:"A studio that builds the website and the office behind it as one thing.",
+  lede:"Most businesses end up with a site from one supplier and a pile of spreadsheets from "
+     + "another, then spend years typing everything into both. Everything in this house exists "
+     + "to stop that. Walk through it in any order — the map on the left is the whole building.",
+  facts:[
+    {k:"Where",v:"Netherlands",n:"A studio working with churches, ministries, nonprofits and small businesses.",s:"core"},
+    {k:"What is built",v:"Two halves",n:"The public site and the back office behind it, made together rather than joined later.",s:"gallery"},
+    {k:"Rooms in this house",v:"7",n:"Each one is a real part of the studio with its own working output.",s:"door"}
+  ],
+  link:"core", linkText:"Open the studio's own site",
+  say:"Good afternoon. You're in the entrance hall — nothing to read here, it's just where I "
+    + "explain the shape of the place. The house has seven rooms and you may see them in any "
+    + "order. <em>Shall I take you to the workshop first?</em> It's where most of the work is." },
+
+{ id:"workshop", n:"The workshop", eyebrow:"Room one",
+  h:"Ten kinds of business, each fully worked out.",
+  lede:"A church and a venue do not need the same website with a different photo on it, so they "
+     + "do not get one. Each of these is built in its own world, and each ends at a working "
+     + "example you can click through. The two numbers are how many pages the platform has and "
+     + "how many back-office modules sit behind it.",
+  table:true,
+  facts:[
+    {k:"Kinds of business",v:"10",n:"Each one fully worked out, not a template with the words swapped.",s:"gallery"},
+    {k:"Live examples",v:"10",n:"One per kind, openable right now without asking anybody.",s:"gallery"},
+    {k:"Your keys held by us",v:"0",n:"Payments, email and analytics are wired to the owner's own accounts.",s:"gallery"}
+  ],
+  link:"gallery", linkText:"Walk the workshop yourself",
+  say:"This is the workshop. Ten kinds of business, and I'd point you at the table rather than "
+    + "the headline — the page and module counts differ per kind, which is the whole argument. "
+    + "<em>Courses need eleven modules; a shop needs nine.</em>" },
+
+{ id:"instruments", n:"The instrument room", eyebrow:"Room two",
+  h:"Your public footprint, scored across eight channels.",
+  lede:"Measured on the same rubric every month, so “we should post more” becomes a ranked list "
+     + "of what is actually costing you. The same analysis runs on competitors, which is usually "
+     + "the more uncomfortable half.",
+  channels:true,
+  facts:[
+    {k:"Channels scored",v:"8",n:"Each measured separately rather than rolled into one vanity number.",s:"gallery"},
+    {k:"Cadence",v:"Monthly",n:"The same rubric each time, so the movement means something.",s:"gallery"},
+    {k:"Also runs on",v:"Competitors",n:"The same eight channels, scored the same way.",s:"gallery"}
+  ],
+  link:"engage", linkText:"Open the control room",
+  say:"The instrument room. Eight dials, read every month against the same rubric. I'll be "
+    + "honest about why that matters: one score for “social” tells you nothing, but eight "
+    + "separate ones tell you <em>which room the draught is coming from</em>." },
+
+{ id:"floor", n:"The machine floor", eyebrow:"Room three",
+  h:"The part that builds a platform with nobody in the loop.",
+  lede:"Turnkey decides what a business needs and compiles it into a blueprint. Forge executes "
+     + "that blueprint end to end — composing the modules, writing the site, checking its own "
+     + "work, deploying, and proving what it deployed is answering.",
+  facts:[
+    {k:"Archetype platforms",v:"10",n:"One per kind of business in the workshop.",s:"forge"},
+    {k:"To build all ten",v:"0.63s",n:"The whole set, start to finish, in one run.",s:"forge"},
+    {k:"Stages, each checked",v:"11",n:"It refuses an unready spec rather than producing a half-decided platform.",s:"forge"},
+    {k:"Human steps in a run",v:"0",n:"Nobody stands in the middle translating between documents.",s:"forge"}
+  ],
+  link:"forge", linkText:"See the machine floor",
+  say:"Mind the noise. Ten platforms in <em>0.63 seconds</em>, eleven checked stages, nobody in "
+    + "the loop. The number people disbelieve is the last one, so I'd rather you clicked through "
+    + "and read the stage list than took my word." },
+
+{ id:"proving", n:"The proving ground", eyebrow:"Room four",
+  h:"Evidence before investment.",
+  lede:"A single page that makes one promise and counts who says yes. Deployed on its own, so it "
+     + "keeps collecting while the real thing is built — or tells you not to build it. An "
+     + "afternoon, against six months of building the wrong thing.",
+  facts:[
+    {k:"What it is",v:"One page",n:"One promise, and a count of who said yes to it.",s:"gallery"},
+    {k:"Costs you",v:"An afternoon",n:"Set against six months of building something nobody wanted.",s:"gallery"},
+    {k:"Can also say",v:"Don't build it",n:"Which is the outcome that saves the most money.",s:"gallery"}
+  ],
+  link:"grow", linkText:"The three engagements, written plainly",
+  say:"The proving ground, and my favourite room. Everything else here builds something. "
+    + "<em>This one is allowed to tell you not to.</em>" },
+
+{ id:"library", n:"The library", eyebrow:"Room five",
+  h:"Everything the studio has published, in one menu.",
+  lede:"Tools, guides, dashboards and wizards, added automatically as they ship. The house keeps "
+     + "an audit of its own readiness on the same page, which is a slightly uncomfortable thing "
+     + "to publish and the reason it is worth reading.",
+  facts:[
+    {k:"Operating systems",v:"6",n:"All six now deliver what they promise.",s:"studio"},
+    {k:"House readiness",v:"40%",n:"The studio's own audit of itself. The gap is the storefront layer: buyable, deliverable, provable.",s:"studio"},
+    {k:"Index updates",v:"Daily",n:"New artifacts are added automatically rather than by hand.",s:"studio"}
+  ],
+  link:"studio", linkText:"Open the index",
+  say:"The library. I'll draw your attention to the forty per cent — that's the studio's audit "
+    + "<em>of itself</em>, published where anyone can read it. Most houses don't hang that in "
+    + "the hallway." },
+
+{ id:"lab", n:"The workbench", eyebrow:"Room six",
+  h:"Where the house experiments on itself.",
+  lede:"This tour is one of the experiments. The interface you are using — a guide instead of a "
+     + "navigation bar — comes out of work on intent-led browsing, where you state an outcome "
+     + "and the surface composes itself around it rather than making you hunt for a page.",
+  facts:[
+    {k:"You are inside",v:"An experiment",n:"A guided walk rather than a menu. There is no navigation bar anywhere on this page.",s:"door"},
+    {k:"The model",v:"Intent-led",n:"State an outcome; the surface composes. The thinking is written out in full.",s:"intent"},
+    {k:"Also built on it",v:"The front door",n:"The same idea applied to a landing page that answers instead of listing.",s:"door"}
+  ],
+  link:"intent", linkText:"Read the thinking behind this interface",
+  say:"The workbench — and you're standing in the experiment. There's no navigation on this "
+    + "page at all; you've been getting around by <em>asking me</em>. Whether that's better "
+    + "than a menu is exactly the open question." },
+
+{ id:"office", n:"The office", eyebrow:"The way out",
+  h:"Four steps, and you are running it.",
+  lede:"Tell us what the business is — a paragraph is enough. We build it and you look at the "
+     + "actual thing, live on a real address, not a wireframe. You say what is wrong and it gets "
+     + "rebuilt rather than patched, which is why changing your mind is cheap here. Then you run "
+     + "it, on your own accounts.",
+  steps:["Tell us what the business is. A paragraph is enough: what it does, who for, what it charges.",
+         "We build it and you look at it — the actual site and back office, live, seeded so it opens with something in it.",
+         "You say what is wrong. It gets rebuilt, not patched.",
+         "You run it. Payments, email and analytics wired to your own accounts."],
+  facts:[
+    {k:"Steps",v:"4",n:"From a paragraph to a system you run yourself.",s:"gallery"},
+    {k:"What you're shown",v:"The real thing",n:"Not a wireframe and not a slide.",s:"gallery"},
+    {k:"Changing your mind",v:"Cheap",n:"Because it is rebuilt rather than patched.",s:"gallery"}
+  ],
+  link:"core", linkText:"Start a conversation on the studio's site",
+  say:"And this is the office, where a tour normally turns into a sales pitch. I'll spare you: "
+    + "<em>nothing on this page sends anything to anybody.</em> When you want to talk to a "
+    + "person, the studio's own site is the door." }
+];
+
+/* ------------------------------------------------------------------ answers
+   A small, honest question set. Bram answers from the rooms; when he cannot,
+   he says so and does not invent.                                          */
+var QA = [
+  [/how long|how fast|speed|quick|time to build|0\.63|\bsecond/i,
+   "Ten archetype platforms build in <em>0.63 seconds</em>, across eleven checked stages with no "
+ + "human steps in the run. That is machine time, not project time — a real engagement still has "
+ + "a conversation at the front of it.", "floor"],
+  [/cost|price|pricing|budget|how much|charge|fee|euro|€/i,
+   "I won't quote you a number, because there isn't an honest one on this page to quote. What I "
+ + "can tell you is the shape: you're shown the real thing before you commit, and revisions are "
+ + "rebuilds rather than patches. <em>Pricing is a conversation the studio has directly.</em>",
+   "office"],
+  [/channel|social|instagram|facebook|linkedin|youtube|seo|found|visib|reach/i,
+   "Eight channels, scored separately on the same rubric every month — website, Google Business, "
+ + "YouTube, Facebook, Instagram, LinkedIn, X and news coverage. The same run works on your "
+ + "competitors too.", "instruments"],
+  [/church|ministr|nonprofit|charit|faith/i,
+   "That's the work this studio was built for. Churches take seven pages and ten back-office "
+ + "modules; charities six and ten. There's a worked example for each you can open.", "workshop"],
+  [/example|proof|show me|see it|demo|portfolio|work/i,
+   "Ten live examples, one per kind of business, openable right now without asking anyone. "
+ + "That's the workshop.", "workshop"],
+  [/idea|not sure|validate|test|maybe|before i|risk/i,
+   "Then you want the proving ground rather than the workshop — one page, one promise, a count "
+ + "of who says yes. It's allowed to tell you not to build the thing.", "proving"],
+  [/who are you|what are you|are you\b[^?]{0,20}\b(ai|bot|real|human|person|scripted)|chatgpt|model|llm/i,
+   "A scripted guide. I'm a few hundred lines of rules that know this house — there's no model "
+ + "behind me and nothing you type leaves your browser. <em>I'd rather tell you that than have "
+ + "you assume otherwise.</em>", null],
+  [/contact|talk|call|email|human|person|hire|start/i,
+   "The office is the way out, and the studio's own site is where a real conversation starts. "
+ + "Nothing on this page sends anything.", "office"],
+  [/back office|spreadsheet|admin|module|system/i,
+   "That's the whole argument of the house: the site and the back office are built together, so "
+ + "what the owner types into Events is what a visitor reads on the site. Module counts differ "
+ + "per kind of business.", "workshop"]
+];
+
+/* ------------------------------------------------------------------- state */
+var at = 0, seen = {}, asked = 0;
+
+function $(id){ return document.getElementById(id); }
+function el(t,c,x){ var n=document.createElement(t); if(c)n.className=c; if(x!=null)n.textContent=x; return n; }
+function esc(s){ return String(s).replace(/[&<>"]/g,function(c){
+  return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c];}); }
+function src(key){
+  var s=S[key], a=el("a","h-src",s.n);
+  a.href=s.u; a.target="_blank"; a.rel="noopener"; a.title="Opens "+s.u;
+  return a;
+}
+
+/* --------------------------------------------------------------- rendering */
+function paintMap(){
+  var ol=$("h-map"); ol.textContent="";
+  ROOMS.forEach(function(r,i){
+    var li=document.createElement("li");
+    var b=el("button","h-maprow"+(seen[r.id]?" seen":""));
+    b.type="button";
+    b.setAttribute("aria-current", i===at ? "true":"false");
+    b.appendChild(el("span","n", i===0 ? "ENTRANCE" : i===ROOMS.length-1 ? "EXIT" : "ROOM "+i));
+    b.appendChild(el("span","t", r.n));
+    b.addEventListener("click",function(){ go(i,"map"); });
+    li.appendChild(b); ol.appendChild(li);
+  });
+  var n=0; for(var k in seen) if(seen[k]) n++;
+  $("h-prog").textContent = n+" of "+ROOMS.length+" rooms seen";
+}
+
+function paintRoom(){
+  var r=ROOMS[at], m=$("h-room"); m.textContent="";
+  m.appendChild(el("p","h-eyebrow", r.eyebrow+" · "+r.n));
+  m.appendChild(el("h2",null,r.h));
+  m.appendChild(el("p","lede",r.lede));
+
+  var f=el("div","h-facts");
+  r.facts.forEach(function(x){
+    var c=el("div","h-fact");
+    c.appendChild(el("p","k",x.k));
+    c.appendChild(el("p","v",x.v));
+    c.appendChild(el("p","n",x.n));
+    c.appendChild(src(x.s));
+    f.appendChild(c);
+  });
+  m.appendChild(f);
+
+  if (r.table){
+    var w=el("div","h-tablewrap"), t=el("table","h-table");
+    var th=document.createElement("thead");
+    th.innerHTML="<tr><th>Kind of business</th><th>Pages</th><th>Back-office modules</th><th>Shape</th></tr>";
+    t.appendChild(th);
+    var tb=document.createElement("tbody");
+    KINDS.forEach(function(k){
+      var tr=document.createElement("tr");
+      tr.appendChild(el("td",null,k[0]));
+      tr.appendChild(el("td","num",String(k[1])));
+      tr.appendChild(el("td","num",String(k[2])));
+      var td=el("td","num");
+      var bar=el("span","h-bar"); bar.style.width=(k[2]*9)+"px";
+      td.appendChild(bar); td.appendChild(document.createTextNode(k[1]+" + "+k[2]));
+      tr.appendChild(td);
+      tb.appendChild(tr);
+    });
+    t.appendChild(tb); w.appendChild(t); m.appendChild(w);
+    var note=el("p","h-note","Read down the module column rather than across the row — that is "
+      + "where the kinds actually differ. Courses carry eleven modules; software and digital "
+      + "products carry eight.");
+    note.appendChild(document.createTextNode(" "));
+    note.appendChild(src("gallery"));
+    m.appendChild(note);
+  }
+
+  if (r.channels){
+    var cw=el("div","h-tablewrap"), ct=el("table","h-table");
+    var cth=document.createElement("thead");
+    cth.innerHTML="<tr><th>Channel scored, every month</th><th>Same rubric</th><th>Run on competitors</th></tr>";
+    ct.appendChild(cth);
+    var ctb=document.createElement("tbody");
+    CHANNELS.forEach(function(c){
+      var tr=document.createElement("tr");
+      tr.appendChild(el("td",null,c));
+      tr.appendChild(el("td","num","yes"));
+      tr.appendChild(el("td","num","yes"));
+      ctb.appendChild(tr);
+    });
+    ct.appendChild(ctb); cw.appendChild(ct); m.appendChild(cw);
+  }
+
+  if (r.steps){
+    var ol=el("ol","vk-steps"); ol.style.marginTop="var(--s4)";
+    r.steps.forEach(function(s){
+      var li=document.createElement("li");
+      var p=el("p",null,s); li.appendChild(p); ol.appendChild(li);
+    });
+    m.appendChild(ol);
+  }
+
+  var a=el("a","h-open", r.linkText+" →");
+  a.href=S[r.link].u; a.target="_blank"; a.rel="noopener";
+  m.appendChild(a);
+}
+
+function moves(){
+  var box=$("h-moves"); box.textContent="";
+  function add(label,fn,quiet){
+    var b=el("button","h-move"+(quiet?" h-move--quiet":""),label);
+    b.type="button"; b.addEventListener("click",fn); box.appendChild(b);
+  }
+  var nextUnseen=-1;
+  for (var i=0;i<ROOMS.length;i++) if(!seen[ROOMS[i].id]){ nextUnseen=i; break; }
+
+  if (at+1 < ROOMS.length) add("Lead on → "+ROOMS[at+1].n, function(){ go(at+1,"next"); });
+  if (nextUnseen>=0 && nextUnseen!==at+1)
+    add("Take me to "+ROOMS[nextUnseen].n, function(){ go(nextUnseen,"skip"); }, true);
+  if (at>0) add("Back to "+ROOMS[at-1].n, function(){ go(at-1,"back"); }, true);
+  var n=0; for(var k in seen) if(seen[k]) n++;
+  if (n===ROOMS.length) add("Start the walk again", function(){ seen={}; go(0,"restart"); }, true);
+}
+
+function say(html){ $("h-say").innerHTML = html; }
+
+function go(i, how){
+  at=i; var r=ROOMS[i];
+  var first=!seen[r.id];
+  seen[r.id]=true;
+  paintMap(); paintRoom(); moves();
+
+  var n=0; for(var k in seen) if(seen[k]) n++;
+  var line = r.say;
+  if (!first) line = "Back in "+r.n.toLowerCase()+". "+r.say;
+  else if (how==="skip") line = "Straight there, then. "+r.say;
+  if (n===ROOMS.length && first)
+    line += " That's the whole house — <em>you've now seen all seven rooms and the office.</em>";
+  say(line);
+
+  var m=$("h-room");
+  if (how!=="boot"){ m.focus({preventScroll:true}); m.scrollIntoView({block:"start"}); }
+}
+
+/* ---------------------------------------------------------------- the ask */
+$("h-ask").addEventListener("submit", function(e){
+  e.preventDefault();
+  var q=$("h-q").value.trim();
+  if(!q) { $("h-q").focus(); return; }
+  asked++;
+  for (var i=0;i<QA.length;i++){
+    if (QA[i][0].test(q)){
+      say(QA[i][1]);
+      var room=QA[i][2];
+      if (room){
+        var box=$("h-moves"); box.textContent="";
+        for (var j=0;j<ROOMS.length;j++){
+          if (ROOMS[j].id===room){
+            (function(idx){
+              var b=el("h-move"===""?"button":"button","h-move","Show me — "+ROOMS[idx].n);
+              b.type="button"; b.addEventListener("click",function(){ go(idx,"ask"); });
+              box.appendChild(b);
+            })(j);
+          }
+        }
+        var back=el("button","h-move h-move--quiet","Stay here");
+        back.type="button"; back.addEventListener("click",moves);
+        box.appendChild(back);
+      } else { moves(); }
+      $("h-q").value="";
+      return;
+    }
+  }
+  say("That one's outside what I know. I'm scripted, so I'd rather say so than guess at you — "
+    + "I can speak to what gets built, the eight channels, how a build runs, validating an idea "
+    + "before building it, and how an engagement starts. <em>For anything else the studio's own "
+    + "site is the place to ask a person.</em>");
+  moves();
+  $("h-q").value="";
+});
+
+/* ---------------------------------------------------------------- theme */
+$("h-theme").addEventListener("click", function(){
+  var d=document.documentElement;
+  var now=d.getAttribute("data-theme")
+    || (window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches ? "dark":"light");
+  var next = now==="dark" ? "light":"dark";
+  d.setAttribute("data-theme",next);
+  try{ localStorage.setItem("vom.house.theme",next); }catch(e){}
+  this.textContent = next==="dark" ? "Light":"Dark";
+});
+(function(){
+  var d=document.documentElement.getAttribute("data-theme");
+  if(!d && window.matchMedia) d = matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";
+  $("h-theme").textContent = d==="dark" ? "Light":"Dark";
+})();
+
+go(0,"boot");
+})();
+</script>

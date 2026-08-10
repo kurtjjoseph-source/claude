@@ -1,0 +1,661 @@
+<title>AI Ministry Assessment — Engagement Wizard</title>
+<style>
+  :root {
+    --paper: #F6F3EC;
+    --surface: #FFFEFA;
+    --ink: #241F36;
+    --ink-soft: #5A5470;
+    --line: #DDD7C9;
+    --accent: #5C4791;
+    --accent-ink: #FFFFFF;
+    --accent-soft: #EEEAF6;
+    --gold: #A87F2C;
+    --gold-soft: #F5EDDA;
+    --done: #2E7D4F;
+    --done-soft: #E3EFE7;
+    --mono-bg: #292440;
+    --mono-ink: #E9E4F5;
+    --shadow: 0 1px 3px rgba(36,31,54,.08), 0 4px 16px rgba(36,31,54,.06);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #16131F;
+      --surface: #211C31;
+      --ink: #EDE9F7;
+      --ink-soft: #A79FC0;
+      --line: #37304E;
+      --accent: #9D86D6;
+      --accent-ink: #16131F;
+      --accent-soft: #2C2545;
+      --gold: #D2A94E;
+      --gold-soft: #332B1A;
+      --done: #6FBE8F;
+      --done-soft: #1E3227;
+      --mono-bg: #0F0D18;
+      --mono-ink: #D9D2EE;
+      --shadow: 0 1px 3px rgba(0,0,0,.4), 0 4px 16px rgba(0,0,0,.3);
+    }
+  }
+  :root[data-theme="light"] {
+    --paper: #F6F3EC; --surface: #FFFEFA; --ink: #241F36; --ink-soft: #5A5470;
+    --line: #DDD7C9; --accent: #5C4791; --accent-ink: #FFFFFF; --accent-soft: #EEEAF6;
+    --gold: #A87F2C; --gold-soft: #F5EDDA; --done: #2E7D4F; --done-soft: #E3EFE7;
+    --mono-bg: #292440; --mono-ink: #E9E4F5;
+    --shadow: 0 1px 3px rgba(36,31,54,.08), 0 4px 16px rgba(36,31,54,.06);
+  }
+  :root[data-theme="dark"] {
+    --paper: #16131F; --surface: #211C31; --ink: #EDE9F7; --ink-soft: #A79FC0;
+    --line: #37304E; --accent: #9D86D6; --accent-ink: #16131F; --accent-soft: #2C2545;
+    --gold: #D2A94E; --gold-soft: #332B1A; --done: #6FBE8F; --done-soft: #1E3227;
+    --mono-bg: #0F0D18; --mono-ink: #D9D2EE;
+    --shadow: 0 1px 3px rgba(0,0,0,.4), 0 4px 16px rgba(0,0,0,.3);
+  }
+
+  * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Seravek", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.55;
+  }
+  h1, h2, h3, .serif {
+    font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    text-wrap: balance;
+    margin: 0;
+  }
+
+  .app { display: flex; min-height: 100vh; }
+
+  /* ---- Rail ---- */
+  nav.rail {
+    width: 264px; flex-shrink: 0;
+    border-right: 1px solid var(--line);
+    padding: 28px 18px;
+    position: sticky; top: 0; height: 100vh; overflow-y: auto;
+  }
+  .brand { padding: 0 10px 20px; border-bottom: 1px solid var(--line); margin-bottom: 18px; }
+  .brand h1 { font-size: 1.22rem; line-height: 1.25; }
+  .brand .sub { font-size: .78rem; color: var(--ink-soft); letter-spacing: .06em; text-transform: uppercase; margin-top: 6px; }
+  .rail button.step {
+    display: flex; align-items: center; gap: 11px;
+    width: 100%; text-align: left;
+    background: none; border: none; cursor: pointer;
+    padding: 9px 10px; border-radius: 7px;
+    color: var(--ink-soft); font: inherit; font-size: .92rem;
+  }
+  .rail button.step:hover { background: var(--accent-soft); color: var(--ink); }
+  .rail button.step.active { background: var(--accent); color: var(--accent-ink); }
+  .rail button.step:focus-visible, button:focus-visible, a:focus-visible {
+    outline: 2px solid var(--gold); outline-offset: 2px;
+  }
+  .stepnum {
+    width: 24px; height: 24px; flex-shrink: 0;
+    border: 1.5px solid currentColor; border-radius: 50%;
+    display: grid; place-items: center;
+    font-size: .74rem; font-variant-numeric: tabular-nums;
+  }
+  .rail button.step.done .stepnum { background: var(--done); border-color: var(--done); color: #fff; }
+  .rail .divider { border-top: 1px solid var(--line); margin: 16px 4px; }
+  .rail .raillabel { font-size: .7rem; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-soft); padding: 0 10px 6px; }
+  .rail .reset { margin-top: 22px; padding: 0 10px; }
+  .rail .reset button {
+    font: inherit; font-size: .8rem; color: var(--ink-soft);
+    background: none; border: 1px solid var(--line); border-radius: 6px;
+    padding: 6px 12px; cursor: pointer;
+  }
+  .rail .reset button:hover { color: var(--ink); border-color: var(--ink-soft); }
+
+  /* ---- Main ---- */
+  main { flex: 1; min-width: 0; padding: 40px 48px 90px; max-width: 880px; }
+  .clientbar {
+    display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap;
+    font-size: .85rem; color: var(--ink-soft); margin-bottom: 26px;
+    border: 1px dashed var(--line); border-radius: 8px; padding: 8px 14px;
+  }
+  .clientbar strong { color: var(--ink); font-weight: 600; }
+  .eyebrow { font-size: .74rem; letter-spacing: .13em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
+  section.panel h2 { font-size: 1.9rem; margin: 6px 0 4px; }
+  .lede { color: var(--ink-soft); max-width: 62ch; margin: 0 0 26px; }
+
+  .card {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 10px;
+    padding: 20px 22px; margin-bottom: 18px; box-shadow: var(--shadow);
+  }
+  .card h3 { font-size: 1.12rem; margin-bottom: 10px; }
+  .card p { margin: 8px 0; }
+  .hint { font-size: .84rem; color: var(--ink-soft); }
+
+  label.field { display: block; margin-bottom: 14px; }
+  label.field span.lbl { display: block; font-size: .8rem; font-weight: 600; letter-spacing: .03em; margin-bottom: 4px; }
+  input[type="text"], textarea, select {
+    width: 100%; font: inherit; font-size: .93rem;
+    color: var(--ink); background: var(--paper);
+    border: 1px solid var(--line); border-radius: 7px; padding: 8px 11px;
+  }
+  textarea { min-height: 96px; resize: vertical; }
+  input:focus, textarea:focus, select:focus { outline: 2px solid var(--accent); outline-offset: 1px; border-color: var(--accent); }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0 18px; }
+  @media (max-width: 720px) { .grid2 { grid-template-columns: 1fr; } }
+
+  ul.checks { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+  ul.checks li { display: flex; gap: 10px; align-items: flex-start; }
+  ul.checks input[type="checkbox"] { margin-top: 4px; accent-color: var(--done); width: 15px; height: 15px; flex-shrink: 0; }
+  ul.checks label { cursor: pointer; }
+  ul.checks .q { font-weight: 600; }
+  ul.checks .why { display: block; font-size: .83rem; color: var(--ink-soft); }
+
+  .callout {
+    border-left: 3px solid var(--gold); background: var(--gold-soft);
+    border-radius: 0 8px 8px 0; padding: 12px 16px; margin: 16px 0; font-size: .92rem;
+  }
+  .callout strong { color: var(--gold); }
+
+  pre.prompt {
+    background: var(--mono-bg); color: var(--mono-ink);
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: .8rem; line-height: 1.55;
+    border-radius: 9px; padding: 16px 18px;
+    overflow-x: auto; white-space: pre-wrap; word-break: break-word;
+    max-height: 420px; overflow-y: auto;
+  }
+  button.primary, button.ghost {
+    font: inherit; font-size: .9rem; font-weight: 600;
+    border-radius: 7px; padding: 9px 18px; cursor: pointer;
+  }
+  button.primary { background: var(--accent); color: var(--accent-ink); border: 1px solid var(--accent); }
+  button.primary:hover { filter: brightness(1.08); }
+  button.ghost { background: none; color: var(--accent); border: 1px solid var(--accent); }
+  button.ghost:hover { background: var(--accent-soft); }
+  .btnrow { display: flex; gap: 10px; flex-wrap: wrap; margin: 14px 0 4px; align-items: center; }
+  .copied { font-size: .83rem; color: var(--done); font-weight: 600; }
+
+  table { border-collapse: collapse; width: 100%; font-size: .88rem; }
+  .tablewrap { overflow-x: auto; }
+  th, td { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { font-size: .74rem; letter-spacing: .09em; text-transform: uppercase; color: var(--ink-soft); }
+  td.tool { font-weight: 600; white-space: nowrap; }
+  td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+  details { border: 1px solid var(--line); border-radius: 8px; margin-bottom: 10px; background: var(--surface); }
+  details summary { cursor: pointer; padding: 11px 16px; font-weight: 600; font-size: .93rem; list-style: none; display: flex; justify-content: space-between; align-items: center; }
+  details summary::after { content: "+"; color: var(--accent); font-size: 1.1rem; }
+  details[open] summary::after { content: "–"; }
+  details .body { padding: 2px 16px 14px; }
+
+  .price { font-family: "Iowan Old Style", Palatino, Georgia, serif; color: var(--gold); font-size: 1.05rem; font-weight: 700; white-space: nowrap; }
+
+  .stepfooter {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-top: 30px; padding-top: 18px; border-top: 1px solid var(--line);
+  }
+  .stepfooter .spacer { flex: 1; }
+
+  .radioline { display: flex; gap: 18px; flex-wrap: wrap; margin: 8px 0; }
+  .radioline label { display: flex; gap: 7px; align-items: center; cursor: pointer; font-size: .92rem; }
+  .radioline input { accent-color: var(--accent); }
+
+  .quadrant { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 14px 0; }
+  .quadrant .q4 { border: 1px solid var(--line); border-radius: 8px; padding: 10px 13px; font-size: .84rem; }
+  .quadrant .q4 b { display: block; font-size: .9rem; }
+  .quadrant .qw { border-color: var(--done); background: var(--done-soft); }
+  .quadrant .mp { border-color: var(--gold); background: var(--gold-soft); }
+  @media (max-width: 560px) { .quadrant { grid-template-columns: 1fr; } }
+
+  @media (max-width: 860px) {
+    .app { flex-direction: column; }
+    nav.rail { width: 100%; height: auto; position: static; border-right: none; border-bottom: 1px solid var(--line); padding: 16px; }
+    .railsteps { display: flex; flex-wrap: wrap; gap: 4px; }
+    .rail button.step { width: auto; }
+    .rail .divider, .rail .raillabel { display: none; }
+    .rail button.step.ref { display: inline-flex; }
+    main { padding: 24px 18px 70px; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    section.panel { animation: rise .25s ease; }
+    @keyframes rise { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+  }
+</style>
+
+<div class="app">
+  <nav class="rail" aria-label="Engagement steps">
+    <div class="brand">
+      <h1>AI Ministry Assessment</h1>
+      <div class="sub">Vision Outreach Media</div>
+    </div>
+    <div class="raillabel">Engagement workflow</div>
+    <div class="railsteps" id="railsteps"></div>
+    <div class="divider"></div>
+    <div class="raillabel">Reference</div>
+    <button class="step ref" data-step="leads" id="btn-leads"><span class="stepnum">✦</span> Winning church clients</button>
+    <div class="reset"><button id="resetBtn" type="button">Start new engagement…</button></div>
+  </nav>
+
+  <main>
+    <div class="clientbar" id="clientbar" hidden>
+      Engagement: <strong id="cb-name">—</strong> <span id="cb-meta"></span>
+    </div>
+
+    <!-- STEP 1: INTAKE -->
+    <section class="panel" data-panel="0">
+      <div class="eyebrow">Step 1 · Before the call</div>
+      <h2>Church intake</h2>
+      <p class="lede">Capture who you're serving. Everything you enter here flows into the discovery script and the Claude analysis prompt, so fill it in before the discovery call. It autosaves as you type.</p>
+
+      <div class="card">
+        <div class="grid2">
+          <label class="field"><span class="lbl">Church / ministry name</span><input type="text" id="f-church" placeholder="e.g. Grace Community Church"></label>
+          <label class="field"><span class="lbl">Primary contact &amp; role</span><input type="text" id="f-contact" placeholder="e.g. Pastor Jan de Vries, lead pastor"></label>
+          <label class="field"><span class="lbl">City / region</span><input type="text" id="f-city" placeholder="e.g. Amersfoort"></label>
+          <label class="field"><span class="lbl">Weekly attendance</span><input type="text" id="f-size" placeholder="e.g. 180"></label>
+          <label class="field"><span class="lbl">Paid staff / core volunteers</span><input type="text" id="f-staff" placeholder="e.g. 3 staff, ~25 volunteers"></label>
+          <label class="field"><span class="lbl">Services &amp; ministries</span><input type="text" id="f-services" placeholder="e.g. 2 Sunday services, youth, livestream, food bank"></label>
+        </div>
+        <label class="field"><span class="lbl">Tools they already use (ChMS, giving, livestream, email…)</span><input type="text" id="f-tools" placeholder="e.g. Planning Center, Tithe.ly, OBS + YouTube, Mailchimp"></label>
+        <label class="field"><span class="lbl">Why they reached out / anything you already know</span><textarea id="f-context" placeholder="Referred by…, mentioned drowning in comms work…"></textarea></label>
+      </div>
+
+      <div class="callout"><strong>The offer you're selling:</strong> a 45-minute structured interview, then a prescription of 3–7 off-the-shelf AI &amp; SaaS tools that give the staff back at least 5 hours a week — or 100% of the €999 back. Worst case, they lose 45 minutes.</div>
+    </section>
+
+    <!-- STEP 2: DISCOVERY -->
+    <section class="panel" data-panel="1" hidden>
+      <div class="eyebrow">Step 2 · 45-minute call</div>
+      <h2>Discovery call</h2>
+      <p class="lede">Record the call with your AI note-taker (Fathom). Only probe — never prescribe on this call, even when you already know the answer. Bite your tongue; the prescription comes with the report.</p>
+
+      <div class="card">
+        <h3>Question script — tick as you go</h3>
+        <ul class="checks" id="discovery-qs"></ul>
+      </div>
+
+      <div class="card">
+        <h3>Pain points captured</h3>
+        <p class="hint">Jot the headline pains here during or right after the call. These are injected into the Claude prompt in step 3 alongside the full transcript.</p>
+        <label class="field"><textarea id="f-pains" placeholder="- Bulletin takes admin 6 hrs/week&#10;- Pastor spends Monday mornings cutting sermon clips&#10;- Volunteer roster chaos on WhatsApp…"></textarea></label>
+      </div>
+
+      <div class="callout"><strong>Magic-wand question:</strong> for businesses the answer is usually email; for churches it's usually <em>the weekly communications grind</em> — bulletin, socials, newsletter, announcements. Listen for it.</div>
+    </section>
+
+    <!-- STEP 3: ANALYSIS -->
+    <section class="panel" data-panel="2" hidden>
+      <div class="eyebrow">Step 3 · After the call</div>
+      <h2>Claude analysis</h2>
+      <p class="lede">Paste the note-taker transcript, generate the research prompt, and hand it to Claude. Then run the quality pass — you are the one who knows a 3-staff church doesn't need enterprise software.</p>
+
+      <div class="card">
+        <label class="field"><span class="lbl">Paste discovery-call transcript (optional — you can also attach the file in Claude)</span><textarea id="f-transcript" placeholder="Paste the Fathom transcript here…"></textarea></label>
+        <div class="btnrow">
+          <button class="primary" type="button" id="genPrompt">Generate Claude prompt</button>
+          <button class="ghost" type="button" id="copyPrompt" hidden>Copy prompt</button>
+          <span class="copied" id="copiedNote" hidden>Copied ✓</span>
+        </div>
+        <pre class="prompt" id="promptOut" hidden></pre>
+      </div>
+
+      <div class="card">
+        <h3>Quality pass before you build the report</h3>
+        <ul class="checks">
+          <li><input type="checkbox" id="qa1"><label for="qa1">Every tool sized to the church — no enterprise CRM for a 3-person staff. Swap in the small-church equivalent.</label></li>
+          <li><input type="checkbox" id="qa2"><label for="qa2">Each prescription pulls a lever: <b>reach</b> (effectiveness), <b>time</b> (efficiency), or <b>quality</b> of ministry output.</label></li>
+          <li><input type="checkbox" id="qa3"><label for="qa3">Total tool cost is volunteer-budget friendly (aim ≈ €60/month across all prescriptions).</label></li>
+          <li><input type="checkbox" id="qa4"><label for="qa4">At least 5 hours/week reclaimed is defensible — that's the guarantee. (Average client: 7.)</label></li>
+          <li><input type="checkbox" id="qa5"><label for="qa5">High-effort, high-impact items moved to "major projects" — they're upsells, not quick wins.</label></li>
+          <li><input type="checkbox" id="qa6"><label for="qa6">Cross-checked directories: futurepedia.io &amp; theresanaiforthat.com (filter by nonprofit / productivity / video).</label></li>
+        </ul>
+        <p class="hint" style="margin-top:12px">Tuning tip from the source video: after 2–3 assessments, feed past transcripts + finished reports back into your Claude skill so it learns what a good church prescription looks like. First runs are ~60–70% there; by run five it's often copy-paste.</p>
+      </div>
+    </section>
+
+    <!-- STEP 4: REPORT -->
+    <section class="panel" data-panel="3" hidden>
+      <div class="eyebrow">Step 4 · The deliverable</div>
+      <h2>Build the report</h2>
+      <p class="lede">Nine slides, ruthlessly simple — a confused pastor doesn't implement, and a pastor who doesn't implement doesn't see ROI or come back for more. Build from your template (audittemplate.ai structure) and email it before the review call.</p>
+
+      <div class="card">
+        <h3>Slide checklist</h3>
+        <ul class="checks" id="report-slides"></ul>
+      </div>
+
+      <div class="card">
+        <h3>Effort × impact — where every finding goes</h3>
+        <div class="quadrant">
+          <div class="q4 qw"><b>Quick wins</b>high impact · low effort — the 3–7 tools this report prescribes</div>
+          <div class="q4 mp"><b>Major projects</b>high impact · high effort — goes on the "what comes after" slide; this is your upsell seed</div>
+          <div class="q4"><b>Fill-ins</b>low impact · low effort — mention only if asked</div>
+          <div class="q4"><b>Avoid</b>low impact · high effort — say so out loud; saying "don't do this" builds trust</div>
+        </div>
+      </div>
+
+      <h3 class="serif" style="font-size:1.25rem; margin:26px 0 12px">Church tool library — common prescriptions by pain point</h3>
+      <details open><summary>Communications &amp; bulletin</summary><div class="body tablewrap"><table>
+        <tr><th>Pain</th><th>Tool</th><th>≈ Cost/mo</th><th>Saves</th></tr>
+        <tr><td>Weekly bulletin & announcement design</td><td class="tool">Canva (teams) + brand kit</td><td class="num">€12</td><td class="num">2–3 hrs/wk</td></tr>
+        <tr><td>Newsletter drafting from service content</td><td class="tool">Claude + Mailerlite</td><td class="num">€20</td><td class="num">2 hrs/wk</td></tr>
+        <tr><td>Drowning in email</td><td class="tool">SaneBox</td><td class="num">€7</td><td class="num">3–5 hrs/wk</td></tr>
+        <tr><td>Board / elder meeting notes</td><td class="tool">Fathom</td><td class="num">free–€15</td><td class="num">1–2 hrs/wk</td></tr>
+      </table></div></details>
+      <details><summary>Sermon &amp; media</summary><div class="body tablewrap"><table>
+        <tr><th>Pain</th><th>Tool</th><th>≈ Cost/mo</th><th>Saves</th></tr>
+        <tr><td>Cutting sermon clips for socials</td><td class="tool">Opus Clip / Sermon Shots</td><td class="num">€15–29</td><td class="num">3–4 hrs/wk</td></tr>
+        <tr><td>Podcast/audio cleanup & transcripts</td><td class="tool">Descript</td><td class="num">€12</td><td class="num">1–2 hrs/wk</td></tr>
+        <tr><td>Sermon → devotional / small-group guide</td><td class="tool">Claude project w/ church voice</td><td class="num">€18</td><td class="num">2 hrs/wk</td></tr>
+        <tr><td>Livestream setup each Sunday</td><td class="tool">Scripted OBS + YouTube API priming</td><td class="num">€0</td><td class="num">30 min/wk</td></tr>
+      </table></div></details>
+      <details><summary>People &amp; volunteers</summary><div class="body tablewrap"><table>
+        <tr><th>Pain</th><th>Tool</th><th>≈ Cost/mo</th><th>Saves</th></tr>
+        <tr><td>Volunteer scheduling chaos</td><td class="tool">Planning Center Services</td><td class="num">€0–29</td><td class="num">2–3 hrs/wk</td></tr>
+        <tr><td>Visitor & member follow-up</td><td class="tool">Breeze ChMS / ChurchTrac</td><td class="num">€25–60</td><td class="num">1–2 hrs/wk</td></tr>
+        <tr><td>Repetitive visitor questions</td><td class="tool">Custom GPT on church FAQ</td><td class="num">€20</td><td class="num">1–2 hrs/wk</td></tr>
+      </table></div></details>
+      <details><summary>Admin &amp; giving</summary><div class="body tablewrap"><table>
+        <tr><th>Pain</th><th>Tool</th><th>≈ Cost/mo</th><th>Saves</th></tr>
+        <tr><td>Giving admin & statements</td><td class="tool">Tithe.ly / Givt</td><td class="num">fees</td><td class="num">1–2 hrs/wk</td></tr>
+        <tr><td>Duplicate data entry between systems</td><td class="tool">Zapier / Make</td><td class="num">€0–20</td><td class="num">1–3 hrs/wk</td></tr>
+        <tr><td>Event registration & reminders</td><td class="tool">ChMS events + automation</td><td class="num">incl.</td><td class="num">1 hr/wk</td></tr>
+      </table></div></details>
+      <p class="hint" style="margin-top:10px">Verify pricing and NL availability before prescribing — treat this library as a starting shelf, not gospel.</p>
+    </section>
+
+    <!-- STEP 5: REVIEW CALL -->
+    <section class="panel" data-panel="4" hidden>
+      <div class="eyebrow">Step 5 · 30-minute call</div>
+      <h2>Review call</h2>
+      <p class="lede">Screen-share the report and walk each prescription: pain → tool → cost → setup time → hours back. Spend half the call on the recommended-solutions slide. Then ask the three closing questions — half of clients ask for implementation right here.</p>
+
+      <div class="card">
+        <h3>The three closing questions</h3>
+        <label class="field"><span class="lbl">1 · "Of these recommendations, which is the most urgent for you?"</span><input type="text" id="f-close1" placeholder="Their answer…"></label>
+        <label class="field"><span class="lbl">2 · "Do you want to implement this yourselves, or would you like my help?"</span><input type="text" id="f-close2" placeholder="Their answer…"></label>
+        <label class="field"><span class="lbl">3 · "What's your timeline — is this hurting now, or can it wait 60 days?"</span><input type="text" id="f-close3" placeholder="Their answer…"></label>
+      </div>
+
+      <div class="card">
+        <h3>Outcome</h3>
+        <div class="radioline">
+          <label><input type="radio" name="outcome" value="diy" id="o-diy"> DIY — schedule 30-day check-in</label>
+          <label><input type="radio" name="outcome" value="implement" id="o-impl"> Wants implementation → step 6</label>
+          <label><input type="radio" name="outcome" value="undecided" id="o-und"> Undecided — follow up in 1 week</label>
+        </div>
+        <label class="field" style="margin-top:8px"><span class="lbl">Notes / agreed next step</span><textarea id="f-outcome-notes"></textarea></label>
+      </div>
+
+      <div class="callout"><strong>Before the call:</strong> email the report so they've seen it once. During: remind them of the guarantee you're beating — "we found <em>X</em> hours a week; the promise was five."</div>
+    </section>
+
+    <!-- STEP 6: UPSELL -->
+    <section class="panel" data-panel="5" hidden>
+      <div class="eyebrow">Step 6 · The real business</div>
+      <h2>Upsell &amp; concierge</h2>
+      <p class="lede">The €999 assessment is the door. These are the church-shaped offers behind it — lead with whatever their "major projects" slide teed up.</p>
+
+      <div class="card"><div class="tablewrap"><table>
+        <tr><th>Offer</th><th>Church version</th><th>Price</th></tr>
+        <tr><td class="tool">Sermon pipeline</td><td>One sermon in → clips, devotional, newsletter section, social posts out. Built as Claude skills + Opus Clip, staff trained.</td><td class="price">€2.5–3.5K</td></tr>
+        <tr><td class="tool">Visitor knowledge system</td><td>Custom GPT / Claude project trained on church FAQ, beliefs, ministries — linked from website &amp; welcome email.</td><td class="price">€1.5–2.5K</td></tr>
+        <tr><td class="tool">Process redesign</td><td>Fix one broken workflow (event promo, onboarding volunteers) before automating it. Deliverable: future-state map.</td><td class="price">€2.5–3K</td></tr>
+        <tr><td class="tool">Automation build</td><td>Zapier/Make flows: new member → ChMS → welcome sequence; livestream publish → socials.</td><td class="price">€1–1.5K</td></tr>
+        <tr><td class="tool">Full implementation</td><td>Any combination above as one package.</td><td class="price">€5–8K</td></tr>
+        <tr><td class="tool">AI Concierge ★</td><td>Two 45-min working sessions/month building Claude skills with staff + async access (12-business-hour response).</td><td class="price">€1.2–2K/mo</td></tr>
+      </table></div></div>
+
+      <div class="card">
+        <h3>Concierge mechanics (the €1,000/hour engine)</h3>
+        <ul class="checks">
+          <li><input type="checkbox" id="c1"><label for="c1"><span class="q">Call 1 is foundation only</span><span class="why">Guided onboarding: connect tools, context files, global instructions, one demo skill and scheduled task. Every later call is 10× more effective for it.</span></label></li>
+          <li><input type="checkbox" id="c2"><label for="c2"><span class="q">Every call after: AOA one workflow</span><span class="why">Audit (show me how you do it) → Optimize (13 steps → 7) → Automate (turn it into a Claude skill). Rinse, repeat.</span></label></li>
+          <li><input type="checkbox" id="c3"><label for="c3"><span class="q">Pre-engagement form: "What makes 90 days a win?"</span><span class="why">Get a specific answer, beat it, then remind them you beat it — that's the renewal and the next upsell.</span></label></li>
+          <li><input type="checkbox" id="c4"><label for="c4"><span class="q">Living Notion one-pager per client</span><span class="why">Running inventory of everything built together, emailed after every call. It's what stares at them when the invoice arrives.</span></label></li>
+          <li><input type="checkbox" id="c5"><label for="c5"><span class="q">Raise the price each new client; cap the roster</span><span class="why">€1,200 → €1,500 → €1,800 → €2,000. Real scarcity: "I'm taking one more church this quarter."</span></label></li>
+        </ul>
+      </div>
+
+      <div class="callout"><strong>Closing lever:</strong> credit the €999 assessment toward any implementation — "instead of €5,000, it's €4,000." (Price the package €1K higher first. Psychologically free assessment, same revenue.)</div>
+
+      <div class="card">
+        <h3>Engagement summary</h3>
+        <p class="hint">Everything captured in this wizard, assembled for your files or the follow-up email.</p>
+        <div class="btnrow">
+          <button class="primary" type="button" id="genSummary">Generate summary</button>
+          <button class="ghost" type="button" id="copySummary" hidden>Copy</button>
+          <span class="copied" id="copiedSummary" hidden>Copied ✓</span>
+        </div>
+        <pre class="prompt" id="summaryOut" hidden></pre>
+      </div>
+    </section>
+
+    <!-- REFERENCE: LEADS -->
+    <section class="panel" data-panel="leads" hidden>
+      <div class="eyebrow">Reference · Pipeline</div>
+      <h2>Winning church clients</h2>
+      <p class="lede">Seven zero-capital, zero-audience methods from the source playbook, translated to the church world. Most people quit these after 3 days; hold for 7 and you're alone in the field.</p>
+
+      <details open><summary>1 · Host "AI for Ministry" gatherings</summary><div class="body"><p>Partner with a church that has space (you already run one's livestream). Monthly evening: 20-minute live demo — build a sermon-clip skill on stage — then Q&amp;A. Collect contacts at the door, follow up within 24 hours offering the assessment. Compounds like SEO: clients come from gathering three, not gathering one.</p></div></details>
+      <details><summary>2 · Walk into church offices</summary><div class="body"><p>Midweek, ask for the pastor or office manager. "I help churches get hours back with AI — can I show you one thing in 10 minutes?" The door-knock conversion from the source: 30 doors → 5 meetings → 2 clients. Nobody in ministry-services does this.</p></div></details>
+      <details><summary>3 · Direct messages to pastors</summary><div class="body"><p>LinkedIn/Instagram/email to local pastors and church admins. Probe, never pitch in message one: "Curious how your team is using AI — happy to share free feedback on one workflow." Voice notes and short Looms outperform text. "I'm just down the road in Amersfoort" is the hook.</p></div></details>
+      <details><summary>4 · Free mini-audits in your network</summary><div class="body"><p>You already know pastors, worship leaders, denominational contacts. "15 free minutes — I'll show you one AI tool for your church. Worst case, you learn a tool; best case you get a partner for the whole AI to-do list." The full €999 assessment is the upsell.</p></div></details>
+      <details><summary>5 · Partner with people churches already trust</summary><div class="body"><p>Denominational offices, church accountants, ChMS consultants, Christian media agencies, worship-tech suppliers. Their clients ask them about AI and they have no answer — be the answer, pay a referral fee. Follow up every 2–3 weeks. Combine with #1: co-host a workshop under their banner.</p></div></details>
+      <details><summary>6 · AI office hours</summary><div class="body"><p>One hour a week at a church network hub, Christian conference space, or co-working spot: "any AI question answered, free." You're sitting inside your ICP. Sweeten attendance with donated gift cards from local businesses (the Dennis play: 11 attendees → 2 follow-ups from event one).</p></div></details>
+      <details><summary>7 · Post the wins</summary><div class="body"><p>Build in public where church leaders scroll. A win is small: "Cut a church's bulletin prep from 6 hours to 1 — here's the workflow." Ninety days of one useful post at a time; by the end, real testimonials replace manufactured content. Feeds Engage AI credibility too.</p></div></details>
+
+      <div class="callout" style="margin-top:18px"><strong>Your edge:</strong> you already run church livestreams, benchmark church digital presence with Engage AI, and sit inside the community. You're not "an AI guy who found churches" — you're the church-media person who does AI. Lead with that.</div>
+    </section>
+
+    <div class="stepfooter" id="stepfooter">
+      <button class="ghost" type="button" id="backBtn">← Back</button>
+      <div class="spacer"></div>
+      <button class="primary" type="button" id="nextBtn">Next step →</button>
+    </div>
+  </main>
+</div>
+
+<script>
+(function () {
+  var LS = "cam-wizard-v1";
+  var state = {};
+  try { state = JSON.parse(localStorage.getItem(LS) || "{}"); } catch (e) { state = {}; }
+  function save() { try { localStorage.setItem(LS, JSON.stringify(state)); } catch (e) {} }
+
+  var steps = ["Church intake", "Discovery call", "Claude analysis", "Build the report", "Review call", "Upsell & concierge"];
+  var current = state._step || 0;
+
+  // Build rail
+  var rail = document.getElementById("railsteps");
+  steps.forEach(function (name, i) {
+    var b = document.createElement("button");
+    b.className = "step"; b.dataset.step = i; b.type = "button";
+    b.innerHTML = '<span class="stepnum">' + (i + 1) + "</span> " + name;
+    b.addEventListener("click", function () { go(i); });
+    rail.appendChild(b);
+  });
+  document.getElementById("btn-leads").addEventListener("click", function () { go("leads"); });
+
+  function go(i) {
+    current = i;
+    if (typeof i === "number") { state._step = i; save(); }
+    document.querySelectorAll("section.panel").forEach(function (p) {
+      p.hidden = String(p.dataset.panel) !== String(i);
+    });
+    document.querySelectorAll(".rail button.step").forEach(function (b) {
+      var s = b.dataset.step;
+      b.classList.toggle("active", String(s) === String(i));
+      if (s !== "leads") b.classList.toggle("done", typeof i === "number" && Number(s) < i);
+    });
+    var foot = document.getElementById("stepfooter");
+    foot.style.display = (i === "leads") ? "none" : "flex";
+    if (typeof i === "number") {
+      document.getElementById("backBtn").style.visibility = i === 0 ? "hidden" : "visible";
+      document.getElementById("nextBtn").textContent = i === steps.length - 1 ? "Engagement complete ✓" : "Next step →";
+    }
+    updateClientbar();
+    window.scrollTo({ top: 0 });
+  }
+  document.getElementById("backBtn").addEventListener("click", function () { if (current > 0) go(current - 1); });
+  document.getElementById("nextBtn").addEventListener("click", function () {
+    if (current < steps.length - 1) go(current + 1);
+  });
+
+  // Discovery questions
+  var qs = [
+    ["Walk me through last week — from Monday to Sunday service.", "Surfaces the real weekly rhythm and where hours vanish."],
+    ["What tasks does your team dread every week?", "Dread = repetitive = automatable."],
+    ["Where does work pile up before Sundays?", "The Thursday–Saturday crunch is where quick wins live."],
+    ["How does the bulletin / newsletter / announcements cycle work today?", "Communications grind is the #1 church time drain."],
+    ["What happens to the sermon after Sunday? Clips? Podcast? Nothing?", "Unused sermon content is the biggest reach opportunity."],
+    ["How do you schedule volunteers, and how often does it break?", "WhatsApp-roster chaos is near-universal and very solvable."],
+    ["How do you follow up with first-time visitors?", "Usually manual or nonexistent — high-impact prescription."],
+    ["What have you tried to automate or delegate that failed?", "Tells you their tolerance and past scar tissue."],
+    ["Magic wand: delete one recurring process forever — which one?", "Their answer is your executive-summary headline."],
+    ["Who on the team is most curious about AI?", "That person is your implementation champion (and concierge attendee)."]
+  ];
+  var qList = document.getElementById("discovery-qs");
+  qs.forEach(function (q, i) {
+    var li = document.createElement("li");
+    li.innerHTML = '<input type="checkbox" id="dq' + i + '"><label for="dq' + i + '"><span class="q">' + q[0] + '</span><span class="why">' + q[1] + "</span></label>";
+    qList.appendChild(li);
+  });
+
+  // Report slides
+  var slides = [
+    ["Title", "Church name, date, ministry type, primary focus."],
+    ["Executive summary", "Top 1–2 pains, main outcome, hours reclaimed/week (guarantee ≥5, avg 7), primary lever: reach, time, or quality."],
+    ["Effort × impact matrix", "Frame the report as the quick-wins quadrant."],
+    ["Quick-wins summary", "One line each: pain → tool. “6 hrs/week on bulletin → Canva + Claude.”"],
+    ["Recommended solutions", "Per tool: pain solved, cost, setup time, hours saved. Half the review call lives here."],
+    ["Four-day quick-start plan", "One 5–10 minute action per day, Monday–Thursday. Kills overwhelm."],
+    ["What comes after quick wins", "The major-projects quadrant — your upsell seed. “Can you help us do that?”"],
+    ["Ministry impact", "Monthly net value = weekly hours returned × staff cost/hour − tool cost (≈€60/mo). Frame as ministry hours returned, not just euros."],
+    ["Next steps", "Do the 4-day plan, book the review call."]
+  ];
+  var sList = document.getElementById("report-slides");
+  slides.forEach(function (s, i) {
+    var li = document.createElement("li");
+    li.innerHTML = '<input type="checkbox" id="sl' + i + '"><label for="sl' + i + '"><span class="q">' + (i + 1) + " · " + s[0] + '</span><span class="why">' + s[1] + "</span></label>";
+    sList.appendChild(li);
+  });
+
+  // Persistence for all fields
+  function bindAll() {
+    document.querySelectorAll("input[type=text], textarea, input[type=checkbox], input[type=radio]").forEach(function (el) {
+      var key = el.id || (el.name + ":" + el.value);
+      if (!key) return;
+      if (el.type === "checkbox") { el.checked = !!state[key]; el.addEventListener("change", function () { state[key] = el.checked; save(); }); }
+      else if (el.type === "radio") { if (state[el.name] === el.value) el.checked = true; el.addEventListener("change", function () { state[el.name] = el.value; save(); }); }
+      else { el.value = state[key] || ""; el.addEventListener("input", function () { state[key] = el.value; save(); updateClientbar(); }); }
+    });
+  }
+  bindAll();
+
+  function updateClientbar() {
+    var name = (state["f-church"] || "").trim();
+    var bar = document.getElementById("clientbar");
+    if (!name) { bar.hidden = true; return; }
+    bar.hidden = false;
+    document.getElementById("cb-name").textContent = name;
+    var bits = [];
+    if (state["f-city"]) bits.push(state["f-city"]);
+    if (state["f-size"]) bits.push("~" + state["f-size"] + " attendance");
+    if (state["f-contact"]) bits.push(state["f-contact"]);
+    document.getElementById("cb-meta").textContent = bits.length ? "· " + bits.join(" · ") : "";
+  }
+
+  // Prompt generator
+  function v(id) { return (state[id] || "").trim(); }
+  document.getElementById("genPrompt").addEventListener("click", function () {
+    var lines = [];
+    lines.push("I run AI assessments for churches and ministries. I just finished a discovery call with a church and need you to research off-the-shelf SaaS and AI tools that solve their specific pain points.");
+    lines.push("");
+    lines.push("## The church");
+    if (v("f-church")) lines.push("- Name: " + v("f-church"));
+    if (v("f-city")) lines.push("- Location: " + v("f-city"));
+    if (v("f-size")) lines.push("- Weekly attendance: " + v("f-size"));
+    if (v("f-staff")) lines.push("- Team: " + v("f-staff"));
+    if (v("f-services")) lines.push("- Services & ministries: " + v("f-services"));
+    if (v("f-tools")) lines.push("- Tools already in use: " + v("f-tools"));
+    if (v("f-context")) lines.push("- Background: " + v("f-context"));
+    lines.push("");
+    if (v("f-pains")) { lines.push("## Pain points I captured"); lines.push(v("f-pains")); lines.push(""); }
+    lines.push("## Your task");
+    lines.push("1. Read the full transcript below and extract every pain point, including ones I may have missed. Look for patterns across complaints.");
+    lines.push("2. For each pain point, research real, currently-available off-the-shelf tools (search the web; futurepedia.io and theresanaiforthat.com are good directories). Prefer tools that are affordable for a small church (~€5–30/month), simple enough for volunteers, and quick to set up.");
+    lines.push("3. Prescribe 3–7 quick wins total. For each: tool name, pain it solves, monthly cost, setup time, estimated hours saved per week, and a one-line reason it fits THIS church.");
+    lines.push("4. Separately list any high-impact but high-effort opportunities (custom Claude skills, knowledge systems, automation builds) under “major projects” — do not mix them into the quick wins.");
+    lines.push("5. Total the estimated hours reclaimed per week (I guarantee at least 5) and total monthly tool cost (target ≈ €60).");
+    lines.push("");
+    lines.push("Sanity-check every tool against the church's size — nothing enterprise, nothing that needs a developer to run.");
+    lines.push("");
+    lines.push("## Transcript");
+    lines.push(v("f-transcript") || "[attach the discovery-call transcript file]");
+    var out = lines.join("\n");
+    var pre = document.getElementById("promptOut");
+    pre.textContent = out; pre.hidden = false;
+    document.getElementById("copyPrompt").hidden = false;
+  });
+  document.getElementById("copyPrompt").addEventListener("click", function () {
+    copyText(document.getElementById("promptOut").textContent, "copiedNote");
+  });
+
+  // Summary generator
+  document.getElementById("genSummary").addEventListener("click", function () {
+    var l = [];
+    l.push("AI MINISTRY ASSESSMENT — ENGAGEMENT SUMMARY");
+    l.push("Church: " + (v("f-church") || "—") + (v("f-city") ? " (" + v("f-city") + ")" : ""));
+    l.push("Contact: " + (v("f-contact") || "—"));
+    l.push("Size: " + (v("f-size") || "—") + " · Team: " + (v("f-staff") || "—"));
+    l.push("Existing tools: " + (v("f-tools") || "—"));
+    l.push("");
+    l.push("PAIN POINTS");
+    l.push(v("f-pains") || "—");
+    l.push("");
+    l.push("REVIEW CALL");
+    l.push("Most urgent: " + (v("f-close1") || "—"));
+    l.push("DIY or help: " + (v("f-close2") || "—"));
+    l.push("Timeline: " + (v("f-close3") || "—"));
+    l.push("Outcome: " + (state["outcome"] || "—"));
+    l.push("Notes: " + (v("f-outcome-notes") || "—"));
+    var out = l.join("\n");
+    var pre = document.getElementById("summaryOut");
+    pre.textContent = out; pre.hidden = false;
+    document.getElementById("copySummary").hidden = false;
+  });
+  document.getElementById("copySummary").addEventListener("click", function () {
+    copyText(document.getElementById("summaryOut").textContent, "copiedSummary");
+  });
+
+  function copyText(text, noteId) {
+    function done() {
+      var n = document.getElementById(noteId);
+      n.hidden = false; setTimeout(function () { n.hidden = true; }, 2200);
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done, function () { fallback(); });
+    } else fallback();
+    function fallback() {
+      var ta = document.createElement("textarea");
+      ta.value = text; document.body.appendChild(ta); ta.select();
+      try { document.execCommand("copy"); done(); } catch (e) {}
+      document.body.removeChild(ta);
+    }
+  }
+
+  // Reset
+  document.getElementById("resetBtn").addEventListener("click", function () {
+    if (!confirm("Clear this engagement and start fresh? All entered client data will be erased.")) return;
+    state = {}; save();
+    document.querySelectorAll("input[type=text], textarea").forEach(function (el) { el.value = ""; });
+    document.querySelectorAll("input[type=checkbox]").forEach(function (el) { el.checked = false; });
+    document.querySelectorAll("input[type=radio]").forEach(function (el) { el.checked = false; });
+    document.getElementById("promptOut").hidden = true;
+    document.getElementById("copyPrompt").hidden = true;
+    document.getElementById("summaryOut").hidden = true;
+    document.getElementById("copySummary").hidden = true;
+    go(0);
+  });
+
+  go(current);
+})();
+</script>

@@ -1,0 +1,723 @@
+<!doctype html>
+<html lang="en" data-scheme="aurora">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{{NAME}} — Your shifts</title>
+<meta name="theme-color" content="#06070C">
+<style>
+:root{
+  --ink:#F2F4FF; --dim:#A8ADC8; --faint:#6E7391; --line:rgba(255,255,255,.11);
+  --line-2:rgba(255,255,255,.06); --panel:rgba(255,255,255,.035);
+  --ok:#34D399; --warn:#FBBF24; --bad:#FB7185;
+  --sans:ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
+  --mono:ui-monospace,'SF Mono','Cascadia Code',Menlo,Consolas,monospace;
+}
+[data-scheme="aurora"]{--a:#6366F1;--b:#22D3EE;--c:#A855F7;--glow:#4F46E5;--bg:#06070C}
+[data-scheme="ember"] {--a:#FB7185;--b:#FBBF24;--c:#F472B6;--glow:#E11D48;--bg:#0B0608}
+[data-scheme="toxic"] {--a:#A3E635;--b:#2DD4BF;--c:#4ADE80;--glow:#65A30D;--bg:#05090A}
+[data-scheme="solar"] {--a:#FDBA74;--b:#F97316;--c:#FDE047;--glow:#EA580C;--bg:#0A0705}
+[data-scheme="mono"]  {--a:#E2E8F0;--b:#94A3B8;--c:#CBD5E1;--glow:#64748B;--bg:#08090B}
+
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;
+  line-height:1.6;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(58% 40% at 14% -6%,color-mix(in srgb,var(--a) 17%,transparent),transparent 70%),
+             radial-gradient(50% 36% at 90% 0,color-mix(in srgb,var(--c) 13%,transparent),transparent 72%)}
+a{color:inherit}
+button{font:inherit;font-family:var(--sans)}
+:focus-visible{outline:2px solid var(--b);outline-offset:2px;border-radius:6px}
+.wrap{position:relative;z-index:1;max-width:880px;margin:0 auto;padding:0 20px 80px}
+
+header.bar{display:flex;align-items:center;gap:14px;padding:16px 0;flex-wrap:wrap;
+  border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:-.03em;
+  font-size:1.04rem;text-decoration:none}
+.brand img{height:23px;border-radius:5px}
+.brand .orb{width:10px;height:10px;border-radius:50%;
+  background:conic-gradient(from 0deg,var(--a),var(--b),var(--c),var(--a))}
+.brand small{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--faint);font-weight:500;padding-left:9px;margin-left:3px;
+  border-left:1px solid var(--line)}
+.spacer{margin-left:auto}
+.who{display:flex;align-items:center;gap:8px;font-size:.85rem;color:var(--dim)}
+/* a class with display:flex outranks the UA's [hidden] rule, so say it here */
+.who[hidden]{display:none}
+.who .av{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-size:10px;
+  font-weight:800;color:#08090C;background:linear-gradient(135deg,var(--a),var(--b))}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:999px;
+  padding:10px 18px;font-weight:700;font-size:.86rem;cursor:pointer;border:1px solid var(--line);
+  background:var(--panel);color:var(--ink);
+  transition:transform .15s,border-color .2s,box-shadow .2s}
+.btn:hover{transform:translateY(-1px);border-color:color-mix(in srgb,var(--b) 55%,transparent)}
+.btn.pri{border-color:transparent;color:#08090C;
+  background:linear-gradient(120deg,var(--a),var(--b) 60%,var(--c));
+  box-shadow:0 6px 20px color-mix(in srgb,var(--glow) 38%,transparent)}
+.btn.qt{background:transparent;border-color:transparent;color:var(--dim);padding:8px 11px}
+.btn.qt:hover{color:var(--ink);background:var(--panel)}
+.btn.sm{padding:7px 14px;font-size:.79rem}
+.btn[disabled]{opacity:.45;cursor:not-allowed;transform:none;box-shadow:none}
+
+h1{font-size:clamp(1.7rem,4vw,2.3rem);font-weight:800;letter-spacing:-.035em;margin:34px 0 8px}
+.sub{color:var(--dim);margin:0 0 26px}
+h2{font-family:var(--mono);font-size:10.5px;letter-spacing:.17em;text-transform:uppercase;
+  color:var(--faint);font-weight:500;margin:36px 0 14px;display:flex;align-items:center;gap:9px}
+h2::after{content:"";flex:1;height:1px;background:var(--line-2)}
+
+/* who am I */
+.pick{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:8px}
+.pick button{display:flex;align-items:center;gap:9px;border:1px solid var(--line);
+  border-radius:999px;padding:8px 16px 8px 8px;background:var(--panel);color:var(--ink);
+  font-weight:650;font-size:.88rem;cursor:pointer;transition:all .18s}
+.pick button:hover{border-color:color-mix(in srgb,var(--b) 55%,transparent);transform:translateY(-1px)}
+.pick .av{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-size:10px;
+  font-weight:800;color:#08090C;background:linear-gradient(135deg,var(--a),var(--b))}
+
+/* week navigation */
+.nav{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 8px}
+.nav .lbl{font-weight:800;font-size:1.05rem;letter-spacing:-.025em;min-width:150px}
+.nav .btn{padding:8px 13px}
+.tag{font-family:var(--mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;
+  border:1px solid var(--line);border-radius:999px;padding:5px 12px;color:var(--faint)}
+.tag.final{color:var(--ok);border-color:color-mix(in srgb,var(--ok) 45%,transparent);
+  background:color-mix(in srgb,var(--ok) 12%,transparent)}
+.tag.plan{color:var(--warn);border-color:color-mix(in srgb,var(--warn) 45%,transparent);
+  background:color-mix(in srgb,var(--warn) 10%,transparent)}
+.tag.past{opacity:.6}
+.planning{border:1px solid color-mix(in srgb,var(--warn) 40%,transparent);border-radius:14px;
+  padding:14px 16px;background:color-mix(in srgb,var(--warn) 8%,transparent);
+  color:var(--dim);font-size:.88rem;margin-bottom:20px}
+.planning b{color:var(--ink)}
+
+/* the notice when nothing is published */
+.notice{border:1px dashed var(--line);border-radius:16px;padding:30px 26px;text-align:center;
+  background:var(--panel)}
+.notice .big{font-size:1.15rem;font-weight:750;letter-spacing:-.02em;margin-bottom:8px}
+.notice p{color:var(--dim);margin:0;font-size:.92rem}
+
+/* my shifts */
+.mine{display:grid;gap:10px}
+.ms{display:grid;grid-template-columns:64px minmax(0,1fr) auto;gap:16px;align-items:center;
+  border:1px solid var(--line);border-radius:14px;padding:14px 16px;background:var(--panel);
+  transition:border-color .2s}
+.ms:hover{border-color:color-mix(in srgb,var(--b) 40%,transparent)}
+.ms .dt{text-align:center;border-right:1px solid var(--line-2);padding-right:12px}
+.ms .dt b{display:block;font-size:1.25rem;font-weight:800;letter-spacing:-.03em;line-height:1;
+  font-variant-numeric:tabular-nums}
+.ms .dt span{display:block;font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--b);margin-top:3px}
+.ms .tm{font-weight:700;font-size:1rem;letter-spacing:-.01em}
+.ms .rl{color:var(--faint);font-size:.82rem;font-family:var(--mono);letter-spacing:.06em;
+  text-transform:uppercase}
+.ms .hrs{font-family:var(--mono);font-size:.78rem;color:var(--dim);text-align:right;
+  font-variant-numeric:tabular-nums;margin-bottom:6px}
+.ms.away{opacity:.5}
+.ms.away .tm{text-decoration:line-through}
+
+.sum{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--line);
+  border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-top:14px}
+.sum div{background:var(--bg);padding:16px 18px}
+.sum b{display:block;font-size:1.4rem;font-weight:800;letter-spacing:-.035em;
+  font-variant-numeric:tabular-nums;
+  background:linear-gradient(100deg,var(--a),var(--b));-webkit-background-clip:text;
+  background-clip:text;color:transparent}
+.sum span{display:block;color:var(--faint);font-size:.78rem;margin-top:5px}
+.sum .over b{background:none;color:var(--bad);-webkit-text-fill-color:var(--bad)}
+
+/* the whole week */
+.week{display:grid;gap:8px}
+.day{border:1px solid var(--line-2);border-radius:12px;padding:12px 14px;background:var(--panel)}
+.day .hd{display:flex;align-items:baseline;gap:10px;margin-bottom:8px}
+.day .hd b{font-weight:750;font-size:.92rem}
+.day .hd span{color:var(--faint);font-family:var(--mono);font-size:.72rem}
+.day .hd .n{margin-left:auto;color:var(--faint);font-size:.74rem}
+.row{display:flex;align-items:center;flex-wrap:wrap;gap:10px;padding:6px 0;font-size:.86rem;
+  border-top:1px solid var(--line-2)}
+/* the claim control drops to its own line rather than squeezing onto the name/time row —
+   this page lives at 380px wide and that row is already tight */
+.row .claimwrap{flex-basis:100%;display:flex;justify-content:flex-end;margin-top:2px}
+.row:first-of-type{border-top:0}
+.row .av{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-size:9px;
+  font-weight:800;color:#08090C;background:linear-gradient(135deg,var(--a),var(--b));flex:none}
+.row .nm{font-weight:600;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.row .tm{margin-left:auto;font-family:var(--mono);font-size:.76rem;color:var(--dim);flex:none}
+.row.me{color:var(--b)}
+.row.me .nm{font-weight:800}
+.row.open .nm{color:var(--warn)}
+.row.open .av{background:transparent;border:1px dashed var(--warn);color:var(--warn)}
+.day.empty{opacity:.45}
+.day.empty .none{color:var(--faint);font-size:.82rem}
+
+/* availability — the control that stops a swap request ever being needed */
+.avail{display:grid;gap:8px}
+.arow{display:flex;align-items:center;flex-wrap:wrap;gap:10px;border:1px solid var(--line-2);
+  border-radius:12px;padding:10px 14px;background:var(--panel)}
+.arow .d{font-weight:750;font-size:.88rem;min-width:78px}
+.arow .note2{color:var(--dim);font-size:.8rem;flex-basis:100%}
+.arow .btn{margin-left:auto}
+.mark{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  border:1px solid var(--line);border-radius:999px;padding:4px 10px}
+.mark.off{color:var(--bad);border-color:color-mix(in srgb,var(--bad) 45%,transparent)}
+.mark.prefer_not{color:var(--warn);border-color:color-mix(in srgb,var(--warn) 45%,transparent)}
+
+/* acknowledge — sits inside .planning when asking, becomes a quiet .sub line once done */
+.ackrow{margin-top:10px}
+
+/* requests */
+.req{border:1px solid var(--line);border-radius:14px;padding:14px 16px;background:var(--panel);
+  display:grid;gap:8px;margin-bottom:9px}
+.req .t{font-size:.9rem}
+.req .t b{font-weight:750}
+.req .note{color:var(--dim);font-size:.82rem}
+.state{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  border:1px solid var(--line);border-radius:999px;padding:4px 10px;justify-self:start}
+.state.pending{color:var(--warn);border-color:color-mix(in srgb,var(--warn) 45%,transparent)}
+.state.approved{color:var(--ok);border-color:color-mix(in srgb,var(--ok) 45%,transparent)}
+.state.declined{color:var(--bad);border-color:color-mix(in srgb,var(--bad) 45%,transparent)}
+
+dialog{border:1px solid var(--line);border-radius:18px;background:#0D0F17;color:var(--ink);
+  padding:0;width:min(430px,94vw);box-shadow:0 40px 90px rgba(0,0,0,.7)}
+dialog::backdrop{background:rgba(4,5,9,.7)}
+dialog h3{margin:0;padding:18px 22px;border-bottom:1px solid var(--line-2);font-size:1rem;
+  letter-spacing:-.02em}
+dialog .bd{padding:20px 22px;display:grid;gap:14px}
+dialog label{display:grid;gap:6px;font-size:.79rem;font-weight:650;color:var(--dim)}
+dialog select,dialog input{font:inherit;font-size:.9rem;padding:10px 12px;border-radius:10px;
+  border:1px solid var(--line);background:rgba(0,0,0,.4);color:var(--ink)}
+dialog select:focus,dialog input:focus{outline:none;border-color:var(--b)}
+dialog .ft{display:flex;gap:9px;justify-content:flex-end;padding:16px 22px;
+  border-top:1px solid var(--line-2)}
+dialog .ctx{border:1px solid var(--line-2);border-radius:11px;padding:11px 13px;
+  background:rgba(255,255,255,.02);font-size:.85rem}
+dialog .ctx b{font-weight:750}
+
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);z-index:80;
+  border:1px solid var(--line);border-radius:999px;padding:11px 20px;background:#0D0F17;
+  font-size:.85rem;font-weight:650;opacity:0;pointer-events:none;transition:all .3s;
+  box-shadow:0 18px 40px rgba(0,0,0,.6)}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+.toast b{color:var(--b)}
+
+.foot{margin-top:40px;border-top:1px solid var(--line);padding-top:20px;color:var(--faint);
+  font-size:.82rem;display:flex;gap:16px;flex-wrap:wrap;justify-content:space-between}
+.foot a{color:var(--b);text-decoration:none;font-weight:650}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="bar">
+  <a class="brand" href="../index.html">{{LOGO_MARK}}{{NAME}}<small>Team</small></a>
+  <span class="spacer"></span>
+  <span class="tag" id="syncstate" hidden>…</span>
+  <div class="who" id="whoami" hidden>
+    <span class="av" id="whoav"></span><span id="whonm"></span>
+    <button class="btn qt sm" id="switch">not you?</button>
+  </div>
+</header>
+
+<main id="main"></main>
+
+<div class="foot">
+  <span>Your manager sees every request the moment you send it.</span>
+  <a href="../app/">Manager view &rarr;</a>
+</div>
+</div>
+
+<dialog id="dlg">
+  <form method="dialog">
+    <h3>Ask someone to take this shift</h3>
+    <div class="bd">
+      <div class="ctx" id="ctx"></div>
+      <label>Who could take it?<select id="f_to"></select></label>
+      <label>Why? (your manager reads this)
+        <input id="f_note" placeholder="Dentist — back by 18:00" maxlength="90"></label>
+    </div>
+    <div class="ft">
+      <button class="btn" formnovalidate value="cancel">Cancel</button>
+      <button class="btn pri" value="save">Send the request</button>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="dlgAvail">
+  <form method="dialog">
+    <h3>Mark a day</h3>
+    <div class="bd">
+      <div class="ctx" id="actx"></div>
+      <label>What's going on?
+        <select id="a_kind">
+          <option value="off">Can't work</option>
+          <option value="prefer_not">Would rather not</option>
+        </select>
+      </label>
+      <label>Note (optional)
+        <input id="a_note" placeholder="Doctor appointment" maxlength="90"></label>
+    </div>
+    <div class="ft">
+      <button class="btn" formnovalidate value="cancel">Cancel</button>
+      <button class="btn pri" value="save">Save</button>
+    </div>
+  </form>
+</dialog>
+
+<div class="toast" id="toast"></div>
+
+<script>{{SYNC_JS}}</script>
+<script>
+const CONFIG = {{CONFIG}};
+
+/* The team page and the manager's app are one system: same storage, same shapes. A
+   request made here is in the manager's approval queue before the tab has finished
+   animating, and an approval there lands here without a refresh. That is the whole
+   point of the page — a rota nobody can read is a rota nobody follows. */
+const KEY = 'vom_app_' + CONFIG.business.toLowerCase().replace(/[^a-z0-9]+/g, '_');
+const ME  = KEY + '_me';
+
+let DB = read();
+function read(){
+  let d = null;
+  try { d = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (e) {}
+  if (!d || d.v !== CONFIG.seed.v) d = JSON.parse(JSON.stringify(CONFIG.seed));
+  return d;
+}
+/* The team member browses on their own. The manager moving to next week must not drag
+   everyone's screen with them, so this offset is this page's, not the rota's. */
+let offset = 0;
+try { const o = localStorage.getItem(KEY + '_teamweek'); if (o !== null) offset = +o; } catch(e){}
+function setOffset(n){ offset = n;
+  try { localStorage.setItem(KEY + '_teamweek', String(n)); } catch(e){} render(); }
+const inWeek = s => s.wk === offset;
+const isPublished = () => !!(DB.published || {})[String(offset)];
+function write(){ try { localStorage.setItem(KEY, JSON.stringify(DB)); } catch(e){} }
+
+const DAYS = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+const $ = s => document.querySelector(s);
+const esc = s => { const d = document.createElement('div'); d.textContent = s == null ? '' : s;
+  return d.innerHTML; };
+const initials = n => n.split(/\s+/).map(w => w[0]).slice(0,2).join('').toUpperCase();
+const person = id => DB.staff.find(p => p.id === id);
+
+function hours(s){
+  const [h1,m1] = s.start.split(':').map(Number), [h2,m2] = s.end.split(':').map(Number);
+  let mins = (h2*60+m2) - (h1*60+m1);
+  if (mins <= 0) mins += 24*60;
+  return mins / 60;
+}
+function monday(offset){
+  const d = new Date(); const day = (d.getDay() + 6) % 7;
+  d.setDate(d.getDate() - day + (offset||0) * 7); d.setHours(0,0,0,0); return d;
+}
+function dayDate(i){ const d = monday(offset); d.setDate(d.getDate() + i); return d; }
+const fmtD = new Intl.DateTimeFormat('en-GB', {day:'numeric'});
+const fmtM = new Intl.DateTimeFormat('en-GB', {month:'short'});
+const fmt  = new Intl.DateTimeFormat('en-GB', {day:'numeric', month:'short'});
+
+let me = null;
+try { me = localStorage.getItem(ME); } catch(e){}
+
+/* ------------------------------------------------------------------ render */
+function render(){
+  DB = read();
+  const main = $('#main');
+  const p = person(me);
+
+  if (!p){
+    $('#whoami').hidden = true;
+    main.innerHTML =
+      '<h1>Who are you?</h1>' +
+      '<p class="sub">Your rota is not public, so this asks for your PIN. Your manager ' +
+      'has it if you have forgotten.</p><div class="pick" id="pick"></div>' +
+      (sync && sync.demoPins ? '<p class="sub" style="font-family:var(--mono);' +
+        'font-size:.78rem;color:var(--faint)">demo PINs: 1001 &hellip; 1006 in the order ' +
+        'shown &middot; manager 2468</p>' : '');
+    const pick = $('#pick');
+    DB.staff.forEach(s => {
+      const b = document.createElement('button');
+      b.innerHTML = '<span class="av">' + esc(initials(s.name)) + '</span>' + esc(s.name);
+      b.addEventListener('click', () => askPin(s));
+      pick.appendChild(b);
+    });
+    return;
+  }
+
+  $('#whoami').hidden = false;
+  $('#whoav').textContent = initials(p.name);
+  $('#whonm').textContent = p.name;
+
+  const published = isPublished();
+  const rows = DB.shifts.filter(inWeek);
+  const mine = rows.filter(s => s.who === me)
+    .sort((a,b) => a.day - b.day || a.start.localeCompare(b.start));
+  const myHours = mine.reduce((a,s) => a + hours(s), 0);
+  const pendingIds = new Set(DB.swaps.filter(w => w.state === 'pending' && w.from === me)
+                                     .map(w => w.shift));
+  const when = offset === 0 ? 'This week' : (offset === 1 ? 'Next week'
+             : (offset === -1 ? 'Last week' : 'Week of ' + fmt.format(monday(offset))));
+  const tag = offset < 0 ? '<span class="tag past">' + (published ? 'finished' : 'never published') + '</span>'
+            : (published ? '<span class="tag final">published &middot; final</span>'
+                         : '<span class="tag plan">planning</span>');
+
+  main.innerHTML =
+    '<h1>Hello, ' + esc(p.name.split(' ')[0]) + '</h1>' +
+
+    '<div class="nav">' +
+      '<button class="btn" id="prev">&larr;</button>' +
+      '<div class="lbl">' + when + '</div>' +
+      '<button class="btn" id="next">&rarr;</button>' +
+      (offset !== 0 ? '<button class="btn qt" id="now">This week</button>' : '') +
+      tag +
+    '</div>' +
+    '<p class="sub">' + fmt.format(monday(offset)) + ' – ' + fmt.format(dayDate(6)) + '</p>' +
+
+    (offset < 0 ?
+      '<div class="planning" style="border-color:var(--line);background:var(--panel)">' +
+      '<b>This week has been and gone.</b> It is here so you can check what you worked ' +
+      '— there is nothing left to change.</div>' : '') +
+
+    (published || offset < 0 ? '' :
+      '<div class="planning"><b>This week is still being planned.</b> ' +
+      'Your manager has not published it, so times can still move — but you can look, ' +
+      'and you can ask for a change now rather than after it is set.</div>') +
+
+    ackHtml() +
+
+    '<h2>Your shifts</h2>' +
+    (mine.length
+      ? '<div class="mine">' + mine.map(s => {
+          const asked = pendingIds.has(s.id);
+          return '<div class="ms' + (asked ? ' away' : '') + '">' +
+            '<div class="dt"><b>' + fmtD.format(dayDate(s.day)) + '</b><span>' +
+              fmtM.format(dayDate(s.day)) + '</span></div>' +
+            '<div><div class="tm">' + esc(s.start) + ' – ' + esc(s.end) + '</div>' +
+            '<div class="rl">' + DAYS[s.day] + ' &middot; ' + esc(s.role) + '</div></div>' +
+            '<div><div class="hrs">' + hours(s).toFixed(1) + 'h</div>' +
+            (offset < 0
+              ? '<span class="tag past">worked</span>'
+              : asked
+                ? '<span class="tag plan">asked</span>'
+                : '<button class="btn sm" data-swap="' + s.id + '">Request a change</button>') +
+            '</div></div>';
+        }).join('') + '</div>'
+      : '<div class="notice"><div class="big">' +
+        (rows.length ? 'Nothing for you this week.' : 'This week has not been started.') +
+        '</div><p>' + (rows.length
+          ? 'You are not on the rota — enjoy it, or ask your manager if that is wrong.'
+          : 'Nobody is on it yet. It will fill up as your manager builds it.') +
+        '</p></div>') +
+
+    '<div class="sum">' +
+      '<div' + (myHours > p.max ? ' class="over"' : '') + '><b>' + myHours.toFixed(1) +
+        'h</b><span>your hours</span></div>' +
+      '<div><b>' + p.max + 'h</b><span>your limit</span></div>' +
+      '<div><b>' + mine.length + '</b><span>shifts</span></div>' +
+    '</div>' +
+
+    availHtml() +
+
+    requestsHtml(p) +
+
+    '<h2>The whole week</h2><div class="week">' +
+    DAYS.map((name, i) => {
+      const on = rows.filter(s => s.day === i).sort((a,b) => a.start.localeCompare(b.start));
+      if (!on.length){
+        return '<div class="day empty"><div class="hd"><b>' + name + '</b><span>' +
+          fmt.format(dayDate(i)) + '</span></div><div class="none">Nobody on.</div></div>';
+      }
+      return '<div class="day"><div class="hd"><b>' + name + '</b><span>' +
+        fmt.format(dayDate(i)) + '</span><span class="n">' + on.length + ' on</span></div>' +
+        on.map(s => {
+          const q = person(s.who);
+          const isMe = s.who === me;
+          /* open + this week or later + not already asked + no clash with a shift the
+             viewer already works that day — anything less and the button lies. */
+          let claimWrap = '';
+          if (!q && offset >= 0){
+            const askedAlready = DB.claims.some(c => c.shift === s.id && c.person === me &&
+              c.state === 'pending');
+            if (askedAlready){
+              claimWrap = '<span class="claimwrap"><span class="tag plan">you asked for this</span></span>';
+            } else if (!mine.some(m => m.day === s.day)){
+              claimWrap = '<span class="claimwrap"><button class="btn sm" data-claim="' + s.id +
+                '">Claim this shift</button></span>';
+            }
+          }
+          return '<div class="row' + (isMe ? ' me' : (q ? '' : ' open')) + '">' +
+            '<span class="av">' + (q ? esc(initials(q.name)) : '?') + '</span>' +
+            '<span class="nm">' + (q ? esc(q.name) + (isMe ? ' (you)' : '') : 'Not filled yet') +
+            '</span><span class="tm">' + esc(s.start) + '–' + esc(s.end) + ' &middot; ' +
+            esc(s.role) + '</span>' + claimWrap + '</div>';
+        }).join('') + '</div>';
+    }).join('') + '</div>';
+
+  $('#prev').addEventListener('click', () => setOffset(offset - 1));
+  $('#next').addEventListener('click', () => setOffset(offset + 1));
+  const now = $('#now'); if (now) now.addEventListener('click', () => setOffset(0));
+  wireRequests();
+  wireExtras();
+}
+
+/* ------------------------------------------------------------------ acknowledge */
+function ackHtml(){
+  /* nothing to confirm on a week that was never made final, and nagging about a week
+     that's already over helps nobody */
+  if (!isPublished() || offset < 0) return '';
+  const acked = ((DB.acks || {})[String(offset)] || []).includes(me);
+  if (acked) return '<p class="sub">You confirmed you’ve read this week’s rota.</p>';
+  return '<div class="planning"><b>Please confirm you’ve read this week’s rota.</b> ' +
+    'It’s final now — a quick nod back lets your manager know everyone has seen it.' +
+    '<div class="ackrow"><button class="btn sm pri" id="ackBtn">I’ve read it</button></div></div>';
+}
+
+/* ------------------------------------------------------------------ availability */
+function availHtml(){
+  if (offset < 0) return '';   /* can't take back a week that's already happened */
+  const marks = {};
+  DB.availability.filter(a => a.person === me && a.wk === offset).forEach(a => marks[a.day] = a);
+  return '<h2>Time off &amp; availability</h2><div class="avail">' +
+    DAYS.map((name, i) => {
+      const a = marks[i];
+      if (a){
+        return '<div class="arow"><span class="d">' + name + '</span>' +
+          '<span class="mark ' + a.kind + '">' + (a.kind === 'off' ? 'can’t work' : 'prefer not') +
+          '</span>' + (a.note ? '<span class="note2">' + esc(a.note) + '</span>' : '') +
+          '<button class="btn qt sm" data-avail-remove="' + a.id + '">Take back</button></div>';
+      }
+      return '<div class="arow"><span class="d">' + name + '</span>' +
+        '<button class="btn qt sm" data-avail-add="' + i + '">Mark this day</button></div>';
+    }).join('') + '</div>';
+}
+
+function requestsHtml(p){
+  const mine = DB.swaps.filter(w => w.from === me);
+  if (!mine.length) return '';
+  return '<h2>Your requests</h2>' + mine.slice().reverse().map(w => {
+    const s = DB.shifts.find(x => x.id === w.shift);
+    const to = person(w.to);
+    if (!s || !to) return '';
+    return '<div class="req"><div class="t">You asked <b>' + esc(to.name.split(' ')[0]) +
+      '</b> to take ' + DAYS[s.day].toLowerCase() + ' ' + esc(s.start) + '–' + esc(s.end) +
+      '</div>' + (w.note ? '<div class="note">“' + esc(w.note) + '”</div>' : '') +
+      '<span class="state ' + w.state + '">' +
+      (w.state === 'pending' ? 'waiting on your manager' : w.state) + '</span></div>';
+  }).join('');
+}
+
+function wireRequests(){
+  document.querySelectorAll('[data-swap]').forEach(b => {
+    b.addEventListener('click', () => openDialog(b.getAttribute('data-swap')));
+  });
+}
+
+function wireExtras(){
+  const ackBtn = $('#ackBtn');
+  if (ackBtn) ackBtn.addEventListener('click', ack);
+  document.querySelectorAll('[data-avail-add]').forEach(b => {
+    b.addEventListener('click', () => openAvailDialog(+b.getAttribute('data-avail-add')));
+  });
+  document.querySelectorAll('[data-avail-remove]').forEach(b => {
+    b.addEventListener('click', () => removeAvail(b.getAttribute('data-avail-remove')));
+  });
+  document.querySelectorAll('[data-claim]').forEach(b => {
+    b.addEventListener('click', () => claimShift(b.getAttribute('data-claim')));
+  });
+}
+
+function ack(){
+  DB = read();                       /* re-read: the manager may have changed it meanwhile */
+  if (!isPublished() || offset < 0) return;   /* nothing final to confirm anymore */
+  const wk = String(offset);
+  if (!DB.acks) DB.acks = {};
+  if (!DB.acks[wk]) DB.acks[wk] = [];
+  if (!DB.acks[wk].includes(me)) DB.acks[wk].push(me);
+  write();
+  toast('Marked as read');
+  render();
+}
+
+function removeAvail(id){
+  DB = read();
+  DB.availability = DB.availability.filter(a => a.id !== id);
+  write();
+  toast('Taken back');
+  render();
+}
+
+function claimShift(shiftId){
+  DB = read();
+  const s = DB.shifts.find(x => x.id === shiftId);
+  /* re-check everything against the freshly-read copy — the manager may have filled
+     this, or another team member may have claimed it, in the time it took to tap */
+  if (!s || s.who || !inWeek(s) || offset < 0){ render(); return; }
+  if (DB.claims.some(c => c.shift === shiftId && c.person === me && c.state === 'pending')){
+    toast('You already asked for this one'); return;
+  }
+  if (DB.shifts.some(x => inWeek(x) && x.who === me && x.day === s.day)){
+    toast('That clashes with a shift you already have that day'); return;
+  }
+  DB.claims.push({id: 'cl' + Date.now(), shift: shiftId, person: me, note: '', state: 'pending'});
+  write();
+  toast('Sent — your manager will confirm it');
+  render();
+}
+
+/* ------------------------------------------------------------------ request */
+const dlg = $('#dlg');
+let asking = null;
+
+function openDialog(shiftId){
+  const s = DB.shifts.find(x => x.id === shiftId);
+  if (!s) return;
+  asking = s;
+  $('#ctx').innerHTML = '<b>' + DAYS[s.day] + ' ' + esc(s.start) + '–' + esc(s.end) +
+    '</b> · ' + esc(s.role) + ' · ' + hours(s).toFixed(1) + 'h';
+  /* Only offer people who could actually do it — same role, and not already on that day
+     *of that week*. A request the manager has to decline for an obvious reason wastes
+     two people's time. */
+  const busy = new Set(DB.shifts.filter(x => inWeek(x) && x.day === s.day && x.who)
+                                .map(x => x.who));
+  const able = DB.staff.filter(q => q.id !== me && q.role === s.role && !busy.has(q.id));
+  const rest = DB.staff.filter(q => q.id !== me && !able.includes(q));
+  $('#f_to').innerHTML =
+    (able.length
+      ? '<optgroup label="Free, and does your job">' + able.map(q =>
+          '<option value="' + q.id + '">' + esc(q.name) + '</option>').join('') + '</optgroup>'
+      : '') +
+    (rest.length
+      ? '<optgroup label="Anyone else">' + rest.map(q =>
+          '<option value="' + q.id + '">' + esc(q.name) + ' · ' + esc(q.role) +
+          '</option>').join('') + '</optgroup>'
+      : '');
+  $('#f_note').value = '';
+  dlg.showModal();
+}
+
+dlg.addEventListener('close', () => {
+  if (dlg.returnValue !== 'save' || !asking) return;
+  const to = $('#f_to').value;
+  if (!to) return;
+  DB = read();                       /* re-read: the manager may have changed it meanwhile */
+  DB.swaps.push({id: 'r' + Date.now(), shift: asking.id, from: me, to: to,
+                 note: $('#f_note').value.trim(), state: 'pending'});
+  write();
+  const q = person(to);
+  toast('Sent — your manager has it, and <b>' + esc((q||{}).name.split(' ')[0]) +
+        '</b> is on the request');
+  asking = null;
+  render();
+});
+
+/* ------------------------------------------------------------------ availability dialog */
+const dlgAvail = $('#dlgAvail');
+let markingDay = null;
+
+function openAvailDialog(day){
+  markingDay = day;
+  $('#actx').innerHTML = '<b>' + DAYS[day] + '</b> · ' + fmt.format(dayDate(day));
+  $('#a_kind').value = 'off';
+  $('#a_note').value = '';
+  dlgAvail.showModal();
+}
+
+dlgAvail.addEventListener('close', () => {
+  if (dlgAvail.returnValue !== 'save' || markingDay === null || offset < 0){
+    markingDay = null; return;
+  }
+  DB = read();                       /* re-read: the manager may have changed it meanwhile */
+  /* one mark per person per day — take the old one back before adding a new one, rather
+     than letting two pile up and leaving the manager to guess which one is current */
+  const exists = DB.availability.some(a => a.person === me && a.wk === offset &&
+    a.day === markingDay);
+  if (!exists){
+    DB.availability.push({id: 'av' + Date.now(), person: me, wk: offset, day: markingDay,
+      kind: $('#a_kind').value, note: $('#a_note').value.trim()});
+    write();
+    toast('Marked — your manager sees it when building the rota');
+  }
+  markingDay = null;
+  render();
+});
+
+$('#switch').addEventListener('click', async () => {
+  me = null; try { localStorage.removeItem(ME); } catch(e){}
+  if (sync) await sync.signOut();
+  render();
+});
+
+/* Two tabs, one rota: an approval in the manager's tab lands here without a refresh. */
+addEventListener('storage', ev => {
+  if (ev.key === KEY){ render(); toast('The rota just changed'); }
+});
+
+/* ---------------------------------------------------------------- the server
+   The team page is the half most likely to be on a phone with two bars of signal, so the
+   local copy stays authoritative for reading and the server is what makes it the SAME rota
+   the manager is looking at. A failed request must never cost somebody their request. */
+const sync = CONFIG.sync ? new Sync({url: CONFIG.sync.url, team: CONFIG.sync.team,
+                                     role: '{{ROLE}}'}) : null;
+
+function syncBadge(state, detail){
+  const el = document.querySelector('#syncstate');
+  if (!el) return;
+  el.hidden = false;
+  el.textContent = state === 'online' ? 'live' : (state === 'connecting' ? '…' : 'offline');
+  el.className = 'tag' + (state === 'online' ? ' final' : ' plan');
+  el.title = state === 'online'
+    ? 'This is the rota your manager is looking at right now.'
+    : 'Not connected' + (detail ? ' (' + detail + ')' : '') +
+      ' — you are seeing the last copy this device downloaded, and anything you send ' +
+      'will go when the connection is back.';
+}
+
+/* Every write on this page goes through write(); make each one reach the server too. */
+const _write = write;
+write = function(){
+  _write();
+  if (sync) sync.push(() => DB, merged => { DB = merged; _write(); render(); });
+};
+
+if (sync){
+  sync.onstate = syncBadge;
+  syncBadge('connecting');
+  sync.onremote = doc => { DB = Sync.adopt(doc, DB); _write(); render();
+                           toast('The rota was updated'); };
+  (async () => {
+    const doc = await sync.pull();
+    if (doc && doc.v === CONFIG.seed.v){ DB = Sync.adopt(doc, DB); _write(); render(); }
+    sync.watch(5000);
+  })();
+}
+
+/* Choosing a name is a claim, not a fact, so it costs a PIN. Everything this person can
+   then do is scoped by the token the server hands back — the page never says whose row it
+   is changing, because that is the field somebody would edit. */
+function askPin(person){
+  const pin = prompt('PIN for ' + person.name);
+  if (pin === null) return;
+  if (!sync){ me = person.id; try { localStorage.setItem(ME, me); } catch(e){} render(); return; }
+  sync.signIn(person.id, String(pin).trim()).then(r => {
+    if (!r.ok){
+      toast(r.error + (typeof r.attempts_left === 'number'
+        ? ' — ' + r.attempts_left + ' tries left' : ''));
+      return;
+    }
+    me = person.id; try { localStorage.setItem(ME, me); } catch(e){}
+    sync.pull().then(doc => { if (doc) { DB = Sync.adopt(doc, DB); _write(); } render(); });
+  });
+}
+
+let toastT = null;
+function toast(msg){
+  const t = $('#toast'); t.innerHTML = msg; t.classList.add('on');
+  clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove('on'), 2800);
+}
+
+try { const s = localStorage.getItem(KEY + '_scheme');
+  if (s) document.documentElement.setAttribute('data-scheme', s); } catch(e){}
+
+render();
+</script>
+</body>
+</html>

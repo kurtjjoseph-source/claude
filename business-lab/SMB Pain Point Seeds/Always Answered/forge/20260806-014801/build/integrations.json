@@ -1,0 +1,33 @@
+{
+  "integrations": [
+    {
+      "key": "email",
+      "provider": "brevo",
+      "purpose": "the one announcement the list is waiting for",
+      "mode": "stub",
+      "env_required": [
+        "BREVO_API_KEY",
+        "BREVO_SENDER_EMAIL"
+      ],
+      "env_present": [],
+      "note": "the interface is built and labelled; it goes live when the operator supplies the credentials — an agent never holds them"
+    },
+    {
+      "key": "analytics",
+      "provider": "engage_ai",
+      "purpose": "where the signups came from",
+      "mode": "stub",
+      "env_required": [
+        "ENGAGE_AI_BASE_URL"
+      ],
+      "env_present": [],
+      "note": "the interface is built and labelled; it goes live when the operator supplies the credentials — an agent never holds them"
+    }
+  ],
+  "env_required": [
+    "BREVO_API_KEY",
+    "BREVO_SENDER_EMAIL",
+    "ENGAGE_AI_BASE_URL"
+  ],
+  "note": "Credentials are the operator's. The builder never holds them; each rail is built and labelled, and goes live when its variables are set."
+}

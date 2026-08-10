@@ -1,0 +1,459 @@
+<!doctype html>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>FaithSite AI — Publisher</title>
+<style>
+  :root{
+    --ink:#191b2b; --inkSoft:#262a41; --inkLine:#33374f;
+    --parchment:#f6f3ec; --card:#fff; --line:#e8e3d7;
+    --gold:#a8781f; --goldTint:#f3e8cf;
+    --sage:#567a63; --sageTint:#e5ede7;
+    --amber:#bd7f27; --clay:#a94b32; --clayTint:#f3e1da;
+    --text:#25262f; --textSoft:#6c6a63; --textFaint:#9a968b;
+    --serif:ui-serif,Georgia,'Times New Roman',serif;
+    --sans:ui-sans-serif,system-ui,-apple-system,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--parchment);color:var(--text);font-family:var(--sans);font-size:15px;line-height:1.5}
+  .app{display:flex;min-height:100vh}
+  aside{width:230px;background:var(--ink);color:#b9bcce;flex-shrink:0;display:flex;flex-direction:column}
+  .brand{display:flex;align-items:center;gap:10px;padding:20px 20px 22px}
+  .brand h1{font-family:var(--serif);color:#fff;font-size:18px;margin:0;letter-spacing:-.01em}
+  .brand .eyebrow{color:var(--gold);font-size:10px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;margin-top:1px}
+  nav{padding:0 12px;display:flex;flex-direction:column;gap:4px}
+  nav button{display:flex;align-items:center;gap:10px;background:none;border:none;color:#b9bcce;font:inherit;font-weight:500;text-align:left;padding:10px 12px;border-radius:9px;cursor:pointer;transition:background .15s}
+  nav button:hover{background:var(--inkSoft)}
+  nav button.active{background:var(--inkSoft);color:#fff}
+  nav .badge{margin-left:auto;background:var(--gold);color:var(--ink);font-size:11px;font-weight:800;border-radius:99px;padding:1px 7px;font-variant-numeric:tabular-nums}
+  nav .dot{margin-left:auto;width:8px;height:8px;border-radius:99px}
+  aside .foot{margin-top:auto;padding:18px 20px;border-top:1px solid var(--inkLine);font-size:12px;color:#8b8fa6}
+  main{flex:1;min-width:0;overflow:auto;max-height:100vh}
+  .wrap{padding:30px 34px;max-width:820px}
+  h2.title{font-family:var(--serif);font-size:26px;letter-spacing:-.02em;margin:0}
+  .sub{color:var(--textSoft);font-size:14px;margin-top:5px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:20px}
+  .grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
+  label.f{display:block;margin-bottom:14px}
+  label.f .lab{font-size:12px;font-weight:700;color:var(--textSoft);margin-bottom:6px;display:block}
+  input,select,textarea{width:100%;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:9px 11px;font:inherit;font-size:14px;color:var(--text)}
+  input:focus,select:focus,textarea:focus{outline:2px solid var(--gold);outline-offset:1px;border-color:var(--gold)}
+  textarea{resize:vertical;line-height:1.5}
+  button.btn{display:inline-flex;align-items:center;gap:7px;border:none;border-radius:9px;padding:10px 15px;font:inherit;font-weight:600;cursor:pointer}
+  .btn.gold{background:var(--gold);color:var(--ink)}
+  .btn.ink{background:var(--ink);color:#fff}
+  .btn.sage{background:var(--sage);color:#fff}
+  .btn.ghost{background:var(--card);border:1px solid var(--line);color:var(--textSoft)}
+  .btn.clay{background:var(--card);border:1px solid var(--line);color:var(--clay)}
+  .btn:disabled{opacity:.6;cursor:default}
+  .btn.wide{width:100%;justify-content:center;padding:11px}
+  .chip{border:1px solid var(--line);background:var(--card);color:var(--textSoft);border-radius:99px;padding:6px 13px;font-size:14px;font-weight:500;cursor:pointer}
+  .chip.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  .between{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
+  .tnum{font-variant-numeric:tabular-nums}
+  .serif{font-family:var(--serif)}
+  .muted{color:var(--textFaint)}
+  .soft{color:var(--textSoft)}
+  .pill{font-size:11px;font-weight:700;padding:3px 9px;border-radius:99px}
+  .note{font-size:13px;border-radius:9px;padding:10px 12px;display:flex;gap:8px;align-items:flex-start}
+  .note.warn{background:var(--clayTint);color:var(--clay)}
+  .note.ok{background:var(--sageTint);color:var(--sage)}
+  .note.info{background:var(--parchment);border:1px solid var(--line);color:var(--textSoft)}
+  .meter{height:6px;background:var(--line);border-radius:99px;overflow:hidden}
+  .meter>span{display:block;height:100%;border-radius:99px}
+  .empty{border:1px dashed var(--line);border-radius:13px;padding:44px;text-align:center}
+  .divide>*+*{border-top:1px solid var(--line)}
+  details summary{cursor:pointer;font-weight:600;color:var(--textSoft);font-size:13px}
+  pre{background:var(--ink);color:#e7e4dd;border-radius:10px;padding:14px;overflow:auto;font-size:12.5px;line-height:1.5}
+  a{color:var(--gold)}
+  .modal-bg{position:fixed;inset:0;background:rgba(25,27,43,.45);display:flex;align-items:center;justify-content:center;padding:16px;z-index:50}
+  .modal{background:var(--parchment);border-radius:16px;padding:24px;max-width:440px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.3);max-height:88vh;overflow:auto}
+  .modal .mh{font-family:var(--serif);font-size:20px;margin:0 0 4px}
+  .spin{width:15px;height:15px;border:2px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:99px;display:inline-block;animation:sp .7s linear infinite}
+  @keyframes sp{to{transform:rotate(360deg)}}
+  @media (max-width:720px){ .app{flex-direction:column} aside{width:100%} nav{flex-direction:row;overflow:auto} aside .foot{display:none} .wrap{padding:22px 18px} }
+</style>
+
+<div class="app">
+  <aside>
+    <div class="brand">
+      <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+        <path d="M15 3 L25 11 V26 H5 V11 Z" stroke="#a8781f" stroke-width="1.6" stroke-linejoin="round"/>
+        <path d="M15 3 L25 11 M15 3 L5 11" stroke="#a8781f" stroke-width="1.6" opacity=".5"/>
+        <path d="M15 12 V22 M11 16 H19" stroke="#fff" stroke-width="1.6" stroke-linecap="round" opacity=".85"/>
+      </svg>
+      <div><h1>FaithSite</h1><div class="eyebrow">Publisher · build 3</div></div>
+    </div>
+    <nav id="nav"></nav>
+    <div class="foot" id="foot"></div>
+  </aside>
+  <main><div class="wrap" id="view"></div></main>
+</div>
+<div id="modal"></div>
+
+<script>
+/* ---------------- state ---------------- */
+const LS = {
+  config: "fsp:config", clients: "fsp:clients", drafts: "fsp:drafts"
+};
+const uid = () => Math.random().toString(36).slice(2,10);
+const esc = s => (s||"").replace(/[&<>]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+const load = (k,f) => { try{ return JSON.parse(localStorage.getItem(k)) ?? f }catch{ return f } };
+const save = (k,v) => localStorage.setItem(k, JSON.stringify(v));
+
+let config = load(LS.config, {
+  wpUrl:"", wpUser:"", wpPass:"",
+  provider:"openrouter", aiKey:"", aiModel:"anthropic/claude-sonnet-4.6",
+  aiBase:"", publishLive:false, connected:false
+});
+let clients = load(LS.clients, [
+  { id:"grace", name:"Grace Chapel", type:"church",
+    voice:"Warm and welcoming; scripture-forward but plain-spoken." }
+]);
+let drafts = load(LS.drafts, []);
+
+const CONTENT_TYPES = ["Sermon recap","Weekly announcement","Event page","Social post","Newsletter blurb"];
+let route = "fleet";
+let studioPre = null;
+
+/* ---------------- nav ---------------- */
+function renderNav(){
+  const pending = drafts.filter(d=>d.status==="pending").length;
+  const items = [
+    ["fleet","Fleet","▦"],
+    ["studio","Studio","✎"],
+    ["approvals","Approvals","✓"],
+    ["connect","Connect","⚙"],
+  ];
+  document.getElementById("nav").innerHTML = items.map(([id,label])=>{
+    const active = route===id ? "active":"";
+    let right = "";
+    if(id==="approvals" && pending>0) right = `<span class="badge">${pending}</span>`;
+    if(id==="connect") right = `<span class="dot" style="background:${config.connected?'var(--sage)':'var(--clay)'}"></span>`;
+    return `<button class="${active}" onclick="go('${id}')">${label}${right}</button>`;
+  }).join("");
+  document.getElementById("foot").innerHTML = config.connected
+    ? `Connected to<br><span style="color:#fff">${esc(hostname(config.wpUrl))}</span>`
+    : `Not connected.<br>Open <b style="color:#fff">Connect</b> to link your site.`;
+}
+function hostname(u){ try{ return new URL(u).hostname }catch{ return u } }
+function go(r){ route=r; if(r!=="studio") studioPre=null; render(); }
+
+/* ---------------- views ---------------- */
+function render(){
+  renderNav();
+  const v = document.getElementById("view");
+  if(route==="fleet") v.innerHTML = viewFleet();
+  else if(route==="studio") v.innerHTML = viewStudio();
+  else if(route==="approvals") v.innerHTML = viewApprovals();
+  else if(route==="connect") v.innerHTML = viewConnect();
+  window.scrollTo(0,0);
+}
+
+function viewFleet(){
+  const cards = clients.map(c=>`
+    <div class="card" style="display:flex;flex-direction:column">
+      <div class="row">
+        <div style="width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:${c.type==='church'?'var(--goldTint)':'var(--sageTint)'};font-size:19px">${c.type==='church'?'⛪':'🏪'}</div>
+        <div style="min-width:0">
+          <div style="font-weight:600">${esc(c.name)}</div>
+          <div class="muted" style="font-size:12px;text-transform:capitalize">${esc(c.type)}</div>
+        </div>
+        <button class="btn ghost" style="margin-left:auto;padding:6px 10px" onclick="removeClient('${c.id}')" title="Remove">✕</button>
+      </div>
+      <div class="soft" style="font-size:13px;margin-top:12px;flex:1">${esc(c.voice)}</div>
+      <button class="btn gold" style="align-self:flex-start;margin-top:14px" onclick="draftFor('${c.id}')">✎ Draft content</button>
+    </div>`).join("");
+  return `
+    <div class="between">
+      <div><h2 class="title">The fleet</h2><div class="sub">${clients.length} site${clients.length!==1?'s':''} under care</div></div>
+      <button class="btn ink" onclick="addClientPrompt()">+ Add client</button>
+    </div>
+    <div class="grid" style="margin-top:22px">${cards || emptyBlock('No clients yet','Add one to start drafting.')}</div>`;
+}
+
+function viewStudio(){
+  if(clients.length===0) return header("Studio","The drafting agent writes; you approve before anything is sent.") + emptyBlock("No clients","Add a client in Fleet first.");
+  const sel = studioPre || clients[0].id;
+  const opts = clients.map(c=>`<option value="${c.id}" ${c.id===sel?'selected':''}>${esc(c.name)}</option>`).join("");
+  const chips = CONTENT_TYPES.map((t,i)=>`<button class="chip ${i===0?'on':''}" data-type onclick="pickType(this)">${t}</button>`).join("");
+  return header("Studio","The drafting agent writes in the client's voice. Nothing is sent until you approve.") + `
+    <div class="card" style="margin-top:22px">
+      <label class="f"><span class="lab">Client</span>
+        <select id="s-client">${opts}</select></label>
+      <label class="f"><span class="lab">Content type</span></label>
+      <div class="row" id="s-types" style="margin:-8px 0 16px">${chips}</div>
+      <label class="f"><span class="lab">What's it about?</span>
+        <textarea id="s-topic" rows="3" placeholder="e.g. Youth group starts back Wednesday nights — worship, small groups, snacks. First night is a bonfire."></textarea></label>
+      <div id="s-msg"></div>
+      <button class="btn gold wide" id="s-go" onclick="generate()">✦ Draft it</button>
+    </div>
+    <div id="s-result" style="margin-top:16px"></div>`;
+}
+
+function viewApprovals(){
+  const pending = drafts.filter(d=>d.status==="pending");
+  const decided = drafts.filter(d=>d.status!=="pending").slice(0,8);
+  const nameOf = id => (clients.find(c=>c.id===id)||{}).name || "—";
+  const p = pending.map(d=>`
+    <div class="card" style="margin-bottom:12px">
+      <div class="between" style="margin-bottom:6px">
+        <div style="min-width:0">
+          <div class="muted" style="font-size:12px">${esc(nameOf(d.clientId))} · ${esc(d.type)}</div>
+          <div class="serif" style="font-size:17px;margin-top:2px">${esc(d.title)}</div>
+        </div>
+        <span class="pill" style="background:var(--goldTint);color:var(--gold)">Pending</span>
+      </div>
+      <div class="soft" style="font-size:14px;white-space:pre-wrap">${esc(clip(d.body,260))}</div>
+      <div class="row" style="margin-top:16px">
+        <button class="btn sage" onclick="publish('${d.id}')">✓ Approve &amp; send to site</button>
+        <button class="btn clay" onclick="decide('${d.id}','rejected')">✕ Reject</button>
+        <span class="muted" style="margin-left:auto;font-size:13px" class="tnum">${(d.tokens||0).toLocaleString()} tok</span>
+      </div>
+      <div id="pub-${d.id}"></div>
+    </div>`).join("");
+  const d2 = decided.map(d=>{
+    const ok = d.status==="published";
+    const col = ok?'var(--sage)':d.status==='rejected'?'var(--clay)':'var(--gold)';
+    const link = d.link ? ` · <a href="${d.link}" target="_blank">view on site ↗</a>` : "";
+    return `<div class="card" style="padding:12px 16px;display:flex;gap:12px;align-items:center;border-radius:10px">
+      <span style="color:${col}">${ok?'✓':d.status==='rejected'?'✕':'•'}</span>
+      <span class="soft" style="font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(d.title)}</span>
+      <span class="muted" style="margin-left:auto;font-size:12px;white-space:nowrap">${esc(nameOf(d.clientId))}${d.status==='published'?' · '+(config.publishLive?'published':'draft on site'):''}${link}</span>
+    </div>`;
+  }).join("");
+  return header("Approvals","You are the gate. Approving sends the post to your WordPress site.") +
+    (pending.length? `<div style="margin-top:22px">${p}</div>` : emptyBlock("Queue is clear","Head to Studio to draft the next one.")) +
+    (decided.length? `<div style="margin-top:28px"><div class="lab" style="margin-bottom:10px">Recently decided</div><div style="display:flex;flex-direction:column;gap:8px">${d2}</div></div>`:"");
+}
+
+function viewConnect(){
+  const c = config;
+  return header("Connect","Link your WordPress site and your AI provider. Everything below is stored only in this browser.") + `
+    <div class="card" style="margin-top:22px">
+      <div class="serif" style="font-size:18px;margin-bottom:2px">Your WordPress site</div>
+      <div class="muted" style="font-size:13px;margin-bottom:16px">Uses an Application Password — not your login password. Create one under <b>Users → Profile → Application Passwords</b> in wp-admin.</div>
+      <label class="f"><span class="lab">Site URL</span><input id="c-url" value="${esc(c.wpUrl)}" placeholder="https://yourchurch.org"></label>
+      <div class="row" style="gap:12px">
+        <label class="f" style="flex:1;min-width:180px"><span class="lab">WordPress username</span><input id="c-user" value="${esc(c.wpUser)}" placeholder="admin"></label>
+        <label class="f" style="flex:1;min-width:180px"><span class="lab">Application password</span><input id="c-pass" type="password" value="${esc(c.wpPass)}" placeholder="xxxx xxxx xxxx xxxx"></label>
+      </div>
+      <div class="row">
+        <button class="btn ink" onclick="testWP()">Test connection</button>
+        <span id="c-test"></span>
+      </div>
+      <label class="f" style="margin-top:18px;display:flex;align-items:center;gap:10px">
+        <input type="checkbox" id="c-live" ${c.publishLive?'checked':''} style="width:auto">
+        <span style="font-weight:500">Publish live immediately (off = save as draft in wp-admin for a final human check)</span>
+      </label>
+      ${c.publishLive? '<div class="note warn">⚠ Live publishing is on. Approved posts go public instantly. Recommended: keep this off so every post waits as a draft on the site until someone hits Publish.</div>':''}
+    </div>
+
+    <div class="card" style="margin-top:16px">
+      <div class="serif" style="font-size:18px;margin-bottom:2px">Your AI provider</div>
+      <div class="muted" style="font-size:13px;margin-bottom:16px">The drafting agent uses your own key. OpenRouter is recommended — one key, many models, per-key spend caps.</div>
+      <label class="f"><span class="lab">Provider</span>
+        <select id="c-prov" onchange="onProv(this.value)">
+          <option value="openrouter" ${c.provider==='openrouter'?'selected':''}>OpenRouter</option>
+          <option value="anthropic" ${c.provider==='anthropic'?'selected':''}>Anthropic (direct)</option>
+          <option value="custom" ${c.provider==='custom'?'selected':''}>Custom / local (OpenAI-compatible, e.g. Ollama)</option>
+        </select></label>
+      <div id="c-base" style="${c.provider==='custom'?'':'display:none'}">
+        <label class="f"><span class="lab">Base URL</span><input id="c-baseurl" value="${esc(c.aiBase)}" placeholder="http://localhost:11434/v1"></label>
+      </div>
+      <label class="f"><span class="lab">API key</span><input id="c-aikey" type="password" value="${esc(c.aiKey)}" placeholder="sk-..."></label>
+      <label class="f"><span class="lab">Model</span><input id="c-model" value="${esc(c.aiModel)}" placeholder="anthropic/claude-sonnet-4.6"></label>
+    </div>
+
+    <div class="row" style="margin-top:18px">
+      <button class="btn gold" onclick="saveConnect()">Save connection</button>
+      <button class="btn ghost" onclick="resetAll()">Reset app data</button>
+    </div>
+
+    <details style="margin-top:22px">
+      <summary>If “Test connection” fails — CORS fix for your site</summary>
+      <div class="note info" style="margin-top:12px">A default WordPress site allows this when the app is <b>hosted</b> (not opened from a file). If your host or a security plugin blocks it, add this snippet to your site with the free <b>Code Snippets</b> or <b>WPCode</b> plugin (Plugins → Add New → search, install, activate → add new snippet → paste → activate). No terminal needed.</div>
+      <pre>add_action('rest_api_init', function () {
+  add_filter('rest_pre_serve_request', function ($value) {
+    header('Access-Control-Allow-Origin: *');
+    header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
+    header('Access-Control-Allow-Headers: Authorization, Content-Type');
+    return $value;
+  }, 15);
+});</pre>
+      <div class="muted" style="font-size:12px;margin-top:8px">Also make sure your host passes the Authorization header through to PHP (most do). Application Passwords require it.</div>
+    </details>`;
+}
+
+/* ---------------- small view helpers ---------------- */
+function header(t,s){ return `<div class="between"><div><h2 class="title">${t}</h2><div class="sub">${s}</div></div></div>`; }
+function emptyBlock(t,s){ return `<div class="empty"><div class="serif" style="font-size:18px">${t}</div><div class="soft" style="margin-top:4px">${s}</div></div>`; }
+function clip(s,n){ return (s||"").length>n ? s.slice(0,n)+"…" : (s||""); }
+
+/* ---------------- fleet actions ---------------- */
+function openModal(html){ document.getElementById("modal").innerHTML =
+  `<div class="modal-bg" onclick="if(event.target===this)closeModal()"><div class="modal">${html}</div></div>`; }
+function closeModal(){ document.getElementById("modal").innerHTML=""; }
+
+function addClientPrompt(){
+  openModal(`
+    <div class="mh">Add a client</div>
+    <div class="soft" style="font-size:13px;margin-bottom:16px">One site joins the fleet.</div>
+    <label class="f"><span class="lab">Name</span><input id="m-name" placeholder="St. Mark's Fellowship" autofocus></label>
+    <label class="f"><span class="lab">Type</span>
+      <select id="m-type"><option value="church">Church</option><option value="business">Business</option></select></label>
+    <label class="f"><span class="lab">Voice / tone</span>
+      <textarea id="m-voice" rows="2" placeholder="Warm, welcoming, scripture-forward but plain-spoken."></textarea></label>
+    <div class="row" style="margin-top:6px">
+      <button class="btn gold" onclick="saveNewClient()">Add to fleet</button>
+      <button class="btn ghost" onclick="closeModal()">Cancel</button>
+    </div>`);
+  setTimeout(()=>{ const el=document.getElementById("m-name"); if(el) el.focus(); },30);
+}
+function saveNewClient(){
+  const name=val("m-name").trim(); if(!name){ document.getElementById("m-name").focus(); return; }
+  const type=val("m-type"); const voice=val("m-voice").trim()||"Warm, clear, and on-brand.";
+  clients.push({id:uid(),name,type,voice}); save(LS.clients,clients); closeModal(); render();
+}
+function removeClient(id){
+  const c=clients.find(x=>x.id===id); if(!c) return;
+  openModal(`
+    <div class="mh">Remove ${esc(c.name)}?</div>
+    <div class="soft" style="font-size:14px;margin:6px 0 18px">This only removes the client from this app. Their site and posts are untouched.</div>
+    <div class="row"><button class="btn clay" onclick="confirmRemove('${id}')">Remove</button>
+    <button class="btn ghost" onclick="closeModal()">Keep</button></div>`);
+}
+function confirmRemove(id){ clients=clients.filter(c=>c.id!==id); save(LS.clients,clients); closeModal(); render(); }
+function draftFor(id){ studioPre=id; go("studio"); }
+function pickType(el){ document.querySelectorAll('#s-types .chip').forEach(c=>c.classList.remove('on')); el.classList.add('on'); }
+
+/* ---------------- AI drafting ---------------- */
+async function generate(){
+  const clientId = document.getElementById("s-client").value;
+  const client = clients.find(c=>c.id===clientId);
+  const typeEl = document.querySelector('#s-types .chip.on');
+  const type = typeEl ? typeEl.textContent : CONTENT_TYPES[0];
+  const topic = document.getElementById("s-topic").value.trim();
+  const msg = document.getElementById("s-msg");
+  if(!config.aiKey && config.provider!=="custom"){ msg.innerHTML = note("warn","Add your AI provider key in Connect first."); return; }
+  if(!topic){ msg.innerHTML = note("warn","Add a short note on what this is about."); return; }
+  msg.innerHTML="";
+  const goBtn = document.getElementById("s-go"); goBtn.disabled=true; goBtn.innerHTML='<span class="spin"></span> Drafting…';
+  try{
+    const sys = "You are the Drafting agent for FaithSite AI, writing website content for faith communities and small businesses. Write warm, clear, publish-ready copy in the client's voice. Never invent specific facts (dates, times, names, scripture references) that weren't provided — use a bracketed placeholder like [service time] instead. Return ONLY valid JSON, no markdown fences, no preamble, shaped exactly: {\"title\": string, \"body\": string}. Use \\n between paragraphs in body.";
+    const user = `Client: ${client.name} (${client.type}). Voice/tone: ${client.voice}. Content type: ${type}. Notes from the client: ${topic}. Write the ${type} now.`;
+    const {text,tokens} = await callAI(sys,user);
+    let parsed; try{ parsed = JSON.parse(text.replace(/```json|```/g,"").trim()); }
+    catch{ parsed = { title:`${type} — ${client.name}`, body:text }; }
+    const d = { id:uid(), clientId, type, title:parsed.title||type, body:parsed.body||"", status:"pending", createdAt:Date.now(), tokens };
+    drafts.unshift(d); save(LS.drafts,drafts);
+    document.getElementById("s-result").innerHTML = `
+      <div class="card" style="border-color:var(--sage)">
+        <div class="row" style="color:var(--sage);font-weight:700;font-size:13px;margin-bottom:8px">✓ Draft ready — sent to Approvals</div>
+        <div class="serif" style="font-size:18px;margin-bottom:6px">${esc(d.title)}</div>
+        <div class="soft" style="font-size:14px;white-space:pre-wrap">${esc(d.body)}</div>
+        <div class="row" style="margin-top:14px;border-top:1px solid var(--line);padding-top:12px">
+          <span class="muted tnum" style="font-size:12px">${(tokens||0).toLocaleString()} tokens</span>
+          <button class="btn ghost" style="margin-left:auto" onclick="go('approvals')">Review in Approvals →</button>
+        </div>
+      </div>`;
+    document.getElementById("s-topic").value="";
+  }catch(e){
+    msg.innerHTML = note("warn","Drafting failed: "+esc(e.message)+". Check your key and model in Connect.");
+  }finally{ goBtn.disabled=false; goBtn.innerHTML='✦ Draft it'; }
+}
+
+async function callAI(sys,user){
+  const p = config.provider;
+  if(p==="anthropic"){
+    const r = await fetch("https://api.anthropic.com/v1/messages",{
+      method:"POST",
+      headers:{"content-type":"application/json","x-api-key":config.aiKey,"anthropic-version":"2023-06-01","anthropic-dangerous-direct-browser-access":"true"},
+      body:JSON.stringify({model:config.aiModel,max_tokens:1000,system:sys,messages:[{role:"user",content:user}]})
+    });
+    if(!r.ok) throw new Error("HTTP "+r.status);
+    const j = await r.json();
+    const text = (j.content||[]).filter(b=>b.type==="text").map(b=>b.text).join("\n").trim();
+    return {text, tokens:(j.usage?.input_tokens||0)+(j.usage?.output_tokens||0)};
+  } else {
+    const base = p==="custom" ? (config.aiBase||"").replace(/\/$/,"") : "https://openrouter.ai/api/v1";
+    const r = await fetch(base+"/chat/completions",{
+      method:"POST",
+      headers:{"content-type":"application/json","authorization":"Bearer "+(config.aiKey||"none")},
+      body:JSON.stringify({model:config.aiModel,max_tokens:1000,messages:[{role:"system",content:sys},{role:"user",content:user}]})
+    });
+    if(!r.ok) throw new Error("HTTP "+r.status);
+    const j = await r.json();
+    const text = (j.choices?.[0]?.message?.content||"").trim();
+    return {text, tokens:(j.usage?.prompt_tokens||0)+(j.usage?.completion_tokens||0)};
+  }
+}
+
+/* ---------------- WordPress publish ---------------- */
+function decide(id,status){ const d=drafts.find(x=>x.id===id); if(d){d.status=status; save(LS.drafts,drafts); render();} }
+
+async function publish(id){
+  const d = drafts.find(x=>x.id===id); if(!d) return;
+  const slot = document.getElementById("pub-"+id);
+  if(!config.wpUrl || !config.wpUser || !config.wpPass){ slot.innerHTML = note("warn","Connect your WordPress site first (Connect tab)."); return; }
+  slot.innerHTML = `<div class="note info" style="margin-top:10px"><span class="spin" style="border-color:rgba(0,0,0,.2);border-top-color:var(--textSoft)"></span> Sending to ${esc(hostname(config.wpUrl))}…</div>`;
+  try{
+    const html = d.body.split(/\n{2,}/).map(p=>`<p>${esc(p).replace(/\n/g,"<br>")}</p>`).join("\n");
+    const url = config.wpUrl.replace(/\/$/,"") + "/wp-json/wp/v2/posts";
+    const r = await fetch(url,{
+      method:"POST",
+      headers:{ "content-type":"application/json", "authorization":"Basic "+btoa(config.wpUser+":"+config.wpPass) },
+      body:JSON.stringify({ title:d.title, content:html, status: config.publishLive?"publish":"draft" })
+    });
+    if(!r.ok){ const t=await r.text().catch(()=> ""); throw new Error("HTTP "+r.status+" "+clip(t,120)); }
+    const j = await r.json();
+    d.status="published"; d.link = j.link || (config.wpUrl.replace(/\/$/,"")+"/?p="+j.id); d.wpId=j.id;
+    save(LS.drafts,drafts);
+    slot.innerHTML = note("ok", (config.publishLive?"Published live":"Saved as draft on your site")+`. <a href="${esc(j.link||d.link)}" target="_blank">Open ↗</a>`);
+    setTimeout(render,1400);
+  }catch(e){
+    slot.innerHTML = note("warn","Publish failed: "+esc(e.message)+". If this is a CORS error, see the fix in Connect.");
+  }
+}
+
+/* ---------------- connect actions ---------------- */
+function onProv(v){ document.getElementById("c-base").style.display = v==="custom" ? "" : "none";
+  const m=document.getElementById("c-model"); if(v==="anthropic"&&/\//.test(m.value)) m.value="claude-sonnet-4-6"; if(v==="openrouter"&&!/\//.test(m.value)) m.value="anthropic/claude-sonnet-4.6"; }
+function saveConnect(){
+  config.wpUrl=val("c-url").trim(); config.wpUser=val("c-user").trim(); config.wpPass=val("c-pass").trim();
+  config.provider=val("c-prov"); config.aiKey=val("c-aikey").trim(); config.aiModel=val("c-model").trim();
+  config.aiBase=val("c-baseurl")?.trim()||""; config.publishLive=document.getElementById("c-live").checked;
+  config.connected = !!(config.wpUrl && config.wpUser && config.wpPass);
+  save(LS.config,config); render();
+}
+async function testWP(){
+  const url=val("c-url").trim(), user=val("c-user").trim(), pass=val("c-pass").trim();
+  const out=document.getElementById("c-test");
+  if(!url||!user||!pass){ out.innerHTML=note("warn","Fill in all three fields."); return; }
+  out.innerHTML='<span class="spin" style="border-color:rgba(0,0,0,.2);border-top-color:var(--textSoft)"></span>';
+  try{
+    const r=await fetch(url.replace(/\/$/,"")+"/wp-json/wp/v2/users/me?context=edit",{
+      headers:{ "authorization":"Basic "+btoa(user+":"+pass) }});
+    if(!r.ok) throw new Error("HTTP "+r.status);
+    const j=await r.json();
+    out.innerHTML=note("ok","Connected as "+esc(j.name||user)+".");
+  }catch(e){ out.innerHTML=note("warn","Failed: "+esc(e.message)+" — see the CORS fix below if needed."); }
+}
+function resetAll(){
+  openModal(`
+    <div class="mh">Reset app data?</div>
+    <div class="soft" style="font-size:14px;margin:6px 0 18px">Clears all clients, drafts, and connection details from this browser. Your WordPress site is not affected.</div>
+    <div class="row"><button class="btn clay" onclick="confirmReset()">Clear everything</button>
+    <button class="btn ghost" onclick="closeModal()">Cancel</button></div>`);
+}
+function confirmReset(){
+  localStorage.removeItem(LS.config); localStorage.removeItem(LS.clients); localStorage.removeItem(LS.drafts);
+  location.reload();
+}
+
+/* ---------------- utils ---------------- */
+function val(id){ const e=document.getElementById(id); return e?e.value:""; }
+function note(kind,html){ const icon=kind==="ok"?"✓":kind==="warn"?"⚠":"•"; return `<div class="note ${kind}" style="margin-top:10px">${icon} <span>${html}</span></div>`; }
+
+render();
+</script>

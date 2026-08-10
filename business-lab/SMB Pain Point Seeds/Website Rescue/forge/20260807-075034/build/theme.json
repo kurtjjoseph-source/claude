@@ -1,0 +1,73 @@
+{
+  "forge": "PRELAUNCHforge",
+  "console_accent": "#38D07F",
+  "base": "#0A0A0B",
+  "palette": {
+    "navy": "#1B2A4A",
+    "orange": "#E8843C",
+    "teal": "#2FA8A0",
+    "ink": "#1B2233",
+    "paper": "#FFFFFF"
+  },
+  "display": "Manrope",
+  "kit": {
+    "id": "waitlist-green",
+    "name": "Waitlist Green",
+    "family": "Natural",
+    "source": "default",
+    "scheme": "light",
+    "accent": "#278453",
+    "accent_bright": "#38D07F",
+    "secondary": "#4E6357",
+    "paper": "#F6F5F1",
+    "ink": "#1A1D1B",
+    "line": "#E1DFD4"
+  },
+  "swatches": [
+    {
+      "role": "primary",
+      "name": "Waitlist Green",
+      "hex": "#278453",
+      "rgb": "39, 132, 83",
+      "cmyk": "70 / 0 / 37 / 48",
+      "on": "#FFFFFF"
+    },
+    {
+      "role": "secondary",
+      "name": "Moss Slate",
+      "hex": "#4E6357",
+      "rgb": "78, 99, 87",
+      "cmyk": "21 / 0 / 12 / 61",
+      "on": "#FFFFFF"
+    },
+    {
+      "role": "background",
+      "name": "Warm Paper",
+      "hex": "#F6F5F1",
+      "rgb": "246, 245, 241",
+      "cmyk": "0 / 0 / 2 / 4",
+      "on": "#111111"
+    },
+    {
+      "role": "text",
+      "name": "Deep Bark",
+      "hex": "#1A1D1B",
+      "rgb": "26, 29, 27",
+      "cmyk": "10 / 0 / 7 / 89",
+      "on": "#FFFFFF"
+    },
+    {
+      "role": "neutral",
+      "name": "Sand Line",
+      "hex": "#E1DFD4",
+      "rgb": "225, 223, 212",
+      "cmyk": "0 / 1 / 6 / 12",
+      "on": "#111111"
+    }
+  ],
+  "type": {
+    "preset": "grotesk",
+    "heading": "Inter / system grotesk",
+    "body": "Manrope"
+  }
+}

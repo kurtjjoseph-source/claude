@@ -1,0 +1,127 @@
+{
+  "_readme": "Six ready-made agent graphs. Open the Graph Bench wizard → Graphs → paste this whole file into the Import box → Import. Each one loads as an editable graph.",
+  "_source": "https://www.youtube.com/watch?v=JWhICz1QR8M",
+  "graphs": [
+    {
+      "id": "pk-idea", "preset": "idea", "name": "Should we build this?",
+      "outcome": "A one-page recommendation on whether this idea is worth testing, and what to test first.",
+      "decision": "Whether I spend the next month on this idea.",
+      "qualify": {"steps": true, "parallel": true, "checked": true},
+      "jobs": [
+        {"id":"i1","name":"Planner","role":"plan","job":"Break the question into the angles that would actually change the answer.","file":"plan.md","deps":[]},
+        {"id":"i2","name":"Customer research","role":"work","job":"Find the real pain: what they use today, what it costs them, what they've already tried.","file":"customer.md","deps":["i1"]},
+        {"id":"i3","name":"Competitor research","role":"work","job":"Map who already serves this — products, agencies, freelancers, spreadsheets.","file":"competitors.md","deps":["i1"]},
+        {"id":"i4","name":"Distribution research","role":"work","job":"Find where these buyers actually are and what search terms reveal intent.","file":"distribution.md","deps":["i1"]},
+        {"id":"i5","name":"Skeptic","role":"check","job":"Kill the weak claims: stale evidence, ignored competitors, pain confused with willingness to pay.","file":"review.md","deps":["i2","i3","i4"]},
+        {"id":"i6","name":"Merge","role":"merge","job":"Turn the surviving evidence into pursue / pause / kill, plus the wedge and this week's test.","file":"recommendation.md","deps":["i5"]},
+        {"id":"i7","name":"Human gate","role":"gate","job":"Decide what happens next, and what evidence would change your mind.","file":"decision.md","deps":["i6"]}
+      ],
+      "skeptic": {"targets":["unsupported","stale","missing","pain","confident"],"custom":"Any market size number quoted without a source and a date."},
+      "risk": "memo", "gateWho": "The recommendation and the one test we run this week.",
+      "level": "1", "tools": [],
+      "state": {"picks":["evidence","objections","decision","changemind"],"custom":"./research/<idea-slug>/ — one dated folder per run"},
+      "step": 0, "touched": {}
+    },
+    {
+      "id": "pk-support", "preset": "support", "name": "Support triage",
+      "outcome": "A reply that is accurate, on-policy, in our voice, and safe to send.",
+      "decision": "Whether this reply goes out as written.",
+      "qualify": {"steps": true, "parallel": true, "checked": true},
+      "jobs": [
+        {"id":"s1","name":"Classify","role":"plan","job":"Billing, product confusion, bug, cancellation risk, or something else.","file":"classification.md","deps":[]},
+        {"id":"s2","name":"Account context","role":"work","job":"New or long-standing? High value? Written in before? Already frustrated?","file":"account.md","deps":["s1"]},
+        {"id":"s3","name":"Policy lookup","role":"work","job":"Find the governing policy in the docs or internal wiki. Quote it.","file":"policy.md","deps":["s1"]},
+        {"id":"s4","name":"Draft reply","role":"work","job":"Write the reply using the account context and the policy — nothing invented.","file":"draft.md","deps":["s2","s3"]},
+        {"id":"s5","name":"Checker","role":"check","job":"Review for factual accuracy, tone, and risk. Flag anything we could regret.","file":"review.md","deps":["s4"]},
+        {"id":"s6","name":"Human gate","role":"gate","job":"Approve. Mandatory for refunds, account changes, angry customers, legal risk.","file":"sent.md","deps":["s5"]}
+      ],
+      "skeptic": {"targets":["unsupported","confident","contradiction"],"custom":"Any promise about timing, pricing or a future feature."},
+      "risk": "customer", "gateWho": "The exact words that go to the customer.",
+      "level": "1", "tools": [],
+      "state": {"picks":["objections","decision","quotes"],"custom":"Tag every run with the product area — this becomes the feedback pipeline"},
+      "step": 0, "touched": {}
+    },
+    {
+      "id": "pk-content", "preset": "content", "name": "Episode build",
+      "outcome": "A script plus a title, thumbnail direction and captions that sound like a person.",
+      "decision": "Whether this goes into production this week.",
+      "qualify": {"steps": true, "parallel": true, "checked": true},
+      "jobs": [
+        {"id":"c1","name":"Research","role":"plan","job":"Gather what's actually being said on this topic right now.","file":"research.md","deps":[]},
+        {"id":"c2","name":"Thesis","role":"work","job":"One sharp claim the whole piece defends.","file":"thesis.md","deps":["c1"]},
+        {"id":"c3","name":"Examples","role":"work","job":"Find specific, checkable examples — names, numbers, dates.","file":"examples.md","deps":["c2"]},
+        {"id":"c4","name":"Hook","role":"work","job":"Write openings that earn attention in formats that are working now.","file":"hook.md","deps":["c2"]},
+        {"id":"c5","name":"Script","role":"work","job":"Draft the script from the thesis, examples and hook.","file":"script.md","deps":["c3","c4"]},
+        {"id":"c6","name":"Checker","role":"check","job":"Are the examples specific? Does the pacing work? Does it sound like a person?","file":"review.md","deps":["c5"]},
+        {"id":"c7","name":"Titles","role":"work","job":"Title options that match the thesis, not the topic.","file":"titles.md","deps":["c6"]},
+        {"id":"c8","name":"Thumbnails","role":"work","job":"Thumbnail concepts, described well enough to hand to a designer.","file":"thumbs.md","deps":["c6"]},
+        {"id":"c9","name":"Human gate","role":"gate","job":"Approve the script and pick the title and thumbnail.","file":"approved.md","deps":["c7","c8"]}
+      ],
+      "skeptic": {"targets":["unsupported","stale","confident"],"custom":"Any sentence that could have been written about any topic. Cut it."},
+      "risk": "public", "gateWho": "The script, the title and the thumbnail direction.",
+      "level": "1", "tools": [],
+      "state": {"picks":["evidence","drafts","quotes"],"custom":"./content/<slug>/ — the examples file is the real asset, keep it forever"},
+      "step": 0, "touched": {}
+    },
+    {
+      "id": "pk-code", "preset": "code", "name": "Ship it",
+      "outcome": "A pull request that is safe to merge, with the evidence that says so.",
+      "decision": "Whether this merges to main.",
+      "qualify": {"steps": true, "parallel": true, "checked": true},
+      "jobs": [
+        {"id":"k1","name":"Plan","role":"plan","job":"State what changes, what must not change, and how we'll know it worked.","file":"plan.md","deps":[]},
+        {"id":"k2","name":"Implement","role":"work","job":"Make the change. Nothing else.","file":"diff.md","deps":["k1"]},
+        {"id":"k3","name":"Review the diff","role":"check","job":"Read the diff as an adversary. Where does this break?","file":"review.md","deps":["k2"]},
+        {"id":"k4","name":"Run tests","role":"check","job":"Run the suite. Report failures verbatim — no summarising away a red build.","file":"tests.md","deps":["k2"]},
+        {"id":"k5","name":"Check the UI","role":"check","job":"Drive the real screen. Does the change look and behave right?","file":"ui.md","deps":["k2"]},
+        {"id":"k6","name":"Edge cases","role":"check","job":"Empty, huge, concurrent, offline, wrong-permission, non-ASCII.","file":"edges.md","deps":["k2"]},
+        {"id":"k7","name":"Human gate","role":"gate","job":"Approve the pull request.","file":"merged.md","deps":["k3","k4","k5","k6"]}
+      ],
+      "skeptic": {"targets":["unsupported","missing","confident","contradiction"],"custom":"Any test described as passing without the actual output pasted in."},
+      "risk": "deploy", "gateWho": "The diff and the test output.",
+      "level": "2", "tools": [],
+      "state": {"picks":["objections","decision"],"custom":"Attach review.md and tests.md to the PR description"},
+      "step": 0, "touched": {}
+    },
+    {
+      "id": "pk-feedback", "preset": "feedback", "name": "What are they telling us?",
+      "outcome": "The three themes worth acting on this quarter, with the quotes that prove them.",
+      "decision": "What goes on the roadmap.",
+      "qualify": {"steps": true, "parallel": true, "checked": true},
+      "jobs": [
+        {"id":"f1","name":"Planner","role":"plan","job":"Define the sources and the window. What counts as a signal?","file":"plan.md","deps":[]},
+        {"id":"f2","name":"Tickets","role":"work","job":"Pull themes out of support tickets, with counts.","file":"tickets.md","deps":["f1"]},
+        {"id":"f3","name":"Interviews","role":"work","job":"Pull themes out of calls and interviews, with quotes.","file":"interviews.md","deps":["f1"]},
+        {"id":"f4","name":"Churn & cancels","role":"work","job":"Why people actually left, in their words.","file":"churn.md","deps":["f1"]},
+        {"id":"f5","name":"Skeptic","role":"check","job":"Which themes are loud but rare? Which are one angry customer repeated?","file":"review.md","deps":["f2","f3","f4"]},
+        {"id":"f6","name":"Merge","role":"merge","job":"Three themes, ranked, each with evidence and a proposed response.","file":"themes.md","deps":["f5"]},
+        {"id":"f7","name":"Human gate","role":"gate","job":"Decide what goes on the roadmap.","file":"roadmap.md","deps":["f6"]}
+      ],
+      "skeptic": {"targets":["unsupported","stale","pain","contradiction"],"custom":"Any theme backed by fewer than three independent customers."},
+      "risk": "internal", "gateWho": "The three themes and what we do about each.",
+      "level": "1", "tools": [],
+      "state": {"picks":["evidence","quotes","decision","changemind"],"custom":"./feedback/<quarter>/ — quotes carry forward to every future run"},
+      "step": 0, "touched": {}
+    },
+    {
+      "id": "pk-sales", "preset": "sales", "name": "Call prep",
+      "outcome": "A one-page brief: who they are, what they likely need, and the three questions to ask.",
+      "decision": "How I run the call.",
+      "qualify": {"steps": true, "parallel": true, "checked": true},
+      "jobs": [
+        {"id":"p1","name":"Planner","role":"plan","job":"What do we need to know before this call to not waste it?","file":"plan.md","deps":[]},
+        {"id":"p2","name":"Company","role":"work","job":"What they do, size, recent news, how they make money.","file":"company.md","deps":["p1"]},
+        {"id":"p3","name":"People","role":"work","job":"Who's on the call, what they own, what they're measured on.","file":"people.md","deps":["p1"]},
+        {"id":"p4","name":"Fit & objections","role":"work","job":"Where we'd fit, and the objections that will come up.","file":"fit.md","deps":["p1"]},
+        {"id":"p5","name":"Skeptic","role":"check","job":"What's guessed vs. sourced? What would embarrass us if it's wrong?","file":"review.md","deps":["p2","p3","p4"]},
+        {"id":"p6","name":"Merge","role":"merge","job":"One page: context, hypothesis, three questions, the ask.","file":"brief.md","deps":["p5"]},
+        {"id":"p7","name":"Human gate","role":"gate","job":"Read the brief before the call. Cut anything you can't defend live.","file":"final-brief.md","deps":["p6"]}
+      ],
+      "skeptic": {"targets":["unsupported","stale","confident"],"custom":"Anything about a named person that isn't from a public source."},
+      "risk": "internal", "gateWho": "The brief I'll actually have open during the call.",
+      "level": "1", "tools": [],
+      "state": {"picks":["evidence","decision"],"custom":"./calls/<company>/ — next call starts from the last brief"},
+      "step": 0, "touched": {}
+    }
+  ]
+}

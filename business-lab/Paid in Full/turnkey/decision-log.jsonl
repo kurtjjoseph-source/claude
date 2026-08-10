@@ -1,0 +1,4 @@
+{"data":{"business":"Paid in Full","operator":"vom","throttle":"single"},"kind":"init","ts":"2026-08-07T07:14:49Z"}
+{"data":{"classified":"operator","confidence":"explicit","core":["analytics_reporting","booking","checkout_payments","crm","documents_contracts","finance_admin","lead_capture","web_presence"],"org_type":"service_business","overrides":{"added":[],"removed":[]},"platform":"wordpress","platform_source":"engine","wordpress_used":true},"kind":"blueprint","ts":"2026-08-07T07:15:23Z"}
+{"data":{"actor":"VOM","consent":"d300b222462e98dd","target":"vercel"},"kind":"forge_authorized","ts":"2026-08-07T07:15:23Z"}
+{"data":{"archetype":"prelaunch","elapsed":14.1,"fingerprint":"sha256:c00c17544d6ed4c47025908222e0debc","outcome":"launched","run":"20260807-071523","target":"vercel","url":"https://paid-in-full-prelaunch-ck8oje0e9-kurtjjoseph-6989s-projects.vercel.app"},"kind":"forge_run","ts":"2026-08-07T07:15:38Z"}

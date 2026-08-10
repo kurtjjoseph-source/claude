@@ -1,0 +1,38 @@
+{
+  "run": "20260806-015018",
+  "sealed": "2026-08-06T01:50:33Z",
+  "fingerprint": "sha256:36d09d9bf42eabc24ea3771b3478fcce",
+  "business": "The Freelance Desk",
+  "archetype": "prelaunch",
+  "forge": "PRELAUNCHforge",
+  "target": "vercel",
+  "artifacts": {
+    "logo": "drawn monogram — no client logo was supplied",
+    "brand_manual": "/Users/kurtjoseph/Business Ideas/SMB Pain Point Seeds/The Freelance Desk/forge/20260806-015018/build/brand-manual.html",
+    "brand_kit": "Waitlist Green (default)",
+    "platform": "/Users/kurtjoseph/Business Ideas/SMB Pain Point Seeds/The Freelance Desk/forge/20260806-015018/build/platform/index.html",
+    "photos": "6 placeholder photographs (CC0/PDM)",
+    "site": "/Users/kurtjoseph/Business Ideas/SMB Pain Point Seeds/The Freelance Desk/forge/20260806-015018/build/site/index.html",
+    "pages": [
+      "faq.html",
+      "index.html"
+    ],
+    "url": "https://the-freelance-desk-prelaunch-76zulghav.vercel.app",
+    "platform_url": "https://the-freelance-desk-prelaunch-76zulghav.vercel.app/platform/",
+    "alias": "https://the-freelance-desk-prelaunch.vercel.app"
+  },
+  "checks_passed": 10,
+  "elapsed_seconds": 14.38,
+  "authorization": {
+    "mode": "unattended",
+    "targets": [
+      "vercel"
+    ],
+    "scope": "unattended forge build + deploy to 'vercel' for this business, limited to: composing the platform modules, writing the public site, wiring rails that already have credentials, publishing the result, and — for a hosting target that gates new projects behind a login — making that one deployment publicly reachable. Does not authorize sending email, charging anyone, or posting to any channel.",
+    "consent_ref": "de23651af840ccdf",
+    "consent_seq": 0,
+    "granted_by": "VOM",
+    "granted_at": "2026-08-06T01:50:18Z",
+    "channel": "standing service authorization"
+  }
+}

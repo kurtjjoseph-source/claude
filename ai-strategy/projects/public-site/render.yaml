@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: kurt-joseph-site
+    runtime: node
+    plan: free
+    rootDir: projects/public-site
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_VERSION
+        value: 24.18.0

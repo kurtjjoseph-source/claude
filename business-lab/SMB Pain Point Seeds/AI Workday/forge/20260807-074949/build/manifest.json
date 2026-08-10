@@ -1,0 +1,54 @@
+{
+  "schema": 1,
+  "run": "20260807-074949",
+  "built": "2026-08-07T07:49:49Z",
+  "fingerprint": "sha256:76e2f3e08b93782d00650326f694a154",
+  "business": {
+    "name": "AI Workday",
+    "slug": "ai-workday",
+    "tagline": "Prelaunch validation funnel",
+    "city": "Amersfoort",
+    "email": "info@visionoutreachmedia.nl",
+    "offer_line": "Your members have sat through the AI keynote twice and still cannot use it on Monday. Half a day, thirty owners, and every one of them leaves with two working automations built for their own business.",
+    "org_type": "education",
+    "org_label": "Education / training provider"
+  },
+  "archetype": {
+    "id": "prelaunch",
+    "label": "Prelaunch validation funnel",
+    "curated": true,
+    "source": "operator override",
+    "voice": "Direct and unembarrassed. It is asking for a small commitment to an idea that does not exist yet, so it must be specific about what it is, honest that it is early, and clear about what happens next. No fake scarcity.",
+    "summary": "One page that turns an idea into evidence. It states the promise, asks for a name and an email, and counts. Nothing else is built until enough people say they want it.",
+    "type_preset": "grotesk",
+    "site_scheme": "light",
+    "type_preset_archetype": "grotesk",
+    "site_scheme_archetype": "light",
+    "skin": "house",
+    "product_app": null,
+    "forge": {
+      "name": "PRELAUNCHforge",
+      "scheme": "dark",
+      "base": "#0A0A0B",
+      "base_soft": "#141416",
+      "accent": "#38D07F",
+      "accent_2": "#7BE3AC",
+      "accent_site": "#2f9e63",
+      "on_accent": "#0A0A0B",
+      "line": "Building a validation funnel."
+    }
+  },
+  "modules": [
+    "lead_capture",
+    "crm",
+    "email_marketing",
+    "content_publishing",
+    "support_inbox",
+    "events"
+  ],
+  "pages": [
+    "index.html",
+    "faq.html"
+  ],
+  "target": "vercel"
+}

@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VOM Systems — The Two Funnels</title>
+<meta name="description" content="How the Vision Outreach Media house connects: two go-to-market funnels — church and operator — each a product ladder from a free front door to its core product.">
+<style>
+  :root{
+    --bg:#0e100f; --surface:#161a18; --surface-2:#1c211e; --line:#2a322d; --line-soft:#212824;
+    --ink:#eef2ef; --ink-dim:#a6b1aa; --ink-faint:#6c7772; --accent:#e8c37a;
+    --money:#38d07f; --vom:#f0a24b; --church:#a48cf5; --guides:#5fb9e8; --tools:#f2765c; --health:#3fd0c0;
+    --mono:ui-monospace,"SF Mono",Menlo,monospace; --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; --serif:ui-serif,Georgia,"Times New Roman",serif;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 16px 40px -18px rgba(0,0,0,.6);
+  }
+  @media (prefers-color-scheme: light){ :root{ --bg:#f5f4ef;--surface:#ffffff;--surface-2:#efeee7;--line:#e1dfd4;--line-soft:#ece9df;--ink:#1a1d1b;--ink-dim:#535b56;--ink-faint:#868f89;--accent:#a9812c;--money:#12a35a;--vom:#c47716;--church:#6b56d6;--guides:#2b86bd;--tools:#d1522f;--health:#0f9f8f;--shadow:0 1px 2px rgba(40,32,18,.05),0 16px 38px -18px rgba(40,32,18,.16); } }
+  :root[data-theme="dark"]{ --bg:#0e100f;--surface:#161a18;--surface-2:#1c211e;--line:#2a322d;--line-soft:#212824;--ink:#eef2ef;--ink-dim:#a6b1aa;--ink-faint:#6c7772;--accent:#e8c37a;--money:#38d07f;--vom:#f0a24b;--church:#a48cf5;--guides:#5fb9e8;--tools:#f2765c;--health:#3fd0c0;--shadow:0 1px 2px rgba(0,0,0,.3),0 16px 40px -18px rgba(0,0,0,.6); }
+  :root[data-theme="light"]{ --bg:#f5f4ef;--surface:#ffffff;--surface-2:#efeee7;--line:#e1dfd4;--line-soft:#ece9df;--ink:#1a1d1b;--ink-dim:#535b56;--ink-faint:#868f89;--accent:#a9812c;--money:#12a35a;--vom:#c47716;--church:#6b56d6;--guides:#2b86bd;--tools:#d1522f;--health:#0f9f8f;--shadow:0 1px 2px rgba(40,32,18,.05),0 16px 38px -18px rgba(40,32,18,.16); }
+
+  *{ box-sizing:border-box; }
+  body{ margin:0; background:var(--bg); color:var(--ink); font-family:var(--sans); line-height:1.6; -webkit-font-smoothing:antialiased; }
+  .wrap{ max-width:1080px; margin:0 auto; padding:0 24px; }
+  a{ color:inherit; }
+  [data-c=money]{ --c:var(--money); } [data-c=vom]{ --c:var(--vom); } [data-c=church]{ --c:var(--church); }
+  [data-c=guides]{ --c:var(--guides); } [data-c=tools]{ --c:var(--tools); } [data-c=health]{ --c:var(--health); }
+
+  .toggle{ position:fixed; top:14px; right:16px; font:inherit; font-size:12.5px; font-weight:650; cursor:pointer; border:1px solid var(--line); background:color-mix(in srgb,var(--bg) 80%,transparent); backdrop-filter:blur(8px); color:var(--ink); border-radius:9px; padding:7px 11px; z-index:9; }
+  .toggle:hover{ border-color:var(--accent); }
+
+  /* ---------- header (house style) ---------- */
+  header{ position:relative; overflow:hidden; border-bottom:1px solid var(--line);
+    background:radial-gradient(130% 90% at 85% -20%, color-mix(in srgb,var(--accent) 15%,transparent), transparent 58%); }
+  .hero{ padding:66px 0 46px; }
+  .eyebrow{ font-family:var(--mono); font-size:12px; letter-spacing:.24em; text-transform:uppercase; color:var(--accent); margin:0 0 20px; display:flex; align-items:center; gap:12px; }
+  .eyebrow::after{ content:""; flex:1; height:1px; background:linear-gradient(90deg,var(--line),transparent); max-width:260px; }
+  h1{ font-family:var(--serif); font-weight:600; font-size:clamp(38px,6.6vw,66px); line-height:1.02; margin:0 0 16px; letter-spacing:-.02em; text-wrap:balance; }
+  h1 em{ font-style:italic; color:var(--accent); }
+  .lead{ font-size:clamp(16px,2.2vw,20px); color:var(--ink-dim); max-width:64ch; margin:0; } .lead b{ color:var(--ink); }
+  .backline{ margin-top:22px; font-family:var(--mono); font-size:12px; letter-spacing:.04em; color:var(--ink-faint); }
+  .backline a{ color:var(--accent); text-decoration:none; } .backline a:hover{ text-decoration:underline; }
+
+  /* ---------- funnel sections ---------- */
+  .funnels{ display:grid; grid-template-columns:1fr 1fr; gap:clamp(22px,3vw,40px); padding:44px 0 20px; align-items:start; }
+  @media (max-width:840px){ .funnels{ grid-template-columns:1fr; gap:46px; } }
+
+  .col-head{ margin-bottom:18px; }
+  .col-tag{ font-family:var(--mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--c); font-weight:600; display:flex; align-items:center; gap:9px; margin-bottom:9px; }
+  .col-tag .dot{ width:9px; height:9px; border-radius:50%; background:var(--c); }
+  .col-head h2{ font-family:var(--serif); font-weight:600; font-size:clamp(24px,3.4vw,32px); letter-spacing:-.01em; margin:0 0 5px; }
+  .col-head .aud{ font-size:14px; color:var(--ink-dim); }
+  .edge{ margin-top:12px; font-size:13px; line-height:1.5; color:var(--ink-dim); border-left:2px solid var(--c); padding:2px 0 2px 12px; }
+  .edge b{ color:var(--ink); }
+
+  .funnel{ position:relative; }
+  .silhouette{ position:absolute; inset:6px 0 78px 0; z-index:0; background:color-mix(in srgb,var(--c) 12%,transparent);
+    clip-path:polygon(3% 0, 97% 0, 71% 100%, 29% 100%); border-radius:8px; }
+  .tiers{ position:relative; z-index:1; display:flex; flex-direction:column; align-items:center; }
+
+  .tier{ position:relative; width:100%; background:var(--surface); border:1px solid var(--line); border-radius:15px; padding:18px 20px; overflow:hidden; box-shadow:var(--shadow); transition:transform .16s ease, border-color .16s ease; }
+  .tier::before{ content:""; position:absolute; inset:0 auto 0 0; width:4px; background:var(--c); }
+  .tier:hover{ transform:translateY(-2px); border-color:color-mix(in srgb,var(--c) 50%,var(--line)); }
+  .tier.t2{ width:88%; } .tier.t3{ width:78%; }
+  @media (max-width:840px){ .tier.t2,.tier.t3{ width:100%; } }
+  .tier .lab{ font-family:var(--mono); font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--c); display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:8px; }
+  .tier .price{ font-family:var(--mono); font-size:12px; font-weight:700; color:var(--ink); background:color-mix(in srgb,var(--c) 14%,transparent); border-radius:20px; padding:2px 10px; white-space:nowrap; font-variant-numeric:tabular-nums; }
+  .tier .name{ font-family:var(--serif); font-size:19px; font-weight:600; letter-spacing:-.01em; line-height:1.15; margin:0 0 6px; }
+  .tier .role{ font-size:13px; color:var(--ink-dim); line-height:1.5; }
+  .tier .role .lift{ color:var(--ink); font-weight:600; }
+  .tier .duo{ display:flex; gap:8px; flex-wrap:wrap; margin:0 0 9px; }
+  .tier .duo .p{ flex:1; min-width:120px; position:relative; border:1px solid var(--line-soft); border-radius:10px; padding:9px 11px 9px 13px; background:var(--surface-2); overflow:hidden; }
+  .tier .duo .p::before{ content:""; position:absolute; inset:0 auto 0 0; width:3px; background:var(--pc); }
+  .tier .duo .p .pn{ font-family:var(--serif); font-size:15px; font-weight:600; }
+  .tier .duo .p .pp{ font-family:var(--mono); font-size:11px; color:var(--pc); font-weight:700; }
+
+  .tier.core{ background:var(--c); border-color:var(--c); box-shadow:0 18px 44px -14px color-mix(in srgb,var(--c) 60%,transparent); }
+  .tier.core::before{ background:color-mix(in srgb,#000 22%,var(--c)); }
+  .tier.core, .tier.core .name{ color:#141210; }
+  :root[data-theme="dark"] .tier.core, :root:not([data-theme="light"]) .tier.core{ color:#141210; }
+  @media (prefers-color-scheme:light){ :root:not([data-theme="dark"]) .tier.core, :root:not([data-theme="dark"]) .tier.core .name{ color:#fff; } }
+  :root[data-theme="light"] .tier.core, :root[data-theme="light"] .tier.core .name{ color:#fff; }
+  .tier.core .lab{ color:inherit; opacity:.9; }
+  .tier.core .price{ background:color-mix(in srgb,#000 18%,transparent); color:inherit; }
+  .tier.core .name{ font-size:22px; }
+  .tier.core .role{ color:inherit; opacity:.92; }
+
+  .flow{ display:grid; place-items:center; color:var(--c); height:26px; font-size:15px; position:relative; z-index:1; }
+
+  .enter{ position:relative; z-index:1; margin-top:14px; border:1px dashed color-mix(in srgb,var(--c) 45%,var(--line)); border-radius:12px; padding:12px 15px; background:var(--surface); }
+  .enter .k{ font-family:var(--mono); font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--c); margin-bottom:5px; }
+  .enter .v{ font-size:13px; color:var(--ink-dim); line-height:1.5; } .enter .v b{ color:var(--ink); }
+
+  footer{ padding:30px 0 60px; margin-top:24px; }
+  .foot{ font-size:12.5px; color:var(--ink-faint); border-top:1px solid var(--line); padding-top:20px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; }
+  .foot a{ color:var(--accent); text-decoration:none; }
+  .foot .note b{ color:var(--ink-dim); }
+
+  @media (prefers-reduced-motion:no-preference){
+    .tier,.enter{ animation:rise .5s cubic-bezier(.2,.7,.2,1) both; }
+    @keyframes rise{ from{ opacity:0; transform:translateY(10px); } to{ opacity:1; transform:none; } }
+  }
+  .toggle:focus-visible,a:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
+  @media print{ .toggle{ display:none; } }
+</style>
+</head>
+<body>
+<button class="toggle" id="t">◐ Theme</button>
+
+<header><div class="wrap hero">
+  <p class="eyebrow">Vision Outreach Media · Go-to-market</p>
+  <h1>Two funnels, <em>one house.</em></h1>
+  <p class="lead">Every product line is a <b>ladder</b>: a free front door that earns trust and captures the lead, an offer that proves value fast, and the <b>core product</b> it all climbs toward. Two audiences, two ladders — each with one destination.</p>
+  <p class="backline">Free entries capture into <b style="color:var(--accent)">hello@visionoutreachmedia.nl</b> &nbsp;·&nbsp; <a href="/">← Back to the house</a></p>
+</div></header>
+
+<main class="wrap">
+  <div class="funnels">
+
+    <!-- ============ CHURCH ============ -->
+    <section class="col" data-c="church">
+      <div class="col-head">
+        <div class="col-tag"><span class="dot"></span>Funnel 01 · Faith</div>
+        <h2>The Church Funnel</h2>
+        <div class="aud">Churches &amp; ministries — pastors and media directors.</div>
+        <div class="edge"><b>Your home turf.</b> You run a church livestream and benchmark churches with Engage AI — start where the trust already exists.</div>
+      </div>
+      <div class="funnel">
+        <div class="silhouette"></div>
+        <div class="tiers">
+          <div class="tier t1">
+            <div class="lab"><span>Free · front door</span><span class="price">Free</span></div>
+            <div class="name">AI Ministry Assessment</div>
+            <div class="role">A diagnostic that scores a church's digital presence and creates urgency — and <span class="lift">captures the lead into hello@</span>. The hook that opens every conversation.</div>
+          </div>
+          <div class="flow">▼</div>
+          <div class="tier t2">
+            <div class="lab"><span>The on-ramp · recurring</span><span class="price">€1K / mo</span></div>
+            <div class="name">90-Day Program — the Cohort</div>
+            <div class="role">The week-by-week system, built <em>with</em> them: from ad-hoc volunteers to a media operation that runs itself.</div>
+          </div>
+          <div class="flow">▼</div>
+          <div class="tier t3 core">
+            <div class="lab"><span>★ The core product</span><span class="price">€10K</span></div>
+            <div class="name">Church Media Academy — Done-for-you</div>
+            <div class="role">We build the whole quarter for them. A media ministry that runs itself — the top of the ladder.</div>
+          </div>
+        </div>
+        <div class="enter">
+          <div class="k">How they find it</div>
+          <div class="v">Your <b>church network</b> · referrals · denominational &amp; church-tech partners · DMs to pastors — all pointed at the <b>free assessment</b>.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ OPERATOR ============ -->
+    <section class="col" data-c="vom">
+      <div class="col-head">
+        <div class="col-tag"><span class="dot"></span>Funnel 02 · Business</div>
+        <h2>The Operator Funnel</h2>
+        <div class="aud">Operators &amp; small-business owners — builders.</div>
+        <div class="edge"><b>Broader, more competitive.</b> Win it with content and the free Academy — earn the audience, then sell the ladder.</div>
+      </div>
+      <div class="funnel">
+        <div class="silhouette"></div>
+        <div class="tiers">
+          <div class="tier t1">
+            <div class="lab"><span>Free · front door</span><span class="price">Free</span></div>
+            <div class="name">The Operator's Academy</div>
+            <div class="role">Free courses — The Leverage Stack &amp; The Distribution Console — that teach the leverage and <span class="lift">capture the list into hello@</span>.</div>
+          </div>
+          <div class="flow">▼</div>
+          <div class="tier t2">
+            <div class="lab"><span>Entry offers · low-ticket</span><span class="price">€99 – €199</span></div>
+            <div class="duo">
+              <div class="p" style="--pc:var(--money)"><div class="pn">Hundred</div><div class="pp">€99</div></div>
+              <div class="p" style="--pc:var(--tools)"><div class="pn">Launch Kits</div><div class="pp">€199</div></div>
+            </div>
+            <div class="role">A fast, cheap win that proves value and builds trust — the path to a first $100K, or a specific business launched this week.</div>
+          </div>
+          <div class="flow">▼</div>
+          <div class="tier t3 core">
+            <div class="lab"><span>★ The core product</span><span class="price">€2K/mo – €10K+</span></div>
+            <div class="name">Turnkey — the flagship</div>
+            <div class="role">Idea in, launched business out. Licence the launch OS or have it done-for-you — the factory the whole ladder leads to.</div>
+          </div>
+        </div>
+        <div class="enter">
+          <div class="k">How they find it</div>
+          <div class="v"><b>Content &amp; build-in-public</b> · SEO / AEO · the repurposing engine — all pointed at the <b>free Academy</b>.</div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer><div class="wrap foot">
+  <span class="note"><b>Not shown:</b> vital. is the consumer arm — a separate health funnel to a different audience.</span>
+  <span>Part of the house · <a href="/">VOM Systems</a> · <a href="https://artifact-hub-nu.vercel.app" target="_blank" rel="noopener">Studio Index</a></span>
+</div></footer>
+
+<script>
+  var t=document.getElementById('t');
+  t.addEventListener('click',function(){
+    var c=document.documentElement.getAttribute('data-theme');
+    var sys=matchMedia('(prefers-color-scheme:dark)').matches;
+    var now=c||(sys?'dark':'light');
+    document.documentElement.setAttribute('data-theme', now==='dark'?'light':'dark');
+    try{ localStorage.setItem('vomsys_theme', now==='dark'?'light':'dark'); }catch(e){}
+  });
+  try{ var th=localStorage.getItem('vomsys_theme'); if(th) document.documentElement.setAttribute('data-theme',th); }catch(e){}
+</script>
+</body>
+</html>

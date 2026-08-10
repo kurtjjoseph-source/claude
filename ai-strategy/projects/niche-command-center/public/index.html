@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>VOM Ops Tracker</title>
+<style>
+  :root { color-scheme: light dark; }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 24px 20px 80px;
+    background: #f6f5f2;
+    color: #1c1c1c;
+  }
+  @media (prefers-color-scheme: dark) {
+    body { background: #16181c; color: #e8e6e1; }
+    .card { background: #1f2228 !important; border-color: #2c3038 !important; }
+    input, textarea { background: #14161a !important; color: #e8e6e1 !important; border-color: #2c3038 !important; }
+    .muted { color: #8b8f98 !important; }
+    .tab.active { background: #2c3038 !important; }
+  }
+  h1 { font-size: 1.4rem; margin: 0 0 4px; }
+  .muted { color: #6b6b6b; font-size: 0.9rem; }
+  .tabs { display: flex; gap: 8px; margin: 20px 0; }
+  .tab {
+    padding: 8px 16px; border-radius: 8px; cursor: pointer;
+    background: #eceae5; font-size: 0.9rem; font-weight: 600;
+  }
+  .tab.active { background: #d8d5cc; }
+  .card {
+    background: #fff; border: 1px solid #e4e2db; border-radius: 10px;
+    padding: 16px; margin-bottom: 12px;
+  }
+  .overdue { border-left: 4px solid #d64545; }
+  .upcoming { border-left: 4px solid #d6a545; }
+  .action-row { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+  .action-row .meta { font-size: 0.85rem; }
+  button {
+    border: none; border-radius: 6px; padding: 6px 12px; cursor: pointer;
+    background: #1c1c1c; color: #fff; font-size: 0.85rem;
+  }
+  button.secondary { background: transparent; color: #d64545; border: 1px solid #d64545; }
+  input, textarea, select {
+    border: 1px solid #d8d5cc; border-radius: 6px; padding: 8px; font-size: 0.9rem;
+    width: 100%; font-family: inherit;
+  }
+  form.inline { display: flex; gap: 8px; margin: 10px 0; flex-wrap: wrap; }
+  form.inline input { flex: 1; min-width: 140px; }
+  .client-header { display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
+  .note { font-size: 0.85rem; border-top: 1px solid #eee; padding: 6px 0; }
+  .empty { color: #999; font-style: italic; padding: 20px 0; text-align: center; }
+  h3 { margin: 16px 0 6px; font-size: 0.95rem; }
+</style>
+</head>
+<body>
+  <h1>VOM Ops Tracker</h1>
+  <div class="muted" id="subtitle">Loading…</div>
+
+  <div class="tabs">
+    <div class="tab active" data-tab="dashboard">Dashboard</div>
+    <div class="tab" data-tab="clients">Clients</div>
+  </div>
+
+  <div id="dashboard"></div>
+  <div id="clients" style="display:none"></div>
+
+<script>
+let clients = [];
+
+async function load() {
+  const res = await fetch('/api/clients');
+  clients = await res.json();
+  renderDashboard();
+  renderClients();
+}
+
+function daysBetween(dateStr) {
+  const due = new Date(dateStr + 'T00:00:00');
+  const today = new Date(); today.setHours(0,0,0,0);
+  return Math.round((today - due) / 86400000);
+}
+
+function allActions() {
+  const out = [];
+  clients.forEach(c => c.actions.forEach(a => out.push({ ...a, clientId: c.id, clientName: c.name })));
+  return out;
+}
+
+function renderDashboard() {
+  const el = document.getElementById('dashboard');
+  const subtitle = document.getElementById('subtitle');
+  const open = allActions().filter(a => !a.done);
+  const overdue = open.filter(a => daysBetween(a.dueDate) > 0).sort((a,b) => daysBetween(b.dueDate) - daysBetween(a.dueDate));
+  const upcoming = open.filter(a => daysBetween(a.dueDate) <= 0).sort((a,b) => new Date(a.dueDate) - new Date(b.dueDate));
+
+  subtitle.textContent = `${clients.length} client${clients.length === 1 ? '' : 's'} · ${overdue.length} overdue action${overdue.length === 1 ? '' : 's'}`;
+
+  let html = '<h3>Overdue</h3>';
+  html += overdue.length
+    ? overdue.map(a => actionCard(a, true)).join('')
+    : '<div class="empty">Nothing overdue. Nice.</div>';
+
+  html += '<h3>Upcoming (next 7 days)</h3>';
+  const soon = upcoming.filter(a => -daysBetween(a.dueDate) <= 7);
+  html += soon.length
+    ? soon.map(a => actionCard(a, false)).join('')
+    : '<div class="empty">Nothing due soon.</div>';
+
+  el.innerHTML = html;
+  el.querySelectorAll('[data-done]').forEach(btn => {
+    btn.onclick = () => markDone(btn.dataset.client, btn.dataset.done);
+  });
+}
+
+function actionCard(a, overdue) {
+  const d = daysBetween(a.dueDate);
+  const label = overdue ? `${d} day${d === 1 ? '' : 's'} overdue` : (d === 0 ? 'due today' : `due in ${-d} day${-d === 1 ? '' : 's'}`);
+  return `<div class="card ${overdue ? 'overdue' : 'upcoming'}">
+    <div class="action-row">
+      <div>
+        <strong>${escapeHtml(a.clientName)}</strong> — ${escapeHtml(a.text)}
+        <div class="meta muted">${label} (${a.dueDate})</div>
+      </div>
+      <button data-client="${a.clientId}" data-done="${a.id}">Mark done</button>
+    </div>
+  </div>`;
+}
+
+async function markDone(clientId, actionId) {
+  await fetch(`/api/clients/${clientId}/actions/${actionId}`, {
+    method: 'PATCH', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ done: true })
+  });
+  await load();
+}
+
+function renderClients() {
+  const el = document.getElementById('clients');
+  let html = `<form class="inline" id="add-client-form">
+    <input type="text" id="new-client-name" placeholder="New client name" required />
+    <button type="submit">Add client</button>
+  </form>`;
+
+  if (!clients.length) html += '<div class="empty">No clients yet — add one above.</div>';
+
+  clients.forEach(c => {
+    const openActions = c.actions.filter(a => !a.done).sort((a,b) => new Date(a.dueDate) - new Date(b.dueDate));
+    const doneActions = c.actions.filter(a => a.done);
+    html += `<div class="card">
+      <div class="client-header">
+        <strong>${escapeHtml(c.name)}</strong>
+        <button class="secondary" data-delete="${c.id}">Delete</button>
+      </div>
+
+      <h3>Next actions</h3>
+      ${openActions.map(a => `<div class="action-row">
+        <span>${escapeHtml(a.text)} <span class="muted">(due ${a.dueDate})</span></span>
+        <button data-client="${c.id}" data-done="${a.id}">Done</button>
+      </div>`).join('') || '<div class="muted">None open.</div>'}
+      ${doneActions.length ? `<div class="muted">${doneActions.length} completed</div>` : ''}
+      <form class="inline" data-action-form="${c.id}">
+        <input type="text" placeholder="Action" name="text" required />
+        <input type="date" name="dueDate" required />
+        <button type="submit">Add</button>
+      </form>
+
+      <h3>Notes / history</h3>
+      <form class="inline" data-note-form="${c.id}">
+        <input type="text" placeholder="Add a note…" name="text" required />
+        <button type="submit">Add</button>
+      </form>
+      ${c.notes.map(n => `<div class="note"><span class="muted">${new Date(n.date).toLocaleDateString()}</span> — ${escapeHtml(n.text)}</div>`).join('') || '<div class="muted">No notes yet.</div>'}
+    </div>`;
+  });
+
+  el.innerHTML = html;
+  wireClientForms();
+}
+
+function wireClientForms() {
+  const addForm = document.getElementById('add-client-form');
+  if (addForm) addForm.onsubmit = async (e) => {
+    e.preventDefault();
+    const name = document.getElementById('new-client-name').value;
+    await fetch('/api/clients', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name }) });
+    await load();
+  };
+
+  document.querySelectorAll('[data-delete]').forEach(btn => {
+    btn.onclick = async () => {
+      if (!confirm('Delete this client?')) return;
+      await fetch(`/api/clients/${btn.dataset.delete}`, { method: 'DELETE' });
+      await load();
+    };
+  });
+
+  document.querySelectorAll('[data-action-form]').forEach(form => {
+    form.onsubmit = async (e) => {
+      e.preventDefault();
+      const fd = new FormData(form);
+      await fetch(`/api/clients/${form.dataset.actionForm}/actions`, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text: fd.get('text'), dueDate: fd.get('dueDate') })
+      });
+      await load();
+    };
+  });
+
+  document.querySelectorAll('[data-note-form]').forEach(form => {
+    form.onsubmit = async (e) => {
+      e.preventDefault();
+      const fd = new FormData(form);
+      await fetch(`/api/clients/${form.dataset.noteForm}/notes`, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text: fd.get('text') })
+      });
+      await load();
+    };
+  });
+
+  document.querySelectorAll('[data-done]').forEach(btn => {
+    btn.onclick = () => markDone(btn.dataset.client, btn.dataset.done);
+  });
+}
+
+function escapeHtml(s) {
+  return s.replace(/[&<>"']/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]));
+}
+
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.onclick = () => {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('dashboard').style.display = tab.dataset.tab === 'dashboard' ? 'block' : 'none';
+    document.getElementById('clients').style.display = tab.dataset.tab === 'clients' ? 'block' : 'none';
+  };
+});
+
+load();
+</script>
+</body>
+</html>

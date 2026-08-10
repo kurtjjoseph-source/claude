@@ -1,0 +1,361 @@
+{
+  "schema": 1,
+  "business": "AI Tools Assessment Business",
+  "idea_folder": "/Users/kurtjoseph/Business Ideas/AI Tools Assessment Business",
+  "started": "2026-07-29T08:21:20Z",
+  "updated": "2026-08-01T08:28:42Z",
+  "stage": "launched",
+  "throttle": "single",
+  "gate_matrix": {
+    "stripe_connect": "done",
+    "cloudflare_delegation": "pending",
+    "credential_baseline": "pending",
+    "dutch_lawyer_terms": "pending",
+    "registrar_nl": "pending",
+    "provisioned_accounts": "done"
+  },
+  "workstreams": {
+    "intake": {
+      "status": "done",
+      "actor_waiting": null,
+      "blocked_by": [],
+      "note": "profile+kyb written; KYB cleared; terms accepted (operator-run, lawyer review deferred)",
+      "updated": "2026-07-29T09:29:45Z",
+      "gate": {
+        "action": "Clear flagged KYB + capture disclosure/terms YES (Part B blocked by dutch_lawyer_terms prereq)",
+        "actor": "VOM",
+        "channel": "in-session",
+        "script": "turnkey/gates/intake-1.md",
+        "opened_at": "2026-07-29T09:18:24Z"
+      }
+    },
+    "W1_profile": {
+      "status": "done",
+      "actor_waiting": null,
+      "blocked_by": [],
+      "note": "LOCKED: niche=church/faith; brand=VOM operator-run; pricing MODEL=founder-rate-while-unproven -> full price (founders grandfathered) -> church-budget-friendly baseline; exact figures set at W5",
+      "updated": "2026-07-29T16:14:11Z",
+      "gate": {
+        "action": "Business-name + niche + pricing decision (proceeding on provisional hostname)",
+        "actor": "VOM",
+        "channel": "in-session",
+        "script": "turnkey/gates/foundation-W1.md",
+        "opened_at": "2026-07-29T09:35:25Z"
+      }
+    },
+    "W2_legal": {
+      "status": "gate_pending",
+      "actor_waiting": "VOM",
+      "blocked_by": [],
+      "note": "File VAT + handelsnaam; confirm bookkeeping (lawyer terms review deferred)",
+      "updated": "2026-07-29T09:35:26Z",
+      "gate": {
+        "action": "File VAT + handelsnaam; confirm bookkeeping (lawyer terms review deferred)",
+        "actor": "VOM",
+        "channel": "in-session",
+        "script": "turnkey/gates/foundation-W2.md",
+        "opened_at": "2026-07-29T09:35:26Z"
+      }
+    },
+    "W3_domain": {
+      "status": "gate_pending",
+      "actor_waiting": "VOM",
+      "blocked_by": [],
+      "note": "Cloudflare NS delegation (bootstrap #2) + client domain purchase + Brevo verify",
+      "updated": "2026-07-29T09:35:26Z",
+      "gate": {
+        "action": "Cloudflare NS delegation (bootstrap #2) + client domain purchase + Brevo verify",
+        "actor": "VOM",
+        "channel": "in-session",
+        "script": "turnkey/gates/foundation-W3.md",
+        "opened_at": "2026-07-29T09:35:26Z"
+      }
+    },
+    "W4_website": {
+      "status": "done",
+      "actor_waiting": null,
+      "blocked_by": [],
+      "note": "LIVE (production) VOM-branded: https://vom-ministry-ai.vercel.app — go-live YES logged; founding access code FOUNDINGCHURCH verified working; Stripe coupon prepared (build-W5-coupon.md)",
+      "updated": "2026-07-29T19:38:03Z",
+      "gate": {
+        "action": "Promote preview -> live public URL (blocked on provisioned_accounts/Vercel; swarm not run)",
+        "actor": "VOM",
+        "channel": "in-session",
+        "script": "turnkey/gates/build-W4.md",
+        "opened_at": "2026-07-29T15:48:34Z"
+      }
+    },
+    "W5_payments": {
+      "status": "gate_pending",
+      "actor_waiting": "VOM",
+      "blocked_by": [],
+      "note": "Checkout endpoint BUILT + live (api/checkout.js on vom-ministry-ai; graceful 503 until key). VOM to add STRIPE_SECRET_KEY + create FOUNDINGCHURCH coupon + run test purchase/refund (build-W5-coupon.md).",
+      "updated": "2026-07-30T00:52:23Z",
+      "gate": {
+        "action": "Enable Stripe Connect (bootstrap) -> client ID+IBAN -> VOM test purchase+refund",
+        "actor": "VOM",
+        "channel": "in-session",
+        "script": "turnkey/gates/build-W5-vom.md",
+        "opened_at": "2026-07-29T15:48:34Z"
+      }
+    },
+    "W6_products": {
+      "status": "gate_pending",
+      "actor_waiting": "VOM",
+      "blocked_by": [],
+      "note": "Enable live webhook fulfillment (buyer-emailing send gate)",
+      "updated": "2026-07-29T15:48:34Z",
+      "gate": {
+        "action": "Enable live webhook fulfillment (buyer-emailing send gate)",
+        "actor": "VOM",
+        "channel": "in-session",
+        "script": "turnkey/gates/build-W6.md",
+        "opened_at": "2026-07-29T15:48:34Z"
+      }
+    },
+    "W7_presence": {
+      "status": "gate_pending",
+      "actor_waiting": "VOM",
+      "blocked_by": [],
+      "note": "Google Business verification (blocked on name/niche); baseline runs live once site up",
+      "updated": "2026-07-29T15:52:25Z",
+      "gate": {
+        "action": "Google Business verification (blocked on name/niche); baseline runs live once site up",
+        "actor": "VOM",
+        "channel": "in-session",
+        "script": "turnkey/gates/market-W7.md",
+        "opened_at": "2026-07-29T15:52:25Z"
+      }
+    },
+    "W8_social": {
+      "status": "gate_pending",
+      "actor_waiting": "CLIENT",
+      "blocked_by": [],
+      "note": "Approve week-1 social digest (one tap; nothing posts before YES)",
+      "updated": "2026-07-29T15:52:25Z",
+      "gate": {
+        "action": "Approve week-1 social digest (one tap; nothing posts before YES)",
+        "actor": "CLIENT",
+        "channel": "magic-link",
+        "script": "turnkey/gates/market-W8.md",
+        "opened_at": "2026-07-29T15:52:25Z"
+      }
+    },
+    "W9_leads": {
+      "status": "gate_pending",
+      "actor_waiting": "CLIENT",
+      "blocked_by": [],
+      "note": "Built: prospects.csv (61 real NL churches, Amersfoort/Utrecht-first, public org data, 8 flagged verify-domain/website) + send-ready sequences + outreach-batch-1.md (10 warm/local churches). Awaiting operator YES + sign-off name; NO send mechanism wired (operator sends, or wire Brevo/CCG).",
+      "updated": "2026-07-30T00:54:55Z",
+      "gate": {
+        "action": "Approve outreach send batch (per-batch scoped consent)",
+        "actor": "CLIENT",
+        "channel": "magic-link",
+        "script": "turnkey/gates/market-W9.md",
+        "opened_at": "2026-07-29T15:52:25Z"
+      }
+    },
+    "W10_crm": {
+      "status": "done",
+      "actor_waiting": null,
+      "blocked_by": [],
+      "note": "CRM pipeline + running inventory stood up; operator-only, no client login",
+      "updated": "2026-07-29T15:55:20Z"
+    },
+    "W11_followups": {
+      "status": "gate_pending",
+      "actor_waiting": "CLIENT",
+      "blocked_by": [],
+      "note": "Approve daily follow-up sends (per-draft, this cycle only)",
+      "updated": "2026-07-29T15:55:20Z",
+      "gate": {
+        "action": "Approve daily follow-up sends (per-draft, this cycle only)",
+        "actor": "CLIENT",
+        "channel": "magic-link",
+        "script": "turnkey/gates/operate-W11.md",
+        "opened_at": "2026-07-29T15:55:20Z"
+      }
+    }
+  },
+  "operator": {
+    "id": "vom",
+    "name": "Vision Outreach Media",
+    "short": "VOM",
+    "author_as": "Vision Outreach Media (VOM)",
+    "voice": "Mission-driven, plain-spoken, trust-first, and (for the church niche) faith-friendly. Never hype, never jargon. Speak like a helpful expert, not a salesperson. Deliverables say \"Vision Outreach Media (VOM)\" or \"the operator\" — never a personal name.",
+    "model": "operator-run",
+    "profile_source": "/Users/kurtjoseph/Business Ideas/vom-systems/turnkey/orchestrator/operator.json"
+  },
+  "blueprint": {
+    "schema": 1,
+    "org_type": "service_business",
+    "org_label": "Service business / consultancy / agency",
+    "classified": {
+      "source": "classifier",
+      "confidence": "high"
+    },
+    "platform": {
+      "decision": "vercel_app",
+      "label": "Custom app (Vercel)",
+      "wordpress_used": false,
+      "hosting": "Vercel (scope kurtjjoseph-6989)",
+      "confidence": "low",
+      "scores": {
+        "wordpress": 3.0,
+        "vercel_app": 3.0
+      },
+      "headline": "Tie on the evidence; defaulting to the custom app (cheaper to run, no plugin maintenance) — operator can override.",
+      "source": "engine"
+    },
+    "functions": {
+      "web_presence": {
+        "tier": "core",
+        "workstream": "W4_website",
+        "title": "Public web presence",
+        "gated": true,
+        "implementation": "Next.js site on Vercel — home, offer, about, contact"
+      },
+      "crm": {
+        "tier": "core",
+        "workstream": "W10_crm",
+        "title": "CRM — contacts, pipeline, running inventory",
+        "gated": false,
+        "implementation": "Operator-side CRM; app forms feed it"
+      },
+      "finance_admin": {
+        "tier": "core",
+        "workstream": "W2_legal",
+        "title": "Finance & admin (invoicing, VAT, bookkeeping)",
+        "gated": false,
+        "implementation": "NL bookkeeping tool + Stripe payouts reconciled monthly"
+      },
+      "analytics_reporting": {
+        "tier": "core",
+        "workstream": "W7_presence",
+        "title": "Analytics & presence reporting",
+        "gated": false,
+        "implementation": "Analytics + the Engage AI server-side website probe"
+      },
+      "lead_capture": {
+        "tier": "core",
+        "workstream": "W9_leads",
+        "title": "Lead capture (forms, lead magnet, CTA)",
+        "gated": false,
+        "implementation": "Form route → CRM + Brevo list"
+      },
+      "email_marketing": {
+        "tier": "recommended",
+        "workstream": "W9_leads",
+        "title": "Email list & broadcasts",
+        "gated": true,
+        "implementation": "Brevo list + form route; broadcasts sent from Brevo"
+      },
+      "social_publishing": {
+        "tier": "recommended",
+        "workstream": "W8_social",
+        "title": "Social content production & scheduling",
+        "gated": true,
+        "implementation": "Content produced operator-side; owner approves the weekly digest"
+      },
+      "documents_contracts": {
+        "tier": "core",
+        "workstream": "W10_crm",
+        "title": "Quotes, proposals & contracts",
+        "gated": false,
+        "implementation": "Template pack + e-sign SaaS, tracked on the CRM record"
+      },
+      "booking": {
+        "tier": "core",
+        "workstream": "W4_website",
+        "title": "Appointment booking / scheduling",
+        "gated": false,
+        "implementation": "Embedded scheduling SaaS (Cal.com/Calendly) + webhook to CRM"
+      },
+      "checkout_payments": {
+        "tier": "core",
+        "workstream": "W5_payments",
+        "title": "Checkout & payments",
+        "gated": true,
+        "implementation": "Stripe Checkout / Payment Links; iDEAL enabled for NL"
+      },
+      "content_publishing": {
+        "tier": "recommended",
+        "workstream": "W4_website",
+        "title": "Content publishing (blog / news / articles)",
+        "gated": false,
+        "implementation": "MDX content collection — every edit is a code deploy"
+      },
+      "support_inbox": {
+        "tier": "recommended",
+        "workstream": "W11_followups",
+        "title": "Support inbox & FAQ",
+        "gated": true,
+        "implementation": "Shared mailbox + FAQ routes; replies drafted, human-approved"
+      },
+      "product_catalog": {
+        "tier": "optional",
+        "workstream": "W6_products",
+        "title": "Product catalog (what is for sale, at what price)",
+        "gated": false,
+        "implementation": "Catalog defined in Stripe products/prices, rendered from the API"
+      },
+      "membership_access": {
+        "tier": "optional",
+        "workstream": "W6_products",
+        "title": "Member area & access control",
+        "gated": false,
+        "implementation": "Auth + entitlement check per route"
+      },
+      "courses_lms": {
+        "tier": "optional",
+        "workstream": "W6_products",
+        "title": "Course delivery (LMS)",
+        "gated": false,
+        "implementation": "Course routes + progress store, or an external LMS embed"
+      },
+      "subscriptions": {
+        "tier": "optional",
+        "workstream": "W5_payments",
+        "title": "Subscriptions / recurring billing",
+        "gated": true,
+        "implementation": "Stripe Billing + customer portal"
+      }
+    },
+    "workstream_scope": {
+      "W4_website": [
+        "web_presence",
+        "booking",
+        "content_publishing"
+      ],
+      "W10_crm": [
+        "crm",
+        "documents_contracts"
+      ],
+      "W2_legal": [
+        "finance_admin"
+      ],
+      "W7_presence": [
+        "analytics_reporting"
+      ],
+      "W9_leads": [
+        "lead_capture",
+        "email_marketing"
+      ],
+      "W8_social": [
+        "social_publishing"
+      ],
+      "W5_payments": [
+        "checkout_payments"
+      ],
+      "W11_followups": [
+        "support_inbox"
+      ]
+    },
+    "overrides": {
+      "added": [],
+      "removed": []
+    },
+    "doc": "turnkey/blueprint.md",
+    "decided": "2026-07-30T22:35:16Z"
+  }
+}

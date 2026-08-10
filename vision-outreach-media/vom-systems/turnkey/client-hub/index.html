@@ -1,0 +1,1261 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Client Business Hub — Vision Outreach Media</title>
+<meta name="description" content="Passwordless prototype hub the launched business's owner logs into to run CRM, content, bookings, inbox and reporting.">
+<style>
+  :root{
+    --navy:#1B2A4A; --navy-d:#12203b; --orange:#E8843C; --orange-d:#c15f1f; --teal:#1f9e93; --green:#2f9e63;
+    --bg:#f5f8fc; --surface:#ffffff; --surface-2:#eef2f8; --line:#e0e6f0; --line-strong:#cdd6e6;
+    --ink:#16233f; --ink-soft:#586880; --ink-faint:#8a97ab; --bad:#c0453b; --warn:#c9862a;
+    --sans:"Manrope","Inter",system-ui,-apple-system,"Segoe UI",sans-serif; --mono:ui-monospace,"SF Mono",Menlo,monospace;
+    --radius:12px; --radius-sm:8px;
+  }
+  @media (prefers-color-scheme:dark){ :root{
+    --navy:#6E97D6; --navy-d:#8fb0e4; --orange:#f0a05c; --orange-d:#f6b778; --teal:#4fc0b5; --green:#4fd08a;
+    --bg:#0f1626; --surface:#172033; --surface-2:#1d283e; --line:#28344c; --line-strong:#37455f;
+    --ink:#eaf0f8; --ink-soft:#9dabc2; --ink-faint:#6f7d94; --bad:#e8785c; --warn:#e0a94b;
+  } }
+  :root[data-theme="light"]{ --bg:#f5f8fc; --surface:#fff; --surface-2:#eef2f8; --line:#e0e6f0; --line-strong:#cdd6e6; --ink:#16233f; --ink-soft:#586880; --ink-faint:#8a97ab; --navy:#1B2A4A; --orange:#E8843C; --teal:#1f9e93; --bad:#c0453b; --warn:#c9862a; }
+  :root[data-theme="dark"]{ --bg:#0f1626; --surface:#172033; --surface-2:#1d283e; --line:#28344c; --line-strong:#37455f; --ink:#eaf0f8; --ink-soft:#9dabc2; --ink-faint:#6f7d94; --navy:#6E97D6; --orange:#f0a05c; --teal:#4fc0b5; --bad:#e8785c; --warn:#e0a94b; }
+
+  *{ box-sizing:border-box; }
+  html,body{ height:100%; }
+  body{ margin:0; background:var(--bg); color:var(--ink); font-family:var(--sans); line-height:1.5; -webkit-font-smoothing:antialiased; }
+  a{ color:inherit; }
+  .tabnum{ font-variant-numeric:tabular-nums; }
+  :focus-visible{ outline:2px solid var(--orange); outline-offset:2px; }
+  @media (prefers-reduced-motion:reduce){ *{ transition:none!important; animation:none!important; } }
+
+  .skip-link{ position:absolute; left:-9999px; top:auto; background:var(--navy); color:#fff; padding:10px 16px; border-radius:0 0 8px 0; z-index:200; }
+  .skip-link:focus{ left:0; top:0; }
+
+  /* ---------- shared bits ---------- */
+  .hidden{ display:none!important; }
+  .btn{ font:inherit; font-weight:700; font-size:.9rem; border-radius:var(--radius-sm); padding:9px 16px; border:1px solid var(--line-strong); cursor:pointer; text-decoration:none; display:inline-flex; align-items:center; gap:7px; background:var(--surface); color:var(--ink); }
+  .btn:hover{ border-color:var(--orange); color:var(--orange-d); }
+  .btn-primary{ background:var(--orange); border-color:var(--orange); color:#fff; }
+  .btn-primary:hover{ background:var(--orange-d); border-color:var(--orange-d); color:#fff; }
+  .btn-ghost{ background:transparent; border-color:transparent; color:var(--ink-soft); }
+  .btn-ghost:hover{ color:var(--orange-d); border-color:transparent; }
+  .btn-sm{ padding:6px 10px; font-size:.8rem; }
+  .btn-danger{ color:var(--bad); border-color:color-mix(in srgb, var(--bad) 40%, var(--line)); }
+
+  input[type=text], input[type=email], input[type=date], input[type=time], input[type=number], textarea, select{
+    width:100%; font:inherit; font-size:.92rem; color:var(--ink); background:var(--surface);
+    border:1px solid var(--line-strong); border-radius:var(--radius-sm); padding:9px 11px; }
+  input:focus, textarea:focus, select:focus{ outline:2px solid var(--orange); outline-offset:1px; border-color:var(--orange); }
+  textarea{ min-height:74px; resize:vertical; font-family:inherit; }
+  label{ display:block; font-weight:700; font-size:.82rem; margin:0 0 4px; }
+  .field{ margin-bottom:12px; }
+  .field .h{ font-weight:400; color:var(--ink-soft); font-size:.78rem; margin-top:2px; }
+  .form-row{ display:grid; grid-template-columns:1fr 1fr; gap:10px; } @media(max-width:520px){ .form-row{ grid-template-columns:1fr; } }
+
+  .pill{ display:inline-block; font-size:10px; font-weight:800; letter-spacing:.03em; text-transform:uppercase; border-radius:6px; padding:3px 8px; white-space:nowrap; }
+  .pill-stub{ color:var(--ink-faint); background:transparent; border:1px dashed var(--line-strong); text-transform:none; letter-spacing:0; font-weight:700; }
+  .pill-live{ color:#fff; background:var(--green); }
+  .pill-warn{ color:#fff; background:var(--warn); }
+  .pill-bad{ color:#fff; background:var(--bad); }
+  .pill-info{ color:#fff; background:var(--teal); }
+  .pill-neutral{ color:var(--ink-soft); background:var(--surface-2); border:1px solid var(--line); text-transform:none; letter-spacing:0; font-weight:700; }
+
+  .card{ background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:16px 18px; }
+  .note{ background:var(--surface-2); border:1px solid var(--line); border-radius:var(--radius-sm); padding:11px 13px; font-size:.83rem; color:var(--ink-soft); }
+  .note b{ color:var(--ink); }
+  .stub-flag{ display:inline-flex; align-items:center; gap:5px; }
+
+  details.add-box{ margin:16px 0; border:1px solid var(--line); border-radius:var(--radius); background:var(--surface); overflow:hidden; }
+  details.add-box > summary{ cursor:pointer; list-style:none; padding:12px 16px; font-weight:700; font-size:.88rem; color:var(--orange-d); display:flex; align-items:center; gap:8px; }
+  details.add-box > summary::-webkit-details-marker{ display:none; }
+  details.add-box > summary::before{ content:"+"; font-size:1.1em; }
+  details.add-box[open] > summary::before{ content:"–"; }
+  details.add-box form{ padding:4px 16px 16px; border-top:1px solid var(--line-soft, var(--line)); }
+
+  h2.section-title{ font-size:1.3rem; font-weight:800; letter-spacing:-.01em; margin:0 0 4px; }
+  p.section-sub{ color:var(--ink-soft); font-size:.9rem; margin:0 0 18px; max-width:60ch; }
+
+  /* ---------- sign-in screen ---------- */
+  #signin{ min-height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:40px 18px; }
+  .signin-box{ width:100%; max-width:400px; }
+  .signin-logo-row{ display:flex; align-items:center; gap:10px; justify-content:center; margin-bottom:26px; }
+  .signin-logo-row img{ width:34px; height:34px; border-radius:8px; object-fit:cover; background:#fff; border:1px solid var(--line); }
+  .signin-logo-row .nm b{ display:block; font-weight:800; font-size:15px; }
+  .signin-logo-row .nm span{ display:block; font-size:11px; color:var(--ink-faint); text-transform:uppercase; letter-spacing:.09em; }
+  .signin-card{ background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:28px 26px; box-shadow:0 2px 6px rgba(20,30,60,.05), 0 14px 34px rgba(20,30,60,.06); }
+  .signin-card h1{ font-size:1.35rem; font-weight:800; letter-spacing:-.01em; margin:0 0 6px; }
+  .signin-card .lede{ color:var(--ink-soft); font-size:.9rem; margin:0 0 20px; }
+  .signin-eyebrow{ font-family:var(--mono); font-size:10.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--orange); margin:0 0 10px; }
+  .divider{ display:flex; align-items:center; gap:10px; margin:20px 0; color:var(--ink-faint); font-size:.78rem; text-transform:uppercase; letter-spacing:.08em; }
+  .divider::before, .divider::after{ content:""; flex:1; height:1px; background:var(--line); }
+  .sent-panel{ background:var(--surface-2); border:1px solid var(--line); border-radius:var(--radius-sm); padding:14px 16px; margin-top:6px; }
+  .sent-panel .addr{ font-weight:700; }
+  .signin-foot{ text-align:center; margin-top:18px; font-size:.78rem; color:var(--ink-faint); }
+  .demo-btn-wrap{ margin-top:4px; }
+  .full{ width:100%; justify-content:center; }
+
+  /* ---------- app shell ---------- */
+  #app{ min-height:100%; display:flex; flex-direction:column; }
+  .topbar{ display:flex; align-items:center; gap:12px; padding:9px 16px; background:var(--navy-d); color:#fff; position:sticky; top:0; z-index:40; }
+  .topbar img{ width:26px; height:26px; border-radius:6px; object-fit:cover; background:#fff; flex:none; }
+  .topbar .biz b{ font-weight:800; font-size:13.5px; letter-spacing:.01em; display:block; }
+  .topbar .biz span{ font-size:10px; text-transform:uppercase; letter-spacing:.09em; opacity:.72; display:block; }
+  .topbar .right{ margin-left:auto; display:flex; align-items:center; gap:8px; }
+  .topbar .owner{ font-size:11.5px; opacity:.85; text-align:right; margin-right:4px; }
+  .topbar .owner b{ display:block; font-size:12px; }
+  .topbar .ctrlbtn{ font-family:var(--mono); font-size:11px; font-weight:700; color:#fff; background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.25); border-radius:8px; padding:6px 10px; cursor:pointer; }
+  .topbar .ctrlbtn:hover{ background:rgba(255,255,255,.2); }
+  @media(max-width:640px){ .topbar .owner{ display:none; } }
+
+  .shell{ display:grid; grid-template-columns:230px 1fr; flex:1; min-height:0; }
+  @media(max-width:860px){ .shell{ grid-template-columns:1fr; } }
+  .sidebar{ border-right:1px solid var(--line); background:var(--surface); padding:16px 12px; display:flex; flex-direction:column; }
+  @media(max-width:860px){ .sidebar{ border-right:none; border-bottom:1px solid var(--line); flex-direction:row; overflow-x:auto; padding:10px 12px; gap:4px; } }
+  .nav-lead{ font-family:var(--mono); font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-faint); padding:4px 10px 8px; }
+  @media(max-width:860px){ .nav-lead{ display:none; } }
+  .nav-list{ display:flex; flex-direction:column; gap:2px; }
+  @media(max-width:860px){ .nav-list{ flex-direction:row; } }
+  .nav-item{ display:flex; align-items:center; gap:10px; width:100%; text-align:left; background:none; border:none; cursor:pointer; padding:9px 10px; border-radius:9px; color:var(--ink-soft); font:inherit; font-size:.87rem; font-weight:600; white-space:nowrap; }
+  .nav-item:hover{ background:var(--surface-2); color:var(--ink); }
+  .nav-item[aria-current="page"]{ background:color-mix(in srgb, var(--orange) 13%, transparent); color:var(--orange-d); }
+  .nav-item .ic{ width:18px; height:18px; flex:none; }
+  .nav-sep{ height:1px; background:var(--line); margin:10px 6px; }
+  @media(max-width:860px){ .nav-sep{ width:1px; height:auto; align-self:stretch; margin:0 4px; } }
+  .nav-foot{ margin-top:auto; padding-top:10px; }
+  @media(max-width:860px){ .nav-foot{ display:none; } }
+
+  main.stage{ padding:26px clamp(16px,4vw,40px) 60px; max-width:980px; width:100%; }
+
+  /* overview */
+  .stat-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:12px; margin:18px 0 24px; }
+  .stat-tile{ background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:16px 16px; }
+  .stat-tile .v{ font-size:1.7rem; font-weight:800; letter-spacing:-.01em; }
+  .stat-tile .k{ font-size:.78rem; color:var(--ink-soft); margin-top:2px; }
+  .stat-tile .extra{ font-size:.72rem; color:var(--ink-faint); margin-top:6px; }
+  .module-links{ display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:10px; margin-top:6px; }
+  .module-link{ display:flex; align-items:center; gap:10px; background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:13px 14px; cursor:pointer; text-align:left; font:inherit; }
+  .module-link:hover{ border-color:var(--orange); }
+  .module-link b{ display:block; font-size:.92rem; } .module-link span{ display:block; font-size:.78rem; color:var(--ink-soft); }
+
+  /* kanban */
+  .board{ display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:16px; }
+  @media(max-width:820px){ .board{ grid-template-columns:1fr 1fr; } }
+  @media(max-width:480px){ .board{ grid-template-columns:1fr; } }
+  .col{ background:var(--surface-2); border:1px solid var(--line); border-radius:var(--radius); padding:10px; min-height:120px; }
+  .col.drag-over{ outline:2px dashed var(--orange); outline-offset:-4px; }
+  .col-head{ display:flex; align-items:center; justify-content:space-between; padding:4px 4px 10px; }
+  .col-head b{ font-size:.82rem; text-transform:uppercase; letter-spacing:.04em; color:var(--ink-soft); }
+  .col-head .cnt{ font-size:.72rem; color:var(--ink-faint); background:var(--surface); border:1px solid var(--line); border-radius:999px; padding:1px 7px; }
+  .kcard{ background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:10px 11px; margin-bottom:8px; cursor:grab; }
+  .kcard:active{ cursor:grabbing; }
+  .kcard b{ display:block; font-size:.86rem; }
+  .kcard .org{ font-size:.76rem; color:var(--ink-soft); }
+  .kcard .note{ margin-top:6px; padding:6px 8px; font-size:.72rem; }
+  .kcard .mv{ margin-top:8px; }
+  .kcard .mv select{ font-size:.74rem; padding:5px 6px; }
+  .kcard .rm{ float:right; }
+
+  /* lists / tables */
+  .list{ display:flex; flex-direction:column; gap:10px; margin-top:16px; }
+  .row-card{ background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:13px 15px; display:flex; gap:14px; align-items:flex-start; flex-wrap:wrap; }
+  .row-card .main{ flex:1; min-width:200px; }
+  .row-card .main b{ display:block; font-size:.94rem; }
+  .row-card .meta{ font-size:.78rem; color:var(--ink-soft); margin-top:2px; }
+  .row-card .side{ display:flex; align-items:center; gap:8px; flex:none; }
+  .empty{ color:var(--ink-faint); font-size:.86rem; padding:18px; text-align:center; border:1px dashed var(--line-strong); border-radius:var(--radius); }
+
+  .tablewrap{ overflow-x:auto; margin-top:16px; }
+  table.dt{ width:100%; border-collapse:collapse; font-size:.86rem; }
+  table.dt th{ font-family:var(--mono); font-size:10px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-faint); font-weight:700; padding:8px 10px; text-align:left; border-bottom:1px solid var(--line); white-space:nowrap; }
+  table.dt td{ padding:10px 10px; border-bottom:1px solid var(--line); vertical-align:middle; }
+  table.dt tr:last-child td{ border-bottom:none; }
+
+  /* inbox */
+  .msg{ background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:13px 15px; margin-bottom:10px; }
+  .msg.unread{ border-left:3px solid var(--orange); }
+  .msg-head{ display:flex; justify-content:space-between; gap:10px; align-items:baseline; }
+  .msg-head b{ font-size:.9rem; }
+  .msg-head .dt{ font-size:.74rem; color:var(--ink-faint); flex:none; }
+  .msg-sub{ font-size:.86rem; font-weight:700; margin-top:3px; }
+  .msg-prev{ font-size:.82rem; color:var(--ink-soft); margin-top:3px; }
+  .msg-status{ margin-top:8px; display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+  .msg-draft{ margin-top:10px; border-top:1px dashed var(--line); padding-top:10px; }
+
+  /* settings */
+  .settings-grid{ display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:16px; } @media(max-width:760px){ .settings-grid{ grid-template-columns:1fr; } }
+  #profileJsonOut{ width:100%; min-height:220px; font-family:var(--mono); font-size:11px; }
+  .modchecks{ display:flex; flex-direction:column; gap:8px; margin-top:6px; }
+  .modchk{ display:flex; gap:10px; align-items:flex-start; background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:10px 12px; }
+  .modchk input{ margin-top:2px; accent-color:var(--orange); width:16px; height:16px; flex:none; }
+  .modchk b{ font-size:.86rem; display:block; } .modchk span{ font-size:.76rem; color:var(--ink-soft); }
+
+  .toast{ position:fixed; bottom:18px; left:50%; transform:translateX(-50%); background:var(--navy-d); color:#fff; font-size:.82rem; font-weight:600; padding:10px 18px; border-radius:999px; box-shadow:0 8px 24px rgba(0,0,0,.25); z-index:100; opacity:0; pointer-events:none; transition:opacity .18s ease, transform .18s ease; }
+  .toast.show{ opacity:1; transform:translateX(-50%) translateY(-4px); }
+
+  .form-actions{ display:flex; gap:10px; margin-top:6px; }
+</style>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to main content</a>
+
+<!-- ================= SIGN-IN ================= -->
+<section id="signin">
+  <div class="signin-box">
+    <div class="signin-logo-row">
+      <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAASABIAAD/4QBMRXhpZgAATU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAgKADAAQAAAABAAAAgAAAAAD/4QnSaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLwA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJYTVAgQ29yZSA2LjAuMCI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnBob3Rvc2hvcD0iaHR0cDovL25zLmFkb2JlLmNvbS9waG90b3Nob3AvMS4wLyIgcGhvdG9zaG9wOkluc3RydWN0aW9ucz0iRkJNRDBhMDAwYTA3MDIwMDAwYmQwYTAwMDBjMzE0MDAwMDU3MTYwMDAwNTkxODAwMDBhMjIxMDAwMDBhMzIwMDAwYmMzNDAwMDA2OTM2MDAwMDMxMzgwMDAwMmI0YzAwMDAiLz4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8P3hwYWNrZXQgZW5kPSJ3Ij8+AP/tAK5QaG90b3Nob3AgMy4wADhCSU0EBAAAAAAAdhwBWgADGyVHHAIAAAIAAhwCKABiRkJNRDBhMDAwYTA3MDIwMDAwYmQwYTAwMDBjMzE0MDAwMDU3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" alt="Vision Outreach Media logo">
+      <div class="nm"><b>Client Business Hub</b><span>Vision Outreach Media · Turnkey</span></div>
+    </div>
+    <div class="signin-card">
+      <p class="signin-eyebrow">Passwordless sign-in</p>
+      <h1>Log in to run your business</h1>
+      <p class="lede">Enter the email your business hub is registered to. We'll send a one-time sign-in link — no password to remember.</p>
+
+      <form id="magicForm">
+        <div class="field">
+          <label for="magicEmail">Work email</label>
+          <input type="email" id="magicEmail" name="email" placeholder="owner@yourbusiness.org" autocomplete="email" required>
+        </div>
+        <button type="submit" class="btn btn-primary full" id="magicSubmitBtn" disabled>Send magic link</button>
+        <p class="note" style="margin-top:10px" id="magicFormNote"><span class="stub-flag"><span class="pill pill-stub">stub — needs backend</span></span> No email is actually sent in this prototype. Real magic-link delivery, token verification and session cookies require a backend.</p>
+      </form>
+
+      <div id="sentPanel" class="sent-panel hidden" role="status" aria-live="polite"></div>
+
+      <div class="divider" id="signinDivider">or</div>
+      <div class="demo-btn-wrap" id="demoBtnWrap">
+        <button type="button" id="demoBtn" class="btn full" disabled>Continue as demo owner</button>
+      </div>
+    </div>
+    <p class="signin-foot">Prototype only. No real credentials are collected or verified anywhere on this screen.</p>
+    <p class="signin-foot" id="signinModeNote" style="margin-top:4px"></p>
+  </div>
+</section>
+
+<!-- ================= APP SHELL ================= -->
+<div id="app" class="hidden">
+  <header class="topbar">
+    <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAASABIAAD/4QBMRXhpZgAATU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAgKADAAQAAAABAAAAgAAAAAD/4QnSaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLwA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJYTVAgQ29yZSA2LjAuMCI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnBob3Rvc2hvcD0iaHR0cDovL25zLmFkb2JlLmNvbS9waG90b3Nob3AvMS4wLyIgcGhvdG9zaG9wOkluc3RydWN0aW9ucz0iRkJNRDBhMDAwYTA3MDIwMDAwYmQwYTAwMDBjMzE0MDAwMDU3MTYwMDAwNTkxODAwMDBhMjIxMDAwMDBhMzIwMDAwYmMzNDAwMDA2OTM2MDAwMDMxMzgwMDAwMmI0YzAwMDAiLz4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8P3hwYWNrZXQgZW5kPSJ3Ij8+AP/tAK5QaG90b3Nob3AgMy4wADhCSU0EBAAAAAAAdhwBWgADGyVHHAIAAAIAAhwCKABiRkJNRDBhMDAwYTA3MDIwMDAwYmQwYTAwMDBjMzE0MDAwMDU3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" alt="Vision Outreach Media logo">
+    <div class="biz"><b id="bizName">—</b><span>Client Business Hub</span></div>
+    <div class="right">
+      <div class="owner"><b id="ownerName">—</b><span id="ownerEmail"></span></div>
+      <span class="pill pill-neutral" id="modeIndicator" title="Connection mode">Local only</span>
+      <button class="ctrlbtn" id="themeBtn" title="Toggle light / dark" aria-label="Toggle light / dark theme">◐</button>
+      <button class="ctrlbtn" id="signOutBtn">Sign out</button>
+    </div>
+  </header>
+
+  <div class="shell">
+    <nav class="sidebar" aria-label="Hub navigation">
+      <div class="nav-lead">Modules</div>
+      <div class="nav-list" id="navList"></div>
+      <div class="nav-foot">
+        <div class="nav-sep"></div>
+        <button class="nav-item" data-nav="settings" id="settingsNavBtn">⚙ Settings</button>
+      </div>
+    </nav>
+
+    <main class="stage" id="main" tabindex="-1"></main>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ============================================================
+     MODULE CATALOG — key must match business-operating-profile
+     `client_hub` array values produced by launch-wizard.html
+     ============================================================ */
+  var MODULES = [
+    { key:"crm",      label:"CRM",                    icon:"◧", blurb:"Prospect → Lead → Customer → Retained pipeline." },
+    { key:"content",  label:"Content & calendar",      icon:"▤", blurb:"What's shipping, and when." },
+    { key:"bookings", label:"Bookings & events",       icon:"▦", blurb:"Upcoming bookings and events." },
+    { key:"inbox",    label:"Inbox & follow-ups",      icon:"✉", blurb:"Messages and drafted replies." },
+    { key:"payments", label:"Payments & invoices",     icon:"◆", blurb:"Invoice status at a glance." },
+    { key:"reports",  label:"Reports",                 icon:"▥", blurb:"The monthly proof-of-value snapshot." }
+  ];
+  var STAGES = ["prospect","lead","customer","retained"];
+  var STAGE_LABEL = { prospect:"Prospect", lead:"Lead", customer:"Customer", retained:"Retained" };
+
+  var SAMPLE_PROFILE = {
+    business: "Grace Community Church",
+    tagline: "A growing church family in the heart of town",
+    org_type: "church",
+    stack: "wordpress",
+    domain: { mode:"custom", value:"gracecommunitychurch.org" },
+    pages: ["home","about","give","events","contact"],
+    payments: { stripe:true, subscriptions:true, ideal:true, donations:true, currency:"EUR" },
+    features: ["crm","booking","inbox"],
+    publications: { engage_ai:true, content_studio:true, social_swarm:true, lead_outreach:false, channels:["facebook","instagram","youtube","google_business"] },
+    operations_model: "hybrid",
+    client_hub: ["crm","bookings","inbox","reports"],
+    owner: { name:"Pastor James Whitfield", email:"james@gracecommunitychurch.org", role:"Lead Pastor" }
+  };
+
+  var SEED_DATA = {
+    crm: [
+      { id:"c1", name:"Sarah Mitchell", org:"Wedding inquiry", stage:"prospect", note:"Asked about Saturday availability in September." },
+      { id:"c2", name:"Marcus Webb", org:"New visitor, July 21 service", stage:"prospect", note:"" },
+      { id:"c3", name:"Tom & Ellen Baxter", org:"Baptism follow-up", stage:"lead", note:"Scheduled for Aug 9, needs reception room too." },
+      { id:"c4", name:"Riverside Youth Group", org:"Monthly facility rental", stage:"customer", note:"Rents fellowship hall 2nd Friday each month." },
+      { id:"c5", name:"First Fellowship Partners", org:"Annual sponsorship", stage:"retained", note:"5th year renewing; invoice sent." }
+    ],
+    content: [
+      { id:"n1", title:"Sunday message: Faith in Action", channel:"youtube", date:"2026-07-26", status:"shipped" },
+      { id:"n2", title:"Weekly newsletter #31", channel:"email", date:"2026-07-28", status:"shipped" },
+      { id:"n3", title:"Facebook event — Community BBQ", channel:"facebook", date:"2026-08-09", status:"drafted" },
+      { id:"n4", title:"Instagram reel — worship highlights", channel:"instagram", date:"2026-08-02", status:"planned" }
+    ],
+    bookings: [
+      { id:"b1", title:"Sunday Worship Service", date:"2026-08-02", time:"10:00", contact:"Congregation (recurring)", notes:"Sanctuary" },
+      { id:"b2", title:"Baxter baptism + reception", date:"2026-08-09", time:"11:30", contact:"Tom & Ellen Baxter", notes:"Sanctuary + fellowship hall" },
+      { id:"b3", title:"Youth group facility rental", date:"2026-08-14", time:"18:00", contact:"Riverside Youth Group", notes:"Fellowship hall" }
+    ],
+    inbox: [
+      { id:"m1", from:"Sarah Mitchell <sarah.mitchell@email.com>", subject:"Question about wedding venue availability", preview:"Hi, we're hoping to book the sanctuary for a Saturday in September — is it...", date:"2026-07-30", status:"unread", draft:"" },
+      { id:"m2", from:"Riverside Youth Group <contact@riversideyouth.org>", subject:"Thanks + next month's rental", preview:"Thank you again for hosting us Friday. Can we confirm the same date next...", date:"2026-07-29", status:"read", draft:"" },
+      { id:"m3", from:"A. Reyes <newsletter-reply@gracecommunitychurch.org>", subject:"Loved this week's message!", preview:"Just wanted to say the sermon on Sunday really spoke to me, thank you...", date:"2026-07-27", status:"sent", draft:"So glad it landed — thank you for letting us know! See you Sunday." }
+    ],
+    payments: [
+      { id:"i1", num:"INV-1042", client:"Riverside Youth Group", amount:450, currency:"EUR", status:"paid", date:"2026-07-15" },
+      { id:"i2", num:"INV-1043", client:"First Fellowship Partners", amount:1200, currency:"EUR", status:"sent", date:"2026-07-28" },
+      { id:"i3", num:"INV-1044", client:"Baxter Family", amount:150, currency:"EUR", status:"draft", date:"2026-07-30" }
+    ]
+  };
+
+  var STORE_KEY = "vom_client_hub_v1";
+  var API_BASE = "/api";
+
+  /* BACKEND.mode: "local" (no backend / static deploy) or "connected" (real API present).
+     Resolved once at boot by probing GET /api/session — see boot() at the bottom of this file. */
+  var BACKEND = { mode:"local", authed:false, owner:null };
+  var state;        // assigned once boot() resolves the tenant profile + initial data
+  var booted = false;
+
+  function clone(o){ return JSON.parse(JSON.stringify(o)); }
+
+  function defaultState(profile){
+    return {
+      session: { signedIn:false, email:"", name:"" },
+      profile: clone(profile || SAMPLE_PROFILE),
+      data: clone(SEED_DATA),
+      ui: { activeModule:"overview" }
+    };
+  }
+
+  /* ---- low-level fetch helper: same-origin, credentialed, short-timeout ---- */
+  function apiFetch(path, opts){
+    opts = opts || {};
+    opts.credentials = "include";
+    opts.headers = Object.assign({ "Accept":"application/json" }, opts.headers||{});
+    var hasAbort = typeof AbortController !== "undefined";
+    var controller = hasAbort ? new AbortController() : null;
+    var timer;
+    if(controller){ opts.signal = controller.signal; timer = setTimeout(function(){ controller.abort(); }, 4000); }
+    return fetch(API_BASE + path, opts).then(function(res){
+      if(timer) clearTimeout(timer);
+      return res;
+    }, function(err){
+      if(timer) clearTimeout(timer);
+      throw err;
+    });
+  }
+  function readJSON(res){
+    var ct = (res.headers && res.headers.get) ? (res.headers.get("content-type")||"") : "";
+    if(ct.indexOf("json") === -1) return Promise.resolve({});
+    return res.json().catch(function(){ return {}; });
+  }
+
+  /* ---- 1. is there a real backend at all? ----
+     GET /api/session. Any successful JSON response (authed true or false) means
+     "connected mode". A network error, non-2xx, or non-JSON response (e.g. a static
+     host's 404 page, or file:// with no server at all) means static-only — fall back
+     to localStorage exactly as this hub always has. */
+  function probeBackend(){
+    return apiFetch("/session").then(function(res){
+      if(!res.ok) throw new Error("no backend");
+      return readJSON(res);
+    }).then(function(j){
+      // Only trust the backend for auth + storage when it reports a PERSISTENT (KV) store.
+      // On serverless, an ephemeral MemoryStore is per-instance and can't complete the
+      // magic-link round-trip, so treat it as absent and stay in local-only mode until the
+      // operator sets KV_REST_API_URL + KV_REST_API_TOKEN.
+      var persistent = !!(j && j.persistent);
+      return { present: persistent, authed: persistent && !!(j && j.authed), owner: (persistent && j && j.owner) || null };
+    }).catch(function(){
+      return { present:false, authed:false, owner:null };
+    });
+  }
+
+  /* ---- 2. tenant operating profile ----
+     Source order: window.__TENANT__ (injected by provision.sh for a per-tenant bundle)
+     → GET /api/tenant (connected mode only) → the baked church sample. Whatever is
+     found is layered on top of SAMPLE_PROFILE so a partial profile still has every
+     field the UI expects. */
+  function resolveInitialProfile(backendPresent){
+    if(window.__TENANT__ && typeof window.__TENANT__ === "object" && Object.keys(window.__TENANT__).length){
+      return Promise.resolve(Object.assign(clone(SAMPLE_PROFILE), clone(window.__TENANT__)));
+    }
+    if(backendPresent){
+      return apiFetch("/tenant").then(function(res){
+        if(!res.ok) return {};
+        return readJSON(res);
+      }).catch(function(){ return {}; }).then(function(t){
+        if(t && typeof t === "object" && Object.keys(t).length){
+          return Object.assign(clone(SAMPLE_PROFILE), t);
+        }
+        return clone(SAMPLE_PROFILE);
+      });
+    }
+    return Promise.resolve(clone(SAMPLE_PROFILE));
+  }
+
+  /* ---- 3a. local-only load (static deploy) — identical behaviour to before, just
+     seeded from the resolved tenant profile instead of always the baked sample. Any
+     profile/data already saved in this browser's localStorage still wins on top of
+     that seed, exactly as it did previously (so Settings edits keep surviving reloads). */
+  function loadLocal(profile){
+    var d = defaultState(profile);
+    try{
+      var raw = localStorage.getItem(STORE_KEY);
+      if(!raw) return d;
+      var s = JSON.parse(raw);
+      s.session = Object.assign(d.session, s.session||{});
+      s.profile = Object.assign(d.profile, s.profile||{});
+      s.data = s.data||{};
+      Object.keys(d.data).forEach(function(k){ if(!Array.isArray(s.data[k])) s.data[k]=d.data[k]; });
+      s.ui = Object.assign(d.ui, s.ui||{});
+      return s;
+    }catch(e){ return d; }
+  }
+
+  /* ---- 3b. connected load — GET /api/state (session-gated; {} if nothing saved yet) ---- */
+  function loadRemoteState(profile){
+    var d = defaultState(profile);
+    return apiFetch("/state").then(function(res){
+      if(!res.ok) return {};
+      return readJSON(res);
+    }).catch(function(){ return {}; }).then(function(remote){
+      if(!remote || typeof remote !== "object" || !Object.keys(remote).length) return d;
+      var s = {};
+      s.session = clone(d.session); // session comes from the cookie / GET /api/session, not /api/state
+      s.profile = Object.assign(clone(d.profile), remote.profile||{});
+      s.data = (remote.data && typeof remote.data === "object") ? remote.data : {};
+      Object.keys(d.data).forEach(function(k){ if(!Array.isArray(s.data[k])) s.data[k]=d.data[k]; });
+      s.ui = Object.assign(clone(d.ui), remote.ui||{});
+      return s;
+    });
+  }
+
+  /* ---- persist: local mode writes localStorage synchronously (unchanged behaviour);
+     connected mode debounces a PUT /api/state with the editable slice of state. ---- */
+  var remotePersistTimer;
+  function persistRemote(){
+    clearTimeout(remotePersistTimer);
+    remotePersistTimer = setTimeout(function(){
+      apiFetch("/state", {
+        method:"PUT",
+        headers:{ "Content-Type":"application/json" },
+        body: JSON.stringify({ state:{ profile:state.profile, data:state.data, ui:state.ui } })
+      }).catch(function(){ /* best-effort; local UI state already reflects the change */ });
+    }, 700);
+  }
+  function persist(){
+    if(BACKEND.mode === "connected"){ persistRemote(); return; }
+    try{ localStorage.setItem(STORE_KEY, JSON.stringify(state)); }catch(e){}
+  }
+
+  function uid(prefix){ return prefix + Math.random().toString(36).slice(2,8); }
+  function esc(str){
+    return String(str==null?"":str).replace(/[&<>"']/g, function(c){
+      return ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[c];
+    });
+  }
+  function qs(sel, root){ return (root||document).querySelector(sel); }
+  function qsa(sel, root){ return Array.prototype.slice.call((root||document).querySelectorAll(sel)); }
+
+  var toastEl = qs("#toast"); var toastT;
+  function toast(msg){
+    toastEl.textContent = msg;
+    toastEl.classList.add("show");
+    clearTimeout(toastT);
+    toastT = setTimeout(function(){ toastEl.classList.remove("show"); }, 1800);
+  }
+
+  /* ============================================================
+     THEME
+     ============================================================ */
+  qs("#themeBtn").addEventListener("click", function(){
+    var r = document.documentElement;
+    var cur = r.getAttribute("data-theme") || (matchMedia("(prefers-color-scheme:dark)").matches ? "dark" : "light");
+    r.setAttribute("data-theme", cur === "dark" ? "light" : "dark");
+  });
+
+  /* ============================================================
+     SIGN-IN
+     ============================================================ */
+  var signinEl = qs("#signin"), appEl = qs("#app");
+
+  function deriveName(email){
+    var handle = ((email||"").split("@")[0] || "Owner").replace(/[._]+/g," ");
+    return handle.replace(/\b\w/g, function(c){ return c.toUpperCase(); }) || "Owner";
+  }
+
+  qs("#magicForm").addEventListener("submit", function(e){
+    e.preventDefault();
+    if(!booted){ toast("Still connecting — try again in a second."); return; }
+    var email = qs("#magicEmail").value.trim();
+    if(!email) return;
+    var panel = qs("#sentPanel");
+    panel.dataset.email = email;
+    panel.classList.remove("hidden");
+    if(BACKEND.mode === "connected"){ requestMagicLinkRemote(email); }
+    else { showSentPanelLocal(email); toast("Stub: link \"sent\" — nothing was emailed."); }
+  });
+
+  // ---- local (static-only) sent panel: identical stub behaviour to before ----
+  function showSentPanelLocal(email){
+    var panel = qs("#sentPanel");
+    panel.innerHTML =
+      '<p style="margin:0 0 8px">Check your email. We&#39;ve sent a sign-in link to <span class="addr">'+esc(email)+'</span>.</p>'+
+      '<button type="button" id="clickLinkBtn" class="btn btn-primary full">I clicked the link → continue</button>'+
+      '<p class="note" style="margin-top:10px"><span class="pill pill-stub">stub — needs backend</span> No email is actually sent in this prototype.</p>';
+    qs("#clickLinkBtn").addEventListener("click", function(){
+      var e = qs("#sentPanel").dataset.email || email;
+      signInLocal(e, deriveName(e));
+    });
+  }
+
+  // ---- connected sent panel: POST /api/auth/request, show devLink if the backend is in stub mode ----
+  function requestMagicLinkRemote(email){
+    var btn = qs("#magicSubmitBtn");
+    if(btn) btn.disabled = true;
+    var panel = qs("#sentPanel");
+    panel.innerHTML = '<p style="margin:0">Requesting your sign-in link…</p>';
+    apiFetch("/auth/request", {
+      method:"POST",
+      headers:{ "Content-Type":"application/json" },
+      body: JSON.stringify({ email:email })
+    }).then(function(res){ return readJSON(res); })
+      .then(function(j){ showSentPanelRemote(email, j && j.devLink); })
+      .catch(function(){
+        panel.innerHTML = '<p style="margin:0">Couldn&#39;t reach the sign-in service. Please try again.</p>';
+      })
+      .then(function(){ if(btn) btn.disabled = false; });
+  }
+  function showSentPanelRemote(email, devLink){
+    var panel = qs("#sentPanel");
+    var html = '<p style="margin:0 0 8px">If an account exists for <span class="addr">'+esc(email)+'</span>, a sign-in link was just sent.</p>';
+    if(devLink){
+      html += '<p class="note" style="margin-bottom:10px"><span class="pill pill-stub">dev mode</span> No real email service is configured yet — use the link below to continue.</p>'+
+              '<a href="'+esc(devLink)+'" class="btn btn-primary full" id="devLinkBtn">Continue via sign-in link →</a>';
+    } else {
+      html += '<p class="note">Open the link on this device to continue.</p>';
+    }
+    panel.innerHTML = html;
+  }
+
+  qs("#demoBtn").addEventListener("click", function(){
+    if(!booted || BACKEND.mode === "connected") return;
+    var owner = (state.profile && state.profile.owner) || {};
+    signInLocal(owner.email || "demo.owner@example.org", owner.name || "Demo Owner");
+  });
+
+  function signInLocal(email, name){
+    state.session = { signedIn:true, email:email, name:name };
+    persist();
+    enterApp();
+  }
+
+  qs("#signOutBtn").addEventListener("click", function(){
+    if(BACKEND.mode === "connected"){
+      apiFetch("/auth/signout", { method:"POST" }).catch(function(){}).then(function(){
+        BACKEND.authed = false; BACKEND.owner = null;
+        if(state) state.session = { signedIn:false, email:"", name:"" };
+        backToSignIn();
+      });
+    } else {
+      if(state) state.session = { signedIn:false, email:"", name:"" };
+      persist();
+      backToSignIn();
+    }
+  });
+
+  function backToSignIn(){
+    appEl.classList.add("hidden");
+    signinEl.classList.remove("hidden");
+    var panel = qs("#sentPanel");
+    panel.classList.add("hidden");
+    panel.innerHTML = "";
+    qs("#magicForm").reset();
+  }
+
+  function enterApp(){
+    signinEl.classList.add("hidden");
+    appEl.classList.remove("hidden");
+    renderShell();
+    render();
+  }
+
+  /* ============================================================
+     MODE INDICATOR + BOOT — resolves backend presence & the tenant
+     profile once, builds initial `state`, then renders as before.
+     ============================================================ */
+  function applyModeUI(){
+    var connected = BACKEND.mode === "connected";
+    var pill = qs("#modeIndicator");
+    if(pill){
+      pill.textContent = connected ? "Connected" : "Local only";
+      pill.className = "pill " + (connected ? "pill-live" : "pill-neutral");
+      pill.title = connected ? "Using the client-hub API for sign-in and storage." : "No backend detected — data is stored only in this browser.";
+    }
+    var note = qs("#signinModeNote");
+    if(note) note.textContent = connected ? "Connected to the client-hub backend." : "No backend detected — running in local-only (this browser) mode.";
+    var divider = qs("#signinDivider"), demoWrap = qs("#demoBtnWrap");
+    if(divider) divider.classList.toggle("hidden", connected);
+    if(demoWrap) demoWrap.classList.toggle("hidden", connected);
+  }
+
+  function boot(){
+    probeBackend().then(function(probe){
+      BACKEND.mode = probe.present ? "connected" : "local";
+      BACKEND.authed = probe.authed;
+      BACKEND.owner = probe.owner;
+      return resolveInitialProfile(probe.present).then(function(profile){
+        if(BACKEND.mode === "connected"){
+          // /api/state is session-gated — only worth calling once we know we're authed.
+          return BACKEND.authed ? loadRemoteState(profile) : Promise.resolve(defaultState(profile));
+        }
+        return loadLocal(profile);
+      });
+    }).catch(function(){
+      BACKEND.mode = "local";
+      return loadLocal(clone(SAMPLE_PROFILE));
+    }).then(function(builtState){
+      state = builtState;
+      if(BACKEND.mode === "connected" && BACKEND.authed){
+        state.session = { signedIn:true, email: BACKEND.owner || "", name: deriveName(BACKEND.owner || "Owner") };
+      }
+      booted = true;
+      applyModeUI();
+      var submitBtn = qs("#magicSubmitBtn"); if(submitBtn) submitBtn.disabled = false;
+      var demoBtn = qs("#demoBtn"); if(demoBtn) demoBtn.disabled = (BACKEND.mode === "connected");
+      var signedIn = BACKEND.mode === "connected" ? BACKEND.authed : !!(state.session && state.session.signedIn);
+      if(signedIn) enterApp();
+    });
+  }
+
+  /* ============================================================
+     SHELL (sidebar + header) — driven by profile.client_hub
+     ============================================================ */
+  function enabledModules(){
+    var list = (state.profile && Array.isArray(state.profile.client_hub)) ? state.profile.client_hub : [];
+    return MODULES.filter(function(m){ return list.indexOf(m.key) !== -1; });
+  }
+
+  function renderShell(){
+    qs("#bizName").textContent = state.profile.business || "Unnamed business";
+    qs("#ownerName").textContent = state.session.name || "Owner";
+    qs("#ownerEmail").textContent = state.session.email || "";
+
+    var mods = enabledModules();
+    var items = [{ key:"overview", label:"Overview", icon:"⌂" }].concat(mods);
+    qs("#navList").innerHTML = items.map(function(m){
+      var on = state.ui.activeModule === m.key;
+      return '<button class="nav-item" data-nav="'+m.key+'" aria-current="'+(on?'page':'false')+'">'+
+             '<span class="ic" aria-hidden="true">'+m.icon+'</span><span>'+esc(m.label)+'</span></button>';
+    }).join("");
+
+    var setOn = state.ui.activeModule === "settings";
+    qs("#settingsNavBtn").setAttribute("aria-current", setOn ? "page" : "false");
+
+    qsa("[data-nav]").forEach(function(btn){
+      btn.addEventListener("click", function(){
+        state.ui.activeModule = btn.getAttribute("data-nav");
+        persist();
+        renderShell();
+        render();
+        qs("#main").focus();
+      });
+    });
+  }
+
+  /* ============================================================
+     ROUTER
+     ============================================================ */
+  function render(){
+    var mods = enabledModules();
+    var active = state.ui.activeModule;
+    var allowed = ["overview","settings"].concat(mods.map(function(m){return m.key;}));
+    if(allowed.indexOf(active) === -1){ active = "overview"; state.ui.activeModule = "overview"; persist(); }
+
+    var main = qs("#main");
+    if(active === "overview") main.innerHTML = viewOverview();
+    else if(active === "settings") main.innerHTML = viewSettings();
+    else if(active === "crm") main.innerHTML = viewCrm();
+    else if(active === "content") main.innerHTML = viewContent();
+    else if(active === "bookings") main.innerHTML = viewBookings();
+    else if(active === "inbox") main.innerHTML = viewInbox();
+    else if(active === "payments") main.innerHTML = viewPayments();
+    else if(active === "reports") main.innerHTML = viewReports();
+    wireActiveView(active);
+  }
+
+  function wireActiveView(active){
+    if(active === "settings") wireSettings();
+    else if(active === "crm") wireCrm();
+    else if(active === "content") wireContent();
+    else if(active === "bookings") wireBookings();
+    else if(active === "inbox") wireInbox();
+    else if(active === "payments") wirePayments();
+    else if(active === "reports") wireReports();
+    else if(active === "overview") wireOverview();
+  }
+
+  /* ============================================================
+     OVERVIEW
+     ============================================================ */
+  function viewOverview(){
+    var p = state.profile, mods = enabledModules();
+    var thisMonthShipped = countThisMonth(state.data.content, "date", function(x){ return x.status === "shipped"; });
+    var revenue = sumThisMonth(state.data.payments, "date", "amount", function(x){ return x.status === "paid"; });
+    return ''+
+    '<p class="signin-eyebrow" style="margin-bottom:6px">Overview</p>'+
+    '<h2 class="section-title">Welcome back'+(state.session.name?", "+esc(state.session.name):"")+'</h2>'+
+    '<p class="section-sub">'+esc(p.business||"Your business")+(p.tagline?" — "+esc(p.tagline):"")+'. This hub shows only the modules turned on for your operating profile ('+mods.length+' of '+MODULES.length+' available).</p>'+
+    '<div class="stat-grid">'+
+      statTile(state.data.crm.filter(function(c){return c.stage!=="retained";}).length, "Open CRM contacts", "")+
+      statTile(thisMonthShipped, "Content shipped this month", "")+
+      statTile(state.data.bookings.length, "Upcoming bookings", "")+
+      statTile(fmtMoney(revenue,"EUR"), "Revenue this month (paid)", "")+
+    '</div>'+
+    '<h2 class="section-title" style="margin-top:6px">Your modules</h2>'+
+    '<div class="module-links" id="ovLinks">'+
+      (mods.length ? mods.map(function(m){ return '<button class="module-link" data-nav="'+m.key+'"><span aria-hidden="true" style="font-size:1.2rem">'+m.icon+'</span><span><b>'+esc(m.label)+'</b><span>'+esc(m.blurb)+'</span></span></button>'; }).join("") :
+      '<div class="empty">No modules are enabled for this profile yet. Open Settings to turn some on.</div>')+
+    '</div>'+
+    '<p class="note" style="margin-top:20px"><span class="pill pill-stub">stub — needs backend</span> Everything on this hub is stored only in this browser&#39;s local storage. A production hub needs real authentication, a database and API — nothing here currently talks to a server.</p>';
+  }
+  function wireOverview(){
+    qsa("#ovLinks [data-nav]").forEach(function(btn){
+      btn.addEventListener("click", function(){
+        state.ui.activeModule = btn.getAttribute("data-nav");
+        persist(); renderShell(); render(); qs("#main").focus();
+      });
+    });
+  }
+  function statTile(v,k,extra){
+    return '<div class="stat-tile"><div class="v tabnum">'+esc(v)+'</div><div class="k">'+esc(k)+'</div>'+(extra?'<div class="extra">'+esc(extra)+'</div>':'')+'</div>';
+  }
+
+  /* ============================================================
+     CRM — kanban
+     ============================================================ */
+  function viewCrm(){
+    var byStage = {}; STAGES.forEach(function(s){ byStage[s]=[]; });
+    state.data.crm.forEach(function(c){ (byStage[c.stage]||byStage.prospect).push(c); });
+    return ''+
+    '<h2 class="section-title">CRM</h2>'+
+    '<p class="section-sub">Move contacts through the pipeline as they move through their relationship with '+esc(state.profile.business||"the business")+'. Drag a card, or use its stage menu.</p>'+
+    '<details class="add-box"><summary>New CRM contact</summary>'+
+      '<form id="crmForm">'+
+        '<div class="form-row">'+
+          '<div class="field"><label for="crmName">Name</label><input type="text" id="crmName" name="name" required></div>'+
+          '<div class="field"><label for="crmOrg">Context / org</label><input type="text" id="crmOrg" name="org" placeholder="e.g. wedding inquiry"></div>'+
+        '</div>'+
+        '<div class="form-row">'+
+          '<div class="field"><label for="crmStage">Starting stage</label><select id="crmStage" name="stage">'+STAGES.map(function(s){return '<option value="'+s+'">'+STAGE_LABEL[s]+'</option>';}).join("")+'</select></div>'+
+          '<div class="field"><label for="crmNote">Note</label><input type="text" id="crmNote" name="note"></div>'+
+        '</div>'+
+        '<div class="form-actions"><button type="submit" class="btn btn-primary">Add contact</button></div>'+
+      '</form>'+
+    '</details>'+
+    '<div class="board" id="crmBoard">'+
+      STAGES.map(function(stage){
+        var cards = byStage[stage];
+        return '<div class="col" data-stage="'+stage+'">'+
+          '<div class="col-head"><b>'+STAGE_LABEL[stage]+'</b><span class="cnt">'+cards.length+'</span></div>'+
+          (cards.length ? cards.map(function(c){ return crmCard(c); }).join("") : '<div class="empty" style="padding:10px;font-size:.78rem">No cards</div>')+
+        '</div>';
+      }).join("")+
+    '</div>';
+  }
+  function crmCard(c){
+    return '<div class="kcard" draggable="true" data-id="'+c.id+'">'+
+      '<button class="btn btn-ghost btn-sm rm" data-action="crm-remove" data-id="'+c.id+'" aria-label="Remove '+esc(c.name)+'">✕</button>'+
+      '<b>'+esc(c.name)+'</b>'+(c.org?'<div class="org">'+esc(c.org)+'</div>':'')+
+      (c.note?'<div class="note">'+esc(c.note)+'</div>':'')+
+      '<div class="mv"><label class="hidden" for="mv-'+c.id+'">Move '+esc(c.name)+' to stage</label>'+
+      '<select id="mv-'+c.id+'" data-action="crm-move" data-id="'+c.id+'">'+
+        STAGES.map(function(s){ return '<option value="'+s+'"'+(s===c.stage?' selected':'')+'>'+STAGE_LABEL[s]+'</option>'; }).join("")+
+      '</select></div>'+
+    '</div>';
+  }
+  function wireCrm(){
+    var board = qs("#crmBoard");
+    qs("#crmForm").addEventListener("submit", function(e){
+      e.preventDefault();
+      var fd = new FormData(e.target);
+      var name = (fd.get("name")||"").toString().trim();
+      if(!name) return;
+      state.data.crm.push({ id:uid("c"), name:name, org:(fd.get("org")||"").toString().trim(), stage:fd.get("stage")||"prospect", note:(fd.get("note")||"").toString().trim() });
+      persist(); toast("Contact added."); render();
+    });
+    qsa('[data-action="crm-move"]', board).forEach(function(sel){
+      sel.addEventListener("change", function(){
+        var item = state.data.crm.find(function(c){ return c.id === sel.dataset.id; });
+        if(item){ item.stage = sel.value; persist(); toast(item.name+" moved to "+STAGE_LABEL[item.stage]+"."); render(); }
+      });
+    });
+    qsa('[data-action="crm-remove"]', board).forEach(function(btn){
+      btn.addEventListener("click", function(){
+        state.data.crm = state.data.crm.filter(function(c){ return c.id !== btn.dataset.id; });
+        persist(); render();
+      });
+    });
+    // drag & drop (mouse enhancement; the stage <select> above is the keyboard-accessible path)
+    qsa(".kcard", board).forEach(function(card){
+      card.addEventListener("dragstart", function(e){ e.dataTransfer.setData("text/plain", card.dataset.id); });
+    });
+    qsa(".col", board).forEach(function(col){
+      col.addEventListener("dragover", function(e){ e.preventDefault(); col.classList.add("drag-over"); });
+      col.addEventListener("dragleave", function(){ col.classList.remove("drag-over"); });
+      col.addEventListener("drop", function(e){
+        e.preventDefault(); col.classList.remove("drag-over");
+        var id = e.dataTransfer.getData("text/plain");
+        var item = state.data.crm.find(function(c){ return c.id === id; });
+        if(item){ item.stage = col.dataset.stage; persist(); render(); }
+      });
+    });
+  }
+
+  /* ============================================================
+     CONTENT & CALENDAR
+     ============================================================ */
+  var CONTENT_STATUS = ["planned","drafted","shipped"];
+  function viewContent(){
+    var items = state.data.content.slice().sort(function(a,b){ return a.date < b.date ? -1 : 1; });
+    return ''+
+    '<h2 class="section-title">Content &amp; calendar</h2>'+
+    '<p class="section-sub">What is planned, drafted and shipped, in date order.</p>'+
+    '<details class="add-box"><summary>New content item</summary>'+
+      '<form id="contentForm">'+
+        '<div class="field"><label for="ctTitle">Title</label><input type="text" id="ctTitle" name="title" required></div>'+
+        '<div class="form-row">'+
+          '<div class="field"><label for="ctDate">Date</label><input type="date" id="ctDate" name="date" required></div>'+
+          '<div class="field"><label for="ctChannel">Channel</label><select id="ctChannel" name="channel"><option>website</option><option>email</option><option>facebook</option><option>instagram</option><option>youtube</option><option>other</option></select></div>'+
+        '</div>'+
+        '<div class="field"><label for="ctStatus">Status</label><select id="ctStatus" name="status">'+CONTENT_STATUS.map(function(s){return '<option value="'+s+'">'+cap(s)+'</option>';}).join("")+'</select></div>'+
+        '<div class="form-actions"><button type="submit" class="btn btn-primary">Add content item</button></div>'+
+      '</form>'+
+    '</details>'+
+    '<div class="tablewrap"><table class="dt" id="contentTable">'+
+      '<thead><tr><th>Date</th><th>Title</th><th>Channel</th><th>Status</th><th></th></tr></thead>'+
+      '<tbody>'+ (items.length ? items.map(contentRow).join("") : '<tr><td colspan="5"><div class="empty">Nothing planned yet.</div></td></tr>') +'</tbody>'+
+    '</table></div>';
+  }
+  function contentRow(x){
+    var pillClass = x.status==="shipped" ? "pill-live" : x.status==="drafted" ? "pill-warn" : "pill-neutral";
+    return '<tr data-id="'+x.id+'"><td class="tabnum">'+esc(x.date)+'</td><td>'+esc(x.title)+'</td><td>'+esc(x.channel)+'</td>'+
+      '<td><select data-action="content-status" data-id="'+x.id+'" aria-label="Status for '+esc(x.title)+'">'+
+        CONTENT_STATUS.map(function(s){ return '<option value="'+s+'"'+(s===x.status?' selected':'')+'>'+cap(s)+'</option>'; }).join("")+
+      '</select></td>'+
+      '<td><button class="btn btn-ghost btn-sm" data-action="content-remove" data-id="'+x.id+'" aria-label="Remove '+esc(x.title)+'">✕</button></td></tr>';
+  }
+  function wireContent(){
+    qs("#contentForm").addEventListener("submit", function(e){
+      e.preventDefault();
+      var fd = new FormData(e.target);
+      var title = (fd.get("title")||"").toString().trim();
+      if(!title) return;
+      state.data.content.push({ id:uid("n"), title:title, date:fd.get("date")||todayISO(), channel:fd.get("channel")||"website", status:fd.get("status")||"planned" });
+      persist(); toast("Content item added."); render();
+    });
+    qsa('[data-action="content-status"]').forEach(function(sel){
+      sel.addEventListener("change", function(){
+        var item = state.data.content.find(function(x){ return x.id===sel.dataset.id; });
+        if(item){ item.status = sel.value; persist(); toast("Status updated."); }
+      });
+    });
+    qsa('[data-action="content-remove"]').forEach(function(btn){
+      btn.addEventListener("click", function(){
+        state.data.content = state.data.content.filter(function(x){ return x.id!==btn.dataset.id; });
+        persist(); render();
+      });
+    });
+  }
+
+  /* ============================================================
+     BOOKINGS & EVENTS
+     ============================================================ */
+  function viewBookings(){
+    var items = state.data.bookings.slice().sort(function(a,b){ return (a.date+a.time) < (b.date+b.time) ? -1 : 1; });
+    return ''+
+    '<h2 class="section-title">Bookings &amp; events</h2>'+
+    '<p class="section-sub">Upcoming bookings, in date order.</p>'+
+    '<details class="add-box"><summary>New booking</summary>'+
+      '<form id="bookForm">'+
+        '<div class="field"><label for="bkTitle">Title</label><input type="text" id="bkTitle" name="title" required></div>'+
+        '<div class="form-row">'+
+          '<div class="field"><label for="bkDate">Date</label><input type="date" id="bkDate" name="date" required></div>'+
+          '<div class="field"><label for="bkTime">Time</label><input type="time" id="bkTime" name="time"></div>'+
+        '</div>'+
+        '<div class="field"><label for="bkContact">Contact</label><input type="text" id="bkContact" name="contact"></div>'+
+        '<div class="field"><label for="bkNotes">Notes</label><input type="text" id="bkNotes" name="notes"></div>'+
+        '<div class="form-actions"><button type="submit" class="btn btn-primary">Add booking</button></div>'+
+      '</form>'+
+    '</details>'+
+    '<div class="list" id="bookList">'+
+      (items.length ? items.map(function(b){ return ''+
+        '<div class="row-card"><div class="main"><b>'+esc(b.title)+'</b><div class="meta tabnum">'+esc(b.date)+(b.time?" · "+esc(b.time):"")+(b.contact?" · "+esc(b.contact):"")+'</div>'+(b.notes?'<div class="meta">'+esc(b.notes)+'</div>':'')+'</div>'+
+        '<div class="side"><button class="btn btn-ghost btn-sm" data-action="book-remove" data-id="'+b.id+'" aria-label="Remove '+esc(b.title)+'">✕</button></div></div>';
+      }).join("") : '<div class="empty">No upcoming bookings.</div>')+
+    '</div>'+
+    '<p class="note" style="margin-top:16px"><span class="pill pill-stub">stub — needs backend</span> No calendar sync, reminders or confirmation emails are sent — this is a local list only.</p>';
+  }
+  function wireBookings(){
+    qs("#bookForm").addEventListener("submit", function(e){
+      e.preventDefault();
+      var fd = new FormData(e.target);
+      var title = (fd.get("title")||"").toString().trim();
+      if(!title) return;
+      state.data.bookings.push({ id:uid("b"), title:title, date:fd.get("date")||todayISO(), time:fd.get("time")||"", contact:(fd.get("contact")||"").toString().trim(), notes:(fd.get("notes")||"").toString().trim() });
+      persist(); toast("Booking added."); render();
+    });
+    qsa('[data-action="book-remove"]').forEach(function(btn){
+      btn.addEventListener("click", function(){
+        state.data.bookings = state.data.bookings.filter(function(x){ return x.id!==btn.dataset.id; });
+        persist(); render();
+      });
+    });
+  }
+
+  /* ============================================================
+     INBOX & FOLLOW-UPS
+     ============================================================ */
+  function viewInbox(){
+    var items = state.data.inbox.slice().sort(function(a,b){ return a.date < b.date ? 1 : -1; });
+    return ''+
+    '<h2 class="section-title">Inbox &amp; follow-ups</h2>'+
+    '<p class="section-sub">Messages that need a reply. Drafting and "marking sent" here only updates local state.</p>'+
+    '<div class="list" id="inboxList">'+
+      (items.length ? items.map(inboxMsg).join("") : '<div class="empty">Inbox zero.</div>')+
+    '</div>';
+  }
+  function inboxMsg(m){
+    var unread = m.status === "unread";
+    var statusPill = m.status==="sent" ? '<span class="pill pill-live">Replied (stub)</span>' : m.status==="unread" ? '<span class="pill pill-warn">Unread</span>' : '<span class="pill pill-neutral">Read</span>';
+    return '<div class="msg'+(unread?' unread':'')+'" data-id="'+m.id+'">'+
+      '<div class="msg-head"><b>'+esc(m.from)+'</b><span class="dt tabnum">'+esc(m.date)+'</span></div>'+
+      '<div class="msg-sub">'+esc(m.subject)+'</div>'+
+      '<div class="msg-prev">'+esc(m.preview)+'</div>'+
+      '<div class="msg-status">'+statusPill+
+        (unread?'<button class="btn btn-ghost btn-sm" data-action="inbox-read" data-id="'+m.id+'">Mark as read</button>':'')+
+      '</div>'+
+      '<details class="add-box msg-draft-box"><summary>'+(m.draft?"Edit draft reply":"Draft a reply")+'</summary>'+
+        '<form data-action="inbox-draft-form" data-id="'+m.id+'">'+
+          '<div class="field"><label for="draft-'+m.id+'" class="hidden">Reply to '+esc(m.from)+'</label>'+
+          '<textarea id="draft-'+m.id+'" name="draft" placeholder="Write your reply…">'+esc(m.draft)+'</textarea></div>'+
+          '<div class="form-actions">'+
+            '<button type="submit" class="btn">Save draft</button>'+
+            '<button type="button" class="btn btn-primary" data-action="inbox-send" data-id="'+m.id+'">Mark sent <span class="pill pill-stub" style="margin-left:6px">stub</span></button>'+
+          '</div>'+
+          '<p class="note" style="margin-top:8px"><span class="pill pill-stub">stub — needs backend</span> No email is actually delivered. Real sending needs an outbound mail service and the owner\'s connected inbox.</p>'+
+        '</form>'+
+      '</details>'+
+    '</div>';
+  }
+  function wireInbox(){
+    qsa('[data-action="inbox-read"]').forEach(function(btn){
+      btn.addEventListener("click", function(){
+        var m = state.data.inbox.find(function(x){ return x.id===btn.dataset.id; });
+        if(m){ m.status = "read"; persist(); render(); }
+      });
+    });
+    qsa('[data-action="inbox-draft-form"]').forEach(function(form){
+      form.addEventListener("submit", function(e){
+        e.preventDefault();
+        var fd = new FormData(e.target);
+        var m = state.data.inbox.find(function(x){ return x.id===form.dataset.id; });
+        if(m){ m.draft = (fd.get("draft")||"").toString(); if(m.status==="unread") m.status="read"; persist(); toast("Draft saved locally."); render(); }
+      });
+    });
+    qsa('[data-action="inbox-send"]').forEach(function(btn){
+      btn.addEventListener("click", function(){
+        var m = state.data.inbox.find(function(x){ return x.id===btn.dataset.id; });
+        if(!m) return;
+        var ta = qs('#draft-'+m.id);
+        if(ta) m.draft = ta.value;
+        m.status = "sent"; m.sentAt = todayISO();
+        persist(); toast("Marked sent — stub, nothing was emailed."); render();
+      });
+    });
+  }
+
+  /* ============================================================
+     PAYMENTS & INVOICES
+     ============================================================ */
+  var INVOICE_STATUS = ["draft","sent","paid","overdue"];
+  function viewPayments(){
+    var items = state.data.payments.slice().sort(function(a,b){ return a.date < b.date ? 1 : -1; });
+    return ''+
+    '<h2 class="section-title">Payments &amp; invoices</h2>'+
+    '<p class="section-sub">Track invoice status. No card or bank data is collected here.</p>'+
+    '<details class="add-box"><summary>New invoice</summary>'+
+      '<form id="invForm">'+
+        '<div class="form-row">'+
+          '<div class="field"><label for="ivClient">Client</label><input type="text" id="ivClient" name="client" required></div>'+
+          '<div class="field"><label for="ivAmount">Amount</label><input type="number" id="ivAmount" name="amount" min="0" step="0.01" required></div>'+
+        '</div>'+
+        '<div class="form-row">'+
+          '<div class="field"><label for="ivDate">Date</label><input type="date" id="ivDate" name="date" required></div>'+
+          '<div class="field"><label for="ivStatus">Status</label><select id="ivStatus" name="status">'+INVOICE_STATUS.map(function(s){return '<option value="'+s+'">'+cap(s)+'</option>';}).join("")+'</select></div>'+
+        '</div>'+
+        '<div class="form-actions"><button type="submit" class="btn btn-primary">Add invoice</button></div>'+
+      '</form>'+
+    '</details>'+
+    '<div class="tablewrap"><table class="dt" id="invTable">'+
+      '<thead><tr><th>Invoice</th><th>Client</th><th>Amount</th><th>Date</th><th>Status</th><th></th></tr></thead>'+
+      '<tbody>'+ (items.length ? items.map(invRow).join("") : '<tr><td colspan="6"><div class="empty">No invoices yet.</div></td></tr>') +'</tbody>'+
+    '</table></div>'+
+    '<p class="note" style="margin-top:16px"><span class="pill pill-stub">stub — needs backend</span> No real payment processor is connected. Going live needs Stripe (or similar) wired to a backend that never touches raw card or bank data in this hub.</p>';
+  }
+  function invRow(x){
+    var pillClass = x.status==="paid" ? "pill-live" : x.status==="overdue" ? "pill-bad" : x.status==="sent" ? "pill-info" : "pill-neutral";
+    return '<tr data-id="'+x.id+'"><td class="tabnum">'+esc(x.num)+'</td><td>'+esc(x.client)+'</td><td class="tabnum">'+fmtMoney(x.amount,x.currency)+'</td><td class="tabnum">'+esc(x.date)+'</td>'+
+      '<td><select data-action="inv-status" data-id="'+x.id+'" aria-label="Status for '+esc(x.num)+'">'+
+        INVOICE_STATUS.map(function(s){ return '<option value="'+s+'"'+(s===x.status?' selected':'')+'>'+cap(s)+'</option>'; }).join("")+
+      '</select></td>'+
+      '<td><button class="btn btn-ghost btn-sm" data-action="inv-remove" data-id="'+x.id+'" aria-label="Remove '+esc(x.num)+'">✕</button></td></tr>';
+  }
+  function wirePayments(){
+    qs("#invForm").addEventListener("submit", function(e){
+      e.preventDefault();
+      var fd = new FormData(e.target);
+      var client = (fd.get("client")||"").toString().trim();
+      if(!client) return;
+      var n = state.data.payments.length + 1042;
+      state.data.payments.push({ id:uid("i"), num:"INV-"+n, client:client, amount:parseFloat(fd.get("amount"))||0, currency:(state.profile.payments&&state.profile.payments.currency)||"EUR", status:fd.get("status")||"draft", date:fd.get("date")||todayISO() });
+      persist(); toast("Invoice added."); render();
+    });
+    qsa('[data-action="inv-status"]').forEach(function(sel){
+      sel.addEventListener("change", function(){
+        var item = state.data.payments.find(function(x){ return x.id===sel.dataset.id; });
+        if(item){ item.status = sel.value; persist(); toast("Invoice status updated."); }
+      });
+    });
+    qsa('[data-action="inv-remove"]').forEach(function(btn){
+      btn.addEventListener("click", function(){
+        state.data.payments = state.data.payments.filter(function(x){ return x.id!==btn.dataset.id; });
+        persist(); render();
+      });
+    });
+  }
+
+  /* ============================================================
+     REPORTS — the monthly "running inventory" proof-of-value
+     ============================================================ */
+  /* Reports read-adapter cache: last GET /api/reports payload (connected mode). Server-
+     authoritative figures + a live site check + env-gated Engage AI presence. Null in local
+     mode or before the first fetch — viewReports() then falls back to local computation. */
+  var reportsCache = null, reportsLoading = false;
+
+  function fmtClock(iso){ try{ return new Date(iso).toLocaleTimeString([], {hour:"2-digit",minute:"2-digit"}); }catch(e){ return ""; } }
+
+  function fetchReports(force){
+    if(BACKEND.mode !== "connected" || reportsLoading) return;
+    if(reportsCache && !force) return;
+    reportsLoading = true;
+    apiFetch("/reports").then(function(res){ return res.ok ? readJSON(res) : null; }).then(function(j){
+      reportsLoading = false;
+      if(j && j.ok){ reportsCache = j; if(state.ui.activeModule === "reports") render(); }
+    }).catch(function(){ reportsLoading = false; /* keep local-derived tiles */ });
+  }
+  function wireReports(){
+    fetchReports(false);
+    var btn = qs("#reportsRefresh");
+    if(btn) btn.addEventListener("click", function(){ reportsCache = null; fetchReports(true); toast("Refreshing figures…"); });
+  }
+
+  function viewReports(){
+    var p = state.profile;
+    var connected = BACKEND.mode === "connected";
+    var r = reportsCache, t = r && r.tiles;
+    var channels = (p.publications && p.publications.channels) || [];
+
+    var siteVal, siteSub, shipped, contentTotal, followUps, sentSub, revenue, invoices, currency, crmTotal, crmRetained;
+    if(t){
+      siteVal = t.site.value || "—";
+      siteSub = t.site.source === "http-check"
+        ? (t.site.live ? "reachable" : "not reachable") + (t.site.checkedAt ? " · checked "+fmtClock(t.site.checkedAt) : "")
+        : (p.stack ? "on "+p.stack : "");
+      channels = t.channels.list || channels;
+      shipped = t.content.shipped; contentTotal = t.content.total;
+      followUps = t.followUps.sent; sentSub = "sent this month, from your inbox";
+      revenue = t.revenue.amount; invoices = t.revenue.invoices; currency = t.revenue.currency || "EUR";
+      crmTotal = t.crm.total; crmRetained = t.crm.retained;
+    } else {
+      shipped = countThisMonth(state.data.content, "date", function(x){ return x.status==="shipped"; });
+      contentTotal = state.data.content.length;
+      followUps = countThisMonth(state.data.inbox, "sentAt", function(x){ return x.status==="sent"; });
+      sentSub = "logged via “Mark sent” in Inbox";
+      revenue = sumThisMonth(state.data.payments, "date", "amount", function(x){ return x.status==="paid"; });
+      invoices = state.data.payments.length; currency = "EUR";
+      crmTotal = state.data.crm.length; crmRetained = state.data.crm.filter(function(c){return c.stage==="retained";}).length;
+      siteVal = p.domain&&p.domain.value ? p.domain.value : "—"; siteSub = p.stack ? "on "+p.stack : "";
+    }
+
+    var status;
+    if(r){
+      var e = r.presence || {};
+      var engTxt = e.configured
+        ? (e.reachable ? '<span class="pill pill-live">Engage AI connected</span>' : '<span class="pill pill-warn">Engage AI unreachable</span>')
+        : '<span class="pill pill-neutral">Engage AI not connected</span> — set <code>ENGAGE_AI_BASE_URL</code> to pull presence benchmarks';
+      status = '<p class="note" style="margin-top:6px"><span class="pill pill-live">live data</span> Computed server-side from your account'+
+        (t && t.site.source==="http-check" ? ", with a live check of your site" : "")+'. '+engTxt+'.'+
+        (r.generatedAt ? ' <span style="color:var(--ink-faint)">Refreshed '+fmtClock(r.generatedAt)+'.</span>' : '')+'</p>';
+    } else if(connected){
+      status = '<p class="note" style="margin-top:6px"><span class="pill pill-neutral">loading…</span> Fetching live figures from your account.</p>';
+    } else {
+      status = '<p class="note" style="margin-top:6px"><span class="pill pill-stub">local prototype</span> These tiles are computed from data on this device. Connected to its backend, the hub computes them server-side, live-checks your site, and (when configured) pulls Engage AI presence.</p>';
+    }
+    var refresh = connected ? '<button type="button" class="btn btn-ghost" id="reportsRefresh" style="float:right">↻ Refresh</button>' : '';
+
+    return ''+
+    refresh+
+    '<h2 class="section-title">Reports</h2>'+
+    '<p class="section-sub">The running inventory — a snapshot you can screenshot for the monthly proof-of-value review.</p>'+
+    '<div class="stat-grid">'+
+      statTile(siteVal, "Live site", siteSub)+
+      statTile(channels.length, "Active channels", channels.map(cap).join(", "))+
+      statTile(shipped, "Content shipped this month", contentTotal+" total items tracked")+
+      statTile(followUps, "Follow-ups sent this month", sentSub)+
+      statTile(fmtMoney(revenue,currency), "Revenue this month (paid)", invoices+" invoices tracked")+
+      statTile(crmTotal, "CRM contacts", crmRetained+" retained")+
+    '</div>'+
+    status;
+  }
+
+  /* ============================================================
+     SETTINGS — reconfigure which modules render, via profile
+     ============================================================ */
+  function viewSettings(){
+    var p = state.profile;
+    return ''+
+    '<h2 class="section-title">Settings</h2>'+
+    '<p class="section-sub">This hub renders modules from the business operating profile\'s <code>client_hub</code> array. Toggle below, or paste a full profile JSON (e.g. exported from the Turnkey launch wizard) to reconfigure everything at once.</p>'+
+    '<div class="settings-grid">'+
+      '<div>'+
+        '<h3 style="margin:0 0 4px;font-size:1rem">Business</h3>'+
+        '<form id="bizForm">'+
+          '<div class="field"><label for="setBiz">Business name</label><input type="text" id="setBiz" name="business" value="'+esc(p.business||"")+'"></div>'+
+          '<div class="field"><label for="setTagline">Tagline</label><input type="text" id="setTagline" name="tagline" value="'+esc(p.tagline||"")+'"></div>'+
+          '<div class="field"><label for="setOwnerName">Owner name</label><input type="text" id="setOwnerName" name="ownerName" value="'+esc((p.owner&&p.owner.name)||"")+'"></div>'+
+          '<div class="field"><label for="setOwnerEmail">Owner email</label><input type="email" id="setOwnerEmail" name="ownerEmail" value="'+esc((p.owner&&p.owner.email)||"")+'"></div>'+
+          '<div class="form-actions"><button type="submit" class="btn btn-primary">Save business info</button></div>'+
+        '</form>'+
+        '<h3 style="margin:20px 0 4px;font-size:1rem">Modules shown (client_hub)</h3>'+
+        '<div class="modchecks" id="modChecks">'+
+          MODULES.map(function(m){
+            var on = (p.client_hub||[]).indexOf(m.key) !== -1;
+            return '<label class="modchk"><input type="checkbox" data-mod="'+m.key+'"'+(on?' checked':'')+'><span><b>'+esc(m.label)+'</b><span>'+esc(m.blurb)+'</span></span></label>';
+          }).join("")+
+        '</div>'+
+      '</div>'+
+      '<div>'+
+        '<h3 style="margin:0 0 4px;font-size:1rem">Load an operating profile</h3>'+
+        '<p class="section-sub" style="margin-bottom:8px">Paste a business-operating-profile JSON (from the launch wizard) and apply it — this reconfigures the business name, owner and which modules render.</p>'+
+        '<textarea id="profileJsonOut" spellcheck="false" aria-label="Operating profile JSON"></textarea>'+
+        '<div class="form-actions">'+
+          '<button type="button" class="btn btn-primary" id="applyProfileBtn">Apply pasted profile</button>'+
+          '<button type="button" class="btn" id="loadCurrentBtn">Load current profile into box</button>'+
+          '<button type="button" class="btn btn-ghost" id="resetSampleBtn">Restore sample profile</button>'+
+        '</div>'+
+        '<p class="note" style="margin-top:10px" id="settingsMsg" role="status" aria-live="polite"></p>'+
+      '</div>'+
+    '</div>';
+  }
+  function wireSettings(){
+    qs("#profileJsonOut").value = JSON.stringify(state.profile, null, 2);
+
+    qs("#bizForm").addEventListener("submit", function(e){
+      e.preventDefault();
+      var fd = new FormData(e.target);
+      state.profile.business = (fd.get("business")||"").toString().trim() || state.profile.business;
+      state.profile.tagline = (fd.get("tagline")||"").toString().trim();
+      state.profile.owner = state.profile.owner || {};
+      state.profile.owner.name = (fd.get("ownerName")||"").toString().trim();
+      state.profile.owner.email = (fd.get("ownerEmail")||"").toString().trim();
+      persist(); renderShell(); toast("Business info saved."); render();
+    });
+
+    qsa("#modChecks [data-mod]").forEach(function(chk){
+      chk.addEventListener("change", function(){
+        var set = new Set(state.profile.client_hub || []);
+        if(chk.checked) set.add(chk.dataset.mod); else set.delete(chk.dataset.mod);
+        state.profile.client_hub = MODULES.map(function(m){return m.key;}).filter(function(k){ return set.has(k); });
+        persist(); renderShell(); toast("Modules updated.");
+      });
+    });
+
+    qs("#applyProfileBtn").addEventListener("click", function(){
+      // render() below rebuilds #main (including #settingsMsg), so any message
+      // must be set on a freshly-queried node AFTER render(), not the pre-render one.
+      try{
+        var parsed = JSON.parse(qs("#profileJsonOut").value);
+        if(typeof parsed !== "object" || parsed === null) throw new Error("Not a JSON object");
+        if(parsed.client_hub && !Array.isArray(parsed.client_hub)) throw new Error("client_hub must be an array");
+        state.profile = Object.assign(clone(SAMPLE_PROFILE), parsed);
+        if(!Array.isArray(state.profile.client_hub)) state.profile.client_hub = [];
+        persist(); renderShell(); render();
+        var okMsg = qs("#settingsMsg");
+        if(okMsg) okMsg.textContent = "Profile applied — modules now match client_hub: [" + state.profile.client_hub.join(", ") + "].";
+        toast("Profile applied.");
+      }catch(err){
+        var errMsg = qs("#settingsMsg");
+        if(errMsg) errMsg.textContent = "Couldn't parse that JSON: " + err.message;
+      }
+    });
+
+    qs("#loadCurrentBtn").addEventListener("click", function(){
+      qs("#profileJsonOut").value = JSON.stringify(state.profile, null, 2);
+    });
+
+    qs("#resetSampleBtn").addEventListener("click", function(){
+      state.profile = clone(SAMPLE_PROFILE);
+      persist(); renderShell(); render();
+      toast("Sample profile restored.");
+    });
+  }
+
+  /* ============================================================
+     small helpers
+     ============================================================ */
+  function cap(s){ return s ? s.charAt(0).toUpperCase()+s.slice(1) : s; }
+  function todayISO(){ var d=new Date(); return d.toISOString().slice(0,10); }
+  function fmtMoney(n, currency){
+    var sym = currency==="USD" ? "$" : currency==="GBP" ? "£" : "€";
+    return sym + (Number(n)||0).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2});
+  }
+  function thisYM(){ return todayISO().slice(0,7); }
+  function countThisMonth(arr, dateField, pred){
+    var ym = thisYM();
+    return arr.filter(function(x){ return x[dateField] && x[dateField].slice(0,7)===ym && pred(x); }).length;
+  }
+  function sumThisMonth(arr, dateField, amtField, pred){
+    var ym = thisYM();
+    return arr.filter(function(x){ return x[dateField] && x[dateField].slice(0,7)===ym && pred(x); })
+               .reduce(function(sum,x){ return sum + (Number(x[amtField])||0); }, 0);
+  }
+
+  /* ============================================================
+     BOOT
+     ============================================================ */
+  boot();
+})();
+</script>
+</body>
+</html>

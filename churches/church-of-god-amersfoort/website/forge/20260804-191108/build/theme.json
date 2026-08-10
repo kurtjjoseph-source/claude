@@ -1,0 +1,13 @@
+{
+  "forge": "PRELAUNCHforge",
+  "accent": "#38D07F",
+  "base": "#0A0A0B",
+  "palette": {
+    "navy": "#1B2A4A",
+    "orange": "#E8843C",
+    "teal": "#2FA8A0",
+    "ink": "#1B2233",
+    "paper": "#FFFFFF"
+  },
+  "display": "Manrope"
+}

@@ -1,0 +1,53 @@
+{
+  "schema": 1,
+  "run": "20260806-014832",
+  "built": "2026-08-06T01:48:32Z",
+  "fingerprint": "sha256:fc005e35ffa4f0a81ed2611845f2eac5",
+  "business": {
+    "name": "Applicant Flow",
+    "slug": "applicant-flow",
+    "tagline": "Prelaunch validation funnel",
+    "city": "Amersfoort",
+    "email": "info@visionoutreachmedia.nl",
+    "offer_line": "The vacancy has been open four months and the applicants worth hiring never reply. A careers page, rewritten ads, and an assistant that screens and books your applicants within the hour — one fixed price per role.",
+    "org_type": "service_business",
+    "org_label": "Service business / consultancy / agency"
+  },
+  "archetype": {
+    "id": "prelaunch",
+    "label": "Prelaunch validation funnel",
+    "curated": true,
+    "source": "operator override",
+    "voice": "Direct and unembarrassed. It is asking for a small commitment to an idea that does not exist yet, so it must be specific about what it is, honest that it is early, and clear about what happens next. No fake scarcity.",
+    "summary": "One page that turns an idea into evidence. It states the promise, asks for a name and an email, and counts. Nothing else is built until enough people say they want it.",
+    "type_preset": "grotesk",
+    "site_scheme": "light",
+    "type_preset_archetype": "grotesk",
+    "site_scheme_archetype": "light",
+    "skin": "house",
+    "product_app": null,
+    "forge": {
+      "name": "PRELAUNCHforge",
+      "scheme": "dark",
+      "base": "#0A0A0B",
+      "base_soft": "#141416",
+      "accent": "#38D07F",
+      "accent_2": "#7BE3AC",
+      "accent_site": "#2f9e63",
+      "on_accent": "#0A0A0B",
+      "line": "Building a validation funnel."
+    }
+  },
+  "modules": [
+    "lead_capture",
+    "crm",
+    "email_marketing",
+    "content_publishing",
+    "support_inbox"
+  ],
+  "pages": [
+    "index.html",
+    "faq.html"
+  ],
+  "target": "vercel"
+}

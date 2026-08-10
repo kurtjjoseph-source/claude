@@ -1,0 +1,714 @@
+<title>Kanalen instellen — Vision Outreach Media</title>
+<style>
+  :root{
+    --ground:#F6F8F7; --surface:#FFFFFF; --ink:#22302B; --muted:#5E6E67;
+    --line:#DCE4E0; --accent:#1B6E53; --accent-ink:#FFFFFF; --accent-soft:#E4F0EB;
+    --note-bg:#FBF3DF; --note-ink:#7A5200; --note-line:#EBDCB4;
+    --done:#1B6E53; --chip-bg:#EEF3F1; --shadow:0 1px 3px rgba(34,48,43,.08);
+    --radius:14px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --ground:#141A17; --surface:#1D2521; --ink:#E6ECE8; --muted:#93A29B;
+      --line:#2E3934; --accent:#4FC795; --accent-ink:#0E1512; --accent-soft:#1F332B;
+      --note-bg:#2C2517; --note-ink:#E4C376; --note-line:#453A20;
+      --done:#4FC795; --chip-bg:#252E29; --shadow:0 1px 3px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="light"]{
+    --ground:#F6F8F7; --surface:#FFFFFF; --ink:#22302B; --muted:#5E6E67;
+    --line:#DCE4E0; --accent:#1B6E53; --accent-ink:#FFFFFF; --accent-soft:#E4F0EB;
+    --note-bg:#FBF3DF; --note-ink:#7A5200; --note-line:#EBDCB4;
+    --done:#1B6E53; --chip-bg:#EEF3F1; --shadow:0 1px 3px rgba(34,48,43,.08);
+  }
+  :root[data-theme="dark"]{
+    --ground:#141A17; --surface:#1D2521; --ink:#E6ECE8; --muted:#93A29B;
+    --line:#2E3934; --accent:#4FC795; --accent-ink:#0E1512; --accent-soft:#1F332B;
+    --note-bg:#2C2517; --note-ink:#E4C376; --note-line:#453A20;
+    --done:#4FC795; --chip-bg:#252E29; --shadow:0 1px 3px rgba(0,0,0,.35);
+  }
+  html{background:var(--ground);}
+  body{
+    margin:0; background:var(--ground); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    font-size:20px; line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  .app{max-width:460px; margin:0 auto; padding:0 16px 56px;}
+  header.top{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 2px 14px;
+  }
+  .brand{display:flex; flex-direction:column; gap:1px;}
+  .brand .org{font-size:12px; letter-spacing:.09em; text-transform:uppercase; color:var(--muted); font-weight:600;}
+  .brand .title{font-size:17px; font-weight:700;}
+  .langs{display:flex; gap:2px; background:var(--surface); border:1px solid var(--line); border-radius:99px; padding:3px;}
+  .langs button{
+    border:0; background:transparent; color:var(--muted); font:inherit; font-size:14px; font-weight:600;
+    padding:4px 12px; border-radius:99px; cursor:pointer;
+  }
+  .langs button[aria-pressed="true"]{background:var(--accent); color:var(--accent-ink);}
+  .card{
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
+    box-shadow:var(--shadow); padding:22px 20px; margin-bottom:14px;
+  }
+  h1{font-size:26px; line-height:1.25; margin:0 0 10px; text-wrap:balance;}
+  h2{font-size:22px; line-height:1.3; margin:0 0 8px; text-wrap:balance;}
+  p{margin:0 0 12px;}
+  p:last-child{margin-bottom:0;}
+  .muted{color:var(--muted);}
+  .small{font-size:16px;}
+  .eyebrow{font-size:12px; letter-spacing:.09em; text-transform:uppercase; color:var(--muted); font-weight:600; margin-bottom:6px;}
+
+  ul.privacy{list-style:none; margin:0 0 6px; padding:0; display:flex; flex-direction:column; gap:14px;}
+  ul.privacy li{display:flex; gap:12px; align-items:flex-start;}
+  ul.privacy .mark{
+    flex:0 0 auto; width:28px; height:28px; border-radius:50%;
+    background:var(--accent-soft); color:var(--accent);
+    display:flex; align-items:center; justify-content:center; font-weight:800; font-size:16px; margin-top:2px;
+  }
+
+  .btn{
+    display:block; width:100%; box-sizing:border-box; text-align:center;
+    font:inherit; font-weight:700; font-size:20px;
+    border-radius:12px; padding:15px 18px; cursor:pointer; border:1px solid transparent;
+    text-decoration:none;
+  }
+  .btn + .btn{margin-top:10px;}
+  .btn.primary{background:var(--accent); color:var(--accent-ink);}
+  .btn.secondary{background:var(--surface); color:var(--ink); border-color:var(--line);}
+  .btn.link{background:transparent; color:var(--accent); border:0; font-size:17px; padding:10px;}
+  .btn:focus-visible, .chip button:focus-visible, .langs button:focus-visible, .chan:focus-visible{
+    outline:3px solid var(--accent); outline-offset:2px;
+  }
+
+  .chanlist{display:flex; flex-direction:column; gap:10px;}
+  .chan{
+    display:flex; align-items:center; gap:14px; width:100%; box-sizing:border-box; text-align:left;
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
+    padding:14px 16px; cursor:pointer; font:inherit; color:var(--ink); box-shadow:var(--shadow);
+  }
+  .chan .badge{
+    flex:0 0 auto; width:46px; height:46px; border-radius:12px;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:19px; background:var(--accent-soft); color:var(--accent);
+  }
+  .chan .meta{flex:1 1 auto; min-width:0;}
+  .chan .name{font-weight:700; font-size:19px;}
+  .chan .state{font-size:15px; color:var(--muted); font-variant-numeric:tabular-nums;}
+  .chan .state.done{color:var(--done); font-weight:700;}
+  .chan .arrow{color:var(--muted); font-size:20px;}
+  .chan.upcoming{opacity:.55; cursor:default; box-shadow:none;}
+  .chan.upcoming .badge{background:var(--chip-bg); color:var(--muted);}
+  .chan .soon{
+    flex:0 0 auto; font-size:13px; font-weight:700; letter-spacing:.04em;
+    color:var(--muted); border:1px solid var(--line); border-radius:99px; padding:4px 10px;
+  }
+
+  .progress{display:flex; gap:6px; margin:2px 0 16px;}
+  .progress span{height:6px; border-radius:3px; flex:1; background:var(--line);}
+  .progress span.on{background:var(--accent);}
+
+  .chips{display:flex; flex-direction:column; gap:10px; margin:14px 0;}
+  .chip{
+    display:flex; align-items:center; gap:10px;
+    background:var(--chip-bg); border:1px dashed var(--line); border-radius:10px; padding:10px 12px;
+  }
+  .chip .val{flex:1 1 auto; min-width:0; overflow-wrap:anywhere;}
+  .chip .lab{display:block; font-size:13px; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); font-weight:600;}
+  .chip .tx{font-weight:600; font-size:18px;}
+  .chip button{
+    flex:0 0 auto; font:inherit; font-size:15px; font-weight:700;
+    background:var(--surface); color:var(--accent); border:1px solid var(--line);
+    border-radius:8px; padding:8px 12px; cursor:pointer;
+  }
+  .note{
+    background:var(--note-bg); color:var(--note-ink); border:1px solid var(--note-line);
+    border-radius:10px; padding:12px 14px; font-size:16px; line-height:1.45; margin:14px 0 0;
+  }
+  .note b{font-weight:800;}
+  .wait{
+    display:flex; gap:12px; align-items:flex-start; background:var(--accent-soft);
+    border-radius:10px; padding:12px 14px; font-size:16px; margin:14px 0 0; color:var(--ink);
+  }
+  .detail{display:flex; flex-direction:column; gap:12px; margin-top:14px;}
+  .drow{
+    background:var(--chip-bg); border:1px solid var(--line); border-radius:10px; padding:10px 12px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .drow .val{flex:1 1 auto; min-width:0; overflow-wrap:anywhere;}
+  .drow .lab{display:block; font-size:13px; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); font-weight:600;}
+  .drow .tx{font-weight:600; font-size:18px;}
+  .drow button{
+    flex:0 0 auto; font:inherit; font-size:15px; font-weight:700;
+    background:var(--surface); color:var(--accent); border:1px solid var(--line);
+    border-radius:8px; padding:8px 12px; cursor:pointer;
+  }
+  .drow .fixed{flex:0 0 auto; font-size:13px; color:var(--muted); font-weight:600;}
+  .drow.editing{flex-direction:column; align-items:stretch;}
+  .drow input{
+    font:inherit; font-size:18px; font-weight:600; color:var(--ink);
+    background:var(--surface); border:1px solid var(--accent); border-radius:8px; padding:10px 12px;
+    width:100%; box-sizing:border-box; margin-top:6px;
+  }
+  .drow input:focus{outline:3px solid var(--accent); outline-offset:1px;}
+  .editrow{display:flex; gap:8px; margin-top:10px;}
+  .editrow .btn{margin:0; padding:11px 14px; font-size:17px; flex:1;}
+  .flash{
+    background:var(--accent-soft); color:var(--ink); border-radius:8px;
+    padding:9px 12px; font-size:15px; margin-top:8px;
+  }
+  .statusline{display:flex; align-items:center; gap:10px; margin:2px 0 4px;}
+  .statusline .dot{
+    width:30px; height:30px; border-radius:50%; background:var(--accent-soft); color:var(--done);
+    display:flex; align-items:center; justify-content:center; font-weight:800; font-size:16px; flex:0 0 auto;
+  }
+  .statusline .st{font-size:16px; color:var(--muted);}
+  .donebig{
+    width:64px; height:64px; border-radius:50%; background:var(--accent-soft); color:var(--done);
+    display:flex; align-items:center; justify-content:center; font-size:32px; font-weight:800; margin:4px auto 14px;
+  }
+  .center{text-align:center;}
+  footer.demo{margin-top:26px; font-size:14px; color:var(--muted); text-align:center; line-height:1.5;}
+  .backrow{margin-bottom:6px;}
+  .backrow .btn{width:auto; display:inline-block; padding-left:2px;}
+  @media (prefers-reduced-motion: no-preference){
+    .card, .chan{transition:transform .12s ease;}
+    .chan:active{transform:scale(.985);}
+  }
+</style>
+
+<div class="app">
+  <header class="top">
+    <div class="brand">
+      <span class="org" data-i18n="org">Vision Outreach Media</span>
+      <span class="title" data-i18n="apptitle">Kanalen instellen</span>
+    </div>
+    <div class="langs" role="group" aria-label="Taal / Language">
+      <button id="lang-nl" aria-pressed="true" onclick="setLang('nl')">NL</button>
+      <button id="lang-en" aria-pressed="false" onclick="setLang('en')">EN</button>
+    </div>
+  </header>
+  <main id="view"></main>
+  <footer class="demo" id="demoNote"></footer>
+</div>
+
+<script>
+"use strict";
+
+/* ---- Demo brand kit (the Channel Lead agent generates a per-brand instance of this file) ---- */
+const KIT = {
+  org: "Hoopkerk Utrecht",
+  handle: "hoopkerkutrecht",
+  category_nl: "Kerk", category_en: "Church",
+  address: "Domplein 1, 3512 JC Utrecht",
+  phone: "030 123 4567",
+  site: "https://hoopkerk-utrecht.nl",
+  bio_nl: "Een warme kerk midden in Utrecht. Iedereen is welkom — elke zondag om 10:00.",
+  bio_en: "A warm church in the heart of Utrecht. Everyone is welcome — Sundays at 10:00.",
+  igMail: "ig-hoopkerk@visionoutreachmedia.nl",
+  xMail: "x-hoopkerk@visionoutreachmedia.nl",
+  vomMail: "beheer@visionoutreachmedia.nl",
+  emailFrom: "nieuwsbrief@hoopkerk-utrecht.nl"
+};
+
+/* ---- UI strings ---- */
+const UI = {
+  org:{nl:"Vision Outreach Media", en:"Vision Outreach Media"},
+  apptitle:{nl:"Kanalen instellen", en:"Set up your channels"},
+  privacyTitle:{nl:"Wat wij nooit zien of vragen", en:"What we never see or ask"},
+  privacyIntro:{nl:"Voordat we beginnen: vier vaste afspraken. Die gelden altijd, bij elke stap.", en:"Before we start: four fixed promises. They hold at every step, always."},
+  priv1:{nl:"We vragen nooit om je wachtwoord. Ook niet “even snel”.", en:"We never ask for your password. Not even “just quickly”."},
+  priv2:{nl:"Sms-codes om in te loggen blijven bij jou. Alleen de code op het kaartje van Google mag je met ons delen.", en:"Text-message login codes stay with you. Only the code on Google’s postcard is one you share with us."},
+  priv3:{nl:"We kijken niet mee op je scherm. We vertellen wat je kunt aantikken — jij doet het zelf.", en:"We don’t watch your screen. We tell you what to tap — you do it yourself."},
+  priv4:{nl:"Alles wat we samen maken is en blijft van jullie.", en:"Everything we set up together is yours and stays yours."},
+  privacyOk:{nl:"Begrepen, we gaan beginnen", en:"Got it, let’s begin"},
+  homeTitle:{nl:"Zeven plekken waar mensen jullie kunnen vinden", en:"Seven places where people can find you"},
+  homeIntro:{nl:"Doe ze op jouw tempo — eén per keer is prima. Kom je ergens niet uit? App ons gewoon, dan doen we het samen.", en:"Go at your own pace — one at a time is fine. Stuck anywhere? Just message us and we’ll do it together."},
+  notStarted:{nl:"Nog niet begonnen", en:"Not started"},
+  stepOf:{nl:"Stap", en:"Step"}, of:{nl:"van", en:"of"},
+  done:{nl:"Klaar ✓", en:"Done ✓"},
+  next:{nl:"Klaar, volgende", en:"Done, next"},
+  back:{nl:"‹ Terug", en:"‹ Back"},
+  toHome:{nl:"‹ Alle kanalen", en:"‹ All channels"},
+  copy:{nl:"Kopieer", en:"Copy"}, copied:{nl:"Gekopieerd ✓", en:"Copied ✓"},
+  open:{nl:"Open", en:"Open"},
+  branchYes:{nl:"Ja, die is er al", en:"Yes, it already exists"},
+  branchNo:{nl:"Nee, nog niet", en:"No, not yet"},
+  branchHint:{nl:"Weet je het niet zeker? App ons even, dan zoeken we het samen uit.", en:"Not sure? Message us and we’ll figure it out together."},
+  finishTitle:{nl:"Dit kanaal staat klaar", en:"This channel is ready"},
+  finishBody:{nl:"Vanaf hier nemen wij het over. Jij hoeft niets meer te doen — alles wat we plaatsen zie je eerst in je weekoverzicht.", en:"We take it from here. Nothing more for you to do — everything we post, you’ll see first in your weekly overview."},
+  nextChannel:{nl:"Naar het volgende kanaal", en:"Go to the next channel"},
+  allDone:{nl:"Alles staat klaar \u{1F389}", en:"Everything is ready \u{1F389}"},
+  allDoneBody:{nl:"Alle zeven kanalen zijn ingesteld. We sturen je een berichtje zodra de eerste berichten klaarstaan om te bekijken.", en:"All seven channels are set up. We’ll message you as soon as the first posts are ready for you to review."},
+  demo:{nl:"Voorbeeld met demo-gegevens (Hoopkerk Utrecht). Jouw eigen scherm krijgt jullie eigen naam, teksten en adressen.", en:"Preview with demo data (Hoopkerk Utrecht). Your own screen will show your own name, texts and addresses."},
+  detailsEyebrow:{nl:"Kanaalgegevens", en:"Channel details"},
+  readyOn:{nl:"Klaar sinds", en:"Ready since"},
+  pathExisting:{nl:"Bestond al — toegang met ons gedeeld", en:"Already existed — access shared with us"},
+  pathCreated:{nl:"Nieuw aangemaakt — van jullie, wij helpen beheren", en:"Newly created — yours, we help manage it"},
+  editHint:{nl:"Klopt iets niet meer? Tik op Wijzig — wij passen het daarna voor je aan op het kanaal.", en:"Something changed? Tap Edit — we’ll then update it on the channel for you."},
+  viewDetails:{nl:"Bekijk de gegevens", en:"View the details"},
+  openChannel:{nl:"Bekijk het kanaal", en:"View the channel"},
+  edit:{nl:"Wijzig", en:"Edit"},
+  saveBtn:{nl:"Opslaan", en:"Save"},
+  cancelBtn:{nl:"Annuleer", en:"Cancel"},
+  editedNote:{nl:"Aangepast ✓ — wij voeren het door op het kanaal. Je ziet het terug in je weekoverzicht.", en:"Updated ✓ — we’ll apply it on the channel. You’ll see it in your weekly overview."},
+  fixedTag:{nl:"beheren wij", en:"we manage"},
+  redo:{nl:"Opnieuw instellen", en:"Set up again"},
+  redoConfirm:{nl:"Weet je het zeker? De stappen hier beginnen dan opnieuw. Het kanaal zelf blijft gewoon bestaan.", en:"Are you sure? The steps here will start over. The channel itself keeps existing."},
+  soon:{nl:"Binnenkort", en:"Coming soon"},
+  soonState:{nl:"Nog niet beschikbaar — we laten het je weten", en:"Not available yet — we’ll let you know"}
+};
+
+/* ---- Upcoming channels (visible, not yet usable) ---- */
+const UPCOMING = [
+  { id:"spotify", badge:"♪", name:{nl:"Spotify", en:"Spotify"} }
+];
+
+/* ---- Detail fields per completed channel ---- */
+function detailFields(c){
+  const f = [];
+  const push = (k, nl, en, val, fixed) => f.push({k, lab:{nl, en}, val, fixed:!!fixed});
+  if (c.id === "gbp"){
+    push("name","Naam","Name", KIT.org);
+    push("cat","Soort","Category", KIT.category_nl);
+    push("addr","Adres","Address", KIT.address);
+    push("phone","Telefoon","Phone", KIT.phone);
+    push("site","Website","Website", KIT.site);
+    push("mgr","Beheerder","Manager", KIT.vomMail, true);
+  } else if (c.id === "fb"){
+    push("name","Naam","Name", KIT.org);
+    push("cat","Soort","Category", KIT.category_nl);
+    push("bio","Tekst","Text", KIT.bio_nl);
+    push("site","Website","Website", KIT.site);
+  } else if (c.id === "ig"){
+    push("user","Gebruikersnaam","Username", KIT.handle);
+    push("name","Naam","Name", KIT.org);
+    push("bio","Tekst","Text", KIT.bio_nl);
+    push("site","Website","Website", KIT.site);
+    push("mail","E-mailadres","Email address", KIT.igMail, true);
+  } else if (c.id === "li"){
+    push("name","Naam","Name", KIT.org);
+    push("site","Website","Website", KIT.site);
+    push("bio","Tekst","Text", KIT.bio_nl);
+  } else if (c.id === "yt"){
+    push("name","Naam","Name", KIT.org);
+    push("handle","Adresnaam","Handle", "@"+KIT.handle);
+    push("mgr","Beheerder","Manager", KIT.vomMail, true);
+  } else if (c.id === "x"){
+    push("user","Gebruikersnaam","Username", "@"+KIT.handle);
+    push("name","Naam","Name", KIT.org);
+    push("bio","Tekst","Text", KIT.bio_nl);
+    push("mail","E-mailadres","Email address", KIT.xMail, true);
+  } else if (c.id === "email"){
+    push("name","Afzendernaam","Sender name", KIT.org);
+    push("from","Afzenderadres","Sender address", KIT.emailFrom);
+    push("svc","Verzendt via","Sends via", "Vision Outreach Media", true);
+  }
+  return f;
+}
+function channelUrl(c){
+  switch(c.id){
+    case "gbp": return "https://www.google.com/maps/search/" + encodeURIComponent(KIT.org);
+    case "fb":  return "https://www.facebook.com/" + KIT.handle;
+    case "ig":  return "https://www.instagram.com/" + KIT.handle;
+    case "li":  return "https://www.linkedin.com/company/" + KIT.handle;
+    case "yt":  return "https://www.youtube.com/@" + KIT.handle;
+    case "x":   return "https://x.com/" + KIT.handle;
+  }
+}
+
+/* ---- Channel wizard content ----
+   Each step: t (title), b (body), chips [[label,value]], link [label,url], note, wait  */
+const CHANNELS = [
+  {
+    id:"gbp", badge:"G",
+    name:{nl:"Google (Maps & zoeken)", en:"Google (Maps & search)"},
+    branch:{nl:"Staat "+KIT.org+" al op Google Maps?", en:"Is "+KIT.org+" already on Google Maps?"},
+    yes:[
+      { t:{nl:"Zoek jullie plek op", en:"Find your place"},
+        b:{nl:"Open Google Maps en zoek op jullie naam. Tik op jullie plek als je die ziet.", en:"Open Google Maps and search for your name. Tap your place when you see it."},
+        chips:[[{nl:"Zoek op",en:"Search for"}, KIT.org]],
+        link:[{nl:"Open Google Maps",en:"Open Google Maps"}, "https://www.google.com/maps"] },
+      { t:{nl:"Maak het van jou", en:"Claim it as yours"},
+        b:{nl:"Tik op “Ben jij de eigenaar van dit bedrijf?” en volg de stappen. Log in met je eigen Google-account.", en:"Tap “Own this business?” and follow the steps. Sign in with your own Google account."},
+        note:{nl:"Je eigen wachtwoord typ je zelf. Wij zien het nooit.", en:"You type your own password yourself. We never see it."} },
+      { t:{nl:"Wacht op het kaartje", en:"Wait for the postcard"},
+        b:{nl:"Google stuurt een kaartje per post met een code van 6 cijfers. Dat duurt 1 tot 2 weken — heel normaal.", en:"Google mails you a postcard with a 6-digit code. It takes 1 to 2 weeks — completely normal."},
+        wait:{nl:"Zodra het kaartje er is: app ons gewoon de 6 cijfers. Dat is de enige code die je met ons deelt.", en:"When the postcard arrives: just message us the 6 digits. That’s the only code you ever share with us."} },
+      { t:{nl:"Nodig ons uit als beheerder", en:"Invite us as a manager"},
+        b:{nl:"In je bedrijfsprofiel: tik op “Beheerders” en voeg ons e-mailadres toe. Dan houden wij het profiel voor je bij.", en:"In your business profile: tap “Managers” and add our email address. Then we keep the profile up to date for you."},
+        chips:[[{nl:"Ons adres",en:"Our address"}, KIT.vomMail]] }
+    ],
+    no:[
+      { t:{nl:"Begin bij Google", en:"Start at Google"},
+        b:{nl:"Open de pagina hieronder en log in met je eigen Google-account.", en:"Open the page below and sign in with your own Google account."},
+        link:[{nl:"Open Google Bedrijfsprofiel",en:"Open Google Business"}, "https://business.google.com/create"],
+        note:{nl:"Je eigen wachtwoord typ je zelf. Wij zien het nooit.", en:"You type your own password yourself. We never see it."} },
+      { t:{nl:"Vul de naam en soort in", en:"Enter the name and type"},
+        b:{nl:"Kopieer de naam en de soort hieronder en plak ze in de vakjes.", en:"Copy the name and category below and paste them into the boxes."},
+        chips:[[{nl:"Naam",en:"Name"}, KIT.org],[{nl:"Soort",en:"Category"}, KIT.category_nl]] },
+      { t:{nl:"Vul het adres in", en:"Enter the address"},
+        b:{nl:"Zo kunnen mensen jullie vinden op de kaart.", en:"This is how people find you on the map."},
+        chips:[[{nl:"Adres",en:"Address"}, KIT.address],[{nl:"Telefoon",en:"Phone"}, KIT.phone],[{nl:"Website",en:"Website"}, KIT.site]] },
+      { t:{nl:"Wacht op het kaartje", en:"Wait for the postcard"},
+        b:{nl:"Google stuurt een kaartje per post met een code van 6 cijfers. Dat duurt 1 tot 2 weken — heel normaal.", en:"Google mails you a postcard with a 6-digit code. It takes 1 to 2 weeks — completely normal."},
+        wait:{nl:"Zodra het kaartje er is: app ons gewoon de 6 cijfers. Dat is de enige code die je met ons deelt.", en:"When the postcard arrives: just message us the 6 digits. That’s the only code you ever share with us."} },
+      { t:{nl:"Nodig ons uit als beheerder", en:"Invite us as a manager"},
+        b:{nl:"In je bedrijfsprofiel: tik op “Beheerders” en voeg ons e-mailadres toe. Dan houden wij het profiel voor je bij.", en:"In your business profile: tap “Managers” and add our email address. Then we keep the profile up to date for you."},
+        chips:[[{nl:"Ons adres",en:"Our address"}, KIT.vomMail]] }
+    ]
+  },
+  {
+    id:"fb", badge:"f",
+    name:{nl:"Facebook-pagina", en:"Facebook Page"},
+    branch:{nl:"Heeft "+KIT.org+" al een Facebook-pagina?", en:"Does "+KIT.org+" already have a Facebook Page?"},
+    yes:[
+      { t:{nl:"Wij sturen een verzoek", en:"We send a request"},
+        b:{nl:"Je krijgt een melding op Facebook: “Vision Outreach Media vraagt toegang tot je pagina.” Dat verzoek komt echt van ons.", en:"You’ll get a Facebook notification: “Vision Outreach Media requests access to your Page.” That request really is from us."} },
+      { t:{nl:"Tik op Goedkeuren", en:"Tap Approve"},
+        b:{nl:"Open de melding en keur het verzoek goed. De pagina blijft gewoon van jullie — wij mogen er alleen berichten voor klaarzetten.", en:"Open the notification and approve the request. The Page stays yours — we’re only allowed to prepare posts for it."} }
+    ],
+    no:[
+      { t:{nl:"Maak de pagina aan", en:"Create the Page"},
+        b:{nl:"Open Facebook met je eigen account en ga naar “Pagina maken”. Dit maakt géén nieuw account — de pagina hoort bij jouw gewone Facebook.", en:"Open Facebook with your own account and go to “Create Page”. This is not a new account — the Page belongs to your normal Facebook."},
+        link:[{nl:"Open “Pagina maken”",en:"Open “Create Page”"}, "https://www.facebook.com/pages/create"] },
+      { t:{nl:"Vul naam en soort in", en:"Enter name and type"},
+        chips:[[{nl:"Naam",en:"Name"}, KIT.org],[{nl:"Soort",en:"Category"}, KIT.category_nl]],
+        b:{nl:"Kopieer en plak de naam en de soort.", en:"Copy and paste the name and category."} },
+      { t:{nl:"Zet de tekst erbij", en:"Add the description"},
+        b:{nl:"Plak dit stukje tekst in het vak “Bio” of “Info”.", en:"Paste this short text into the “Bio” or “About” box."},
+        chips:[[{nl:"Tekst",en:"Text"}, KIT.bio_nl],[{nl:"Website",en:"Website"}, KIT.site]] },
+      { t:{nl:"Foto’s erbij", en:"Add the photos"},
+        b:{nl:"We hebben je twee foto’s gestuurd via WhatsApp: een klein rond logo en een brede foto. Zet ze als profielfoto en omslagfoto.", en:"We sent you two photos on WhatsApp: a small round logo and a wide photo. Set them as the profile photo and cover photo."} },
+      { t:{nl:"Keur ons verzoek goed", en:"Approve our request"},
+        b:{nl:"Je krijgt zo een melding: “Vision Outreach Media vraagt toegang.” Tik op Goedkeuren — dan zetten wij voortaan de berichten voor je klaar.", en:"You’ll now get a notification: “Vision Outreach Media requests access.” Tap Approve — from then on we prepare the posts for you."} }
+    ]
+  },
+  {
+    id:"ig", badge:"IG",
+    name:{nl:"Instagram", en:"Instagram"},
+    branch:{nl:"Heeft "+KIT.org+" al een Instagram?", en:"Does "+KIT.org+" already have an Instagram?"},
+    yes:[
+      { t:{nl:"Koppel hem aan de Facebook-pagina", en:"Link it to the Facebook Page"},
+        b:{nl:"In Instagram: Instellingen → Accountcentrum → Accounts → voeg de Facebook-pagina toe. Daarna kunnen wij meehelpen via de pagina.", en:"In Instagram: Settings → Accounts Center → Accounts → add the Facebook Page. After that we can help via the Page."},
+        note:{nl:"Kom je er niet uit? Dit is het lastigste schermpje van allemaal — app ons, dan lopen we het samen door.", en:"Stuck? This is the fiddliest screen of them all — message us and we’ll walk through it together."} }
+    ],
+    no:[
+      { t:{nl:"Maak een nieuw account", en:"Create a new account"},
+        b:{nl:"Open de Instagram-app en kies “Nieuw account maken”. Gebruik dit e-mailadres — dat hebben we al voor jullie klaargezet.", en:"Open the Instagram app and choose “Create new account”. Use this email address — we’ve already set it up for you."},
+        chips:[[{nl:"E-mailadres",en:"Email address"}, KIT.igMail]] },
+      { t:{nl:"Kies zelf een wachtwoord", en:"Choose your own password"},
+        b:{nl:"Verzin zelf een wachtwoord en bewaar het op een veilige plek (bijvoorbeeld in de wachtwoord-app die we samen instelden).", en:"Make up your own password and keep it somewhere safe (for example the password app we set up together)."},
+        note:{nl:"Wij zien of vragen dit wachtwoord nooit. Het is van jullie.", en:"We never see or ask for this password. It’s yours."} },
+      { t:{nl:"Kies de naam", en:"Choose the name"},
+        chips:[[{nl:"Gebruikersnaam",en:"Username"}, KIT.handle],[{nl:"Naam",en:"Name"}, KIT.org]],
+        b:{nl:"Kopieer en plak de gebruikersnaam en de naam.", en:"Copy and paste the username and the name."} },
+      { t:{nl:"Zet de tekst en foto erbij", en:"Add the text and photo"},
+        b:{nl:"Plak de tekst in je bio en zet het ronde logo (via WhatsApp gestuurd) als profielfoto.", en:"Paste the text into your bio and set the round logo (sent via WhatsApp) as the profile photo."},
+        chips:[[{nl:"Bio",en:"Bio"}, KIT.bio_nl],[{nl:"Website",en:"Website"}, KIT.site]] },
+      { t:{nl:"Koppel de Facebook-pagina", en:"Link the Facebook Page"},
+        b:{nl:"Instellingen → Accountcentrum → Accounts → voeg de Facebook-pagina toe. Zo horen ze bij elkaar en kunnen wij voortaan de berichten klaarzetten.", en:"Settings → Accounts Center → Accounts → add the Facebook Page. That ties them together so we can prepare the posts from now on."} }
+    ]
+  },
+  {
+    id:"li", badge:"in",
+    name:{nl:"LinkedIn-pagina", en:"LinkedIn Page"},
+    branch:{nl:"Heeft "+KIT.org+" al een LinkedIn-pagina?", en:"Does "+KIT.org+" already have a LinkedIn Page?"},
+    yes:[
+      { t:{nl:"Maak ons beheerder", en:"Make us an admin"},
+        b:{nl:"Open jullie pagina → Instellingen → “Beheerders” → voeg toe. Zoek op onze naam en bevestig.", en:"Open your Page → Settings → “Admins” → add. Search for our name and confirm."},
+        chips:[[{nl:"Zoek op",en:"Search for"}, "Vision Outreach Media"]] }
+    ],
+    no:[
+      { t:{nl:"Maak de pagina aan", en:"Create the Page"},
+        b:{nl:"Open LinkedIn met je eigen account en maak een bedrijfspagina. Dit hoort bij jouw gewone LinkedIn — geen nieuw account.", en:"Open LinkedIn with your own account and create a company page. It belongs to your normal LinkedIn — not a new account."},
+        link:[{nl:"Open “Pagina maken”",en:"Open “Create Page”"}, "https://www.linkedin.com/company/setup/new/"] },
+      { t:{nl:"Vul de gegevens in", en:"Fill in the details"},
+        chips:[[{nl:"Naam",en:"Name"}, KIT.org],[{nl:"Website",en:"Website"}, KIT.site],[{nl:"Tekst",en:"Text"}, KIT.bio_nl]],
+        b:{nl:"Kopieer en plak de naam, website en tekst. Het logo staat in je WhatsApp.", en:"Copy and paste the name, website and text. The logo is in your WhatsApp."} },
+      { t:{nl:"Maak ons beheerder", en:"Make us an admin"},
+        b:{nl:"Op de nieuwe pagina: Instellingen → “Beheerders” → voeg toe. Zoek op onze naam en bevestig.", en:"On the new Page: Settings → “Admins” → add. Search for our name and confirm."},
+        chips:[[{nl:"Zoek op",en:"Search for"}, "Vision Outreach Media"]] }
+    ]
+  },
+  {
+    id:"yt", badge:"▶",
+    name:{nl:"YouTube-kanaal", en:"YouTube channel"},
+    branch:{nl:"Heeft "+KIT.org+" al een YouTube-kanaal?", en:"Does "+KIT.org+" already have a YouTube channel?"},
+    yes:[
+      { t:{nl:"Nodig ons uit", en:"Invite us"},
+        b:{nl:"Open studio.youtube.com → Instellingen → Rechten → “Uitnodigen” en voeg ons adres toe als beheerder.", en:"Open studio.youtube.com → Settings → Permissions → “Invite” and add our address as a manager."},
+        chips:[[{nl:"Ons adres",en:"Our address"}, KIT.vomMail]] }
+    ],
+    no:[
+      { t:{nl:"Maak een kanaal", en:"Create a channel"},
+        b:{nl:"Open de pagina hieronder met je eigen Google-account en kies “Kanaal maken”. Dit is géén nieuw account — het kanaal hoort bij jouw gewone Google.", en:"Open the page below with your own Google account and choose “Create channel”. This is not a new account — the channel belongs to your normal Google."},
+        link:[{nl:"Open YouTube-kanalen",en:"Open YouTube channels"}, "https://www.youtube.com/channel_switcher"] },
+      { t:{nl:"Geef het kanaal een naam", en:"Name the channel"},
+        chips:[[{nl:"Naam",en:"Name"}, KIT.org],[{nl:"Adresnaam",en:"Handle"}, "@"+KIT.handle]],
+        b:{nl:"Kopieer en plak de naam en de adresnaam.", en:"Copy and paste the name and the handle."} },
+      { t:{nl:"Nodig ons uit", en:"Invite us"},
+        b:{nl:"Open studio.youtube.com → Instellingen → Rechten → “Uitnodigen” en voeg ons adres toe als beheerder. Wij zetten dan de eerste video’s voor je klaar.", en:"Open studio.youtube.com → Settings → Permissions → “Invite” and add our address as a manager. We’ll prepare the first videos for you."},
+        chips:[[{nl:"Ons adres",en:"Our address"}, KIT.vomMail]] }
+    ]
+  },
+  {
+    id:"x", badge:"X",
+    name:{nl:"X (Twitter)", en:"X (Twitter)"},
+    branch:{nl:"Heeft "+KIT.org+" al een account op X?", en:"Does "+KIT.org+" already have an X account?"},
+    yes:[
+      { t:{nl:"Zet het wachtwoord in de kluis", en:"Put the password in the vault"},
+        b:{nl:"X kent geen “beheerders” zoals de andere kanalen. Zet daarom het wachtwoord in de wachtwoord-app die we samen instelden — dan kunnen wij berichten klaarzetten en blijft het account gewoon van jullie.", en:"X has no “managers” like the other channels. So put the password in the password app we set up together — then we can prepare posts and the account simply stays yours."},
+        note:{nl:"Alleen via de kluis-app — stuur een wachtwoord nooit los via WhatsApp of e-mail.", en:"Only via the vault app — never send a password loose over WhatsApp or email."} }
+    ],
+    no:[
+      { t:{nl:"Maak een nieuw account", en:"Create a new account"},
+        b:{nl:"Open de pagina hieronder en kies “Account maken”. Gebruik dit e-mailadres — dat hebben we al voor jullie klaargezet.", en:"Open the page below and choose “Create account”. Use this email address — we’ve already set it up for you."},
+        chips:[[{nl:"E-mailadres",en:"Email address"}, KIT.xMail]],
+        link:[{nl:"Open X",en:"Open X"}, "https://x.com/i/flow/signup"] },
+      { t:{nl:"Kies zelf een wachtwoord", en:"Choose your own password"},
+        b:{nl:"Verzin zelf een wachtwoord en zet het meteen in de wachtwoord-app die we samen instelden.", en:"Make up your own password and put it straight into the password app we set up together."},
+        note:{nl:"Krijg je een sms-code? Die vult alleen jij in. Wij vragen er nooit naar.", en:"Get a text-message code? Only you enter it. We never ask for it."} },
+      { t:{nl:"Kies de naam", en:"Choose the name"},
+        chips:[[{nl:"Gebruikersnaam",en:"Username"}, "@"+KIT.handle],[{nl:"Naam",en:"Name"}, KIT.org]],
+        b:{nl:"Kopieer en plak de gebruikersnaam en de naam.", en:"Copy and paste the username and the name."} },
+      { t:{nl:"Tekst en foto erbij", en:"Add text and photo"},
+        b:{nl:"Plak de tekst in het profiel en zet het logo (via WhatsApp gestuurd) als profielfoto.", en:"Paste the text into the profile and set the logo (sent via WhatsApp) as the profile photo."},
+        chips:[[{nl:"Tekst",en:"Text"}, KIT.bio_nl],[{nl:"Website",en:"Website"}, KIT.site]] },
+      { t:{nl:"Deel het via de kluis", en:"Share it via the vault"},
+        b:{nl:"Deel de kluis-map met ons — dan kunnen wij berichten klaarzetten en blijft het account gewoon van jullie.", en:"Share the vault folder with us — then we can prepare posts and the account simply stays yours."},
+        note:{nl:"Alleen via de kluis-app — stuur een wachtwoord nooit los via WhatsApp of e-mail.", en:"Only via the vault app — never send a password loose over WhatsApp or email."} }
+    ]
+  },
+  {
+    id:"email", badge:"@",
+    name:{nl:"E-mail (nieuwsbrief)", en:"Email (newsletter)"},
+    branch:{nl:"Heeft "+KIT.org+" al een e-maillijst?", en:"Does "+KIT.org+" already have an email list?"},
+    yes:[
+      { t:{nl:"Kies de afzender", en:"Choose the sender"},
+        b:{nl:"Onder welke naam en welk adres wil je dat de nieuwsbrief binnenkomt? App ons de naam en het e-mailadres.", en:"Under what name and address should the newsletter arrive? Message us the name and the email address."},
+        chips:[[{nl:"Naam",en:"Name"}, KIT.org],[{nl:"Voorbeeld-afzender",en:"Example sender"}, KIT.emailFrom]] },
+      { t:{nl:"Deel de lijst veilig", en:"Share the list securely"},
+        b:{nl:"Exporteer je contacten (meestal een .csv-bestand) en deel het via de beveiligde link die we je sturen — niet los per e-mail.", en:"Export your contacts (usually a .csv file) and share it via the secure link we send you — not loose by email."},
+        note:{nl:"Wij versturen alleen naar mensen die zich hebben aangemeld. De lijst blijft van jullie.", en:"We only send to people who opted in. The list stays yours."} },
+      { t:{nl:"Wij regelen het versturen", en:"We set up the sending"},
+        b:{nl:"Wij zetten het versturen voor je klaar via onze e-maildienst en bevestigen jullie afzender, zodat de berichten netjes aankomen. Je hoeft niets te installeren.", en:"We set up sending for you via our email service and verify your sender, so messages arrive properly. You don’t need to install anything."},
+        wait:{nl:"De eerste nieuwsbrief sturen we eerst naar jou ter goedkeuring — pas na jouw JA gaat hij naar de lijst.", en:"We send the first newsletter to you for approval first — it only goes to the list after your YES."} }
+    ],
+    no:[
+      { t:{nl:"Kies de afzender", en:"Choose the sender"},
+        b:{nl:"Onder welke naam en welk adres wil je dat de nieuwsbrief binnenkomt? App ons de naam en het e-mailadres — meer hoef je nu niet te doen.", en:"Under what name and address should the newsletter arrive? Message us the name and the email address — that’s all you need to do for now."},
+        chips:[[{nl:"Naam",en:"Name"}, KIT.org],[{nl:"Voorbeeld-afzender",en:"Example sender"}, KIT.emailFrom]] },
+      { t:{nl:"Wij regelen de techniek", en:"We handle the technical side"},
+        b:{nl:"Wij zetten het versturen op via onze e-maildienst en bevestigen jullie afzender, zodat berichten aankomen en niet in de spam belanden. Je hoeft niets te installeren.", en:"We set up sending via our email service and verify your sender, so messages arrive and don’t land in spam. You don’t need to install anything."} },
+      { t:{nl:"Verzamel samen de eerste adressen", en:"Gather the first addresses together"},
+        b:{nl:"Nodig je vaste bezoekers uit zich aan te melden. Wij maken daarvoor een aanmeldknop voor je website en socials.", en:"Invite your regulars to sign up. We’ll make a sign-up button for your website and socials."},
+        wait:{nl:"Elke nieuwsbrief sturen we eerst naar jou ter goedkeuring. Pas na jouw JA gaat hij eruit.", en:"We send every newsletter to you for approval first. It only goes out after your YES."} }
+    ]
+  }
+];
+
+/* ---- State ---- */
+const S_KEY = "vom-channel-wizards-v1";
+let state = { lang:"nl", privacyOk:false, route:{view:"privacy"}, ch:{} };
+try { const s = JSON.parse(localStorage.getItem(S_KEY)); if (s && s.ch) state = s; } catch(e){}
+CHANNELS.forEach(c => {
+  if (!state.ch[c.id]) state.ch[c.id] = { branch:null, step:0, done:false };
+  if (!state.ch[c.id].details) state.ch[c.id].details = {};
+});
+let editKey = null, flashKey = null;
+if (state.privacyOk && state.route.view === "privacy") state.route = {view:"home"};
+
+function save(){ localStorage.setItem(S_KEY, JSON.stringify(state)); }
+function t(o){ return typeof o === "string" ? o : (o[state.lang] || o.nl); }
+function ui(k){ return t(UI[k]); }
+
+function setLang(l){
+  state.lang = l; save();
+  document.getElementById("lang-nl").setAttribute("aria-pressed", String(l==="nl"));
+  document.getElementById("lang-en").setAttribute("aria-pressed", String(l==="en"));
+  render();
+}
+
+function esc(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
+
+function copyVal(btn, val){
+  const done = () => { const old = btn.textContent; btn.textContent = ui("copied"); setTimeout(()=>{ btn.textContent = old; }, 1600); };
+  if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(val).then(done, done);
+  else done();
+}
+
+/* ---- Views ---- */
+function vPrivacy(){
+  return `<div class="card">
+    <div class="eyebrow">${esc(ui("org"))}</div>
+    <h1>${esc(ui("privacyTitle"))}</h1>
+    <p class="muted">${esc(ui("privacyIntro"))}</p>
+    <ul class="privacy">
+      ${["priv1","priv2","priv3","priv4"].map(k=>`<li><span class="mark">✓</span><span>${esc(ui(k))}</span></li>`).join("")}
+    </ul>
+  </div>
+  <button class="btn primary" onclick="ackPrivacy()">${esc(ui("privacyOk"))}</button>`;
+}
+function ackPrivacy(){ state.privacyOk = true; state.route = {view:"home"}; save(); render(); }
+
+function chanState(c){
+  const st = state.ch[c.id];
+  if (st.done) return `<span class="state done">${esc(ui("done"))}</span>`;
+  if (st.branch === null && st.step === 0) return `<span class="state">${esc(ui("notStarted"))}</span>`;
+  const steps = st.branch === null ? 1 : (st.branch === "yes" ? c.yes.length : c.no.length);
+  const cur = st.branch === null ? 1 : Math.min(st.step + 1, steps);
+  return `<span class="state">${esc(ui("stepOf"))} ${cur} ${esc(ui("of"))} ${steps}</span>`;
+}
+
+function vHome(){
+  const allDone = CHANNELS.every(c => state.ch[c.id].done);
+  return `<div class="card">
+    <h1>${esc(allDone ? ui("allDone") : ui("homeTitle"))}</h1>
+    <p class="muted">${esc(allDone ? ui("allDoneBody") : ui("homeIntro"))}</p>
+  </div>
+  <div class="chanlist">
+    ${CHANNELS.map(c=>`
+      <button class="chan" onclick="openChan('${c.id}')">
+        <span class="badge">${esc(c.badge)}</span>
+        <span class="meta"><span class="name">${esc(t(c.name))}</span><br>${chanState(c)}</span>
+        <span class="arrow">›</span>
+      </button>`).join("")}
+    ${UPCOMING.map(u=>`
+      <div class="chan upcoming" aria-disabled="true">
+        <span class="badge">${esc(u.badge)}</span>
+        <span class="meta"><span class="name">${esc(t(u.name))}</span><br><span class="state">${esc(ui("soonState"))}</span></span>
+        <span class="soon">${esc(ui("soon"))}</span>
+      </div>`).join("")}
+  </div>`;
+}
+function openChan(id){ state.route = {view:"chan", id}; editKey = null; flashKey = null; save(); render(); }
+
+function vChan(){
+  const c = CHANNELS.find(x=>x.id===state.route.id);
+  const st = state.ch[c.id];
+  const head = `<div class="backrow"><button class="btn link" onclick="goHome()">${esc(ui("toHome"))}</button></div>`;
+
+  if (st.done) return head + (state.route.sub === "finish" ? vFinish(c) : vDetail(c));
+
+  if (st.branch === null){
+    return `${head}<div class="card">
+      <div class="eyebrow">${esc(t(c.name))}</div>
+      <h2>${esc(t(c.branch))}</h2>
+      <p class="muted small">${esc(ui("branchHint"))}</p>
+    </div>
+    <button class="btn secondary" onclick="setBranch('${c.id}','yes')">${esc(ui("branchYes"))}</button>
+    <button class="btn primary" onclick="setBranch('${c.id}','no')">${esc(ui("branchNo"))}</button>`;
+  }
+
+  const steps = st.branch === "yes" ? c.yes : c.no;
+  const i = Math.min(st.step, steps.length - 1);
+  const s = steps[i];
+  const chips = (s.chips||[]).map(ch=>{
+    const lab = esc(t(ch[0])), val = ch[1];
+    return `<div class="chip"><span class="val"><span class="lab">${lab}</span><span class="tx">${esc(val)}</span></span>
+      <button onclick="copyVal(this, ${JSON.stringify(val).replace(/"/g,"&quot;")})">${esc(ui("copy"))}</button></div>`;
+  }).join("");
+  const link = s.link ? `<a class="btn secondary" href="${esc(s.link[1])}" target="_blank" rel="noopener">${esc(t(s.link[0]))} ↗</a>` : "";
+  const note = s.note ? `<div class="note"><b>⚠</b> ${esc(t(s.note))}</div>` : "";
+  const wait = s.wait ? `<div class="wait"><span>\u{1F4EC}</span><span>${esc(t(s.wait))}</span></div>` : "";
+
+  return `${head}
+  <div class="progress" aria-label="${esc(ui("stepOf"))} ${i+1} ${esc(ui("of"))} ${steps.length}">
+    ${steps.map((_,k)=>`<span class="${k<=i?"on":""}"></span>`).join("")}
+  </div>
+  <div class="card">
+    <div class="eyebrow">${esc(t(c.name))} · ${esc(ui("stepOf"))} ${i+1} ${esc(ui("of"))} ${steps.length}</div>
+    <h2>${esc(t(s.t))}</h2>
+    ${s.b ? `<p>${esc(t(s.b))}</p>` : ""}
+    ${chips ? `<div class="chips">${chips}</div>` : ""}
+    ${link}${wait}${note}
+  </div>
+  ${i>0 ? `<button class="btn link" onclick="stepBack('${c.id}')">${esc(ui("back"))}</button>` : ""}
+  <button class="btn primary" onclick="stepNext('${c.id}', ${steps.length})">${esc(i === steps.length-1 ? ui("done") : ui("next"))}</button>`;
+}
+
+function vFinish(c){
+  const nxt = CHANNELS.find(x => !state.ch[x.id].done);
+  return `<div class="card center">
+    <div class="donebig">✓</div>
+    <h2>${esc(ui("finishTitle"))}</h2>
+    <p class="muted">${esc(ui("finishBody"))}</p>
+  </div>
+  <button class="btn primary" onclick="showDetail('${c.id}')">${esc(ui("viewDetails"))}</button>
+  ${nxt ? `<button class="btn secondary" onclick="openChan('${nxt.id}')">${esc(ui("nextChannel"))}</button>` : `<button class="btn secondary" onclick="goHome()">${esc(ui("toHome").replace("‹ ",""))}</button>`}`;
+}
+
+function vDetail(c){
+  const st = state.ch[c.id];
+  const when = st.doneAt ? new Date(st.doneAt).toLocaleDateString(state.lang === "nl" ? "nl-NL" : "en-GB") : "";
+  const rows = detailFields(c).map(f => {
+    const val = st.details[f.k] !== undefined ? st.details[f.k] : f.val;
+    if (editKey === f.k){
+      return `<div class="drow editing">
+        <span class="val"><span class="lab">${esc(t(f.lab))}</span></span>
+        <input id="editInput" type="text" value="${esc(val)}" aria-label="${esc(t(f.lab))}">
+        <div class="editrow">
+          <button class="btn secondary" onclick="cancelEdit()">${esc(ui("cancelBtn"))}</button>
+          <button class="btn primary" onclick="saveEdit('${c.id}','${f.k}')">${esc(ui("saveBtn"))}</button>
+        </div>
+      </div>`;
+    }
+    return `<div class="drow">
+      <span class="val"><span class="lab">${esc(t(f.lab))}</span><span class="tx">${esc(val)}</span></span>
+      ${f.fixed
+        ? `<span class="fixed">${esc(ui("fixedTag"))}</span>`
+        : `<button onclick="startEdit('${f.k}')">${esc(ui("edit"))}</button>`}
+    </div>${flashKey === f.k ? `<div class="flash">${esc(ui("editedNote"))}</div>` : ""}`;
+  }).join("");
+  return `<div class="card">
+    <div class="eyebrow">${esc(t(c.name))} · ${esc(ui("detailsEyebrow"))}</div>
+    <div class="statusline">
+      <span class="dot">✓</span>
+      <span class="st">${esc(st.branch === "yes" ? ui("pathExisting") : ui("pathCreated"))}${when ? " · " + esc(ui("readyOn")) + " " + esc(when) : ""}</span>
+    </div>
+    <p class="muted small">${esc(ui("editHint"))}</p>
+    <div class="detail">${rows}</div>
+  </div>
+  ${channelUrl(c) ? `<a class="btn secondary" href="${esc(channelUrl(c))}" target="_blank" rel="noopener">${esc(ui("openChannel"))} ↗</a>` : ""}
+  <button class="btn link" onclick="redoChan('${c.id}')">${esc(ui("redo"))}</button>`;
+}
+
+function showDetail(id){ state.route = {view:"chan", id}; editKey = null; save(); render(); }
+function startEdit(k){ editKey = k; flashKey = null; render();
+  const el = document.getElementById("editInput"); if (el){ el.focus(); el.select && el.select(); } }
+function cancelEdit(){ editKey = null; render(); }
+function saveEdit(id, k){
+  const el = document.getElementById("editInput");
+  if (el){ state.ch[id].details[k] = el.value.trim(); }
+  editKey = null; flashKey = k; save(); render();
+}
+function redoChan(id){
+  if (!confirm(ui("redoConfirm"))) return;
+  state.ch[id] = { branch:null, step:0, done:false, details:{} };
+  editKey = null; flashKey = null; save(); render();
+}
+
+function setBranch(id, b){ state.ch[id].branch = b; state.ch[id].step = 0; save(); render(); }
+function stepBack(id){ const st = state.ch[id]; if (st.step > 0) st.step--; else st.branch = null; save(); render(); }
+function stepNext(id, len){
+  const st = state.ch[id];
+  if (st.step >= len - 1){ st.done = true; st.doneAt = Date.now(); state.route.sub = "finish"; }
+  else { st.step++; }
+  save(); render();
+}
+function goHome(){ state.route = {view:"home"}; save(); render(); }
+
+function render(){
+  document.querySelectorAll("[data-i18n]").forEach(el => { el.textContent = ui(el.getAttribute("data-i18n")); });
+  document.getElementById("demoNote").textContent = ui("demo");
+  const v = state.route.view;
+  document.getElementById("view").innerHTML =
+    v === "privacy" ? vPrivacy() : v === "chan" ? vChan() : vHome();
+  window.scrollTo(0,0);
+}
+document.getElementById("lang-nl").setAttribute("aria-pressed", String(state.lang==="nl"));
+document.getElementById("lang-en").setAttribute("aria-pressed", String(state.lang==="en"));
+render();
+</script>

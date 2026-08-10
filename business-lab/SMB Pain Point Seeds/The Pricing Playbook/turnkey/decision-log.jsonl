@@ -1,0 +1,8 @@
+{"data":{"business":"The Pricing Playbook","operator":"vom","throttle":"single"},"kind":"init","ts":"2026-08-05T21:29:46Z"}
+{"data":{"classified":"operator","confidence":"explicit","core":["analytics_reporting","checkout_payments","crm","digital_fulfillment","finance_admin","product_catalog","web_presence"],"org_type":"digital_products","overrides":{"added":[],"removed":[]},"platform":"vercel_app","platform_source":"engine","wordpress_used":false},"kind":"blueprint","ts":"2026-08-06T01:50:33Z"}
+{"data":{"actor":"VOM","consent":"37896bf4ddbcfe67","target":"vercel"},"kind":"forge_authorized","ts":"2026-08-06T01:50:33Z"}
+{"data":{"archetype":"prelaunch","elapsed":13.98,"fingerprint":"sha256:61dbfd83524f27c1d9f8ed6eda605c80","outcome":"launched","run":"20260806-015033","target":"vercel","url":"https://the-pricing-playbook-prelaunch-i5dw1arko.vercel.app"},"kind":"forge_run","ts":"2026-08-06T01:50:47Z"}
+{"data":{"actor":"VOM","consent":"d3d765e14d7d0d0f","target":"vercel"},"kind":"forge_authorized","ts":"2026-08-06T06:56:05Z"}
+{"data":{"archetype":"prelaunch","elapsed":15.52,"fingerprint":"sha256:e78d4f54d5e810b5252242858f12494a","outcome":"launched","run":"20260806-065605","target":"vercel","url":"https://the-pricing-playbook-prelaunch-epunna2ub.vercel.app"},"kind":"forge_run","ts":"2026-08-06T06:56:20Z"}
+{"data":{"actor":"VOM","consent":"540a6729f77f467f","target":"vercel"},"kind":"forge_authorized","ts":"2026-08-07T07:51:03Z"}
+{"data":{"archetype":"prelaunch","elapsed":14.94,"fingerprint":"sha256:3fe93a1fc9b46e946efee9bcc5e7c329","outcome":"launched","run":"20260807-075103","target":"vercel","url":"https://the-pricing-playbook-prelaunch-r0roiy9ux.vercel.app"},"kind":"forge_run","ts":"2026-08-07T07:51:18Z"}

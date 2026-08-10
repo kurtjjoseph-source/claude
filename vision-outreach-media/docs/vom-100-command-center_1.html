@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VOM 100 — Business Command Center</title>
+<style>
+  :root{
+    --navy:#071a2f; --navy2:#092033; --blue:#0b3d91; --teal:#00a6a6; --teal2:#8be8e8;
+    --orange:#ff8a3d; --ink:#102033; --muted:#5f6b7a; --soft:#f5f8fb; --line:#e7edf4;
+    --card:#ffffff; --good:#1f9d6b;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    color:var(--ink);background:var(--soft);line-height:1.5;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1320px;margin:0 auto;padding:0 24px}
+
+  header{background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 55%,var(--blue) 150%);color:#fff;padding:26px 0 24px}
+  .hrow{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}
+  .brand{display:flex;align-items:center;gap:13px}
+  .logo{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--teal),var(--blue));
+    display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;box-shadow:0 6px 20px rgba(0,166,166,.35)}
+  h1{font-size:21px;font-weight:800}
+  .sub{color:var(--teal2);font-size:12.5px;font-weight:500;margin-top:2px}
+  .addbtn{background:var(--orange);color:#231000;border:none;font-weight:700;font-size:14px;padding:11px 18px;border-radius:10px;cursor:pointer;box-shadow:0 6px 18px rgba(255,138,61,.35);transition:.15s}
+  .addbtn:hover{transform:translateY(-1px);filter:brightness(1.05)}
+  .goal{margin-top:20px}
+  .goal .lab{display:flex;justify-content:space-between;font-size:12px;color:#cfe0f2;margin-bottom:6px;font-weight:600}
+  .bar{height:11px;background:rgba(255,255,255,.14);border-radius:20px;overflow:hidden}
+  .bar>span{display:block;height:100%;background:linear-gradient(90deg,var(--teal),var(--teal2));border-radius:20px;transition:width .6s ease}
+  .kpis{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-top:18px}
+  .kpi{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.13);border-radius:11px;padding:11px 13px}
+  .kpi b{display:block;font-size:23px;font-weight:800;line-height:1}
+  .kpi span{font-size:10.5px;color:#bcd0e6;text-transform:uppercase;letter-spacing:.5px;font-weight:600}
+  .kpi.k1 b{color:var(--teal2)} .kpi.k2 b{color:#a9e5ff} .kpi.k3 b{color:#ffd7b0} .kpi.k4 b{color:#ffb98f} .kpi.k5 b{color:#c9b8ff}
+
+  .controls{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:22px 0 8px}
+  .search{flex:1;min-width:220px;position:relative}
+  .search input{width:100%;padding:11px 14px 11px 38px;border:1px solid var(--line);border-radius:10px;font-size:14px;background:#fff}
+  .search svg{position:absolute;left:12px;top:12px;opacity:.45}
+  .seg{display:flex;gap:6px;flex-wrap:wrap}
+  .chip{border:1px solid var(--line);background:#fff;color:var(--muted);font-size:12.5px;font-weight:600;padding:8px 13px;border-radius:20px;cursor:pointer;transition:.12s;white-space:nowrap}
+  .chip:hover{border-color:var(--teal)} .chip.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .rowlabel{font-size:11px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin:14px 0 8px}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px;margin:12px 0 30px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;cursor:pointer;transition:.16s;box-shadow:0 1px 2px rgba(16,32,51,.04);display:flex;flex-direction:column}
+  .card:hover{box-shadow:0 14px 30px rgba(16,32,51,.13);transform:translateY(-3px)}
+  .cover{height:120px;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden}
+  .cover .mono{font-size:30px;font-weight:800;color:rgba(255,255,255,.9);letter-spacing:1px;text-shadow:0 2px 12px rgba(0,0,0,.2)}
+  .badge{position:absolute;top:10px;left:10px;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;padding:4px 9px;border-radius:20px;background:rgba(0,0,0,.55);color:#fff;backdrop-filter:blur(3px)}
+  .badge.live{background:rgba(31,157,107,.92)}
+  .srcpill{position:absolute;top:10px;right:10px;font-size:10px;font-weight:700;padding:4px 9px;border-radius:20px;background:rgba(255,255,255,.9);color:var(--ink)}
+  .cbody{padding:13px 15px 15px}
+  .cname{font-size:15px;font-weight:800;letter-spacing:.1px;display:flex;align-items:center;gap:6px}
+  .cdesc{font-size:12.5px;color:#586574;margin-top:5px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .cmeta{display:flex;align-items:center;justify-content:space-between;margin-top:11px}
+  .catdot{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted);font-weight:600}
+  .catdot i{width:8px;height:8px;border-radius:50%;display:inline-block}
+  .livelink{font-size:11.5px;font-weight:700;color:var(--blue)}
+
+  .empty{text-align:center;color:var(--muted);padding:60px 0;font-size:14px}
+  footer{color:var(--muted);font-size:12px;text-align:center;padding:22px 0 44px}
+
+  /* Detail overlay */
+  .detail{position:fixed;inset:0;background:rgba(7,26,47,.6);backdrop-filter:blur(4px);display:none;z-index:60;overflow:auto;padding:34px 16px}
+  .detail.show{display:block}
+  .dpanel{background:#fff;max-width:760px;margin:0 auto;border-radius:18px;overflow:hidden;box-shadow:0 30px 70px rgba(7,26,47,.45)}
+  .dcover{height:180px;display:flex;align-items:flex-end;padding:18px 24px;position:relative}
+  .dcover .dmono{font-size:44px;font-weight:800;color:rgba(255,255,255,.92);text-shadow:0 3px 16px rgba(0,0,0,.25)}
+  .dclose{position:absolute;top:16px;right:16px;background:rgba(0,0,0,.4);color:#fff;border:none;width:34px;height:34px;border-radius:50%;font-size:16px;cursor:pointer}
+  .dbody{padding:22px 24px 26px}
+  .dtop{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;flex-wrap:wrap}
+  .dname{font-size:23px;font-weight:800}
+  .dtags{display:flex;gap:7px;flex-wrap:wrap;margin-top:9px}
+  .tag{font-size:11px;font-weight:700;padding:4px 11px;border-radius:20px;background:var(--soft);border:1px solid var(--line);color:var(--ink)}
+  .tag.live{background:#dff5ec;border-color:#bfe9d7;color:#0e7a52}
+  .ddesc{font-size:14.5px;color:#33414f;margin:18px 0;line-height:1.6}
+  .dfields{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0 20px}
+  .fld{background:var(--soft);border:1px solid var(--line);border-radius:11px;padding:12px 14px}
+  .fld b{display:block;font-size:10.5px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin-bottom:4px}
+  .fld span{font-size:13.5px;color:var(--ink)}
+  .dactions{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+  .btn{padding:11px 18px;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;border:1px solid var(--line);background:#fff;color:var(--ink);display:inline-flex;align-items:center;gap:7px}
+  .btn.primary{background:var(--blue);color:#fff;border-color:var(--blue)}
+  .btn.live{background:var(--good);color:#fff;border-color:var(--good)}
+  .btn.danger{color:#c0392b;border-color:#f0d0cc;margin-left:auto}
+  .btn:hover{filter:brightness(.97)}
+  .muted-note{font-size:12px;color:var(--muted);margin-top:14px}
+
+  /* Modal form */
+  .ov{position:fixed;inset:0;background:rgba(7,26,47,.55);backdrop-filter:blur(3px);display:none;align-items:flex-start;justify-content:center;z-index:70;padding:40px 16px;overflow:auto}
+  .ov.show{display:flex}
+  .modal{background:#fff;border-radius:16px;width:100%;max-width:580px;padding:24px}
+  .modal h3{font-size:18px;font-weight:800;margin-bottom:16px}
+  .fg{margin-bottom:13px}
+  .fg label{display:block;font-size:11.5px;font-weight:700;color:var(--ink);margin-bottom:5px;text-transform:uppercase;letter-spacing:.4px}
+  .fg input,.fg textarea,.fg select{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:9px;font-size:14px;font-family:inherit}
+  .fg textarea{resize:vertical;min-height:60px}
+  .frow{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .mfoot{display:flex;justify-content:space-between;gap:10px;margin-top:18px}
+  .mfoot .right{display:flex;gap:10px}
+  @media(max-width:720px){.kpis{grid-template-columns:repeat(3,1fr)}.frow,.dfields{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="hrow">
+      <div class="brand">
+        <div class="logo">V100</div>
+        <div><h1>VOM 100 — Business Command Center</h1>
+        <div class="sub">Vision Outreach Media · portfolio of ventures across Claude, Lovable, Manus &amp; ChatGPT</div></div>
+      </div>
+      <button class="addbtn" onclick="openModal()">+ Register venture</button>
+    </div>
+    <div class="goal">
+      <div class="lab"><span>Progress to 100 ventures</span><span id="goalTxt">0 / 100</span></div>
+      <div class="bar"><span id="goalBar" style="width:0%"></span></div>
+    </div>
+    <div class="kpis" id="kpis"></div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="controls">
+    <div class="search">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      <input id="q" placeholder="Search ventures…" oninput="render()">
+    </div>
+  </div>
+  <div class="rowlabel">Category</div>
+  <div class="seg" id="catChips"></div>
+  <div class="rowlabel">Source &amp; status</div>
+  <div class="seg" id="filterChips"></div>
+
+  <div class="grid" id="grid"></div>
+  <footer id="foot"></footer>
+</div>
+
+<!-- Detail overlay -->
+<div class="detail" id="detail"><div class="dpanel" id="dpanel"></div></div>
+
+<!-- Add/Edit modal -->
+<div class="ov" id="ov">
+  <div class="modal">
+    <h3 id="mTitle">Register venture</h3>
+    <div class="fg"><label>Name</label><input id="f_name" placeholder="e.g. Sermon Script Pro"></div>
+    <div class="fg"><label>Concept / description</label><textarea id="f_desc"></textarea></div>
+    <div class="frow">
+      <div class="fg"><label>Category</label><select id="f_cat"></select></div>
+      <div class="fg"><label>Stage</label><select id="f_stage"></select></div>
+    </div>
+    <div class="frow">
+      <div class="fg"><label>Source</label><select id="f_src"></select></div>
+      <div class="fg"><label>Revenue model</label><input id="f_rev" placeholder="optional"></div>
+    </div>
+    <div class="fg"><label>Live / preview URL</label><input id="f_live" placeholder="https://…"></div>
+    <div class="fg"><label>Editor / project URL</label><input id="f_link" placeholder="https://…"></div>
+    <div class="fg"><label>Next action</label><input id="f_next" placeholder="optional"></div>
+    <div class="mfoot">
+      <button class="btn danger" id="delBtn" onclick="delItem()" style="visibility:hidden;margin-left:0">Delete</button>
+      <div class="right">
+        <button class="btn" onclick="closeModal()">Cancel</button>
+        <button class="btn primary" onclick="saveItem()">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const CATS=["Core & VOM","FaithSite SaaS","Church & Ministry","Products & Tools","Content, Media & Games","Commerce & Growth","Emerging Tech","Ops & Infrastructure"];
+const CATGRAD={
+ "Core & VOM":["#071a2f","#0b3d91"], "FaithSite SaaS":["#0b3d91","#00a6a6"],
+ "Church & Ministry":["#0e7a52","#00a6a6"], "Products & Tools":["#ff8a3d","#b8471a"],
+ "Content, Media & Games":["#7b3fe4","#c04bd6"], "Commerce & Growth":["#e0a516","#ff8a3d"],
+ "Emerging Tech":["#0f9d6b","#0b3d91"], "Ops & Infrastructure":["#41506a","#5f6b7a"]};
+const CATDOT={"Core & VOM":"#0b3d91","FaithSite SaaS":"#00a6a6","Church & Ministry":"#0e7a52","Products & Tools":"#ff8a3d","Content, Media & Games":"#7b3fe4","Commerce & Growth":"#e0a516","Emerging Tech":"#0f9d6b","Ops & Infrastructure":"#5f6b7a"};
+const STAGES=["Live","Built","Prototype","Exploring","Idea","Planned"];
+const SOURCES=["Claude","Lovable","Manus","ChatGPT"];
+const GOAL=100;
+const LV="https://lovable.dev/projects/";
+
+const SEED=[
+ // ---- Claude ----
+ {name:"Vision Outreach Media",cat:"Core & VOM",stage:"Live",src:"Claude",desc:"Done-for-you websites, media design & ongoing digital support for churches, ministries and nonprofits (NL).",rev:"Project fees + care plans",next:"Add testimonials; publish blog",live:"https://www.visionoutreachmedia.nl",link:""},
+ {name:"FaithSite AI Agency",cat:"FaithSite SaaS",stage:"Prototype",src:"Claude",desc:"Turnkey AI web agency: live demo copy generator, cold-outreach email tool, tiered pricing + care plans.",rev:"$497–1,997 + $97/mo",next:"Host demo; run outreach",live:"",link:""},
+ {name:"FaithSite Publisher",cat:"FaithSite SaaS",stage:"Built",src:"Claude",desc:"BYO-key WordPress content publisher pushing pages & posts across a fleet of client sites.",rev:"Part of FaithSite suite",next:"Wire to shared fleet store",live:"",link:""},
+ {name:"FaithSite Campaign Builder",cat:"FaithSite SaaS",stage:"Built",src:"Claude",desc:"Fleet-wide campaign roadmap + multilingual content studio + SEO/schema + Google Ad Grants toolkit.",rev:"Part of FaithSite suite",next:"Unify fleet with Hub",live:"",link:""},
+ {name:"FaithSite Hub",cat:"FaithSite SaaS",stage:"Built",src:"Claude",desc:"Orchestration home: shared fleet + connections; launches Publisher & Campaign builder.",rev:"Part of FaithSite suite",next:"Shared source-of-truth store",live:"",link:""},
+ {name:"FaithSite Engagement Platform",cat:"FaithSite SaaS",stage:"Prototype",src:"Claude",desc:"Multi-org SaaS: engagement studio (6 types), distribution (email/Meta/webhooks), analytics, 7 AI agents, audience segments. Next.js/Supabase/Clerk.",rev:"Per-org subscription",next:"Scaffold foundation",live:"",link:""},
+ {name:"AI Website SaaS (bait & hook)",cat:"FaithSite SaaS",stage:"Idea",src:"Claude",desc:"AI builds ~80% of a site; subscription hosting + edits for churches / faith orgs / SMBs.",rev:"Build fee + €29–59/mo",next:"Sample church site",live:"",link:""},
+ {name:"Niche AI Writing Tool",cat:"Products & Tools",stage:"Idea",src:"Claude",desc:"Vertical AI copy tool for one niche (realtors, coaches, Etsy). Free trial → paid; saved history = stickiness.",rev:"€9 / €29 / €99",next:"Pick niche; no-code MVP",live:"",link:""},
+ {name:"VOM Event Registration",cat:"Products & Tools",stage:"Built",src:"Claude",desc:"WordPress plugin: event sign-ups + potluck 'what to bring' coordination + .ics export; backend-editable per event.",rev:"Plugin / care-plan add-on",next:"Prefill real event",live:"",link:""},
+ {name:"QR Code Generator",cat:"Products & Tools",stage:"Built",src:"Claude",desc:"Client-side QR generator (PNG/SVG, adjustable size, download, copy to clipboard).",rev:"Free tool / lead magnet",next:"Bundle into VOM toolkit",live:"",link:""},
+ {name:"Star Quest 64",cat:"Content, Media & Games",stage:"Prototype",src:"Claude",desc:"Retro N64-style 3D collect-athon platformer web game (WebGL).",rev:"Portfolio / fun",next:"Finish playable build",live:"",link:""},
+ {name:"Meta Quest VR Experiences",cat:"Emerging Tech",stage:"Exploring",src:"Claude",desc:"VR/MR apps (faith / training niche) for Meta Quest via Unity or Unreal + Meta XR SDK.",rev:"App sales / commissions",next:"Pick first concept",live:"",link:""},
+ {name:"Aladewura",cat:"Emerging Tech",stage:"Exploring",src:"Claude",desc:"Local-first AI memory/context browser extension + desktop store; session continuity & crash recovery while vibe-coding.",rev:"Freemium extension",next:"Validate pain; prototype",live:"",link:""},
+ {name:"VOM Agent Swarm / DevOps Orchestrator",cat:"Ops & Infrastructure",stage:"Built",src:"Claude",desc:"6 agent teams, 22 agents to run the agency end-to-end with human escalation gates. Productizable as agency-in-a-box.",rev:"Internal / licensable",next:"Care team → runnable skills",live:"",link:""},
+ {name:"SEO Agent Team",cat:"Ops & Infrastructure",stage:"Built",src:"Claude",desc:"Automated technical + content SEO (Rank Math workflow).",rev:"Internal enabler",next:"Roll across fleet",live:"",link:""},
+ {name:"Faith-based Social Media Team / Engage AI",cat:"Ops & Infrastructure",stage:"Built",src:"Claude",desc:"Social-content agent roles + recurring engagement cadence.",rev:"Internal / add-on",next:"Monthly cadence per client",live:"",link:""},
+
+ // ---- Lovable ----
+ {name:"Sermon Script Pro",cat:"Church & Ministry",stage:"Live",src:"Lovable",desc:"AI sermon writing tool — from a whisper to the pulpit. Draft, structure and export sermons.",rev:"SaaS / subscription",next:"Promote to pastors",live:"https://sermon-scribe-light.lovable.app",link:LV+"398d0d58-e4bb-4fac-bf04-6b12817d46f2"},
+ {name:"Adullam Community",cat:"Church & Ministry",stage:"Live",src:"Lovable",desc:"Church community platform — gather, pray, share. Member connection and community hub.",rev:"Community SaaS",next:"Onboard first church",live:"https://gather-pray-share.lovable.app",link:LV+"d06fecb6-adcb-4094-ac0f-f441d96296b4"},
+ {name:"Vision Outreach Hub",cat:"Core & VOM",stage:"Live",src:"Lovable",desc:"VOM outreach / marketing hub site.",rev:"Lead gen for VOM",next:"Link to CRM",live:"https://outreach-sparkle-site.lovable.app",link:LV+"5dee7510-f3c9-4b56-8273-ed8c3cddb9d4"},
+ {name:"Brand Kit Builder",cat:"Products & Tools",stage:"Live",src:"Lovable",desc:"Generate a full brand kit — colors, type, logo direction — from a few inputs.",rev:"Freemium tool",next:"Tie into site builder",live:"https://flair-kit-builder.lovable.app",link:LV+"20813754-d8a6-4328-bfad-083b8c6b27c6"},
+ {name:"Site Replicator",cat:"Products & Tools",stage:"Live",src:"Lovable",desc:"Clone any website's design as a starting point for a new build.",rev:"Tool / internal",next:"Guardrails for IP",live:"https://site-clone-buddy-48.lovable.app",link:LV+"88a63a94-0e17-4939-81ea-308e74c804cd"},
+ {name:"The Gents' Spot",cat:"Commerce & Growth",stage:"Live",src:"Lovable",desc:"Gentleman's grooming guide & store.",rev:"Affiliate / e-commerce",next:"Add products",live:"https://gentlemans-groom-guide.lovable.app",link:LV+"0be5e96a-6db7-4e5c-b62d-f7fe5e173eb5"},
+ {name:"Drop Wizard",cat:"Commerce & Growth",stage:"Live",src:"Lovable",desc:"Dropshipping product finder — surface trending winners.",rev:"Subscription / tool",next:"Automate daily feed",live:"https://wizard-findr.lovable.app",link:LV+"2f78c1df-5731-4731-83f3-b9465398ef43"},
+ {name:"Easy Shop Hub",cat:"Commerce & Growth",stage:"Live",src:"Lovable",desc:"Ready-to-run e-commerce storefront (Glow Store Pro).",rev:"E-commerce",next:"Connect payments",live:"https://glow-store-pro.lovable.app",link:LV+"e2ebe5ab-6a3e-4f05-b926-02a8c7f6982d"},
+ {name:"ChordPro Hub",cat:"Content, Media & Games",stage:"Live",src:"Lovable",desc:"Chord charts & directory for worship musicians.",rev:"Tool / community",next:"Grow song library",live:"https://chord-playmate.lovable.app",link:LV+"4d0d74cc-6e65-4b52-aeef-56fef15dbf0c"},
+ {name:"Paywall Punch",cat:"Commerce & Growth",stage:"Live",src:"Lovable",desc:"Sell anything online with smart, subscription-based paywalls.",rev:"SaaS",next:"Stripe integration",live:"https://paywall-punch.lovable.app",link:LV+"f5a9f0d8-baca-4a7d-8c8f-711b48b9485c"},
+ {name:"Digital Course Booster",cat:"Commerce & Growth",stage:"Live",src:"Lovable",desc:"Create and sell your digital course.",rev:"Course platform",next:"Add checkout",live:"",link:"https://lovable.dev/dashboard/projects"},
+ {name:"Vid-to-Course Creator",cat:"Commerce & Growth",stage:"Live",src:"Lovable",desc:"Transform YouTube videos into structured online courses.",rev:"SaaS",next:"Publish sample course",live:"",link:"https://lovable.dev/dashboard/projects"},
+ {name:"Divine Life Revealed",cat:"Church & Ministry",stage:"Built",src:"Lovable",desc:"Faith teaching / devotional content site.",rev:"Content / ministry",next:"Publish",live:"",link:LV+"8727475e-4a28-40f5-ac42-d46d2b8bf686"},
+ {name:"Drumless Creator",cat:"Content, Media & Games",stage:"Built",src:"Lovable",desc:"Create drumless practice tracks for musicians.",rev:"Tool / subscription",next:"Publish",live:"",link:LV+"63a252f2-9c79-44c1-9bdd-bcf4c481db09"},
+ {name:"Build It Right",cat:"Products & Tools",stage:"Built",src:"Lovable",desc:"Website build helper / guided builder.",rev:"Tool",next:"Define scope",live:"",link:LV+"991fc42e-9ab9-47be-9eb9-30fd4c52de00"},
+ {name:"AI Book Creator",cat:"Content, Media & Games",stage:"Built",src:"Lovable",desc:"AI-assisted book authoring app.",rev:"SaaS",next:"Publish",live:"",link:LV+"9f4dcd57-a08a-4d8d-8e3b-b02d7a451ef0"},
+ {name:"Aura Sidebar",cat:"Products & Tools",stage:"Built",src:"Lovable",desc:"Browser sidebar productivity tool.",rev:"Tool",next:"Define feature set",live:"",link:LV+"f519d221-e3d4-4c37-8db5-429ed832eea4"},
+ {name:"Prompt Pal",cat:"Products & Tools",stage:"Built",src:"Lovable",desc:"Prompt manager / library for AI users.",rev:"Freemium",next:"Publish",live:"",link:LV+"cbb0e8c3-3dc0-4dab-aabf-bfb677ab3d8b"},
+ {name:"Your First Funnel",cat:"Commerce & Growth",stage:"Built",src:"Lovable",desc:"Guided sales funnel builder for beginners.",rev:"SaaS / course",next:"Publish",live:"",link:LV+"8cf9a862-0b7f-4054-b52b-47f5f4a51541"},
+ {name:"NFT Valuables",cat:"Emerging Tech",stage:"Built",src:"Lovable",desc:"NFT valuation / marketplace concept.",rev:"Marketplace fees",next:"Assess viability",live:"",link:LV+"869cb6cf-46dd-4821-bd76-7f3280dac6b0"},
+ {name:"Verse Presenter",cat:"Church & Ministry",stage:"Built",src:"Lovable",desc:"Scripture presentation tool for services.",rev:"Tool / ministry",next:"Publish",live:"",link:LV+"d5393180-29e7-43d8-a73a-04dd712f395d"},
+ {name:"VO Utrecht",cat:"Core & VOM",stage:"Built",src:"Lovable",desc:"Vision Outreach Utrecht local site.",rev:"Regional VOM",next:"Launch",live:"",link:LV+"898e6f44-4ee1-4940-b95c-c9fc349af091"},
+ {name:"Legendary Partner Picker",cat:"Content, Media & Games",stage:"Built",src:"Lovable",desc:"Partner / matchup picker app.",rev:"Tool",next:"Define use case",live:"",link:LV+"26e55d16-9f64-4cdb-9254-eabd505c3a2d"},
+ {name:"ChurchConnect Hub",cat:"Church & Ministry",stage:"Built",src:"Lovable",desc:"Church connection & directory platform.",rev:"Community SaaS",next:"Publish",live:"",link:LV+"06b01e57-efa5-49c4-be82-de5bdcfbbf6c"},
+ {name:"My Loving Calendar",cat:"Products & Tools",stage:"Built",src:"Lovable",desc:"Personal / relationship calendar app.",rev:"Freemium",next:"Publish",live:"",link:LV+"00672939-e460-4acb-9223-f1f863a0b113"},
+ {name:"Score Keeper Supreme",cat:"Content, Media & Games",stage:"Built",src:"Lovable",desc:"Game score-tracking app.",rev:"Tool",next:"Publish",live:"",link:LV+"2d40a6db-4582-49b0-a9af-62dd91a48a51"},
+ {name:"Gospel Groove Maker",cat:"Content, Media & Games",stage:"Built",src:"Lovable",desc:"Gospel music / groove creation tool.",rev:"Tool",next:"Publish",live:"",link:LV+"df0fe9fa-93b7-4239-af6b-4da67c3f5c00"},
+ {name:"Fill Logic Generator",cat:"Products & Tools",stage:"Built",src:"Lovable",desc:"Logic / form fill generator.",rev:"Tool",next:"Define scope",live:"",link:LV+"0b4bda20-0ff0-46f6-b065-f435a3ad9acb"},
+ {name:"Brand Site Genius",cat:"Products & Tools",stage:"Built",src:"Lovable",desc:"Generate a brand website from brand inputs.",rev:"SaaS",next:"Publish",live:"",link:LV+"9460eb95-e6d0-4d46-a3fa-bcb7de08607c"},
+ {name:"Talk Track Host",cat:"Content, Media & Games",stage:"Built",src:"Lovable",desc:"Podcast / talk-show hosting helper.",rev:"Tool",next:"Define scope",live:"",link:LV+"ca761078-7758-49f5-b9e1-99a7fac671fc"},
+ {name:"Rhythm Visualizer Studio",cat:"Content, Media & Games",stage:"Built",src:"Lovable",desc:"Music rhythm visualizer studio.",rev:"Tool",next:"Publish",live:"",link:LV+"92207578-5427-403e-ac70-ed5bffa0cfb0"},
+ {name:"Vision Built Connect",cat:"Core & VOM",stage:"Built",src:"Lovable",desc:"VOM connect / networking site.",rev:"VOM",next:"Clarify role",live:"",link:LV+"435e0996-0ca7-4f30-a127-93d163ea577a"},
+ {name:"MCP Scribe Station",cat:"Emerging Tech",stage:"Built",src:"Lovable",desc:"The Ultimate MCP Agent Directory — discover, publish & manage MCP agents.",rev:"Directory / SaaS",next:"Seed directory",live:"",link:LV+"fef76cdb-69b0-4adf-8a6b-e9af2605d3f6"},
+ {name:"YT Caption Fetcher",cat:"Products & Tools",stage:"Built",src:"Lovable",desc:"Extract transcripts / captions from YouTube videos.",rev:"Tool",next:"Publish",live:"",link:"https://lovable.dev/dashboard/projects"},
+
+ // ---- Manus ----
+ {name:"ChurchEngage — Member Engagement Platform",cat:"Church & Ministry",stage:"Live",src:"Manus",desc:"Church member engagement platform — dashboard, events, member management.",rev:"Community SaaS",next:"Onboard GGC",live:"https://churchengage-e83cl399.manus.space/?code=Xfww8J6ewtUykS4UcGu8Af",link:""},
+ {name:"Vision Outreach Chatbot",cat:"Products & Tools",stage:"Live",src:"Manus",desc:"AI chat + lead-capture widget live on the VOM WordPress site; owner lead dashboard.",rev:"Lead gen for VOM",next:"Review leads",live:"https://visionchat-eows3k2e.manus.space",link:""},
+ {name:"QuantumLeap — Learn Quantum Computing",cat:"Content, Media & Games",stage:"Live",src:"Manus",desc:"Quantum computing learning app / course.",rev:"Course / edu",next:"Get clean public URL",live:"",link:"https://manus.im/app"},
+ {name:"VOM Webmaster Agent",cat:"Ops & Infrastructure",stage:"Live",src:"Manus",desc:"Scheduled daily uptime + health check on visionoutreachmedia.nl with outage alerting.",rev:"Internal enabler",next:"Extend to fleet",live:"",link:"https://manus.im/app"},
+ {name:"Certification Portal",cat:"Church & Ministry",stage:"Planned",src:"Manus",desc:"Portal with lessons and exams to issue certifications.",rev:"Course / cert fees",next:"Spec MVP",live:"",link:"https://manus.im/app"},
+ {name:"Exhorter Training Course",cat:"Church & Ministry",stage:"Built",src:"Manus",desc:"Structured exhorter training course content.",rev:"Course",next:"Package & sell",live:"",link:"https://manus.im/app"},
+ {name:"Ordained Minister Course / COG Licensing Hub",cat:"Church & Ministry",stage:"Planned",src:"Manus",desc:"Ordained minister course + COG ministerial licensing hub page.",rev:"Course / cert",next:"Build hub page",live:"",link:"https://manus.im/app"},
+ {name:"BuildFlow Website Builder",cat:"Products & Tools",stage:"Planned",src:"Manus",desc:"Website builder concept (agent-driven).",rev:"SaaS",next:"Define vs FaithSite",live:"",link:"https://manus.im/app"},
+ {name:"SiteForge",cat:"Products & Tools",stage:"Planned",src:"Manus",desc:"Website forging / builder concept.",rev:"SaaS",next:"Define vs BuildFlow",live:"",link:"https://manus.im/app"},
+ {name:"Brandkit Studio",cat:"Products & Tools",stage:"Built",src:"Manus",desc:"Brand kit studio (how HTML elements react to a brand kit).",rev:"Tool",next:"Merge with Brand Kit Builder?",live:"",link:"https://manus.im/app"},
+ {name:"Real Estate for Churches",cat:"Church & Ministry",stage:"Idea",src:"Manus",desc:"Help churches find & rent government / community spaces in Amersfoort.",rev:"Service / commission",next:"Validate demand",live:"",link:"https://manus.im/app"},
+ {name:"Kids Coloring Book Creator",cat:"Content, Media & Games",stage:"Idea",src:"Manus",desc:"Create kids coloring books with custom scenes.",rev:"Print / digital sales",next:"Sample book",live:"",link:"https://manus.im/app"},
+ {name:"Automated Money-Making Course",cat:"Commerce & Growth",stage:"Idea",src:"Manus",desc:"Course on building an automated income stream.",rev:"Course sales",next:"Outline curriculum",live:"",link:"https://manus.im/app"},
+ {name:"Dropshipping Product Research",cat:"Commerce & Growth",stage:"Live",src:"Manus",desc:"Scheduled daily research on top 15 trending dropshipping products (feeds Drop Wizard).",rev:"Feeds e-commerce",next:"Pipe into Drop Wizard",live:"",link:"https://manus.im/app"},
+ {name:"GGC Zeist Digital Marketing",cat:"Church & Ministry",stage:"Built",src:"Manus",desc:"Digital visibility / marketing plan for Gods Generation Church, Zeist.",rev:"Client engagement",next:"Execute plan",live:"",link:"https://manus.im/app"},
+
+ // ---- ChatGPT ----
+ {name:"AI Tools (R&D)",cat:"Products & Tools",stage:"Idea",src:"ChatGPT",desc:"Working project collecting AI tool ideas & prompt experiments.",rev:"Pipeline",next:"Triage best ideas",live:"",link:"https://chatgpt.com"},
+ {name:"Project Marina",cat:"Content, Media & Games",stage:"Exploring",src:"ChatGPT",desc:"Multi-section writing / book project (built section by section).",rev:"Book / content",next:"Continue sections",live:"",link:"https://chatgpt.com"},
+ {name:"Adullam Articles",cat:"Content, Media & Games",stage:"Built",src:"ChatGPT",desc:"Article / content engine feeding the Adullam Community platform.",rev:"Content arm",next:"Schedule publishing",live:"",link:"https://chatgpt.com"},
+ {name:"Exhorter Fast Track",cat:"Church & Ministry",stage:"Built",src:"ChatGPT",desc:"Fast-track exhorter training project (pairs with the Manus Exhorter course).",rev:"Course",next:"Package & sell",live:"",link:"https://chatgpt.com"},
+ {name:"COGA Social Media Promotion 2025",cat:"Church & Ministry",stage:"Built",src:"ChatGPT",desc:"Social-media promotion campaign project for Church of God Amersfoort.",rev:"Client / ministry",next:"Roll into social cadence",live:"",link:"https://chatgpt.com"},
+ {name:"Brand Kit Creator App",cat:"Products & Tools",stage:"Prototype",src:"ChatGPT",desc:"AI brand-kit creator app with a live site scraper (build a kit from an existing site).",rev:"SaaS / tool",next:"Make the scraper real",live:"",link:"https://chatgpt.com"},
+ {name:"Church Announcements Calendar",cat:"Church & Ministry",stage:"Built",src:"ChatGPT",desc:"Calendar app for managing and displaying church announcements & events.",rev:"Tool / ministry",next:"Publish & connect to site",live:"",link:"https://chatgpt.com"}
+];
+
+const KEY="vom100:ventures:v2";
+let data=load();
+let activeCat="All", activeFilter="All";
+
+function load(){ try{const r=localStorage.getItem(KEY); if(r) return JSON.parse(r);}catch(e){}
+  return SEED.map((v,i)=>({id:"s"+i,...v})); }
+function save(){ try{localStorage.setItem(KEY,JSON.stringify(data));}catch(e){} }
+
+function esc(t){return (t||"").replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+function initials(n){return n.replace(/[^A-Za-z0-9 ]/g,"").split(/\s+/).filter(Boolean).slice(0,2).map(w=>w[0]).join("").toUpperCase();}
+function grad(cat){const g=CATGRAD[cat]||["#334","#556"];return `linear-gradient(135deg,${g[0]},${g[1]})`;}
+
+function paintTop(){
+  const s={Live:0,Built:0,Prototype:0,Idea:0};
+  data.forEach(v=>{ if(v.stage==="Live")s.Live++; else if(v.stage==="Built")s.Built++; else if(v.stage==="Idea"||v.stage==="Planned")s.Idea++; else s.Prototype++; });
+  const liveLinks=data.filter(v=>v.live).length;
+  document.getElementById("kpis").innerHTML=`
+    <div class="kpi"><b>${data.length}</b><span>Registered</span></div>
+    <div class="kpi k1"><b>${s.Live}</b><span>Live</span></div>
+    <div class="kpi k2"><b>${s.Built}</b><span>Built</span></div>
+    <div class="kpi k3"><b>${s.Prototype}</b><span>In build</span></div>
+    <div class="kpi k4"><b>${s.Idea}</b><span>Ideas</span></div>
+    <div class="kpi k5"><b>${liveLinks}</b><span>Live links</span></div>`;
+  const pct=Math.min(100,Math.round(data.length/GOAL*100));
+  document.getElementById("goalBar").style.width=pct+"%";
+  document.getElementById("goalTxt").textContent=data.length+" / "+GOAL;
+}
+function paintChips(){
+  document.getElementById("catChips").innerHTML=["All",...CATS].map(c=>`<button class="chip ${activeCat===c?'on':''}" onclick="setCat('${c.replace(/'/g,"\\'")}')">${c}${c!=="All"?` <span style="opacity:.6">${data.filter(v=>v.cat===c).length}</span>`:""}</button>`).join("");
+  document.getElementById("filterChips").innerHTML=["All",...SOURCES,...STAGES].map(f=>`<button class="chip ${activeFilter===f?'on':''}" onclick="setFilter('${f}')">${f}</button>`).join("");
+}
+function setCat(c){activeCat=c;paintChips();render();}
+function setFilter(f){activeFilter=f;paintChips();render();}
+
+function match(v){
+  const q=document.getElementById("q").value.trim().toLowerCase();
+  if(activeCat!=="All"&&v.cat!==activeCat) return false;
+  if(activeFilter!=="All"&&v.src!==activeFilter&&v.stage!==activeFilter) return false;
+  if(q){const hay=(v.name+" "+v.desc+" "+v.cat+" "+v.src).toLowerCase(); if(!hay.includes(q)) return false;}
+  return true;
+}
+function render(){
+  paintTop();
+  const items=data.filter(match);
+  const host=document.getElementById("grid");
+  if(!items.length){host.innerHTML=`<div class="empty" style="grid-column:1/-1">No ventures match. <a href="#" onclick="openModal();return false" style="color:var(--blue);font-weight:700">Register one</a>.</div>`;foot();return;}
+  host.innerHTML=items.map(cardHTML).join("");
+  foot();
+}
+function cardHTML(v){
+  const isLive=!!v.live;
+  return `<div class="card" onclick="openDetail('${v.id}')">
+    <div class="cover" style="background:${grad(v.cat)}">
+      <span class="mono">${esc(initials(v.name))}</span>
+      <span class="badge ${isLive?'live':''}">${isLive?'● Live':esc(v.stage)}</span>
+      <span class="srcpill">${esc(v.src)}</span>
+    </div>
+    <div class="cbody">
+      <div class="cname">${esc(v.name)}</div>
+      <div class="cdesc">${esc(v.desc)}</div>
+      <div class="cmeta">
+        <span class="catdot"><i style="background:${CATDOT[v.cat]}"></i>${esc(v.cat)}</span>
+        ${isLive?'<span class="livelink">Live ↗</span>':(v.link?'<span class="livelink" style="color:var(--muted)">Open ↗</span>':'')}
+      </div>
+    </div>
+  </div>`;
+}
+function foot(){ const left=GOAL-data.length;
+  document.getElementById("foot").innerHTML=`${data.length} ventures registered · ${data.filter(v=>v.live).length} with live links · ${left>0?left+' to reach 100':'goal reached 🎉'} · saved on this device`; }
+
+// ---- Detail ----
+function openDetail(id){
+  const v=data.find(x=>x.id===id); if(!v) return;
+  const isLive=!!v.live;
+  document.getElementById("dpanel").innerHTML=`
+    <div class="dcover" style="background:${grad(v.cat)}">
+      <span class="dmono">${esc(initials(v.name))}</span>
+      <button class="dclose" onclick="closeDetail()">✕</button>
+    </div>
+    <div class="dbody">
+      <div class="dtop">
+        <div>
+          <div class="dname">${esc(v.name)}</div>
+          <div class="dtags">
+            <span class="tag ${isLive?'live':''}">${isLive?'● Live':esc(v.stage)}</span>
+            <span class="tag">${esc(v.cat)}</span>
+            <span class="tag">${esc(v.src)}</span>
+          </div>
+        </div>
+      </div>
+      <div class="ddesc">${esc(v.desc)}</div>
+      <div class="dfields">
+        ${v.rev?`<div class="fld"><b>Revenue model</b><span>${esc(v.rev)}</span></div>`:""}
+        ${v.next?`<div class="fld"><b>Next action</b><span>${esc(v.next)}</span></div>`:""}
+        <div class="fld"><b>Stage</b><span>${esc(v.stage)}</span></div>
+        <div class="fld"><b>Source</b><span>${esc(v.src)}</span></div>
+      </div>
+      <div class="dactions">
+        ${v.live?`<a class="btn live" href="${encodeURI(v.live)}" target="_blank" rel="noopener">🔗 Open live site</a>`:""}
+        ${v.link?`<a class="btn primary" href="${encodeURI(v.link)}" target="_blank" rel="noopener">↗ Open in ${esc(v.src)}</a>`:""}
+        <button class="btn" onclick="editItem('${v.id}')">✎ Edit</button>
+        <button class="btn danger" onclick="delFromDetail('${v.id}')">Delete</button>
+      </div>
+      ${(!v.live&&!v.link)?'<div class="muted-note">No live or project link yet — add one with Edit.</div>':""}
+    </div>`;
+  document.getElementById("detail").classList.add("show");
+}
+function closeDetail(){document.getElementById("detail").classList.remove("show");}
+function delFromDetail(id){ data=data.filter(x=>x.id!==id); save(); closeDetail(); render(); }
+
+// ---- Modal ----
+let editing=null;
+function fillSelects(){
+  document.getElementById("f_cat").innerHTML=CATS.map(c=>`<option>${c}</option>`).join("");
+  document.getElementById("f_stage").innerHTML=STAGES.map(s=>`<option>${s}</option>`).join("");
+  document.getElementById("f_src").innerHTML=SOURCES.concat(["Other"]).map(s=>`<option>${s}</option>`).join("");
+}
+function openModal(){
+  editing=null; document.getElementById("mTitle").textContent="Register venture";
+  document.getElementById("delBtn").style.visibility="hidden";
+  ["f_name","f_desc","f_rev","f_next","f_live","f_link"].forEach(id=>document.getElementById(id).value="");
+  document.getElementById("f_cat").value=CATS[3]; document.getElementById("f_stage").value="Idea"; document.getElementById("f_src").value="Claude";
+  document.getElementById("ov").classList.add("show");
+}
+function editItem(id){
+  const v=data.find(x=>x.id===id); if(!v) return; editing=id; closeDetail();
+  document.getElementById("mTitle").textContent="Edit venture";
+  document.getElementById("delBtn").style.visibility="visible";
+  document.getElementById("f_name").value=v.name; document.getElementById("f_desc").value=v.desc;
+  document.getElementById("f_cat").value=v.cat; document.getElementById("f_stage").value=v.stage;
+  document.getElementById("f_src").value=SOURCES.includes(v.src)?v.src:"Other";
+  document.getElementById("f_rev").value=v.rev||""; document.getElementById("f_next").value=v.next||"";
+  document.getElementById("f_live").value=v.live||""; document.getElementById("f_link").value=v.link||"";
+  document.getElementById("ov").classList.add("show");
+}
+function closeModal(){document.getElementById("ov").classList.remove("show");}
+function saveItem(){
+  const name=document.getElementById("f_name").value.trim(); if(!name){document.getElementById("f_name").focus();return;}
+  const obj={name,desc:document.getElementById("f_desc").value.trim(),cat:document.getElementById("f_cat").value,
+    stage:document.getElementById("f_stage").value,src:document.getElementById("f_src").value,
+    rev:document.getElementById("f_rev").value.trim(),next:document.getElementById("f_next").value.trim(),
+    live:document.getElementById("f_live").value.trim(),link:document.getElementById("f_link").value.trim()};
+  if(editing){Object.assign(data.find(x=>x.id===editing),obj);}
+  else{obj.id="u"+Date.now();data.unshift(obj);}
+  save();closeModal();render();
+}
+function delItem(){ if(!editing)return; data=data.filter(x=>x.id!==editing); save(); closeModal(); render(); }
+
+document.getElementById("ov").addEventListener("click",e=>{if(e.target.id==="ov")closeModal();});
+document.getElementById("detail").addEventListener("click",e=>{if(e.target.id==="detail")closeDetail();});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeModal();closeDetail();}});
+
+fillSelects();paintChips();render();
+</script>
+</body>
+</html>

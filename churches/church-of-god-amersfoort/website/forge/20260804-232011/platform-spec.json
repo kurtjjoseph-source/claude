@@ -1,0 +1,1302 @@
+{
+  "schema": "apb/1",
+  "spec_version": 1,
+  "id": "church-f-god-amersfoort",
+  "generated": "2026-08-04T23:20:11Z",
+  "generator": "turnkey spec",
+  "business": {
+    "name": "church f god amersfoort",
+    "slug": "church-f-god-amersfoort",
+    "tagline": "Church / faith community",
+    "city": "your city",
+    "email": "kurtjjoseph@hotmail.com",
+    "offer_line": "church f god amersfoort — A gathering-led community funded by giving. The platform runs Sunday and the week around it: services and sermons, events, giving, the people who serve, and the messages that come in.",
+    "org_type": "church",
+    "org_label": "Church / faith community"
+  },
+  "operator": {
+    "id": "vom",
+    "name": "Vision Outreach Media",
+    "author_as": "Vision Outreach Media (VOM)"
+  },
+  "brand": {
+    "palette": {
+      "navy": "#1B2A4A",
+      "orange": "#E8843C",
+      "teal": "#2FA8A0",
+      "ink": "#1B2233",
+      "paper": "#FFFFFF"
+    },
+    "accent": "#F97316",
+    "accent_soft": "#FFF1E6",
+    "display": "Manrope",
+    "body": "Manrope",
+    "logo": "operator logo, embedded at build time"
+  },
+  "archetype": {
+    "id": "church",
+    "label": "Church / faith community",
+    "curated": true,
+    "source": "org type 'church' builds as Church / faith community",
+    "voice": "Warm, plain, unhurried. Welcoming before it is informative, informative before it asks for anything. No hype, no jargon, no pressure.",
+    "summary": "A gathering-led community funded by giving. The platform runs Sunday and the week around it: services and sermons, events, giving, the people who serve, and the messages that come in.",
+    "type_preset": "editorial",
+    "site_scheme": "light",
+    "skin": "house",
+    "product_app": null,
+    "forge": {
+      "name": "CHURCHforge",
+      "scheme": "dark",
+      "base": "#0A0A0B",
+      "base_soft": "#141416",
+      "accent": "#F97316",
+      "accent_2": "#FDBA74",
+      "accent_site": "#e2670a",
+      "on_accent": "#0A0A0B",
+      "line": "Building a church platform."
+    }
+  },
+  "blueprint_source": {
+    "org_type": "church",
+    "confidence": "unknown",
+    "platform": "WordPress",
+    "wordpress": true,
+    "functions": [
+      "analytics_reporting",
+      "booking",
+      "checkout_payments",
+      "content_publishing",
+      "crm",
+      "donations",
+      "email_marketing",
+      "events",
+      "finance_admin",
+      "lead_capture",
+      "media_library",
+      "membership_access",
+      "people_roster",
+      "product_catalog",
+      "social_publishing",
+      "support_inbox",
+      "web_presence"
+    ],
+    "modules_from_blueprint": [
+      "crm",
+      "donations",
+      "events",
+      "media_library",
+      "content_publishing",
+      "people_roster",
+      "support_inbox",
+      "email_marketing",
+      "finance_admin",
+      "lead_capture"
+    ],
+    "added_by_archetype": [],
+    "dropped_by_archetype": []
+  },
+  "modules": [
+    {
+      "title": "Events",
+      "icon": "◷",
+      "record": "event",
+      "blurb": "What is happening, and who is coming.",
+      "view": "upcoming",
+      "fields": [
+        {
+          "k": "title",
+          "label": "Event",
+          "type": "text",
+          "required": true
+        },
+        {
+          "k": "date",
+          "label": "Date",
+          "type": "date",
+          "required": true
+        },
+        {
+          "k": "time",
+          "label": "Time",
+          "type": "text"
+        },
+        {
+          "k": "place",
+          "label": "Where",
+          "type": "text"
+        },
+        {
+          "k": "rsvp",
+          "label": "RSVPs",
+          "type": "number"
+        },
+        {
+          "k": "note",
+          "label": "Details",
+          "type": "textarea"
+        }
+      ],
+      "tiles": [
+        {
+          "label": "Upcoming",
+          "calc": "count_future:date"
+        },
+        {
+          "label": "Expected people",
+          "calc": "sum_future:rsvp"
+        }
+      ],
+      "key": "events",
+      "seed": [
+        {
+          "title": "Sunday gathering",
+          "date": "2026-08-09",
+          "time": "10:00",
+          "place": "your city",
+          "rsvp": 0,
+          "note": "Weekly. Children's programme runs during the talk."
+        },
+        {
+          "title": "Prayer evening",
+          "date": "2026-08-16",
+          "time": "19:30",
+          "place": "your city",
+          "rsvp": 0,
+          "note": "Second Tuesday of the month."
+        },
+        {
+          "title": "Newcomers' coffee",
+          "date": "2026-08-30",
+          "time": "11:45",
+          "place": "your city",
+          "rsvp": 0,
+          "note": "After the gathering, first Sunday of the month."
+        }
+      ]
+    },
+    {
+      "title": "Giving",
+      "icon": "♥",
+      "record": "gift",
+      "blurb": "Gifts and pledges, one-off and recurring.",
+      "view": "ledger",
+      "fields": [
+        {
+          "k": "giver",
+          "label": "Giver",
+          "type": "text",
+          "required": true
+        },
+        {
+          "k": "amount",
+          "label": "Amount",
+          "type": "money",
+          "required": true
+        },
+        {
+          "k": "date",
+          "label": "Date",
+          "type": "date"
+        },
+        {
+          "k": "recurring",
+          "label": "Recurring",
+          "type": "check"
+        },
+        {
+          "k": "fund",
+          "label": "Fund",
+          "type": "select",
+          "options": [
+            "General",
+            "Building",
+            "Missions",
+            "Benevolence"
+          ]
+        },
+        {
+          "k": "note",
+          "label": "Note",
+          "type": "textarea"
+        }
+      ],
+      "tiles": [
+        {
+          "label": "Given this month",
+          "calc": "sum_month:amount",
+          "money": true
+        },
+        {
+          "label": "Recurring givers",
+          "calc": "count_true:recurring"
+        },
+        {
+          "label": "Given all time",
+          "calc": "sum:amount",
+          "money": true
+        }
+      ],
+      "key": "donations",
+      "seed": [
+        {
+          "giver": "Example — replace me",
+          "amount": 50,
+          "date": "2026-07-28",
+          "recurring": true,
+          "fund": "General",
+          "note": "Seed record so the giving view is not empty. Delete when real gifts arrive."
+        }
+      ]
+    },
+    {
+      "title": "Sermons",
+      "icon": "▶",
+      "record": "item",
+      "blurb": "Talks, sermons and recordings, with where they live.",
+      "fields": [
+        {
+          "k": "title",
+          "label": "Title",
+          "type": "text",
+          "required": true
+        },
+        {
+          "k": "speaker",
+          "label": "Speaker",
+          "type": "text"
+        },
+        {
+          "k": "date",
+          "label": "Date",
+          "type": "date"
+        },
+        {
+          "k": "series",
+          "label": "Series",
+          "type": "text"
+        },
+        {
+          "k": "url",
+          "label": "Link (YouTube/Spotify)",
+          "type": "text"
+        },
+        {
+          "k": "summary",
+          "label": "Summary",
+          "type": "textarea"
+        }
+      ],
+      "tiles": [
+        {
+          "label": "In the library",
+          "calc": "count"
+        }
+      ],
+      "key": "media_library",
+      "seed": [
+        {
+          "title": "Begin here",
+          "speaker": "Teaching team",
+          "date": "2026-07-28",
+          "series": "Foundations",
+          "summary": "An opening talk on what this church is for."
+        },
+        {
+          "title": "The long obedience",
+          "speaker": "Teaching team",
+          "date": "2026-07-21",
+          "series": "Foundations",
+          "summary": "On staying with something past the first enthusiasm."
+        }
+      ]
+    },
+    {
+      "title": "Serving rota",
+      "icon": "◇",
+      "record": "slot",
+      "blurb": "Who is serving, when, and in what role.",
+      "view": "upcoming",
+      "fields": [
+        {
+          "k": "person",
+          "label": "Person",
+          "type": "text",
+          "required": true
+        },
+        {
+          "k": "role",
+          "label": "Role",
+          "type": "text"
+        },
+        {
+          "k": "date",
+          "label": "Date",
+          "type": "date",
+          "required": true
+        },
+        {
+          "k": "confirmed",
+          "label": "Confirmed",
+          "type": "check"
+        },
+        {
+          "k": "phone",
+          "label": "Phone",
+          "type": "text"
+        }
+      ],
+      "tiles": [
+        {
+          "label": "Slots ahead",
+          "calc": "count_future:date"
+        },
+        {
+          "label": "Unconfirmed",
+          "calc": "count_false:confirmed"
+        }
+      ],
+      "key": "people_roster",
+      "seed": [
+        {
+          "person": "Example — replace me",
+          "role": "Welcome",
+          "date": "2026-08-09",
+          "confirmed": false
+        },
+        {
+          "person": "Example — replace me",
+          "role": "Sound",
+          "date": "2026-08-09",
+          "confirmed": false
+        }
+      ]
+    },
+    {
+      "title": "People",
+      "icon": "◍",
+      "record": "contact",
+      "blurb": "Everyone this business deals with, and where each one stands.",
+      "view": "pipeline",
+      "stages": [
+        "Lead",
+        "Contacted",
+        "In conversation",
+        "Customer",
+        "Lapsed"
+      ],
+      "fields": [
+        {
+          "k": "name",
+          "label": "Name",
+          "type": "text",
+          "required": true
+        },
+        {
+          "k": "email",
+          "label": "Email",
+          "type": "text"
+        },
+        {
+          "k": "phone",
+          "label": "Phone",
+          "type": "text"
+        },
+        {
+          "k": "stage",
+          "label": "Stage",
+          "type": "select",
+          "from": "stages"
+        },
+        {
+          "k": "value",
+          "label": "Value",
+          "type": "money"
+        },
+        {
+          "k": "note",
+          "label": "Notes",
+          "type": "textarea"
+        }
+      ],
+      "tiles": [
+        {
+          "label": "Contacts",
+          "calc": "count"
+        },
+        {
+          "label": "In pipeline",
+          "calc": "sum:value",
+          "money": true
+        }
+      ],
+      "key": "crm",
+      "seed": []
+    },
+    {
+      "title": "Messages",
+      "icon": "✉",
+      "record": "message",
+      "blurb": "Questions coming in, and what was sent back.",
+      "fields": [
+        {
+          "k": "who",
+          "label": "From",
+          "type": "text",
+          "required": true
+        },
+        {
+          "k": "subject",
+          "label": "About",
+          "type": "text"
+        },
+        {
+          "k": "date",
+          "label": "Received",
+          "type": "date"
+        },
+        {
+          "k": "status",
+          "label": "Status",
+          "type": "select",
+          "options": [
+            "New",
+            "Replied",
+            "Closed"
+          ]
+        },
+        {
+          "k": "message",
+          "label": "What they said",
+          "type": "textarea"
+        },
+        {
+          "k": "reply",
+          "label": "Draft reply",
+          "type": "textarea"
+        }
+      ],
+      "tiles": [
+        {
+          "label": "Needs a reply",
+          "calc": "count_eq:status:New"
+        }
+      ],
+      "key": "support_inbox",
+      "seed": []
+    },
+    {
+      "title": "Content",
+      "icon": "✎",
+      "record": "post",
+      "blurb": "Posts and announcements, drafted here before they go out.",
+      "fields": [
+        {
+          "k": "title",
+          "label": "Title",
+          "type": "text",
+          "required": true
+        },
+        {
+          "k": "status",
+          "label": "Status",
+          "type": "select",
+          "options": [
+            "Idea",
+            "Draft",
+            "Ready",
+            "Published"
+          ]
+        },
+        {
+          "k": "channel",
+          "label": "Channel",
+          "type": "select",
+          "options": [
+            "Website",
+            "Newsletter",
+            "Facebook",
+            "Instagram",
+            "LinkedIn",
+            "YouTube"
+          ]
+        },
+        {
+          "k": "date",
+          "label": "Planned for",
+          "type": "date"
+        },
+        {
+          "k": "body",
+          "label": "The piece",
+          "type": "textarea"
+        }
+      ],
+      "tiles": [
+        {
+          "label": "Ready to publish",
+          "calc": "count_eq:status:Ready"
+        },
+        {
+          "label": "Published",
+          "calc": "count_eq:status:Published"
+        }
+      ],
+      "key": "content_publishing",
+      "seed": [
+        {
+          "title": "Welcome to our new site",
+          "status": "Draft",
+          "channel": "Website",
+          "date": "2026-08-04",
+          "body": "A short post announcing the new site and how to plan a visit."
+        }
+      ]
+    },
+    {
+      "title": "Mailing list",
+      "icon": "✦",
+      "record": "subscriber",
+      "blurb": "The list, and what has been sent to it.",
+      "fields": [
+        {
+          "k": "email",
+          "label": "Email",
+          "type": "text",
+          "required": true
+        },
+        {
+          "k": "name",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "k": "source",
+          "label": "Came from",
+          "type": "text"
+        },
+        {
+          "k": "date",
+          "label": "Joined",
+          "type": "date"
+        },
+        {
+          "k": "subscribed",
+          "label": "Subscribed",
+          "type": "check"
+        }
+      ],
+      "tiles": [
+        {
+          "label": "On the list",
+          "calc": "count_true:subscribed"
+        }
+      ],
+      "key": "email_marketing",
+      "seed": []
+    },
+    {
+      "title": "Finances",
+      "icon": "◫",
+      "record": "invoice",
+      "blurb": "What has been billed, what has been paid, and the VAT on it.",
+      "view": "ledger",
+      "fields": [
+        {
+          "k": "number",
+          "label": "Invoice no.",
+          "type": "text",
+          "required": true
+        },
+        {
+          "k": "client",
+          "label": "To",
+          "type": "text",
+          "required": true
+        },
+        {
+          "k": "amount",
+          "label": "Amount (excl. VAT)",
+          "type": "money",
+          "required": true
+        },
+        {
+          "k": "vat",
+          "label": "VAT %",
+          "type": "number"
+        },
+        {
+          "k": "date",
+          "label": "Date",
+          "type": "date"
+        },
+        {
+          "k": "status",
+          "label": "Status",
+          "type": "select",
+          "options": [
+            "Draft",
+            "Sent",
+            "Paid",
+            "Overdue"
+          ]
+        }
+      ],
+      "tiles": [
+        {
+          "label": "Outstanding",
+          "calc": "sum_eq:amount:status:Sent",
+          "money": true
+        },
+        {
+          "label": "Paid this month",
+          "calc": "sum_month_eq:amount:status:Paid",
+          "money": true
+        },
+        {
+          "label": "VAT collected",
+          "calc": "sum_vat",
+          "money": true
+        }
+      ],
+      "key": "finance_admin",
+      "seed": []
+    },
+    {
+      "title": "New here",
+      "icon": "◌",
+      "record": "enquiry",
+      "blurb": "People who put their hand up, before they become contacts.",
+      "fields": [
+        {
+          "k": "name",
+          "label": "Name",
+          "type": "text",
+          "required": true
+        },
+        {
+          "k": "email",
+          "label": "Email",
+          "type": "text"
+        },
+        {
+          "k": "asked",
+          "label": "What they want",
+          "type": "textarea"
+        },
+        {
+          "k": "date",
+          "label": "When",
+          "type": "date"
+        },
+        {
+          "k": "handled",
+          "label": "Handled",
+          "type": "check"
+        }
+      ],
+      "tiles": [
+        {
+          "label": "New enquiries",
+          "calc": "count_false:handled"
+        }
+      ],
+      "key": "lead_capture",
+      "seed": []
+    }
+  ],
+  "site": {
+    "platform": "WordPress",
+    "nav": [
+      {
+        "slug": "home",
+        "title": "Home",
+        "href": "index.html"
+      },
+      {
+        "slug": "visit",
+        "title": "Plan your visit",
+        "href": "visit.html"
+      },
+      {
+        "slug": "about",
+        "title": "About",
+        "href": "about.html"
+      },
+      {
+        "slug": "sermons",
+        "title": "Sermons",
+        "href": "sermons.html"
+      },
+      {
+        "slug": "events",
+        "title": "Events",
+        "href": "events.html"
+      },
+      {
+        "slug": "give",
+        "title": "Give",
+        "href": "give.html"
+      },
+      {
+        "slug": "contact",
+        "title": "Contact",
+        "href": "contact.html"
+      }
+    ],
+    "primary_cta": {
+      "label": "Plan your visit",
+      "href": "/visit"
+    },
+    "secondary_cta": {
+      "label": "Give",
+      "href": "/give"
+    },
+    "pages": [
+      {
+        "slug": "home",
+        "path": "index.html",
+        "title": "Home",
+        "purpose": "Answer 'can I come on Sunday, and what happens if I do?' in the first screen.",
+        "hero": {
+          "eyebrow": "You are welcome here",
+          "title": "church f god amersfoort",
+          "lede": "A church in your city that gathers every Sunday. Come as you are — there is a seat, and someone will show you where it is.",
+          "cta": "Plan your visit",
+          "cta_href": "/visit",
+          "cta2": "Listen to a sermon",
+          "cta2_href": "/sermons"
+        },
+        "sections": [
+          {
+            "kind": "facts",
+            "title": "Sunday at a glance",
+            "items": [
+              {
+                "label": "We gather",
+                "value": "Sunday, 10:00"
+              },
+              {
+                "label": "Where",
+                "value": "your city"
+              },
+              {
+                "label": "How long",
+                "value": "About 90 minutes"
+              },
+              {
+                "label": "Children",
+                "value": "Welcome, with their own programme"
+              }
+            ]
+          },
+          {
+            "kind": "cards",
+            "title": "What you will find",
+            "items": [
+              {
+                "title": "A real welcome",
+                "body": "Someone at the door who knows you are new, and does not make a thing of it."
+              },
+              {
+                "title": "Teaching you can use",
+                "body": "Straight from the text, in ordinary language, about the week you are actually living."
+              },
+              {
+                "title": "People, not a programme",
+                "body": "Coffee afterwards. Nobody hurries out. That is on purpose."
+              }
+            ]
+          },
+          {
+            "kind": "feed",
+            "title": "Coming up",
+            "source": "events",
+            "limit": 3,
+            "empty": "The next gatherings will be listed here."
+          },
+          {
+            "kind": "feed",
+            "title": "Latest teaching",
+            "source": "media_library",
+            "limit": 3,
+            "empty": "Recent sermons will be listed here."
+          },
+          {
+            "kind": "cta",
+            "title": "Thinking about coming?",
+            "body": "Tell us you are coming and we will look out for you. No follow-up you did not ask for.",
+            "cta": "Plan your visit",
+            "cta_href": "/visit"
+          }
+        ]
+      },
+      {
+        "slug": "visit",
+        "path": "visit.html",
+        "title": "Plan your visit",
+        "purpose": "Remove every unknown that keeps a first-time visitor at home.",
+        "hero": {
+          "eyebrow": "First time",
+          "title": "What to expect",
+          "lede": "Everything you might wonder about, answered before you ask."
+        },
+        "sections": [
+          {
+            "kind": "steps",
+            "title": "How Sunday goes",
+            "items": [
+              {
+                "title": "Arrive",
+                "body": "Doors open 20 minutes early. Park, come in, take a coffee. Someone will say hello."
+              },
+              {
+                "title": "Gather",
+                "body": "Singing, a reading, and a talk from the Bible. About 90 minutes in total."
+              },
+              {
+                "title": "Stay a while",
+                "body": "Coffee afterwards. Stay as long or as short as you like — both are normal."
+              }
+            ]
+          },
+          {
+            "kind": "faq",
+            "title": "The questions people actually ask",
+            "items": [
+              {
+                "q": "What do I wear?",
+                "a": "Whatever you would wear to meet a friend. Nobody is checking."
+              },
+              {
+                "q": "Where do my children go?",
+                "a": "There is a programme for children during the talk. You can keep them with you if you would rather."
+              },
+              {
+                "q": "Will I have to say anything?",
+                "a": "No. You can sit at the back and leave straight after. That is fine."
+              },
+              {
+                "q": "Do I have to give money?",
+                "a": "No. Giving is for people who call this their church home, and it is never collected from visitors."
+              }
+            ]
+          },
+          {
+            "kind": "form",
+            "title": "Tell us you are coming",
+            "form": "visit",
+            "body": "Optional, but it means someone will be looking out for you.",
+            "fields": [
+              "name",
+              "email",
+              "when",
+              "message"
+            ],
+            "target": "lead_capture"
+          }
+        ]
+      },
+      {
+        "slug": "about",
+        "path": "about.html",
+        "title": "About",
+        "purpose": "Say what this church believes and who leads it, without jargon.",
+        "hero": {
+          "eyebrow": "About us",
+          "title": "Who we are",
+          "lede": "church f god amersfoort in your city — what we believe, and how we try to live it."
+        },
+        "sections": [
+          {
+            "kind": "prose",
+            "title": "What we believe",
+            "body": "church f god amersfoort. --- Written by the Turnkey factory · 2026-08-04"
+          },
+          {
+            "kind": "cards",
+            "title": "How we try to live",
+            "items": [
+              {
+                "title": "Scripture first",
+                "body": "We teach through the Bible rather than around it."
+              },
+              {
+                "title": "Open table",
+                "body": "Everyone is welcome long before they agree with everything."
+              },
+              {
+                "title": "Local and practical",
+                "body": "We serve the neighbourhood we are actually in."
+              }
+            ]
+          },
+          {
+            "kind": "prose",
+            "title": "Leadership",
+            "body": "The church is led by its elders, with a teaching team who share the preaching through the year."
+          }
+        ]
+      },
+      {
+        "slug": "sermons",
+        "path": "sermons.html",
+        "title": "Sermons",
+        "purpose": "The teaching archive — the main reason people return to a church site.",
+        "hero": {
+          "eyebrow": "Teaching",
+          "title": "Sermons",
+          "lede": "Listen back, catch up, or start with the most recent."
+        },
+        "sections": [
+          {
+            "kind": "feed",
+            "title": "All teaching",
+            "source": "media_library",
+            "limit": 30,
+            "empty": "Sermons appear here as they are added."
+          }
+        ]
+      },
+      {
+        "slug": "events",
+        "path": "events.html",
+        "title": "Events",
+        "purpose": "Everything on the calendar, with enough detail to turn up.",
+        "hero": {
+          "eyebrow": "Calendar",
+          "title": "What is on",
+          "lede": "Gatherings, groups and one-off events."
+        },
+        "sections": [
+          {
+            "kind": "feed",
+            "title": "Coming up",
+            "source": "events",
+            "limit": 30,
+            "empty": "Upcoming events appear here."
+          }
+        ]
+      },
+      {
+        "slug": "give",
+        "path": "give.html",
+        "title": "Give",
+        "purpose": "Make giving simple and unembarrassing, and say where it goes.",
+        "hero": {
+          "eyebrow": "Giving",
+          "title": "Give",
+          "lede": "church f god amersfoort runs on the generosity of the people who call it home."
+        },
+        "sections": [
+          {
+            "kind": "prose",
+            "title": "Where it goes",
+            "body": "Giving covers the ordinary costs of a church — the building, the people who serve full time, the work we do in your city, and support for people in need. The annual figures are published to anyone who asks."
+          },
+          {
+            "kind": "pay",
+            "title": "Give now",
+            "provider": "stripe",
+            "options": [
+              "One-off",
+              "Monthly"
+            ],
+            "funds": [
+              "General",
+              "Building",
+              "Missions",
+              "Benevolence"
+            ],
+            "fallback": "Bank transfer details are below until online giving is switched on."
+          },
+          {
+            "kind": "faq",
+            "title": "Questions about giving",
+            "items": [
+              {
+                "q": "Is it tax deductible?",
+                "a": "For registered charitable status in the Netherlands (ANBI), gifts are deductible under the usual conditions. Ask us for the details."
+              },
+              {
+                "q": "Can I stop a recurring gift?",
+                "a": "Any time, yourself, without a conversation."
+              },
+              {
+                "q": "Do you know who gives what?",
+                "a": "Only the person who keeps the books, and only because the law requires it."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "slug": "contact",
+        "path": "contact.html",
+        "title": "Contact",
+        "purpose": "One place to reach a human, plus prayer requests.",
+        "hero": {
+          "eyebrow": "Get in touch",
+          "title": "Contact",
+          "lede": "A real person reads these."
+        },
+        "sections": [
+          {
+            "kind": "form",
+            "title": "Send a message",
+            "form": "contact",
+            "body": "Questions, prayer requests, or anything else.",
+            "fields": [
+              "name",
+              "email",
+              "subject",
+              "message"
+            ],
+            "target": "support_inbox"
+          },
+          {
+            "kind": "facts",
+            "title": "Find us",
+            "items": [
+              {
+                "label": "Where",
+                "value": "your city"
+              },
+              {
+                "label": "Sundays",
+                "value": "10:00"
+              },
+              {
+                "label": "Email",
+                "value": "kurtjjoseph@hotmail.com"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "integrations": [
+    {
+      "key": "payments",
+      "provider": "stripe",
+      "purpose": "online giving, one-off and recurring",
+      "mode": "stub",
+      "env_required": [
+        "STRIPE_PUBLISHABLE_KEY",
+        "STRIPE_SECRET_KEY"
+      ],
+      "env_present": [],
+      "note": "the interface is built and labelled; it goes live when the operator supplies the credentials — an agent never holds them"
+    },
+    {
+      "key": "email",
+      "provider": "brevo",
+      "purpose": "newsletter and reply-from-inbox",
+      "mode": "stub",
+      "env_required": [
+        "BREVO_API_KEY",
+        "BREVO_SENDER_EMAIL"
+      ],
+      "env_present": [],
+      "note": "the interface is built and labelled; it goes live when the operator supplies the credentials — an agent never holds them"
+    },
+    {
+      "key": "analytics",
+      "provider": "engage_ai",
+      "purpose": "presence benchmark across 8 channels",
+      "mode": "stub",
+      "env_required": [
+        "ENGAGE_AI_BASE_URL"
+      ],
+      "env_present": [],
+      "note": "the interface is built and labelled; it goes live when the operator supplies the credentials — an agent never holds them"
+    }
+  ],
+  "deploy": {
+    "target": "vercel",
+    "description": "a Vercel deployment — a public URL",
+    "public": true,
+    "hub_url": null,
+    "project": "church-f-god-amersfoort",
+    "domain": {
+      "mode": "subdomain",
+      "value": ""
+    },
+    "requires": [
+      "vercel CLI, authenticated"
+    ]
+  },
+  "authorization": {
+    "mode": "unattended",
+    "targets": [
+      "vercel"
+    ],
+    "scope": "unattended forge build + deploy to 'vercel' for this business, limited to: composing the platform modules, writing the public site, wiring rails that already have credentials, publishing the result, and — for a hosting target that gates new projects behind a login — making that one deployment publicly reachable. Does not authorize sending email, charging anyone, or posting to any channel.",
+    "consent_ref": "6b2030bb04c0ab8f",
+    "consent_seq": 1,
+    "granted_by": "VOM",
+    "granted_at": "2026-08-04T23:20:11Z",
+    "channel": "standing service authorization"
+  },
+  "plan": [
+    {
+      "id": "resolve",
+      "title": "Read the spec",
+      "cue": "◇",
+      "detail": "load the blueprint, verify the fingerprint, refuse if anything is unresolved"
+    },
+    {
+      "id": "scaffold",
+      "title": "Lay out the build",
+      "cue": "▢",
+      "detail": "create the output tree this run writes into"
+    },
+    {
+      "id": "brand",
+      "title": "Apply the brand",
+      "cue": "◐",
+      "detail": "operator palette and type, archetype accent, logo embedded"
+    },
+    {
+      "id": "platform",
+      "title": "Build the platform · 10 modules",
+      "cue": "▣",
+      "detail": "the operating app the owner works in, seeded so it opens with something in it"
+    },
+    {
+      "id": "site",
+      "title": "Write the site · 7 pages",
+      "cue": "▤",
+      "detail": "the public pages, in this archetype's voice"
+    },
+    {
+      "id": "wire",
+      "title": "Wire the rails",
+      "cue": "◈",
+      "detail": "payments, email and analytics — live where credentials exist, labelled where not"
+    },
+    {
+      "id": "package",
+      "title": "Package",
+      "cue": "▥",
+      "detail": "manifest, readme, deployment config"
+    },
+    {
+      "id": "verify",
+      "title": "Check the work",
+      "cue": "◎",
+      "detail": "run every check in the spec against what was actually written"
+    },
+    {
+      "id": "deploy",
+      "title": "Deploy · vercel",
+      "cue": "▲",
+      "detail": "a Vercel deployment — a public URL"
+    },
+    {
+      "id": "smoke",
+      "title": "Prove it is up",
+      "cue": "◉",
+      "detail": "fetch what was deployed and confirm it answers"
+    },
+    {
+      "id": "seal",
+      "title": "Seal the run",
+      "cue": "●",
+      "detail": "record the fingerprint, artifacts and outcome"
+    }
+  ],
+  "checks": [
+    {
+      "id": "spec_fingerprint",
+      "kind": "fingerprint",
+      "assert": "the build matches the spec it claims to be built from"
+    },
+    {
+      "id": "no_placeholders",
+      "kind": "no_placeholders",
+      "assert": "no unresolved {token} reached any page"
+    },
+    {
+      "id": "pages_written",
+      "kind": "files_exist",
+      "target": "site",
+      "assert": "all 7 pages exist and are non-empty"
+    },
+    {
+      "id": "platform_written",
+      "kind": "files_exist",
+      "target": "platform",
+      "assert": "the operating platform opens and carries its modules"
+    },
+    {
+      "id": "nav_resolves",
+      "kind": "links_resolve",
+      "assert": "every navigation link points at a page that was written"
+    },
+    {
+      "id": "module_titles_unique",
+      "kind": "unique_module_titles",
+      "assert": "no two modules carry the same name in the owner's interface"
+    },
+    {
+      "id": "visit_path",
+      "kind": "site_path",
+      "assert": "A first-time visitor can reach 'Plan your visit' from the home page in one click."
+    },
+    {
+      "id": "giving_present",
+      "kind": "module_present",
+      "target": "donations",
+      "assert": "Giving exists in the platform — a church that cannot record a gift is not launched."
+    },
+    {
+      "id": "events_seeded",
+      "kind": "seed_present",
+      "target": "events",
+      "assert": "The events view opens with something in it."
+    },
+    {
+      "id": "no_ask_before_welcome",
+      "kind": "copy_order",
+      "assert": "The home page welcomes before it asks for money."
+    }
+  ],
+  "assumptions": [
+    {
+      "token": "city",
+      "value": "your city",
+      "reason": "no location found in the profile — the page says 'your city' until one is set"
+    },
+    {
+      "token": "tagline",
+      "value": "Church / faith community",
+      "reason": "no tagline in the operating profile — the archetype label stands in"
+    },
+    {
+      "token": "offer_line",
+      "value": "church f god amersfoort — A gathering-led community funded by giving. The platform runs Sunday and the week around it: services and sermons, events, giving, the people who serve, and the messages that come in.",
+      "reason": "no Offer section in the profile — the archetype's own summary stands in"
+    },
+    {
+      "token": "leadership",
+      "value": "The church is led by its elders, with a teaching team who share the preaching through the year.",
+      "reason": "no leadership section in the profile"
+    },
+    {
+      "token": "pricing",
+      "value": "on request",
+      "reason": "no priced lines anywhere in the profile"
+    },
+    {
+      "token": "services",
+      "value": "one generic card",
+      "reason": "the profile's Offer section had no bullet list and no priced lines to turn into service cards"
+    }
+  ],
+  "readiness": {
+    "ready": true,
+    "blocking": []
+  },
+  "fingerprint": "sha256:d4d648a57b5243926a1b8a79bb0a8d6b"
+}

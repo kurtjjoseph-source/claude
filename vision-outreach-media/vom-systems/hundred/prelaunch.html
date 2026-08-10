@@ -1,0 +1,511 @@
+<!doctype html>
+<html lang="en" data-brand="hundred">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Prelaunch — prove the idea before you build it · Hundred</title>
+<meta name="description" content="Six steps from an idea to evidence: the deliverable, the number, the offer, a waitlist funnel, the signal, and a clean handoff into Hundred and Turnkey.">
+<link rel="stylesheet" href="vom-kit.css">
+<style>
+  /* This page lives inside Hundred's own deployment on purpose: the handoff writes
+     Hundred's storage keys directly, and cross-origin localStorage cannot. */
+  .shell{ display:grid; grid-template-columns:250px minmax(0,1fr); gap:var(--s6);
+    max-width:1120px; margin:0 auto; padding:var(--s6) var(--s4) var(--s8); }
+  @media (max-width:860px){ .shell{ grid-template-columns:1fr; gap:var(--s4); } }
+
+  .rail{ position:sticky; top:var(--s4); align-self:start; }
+  @media (max-width:860px){ .rail{ position:static; } }
+  .rail ol{ list-style:none; margin:0; padding:0; }
+  .rail li{ position:relative; padding:0 0 var(--s3) 40px; }
+  .rail li::before{ content:""; position:absolute; left:14px; top:26px; bottom:0; width:1px;
+    background:var(--line); }
+  .rail li:last-child::before{ display:none; }
+  .rail button{ all:unset; cursor:pointer; display:block; }
+  .rail .n{ position:absolute; left:0; top:0; width:28px; height:28px; border-radius:50%;
+    display:grid; place-items:center; font-weight:800; font-size:13px; background:var(--surface);
+    border:1px solid var(--line); color:var(--ink-faint); }
+  .rail .t{ display:block; font-weight:700; font-size:14.5px; }
+  .rail .s{ display:block; font-size:12.5px; color:var(--ink-faint); line-height:1.35; }
+  .rail li.on .n{ background:var(--c); border-color:var(--c); color:#fff; }
+  .rail li.on .t{ color:var(--c); }
+  .rail li.done .n{ background:color-mix(in srgb,var(--good) 15%,var(--surface));
+    border-color:var(--good); color:var(--good); }
+
+  .step{ display:none; }
+  .step.on{ display:block; }
+  .step > h2{ margin-bottom:var(--s1); }
+  .why{ color:var(--ink-faint); font-size:13.5px; margin:0 0 var(--s5); max-width:62ch; }
+  .field{ display:grid; gap:5px; margin-bottom:var(--s3); }
+  .field > span{ font-weight:650; font-size:13.5px; }
+  .field .hint{ font-weight:400; color:var(--ink-faint); font-size:12.5px; }
+  input,textarea,select{ font:inherit; padding:11px 13px; border-radius:var(--radius-sm);
+    border:1px solid var(--line); background:var(--surface); color:var(--ink); width:100%; }
+  input:focus-visible,textarea:focus-visible{ outline:2px solid var(--c); outline-offset:1px; }
+  textarea{ min-height:86px; resize:vertical; }
+  .row{ display:grid; grid-template-columns:1fr 1fr; gap:var(--s3); }
+  @media (max-width:600px){ .row{ grid-template-columns:1fr; } }
+  .nav{ display:flex; gap:var(--s2); margin-top:var(--s5); padding-top:var(--s4);
+    border-top:1px solid var(--line); flex-wrap:wrap; }
+  .nav .sp{ flex:1; }
+
+  .math{ display:grid; grid-template-columns:repeat(auto-fit,minmax(130px,1fr)); gap:1px;
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
+    overflow:hidden; margin-top:var(--s3); }
+  .math div{ background:var(--surface); padding:var(--s3) var(--s4); box-shadow:0 0 0 1px var(--line); }
+  .math .v{ font-family:var(--display); font-size:26px; font-weight:600; letter-spacing:-.03em;
+    font-variant-numeric:tabular-nums; }
+  .math .k{ font-family:var(--mono); font-size:10.5px; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--ink-faint); font-weight:700; }
+  .math .hero{ color:var(--c); }
+
+  .gauge{ height:10px; border-radius:var(--radius-pill); background:var(--surface-2);
+    border:1px solid var(--line); overflow:hidden; margin:var(--s2) 0 var(--s1); }
+  .gauge i{ display:block; height:100%; background:var(--c); transition:width .4s; }
+  .verdict{ font-family:var(--display); font-size:22px; font-weight:600; letter-spacing:-.02em; }
+  .verdict.go{ color:var(--good); } .verdict.wait{ color:var(--warn); }
+
+  .list{ margin-top:var(--s3); }
+  .list .e{ display:flex; gap:var(--s3); align-items:baseline; padding:10px var(--s3);
+    border:1px solid var(--line); border-radius:var(--radius-sm); margin-bottom:6px;
+    background:var(--surface); font-size:14px; }
+  .list .e b{ min-width:150px; }
+  .list .e span{ color:var(--ink-soft); flex:1; }
+  .list .e button{ all:unset; cursor:pointer; color:var(--ink-faint); font-size:16px; padding:0 4px; }
+  .list .e button:hover{ color:var(--bad); }
+
+  pre.out{ margin:0; background:var(--surface); border:1px solid var(--line);
+    border-radius:var(--radius); padding:var(--s4); overflow:auto; font-family:var(--mono);
+    font-size:12.5px; line-height:1.7; color:var(--ink-soft); max-height:340px; white-space:pre-wrap; }
+  .hand{ display:grid; gap:var(--s2); }
+  .hand a,.hand button{ text-align:left; }
+  .done{ color:var(--good); font-weight:700; font-size:13px; }
+  iframe.prev{ width:100%; height:520px; border:1px solid var(--line); border-radius:var(--radius);
+    background:#fff; }
+</style>
+</head>
+<body class="vk-body">
+
+<div class="vom-bar">
+  <a href="/"><img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAASABIAAD/4QBMRXhpZgAATU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAgKADAAQAAAABAAAAgAAAAAD/4QnSaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLwA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJYTVAgQ29yZSA2LjAuMCI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnBob3Rvc2hvcD0iaHR0cDovL25zLmFkb2JlLmNvbS9waG90b3Nob3AvMS4wLyIgcGhvdG9zaG9wOkluc3RydWN0aW9ucz0iRkJNRDBhMDAwYTA3MDIwMDAwYmQwYTAwMDBjMzE0MDAwMDU3MTYwMDAwNTkxODAwMDBhMjIxMDAwMDBhMzIwMDAwYmMzNDAwMDA2OTM2MDAwMDMxMzgwMDAwMmI0YzAwMDAiLz4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8P3hwYWNrZXQgZW5kPSJ3Ij8+AP/tAK5QaG90b3Nob3AgMy4wADhCSU0EBAAAAAAAdhwBWgADGyVHHAIAAAIAAhwCKABiRkJNRDBhMDAwYTA3MDIwMDAwYmQwYTAwMDBjMzE0MDAwMDU3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" alt="">
+  <b>Vision Outreach Media</b><span>· Hundred · Prelaunch</span></a>
+</div>
+
+<div class="shell">
+  <nav class="rail">
+    <p class="vk-shead">Prelaunch</p>
+    <ol id="rail"></ol>
+  </nav>
+
+  <main>
+    <!-- 1 ................................................................. -->
+    <section class="step on" data-step="0">
+      <h2 class="vk-h2">The idea</h2>
+      <p class="why">This is the deliverable everything else reads from. Turnkey's whole
+        pipeline starts at <code class="k">business-idea.md</code> — you are writing it now.</p>
+      <label class="field"><span>What is it called?</span>
+        <input id="f_name" placeholder="Bethel Chapel · Vale Studio · …"></label>
+      <label class="field"><span>Who is it for? <span class="hint">Be narrow. "Everyone" is not an audience.</span></span>
+        <input id="f_who" placeholder="Solo designers in the Netherlands billing under €5k/month"></label>
+      <label class="field"><span>What problem do they have? <span class="hint">In their words, not yours.</span></span>
+        <textarea id="f_problem" placeholder="They win work by referral and go quiet for months when the referrals stop."></textarea></label>
+      <label class="field"><span>What would you do about it?</span>
+        <textarea id="f_solution" placeholder="A fixed-price positioning sprint that produces one page and one outreach sequence."></textarea></label>
+      <div class="row">
+        <label class="field"><span>Where are you based?</span><input id="f_city" placeholder="Amersfoort"></label>
+        <label class="field"><span>Contact email</span><input id="f_email" type="email" placeholder="hello@example.com"></label>
+      </div>
+      <div class="nav"><span class="sp"></span><button class="vk-btn vk-btn--accent" data-go="1">The number →</button></div>
+    </section>
+
+    <!-- 2 ................................................................. -->
+    <section class="step" data-step="1">
+      <h2 class="vk-h2">The number, worked backwards</h2>
+      <p class="why">Hundred's first move, done here so it is settled before you build
+        anything. These four inputs are handed to Hundred OS at the end — same fields, same math.</p>
+      <div class="row">
+        <label class="field"><span>Target per month <span class="hint">(€)</span></span><input type="number" id="f_target" placeholder="10000"></label>
+        <label class="field"><span>Price per sale <span class="hint">(€)</span></span><input type="number" id="f_price" placeholder="2400"></label>
+      </div>
+      <div class="row">
+        <label class="field"><span>Close rate <span class="hint">% of proposals won</span></span><input type="number" id="f_close" placeholder="25"></label>
+        <label class="field"><span>Proposal rate <span class="hint">% of conversations that get one</span></span><input type="number" id="f_prop" placeholder="40"></label>
+      </div>
+      <div class="math" id="math"></div>
+      <div class="nav"><button class="vk-btn" data-go="0">← Back</button><span class="sp"></span>
+        <button class="vk-btn vk-btn--accent" data-go="2">The offer →</button></div>
+    </section>
+
+    <!-- 3 ................................................................. -->
+    <section class="step" data-step="2">
+      <h2 class="vk-h2">The offer</h2>
+      <p class="why">One sentence a stranger can repeat, and three things they actually get.
+        This becomes the funnel's headline and its cards.</p>
+      <label class="field"><span>The promise, in one sentence</span>
+        <textarea id="f_promise" placeholder="A fixed-price positioning sprint that gets a solo designer off referrals in six weeks."></textarea></label>
+      <label class="field"><span>What they get <span class="hint">One per line, up to three.</span></span>
+        <textarea id="f_gets" placeholder="A positioning statement you can say out loud&#10;One page that sells it&#10;A 20-message outreach sequence in your voice"></textarea></label>
+      <label class="field"><span>Why you <span class="hint">Optional. Handed to Hundred OS as "why".</span></span>
+        <textarea id="f_why" placeholder="Ten years doing exactly this, badly, until it worked."></textarea></label>
+      <div class="nav"><button class="vk-btn" data-go="1">← Back</button><span class="sp"></span>
+        <button class="vk-btn vk-btn--accent" data-go="3">The funnel →</button></div>
+    </section>
+
+    <!-- 4 ................................................................. -->
+    <section class="step" data-step="3">
+      <h2 class="vk-h2">The funnel</h2>
+      <p class="why">A single page whose only job is to collect a name. Preview it, download it,
+        put it anywhere. A static page cannot receive form posts on its own, so paste a form
+        endpoint if you have one — otherwise the form says so plainly rather than pretending.</p>
+      <label class="field"><span>Form endpoint <span class="hint">Formspree, Getform, Brevo — any URL that accepts a POST. Leave blank and the form is labelled "not connected".</span></span>
+        <input id="f_endpoint" placeholder="https://formspree.io/f/xxxxxxx"></label>
+      <div class="vk-btns" style="margin-bottom:var(--s3)">
+        <button class="vk-btn vk-btn--accent" id="btnPreview">Build the preview</button>
+        <button class="vk-btn" id="btnDownloadFunnel">Download index.html</button>
+      </div>
+      <iframe class="prev" id="prev" title="Funnel preview"></iframe>
+      <p class="vk-shead" style="margin-top:var(--s5)">Or build the full version with Forge</p>
+      <pre class="out" id="forgeCmd"></pre>
+      <div class="nav"><button class="vk-btn" data-go="2">← Back</button><span class="sp"></span>
+        <button class="vk-btn vk-btn--accent" data-go="4">The signal →</button></div>
+    </section>
+
+    <!-- 5 ................................................................. -->
+    <section class="step" data-step="4">
+      <h2 class="vk-h2">The signal</h2>
+      <p class="why">However the names arrive — the form, a DM, a conversation — they go here.
+        This is the evidence that decides whether anything gets built.</p>
+      <div class="row">
+        <label class="field"><span>Name</span><input id="w_name" placeholder="Sam Rivers"></label>
+        <label class="field"><span>Email</span><input id="w_email" placeholder="sam@example.com"></label>
+      </div>
+      <label class="field"><span>What they said <span class="hint">Optional — the sentence that tells you why they want it.</span></span>
+        <input id="w_note" placeholder="Been trying to fix this for a year."></label>
+      <div class="vk-btns"><button class="vk-btn vk-btn--accent" id="btnAdd">Add to the waitlist</button>
+        <button class="vk-btn" id="btnPaste">Paste a list…</button></div>
+
+      <label class="field" style="margin-top:var(--s5);max-width:280px">
+        <span>Enough to build it <span class="hint">Your threshold.</span></span>
+        <input type="number" id="f_threshold" value="25"></label>
+      <div class="gauge"><i id="gauge"></i></div>
+      <p class="verdict" id="verdict">—</p>
+      <div class="list" id="waitlist"></div>
+      <div class="nav"><button class="vk-btn" data-go="3">← Back</button><span class="sp"></span>
+        <button class="vk-btn vk-btn--accent" data-go="5">Hand it off →</button></div>
+    </section>
+
+    <!-- 6 ................................................................. -->
+    <section class="step" data-step="5">
+      <h2 class="vk-h2">Hand it off</h2>
+      <p class="why">Prelaunch ends here. The names become pipeline, the number becomes
+        Hundred's month, and a validated idea becomes a business Turnkey can build.</p>
+
+      <div class="hand">
+        <button class="vk-btn vk-btn--accent" id="toPipeline">Send the waitlist to Hundred's Pipeline →</button>
+        <p class="why" style="margin:0 0 var(--s3)">Writes them as prospects at stage <strong>Lead</strong>,
+          each carrying what they said as the next action. <span id="pipeDone"></span></p>
+
+        <button class="vk-btn" id="toOS">Send the number and the offer to Hundred OS →</button>
+        <p class="why" style="margin:0 0 var(--s3)">Fills move 1 (the math) and move 2 (the offer)
+          so you land mid-flow, not at the start. <span id="osDone"></span></p>
+
+        <button class="vk-btn" id="dlIdea">Download business-idea.md</button>
+        <p class="why" style="margin:0 0 var(--s3)">The deliverable. Drop it in a folder under
+          <code class="k">Business Ideas/</code> and Turnkey takes it from there.</p>
+      </div>
+
+      <p class="vk-shead" style="margin-top:var(--s5)">Then build the real thing</p>
+      <pre class="out" id="turnkeyCmd"></pre>
+      <div class="nav"><button class="vk-btn" data-go="4">← Back</button><span class="sp"></span>
+        <a class="vk-btn" href="pipeline.html">Open the Pipeline</a>
+        <a class="vk-btn" href="hundred-os.html">Open Hundred OS</a></div>
+    </section>
+  </main>
+</div>
+
+<script>
+"use strict";
+/* ---------------------------------------------------------------- state */
+var KEY = "vom_prelaunch_v1";
+var S;
+try { S = JSON.parse(localStorage.getItem(KEY)) || {}; } catch(e) { S = {}; }
+S.waitlist = S.waitlist || [];
+S.step = S.step || 0;
+function save(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} }
+function $(id){ return document.getElementById(id); }
+function esc(x){ var d=document.createElement("div"); d.textContent = x==null?"":x; return d.innerHTML; }
+
+var FIELDS = ["name","who","problem","solution","city","email","target","price","close","prop",
+              "promise","gets","why","endpoint","threshold"];
+FIELDS.forEach(function(k){
+  var el = $("f_" + k); if (!el) return;
+  if (S[k] != null && S[k] !== "") el.value = S[k];
+  el.addEventListener("input", function(){ S[k] = el.value; save(); render(); });
+});
+
+/* ------------------------------------------------------------- stepper */
+var STEPS = [
+  ["The idea", "the deliverable"],
+  ["The number", "worked backwards"],
+  ["The offer", "one sentence"],
+  ["The funnel", "a page that asks"],
+  ["The signal", "evidence, or not"],
+  ["Hand it off", "into Hundred"],
+];
+function done(i){
+  if (i===0) return !!(S.name && S.who && S.problem);
+  if (i===1) return +S.target > 0 && +S.price > 0;
+  if (i===2) return !!S.promise;
+  if (i===3) return !!S._previewed;
+  if (i===4) return S.waitlist.length > 0;
+  return !!(S._sentPipe || S._sentOS);
+}
+function paintRail(){
+  $("rail").innerHTML = STEPS.map(function(s,i){
+    var cls = i===S.step ? "on" : (done(i) ? "done" : "");
+    return '<li class="'+cls+'"><button data-go="'+i+'"><span class="n">'+
+      (done(i) && i!==S.step ? "✓" : (i+1))+'</span><span class="t">'+esc(s[0])+
+      '</span><span class="s">'+esc(s[1])+'</span></button></li>';
+  }).join("");
+}
+function go(i){
+  S.step = i; save();
+  document.querySelectorAll(".step").forEach(function(el){
+    el.classList.toggle("on", +el.dataset.step === i);
+  });
+  paintRail(); window.scrollTo({top:0, behavior:"smooth"});
+}
+document.addEventListener("click", function(e){
+  var b = e.target.closest("[data-go]"); if (!b) return;
+  go(+b.dataset.go);
+});
+
+/* ---------------------------------------------------------------- math */
+/* Identical to Hundred OS move 1 — same formulas, so the handoff is consistent. */
+function math(){
+  var t=+S.target||0, p=+S.price||0, c=+S.close||25, pr=+S.prop||40;
+  var sales = p>0 ? Math.ceil(t/p) : 0;
+  var props = sales>0 ? Math.ceil(sales/(c/100)) : 0;
+  var convos = props>0 ? Math.ceil(props/(pr/100)) : 0;
+  return { sales:sales, props:props, convos:convos,
+           nos:Math.max(0,convos-sales), perday:Math.ceil(convos/22) };
+}
+function paintMath(){
+  var m = math();
+  $("math").innerHTML =
+    tile("sales to close", m.sales, true) + tile("proposals out", m.props) +
+    tile("conversations", m.convos) + tile("no's to collect", m.nos) +
+    tile("per working day", m.perday);
+}
+function tile(k,v,hero){
+  return '<div><div class="v'+(hero?" hero":"")+'">'+v+'</div><div class="k">'+k+'</div></div>';
+}
+
+/* -------------------------------------------------------------- signal */
+function paintSignal(){
+  var n = S.waitlist.length, need = Math.max(1, +S.threshold || 25);
+  $("gauge").style.width = Math.min(100, Math.round(100*n/need)) + "%";
+  var v = $("verdict");
+  if (n === 0){ v.className="verdict"; v.textContent = "No signal yet — " + need + " to go."; }
+  else if (n >= need){ v.className="verdict go";
+    v.textContent = n + " of " + need + " · build it."; }
+  else { v.className="verdict wait";
+    v.textContent = n + " of " + need + " · " + (need-n) + " more before this is evidence."; }
+  $("waitlist").innerHTML = S.waitlist.map(function(w,i){
+    return '<div class="e"><b>'+esc(w.name)+'</b><span>'+esc(w.email||"")+
+      (w.note? " — "+esc(w.note):"")+'</span><button data-del="'+i+'" title="Remove">×</button></div>';
+  }).join("");
+}
+$("btnAdd").addEventListener("click", function(){
+  var n=$("w_name").value.trim(); if(!n) return;
+  S.waitlist.unshift({ name:n, email:$("w_email").value.trim(), note:$("w_note").value.trim(),
+                       date:new Date().toISOString().slice(0,10) });
+  $("w_name").value=$("w_email").value=$("w_note").value="";
+  save(); render();
+});
+$("btnPaste").addEventListener("click", function(){
+  var txt = prompt("One per line: name, email");
+  if (!txt) return;
+  txt.split("\n").forEach(function(line){
+    var p = line.split(","); var n=(p[0]||"").trim(); if(!n) return;
+    S.waitlist.push({ name:n, email:(p[1]||"").trim(), note:"",
+                      date:new Date().toISOString().slice(0,10) });
+  });
+  save(); render();
+});
+document.addEventListener("click", function(e){
+  var b = e.target.closest("[data-del]"); if(!b) return;
+  S.waitlist.splice(+b.dataset.del, 1); save(); render();
+});
+
+/* -------------------------------------------------- the funnel page */
+function gets(){
+  return (S.gets||"").split("\n").map(function(x){return x.trim();}).filter(Boolean).slice(0,3);
+}
+function funnelHTML(){
+  var name = S.name || "Untitled", promise = S.promise || "",
+      who = S.who || "", endpoint = (S.endpoint||"").trim();
+  var cards = gets().map(function(g){
+    return '<div class="card"><h3>'+esc(g)+'</h3></div>';
+  }).join("");
+  var formAttrs = endpoint ? ' action="'+esc(endpoint)+'" method="POST"' : ' onsubmit="return false"';
+  var notice = endpoint ? '' :
+    '<p class="notice">This form is not connected to anything yet. Add a form endpoint in the '+
+    'prelaunch wizard and it starts working — until then it is honest about it.</p>';
+  var btn = endpoint ? '<button class="btn" type="submit">Join the waitlist</button>'
+                     : '<button class="btn" type="submit" disabled>Join the waitlist — not connected</button>';
+  return '<!doctype html><html lang="en"><head><meta charset="utf-8">'+
+  '<meta name="viewport" content="width=device-width,initial-scale=1"><title>'+esc(name)+'</title>'+
+  '<meta name="description" content="'+esc(promise).slice(0,180)+'">'+
+  '<style>'+
+  ':root{--bg:#f6f5f1;--surface:#fff;--line:#e1dfd4;--ink:#1a1d1b;--soft:#535b56;--faint:#868f89;'+
+  '--c:#2f9e63;--r:14px;--sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;'+
+  '--mono:ui-monospace,"SF Mono",Menlo,monospace}'+
+  '@media(prefers-color-scheme:dark){:root{--bg:#0e100f;--surface:#161a18;--line:#2a322d;'+
+  '--ink:#f0f2ee;--soft:#a8b1aa;--faint:#79837c;--c:#38d07f}}'+
+  '*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);'+
+  'line-height:1.62}.w{max-width:720px;margin:0 auto;padding:0 22px}'+
+  '.hero{padding:clamp(56px,10vw,110px) 0 clamp(30px,5vw,56px)}'+
+  '.eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;'+
+  'color:var(--c);font-weight:700}h1{font-size:clamp(32px,6vw,52px);letter-spacing:-.025em;'+
+  'line-height:1.05;margin:14px 0}.lede{font-size:clamp(16px,2.2vw,20px);color:var(--soft);margin:0 0 28px}'+
+  '.btn{display:inline-block;background:var(--c);color:#fff;border:0;font:inherit;font-weight:700;'+
+  'padding:13px 24px;border-radius:999px;cursor:pointer;text-decoration:none}'+
+  '.btn[disabled]{opacity:.55;cursor:not-allowed}'+
+  'section{padding:clamp(30px,5vw,54px) 0;border-top:1px solid var(--line)}'+
+  'h2{font-size:clamp(20px,3vw,28px);letter-spacing:-.02em;margin:0 0 18px}'+
+  '.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}'+
+  '.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px}'+
+  '.card h3{margin:0;font-size:15.5px}'+
+  'form{display:grid;gap:12px;max-width:460px}label{display:grid;gap:5px;font-weight:650;font-size:14px}'+
+  'input,textarea{font:inherit;padding:11px 13px;border:1px solid var(--line);border-radius:9px;'+
+  'background:var(--surface);color:var(--ink);width:100%}'+
+  '.notice{font-size:13px;color:var(--soft);border-left:3px solid var(--c);padding-left:12px}'+
+  '.facts{display:grid;gap:1px;background:var(--surface);border:1px solid var(--line);'+
+  'border-radius:var(--r);overflow:hidden;grid-template-columns:repeat(auto-fit,minmax(160px,1fr))}'+
+  '.facts div{background:var(--surface);padding:16px 18px;box-shadow:0 0 0 1px var(--line)}'+
+  '.facts .k{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;'+
+  'color:var(--faint);font-weight:700;margin-bottom:4px}.facts .v{font-weight:700}'+
+  'footer{padding:30px 0 60px;color:var(--faint);font-size:13px;border-top:1px solid var(--line)}'+
+  '</style></head><body>'+
+  '<div class="hero"><div class="w"><span class="eyebrow">'+esc(who || "Early access")+'</span>'+
+  '<h1>'+esc(name)+'</h1><p class="lede">'+esc(promise)+'</p>'+
+  '<a class="btn" href="#join">Join the waitlist</a></div></div>'+
+  (cards ? '<section><div class="w"><h2>What you get</h2><div class="grid">'+cards+'</div></div></section>' : '')+
+  '<section id="join"><div class="w"><h2>Join the waitlist</h2>'+
+  '<p class="lede" style="font-size:16px">A name and an email. You hear from us when there is '+
+  'something real to see — not before.</p>'+
+  '<form'+formAttrs+'><label>Your name<input name="name" required></label>'+
+  '<label>Email<input type="email" name="email" required></label>'+
+  '<div>'+btn+'</div></form>'+notice+'</div></section>'+
+  '<section><div class="w"><h2>Straight answers</h2><div class="facts">'+
+  '<div><div class="k">Cost to join</div><div class="v">Nothing</div></div>'+
+  '<div><div class="k">What you get</div><div class="v">First access, lower price</div></div>'+
+  '<div><div class="k">Leaving</div><div class="v">One click, any time</div></div>'+
+  '</div></div></section>'+
+  '<footer><div class="w">'+esc(name)+(S.city? ' · '+esc(S.city):'')+
+  (S.email? ' · '+esc(S.email):'')+'</div></footer></body></html>';
+}
+$("btnPreview").addEventListener("click", function(){
+  $("prev").srcdoc = funnelHTML();
+  S._previewed = true; save(); paintRail();
+});
+$("btnDownloadFunnel").addEventListener("click", function(){
+  download("index.html", funnelHTML(), "text/html");
+});
+
+/* ------------------------------------------------------- the deliverable */
+function ideaMD(){
+  var m = math(), g = gets();
+  return "# " + (S.name||"Untitled") + "\n\n" +
+    "## Offer\n" + (S.promise||"") + "\n\n" +
+    (g.length ? g.map(function(x){ return "- " + x; }).join("\n") + "\n\n" : "") +
+    (+S.price>0 ? "## Pricing\n" + (S.name||"The offer") + " — €" + S.price + "\n\n" : "") +
+    "## Target Customer / ICP\n" + (S.who||"") + "\n\n" +
+    "## The problem\n" + (S.problem||"") + "\n\n" +
+    "## What we would do about it\n" + (S.solution||"") + "\n\n" +
+    "## Organization\n" + (S.name||"") + (S.city ? " is based in " + S.city + "." : "") +
+    (S.email ? "\nContact: " + S.email : "") + "\n\n" +
+    "## The number\n" +
+    "- Target: €" + (S.target||0) + "/month at €" + (S.price||0) + " per sale\n" +
+    "- " + m.sales + " sales · " + m.props + " proposals · " + m.convos + " conversations\n" +
+    "- " + m.perday + " conversations per working day\n\n" +
+    "## Prelaunch evidence\n" +
+    "- Waitlist: " + S.waitlist.length + " of " + (S.threshold||25) + " needed\n" +
+    (S.waitlist.length ? S.waitlist.slice(0,20).map(function(w){
+        return "- " + w.name + (w.email? " <"+w.email+">":"") + (w.note? " — "+w.note:"");
+      }).join("\n") + "\n" : "") +
+    "\n---\nPrepared with the Hundred prelaunch wizard · Vision Outreach Media\n";
+}
+$("dlIdea").addEventListener("click", function(){
+  download("business-idea.md", ideaMD(), "text/markdown");
+});
+function download(fn, text, mime){
+  var b = new Blob([text], {type: mime}), u = URL.createObjectURL(b);
+  var a = document.createElement("a"); a.href=u; a.download=fn; a.click();
+  setTimeout(function(){ URL.revokeObjectURL(u); }, 500);
+}
+
+/* --------------------------------------------------------- the handoffs */
+/* Same origin as Hundred, so these write the real keys the other pages read. */
+$("toPipeline").addEventListener("click", function(){
+  var K = "hundred_pipeline_v1", st;
+  try { st = JSON.parse(localStorage.getItem(K)) || {}; } catch(e){ st = {}; }
+  st.prospects = st.prospects || []; st.noLog = st.noLog || {};
+  var have = {};
+  st.prospects.forEach(function(p){ have[(p.name||"").toLowerCase()] = true; });
+  var added = 0;
+  S.waitlist.forEach(function(w){
+    if (have[w.name.toLowerCase()]) return;              // never duplicate a person
+    st.prospects.push({
+      id: "pl" + Date.now().toString(36) + Math.floor(Math.random()*1e4).toString(36),
+      created: Date.now(), updated: Date.now(),
+      name: w.name, company: w.email || "", value: +S.price || 0, stage: "lead",
+      action: w.note ? ("Waitlist: " + w.note) : "Waitlist signup — make first contact"
+    });
+    added++;
+  });
+  try { localStorage.setItem(K, JSON.stringify(st)); } catch(e){}
+  S._sentPipe = true; save(); paintRail();
+  $("pipeDone").innerHTML = '<span class="done">' + added + ' added' +
+    (added < S.waitlist.length ? ' · ' + (S.waitlist.length-added) + ' already there' : '') +
+    ' — open the Pipeline to see them.</span>';
+});
+$("toOS").addEventListener("click", function(){
+  var K = "hundred_v1", st;
+  try { st = JSON.parse(localStorage.getItem(K)) || {}; } catch(e){ st = {}; }
+  ["target","price","close","prop"].forEach(function(k){ if (S[k]) st[k] = String(S[k]); });
+  if (S.promise) st.offer = S.promise;
+  if (S.why) st.why = S.why;
+  st.assets = st.assets || {}; st.plays = st.plays || {};
+  st.deals = st.deals || []; st.nos = st.nos || 0;
+  try { localStorage.setItem(K, JSON.stringify(st)); } catch(e){}
+  S._sentOS = true; save(); paintRail();
+  $("osDone").innerHTML = '<span class="done">Sent — moves 1 and 2 are filled in.</span>';
+});
+
+/* ------------------------------------------------------------ commands */
+function slug(x){ return (x||"business").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,""); }
+function paintCmds(){
+  var n = S.name || "My Business";
+  $("forgeCmd").textContent =
+    "# the same funnel, built and deployed by Forge\n" +
+    'python3 turnkey.py forge --new "' + n + '" \\\n' +
+    '    --archetype prelaunch --org-type service_business \\\n' +
+    (S.city ? '    --city ' + S.city + ' \\\n' : '') +
+    (S.email ? '    --email ' + S.email + ' \\\n' : '') +
+    '    --about "' + (S.promise||"").replace(/"/g,"'") + '" \\\n' +
+    '    --target local --watch';
+  $("turnkeyCmd").textContent =
+    "# 1. put the deliverable where Turnkey looks\n" +
+    'mkdir -p "Business Ideas/' + n + '" && mv ~/Downloads/business-idea.md "Business Ideas/' + n + '/"\n\n' +
+    "# 2. build the real platform\n" +
+    'python3 turnkey.py forge "Business Ideas/' + n + '" \\\n' +
+    '    --org-type service_business --target local --watch';
+}
+
+/* ---------------------------------------------------------------- boot */
+function render(){ paintMath(); paintSignal(); paintCmds(); paintRail(); }
+render(); go(S.step);
+</script>
+</body>
+</html>

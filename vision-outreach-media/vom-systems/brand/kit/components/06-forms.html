@@ -1,0 +1,36 @@
+<!--
+group: Page sections
+name: Forms, pricing & payment
+surface: client
+brand: bizforge
+-->
+<p class="vk-demo-label">Capture form — submissions land in a named platform module</p>
+<form class="vk-form vk-demo-row" onsubmit="return false">
+  <label>Your name<input type="text" placeholder="Sam Rivers"></label>
+  <label>Email<input type="email" placeholder="sam@example.com"></label>
+  <label>What it is about<textarea placeholder="A sentence or two in your own words."></textarea></label>
+  <div><button class="vk-btn vk-btn--accent" type="submit">Send</button></div>
+  <p class="vk-note">Replies within one working day.</p>
+</form>
+
+<div class="vk-demo-row">
+  <p class="vk-demo-label">Pricing — published, because most competitors will not</p>
+  <div class="vk-tiers">
+    <div class="vk-tier"><h3 class="vk-h3">Brand kit</h3><div class="amt">€2.400</div><ul><li>Fixed scope</li><li>One revision round</li></ul></div>
+    <div class="vk-tier vk-tier--pick"><h3 class="vk-h3">Five-page website</h3><div class="amt">€3.900</div><ul><li>Written quote first</li><li>Owned outright</li></ul></div>
+    <div class="vk-tier"><h3 class="vk-h3">Monthly retainer</h3><div class="amt">€650<span style="font-size:16px">/month</span></div><ul><li>Cancel any time</li></ul></div>
+  </div>
+</div>
+
+<div class="vk-demo-row">
+  <p class="vk-demo-label">Payment block — honest when the rail is not switched on</p>
+  <div class="vk-panel">
+    <div><div class="vk-shead" style="margin:0 0 8px">How often</div>
+      <div class="vk-chips"><button class="vk-chip is-on">One-off</button><button class="vk-chip">Monthly</button></div></div>
+    <div><div class="vk-shead" style="margin:0 0 8px">Amount</div>
+      <div class="vk-chips"><button class="vk-chip">€10</button><button class="vk-chip is-on">€25</button><button class="vk-chip">€50</button><button class="vk-chip">€100</button><button class="vk-chip">Other</button></div></div>
+    <div><button class="vk-btn vk-btn--accent" disabled>Pay now — not yet switched on</button></div>
+    <p class="vk-notice">This goes live the moment the operator supplies the credentials —
+      they are never held by the builder.</p>
+  </div>
+</div>

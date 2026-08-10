@@ -1,0 +1,46 @@
+<!--
+group: Components
+name: Cards, meters & tables
+-->
+<p class="vk-demo-label">Cards — the default container for anything countable</p>
+<div class="vk-grid vk-demo-row">
+  <div class="vk-card">
+    <h3 class="vk-h3">A real welcome</h3>
+    <p class="vk-p">Someone at the door who knows you are new, and does not make a thing of it.</p>
+  </div>
+  <div class="vk-card vk-card--rail">
+    <h3 class="vk-h3">Rail card</h3>
+    <p class="vk-p">The rail carries the accent so a grid of products reads as a house.</p>
+  </div>
+  <div class="vk-card is-done">
+    <h3 class="vk-h3">Done <span class="vk-pill vk-pill--live">live</span></h3>
+    <p class="vk-p">A finished state tints rather than shouts.</p>
+  </div>
+  <div class="vk-card is-flagged">
+    <h3 class="vk-h3">Needs attention</h3>
+    <p class="vk-p">Flagged borrows the bad colour for its border only.</p>
+  </div>
+</div>
+
+<div class="vk-demo-row">
+  <p class="vk-demo-label">Meters — progress that is measured, never decorative</p>
+  <div class="vk-card">
+    <div class="vk-meter"><span class="k">Website</span><span class="track"><i style="width:100%"></i></span><span class="v">8/8</span></div>
+    <div class="vk-meter"><span class="k">Payments</span><span class="track"><i style="width:62%"></i></span><span class="v">5/8</span></div>
+    <div class="vk-meter"><span class="k">Leads</span><span class="track"><i style="width:25%"></i></span><span class="v">2/8</span></div>
+  </div>
+</div>
+
+<div class="vk-demo-row">
+  <p class="vk-demo-label">Table — dense facts, left-aligned, mono headers</p>
+  <div class="vk-card vk-card--pad0">
+    <div class="vk-tablewrap"><table class="vk-table">
+      <thead><tr><th>Rail</th><th>Provider</th><th>State</th><th>Needs</th></tr></thead>
+      <tbody>
+        <tr><td>payments</td><td>Stripe</td><td><span class="vk-pill vk-pill--planned">stub</span></td><td>STRIPE_SECRET_KEY</td></tr>
+        <tr><td>email</td><td>Brevo</td><td><span class="vk-pill vk-pill--planned">stub</span></td><td>BREVO_API_KEY</td></tr>
+        <tr><td>analytics</td><td>Engage AI</td><td><span class="vk-pill vk-pill--live">live</span></td><td>—</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</div>

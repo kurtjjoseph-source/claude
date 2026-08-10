@@ -1,0 +1,549 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Course Launch Kit — Launch Kits · VOM</title>
+<meta name="description" content="A pre-assembled wizard that walks an operator through launching and selling one online course, end to end — validate, price, pre-sell, build, launch, operate.">
+<style>
+  :root{
+    --c:#d1522f;
+    --bg:#f6f5f1; --surface:#ffffff; --surface-2:#efeee7; --line:#e1dfd4; --line-soft:#ece9df;
+    --ink:#1a1d1b; --ink-dim:#535b56; --ink-faint:#868f89;
+    --ok:#3f7d4e; --warn:#a86a1f; --info:#2f6ea8;
+    --ok-bg:#e8f1e9; --warn-bg:#f5ecdb; --info-bg:#e6eff6;
+    --mono:ui-monospace,"SF Mono","Cascadia Code",Menlo,monospace;
+    --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    --serif:"Iowan Old Style",ui-serif,Georgia,"Times New Roman",serif;
+    --shadow:0 1px 2px rgba(20,20,15,.05),0 8px 26px -18px rgba(20,20,15,.28);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --c:#f2765c; --bg:#0e100f; --surface:#161a18; --surface-2:#1c211e; --line:#2a322d; --line-soft:#212824;
+      --ink:#eef2ef; --ink-dim:#a6b1aa; --ink-faint:#6c7772;
+      --ok:#79c088; --warn:#e0ab5c; --info:#77b0e0;
+      --ok-bg:#16241a; --warn-bg:#251d10; --info-bg:#121f2b;
+      --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px -18px rgba(0,0,0,.7); }
+  }
+  :root[data-theme="light"]{ --c:#d1522f; --bg:#f6f5f1;--surface:#ffffff;--surface-2:#efeee7;--line:#e1dfd4;--line-soft:#ece9df;--ink:#1a1d1b;--ink-dim:#535b56;--ink-faint:#868f89;
+    --ok:#3f7d4e;--warn:#a86a1f;--info:#2f6ea8;--ok-bg:#e8f1e9;--warn-bg:#f5ecdb;--info-bg:#e6eff6;
+    --shadow:0 1px 2px rgba(20,20,15,.05),0 8px 26px -18px rgba(20,20,15,.28); }
+  :root[data-theme="dark"]{ --c:#f2765c; --bg:#0e100f;--surface:#161a18;--surface-2:#1c211e;--line:#2a322d;--line-soft:#212824;--ink:#eef2ef;--ink-dim:#a6b1aa;--ink-faint:#6c7772;
+    --ok:#79c088;--warn:#e0ab5c;--info:#77b0e0;--ok-bg:#16241a;--warn-bg:#251d10;--info-bg:#121f2b;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px -18px rgba(0,0,0,.7); }
+
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{ margin:0; background:var(--bg); color:var(--ink); font-family:var(--sans); line-height:1.6; -webkit-font-smoothing:antialiased; }
+  a{ color:var(--c); }
+  ::selection{ background:color-mix(in srgb,var(--c) 26%,transparent); }
+
+  /* ---------- top bar ---------- */
+  .bar{ position:sticky; top:0; z-index:20; display:flex; align-items:center; gap:16px;
+    padding:11px clamp(14px,3vw,26px); background:color-mix(in srgb,var(--bg) 86%,transparent);
+    backdrop-filter:blur(10px); border-bottom:1px solid var(--line); }
+  .brand{ display:flex; flex-direction:column; line-height:1.15; min-width:0; }
+  .brand .kicker{ font-family:var(--mono); font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:var(--c); }
+  .brand .nm{ font-family:var(--serif); font-weight:600; font-size:17px; letter-spacing:-.01em; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .bar-prog{ flex:1; min-width:0; display:flex; align-items:center; gap:10px; }
+  .track{ flex:1; height:7px; border-radius:20px; background:var(--surface-2); border:1px solid var(--line-soft); overflow:hidden; min-width:60px; }
+  .fill{ height:100%; width:0; background:linear-gradient(90deg,var(--c),color-mix(in srgb,var(--c) 60%,#e0a06f)); transition:width .4s ease; }
+  .pct{ font-family:var(--mono); font-size:12px; font-variant-numeric:tabular-nums; color:var(--ink-dim); white-space:nowrap; }
+  .bar-btns{ display:flex; gap:7px; }
+  .ib{ font:inherit; font-size:12.5px; font-weight:600; cursor:pointer; color:var(--ink-dim); background:var(--surface); border:1px solid var(--line); border-radius:8px; padding:7px 11px; white-space:nowrap; }
+  .ib:hover{ color:var(--ink); border-color:var(--c); }
+  .ib:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,button:focus-visible{ outline:2px solid var(--c); outline-offset:2px; }
+
+  /* ---------- layout ---------- */
+  .shell{ max-width:1180px; margin:0 auto; display:grid; grid-template-columns:250px 1fr; gap:0; align-items:start; }
+  .rail{ position:sticky; top:57px; align-self:start; max-height:calc(100vh - 57px); overflow-y:auto; padding:22px 14px 40px; border-right:1px solid var(--line); }
+  .rail h2{ font-family:var(--mono); font-size:10.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-faint); margin:0 0 12px 8px; }
+  .step-btn{ display:grid; grid-template-columns:26px 1fr; gap:9px; align-items:center; width:100%; text-align:left;
+    font:inherit; cursor:pointer; background:none; border:none; color:var(--ink-dim); border-radius:9px; padding:8px; margin-bottom:2px; }
+  .step-btn:hover{ background:var(--surface-2); color:var(--ink); }
+  .step-btn.active{ background:var(--surface); box-shadow:var(--shadow); color:var(--ink); }
+  .step-btn.active .idx{ border-color:var(--c); color:var(--c); }
+  .idx{ width:26px; height:26px; border-radius:50%; border:1.5px solid var(--line); display:grid; place-items:center;
+    font-family:var(--mono); font-size:12px; font-weight:600; color:var(--ink-faint); flex:none; transition:.2s; }
+  .idx.done{ background:var(--c); border-color:var(--c); color:var(--bg); }
+  .idx.part{ border-color:var(--c); color:var(--c); }
+  .step-btn .tx{ min-width:0; }
+  .step-btn .tt{ display:block; font-size:13.5px; font-weight:600; line-height:1.25; }
+  .step-btn .mini{ display:block; font-family:var(--mono); font-size:10px; color:var(--ink-faint); margin-top:1px; }
+
+  main{ padding:30px clamp(18px,4vw,52px) 90px; min-width:0; }
+  .kicker-row{ display:flex; align-items:center; gap:12px; font-family:var(--mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--c); margin-bottom:14px; }
+  .kicker-row::after{ content:""; flex:1; height:1px; background:linear-gradient(90deg,var(--line),transparent); }
+  h1.step-title{ font-family:var(--serif); font-weight:600; font-size:clamp(28px,4.6vw,40px); line-height:1.05; letter-spacing:-.02em; margin:0 0 14px; text-wrap:balance; }
+  .lede{ font-family:var(--serif); font-size:clamp(17px,2.4vw,20px); line-height:1.55; color:var(--ink-dim); max-width:64ch; margin:0 0 30px; }
+
+  .block{ margin:0 0 26px; }
+  .block-lbl{ font-family:var(--mono); font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-faint); margin:0 0 12px; display:flex; align-items:center; gap:8px; }
+  .block-lbl::before{ content:""; width:14px; height:1.5px; background:var(--c); }
+  .prose{ max-width:64ch; }
+  .prose p{ margin:0 0 12px; color:var(--ink-dim); }
+  .prose strong{ color:var(--ink); font-weight:650; }
+  .prose ul{ margin:0 0 12px; padding-left:20px; color:var(--ink-dim); }
+  .prose li{ margin:4px 0; }
+  .prose code{ font-family:var(--mono); font-size:.86em; background:var(--surface-2); border:1px solid var(--line-soft); border-radius:5px; padding:1px 5px; color:var(--ink); }
+
+  /* fields */
+  .fields{ display:grid; gap:16px; }
+  .field label{ display:block; font-size:13.5px; font-weight:650; margin-bottom:5px; }
+  .field .hint{ font-size:12.5px; color:var(--ink-faint); margin-bottom:7px; }
+  .field input,.field textarea{ width:100%; font:inherit; font-size:14.5px; color:var(--ink); background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:11px 13px; resize:vertical; }
+  .field textarea{ min-height:82px; line-height:1.5; }
+  .field input::placeholder,.field textarea::placeholder{ color:var(--ink-faint); }
+
+  /* template / copy box */
+  .tpl{ background:var(--surface); border:1px solid var(--line); border-radius:12px; box-shadow:var(--shadow); overflow:hidden; }
+  .tpl-head{ display:flex; align-items:center; justify-content:space-between; gap:10px; padding:10px 14px; border-bottom:1px solid var(--line-soft); background:var(--surface-2); }
+  .tpl-head .tn{ font-family:var(--mono); font-size:11.5px; letter-spacing:.04em; color:var(--ink-dim); font-weight:600; }
+  .copy{ font:inherit; font-family:var(--mono); font-size:11px; font-weight:600; letter-spacing:.04em; cursor:pointer; color:var(--c); background:none; border:1px solid var(--c); border-radius:7px; padding:5px 10px; white-space:nowrap; }
+  .copy:hover{ background:color-mix(in srgb,var(--c) 12%,transparent); }
+  .copy.done{ color:var(--ok); border-color:var(--ok); }
+  .tpl-body{ margin:0; padding:14px 16px; font-family:var(--mono); font-size:12.5px; line-height:1.62; color:var(--ink); white-space:pre-wrap; word-break:break-word; overflow-x:auto; }
+  .tpl-body .slot{ color:var(--c); font-style:normal; }
+
+  /* checklist */
+  .checklist{ display:grid; gap:2px; }
+  .chk{ display:grid; grid-template-columns:22px 1fr; gap:11px; align-items:start; padding:9px 11px; border-radius:9px; cursor:pointer; }
+  .chk:hover{ background:var(--surface-2); }
+  .chk input{ appearance:none; width:20px; height:20px; margin:1px 0 0; border:1.5px solid var(--line); border-radius:6px; background:var(--surface); cursor:pointer; position:relative; flex:none; }
+  .chk input:checked{ background:var(--c); border-color:var(--c); }
+  .chk input:checked::after{ content:"✓"; position:absolute; inset:0; display:grid; place-items:center; color:var(--bg); font-size:13px; font-weight:800; }
+  .chk span{ font-size:14px; color:var(--ink-dim); line-height:1.45; }
+  .chk input:checked + span{ color:var(--ink-faint); text-decoration:line-through; text-decoration-color:color-mix(in srgb,var(--ink-faint) 60%,transparent); }
+
+  /* cards */
+  .cards{ display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:12px; }
+  .card{ background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:15px 16px; }
+  .card .ch{ font-weight:700; font-size:14.5px; margin:0 0 5px; }
+  .card .cd{ font-size:13px; color:var(--ink-dim); }
+  .card .cb{ display:inline-block; font-family:var(--mono); font-size:9.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--c); border:1px solid var(--c); border-radius:20px; padding:2px 8px; margin-bottom:8px; }
+
+  /* callout */
+  .callout{ display:grid; grid-template-columns:auto 1fr; gap:12px; border-radius:12px; padding:14px 16px; border:1px solid; font-size:13.5px; line-height:1.5; }
+  .callout .ct{ font-weight:700; display:block; margin-bottom:3px; }
+  .callout p{ margin:0; color:var(--ink-dim); }
+  .callout .ico{ font-family:var(--mono); font-weight:800; font-size:14px; }
+  .callout.info{ background:var(--info-bg); border-color:color-mix(in srgb,var(--info) 40%,transparent); } .callout.info .ico,.callout.info .ct{ color:var(--info); }
+  .callout.warn{ background:var(--warn-bg); border-color:color-mix(in srgb,var(--warn) 40%,transparent); } .callout.warn .ico,.callout.warn .ct{ color:var(--warn); }
+  .callout.ok{ background:var(--ok-bg); border-color:color-mix(in srgb,var(--ok) 40%,transparent); } .callout.ok .ico,.callout.ok .ct{ color:var(--ok); }
+
+  /* table */
+  .tbl-wrap{ overflow-x:auto; border:1px solid var(--line); border-radius:12px; }
+  table{ border-collapse:collapse; width:100%; font-size:13px; min-width:420px; }
+  th,td{ text-align:left; padding:10px 13px; border-bottom:1px solid var(--line-soft); }
+  th{ font-family:var(--mono); font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-faint); background:var(--surface-2); }
+  td{ color:var(--ink-dim); } td:first-child{ color:var(--ink); font-weight:600; }
+  tr:last-child td{ border-bottom:none; }
+
+  /* step foot nav */
+  .step-foot{ display:flex; align-items:center; justify-content:space-between; gap:14px; margin-top:38px; padding-top:22px; border-top:1px solid var(--line); }
+  .mark{ display:inline-flex; align-items:center; gap:9px; font:inherit; font-size:13.5px; font-weight:650; cursor:pointer; color:var(--ink-dim); background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:10px 15px; }
+  .mark:hover{ border-color:var(--c); color:var(--ink); }
+  .mark.on{ background:var(--c); border-color:var(--c); color:var(--bg); }
+  .mark .box{ width:17px; height:17px; border-radius:5px; border:1.5px solid currentColor; display:grid; place-items:center; font-size:11px; }
+  .nav{ display:flex; gap:9px; }
+  .nb{ font:inherit; font-size:13.5px; font-weight:650; cursor:pointer; color:var(--ink); background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:10px 16px; }
+  .nb:hover{ border-color:var(--c); }
+  .nb.prim{ background:var(--c); border-color:var(--c); color:var(--bg); }
+  .nb:disabled{ opacity:.4; cursor:default; }
+
+  .toast{ position:fixed; bottom:20px; left:50%; transform:translateX(-50%) translateY(20px); opacity:0; pointer-events:none;
+    background:var(--ink); color:var(--bg); font-size:13px; font-weight:600; padding:10px 18px; border-radius:10px; box-shadow:var(--shadow); transition:.25s; z-index:40; }
+  .toast.show{ opacity:1; transform:translateX(-50%) translateY(0); }
+
+  .foot-note{ max-width:1180px; margin:0 auto; padding:16px clamp(18px,4vw,52px) 40px; font-size:12px; color:var(--ink-faint); border-top:1px solid var(--line); display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px; }
+  .foot-note a{ color:var(--c); }
+
+  @media (max-width:860px){
+    .shell{ grid-template-columns:1fr; }
+    .rail{ position:static; max-height:none; border-right:none; border-bottom:1px solid var(--line); padding:14px; display:flex; gap:8px; overflow-x:auto; }
+    .rail h2{ display:none; }
+    .step-btn{ flex:none; grid-template-columns:auto; width:auto; text-align:center; padding:7px 10px; }
+    .step-btn .tx{ display:none; }
+    .brand .nm{ font-size:15px; }
+  }
+  @media (max-width:560px){ .bar-prog .pct{ display:none; } }
+  @media (prefers-reduced-motion:reduce){ *{ transition:none!important; scroll-behavior:auto; } }
+</style>
+</head>
+<body>
+<div class="bar">
+  <div class="brand"><span class="kicker">Launch Kits · VOM</span><span class="nm">Course Launch Kit</span></div>
+  <div class="bar-prog"><div class="track"><div class="fill" id="fill"></div></div><span class="pct" id="pct">0%</span></div>
+  <div class="bar-btns">
+    <button class="ib" id="reset">Reset</button>
+    <button class="ib" id="theme">◐ Theme</button>
+  </div>
+</div>
+
+<div class="shell">
+  <aside class="rail"><h2>The build</h2><div id="rail"></div></aside>
+  <main id="main"></main>
+</div>
+
+<div class="foot-note">
+  <span>Course Launch Kit — a wizard in the Launch Kits shelf, part of the Vision Outreach Media house of operating systems.</span>
+  <span>Your progress saves to this browser only.</span>
+</div>
+<div class="toast" id="toast">Copied</div>
+
+<script>
+"use strict";
+var KEY="vom.launchkit.course.v1";
+
+/* ============================ CONTENT ============================ */
+var STEPS=[
+ {tab:"Topic", kicker:"Step 1 · Decide", title:"Pick the topic & the outcome",
+  lede:"A course sells a result, not a subject. Before anything else, name one specific transformation you can credibly take a person through — where they start, and where they end up after your course.",
+  blocks:[
+   {t:"prose",html:"<p>The strongest course topics sit at the crossing of three things: something <strong>you have done and can teach</strong>, something people <strong>actively want a result in</strong>, and something with a <strong>clear finish line</strong> a beginner can reach. Vague subjects (\"marketing\") don't convert; specific outcomes (\"book your first 5 paying clients from LinkedIn\") do.</p><p>Fill these in for the operator. Everything downstream — the sales page, the curriculum, the price — flows from the outcome statement.</p>"},
+   {t:"fields",items:[
+     {k:"topic",label:"Course subject",ph:"e.g. LinkedIn lead generation for freelance designers",type:"text"},
+     {k:"who",label:"Exactly who it's for",ph:"e.g. Freelance designers with a portfolio but no steady pipeline",type:"text"},
+     {k:"from",label:"Where they are now (the \"before\")",ph:"e.g. Posting occasionally, hearing crickets, chasing referrals",type:"text"},
+     {k:"to",label:"Where they'll be after (the \"after\")",ph:"e.g. A repeatable weekly system that books 3–5 sales calls",type:"text"},
+     {k:"proof",label:"Why the operator is credible here",ph:"e.g. Built my own agency to $18k/mo through this exact system",type:"area"}
+   ]},
+   {t:"template",label:"Copy-ready",title:"outcome-statement.txt",body:"THE ONE-LINE PROMISE\n\nI help {{who}} go from {{from}} to {{to}} — without the guesswork.\n\nCourse: {{topic}}\nProof it works: {{proof}}\n\n(Read it out loud. If it sounds like a subject, not a result, sharpen the \"to\".)"},
+   {t:"callout",tone:"warn",title:"Don't skip the finish line.",html:"<p>If you can't describe the \"after\" in one concrete sentence, the course is a topic, not a product. Narrow it until one specific person would pay to reach that exact result this month.</p>"},
+   {t:"checklist",label:"Before you move on",items:[
+     {k:"c1",text:"The outcome is a measurable result, not a body of knowledge"},
+     {k:"c2",text:"One specific person is named — not \"anyone who wants to learn\""},
+     {k:"c3",text:"The operator can honestly claim the proof line"},
+     {k:"c4",text:"A beginner could realistically reach the \"after\" in weeks, not years"}
+   ]}
+  ]},
+
+ {tab:"Validate", kicker:"Step 2 · De-risk", title:"Validate the demand before you build",
+  lede:"Most courses fail because they were built for an audience that never asked for them. Spend a day proving people want this outcome badly enough to pay — before you record a single lesson.",
+  blocks:[
+   {t:"prose",html:"<p>You're looking for three green lights: people are <strong>already searching or paying</strong> for this result, they describe the pain in <strong>their own words</strong>, and at least a few say <strong>\"tell me when it's ready.\"</strong> Gather evidence, not opinions — \"sounds great\" from a friend is not validation.</p>"},
+   {t:"cards",items:[
+     {b:"Demand",h:"Search & marketplace scan",d:"Look up the topic on Udemy, YouTube, and Google. Existing courses with reviews = a paying market, not competition to fear."},
+     {b:"Language",h:"Mine the exact words",d:"Read Reddit threads, YouTube comments, and course reviews. Copy the phrases people use to describe the pain — you'll reuse them verbatim on the sales page."},
+     {b:"Intent",h:"5 real conversations",d:"DM or call 5 people in the audience. Ask what they've already tried and what they'd pay to solve. Listen for the wallet, not politeness."}
+   ]},
+   {t:"template",label:"Copy-ready",title:"validation-interview.txt",body:"5-PERSON VALIDATION SCRIPT (15 min each)\n\n1. Tell me about the last time {{from}} was a real problem for you.\n2. What have you already tried to fix it? What did those cost you (time/money)?\n3. What would reaching {{to}} actually be worth to you?\n4. If a step-by-step course got you there in a few weeks, what would make it a no-brainer at $X?\n5. Can I come back to you when it opens? (← the real signal)\n\nRULE: They talk 80%. You never pitch. You're collecting evidence and exact wording."},
+   {t:"template",label:"Copy-ready",title:"demand-signals-log.txt",body:"DEMAND LOG — fill as you research\n\nTopic: {{topic}}\nAudience: {{who}}\n\n[ ] # of existing paid courses on this topic: ____\n[ ] Top competitor's review count / rating: ____\n[ ] 3 exact pain phrases people used:\n     - \"____\"\n     - \"____\"\n     - \"____\"\n[ ] # of the 5 interviewees who said \"tell me when it opens\": ____\n\nGREEN LIGHT = 3+ said yes AND you found people already paying for similar."},
+   {t:"callout",tone:"info",title:"Competition is proof, not a wall.",html:"<p>An empty market usually means no demand. A crowded one means money is moving — your edge is a sharper outcome and a specific person, not being first.</p>"},
+   {t:"checklist",label:"Validation gate",items:[
+     {k:"v1",text:"Found people already paying for a similar result"},
+     {k:"v2",text:"Collected 3+ exact pain phrases in the audience's own words"},
+     {k:"v3",text:"Ran at least 3 real audience conversations"},
+     {k:"v4",text:"At least 3 people asked to be told when it opens"}
+   ]}
+  ]},
+
+ {tab:"Outline", kicker:"Step 3 · Design", title:"Outline the curriculum",
+  lede:"Work backward from the outcome. The curriculum is the shortest path from the \"before\" to the \"after\" — modules are milestones, lessons are single steps. Cut anything that doesn't move the student forward.",
+  blocks:[
+   {t:"prose",html:"<p>Structure it as <strong>3–6 modules</strong>, each ending in a tangible win the student can point to. Inside each module, keep lessons to <strong>one idea and one action</strong>. Aim for <strong>5–15 minutes per lesson</strong> — people finish short lessons and finished students leave testimonials.</p><p>Use the template as a fill-in skeleton. Naming modules after outcomes (\"Book the call\") beats naming them after topics (\"Sales calls\").</p>"},
+   {t:"template",label:"Copy-ready",title:"curriculum-outline.txt",body:"CURRICULUM — {{topic}}\nTransforms: {{from}}  →  {{to}}\n\nMODULE 1 — [Milestone: e.g. \"Set the foundation\"]\n  1.1 Lesson — one idea → one action\n  1.2 Lesson — one idea → one action\n  1.3 Lesson — one idea → one action\n  ▸ Module win: student can now ______\n\nMODULE 2 — [Milestone]\n  2.1 ...\n  2.2 ...\n  ▸ Module win: student can now ______\n\nMODULE 3 — [Milestone]\n  3.1 ...\n  3.2 ...\n  ▸ Module win: student can now ______\n\n[ Optional Module 4–5 — only if truly needed for the outcome ]\n\nEACH LESSON GETS:\n  • a one-line objective\n  • a short teach (5–15 min)\n  • a worksheet / template / checklist to DO it"},
+   {t:"callout",tone:"warn",title:"Beware the curse of completeness.",html:"<p>You don't have to teach everything you know — only what's needed to reach <em>this</em> outcome. Extra modules feel generous but lower completion rates and delay your launch. When in doubt, cut it or make it a bonus.</p>"},
+   {t:"checklist",label:"Outline is ready when",items:[
+     {k:"o1",text:"Every module ends in a win the student can name"},
+     {k:"o2",text:"Each lesson has one objective and one action"},
+     {k:"o3",text:"Nothing in the outline fails the \"does this move them to the outcome?\" test"},
+     {k:"o4",text:"Each lesson has a paired worksheet, template, or checklist"}
+   ]}
+  ]},
+
+ {tab:"Platform", kicker:"Step 4 · Choose", title:"Choose your platform",
+  lede:"The platform hosts your lessons, takes payment, and drips content. Don't overthink it — pick the one that lets you launch this week, not the one with the most features. You can migrate later once revenue is real.",
+  blocks:[
+   {t:"prose",html:"<p>Three postures cover almost everyone. Match the platform to <strong>where the operator is right now</strong>, not where they hope to be in a year.</p>"},
+   {t:"table",label:"Decision matrix",head:["Platform","Best when","Watch-out"],rows:[
+     ["Gumroad / Payhip","Fastest possible start; one-off price; tiny audience","Basic course player; light on community"],
+     ["Teachable / Podia","You want a real course player + drip + email in one","Monthly fee before you've earned; more setup"],
+     ["Kajabi","All-in-one: site, email, funnels, memberships","Pricey; overkill for a first launch"],
+     ["Circle / Skool","Course + community is the point (cohorts, discussion)","Community needs active tending or it dies"],
+     ["Your site + Stripe","You want full control and own the tech","You maintain everything; slowest to stand up"]
+   ]},
+   {t:"fields",items:[
+     {k:"platform",label:"Platform the operator is committing to",ph:"e.g. Teachable — real player, drip, launch this week",type:"text"},
+     {k:"platform_why",label:"One reason it fits right now",ph:"e.g. Handles payment plans + drip so I don't glue tools together",type:"text"}
+   ]},
+   {t:"callout",tone:"ok",title:"Pick-and-move rule.",html:"<p>Spend at most an hour deciding. The platform almost never determines whether a course succeeds — the offer and the audience do. Choose one, set it up, keep moving.</p>"},
+   {t:"checklist",label:"Platform locked",items:[
+     {k:"p1",text:"Chosen a single platform and stopped comparing"},
+     {k:"p2",text:"Confirmed it handles payment (and payment plans if needed)"},
+     {k:"p3",text:"Created the account and the empty course shell"},
+     {k:"p4",text:"Know how you'll deliver access after purchase"}
+   ]}
+  ]},
+
+ {tab:"Price", kicker:"Step 5 · Price", title:"Price it",
+  lede:"Price on the value of the outcome, never on the hours of video. A course that saves someone months or earns them thousands can command far more than \"a few videos\" would suggest. Anchor high, then justify.",
+  blocks:[
+   {t:"prose",html:"<p>Start from the <strong>value of the transformation</strong>: what is reaching <code>{{to}}</code> worth to <code>{{who}}</code> in money, time, or relief? Price at a fraction of that. Then add a middle tier that most people pick, and offer a <strong>payment plan</strong> to lift conversions without discounting.</p>"},
+   {t:"cards",items:[
+     {b:"Anchor",h:"Value math",d:"If the outcome is worth $2,000 to the buyer, a $200–$500 course is an easy yes. Write the value number down first, price second."},
+     {b:"Tiers",h:"Good / Better / Best",d:"Core course · Core + templates/calls · Core + coaching. Most buyers pick the middle — design it to be the obvious choice."},
+     {b:"Plans",h:"Payment options",d:"A 3-pay plan (e.g. 3 × $99) removes the price objection. It nearly always raises total revenue."}
+   ]},
+   {t:"template",label:"Copy-ready",title:"pricing-tiers.txt",body:"PRICING — {{topic}}\nOutcome value to buyer: $________ (fill this first)\n\nTIER 1 — Self-Study            $____\n  • Full course + all worksheets\n\nTIER 2 — Complete  ⭐ most pick  $____\n  • Everything in Tier 1\n  • Swipe files / templates library\n  • Private community access\n\nTIER 3 — With Support          $____\n  • Everything in Tier 2\n  • Live Q&A calls / group coaching\n  • Feedback on your work\n\nPAYMENT PLAN: 3 × $____  (offer on Tier 2 & 3)\nFOUNDING PRICE: ____ off for the first cohort (see next step)"},
+   {t:"callout",tone:"info",title:"Cheap is not a strategy.",html:"<p>Underpricing attracts the least committed students (who finish least and refund most) and starves your ad/effort budget. If unsure, price higher and over-deliver — you can always run a founding discount.</p>"},
+   {t:"checklist",label:"Price is set when",items:[
+     {k:"pr1",text:"Wrote down the dollar value of the outcome to the buyer"},
+     {k:"pr2",text:"Set 2–3 tiers with a clear \"most pick\" middle"},
+     {k:"pr3",text:"Added a payment-plan option"},
+     {k:"pr4",text:"Decided the founding-cohort discount"}
+   ]}
+  ]},
+
+ {tab:"Pre-sell", kicker:"Step 6 · Validate with cash", title:"Pre-sell before you build",
+  lede:"This is the kit's most important move: sell the course before it exists. A pre-sale to a founding cohort turns interest into cash, funds your time to build, and guarantees you're building something people already bought.",
+  blocks:[
+   {t:"prose",html:"<p>Put up a <strong>simple sales page</strong> and open a <strong>founding-member offer</strong> at a discount: they get in early and cheaper, you get proof and revenue. Deliver the first module live or on a schedule as you build the rest. If nobody buys, you've saved yourself months building the wrong thing.</p>"},
+   {t:"template",label:"Copy-ready",title:"presell-sales-page.txt",body:"SALES PAGE SKELETON — founding cohort\n\nHEADLINE:\n  Go from {{from}} to {{to}}.\n\nSUBHEAD:\n  A step-by-step course for {{who}}. Founding cohort now open.\n\nTHE PROBLEM (use their exact words from Step 2):\n  \"____\"  \"____\"  \"____\"\n\nWHAT YOU'LL GET:\n  • [Module 1 win]\n  • [Module 2 win]\n  • [Module 3 win]\n  • Worksheets + templates for every lesson\n\nWHO'S TEACHING & WHY IT WORKS:\n  {{proof}}\n\nFOUNDING OFFER:\n  First [N] students. $____ (going to $____ at full launch).\n  First module drops [date]; new module every week.\n\nGUARANTEE:\n  Do the work through Module 2. Not moving toward the result? Full refund.\n\n[ ENROLL — FOUNDING PRICE ]"},
+   {t:"template",label:"Copy-ready",title:"presell-announcement.txt",body:"LAUNCH-TO-WAITLIST MESSAGE (email / DM the people from Step 2)\n\nSubject: It's open — founding spots for {{topic}}\n\nHey [name] —\n\nYou told me {{from}} was a real problem. I built the fix.\n\n{{topic}} takes you to: {{to}}.\n\nI'm opening a small founding cohort first — lower price, direct access to me, and you shape it as we go. First module lands [date].\n\nFounding spots are limited to [N] and I'm messaging you first.\n\n→ [enroll link]\n\nWorth a look?"},
+   {t:"callout",tone:"ok",title:"The pre-sell is the real validation.",html:"<p>Interviews and \"tell me when it's ready\" are signals; a credit-card charge is proof. Set a threshold before you start — e.g. \"if 8 people buy, I build it.\" Hit it and you build with total confidence. Miss it and you adjust the offer, not your life.</p>"},
+   {t:"checklist",label:"Pre-sell gate",items:[
+     {k:"ps1",text:"Simple sales page published with the founding offer"},
+     {k:"ps2",text:"Set a go/no-go threshold (# of sales that means \"build it\")"},
+     {k:"ps3",text:"Personally invited everyone from the Step 2 conversations"},
+     {k:"ps4",text:"Refund guarantee stated clearly"},
+     {k:"ps5",text:"Hit the threshold — you have paying founding members"}
+   ]}
+  ]},
+
+ {tab:"Build", kicker:"Step 7 · Build", title:"Build the minimum lessons",
+  lede:"Now — and only now — you record. Build just enough to stay ahead of your founding cohort's schedule. Done and delivered beats polished and late. You can re-record the weak lessons after the first round of feedback.",
+  blocks:[
+   {t:"prose",html:"<p>Record <strong>one module ahead</strong> of what students need this week. Batch your recording, keep lessons short, and don't chase production value — clear audio and a screen-share beat a fancy camera nobody watches. Ship the worksheet with every lesson; that's what makes a course feel worth the price.</p>"},
+   {t:"cards",items:[
+     {b:"Gear",h:"Good enough kit",d:"A decent USB mic, screen-recording software, and quiet room. Clear audio matters 10× more than video quality."},
+     {b:"Format",h:"Talking-head or screen-share",d:"Teach with slides + screen-share for how-to; talking-head for mindset. Keep each lesson to one idea."},
+     {b:"Batch",h:"Record in sprints",d:"Outline → script bullets → record a whole module in one sitting → light edit → upload. Momentum beats perfection."}
+   ]},
+   {t:"template",label:"Copy-ready",title:"lesson-recording-checklist.txt",body:"PER-LESSON PRODUCTION CHECKLIST\n\nBEFORE\n  [ ] One-line objective written at top of script\n  [ ] Bullet script (not word-for-word — sound human)\n  [ ] Worksheet/template for this lesson drafted\n  [ ] Mic tested, notifications off, door shut\n\nRECORD\n  [ ] Open with the promise: \"By the end of this you'll ____\"\n  [ ] Teach the one idea\n  [ ] Walk through the action live\n  [ ] Close with the exact next step\n\nAFTER\n  [ ] Trim dead air, cut mistakes\n  [ ] Upload + attach worksheet\n  [ ] Set drip date so it's one week ahead of the cohort"},
+   {t:"callout",tone:"warn",title:"Don't build all of it at once.",html:"<p>Building every lesson before launch is how courses die in a drawer. Deliver live-ish to the founding cohort — their questions tell you exactly which lessons to sharpen, and their pace keeps you honest.</p>"},
+   {t:"checklist",label:"Minimum viable course",items:[
+     {k:"b1",text:"Module 1 fully recorded, edited, and uploaded"},
+     {k:"b2",text:"Staying at least one module ahead of the cohort schedule"},
+     {k:"b3",text:"Every published lesson has its worksheet attached"},
+     {k:"b4",text:"Drip/release dates set on the platform"}
+   ]}
+  ]},
+
+ {tab:"Launch", kicker:"Step 8 · Launch", title:"Launch to the waitlist",
+  lede:"With a proven offer and real lessons delivered to founding members, run the full public launch. A time-boxed open cart with a genuine reason to act now converts your built-up waitlist into buyers.",
+  blocks:[
+   {t:"prose",html:"<p>Launch to the <strong>waitlist and audience you've been building</strong>. Use a <strong>5-email open-cart sequence</strong> over 4–7 days with a real deadline (founding price ends, cohort fills, or bonus expires). Founding-member results become your proof — feature their wins.</p>"},
+   {t:"template",label:"Copy-ready",title:"launch-email-sequence.txt",body:"OPEN-CART SEQUENCE (5 emails, 5–7 days)\n\nDAY 1 — OPEN\n  It's live. Here's who it's for and what changes: {{from}} → {{to}}.\n  [enroll]\n\nDAY 2 — PROOF\n  Founding member result / your own story ({{proof}}). Show the outcome.\n\nDAY 3 — OBJECTIONS\n  \"No time / tried before / not sure it's for me.\" Answer each honestly.\n  Mention the payment plan.\n\nDAY 5 — FAQ + WHAT'S INSIDE\n  Walk the curriculum. The module wins. The guarantee.\n\nDAY 7 — CLOSE (send 2: morning + a few hours before deadline)\n  Cart closes tonight at [time]. Founding price disappears. Last call.\n  [enroll]"},
+   {t:"template",label:"Copy-ready",title:"launch-checklist.txt",body:"LAUNCH-WEEK CHECKLIST\n\n[ ] Sales page updated with founding-member testimonials\n[ ] Real deadline set (price rise / cohort cap / bonus expiry)\n[ ] 5-email sequence loaded and scheduled\n[ ] Checkout tested end-to-end (buy it yourself, then refund)\n[ ] Payment plan live\n[ ] Post-purchase welcome + access instructions automated\n[ ] Social / community posts drafted for open + close day\n[ ] Cart-close automation set (remove buy button at deadline)"},
+   {t:"callout",tone:"info",title:"Deadlines make launches.",html:"<p>Most sales come in the final 24 hours. Without a real reason to act now, people intend to buy \"later\" and never do. Make the deadline true and honor it — credibility compounds across launches.</p>"},
+   {t:"checklist",label:"Cleared for launch",items:[
+     {k:"l1",text:"Checkout tested with a real purchase (then refunded)"},
+     {k:"l2",text:"Open-cart sequence scheduled with a true deadline"},
+     {k:"l3",text:"Founding-member proof added to the sales page"},
+     {k:"l4",text:"Post-purchase welcome & access fully automated"}
+   ]}
+  ]},
+
+ {tab:"Operate", kicker:"Step 9 · Run", title:"Run & operate",
+  lede:"The launch is a spike; the business is the system. Deliver a great experience, harvest testimonials, handle refunds gracefully, and turn the whole thing into an asset you can sell again — on evergreen or in the next cohort.",
+  blocks:[
+   {t:"prose",html:"<p>Two jobs now: <strong>make students win</strong> (results are your marketing) and <strong>make it repeatable</strong>. Ask for testimonials at the moment of each win, not at the end. Then choose your next mode — run it again as a cohort, or turn it evergreen so it sells on autopilot.</p>"},
+   {t:"cards",items:[
+     {b:"Results",h:"Engineer completion",d:"Check-in emails, a quick-win first lesson, and celebrating progress lift completion — and finishers refer and re-buy."},
+     {b:"Proof",h:"Ask at the peak",d:"The instant a student hits a module win, ask: \"What did that unlock for you?\" Screenshot every reply. This becomes your next sales page."},
+     {b:"Next mode",h:"Cohort or evergreen",d:"Evergreen = always-on funnel + drip. Cohort = scheduled live rounds with urgency. Pick one to run next quarter."}
+   ]},
+   {t:"template",label:"Copy-ready",title:"testimonial-request.txt",body:"TESTIMONIAL REQUEST (send right after a student's win)\n\nHey [name] — saw you hit [milestone]. That's exactly the point of the course.\n\nQuick favor: in 2–3 sentences, what was it like BEFORE, and what's different NOW? Feel free to name a number if you've got one.\n\nMind if I share it (first name + last initial)? It helps the next person decide.\n\nThank you — genuinely glad it's working for you."},
+   {t:"template",label:"Copy-ready",title:"operate-cadence.txt",body:"OPERATING CADENCE — {{topic}}\n\nWEEKLY\n  [ ] Answer student questions within 24h\n  [ ] Note every win → testimonial ask\n  [ ] Log refund requests + reasons\n\nPER COHORT / MONTHLY\n  [ ] Re-record the 1–2 weakest lessons from feedback\n  [ ] Update sales page with new testimonials\n  [ ] Review completion rate — where do students stall?\n\nQUARTERLY\n  [ ] Decide: run another cohort or push evergreen\n  [ ] Raise the price for the next round\n  [ ] Add / prune a module based on outcomes\n\nMETRICS THAT MATTER\n  • Conversion rate on the sales page\n  • Completion rate (leading indicator of referrals)\n  • Refund rate (keep it honest, watch for patterns)\n  • Revenue per launch"},
+   {t:"callout",tone:"ok",title:"You now own a repeatable asset.",html:"<p>You validated an outcome, sold it before building, delivered it, and collected proof. That's not a one-time launch — it's a product you can re-sell every quarter, raise the price on, and eventually run without you in the room.</p>"},
+   {t:"checklist",label:"Operating system running",items:[
+     {k:"r1",text:"Support cadence set (respond within 24h)"},
+     {k:"r2",text:"Testimonial request sent at every student win"},
+     {k:"r3",text:"Refund handling defined and logged"},
+     {k:"r4",text:"Chosen the next mode: another cohort or evergreen"},
+     {k:"r5",text:"Sales page updated with real results"}
+   ]}
+  ]}
+];
+/* ========================== END CONTENT ========================== */
+
+/* ---- state ---- */
+var state={fields:{},checks:{},done:{},cur:0};
+try{ var raw=localStorage.getItem(KEY); if(raw){ var s=JSON.parse(raw); state.fields=s.fields||{}; state.checks=s.checks||{}; state.done=s.done||{}; state.cur=s.cur||0; } }catch(e){}
+function save(){ try{ localStorage.setItem(KEY,JSON.stringify(state)); }catch(e){} }
+
+function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c];});}
+function fieldVal(k){ return state.fields[k]||""; }
+
+/* interpolate {{key}} in templates → live field value, or a soft slot placeholder */
+function interp(text,forCopy){
+  return text.replace(/\{\{(\w+)\}\}/g,function(_,k){
+    var v=fieldVal(k);
+    if(v) return forCopy? v : '<span class="slot">'+esc(v)+'</span>';
+    var ph="["+k+"]";
+    return forCopy? ph : '<span class="slot">'+esc(ph)+'</span>';
+  });
+}
+
+/* ---- progress ---- */
+function stepItems(step){ var n=0; (step.blocks||[]).forEach(function(b){ if(b.t==="checklist") n+=b.items.length; }); return n; }
+function stepChecked(si){ var step=STEPS[si],n=0; (step.blocks||[]).forEach(function(b){ if(b.t==="checklist") b.items.forEach(function(it){ if(state.checks[si+"."+it.k]) n++; }); }); return n; }
+function totals(){ var tot=0,done=0; STEPS.forEach(function(st,i){ var t=stepItems(st); tot+=t; done+=stepChecked(i); }); return {tot:tot,done:done}; }
+function updateProgress(){
+  var t=totals(); var p=t.tot? Math.round(t.done/t.tot*100):0;
+  document.getElementById("fill").style.width=p+"%";
+  document.getElementById("pct").textContent=p+"%";
+}
+
+/* ---- rail ---- */
+function buildRail(){
+  var el=document.getElementById("rail"); el.innerHTML="";
+  STEPS.forEach(function(st,i){
+    var tot=stepItems(st), ck=stepChecked(i);
+    var cls="idx"; if(state.done[i]||(tot>0&&ck===tot)) cls+=" done"; else if(ck>0) cls+=" part";
+    var b=document.createElement("button");
+    b.className="step-btn"+(i===state.cur?" active":"");
+    b.setAttribute("aria-current", i===state.cur?"step":"false");
+    b.innerHTML='<span class="'+cls+'">'+(state.done[i]||(tot>0&&ck===tot)?"✓":(i+1))+'</span>'+
+      '<span class="tx"><span class="tt">'+esc(st.tab)+'</span><span class="mini">'+ck+'/'+tot+'</span></span>';
+    b.onclick=function(){ goto(i); };
+    el.appendChild(b);
+  });
+}
+
+/* ---- block renderers ---- */
+function rBlock(b,si){
+  var h="";
+  if(b.t==="prose"){ h='<div class="block"><div class="prose">'+interp(b.html)+'</div></div>'; }
+  else if(b.t==="fields"){
+    h='<div class="block"><div class="fields">'+b.items.map(function(it){
+      var v=fieldVal(it.k);
+      var input = it.type==="area"
+        ? '<textarea data-f="'+it.k+'" placeholder="'+esc(it.ph)+'">'+esc(v)+'</textarea>'
+        : '<input type="text" data-f="'+it.k+'" value="'+esc(v)+'" placeholder="'+esc(it.ph)+'">';
+      return '<div class="field"><label>'+esc(it.label)+'</label>'+(it.hint?'<div class="hint">'+esc(it.hint)+'</div>':'')+input+'</div>';
+    }).join("")+'</div></div>';
+  }
+  else if(b.t==="template"){
+    h='<div class="block">'+(b.label?'<p class="block-lbl">'+esc(b.label)+'</p>':'')+
+      '<div class="tpl"><div class="tpl-head"><span class="tn">'+esc(b.title)+'</span>'+
+      '<button class="copy" data-copy>Copy</button></div>'+
+      '<pre class="tpl-body" data-raw="'+esc(interp(b.body,true))+'">'+interp(b.body)+'</pre></div></div>';
+  }
+  else if(b.t==="checklist"){
+    h='<div class="block">'+(b.label?'<p class="block-lbl">'+esc(b.label)+'</p>':'')+
+      '<div class="checklist">'+b.items.map(function(it){
+        var id=si+"."+it.k, on=state.checks[id]?"checked":"";
+        return '<label class="chk"><input type="checkbox" data-chk="'+id+'" '+on+'><span>'+esc(it.text)+'</span></label>';
+      }).join("")+'</div></div>';
+  }
+  else if(b.t==="cards"){
+    h='<div class="block">'+(b.label?'<p class="block-lbl">'+esc(b.label)+'</p>':'')+
+      '<div class="cards">'+b.items.map(function(c){
+        return '<div class="card">'+(c.b?'<span class="cb">'+esc(c.b)+'</span>':'')+'<p class="ch">'+esc(c.h)+'</p><p class="cd">'+esc(c.d)+'</p></div>';
+      }).join("")+'</div></div>';
+  }
+  else if(b.t==="callout"){
+    var ic=b.tone==="warn"?"!":b.tone==="ok"?"✓":"i";
+    h='<div class="block"><div class="callout '+b.tone+'"><span class="ico">'+ic+'</span><div><span class="ct">'+esc(b.title)+'</span>'+interp(b.html)+'</div></div></div>';
+  }
+  else if(b.t==="table"){
+    h='<div class="block">'+(b.label?'<p class="block-lbl">'+esc(b.label)+'</p>':'')+
+      '<div class="tbl-wrap"><table><thead><tr>'+b.head.map(function(x){return '<th>'+esc(x)+'</th>';}).join("")+'</tr></thead><tbody>'+
+      b.rows.map(function(r){return '<tr>'+r.map(function(c){return '<td>'+esc(c)+'</td>';}).join("")+'</tr>';}).join("")+
+      '</tbody></table></div></div>';
+  }
+  return h;
+}
+
+/* ---- main render ---- */
+function render(){
+  var si=state.cur, st=STEPS[si];
+  var main=document.getElementById("main");
+  var body=(st.blocks||[]).map(function(b){return rBlock(b,si);}).join("");
+  var doneOn=state.done[si]?" on":"";
+  main.innerHTML=
+    '<div class="kicker-row">'+esc(st.kicker)+'</div>'+
+    '<h1 class="step-title">'+esc(st.title)+'</h1>'+
+    '<p class="lede">'+esc(st.lede)+'</p>'+
+    body+
+    '<div class="step-foot">'+
+      '<button class="mark'+doneOn+'" id="markdone"><span class="box">'+(state.done[si]?"✓":"")+'</span>'+(state.done[si]?"Step complete":"Mark step complete")+'</button>'+
+      '<div class="nav">'+
+        '<button class="nb" id="prev"'+(si===0?" disabled":"")+'>← Prev</button>'+
+        '<button class="nb prim" id="next"'+(si===STEPS.length-1?" disabled":"")+'>Next →</button>'+
+      '</div>'+
+    '</div>';
+  wire(si);
+  buildRail(); updateProgress();
+  window.scrollTo({top:0,behavior: matchMedia("(prefers-reduced-motion:reduce)").matches?"auto":"smooth"});
+}
+
+function wire(si){
+  // fields
+  document.querySelectorAll("[data-f]").forEach(function(inp){
+    inp.addEventListener("input",function(){ state.fields[inp.getAttribute("data-f")]=inp.value; save(); });
+    inp.addEventListener("change",function(){ refreshTemplates(); });
+    inp.addEventListener("blur",function(){ refreshTemplates(); });
+  });
+  // checklists
+  document.querySelectorAll("[data-chk]").forEach(function(cb){
+    cb.addEventListener("change",function(){ state.checks[cb.getAttribute("data-chk")]=cb.checked; save(); buildRail(); updateProgress(); });
+  });
+  // copy
+  document.querySelectorAll("[data-copy]").forEach(function(btn){
+    btn.addEventListener("click",function(){
+      var pre=btn.closest(".tpl").querySelector(".tpl-body");
+      var txt=pre.getAttribute("data-raw");
+      var done=function(){ btn.textContent="Copied ✓"; btn.classList.add("done"); toast("Template copied to clipboard"); setTimeout(function(){ btn.textContent="Copy"; btn.classList.remove("done"); },1600); };
+      if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(txt).then(done,function(){ legacyCopy(txt); done(); }); }
+      else { legacyCopy(txt); done(); }
+    });
+  });
+  // mark done
+  document.getElementById("markdone").onclick=function(){ state.done[si]=!state.done[si]; save(); render(); };
+  document.getElementById("prev").onclick=function(){ if(si>0) goto(si-1); };
+  document.getElementById("next").onclick=function(){ if(si<STEPS.length-1) goto(si+1); };
+}
+
+/* re-interpolate templates in place when a field changes (so {{topic}} etc. update live) */
+function refreshTemplates(){
+  var si=state.cur, st=STEPS[si], idx=0;
+  var pres=document.querySelectorAll(".tpl-body");
+  (st.blocks||[]).forEach(function(b){
+    if(b.t==="template"){
+      var pre=pres[idx++]; if(!pre) return;
+      pre.innerHTML=interp(b.body);
+      pre.setAttribute("data-raw",interp(b.body,true).replace(/&quot;/g,'"'));
+    }
+  });
+}
+
+function legacyCopy(t){ var ta=document.createElement("textarea"); ta.value=t; ta.style.position="fixed"; ta.style.opacity="0"; document.body.appendChild(ta); ta.select(); try{document.execCommand("copy");}catch(e){} document.body.removeChild(ta); }
+var toastT;
+function toast(m){ var el=document.getElementById("toast"); el.textContent=m; el.classList.add("show"); clearTimeout(toastT); toastT=setTimeout(function(){ el.classList.remove("show"); },1800); }
+
+function goto(i){ state.cur=i; save(); render(); }
+
+/* controls */
+document.getElementById("theme").onclick=function(){
+  var c=document.documentElement.getAttribute("data-theme");
+  var n=c==="dark"?"light":(c==="light"?"dark":(matchMedia("(prefers-color-scheme: dark)").matches?"light":"dark"));
+  document.documentElement.setAttribute("data-theme",n); try{localStorage.setItem("th_"+KEY,n);}catch(e){}
+};
+document.getElementById("reset").onclick=function(){
+  if(!confirm("Reset all progress for the Course Launch Kit? Your entries and checkmarks will be cleared from this browser.")) return;
+  state={fields:{},checks:{},done:{},cur:0}; save(); render();
+};
+try{var th=localStorage.getItem("th_"+KEY); if(th)document.documentElement.setAttribute("data-theme",th);}catch(e){}
+
+document.addEventListener("keydown",function(e){
+  if(e.target && /INPUT|TEXTAREA/.test(e.target.tagName)) return;
+  if(e.key==="ArrowRight" && state.cur<STEPS.length-1) goto(state.cur+1);
+  if(e.key==="ArrowLeft" && state.cur>0) goto(state.cur-1);
+});
+
+render();
+</script>
+</body>
+</html>

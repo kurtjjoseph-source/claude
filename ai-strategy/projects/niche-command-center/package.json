@@ -1,0 +1,13 @@
+{
+  "name": "vom-ops-tracker",
+  "version": "1.0.0",
+  "description": "VOM client/ops tracker — local-only Node.js MVP. Surfaces overdue next-actions across clients; tracks a dated notes/history log per client.",
+  "main": "server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}

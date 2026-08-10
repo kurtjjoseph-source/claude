@@ -1,0 +1,649 @@
+{
+  "org_types": {
+    "church": {
+      "label": "Church / faith community",
+      "summary": "Gathering-led, content-heavy, funded by giving rather than sales.",
+      "core": [
+        "content_publishing",
+        "media_library",
+        "events",
+        "donations",
+        "people_roster"
+      ],
+      "recommended": [
+        "support_inbox"
+      ],
+      "optional": [
+        "membership_access",
+        "product_catalog",
+        "checkout_payments",
+        "booking"
+      ],
+      "revenue": "Recurring giving + occasional event/ticket income",
+      "site_bias": [
+        "wordpress",
+        3,
+        "Weekly self-edited content (sermons, events, announcements) by non-technical staff is exactly WordPress's job; the plugin ecosystem covers giving, events and media out of the box."
+      ],
+      "signals": [
+        "church",
+        "kerk",
+        "ministry",
+        "congregation",
+        "gemeente",
+        "sermon",
+        "worship",
+        "pastor",
+        "faith",
+        "parish",
+        "gospel",
+        "discipleship",
+        "tithe",
+        "bible"
+      ]
+    },
+    "nonprofit": {
+      "label": "Nonprofit / foundation (stichting)",
+      "summary": "Mission-funded; donors and grants instead of customers.",
+      "core": [
+        "content_publishing",
+        "donations",
+        "donor_reporting",
+        "people_roster",
+        "events"
+      ],
+      "recommended": [
+        "support_inbox"
+      ],
+      "optional": [
+        "membership_access",
+        "product_catalog",
+        "checkout_payments"
+      ],
+      "revenue": "Donations, grants, membership dues",
+      "site_bias": [
+        "wordpress",
+        3,
+        "Programme pages, annual reports and an ANBI/transparency page change often and must be editable by staff without a developer."
+      ],
+      "signals": [
+        "nonprofit",
+        "non-profit",
+        "charity",
+        "stichting",
+        "foundation",
+        "ngo",
+        "donor",
+        "anbi",
+        "volunteer",
+        "goede doel",
+        "fundraising",
+        "grant"
+      ]
+    },
+    "service_business": {
+      "label": "Service business / consultancy / agency",
+      "summary": "Sells time and expertise to a small number of higher-value clients.",
+      "core": [
+        "lead_capture",
+        "documents_contracts",
+        "booking",
+        "checkout_payments"
+      ],
+      "recommended": [
+        "content_publishing",
+        "support_inbox"
+      ],
+      "optional": [
+        "product_catalog",
+        "membership_access",
+        "courses_lms",
+        "subscriptions"
+      ],
+      "revenue": "Projects and retainers, invoiced; deposits via checkout",
+      "site_bias": [
+        "vercel_app",
+        1,
+        "A service business sells through a small set of high-conversion pages that rarely change — a fast custom site beats a CMS unless the owner publishes regularly."
+      ],
+      "signals": [
+        "consulting",
+        "consultancy",
+        "agency",
+        "freelance",
+        "coaching",
+        "coach",
+        "services",
+        "retainer",
+        "b2b",
+        "advisory",
+        "studio",
+        "contractor",
+        "installation",
+        "maintenance",
+        "productized",
+        "productised",
+        "assessment",
+        "audit",
+        "discovery call",
+        "engagement",
+        "done-for-you",
+        "deliverable",
+        "implementation",
+        "proposal",
+        "scope of work",
+        "hourly",
+        "day rate"
+      ]
+    },
+    "ecommerce": {
+      "title_note": "physical goods",
+      "label": "E-commerce (physical products)",
+      "summary": "Sells stocked goods that must be picked, packed and shipped.",
+      "core": [
+        "product_catalog",
+        "checkout_payments",
+        "inventory_shipping"
+      ],
+      "recommended": [
+        "content_publishing",
+        "support_inbox",
+        "email_marketing"
+      ],
+      "optional": [
+        "subscriptions",
+        "membership_access",
+        "booking"
+      ],
+      "revenue": "Per-order product sales, margin on goods",
+      "site_bias": [
+        "wordpress",
+        3,
+        "WooCommerce gives catalog, stock, tax and NL shipping zones on day one; rebuilding that in a custom app only pays off at real volume."
+      ],
+      "signals": [
+        "webshop",
+        "web shop",
+        "e-commerce",
+        "ecommerce",
+        "shop",
+        "store",
+        "shipping",
+        "inventory",
+        "stock",
+        "sku",
+        "woocommerce",
+        "shopify",
+        "physical product",
+        "warehouse",
+        "packaging"
+      ]
+    },
+    "digital_products": {
+      "label": "Digital products",
+      "summary": "Sells files, templates or downloads — no stock, instant delivery.",
+      "core": [
+        "product_catalog",
+        "checkout_payments",
+        "digital_fulfillment"
+      ],
+      "recommended": [
+        "content_publishing",
+        "email_marketing"
+      ],
+      "optional": [
+        "membership_access",
+        "courses_lms",
+        "subscriptions",
+        "support_inbox"
+      ],
+      "revenue": "One-off digital sales; near-100% margin, fulfilment is a webhook",
+      "site_bias": [
+        "vercel_app",
+        3,
+        "The whole business is a funnel plus a fulfilment webhook; a CMS adds surface area and maintenance without adding sales."
+      ],
+      "signals": [
+        "ebook",
+        "e-book",
+        "template",
+        "download",
+        "digital product",
+        "printable",
+        "preset",
+        "toolkit",
+        "pdf",
+        "worksheet",
+        "swipe file",
+        "notion template"
+      ]
+    },
+    "membership": {
+      "label": "Membership / community / academy",
+      "summary": "Recurring access to content, community or software for a fee.",
+      "core": [
+        "membership_access",
+        "subscriptions",
+        "checkout_payments",
+        "content_publishing"
+      ],
+      "recommended": [
+        "courses_lms",
+        "email_marketing",
+        "support_inbox"
+      ],
+      "optional": [
+        "events",
+        "product_catalog",
+        "digital_fulfillment"
+      ],
+      "revenue": "Monthly/annual dues; retention is the whole game",
+      "site_bias": [
+        "wordpress",
+        2,
+        "Gated content, drip release and member logins are a solved WordPress problem, and the owner can add member content without a deploy."
+      ],
+      "signals": [
+        "membership",
+        "members",
+        "community",
+        "club",
+        "academy",
+        "subscription",
+        "recurring access",
+        "cohort",
+        "mastermind",
+        "inner circle"
+      ]
+    },
+    "education": {
+      "label": "Education / training provider",
+      "summary": "Teaches a curriculum to enrolled learners, online or in person.",
+      "core": [
+        "courses_lms",
+        "checkout_payments",
+        "content_publishing",
+        "membership_access"
+      ],
+      "recommended": [
+        "events",
+        "email_marketing",
+        "support_inbox",
+        "booking"
+      ],
+      "optional": [
+        "subscriptions",
+        "product_catalog",
+        "people_roster"
+      ],
+      "revenue": "Course/cohort fees, sometimes subsidised or invoiced to employers",
+      "site_bias": [
+        "wordpress",
+        2,
+        "Curriculum pages and lesson content change constantly and are written by teaching staff, not developers; the LMS plugins are mature."
+      ],
+      "signals": [
+        "course",
+        "curriculum",
+        "training",
+        "school",
+        "students",
+        "lms",
+        "workshop",
+        "cohort",
+        "opleiding",
+        "cursus",
+        "certification",
+        "bootcamp",
+        "teacher"
+      ]
+    },
+    "local_venue": {
+      "label": "Local venue / practice (appointment-led)",
+      "summary": "A physical place customers visit — books time or serves walk-ins.",
+      "core": [
+        "booking",
+        "lead_capture",
+        "checkout_payments"
+      ],
+      "recommended": [
+        "content_publishing",
+        "events",
+        "support_inbox"
+      ],
+      "optional": [
+        "product_catalog",
+        "inventory_shipping",
+        "subscriptions",
+        "membership_access"
+      ],
+      "revenue": "Per-visit services, packages, sometimes retail add-ons",
+      "site_bias": [
+        "wordpress",
+        2,
+        "Opening hours, menus, price lists and staff pages are edited by the venue itself; local SEO plugins and booking plugins do the rest."
+      ],
+      "signals": [
+        "restaurant",
+        "salon",
+        "barber",
+        "gym",
+        "clinic",
+        "cafe",
+        "praktijk",
+        "dentist",
+        "physio",
+        "kapper",
+        "walk-in",
+        "appointment",
+        "opening hours",
+        "studio space",
+        "wellness"
+      ]
+    },
+    "saas": {
+      "label": "SaaS / software product",
+      "summary": "The product is software; the site only sells and supports it.",
+      "core": [
+        "custom_app",
+        "subscriptions",
+        "checkout_payments",
+        "support_inbox"
+      ],
+      "recommended": [
+        "content_publishing",
+        "lead_capture",
+        "email_marketing"
+      ],
+      "optional": [
+        "membership_access",
+        "courses_lms"
+      ],
+      "revenue": "Seats/usage subscriptions",
+      "site_bias": [
+        "vercel_app",
+        4,
+        "The application is the product — it needs its own auth, data model and deploy pipeline. WordPress could at most host the marketing pages."
+      ],
+      "signals": [
+        "saas",
+        "software",
+        "platform",
+        "api",
+        "dashboard",
+        "app users",
+        "seats",
+        "web app",
+        "integration",
+        "developer tool"
+      ]
+    },
+    "creator_media": {
+      "label": "Creator / media brand",
+      "summary": "Builds an audience first; monetises it through sponsors and products.",
+      "core": [
+        "content_publishing",
+        "media_library",
+        "email_marketing"
+      ],
+      "recommended": [
+        "product_catalog",
+        "checkout_payments",
+        "digital_fulfillment"
+      ],
+      "optional": [
+        "membership_access",
+        "subscriptions",
+        "events",
+        "booking"
+      ],
+      "revenue": "Sponsorship, digital products, memberships",
+      "site_bias": [
+        "wordpress",
+        1,
+        "Publishing cadence is the business; the owner must post without help."
+      ],
+      "signals": [
+        "podcast",
+        "youtube channel",
+        "newsletter",
+        "audience",
+        "creator",
+        "influencer",
+        "media brand",
+        "content creator",
+        "vlog",
+        "substack"
+      ]
+    }
+  },
+  "functions": {
+    "web_presence": {
+      "title": "Public web presence",
+      "domain": "Front of house",
+      "workstream": "W4_website",
+      "wp_fit": "neutral",
+      "wp": "WordPress site (block theme) — home, offer, about, contact",
+      "app": "Next.js site on Vercel — home, offer, about, contact",
+      "gated": true
+    },
+    "content_publishing": {
+      "title": "Content publishing (blog / news / articles)",
+      "domain": "Front of house",
+      "workstream": "W4_website",
+      "wp_fit": "strong",
+      "wp": "WordPress posts + categories; owner edits without a developer",
+      "app": "MDX content collection — every edit is a code deploy",
+      "gated": false
+    },
+    "media_library": {
+      "title": "Media library (sermons / video / podcast archive)",
+      "domain": "Front of house",
+      "workstream": "W4_website",
+      "wp_fit": "strong",
+      "wp": "Custom post type + embeds (YouTube/Spotify), series taxonomy",
+      "app": "Media index page fed by the channel APIs",
+      "gated": false
+    },
+    "events": {
+      "title": "Events calendar & RSVP",
+      "domain": "Front of house",
+      "workstream": "W4_website",
+      "wp_fit": "strong",
+      "wp": "Events plugin (The Events Calendar) + RSVP form",
+      "app": "Events collection + form endpoint",
+      "gated": false
+    },
+    "booking": {
+      "title": "Appointment booking / scheduling",
+      "domain": "Front of house",
+      "workstream": "W4_website",
+      "wp_fit": "strong",
+      "wp": "Booking plugin, or embed the operator's scheduling SaaS",
+      "app": "Embedded scheduling SaaS (Cal.com/Calendly) + webhook to CRM",
+      "gated": false
+    },
+    "lead_capture": {
+      "title": "Lead capture (forms, lead magnet, CTA)",
+      "domain": "Front of house",
+      "workstream": "W9_leads",
+      "wp_fit": "neutral",
+      "wp": "Form plugin → CRM + Brevo list",
+      "app": "Form route → CRM + Brevo list",
+      "gated": false
+    },
+    "product_catalog": {
+      "title": "Product catalog (what is for sale, at what price)",
+      "domain": "Revenue",
+      "workstream": "W6_products",
+      "wp_fit": "strong",
+      "wp": "WooCommerce products/variations; Stripe as the gateway",
+      "app": "Catalog defined in Stripe products/prices, rendered from the API",
+      "gated": false
+    },
+    "checkout_payments": {
+      "title": "Checkout & payments",
+      "domain": "Revenue",
+      "workstream": "W5_payments",
+      "wp_fit": "neutral",
+      "wp": "Stripe checkout (hosted) linked from Woo/pages; iDEAL enabled for NL",
+      "app": "Stripe Checkout / Payment Links; iDEAL enabled for NL",
+      "gated": true
+    },
+    "donations": {
+      "title": "Donations & recurring giving",
+      "domain": "Revenue",
+      "workstream": "W5_payments",
+      "wp_fit": "strong",
+      "wp": "Giving plugin (GiveWP) or Stripe donation links + campaign pages",
+      "app": "Stripe recurring Payment Links + a giving page",
+      "gated": true
+    },
+    "subscriptions": {
+      "title": "Subscriptions / recurring billing",
+      "domain": "Revenue",
+      "workstream": "W5_payments",
+      "wp_fit": "neutral",
+      "wp": "Stripe Billing (portal hosted by Stripe), membership plugin for access",
+      "app": "Stripe Billing + customer portal",
+      "gated": true
+    },
+    "membership_access": {
+      "title": "Member area & access control",
+      "domain": "Delivery",
+      "workstream": "W6_products",
+      "wp_fit": "strong",
+      "wp": "Membership plugin gating pages by plan; login lives on the client's site",
+      "app": "Auth + entitlement check per route",
+      "gated": false
+    },
+    "courses_lms": {
+      "title": "Course delivery (LMS)",
+      "domain": "Delivery",
+      "workstream": "W6_products",
+      "wp_fit": "strong",
+      "wp": "LMS plugin (LearnDash/TutorLMS) — lessons, progress, certificates",
+      "app": "Course routes + progress store, or an external LMS embed",
+      "gated": false
+    },
+    "digital_fulfillment": {
+      "title": "Digital fulfilment (deliver the file / grant the access)",
+      "domain": "Delivery",
+      "workstream": "W6_products",
+      "wp_fit": "neutral",
+      "wp": "Stripe webhook → email delivery; WP only hosts the thank-you page",
+      "app": "Stripe webhook → signed download link + buyer email (Brevo)",
+      "gated": true
+    },
+    "inventory_shipping": {
+      "title": "Stock, shipping & physical fulfilment",
+      "domain": "Delivery",
+      "workstream": "W6_products",
+      "wp_fit": "strong",
+      "wp": "WooCommerce stock + shipping zones + NL carrier plugin",
+      "app": "Custom stock model + carrier API — only worth it above real volume",
+      "gated": false
+    },
+    "crm": {
+      "title": "CRM — contacts, pipeline, running inventory",
+      "domain": "Back office",
+      "workstream": "W10_crm",
+      "wp_fit": "neutral",
+      "wp": "Operator-side CRM (not in WordPress); site forms feed it",
+      "app": "Operator-side CRM; app forms feed it",
+      "gated": false
+    },
+    "finance_admin": {
+      "title": "Finance & admin (invoicing, VAT, bookkeeping)",
+      "domain": "Back office",
+      "workstream": "W2_legal",
+      "wp_fit": "neutral",
+      "wp": "NL bookkeeping tool + Stripe payouts reconciled monthly",
+      "app": "NL bookkeeping tool + Stripe payouts reconciled monthly",
+      "gated": false
+    },
+    "email_marketing": {
+      "title": "Email list & broadcasts",
+      "domain": "Growth",
+      "workstream": "W9_leads",
+      "wp_fit": "neutral",
+      "wp": "Brevo list + form plugin; broadcasts sent from Brevo",
+      "app": "Brevo list + form route; broadcasts sent from Brevo",
+      "gated": true
+    },
+    "social_publishing": {
+      "title": "Social content production & scheduling",
+      "domain": "Growth",
+      "workstream": "W8_social",
+      "wp_fit": "neutral",
+      "wp": "Engage AI Content Studio inside wp-admin (owner-operable)",
+      "app": "Content produced operator-side; owner approves the weekly digest",
+      "gated": true
+    },
+    "analytics_reporting": {
+      "title": "Analytics & presence reporting",
+      "domain": "Growth",
+      "workstream": "W7_presence",
+      "wp_fit": "neutral",
+      "wp": "Engage AI plugin reports real page/post counts as ground truth",
+      "app": "Analytics + the Engage AI server-side website probe",
+      "gated": false
+    },
+    "support_inbox": {
+      "title": "Support inbox & FAQ",
+      "domain": "Back office",
+      "workstream": "W11_followups",
+      "wp_fit": "neutral",
+      "wp": "Shared mailbox + FAQ pages; replies drafted, human-approved",
+      "app": "Shared mailbox + FAQ routes; replies drafted, human-approved",
+      "gated": true
+    },
+    "documents_contracts": {
+      "title": "Quotes, proposals & contracts",
+      "domain": "Back office",
+      "workstream": "W10_crm",
+      "wp_fit": "neutral",
+      "wp": "Template pack + e-sign SaaS, tracked on the CRM record",
+      "app": "Template pack + e-sign SaaS, tracked on the CRM record",
+      "gated": false
+    },
+    "people_roster": {
+      "title": "People, volunteers & rosters",
+      "domain": "Back office",
+      "workstream": "W10_crm",
+      "wp_fit": "neutral",
+      "wp": "Roster in the CRM; a public sign-up form on the site",
+      "app": "Roster in the CRM; a public sign-up route",
+      "gated": false
+    },
+    "donor_reporting": {
+      "title": "Donor & grant reporting (ANBI-ready)",
+      "domain": "Back office",
+      "workstream": "W2_legal",
+      "wp_fit": "neutral",
+      "wp": "Giving exports → bookkeeping; annual public ANBI page on the site",
+      "app": "Giving exports → bookkeeping; annual public ANBI page",
+      "gated": false
+    },
+    "custom_app": {
+      "title": "The product application itself",
+      "domain": "Delivery",
+      "workstream": "W4_website",
+      "wp_fit": "weak",
+      "wp": "Not a WordPress job — WordPress can only market it",
+      "app": "The application, built by the dev swarm and deployed on Vercel",
+      "gated": true
+    }
+  },
+  "universal_core": [
+    "web_presence",
+    "crm",
+    "finance_admin",
+    "analytics_reporting"
+  ],
+  "universal_recommended": [
+    "lead_capture",
+    "email_marketing",
+    "social_publishing"
+  ]
+}

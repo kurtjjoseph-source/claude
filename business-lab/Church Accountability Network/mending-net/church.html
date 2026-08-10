@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mending Net — church intranet</title>
+<meta name="description" content="A congregation's own record: the monthly report and tithe of tithes, officers and council, church conferences, the membership roll, the safeguarding register and twelve months of progress.">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#f6f5f1" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0e100f" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231B2A4A'/%3E%3Cpath d='M6 22 L16 8 L26 22 M6 22 L16 16 L26 22' stroke='%2357b3a8' stroke-width='2' fill='none' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="kit.css">
+</head>
+<body>
+
+<div class="vom-bar">
+  <a class="brand" href="https://visionoutreachmedia.nl"><img src="vom-logo.jpg" alt="Vision Outreach Media"><b>Vision Outreach Media</b><span>· Mending Net</span></a>
+  <nav class="surfaces"><a class="surf" href="index.html">Console</a><a class="surf" href="minister.html">Minister</a><a class="surf" href="church.html" aria-current="page">Church</a></nav>
+  <button class="themebtn" id="themebtn" type="button">Theme</button>
+</div>
+
+<header class="mast">
+  <div class="wrap">
+    <p class="eyebrow">Church intranet</p>
+    <h1 id="whoName">—</h1>
+    <p class="lede" id="whoMeta">—</p>
+    <p class="lede">The congregation's own record — report and funds, offices and council, conferences, roll, safeguarding and progress. Kept by the pastor and treasurer together. It holds no ministerial discipline file, not even its own pastor's.</p>
+    <div class="ctx">
+      <div><label class="f" for="asCh">Signed in as</label><select id="asCh"></select></div>
+      <div><label class="f" for="period">Current period</label><select id="period"></select></div>
+    </div>
+  </div>
+</header>
+
+<nav class="tabs"><div class="wrap" id="tabs"></div></nav>
+
+<main><div class="wrap">
+  <section class="pane" id="p-home"></section>
+  <section class="pane" id="p-report"></section>
+  <section class="pane" id="p-officers"></section>
+  <section class="pane" id="p-conference"></section>
+  <section class="pane" id="p-members"></section>
+  <section class="pane" id="p-safeguard"></section>
+  <section class="pane" id="p-progress"></section>
+  <section class="pane" id="p-concern"></section>
+</div></main>
+
+<footer><div class="wrap">
+  <p><b>Demonstration network.</b> Every minister, congregation, concern and restoration case here is fictional. Nothing is a real record.</p>
+  <p><b>Authority.</b> Mending Net implements process defined in the Church of God <i>Book of Church Order, Governance, and Discipline</i> (Minutes of the International General Assembly) and the <i>Practical Commitments</i>. Those documents are the authority; this is a tracker, and where the two differ the Minutes govern. Sections are cited so a user can turn to the authoritative text; the text itself is not reproduced — it is copyright Church of God Ministerial Development, Cleveland, Tennessee.</p>
+  <p><b>Not a substitute for civil process.</b> Allegations of child sexual abuse, sexual exploitation of a minor, or any other suspected crime go to civil authorities under applicable mandatory-reporting law. Ministerial confidentiality does not preempt reporting law and may not be used to conceal a felonious act.</p>
+  <p style="margin-top:18px">Built by Vision Outreach Media · <button class="b quiet sm" id="reset" type="button">Reset demonstration data</button></p>
+</div></footer>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer"><div class="dhd"><div id="drawerTitle"></div><button class="x" id="drawerX" type="button">×</button></div><div class="dbd" id="drawerBody"></div></aside>
+
+<script src="core.js"></script>
+<script src="church.js"></script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+# Orchestrator decision log — Church Media Academy sprint
+
+T1 PO stories      | product_owner/write_user_stories | tier1 haiku → FAIL reviewer (AC cap) → tier2 sonnet fix → PASS (local recount)
+T2 UX copy+tokens  | ux_designer/copy_tokens          | tier1 haiku → PASS reviewer (sonnet) with notes
+T3 FE build        | frontend_developer/implement_feature | tier2 sonnet (dispatched with resolved decisions below)
+
+## Product decisions resolving reviewer notes (binding for T3 build)
+1. CHANNELS = 7 everywhere: Website, Google Business, Facebook, Instagram, YouTube, LinkedIn, X.
+   Sample report gains X + Website rows (plausible scores + one-line insights, same voice).
+   Fix Manual 3 "five channel scores" → "seven channel scores".
+2. Landing must PREVIEW real sample data (Story 2): one community post card + a mini report
+   teaser with 3 of the 7 channel scores, both labeled sample.
+3. Every community post card carries its own "Sample" tag (not just a feed-level label).
+4. First entry after join = "Welcome, {name}"; returning sign-in = "Welcome back, {name}".
+5. Community post 3: "Encoded a lighting guide" → "Made a lighting guide".
+6. Founder story at 88 words: accepted as-is.
+7. Sign-out semantics (stories.md Story 11 conflict): member RECORD persists in
+   localStorage; sign-out clears only the session flag and returns to landing with a
+   "Sign in" affordance; sign-in matches the stored email, no password. While signed out
+   no member content is reachable.
+
+## Final run log
+T3 FE build   | tier2 sonnet | attempt 1 killed by API error (no output) → clean retry tier2 → delivered
+T4 QA         | tier1 haiku  | qa-check.mjs 31/31 + runtime pass by orchestrator; 3 defects filed from runtime Story 11 testing
+T3 fix round  | tier2 sonnet (same agent, SendMessage) | all 3 defects fixed, re-verified: 31/31 static + full runtime pass
+T5 PO accept  | tier1 haiku  | PASS — zero unmet criteria
+DEPLOY        | orchestrator | published https://claude.ai/code/artifact/31e62816-2938-47c0-9033-c87b069596e4
+DEPLOY 2      | orchestrator | Vercel production (2026-07-20): https://church-media-academy.vercel.app
+                (project church-media-academy, account kurtjjoseph-6989; source deploy/index.html =
+                index.html wrapped in full HTML doc; 27/27 applicable QA checks passed; redeploy cmd:
+                cd deploy && vercel deploy --prod --yes)
+DEPLOY 3      | orchestrator | Custom domain live (2026-07-20): https://cma.visionoutreachmedia.nl
+                DNS: A record `cma → 76.76.21.21` added in one.com panel (visionoutreachmedia.nl
+                zone, nameservers ns01/ns02.one.com); domain attached + verified on Vercel project
+                church-media-academy; SSL auto-issued by Vercel; HTTP/2 200 confirmed.
+                Cloudflare: NOT in the chain — domain DNS lives at one.com; migrating nameservers
+                to Cloudflare deliberately deferred (would affect mail/Brevo/site records).
+DEPLOY 4      | orchestrator | Payment layer wired + deployed (2026-07-20): PAYMENT_LINKS config
+                (founding/monthly/annual) in index.html; real-link mode redirects to Stripe with
+                prefilled email + pending draft in localStorage (cma-pending-v1); return via
+                /?paid=1 finalizes membership paid:true (verified live). Links empty ⇒ demo mode
+                unchanged (verified live). QA 31/31. BLOCKED on Kurt: Stripe sign-in/activation +
+                create 3 payment links — runbook in PAYMENTS.md.
+
+## Routing tune notes for next sprint
+- product_owner/write_user_stories at tier1: escalated once (AC-count cap missed) — keep tier1, tighten the cap wording in the worker prompt instead.
+- ux_designer/copy_tokens at tier1: passed with notes — keep tier1.
+- frontend_developer/implement_feature at tier2: passed; defects were spec-conflict + one state bug caught by QA — keep tier2.
+- qa_engineer/generate_tests at tier1: solid — keep tier1.

@@ -1,0 +1,127 @@
+=== Engage AI ===
+Contributors: visionoutreachmedia
+Tags: church, ai, content generation, engagement, automation
+Requires at least: 6.0
+Tested up to: 6.7
+Requires PHP: 8.0
+Stable tag: 0.24.0
+License: GPLv2 or later
+
+Generates and auto-publishes church engagement content, modular autonomous check-in agents for the 8 Claude AI side hustles, and web-search-based digital footprint analytics, via the Engage AI Cloud API.
+
+== Description ==
+
+Engage AI connects your WordPress site to the Engage AI Cloud API. It does three things, each independently switched on per organization under Settings > Modules:
+
+* **Engagement** (the original feature): turns a message, sermon, or event into practical engagement — a website post, social media caption, email, WhatsApp message, presentation slides, and follow-up actions — matched to your organization's stored voice (mission, tone, audience).
+* **Agent modules** (one per Claude AI side hustle — physical product business, reselling, YouTube channel growth, paid Q&A, local service business, app building, UGC creation, coaching): each runs its own autonomous check-in cycle, proposing concrete work as tickets you approve, reject, or redirect from the Agents page. Anything reversible it drafts immediately; anything that would spend money or act publicly is held for your explicit approval.
+* **Analytics**: searches the web for the organization's public digital footprint (website, social profiles, reviews, etc.) and records what it finds per channel. The first scan is flagged as the baseline so later scans have a fixed reference point to compare against, instead of just comparing to whatever the last scan said.
+
+The AI Assistant page (Engage AI > AI Assistant) answers free-form questions grounded in the organization's stored context, for anything that doesn't fit one of the structured generators or a specific agent niche.
+
+= Setup =
+
+1. Deploy the Engage AI Cloud API (see the `engage-ai-cloud-api` project) and note its base URL.
+2. In WordPress, go to Engage AI > Settings and enter the API URL.
+3. Connect with the email/password you registered with on the API (your password is used once to connect and is not stored — only the resulting session token is kept).
+4. Select or create your organization. A website URL sharpens the Analytics module's search a lot for common organization names.
+5. Under Settings > Modules, turn on Engagement, Analytics, and/or whichever side-hustle agents this organization needs.
+6. Go to Engage AI > Content Studio to create content step by step, Engage AI > Agents for the ticket dashboard of any active side-hustle module, or Engage AI > Analytics to run a scan.
+
+== Changelog ==
+
+= 0.24.0 =
+* New "Set up a channel" page - a step-by-step walkthrough that takes one channel from "we don't have one yet" to "Engage AI can post on it". It asks whether you already have the channel, then gives you only the steps you actually need: creating the Facebook Page, switching Instagram to a business account, claiming your place on Google Maps, and so on.
+* Every step that sends you somewhere has the real link on it, opening in its own tab so the page keeps your place. Where a channel needs an access token, the steps link straight to the page that issues one - Meta's Graph API Explorer, LinkedIn's token generator, Google's OAuth Playground - instead of leaving you to find it.
+* Your organisation's own name, website and suggested handle are already filled into the steps with a Copy button, so there is nothing to retype into a form on someone else's website.
+* Stop halfway and come back - the wizard remembers which channel you were on and which step, per user. A channel that's already connected is shown as done rather than asking you to set it up again.
+
+= 0.23.0 =
+* New Channels page - connect the accounts you want Engage AI to post to: your Facebook Page, Instagram, LinkedIn, YouTube, X and Google Business Profile. You sign in at the channel itself, so Engage AI never sees your password, and you can withdraw its access from that page at any time.
+* Publish straight from the Content Studio. Once a channel is connected, the last step offers "Post it to <your account> now" and the piece goes out for real - copy, hashtags and the image or video it rendered. Nothing changes for channels you haven't connected: the copy-and-paste route is still there.
+* Connecting a channel does not start anything posting. Content still goes out only when you publish it, unless you switch automatic posting on for that channel yourself - it starts off, per channel, and says which channels have it on.
+* Each connected channel shows who Engage AI posts as, when its access expires (renewed automatically where the channel allows), and a "check it still works" button that tells you straight away if a channel has stopped accepting posts.
+
+= 0.22.0 =
+* The Content Studio now remembers where you were. Open it from the menu and it drops you straight back into the piece you were working on - so you can go and preview the image or video in your Media Library, come back, and pick up exactly where you left off, instead of starting from the goal screen again.
+* Removed the old Generate Content page. Everything it did is now in the Content Studio (create) and the Content Library (see what you've made), so there's one clear place to create content instead of two overlapping ones.
+
+= 0.21.0 =
+* New Content Studio - content creation rebuilt as a workflow you can steer instead of one button and a wall of output. It runs in passes: pick the business goal, choose from competing ideas, shape the copy, read the quality check, make the media, publish. Every pass is its own screen, so you can change the format, rewrite a line, or send a draft back for another pass at any point, and a half-built piece can be left and picked up later.
+* Three content types that render reliably, every time, with no API key: a post with an image; an image with your headline set on it (auto-sized so it always fits and always stays legible); and an 8-second vertical video - four slides, two seconds each, your narration centred on screen over a slow zoom with cross-fades. Sized automatically to each channel (Instagram 4:5, X 16:9, website landscape, video 9:16).
+* The quality check is real: it measures every draft against the channel's actual limits and fixes what it can mechanically (over-long copy, too many hashtags, hashtags on channels that don't take them, an on-image headline too long to read, missing alt text, over-long narration). What's left - placeholder text, a missing call to action when the goal needs one, too few slides - is listed with a one-click "have the AI fix these".
+* Media now renders in the background and lands in your Media Library on its own, so a slow image or a full video no longer times out the page. Website pieces publish as a WordPress draft with the generated image already set as the featured image.
+* Fixed: "Generate image" and "Generate video" on the Content page fetched the wrong asset and could fail to save the file into your Media Library.
+* The old Content page is now Content Library - the log of everything created, unchanged.
+
+= 0.20.0 =
+* Image and video generation now work out of the box - no API key required. "Generate image" creates a real image and saves it straight to your Media Library using a built-in generator (add an OpenAI API key anytime to upgrade the quality). "Generate video" assembles a short captioned video from the storyboard - a still per scene with the caption burned in, stitched into an MP4 - and saves it to your Media Library, ready to post to YouTube, Reels, or anywhere.
+
+= 0.19.0 =
+* New content campaign workflow: enter one topic, pick your channels, and the content-design agent drafts a coordinated post for each - with the copy and the media each channel needs. Image posts (Instagram, Facebook, LinkedIn, website featured image, Google Business) get an AI-generated image saved straight to your Media Library; video channels (YouTube, Reels) get a full storyboard (script, scene-by-scene captions and image prompts, and a thumbnail prompt). Image generation uses OpenAI - add an OpenAI API key to switch it on; until then every post still comes with a ready-to-use image prompt and alt text.
+
+= 0.18.0 =
+* The Content generator can now draft for any channel, not just your website. Pick a channel (Google Business, YouTube, Facebook, Instagram, LinkedIn, X, news) and one of five content types designed to raise that channel's engagement score - e.g. an Instagram educational carousel, a YouTube Short script, a Google review-request message, a LinkedIn insight post, or a press release. Each draft is saved with a copy-ready body (and hashtags where relevant); website drafts still become WordPress drafts in one click.
+
+= 0.17.0 =
+* Content drafts now open as proper WordPress blocks (paragraphs, headings, lists) instead of one raw HTML block that some themes displayed with a broken, collapsed layout in the editor.
+* You can now set your Website type under Settings > Organization details (church / business / online shop, or leave on Auto-detect) - it tailors content suggestions to your kind of site.
+
+= 0.16.0 =
+* New Content page: see everything Engage AI has generated for your site in one place, and click "Suggest content" to have the AI draft a few website posts tailored to your site type (a WooCommerce shop gets product-led posts, a church gets sermon/event content, other sites get how-to/expertise posts). Turn any suggestion into a WordPress draft in one click to review and publish. The plugin now reports your site type to the API so suggestions fit the kind of site you run.
+
+= 0.15.0 =
+* The plugin now reports your site's real published post and page counts to the API, so your website's analytics score reflects that the site is live and how much content it has actually published - even when a search engine hasn't indexed the site yet. Previously a small or brand-new site could score 0 across the board because the web search couldn't find it; now the website channel is scored from ground truth the plugin knows directly. Counts refresh automatically as you publish.
+
+= 0.14.0 =
+* Scores now reward channel availability (how many channels you're actually live on) as an explicit part of the org score, and count the number of posts/pages/videos published per channel. Simply having a channel and having any content on it now both count - you no longer need a large volume before content registers. The Dashboard and Analytics pages now show "X of 8 channels live" and total pieces of content published. A score of 0 means no presence online at all.
+
+= 0.13.0 =
+* On first run the plugin now reports its site URL to the API, so the operator console can link straight to the live site and, if the same site had already been added in the console, the two records are merged automatically instead of tracking the site twice.
+
+= 0.12.0 =
+* The engagement_growth agent niche can now generate AND publish autonomously for one specific case: a "content_idea" ticket targeting the "website" channel lands straight in WordPress as a draft post, with no approval wait - a draft is fully reversible (nothing is public until you publish it live), unlike every other channel this plugin doesn't have a real publish integration for yet. Runs hourly via WP-Cron.
+
+= 0.11.0 =
+* Added an AI Assistant page: ask a free-form question, answered using the organization's stored context (mission, tone, audience, etc) - for anything that doesn't fit the structured generators or a specific agent niche.
+* Approving a "high risk" agent ticket (one that spends money, posts publicly, or contacts someone directly) now triggers AI generation of the actual deliverable content, shown right on the ticket once approved. Previously these tickets only ever held a proposal description - the admin had to write the real thing by hand after approving.
+
+= 0.10.0 =
+* Analytics scans now run asynchronously: "Run new scan" returns instantly instead of holding the page open for 30s-3min+ waiting on Claude. The scan runs in the background; the Analytics page shows "Scan in progress" until it lands, then refresh to see the result. This replaces the timeout-raising in 0.9.1's scan fix - the scan no longer happens inside the HTTP request at all, so no timeout is long enough to matter.
+
+= 0.9.1 =
+* Fixed: scans, campaign generation, and agent check-in cycles could hit "cURL error 28: Operation timed out after 45001 milliseconds" - these all call the API's Claude-backed endpoints, which routinely take 30-90s (longer for scans now that they use web_fetch too), well past the 45-second timeout every API call used by default. These three now get up to 180s (120s for campaign generation).
+
+= 0.9.0 =
+* Added a Settings > Channel details section: record each channel's actual profile URL/handle once it exists, so the Analytics module verifies it directly instead of guessing from the organization name.
+* Next-best-step tickets for a channel now link straight to that channel's Settings row, and - for "set this up from scratch" tickets - to the platform's own signup/creation page, so a ticket is something to act on immediately.
+
+= 0.8.0 =
+* The Dashboard's "Current scores" section now includes a radar chart of the current per-channel scores (fixed axis order, so the shape stays comparable scan to scan) alongside the existing ranking table.
+
+= 0.7.0 =
+* The Dashboard now separates agent clarifying questions ("Messages") from actionable next-best-step tickets ("Next best steps"), so a question that's blocking an agent doesn't get lost among proposals awaiting approve/reject/redirect.
+
+= 0.6.0 =
+* Added the Dashboard page (now the plugin's landing page): current org/channel engagement scores and next-best-step tickets aggregated across every active agent module, in one place.
+
+= 0.5.0 =
+* Added the Publications workflow: mark generated or manually-posted content as published, then scan it independently for its own performance over time.
+* Analytics page now shows score/breakdown drill-down, a full channel ranking, and an engagement-type ranking (which kind of content performs best on average).
+* Added engagement-growth score targets and wired up its next-best-action ticket payloads.
+* Fixed a bug where the Analytics page read the old "metrics" field name instead of "kpis", so channel data never actually rendered.
+
+= 0.4.0 =
+* Analytics scans can now be scoped to specific channels instead of always running the full sweep.
+* Added an opt-in per-page website visibility ranking (indexed status, keyword rankings, backlink/freshness signals, attributed third-party traffic estimates) - explicitly a discoverability proxy, not real analytics.
+
+= 0.3.0 =
+* Added the Analytics module: web-search-based per-channel digital footprint scans, with the first scan flagged as a baseline for later comparison.
+* Organization details (website URL, mission, audience) can now be edited after creation, not just set at creation time.
+
+= 0.2.0 =
+* Modular activation: organizations turn on exactly the capabilities they need (Settings > Modules).
+* Added autonomous agent modules for all 8 Claude AI side hustles, each with its own scheduled check-in cycle and ticket queue (approve/reject/redirect) on the new Agents page.
+
+= 0.1.0 =
+* Initial release: settings/connection flow, organization management, event/announcement/sermon generation with auto-publish to a WordPress post.

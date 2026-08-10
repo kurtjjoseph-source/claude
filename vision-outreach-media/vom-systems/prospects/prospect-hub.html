@@ -1,0 +1,287 @@
+<title>Ideas in validation · Vision Outreach Media</title>
+<style>
+  :root{
+    --navy:#1B2A4A; --navy-2:#14203a; --orange:#BA5C1D; --teal:#0F7A73;
+    --paper:#FFFFFF; --paper-2:#F4F7FB; --card:#FFFFFF;
+    --ink:#16233F; --ink-soft:#48566E; --line:#E1E7F0;
+    --wrap:1140px;
+    --sans:"Manrope","Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);
+    line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  .wrap{max-width:var(--wrap);margin:0 auto;padding:0 22px}
+
+  header.site{background:var(--navy);color:#fff}
+  header.site .bar{display:flex;align-items:center;gap:14px;padding:14px 0}
+  header.site img{height:34px;width:auto;border-radius:6px;display:block}
+  header.site .nm{font-weight:800;letter-spacing:-.01em}
+  header.site .sp{flex:1}
+  header.site a.home{color:#fff;text-decoration:none;font-size:.9rem;
+    border:1px solid rgba(255,255,255,.35);padding:7px 14px;border-radius:999px}
+  header.site a.home:hover{background:rgba(255,255,255,.12)}
+
+  .hero{background:linear-gradient(180deg,var(--navy) 0%,var(--navy-2) 100%);color:#fff;
+    padding:54px 0 60px}
+  .hero .eyebrow{font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;
+    font-weight:800;color:#F3B27A;margin:0 0 14px}
+  .hero h1{margin:0 0 16px;font-size:clamp(1.9rem,4.4vw,3rem);line-height:1.1;
+    letter-spacing:-.03em;max-width:19ch}
+  .hero p{margin:0;max-width:62ch;font-size:1.06rem;color:#DCE4F1}
+
+  .how{background:var(--paper-2);border-bottom:1px solid var(--line);padding:26px 0}
+  .how ol{display:grid;gap:18px;grid-template-columns:repeat(3,minmax(0,1fr));
+    margin:0;padding:0;list-style:none;counter-reset:s}
+  .how li{counter-increment:s;display:flex;gap:12px;align-items:flex-start;
+    font-size:.94rem;color:var(--ink-soft)}
+  .how li::before{content:counter(s);flex:none;width:26px;height:26px;border-radius:50%;
+    background:var(--teal);color:#fff;font-weight:800;font-size:.8rem;
+    display:grid;place-items:center;margin-top:1px}
+  .how b{color:var(--ink)}
+  @media(max-width:760px){.how ol{grid-template-columns:1fr}}
+
+  .filters{display:flex;gap:9px;flex-wrap:wrap;padding:30px 0 6px;align-items:center}
+  .filters .lbl{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;
+    font-weight:800;color:var(--ink-soft);margin-right:4px}
+  .chip{font:inherit;font-size:.87rem;font-weight:650;padding:7px 15px;border-radius:999px;
+    border:1px solid var(--line);background:#fff;color:var(--ink);cursor:pointer}
+  .chip:hover{border-color:var(--teal)}
+  .chip[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:#fff}
+
+  .grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));
+    padding:18px 0 56px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:22px;display:flex;flex-direction:column;gap:11px}
+  .card:hover{border-color:#C6D2E4;box-shadow:0 2px 6px rgba(22,35,63,.06),0 16px 34px rgba(22,35,63,.08)}
+  .card[hidden]{display:none}
+  .ctop{display:flex;align-items:center;justify-content:space-between;gap:10px}
+  .tag{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;font-weight:800;
+    color:var(--teal)}
+  .price{font-size:.82rem;font-weight:700;color:var(--ink-soft);white-space:nowrap}
+  .card h3{margin:0;font-size:1.3rem;letter-spacing:-.02em}
+  .quote{margin:0;font-size:.95rem;color:var(--ink-soft);border-left:3px solid var(--line);
+    padding-left:12px}
+  .what{margin:0;font-size:.97rem}
+  .who{margin:0;font-size:.86rem;color:var(--ink-soft)}
+  .who span{display:block;font-size:.66rem;letter-spacing:.13em;text-transform:uppercase;
+    font-weight:800;color:var(--ink-soft);margin-bottom:2px}
+  .go{margin-top:auto;align-self:flex-start;display:inline-flex;align-items:center;gap:8px;
+    background:var(--orange);color:#fff;text-decoration:none;font-weight:750;font-size:.94rem;
+    padding:10px 18px;border-radius:999px}
+  .go:hover{background:#A9521A}
+
+  .note{border-top:1px solid var(--line);padding:26px 0;color:var(--ink-soft);
+    font-size:.92rem;max-width:70ch}
+
+  footer.site{background:var(--navy);color:#DCE4F1;padding:34px 0;font-size:.92rem}
+  footer.site .cols{display:flex;gap:22px;flex-wrap:wrap;align-items:center}
+  footer.site a{color:#fff}
+  footer.site .sp{flex:1}
+
+  @media (prefers-color-scheme:dark){
+    :root{--paper:#0F131A;--paper-2:#141A23;--card:#161D27;--ink:#EDF1F7;
+      --line:#26303D;--orange:#E8843C;--teal:#3FB3AA;--ink-soft:#A7B4C6;}
+    .chip{background:var(--card)}
+    .card:hover{border-color:#33404F;box-shadow:none}
+    .go{color:#10141A}
+  }
+</style>
+
+<header class="site"><div class="wrap bar">
+  <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAASABIAAD/4QBMRXhpZgAATU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAgKADAAQAAAABAAAAgAAAAAD/4QnSaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLwA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJYTVAgQ29yZSA2LjAuMCI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnBob3Rvc2hvcD0iaHR0cDovL25zLmFkb2JlLmNvbS9waG90b3Nob3AvMS4wLyIgcGhvdG9zaG9wOkluc3RydWN0aW9ucz0iRkJNRDBhMDAwYTA3MDIwMDAwYmQwYTAwMDBjMzE0MDAwMDU3MTYwMDAwNTkxODAwMDBhMjIxMDAwMDBhMzIwMDAwYmMzNDAwMDA2OTM2MDAwMDMxMzgwMDAwMmI0YzAwMDAiLz4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8P3hwYWNrZXQgZW5kPSJ3Ij8+AP/tAK5QaG90b3Nob3AgMy4wADhCSU0EBAAAAAAAdhwBWgADGyVHHAIAAAIAAhwCKABiRkJNRDBhMDAwYTA3MDIwMDAwYmQwYTAwMDBjMzE0MDAwMDU3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" alt="Vision Outreach Media">
+  <span class="nm">Vision Outreach Media</span>
+  <span class="sp"></span>
+  <a class="home" href="https://visionoutreachmedia.nl">visionoutreachmedia.nl</a>
+</div></header>
+
+<section class="hero"><div class="wrap">
+  <p class="eyebrow">Ideas in validation</p>
+  <h1>Twelve businesses we are testing in public.</h1>
+  <p>None of these exist yet. Each one answers a problem small business owners
+     themselves report in recent national surveys, and each has a page where you can say
+     you would want it. The ones people ask for get built; the rest do not. Browsing
+     costs nothing and joining a list costs nothing.</p>
+</div></section>
+
+<section class="how"><div class="wrap"><ol>
+  <li><span><b>Read the twelve.</b> Every card is a real proposal with a real price,
+      not a survey.</span></li>
+  <li><span><b>Join the ones you would use.</b> A name and an email. No sequence, no
+      charge, nothing to cancel.</span></li>
+  <li><span><b>It gets built, or it does not.</b> The list decides. Everyone on it sees
+      the first version first and pays less, permanently.</span></li>
+</ol></div></section>
+
+<div class="wrap">
+  <div class="filters">
+    <span class="lbl">Filter</span>
+    <button class="chip" data-filter="all" aria-pressed="true">All twelve</button>
+    <button class="chip" data-filter="AI">AI</button><button class="chip" data-filter="Staffing">Staffing</button><button class="chip" data-filter="Cash flow">Cash flow</button><button class="chip" data-filter="Customers">Customers</button><button class="chip" data-filter="Admin">Admin</button><button class="chip" data-filter="Costs">Costs</button>
+  </div>
+  <div class="grid" id="grid">
+    <article class="card" data-theme="AI">
+      <div class="ctop">
+        <span class="tag">AI</span>
+        <span class="price">€1.950</span>
+      </div>
+      <h3>AI Installed</h3>
+      <p class="quote">“We know we should be doing something with AI.”</p>
+      <p class="what">Three AI systems running in your business in two weeks, for a fixed price, without anyone on your team learning a new tool.</p>
+      <p class="who"><span>Who it is for</span>Owners of 2–20 person businesses in and around Amersfoort who have tried ChatGPT, pay for it, and still run every quote, every…</p>
+      <a class="go" href="https://ai-installed-prelaunch.vercel.app">Open the waitlist<span aria-hidden="true">→</span></a>
+    </article>
+    <article class="card" data-theme="Customers">
+      <div class="ctop">
+        <span class="tag">Customers</span>
+        <span class="price">€1.500</span>
+      </div>
+      <h3>Trades Online</h3>
+      <p class="quote">“My site is from 2019 and my nephew made it.”</p>
+      <p class="what">A site that ranks for the jobs you want and asks for the enquiry, live in three weeks and looked after every month after that.</p>
+      <p class="who"><span>Who it is for</span>Dutch installers, electricians, painters, cleaners and small building firms with one to ten staff, whose website was built once…</p>
+      <a class="go" href="https://trades-online-prelaunch.vercel.app">Open the waitlist<span aria-hidden="true">→</span></a>
+    </article>
+    <article class="card" data-theme="Staffing">
+      <div class="ctop">
+        <span class="tag">Staffing</span>
+        <span class="price">€250 / month</span>
+      </div>
+      <h3>Always Answered</h3>
+      <p class="quote">“Half the calls come in while I&#x27;m under a sink.”</p>
+      <p class="what">Every call and every web enquiry answered within seconds and booked into your diary, for less than a tenth of what a receptionist costs.</p>
+      <p class="who"><span>Who it is for</span>Plumbers, electricians, dental and physio practices, salons and repair shops with one to fifteen staff, where the person who…</p>
+      <a class="go" href="https://always-answered-prelaunch.vercel.app">Open the waitlist<span aria-hidden="true">→</span></a>
+    </article>
+    <article class="card" data-theme="Customers">
+      <div class="ctop">
+        <span class="tag">Customers</span>
+        <span class="price">€95 / month</span>
+      </div>
+      <h3>Review Engine</h3>
+      <p class="quote">“Our customers love us.”</p>
+      <p class="what">A steady flow of new Google reviews every month, without anyone in your business having to ask for one.</p>
+      <p class="who"><span>Who it is for</span>Local businesses with a physical service and happy customers who never get asked — trades, clinics, salons, garages, restaurants,…</p>
+      <a class="go" href="https://review-engine-prelaunch.vercel.app">Open the waitlist<span aria-hidden="true">→</span></a>
+    </article>
+    <article class="card" data-theme="Cash flow">
+      <div class="ctop">
+        <span class="tag">Cash flow</span>
+        <span class="price">€125 / month</span>
+      </div>
+      <h3>Paid on Time</h3>
+      <p class="quote">“There&#x27;s money out there I&#x27;ve already earned.”</p>
+      <p class="what">We chase every overdue invoice for you, politely and on schedule, so the money arrives without you having to ask for it.</p>
+      <p class="who"><span>Who it is for</span>Owner-run service businesses invoicing other businesses — installers, agencies, consultants, contractors — with more than €5,000…</p>
+      <a class="go" href="https://paid-on-time-prelaunch.vercel.app">Open the waitlist<span aria-hidden="true">→</span></a>
+    </article>
+    <article class="card" data-theme="Staffing">
+      <div class="ctop">
+        <span class="tag">Staffing</span>
+        <span class="price">€1.200</span>
+      </div>
+      <h3>Applicant Flow</h3>
+      <p class="quote">“We&#x27;ve had the same vacancy up for four months.”</p>
+      <p class="what">A careers page, rewritten ads and an assistant that screens and books your applicants within the hour — one fixed price per role.</p>
+      <p class="who"><span>Who it is for</span>Businesses of 5–50 staff that hire continuously and lose to bigger employers — hospitality, care, logistics, cleaning,…</p>
+      <a class="go" href="https://applicant-flow-prelaunch.vercel.app">Open the waitlist<span aria-hidden="true">→</span></a>
+    </article>
+    <article class="card" data-theme="Customers">
+      <div class="ctop">
+        <span class="tag">Customers</span>
+        <span class="price">€225 / month</span>
+      </div>
+      <h3>Second Visit</h3>
+      <p class="quote">“We&#x27;ve got two thousand names in the system.”</p>
+      <p class="what">We bring back the customers you already paid to acquire, and report what came back in euros.</p>
+      <p class="who"><span>Who it is for</span>Local businesses with repeat-purchase potential and a customer list nobody is using — salons, garages, dental and physio…</p>
+      <a class="go" href="https://second-visit-prelaunch.vercel.app">Open the waitlist<span aria-hidden="true">→</span></a>
+    </article>
+    <article class="card" data-theme="Customers">
+      <div class="ctop">
+        <span class="tag">Customers</span>
+        <span class="price">€375</span>
+      </div>
+      <h3>Website Rescue</h3>
+      <p class="quote">“Someone built us a site.”</p>
+      <p class="what">A scored report on your website in five days, with a prioritised list of fixes and what each one is worth — for a fixed price.</p>
+      <p class="who"><span>Who it is for</span>Owners of small businesses who suspect their website is costing them work but have no way to tell whether that is true or which…</p>
+      <a class="go" href="https://website-rescue-prelaunch.vercel.app">Open the waitlist<span aria-hidden="true">→</span></a>
+    </article>
+    <article class="card" data-theme="AI">
+      <div class="ctop">
+        <span class="tag">AI</span>
+        <span class="price">€1.750</span>
+      </div>
+      <h3>AI Workday</h3>
+      <p class="quote">“Everyone in the room knows they&#x27;re behind on AI.”</p>
+      <p class="what">Half a day, thirty owners, and every one of them leaves with two working automations built for their own business.</p>
+      <p class="who"><span>Who it is for</span>Business associations, chambers of commerce, church and nonprofit networks and coworking spaces that need to put something…</p>
+      <a class="go" href="https://ai-workday-prelaunch.vercel.app">Open the waitlist<span aria-hidden="true">→</span></a>
+    </article>
+    <article class="card" data-theme="Admin">
+      <div class="ctop">
+        <span class="tag">Admin</span>
+        <span class="price">€450 / month</span>
+      </div>
+      <h3>Back Office Desk</h3>
+      <p class="quote">“I do the actual work between nine and five and then the admin starts.”</p>
+      <p class="what">Your inbox triaged, your invoices sent and chased, and your calendar managed — for a fixed monthly fee, in Dutch.</p>
+      <p class="who"><span>Who it is for</span>Solo owners and two-person businesses in the Netherlands who are doing their own inbox, scheduling, invoicing and supplier…</p>
+      <a class="go" href="https://back-office-desk-prelaunch.vercel.app">Open the waitlist<span aria-hidden="true">→</span></a>
+    </article>
+    <article class="card" data-theme="Staffing">
+      <div class="ctop">
+        <span class="tag">Staffing</span>
+        <span class="price">€350 / month</span>
+      </div>
+      <h3>The Freelance Desk</h3>
+      <p class="quote">“I&#x27;ve got five freelancers and I&#x27;m the only one who knows what each of them is doing.”</p>
+      <p class="what">One relationship instead of five: we source, brief and manage your freelancers, and cover you when one drops out.</p>
+      <p class="who"><span>Who it is for</span>Owners of 5–25 person businesses who now depend on three or four freelancers — a designer, a copywriter, a developer, a…</p>
+      <a class="go" href="https://the-freelance-desk-prelaunch.vercel.app">Open the waitlist<span aria-hidden="true">→</span></a>
+    </article>
+    <article class="card" data-theme="Costs">
+      <div class="ctop">
+        <span class="tag">Costs</span>
+        <span class="price">€750</span>
+      </div>
+      <h3>The Pricing Playbook</h3>
+      <p class="quote">“My supplier has put prices up twice.”</p>
+      <p class="what">Work out your new prices, see what each option does to your margin, and get the wording to announce it — in one working session.</p>
+      <p class="who"><span>Who it is for</span>Owners of small product and service businesses whose costs have risen twice in a year and who have not changed their prices since…</p>
+      <a class="go" href="https://the-pricing-playbook-prelaunch.vercel.app">Open the waitlist<span aria-hidden="true">→</span></a>
+    </article>
+  </div>
+
+  <p class="note"><strong>Where these came from.</strong> Seven pain points reported by
+  small business owners in 2025–2026 research — the Federal Reserve's Small Business
+  Credit Survey, Guidant Financial, the U.S. Chamber of Commerce, NFIB, Intuit QuickBooks
+  and others — turned into twelve concrete offers. Vision Outreach Media builds the ones
+  that earn a list. Questions:
+  <a href="mailto:info@visionoutreachmedia.nl">info@visionoutreachmedia.nl</a>.</p>
+</div>
+
+<footer class="site"><div class="wrap cols">
+  <span>© <span id="yr">2026</span> Vision Outreach Media · Amersfoort</span>
+  <span class="sp"></span>
+  <a href="https://visionoutreachmedia.nl">Main site</a>
+  <a href="mailto:info@visionoutreachmedia.nl">info@visionoutreachmedia.nl</a>
+</div></footer>
+
+<script>
+(function(){
+  document.getElementById("yr").textContent = new Date().getFullYear();
+  var chips = [].slice.call(document.querySelectorAll(".chip"));
+  var cards = [].slice.call(document.querySelectorAll(".card"));
+  chips.forEach(function(c){
+    c.addEventListener("click", function(){
+      var f = c.dataset.filter;
+      chips.forEach(function(x){ x.setAttribute("aria-pressed", String(x === c)); });
+      cards.forEach(function(card){
+        card.hidden = !(f === "all" || card.dataset.theme === f);
+      });
+    });
+  });
+})();
+</script>

@@ -1,0 +1,520 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Newsletter Launch Kit — Launch Kits · VOM</title>
+<meta name="description" content="A pre-assembled wizard that walks an operator through launching and growing one paid newsletter, end to end — niche, platform, branding, free-to-paid tiers, first issue, first 100 subscribers, and publishing ops.">
+<style>
+  :root{
+    --c:#d1522f;
+    --bg:#f6f5f1; --surface:#ffffff; --surface-2:#efeee7; --line:#e1dfd4; --line-soft:#ece9df;
+    --ink:#1a1d1b; --ink-dim:#535b56; --ink-faint:#868f89;
+    --ok:#3f7d4e; --warn:#a86a1f; --info:#2f6ea8;
+    --ok-bg:#e8f1e9; --warn-bg:#f5ecdb; --info-bg:#e6eff6;
+    --mono:ui-monospace,"SF Mono","Cascadia Code",Menlo,monospace;
+    --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    --serif:"Iowan Old Style",ui-serif,Georgia,"Times New Roman",serif;
+    --shadow:0 1px 2px rgba(20,20,15,.05),0 8px 26px -18px rgba(20,20,15,.28);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --c:#f2765c; --bg:#0e100f; --surface:#161a18; --surface-2:#1c211e; --line:#2a322d; --line-soft:#212824;
+      --ink:#eef2ef; --ink-dim:#a6b1aa; --ink-faint:#6c7772;
+      --ok:#79c088; --warn:#e0ab5c; --info:#77b0e0;
+      --ok-bg:#16241a; --warn-bg:#251d10; --info-bg:#121f2b;
+      --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px -18px rgba(0,0,0,.7); }
+  }
+  :root[data-theme="light"]{ --c:#d1522f; --bg:#f6f5f1;--surface:#ffffff;--surface-2:#efeee7;--line:#e1dfd4;--line-soft:#ece9df;--ink:#1a1d1b;--ink-dim:#535b56;--ink-faint:#868f89;
+    --ok:#3f7d4e;--warn:#a86a1f;--info:#2f6ea8;--ok-bg:#e8f1e9;--warn-bg:#f5ecdb;--info-bg:#e6eff6;
+    --shadow:0 1px 2px rgba(20,20,15,.05),0 8px 26px -18px rgba(20,20,15,.28); }
+  :root[data-theme="dark"]{ --c:#f2765c; --bg:#0e100f;--surface:#161a18;--surface-2:#1c211e;--line:#2a322d;--line-soft:#212824;--ink:#eef2ef;--ink-dim:#a6b1aa;--ink-faint:#6c7772;
+    --ok:#79c088;--warn:#e0ab5c;--info:#77b0e0;--ok-bg:#16241a;--warn-bg:#251d10;--info-bg:#121f2b;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px -18px rgba(0,0,0,.7); }
+
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{ margin:0; background:var(--bg); color:var(--ink); font-family:var(--sans); line-height:1.6; -webkit-font-smoothing:antialiased; }
+  a{ color:var(--c); }
+  ::selection{ background:color-mix(in srgb,var(--c) 26%,transparent); }
+
+  .bar{ position:sticky; top:0; z-index:20; display:flex; align-items:center; gap:16px;
+    padding:11px clamp(14px,3vw,26px); background:color-mix(in srgb,var(--bg) 86%,transparent);
+    backdrop-filter:blur(10px); border-bottom:1px solid var(--line); }
+  .brand{ display:flex; flex-direction:column; line-height:1.15; min-width:0; }
+  .brand .kicker{ font-family:var(--mono); font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:var(--c); }
+  .brand .nm{ font-family:var(--serif); font-weight:600; font-size:17px; letter-spacing:-.01em; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .bar-prog{ flex:1; min-width:0; display:flex; align-items:center; gap:10px; }
+  .track{ flex:1; height:7px; border-radius:20px; background:var(--surface-2); border:1px solid var(--line-soft); overflow:hidden; min-width:60px; }
+  .fill{ height:100%; width:0; background:linear-gradient(90deg,var(--c),color-mix(in srgb,var(--c) 60%,#e0a06f)); transition:width .4s ease; }
+  .pct{ font-family:var(--mono); font-size:12px; font-variant-numeric:tabular-nums; color:var(--ink-dim); white-space:nowrap; }
+  .bar-btns{ display:flex; gap:7px; }
+  .ib{ font:inherit; font-size:12.5px; font-weight:600; cursor:pointer; color:var(--ink-dim); background:var(--surface); border:1px solid var(--line); border-radius:8px; padding:7px 11px; white-space:nowrap; }
+  .ib:hover{ color:var(--ink); border-color:var(--c); }
+  .ib:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,button:focus-visible{ outline:2px solid var(--c); outline-offset:2px; }
+
+  .shell{ max-width:1180px; margin:0 auto; display:grid; grid-template-columns:250px 1fr; gap:0; align-items:start; }
+  .rail{ position:sticky; top:57px; align-self:start; max-height:calc(100vh - 57px); overflow-y:auto; padding:22px 14px 40px; border-right:1px solid var(--line); }
+  .rail h2{ font-family:var(--mono); font-size:10.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-faint); margin:0 0 12px 8px; }
+  .step-btn{ display:grid; grid-template-columns:26px 1fr; gap:9px; align-items:center; width:100%; text-align:left;
+    font:inherit; cursor:pointer; background:none; border:none; color:var(--ink-dim); border-radius:9px; padding:8px; margin-bottom:2px; }
+  .step-btn:hover{ background:var(--surface-2); color:var(--ink); }
+  .step-btn.active{ background:var(--surface); box-shadow:var(--shadow); color:var(--ink); }
+  .step-btn.active .idx{ border-color:var(--c); color:var(--c); }
+  .idx{ width:26px; height:26px; border-radius:50%; border:1.5px solid var(--line); display:grid; place-items:center;
+    font-family:var(--mono); font-size:12px; font-weight:600; color:var(--ink-faint); flex:none; transition:.2s; }
+  .idx.done{ background:var(--c); border-color:var(--c); color:var(--bg); }
+  .idx.part{ border-color:var(--c); color:var(--c); }
+  .step-btn .tx{ min-width:0; }
+  .step-btn .tt{ display:block; font-size:13.5px; font-weight:600; line-height:1.25; }
+  .step-btn .mini{ display:block; font-family:var(--mono); font-size:10px; color:var(--ink-faint); margin-top:1px; }
+
+  main{ padding:30px clamp(18px,4vw,52px) 90px; min-width:0; }
+  .kicker-row{ display:flex; align-items:center; gap:12px; font-family:var(--mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--c); margin-bottom:14px; }
+  .kicker-row::after{ content:""; flex:1; height:1px; background:linear-gradient(90deg,var(--line),transparent); }
+  h1.step-title{ font-family:var(--serif); font-weight:600; font-size:clamp(28px,4.6vw,40px); line-height:1.05; letter-spacing:-.02em; margin:0 0 14px; text-wrap:balance; }
+  .lede{ font-family:var(--serif); font-size:clamp(17px,2.4vw,20px); line-height:1.55; color:var(--ink-dim); max-width:64ch; margin:0 0 30px; }
+
+  .block{ margin:0 0 26px; }
+  .block-lbl{ font-family:var(--mono); font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-faint); margin:0 0 12px; display:flex; align-items:center; gap:8px; }
+  .block-lbl::before{ content:""; width:14px; height:1.5px; background:var(--c); }
+  .prose{ max-width:64ch; }
+  .prose p{ margin:0 0 12px; color:var(--ink-dim); }
+  .prose strong{ color:var(--ink); font-weight:650; }
+  .prose ul{ margin:0 0 12px; padding-left:20px; color:var(--ink-dim); }
+  .prose li{ margin:4px 0; }
+  .prose code{ font-family:var(--mono); font-size:.86em; background:var(--surface-2); border:1px solid var(--line-soft); border-radius:5px; padding:1px 5px; color:var(--ink); }
+
+  .fields{ display:grid; gap:16px; }
+  .field label{ display:block; font-size:13.5px; font-weight:650; margin-bottom:5px; }
+  .field .hint{ font-size:12.5px; color:var(--ink-faint); margin-bottom:7px; }
+  .field input,.field textarea{ width:100%; font:inherit; font-size:14.5px; color:var(--ink); background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:11px 13px; resize:vertical; }
+  .field textarea{ min-height:82px; line-height:1.5; }
+  .field input::placeholder,.field textarea::placeholder{ color:var(--ink-faint); }
+
+  .tpl{ background:var(--surface); border:1px solid var(--line); border-radius:12px; box-shadow:var(--shadow); overflow:hidden; }
+  .tpl-head{ display:flex; align-items:center; justify-content:space-between; gap:10px; padding:10px 14px; border-bottom:1px solid var(--line-soft); background:var(--surface-2); }
+  .tpl-head .tn{ font-family:var(--mono); font-size:11.5px; letter-spacing:.04em; color:var(--ink-dim); font-weight:600; }
+  .copy{ font:inherit; font-family:var(--mono); font-size:11px; font-weight:600; letter-spacing:.04em; cursor:pointer; color:var(--c); background:none; border:1px solid var(--c); border-radius:7px; padding:5px 10px; white-space:nowrap; }
+  .copy:hover{ background:color-mix(in srgb,var(--c) 12%,transparent); }
+  .copy.done{ color:var(--ok); border-color:var(--ok); }
+  .tpl-body{ margin:0; padding:14px 16px; font-family:var(--mono); font-size:12.5px; line-height:1.62; color:var(--ink); white-space:pre-wrap; word-break:break-word; overflow-x:auto; }
+  .tpl-body .slot{ color:var(--c); font-style:normal; }
+
+  .checklist{ display:grid; gap:2px; }
+  .chk{ display:grid; grid-template-columns:22px 1fr; gap:11px; align-items:start; padding:9px 11px; border-radius:9px; cursor:pointer; }
+  .chk:hover{ background:var(--surface-2); }
+  .chk input{ appearance:none; width:20px; height:20px; margin:1px 0 0; border:1.5px solid var(--line); border-radius:6px; background:var(--surface); cursor:pointer; position:relative; flex:none; }
+  .chk input:checked{ background:var(--c); border-color:var(--c); }
+  .chk input:checked::after{ content:"✓"; position:absolute; inset:0; display:grid; place-items:center; color:var(--bg); font-size:13px; font-weight:800; }
+  .chk span{ font-size:14px; color:var(--ink-dim); line-height:1.45; }
+  .chk input:checked + span{ color:var(--ink-faint); text-decoration:line-through; text-decoration-color:color-mix(in srgb,var(--ink-faint) 60%,transparent); }
+
+  .cards{ display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:12px; }
+  .card{ background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:15px 16px; }
+  .card .ch{ font-weight:700; font-size:14.5px; margin:0 0 5px; }
+  .card .cd{ font-size:13px; color:var(--ink-dim); }
+  .card .cb{ display:inline-block; font-family:var(--mono); font-size:9.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--c); border:1px solid var(--c); border-radius:20px; padding:2px 8px; margin-bottom:8px; }
+
+  .callout{ display:grid; grid-template-columns:auto 1fr; gap:12px; border-radius:12px; padding:14px 16px; border:1px solid; font-size:13.5px; line-height:1.5; }
+  .callout .ct{ font-weight:700; display:block; margin-bottom:3px; }
+  .callout p{ margin:0; color:var(--ink-dim); }
+  .callout .ico{ font-family:var(--mono); font-weight:800; font-size:14px; }
+  .callout.info{ background:var(--info-bg); border-color:color-mix(in srgb,var(--info) 40%,transparent); } .callout.info .ico,.callout.info .ct{ color:var(--info); }
+  .callout.warn{ background:var(--warn-bg); border-color:color-mix(in srgb,var(--warn) 40%,transparent); } .callout.warn .ico,.callout.warn .ct{ color:var(--warn); }
+  .callout.ok{ background:var(--ok-bg); border-color:color-mix(in srgb,var(--ok) 40%,transparent); } .callout.ok .ico,.callout.ok .ct{ color:var(--ok); }
+
+  .tbl-wrap{ overflow-x:auto; border:1px solid var(--line); border-radius:12px; }
+  table{ border-collapse:collapse; width:100%; font-size:13px; min-width:420px; }
+  th,td{ text-align:left; padding:10px 13px; border-bottom:1px solid var(--line-soft); }
+  th{ font-family:var(--mono); font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-faint); background:var(--surface-2); }
+  td{ color:var(--ink-dim); } td:first-child{ color:var(--ink); font-weight:600; }
+  tr:last-child td{ border-bottom:none; }
+
+  .step-foot{ display:flex; align-items:center; justify-content:space-between; gap:14px; margin-top:38px; padding-top:22px; border-top:1px solid var(--line); }
+  .mark{ display:inline-flex; align-items:center; gap:9px; font:inherit; font-size:13.5px; font-weight:650; cursor:pointer; color:var(--ink-dim); background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:10px 15px; }
+  .mark:hover{ border-color:var(--c); color:var(--ink); }
+  .mark.on{ background:var(--c); border-color:var(--c); color:var(--bg); }
+  .mark .box{ width:17px; height:17px; border-radius:5px; border:1.5px solid currentColor; display:grid; place-items:center; font-size:11px; }
+  .nav{ display:flex; gap:9px; }
+  .nb{ font:inherit; font-size:13.5px; font-weight:650; cursor:pointer; color:var(--ink); background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:10px 16px; }
+  .nb:hover{ border-color:var(--c); }
+  .nb.prim{ background:var(--c); border-color:var(--c); color:var(--bg); }
+  .nb:disabled{ opacity:.4; cursor:default; }
+
+  .toast{ position:fixed; bottom:20px; left:50%; transform:translateX(-50%) translateY(20px); opacity:0; pointer-events:none;
+    background:var(--ink); color:var(--bg); font-size:13px; font-weight:600; padding:10px 18px; border-radius:10px; box-shadow:var(--shadow); transition:.25s; z-index:40; }
+  .toast.show{ opacity:1; transform:translateX(-50%) translateY(0); }
+
+  .foot-note{ max-width:1180px; margin:0 auto; padding:16px clamp(18px,4vw,52px) 40px; font-size:12px; color:var(--ink-faint); border-top:1px solid var(--line); display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px; }
+  .foot-note a{ color:var(--c); }
+
+  @media (max-width:860px){
+    .shell{ grid-template-columns:1fr; }
+    .rail{ position:static; max-height:none; border-right:none; border-bottom:1px solid var(--line); padding:14px; display:flex; gap:8px; overflow-x:auto; }
+    .rail h2{ display:none; }
+    .step-btn{ flex:none; grid-template-columns:auto; width:auto; text-align:center; padding:7px 10px; }
+    .step-btn .tx{ display:none; }
+    .brand .nm{ font-size:15px; }
+  }
+  @media (max-width:560px){ .bar-prog .pct{ display:none; } }
+  @media (prefers-reduced-motion:reduce){ *{ transition:none!important; scroll-behavior:auto; } }
+</style>
+</head>
+<body>
+<div class="bar">
+  <div class="brand"><span class="kicker">Launch Kits · VOM</span><span class="nm">Newsletter Launch Kit</span></div>
+  <div class="bar-prog"><div class="track"><div class="fill" id="fill"></div></div><span class="pct" id="pct">0%</span></div>
+  <div class="bar-btns">
+    <button class="ib" id="reset">Reset</button>
+    <button class="ib" id="theme">◐ Theme</button>
+  </div>
+</div>
+
+<div class="shell">
+  <aside class="rail"><h2>The build</h2><div id="rail"></div></aside>
+  <main id="main"></main>
+</div>
+
+<div class="foot-note">
+  <span>Newsletter Launch Kit — a wizard in the Launch Kits shelf, part of the Vision Outreach Media house of operating systems.</span>
+  <span>Your progress saves to this browser only.</span>
+</div>
+<div class="toast" id="toast">Copied</div>
+
+<script>
+"use strict";
+var KEY="vom.launchkit.newsletter.v1";
+
+/* ============================ CONTENT ============================ */
+var STEPS=[
+ {tab:"Niche", kicker:"Step 1 · Decide", title:"Niche & the promise",
+  lede:"A paid newsletter is a subscription to one person's ongoing judgment on one thing. Before anything else, pin the narrow niche and the recurring promise a reader is paying to receive every issue.",
+  blocks:[
+   {t:"prose",html:"<p>People don't subscribe to \"a newsletter about business.\" They subscribe to <strong>one reader, one topic, one recurring benefit</strong> — \"the weekly playbook for solo SaaS founders,\" not \"tech thoughts.\" The tighter the niche, the easier it is to grow, name, and eventually charge for.</p><p>Your promise is what shows up in their inbox every time and why they'd miss it if it stopped. Write it as: <em>every [cadence], [specific reader] gets [specific recurring value].</em></p>"},
+   {t:"fields",items:[
+     {k:"topic",label:"The one topic",ph:"e.g. Cold email that books B2B sales meetings",type:"text"},
+     {k:"reader",label:"The one reader (be specific)",ph:"e.g. Early-stage B2B founders doing their own outbound",type:"text"},
+     {k:"promise",label:"The recurring promise",ph:"e.g. One tested cold-email teardown + template they can send today",type:"text"},
+     {k:"why_you",label:"Why the operator is worth subscribing to here",ph:"e.g. Sent 40k cold emails, booked 600 meetings, tracked what works",type:"area"}
+   ]},
+   {t:"template",label:"Copy-ready",title:"positioning-line.txt",body:"THE POSITIONING LINE\n\nEvery week, {{reader}} get {{promise}}.\n\nTopic: {{topic}}\nWhy me: {{why_you}}\n\nTHE TEST: read it aloud. Would your ideal reader forward it to one\nfriend in the same boat? If not, the reader or promise is too broad."},
+   {t:"callout",tone:"warn",title:"Narrow beats big.",html:"<p>A newsletter for \"marketers\" competes with thousands. One for \"in-house B2B content leads at 10–50 person startups\" competes with almost none — and those readers feel like it was written for them, because it was.</p>"},
+   {t:"checklist",label:"Before you move on",items:[
+     {k:"n1",text:"The topic is one thing, not a category"},
+     {k:"n2",text:"One specific reader is named — not \"anyone interested\""},
+     {k:"n3",text:"The promise recurs every issue (not a one-time payoff)"},
+     {k:"n4",text:"The operator has a real reason to be trusted on this topic"}
+   ]}
+  ]},
+
+ {tab:"Platform", kicker:"Step 2 · Choose", title:"Pick your platform",
+  lede:"The platform hosts your list, sends the emails, and handles paid subscriptions. Pick for how you want to grow and monetize — then stop shopping. Migrating later is easy; stalling now is what kills newsletters.",
+  blocks:[
+   {t:"prose",html:"<p>Every option below can send email and take money. The real differences are <strong>built-in growth tools</strong>, <strong>how they handle paid tiers</strong>, and <strong>who owns the reader relationship</strong>. Match the platform to the operator's plan, not to hype.</p>"},
+   {t:"table",label:"Decision matrix",head:["Platform","Best when","Watch-out"],rows:[
+     ["Substack","Fastest start; discovery network + recommendations; simple paid","Takes 10% of paid revenue; less design/automation control"],
+     ["beehiiv","Growth-focused: referral program, ads, recommendations built in","Newer ecosystem; can feel feature-dense at first"],
+     ["Ghost","You want to own everything: your site, no revenue cut, memberships","Self-managed hosting/setup; more moving parts"],
+     ["Kit (ConvertKit)","You'll run automations, sequences, and sell products too","Email-tool feel, not a \"publication\" out of the box"],
+     ["MailerLite / Buttondown","Simple, cheap, clean; you just want to send","Lighter on native growth + discovery features"]
+   ]},
+   {t:"fields",items:[
+     {k:"platform",label:"Platform the operator is committing to",ph:"e.g. beehiiv — referral program + recommendations for growth",type:"text"},
+     {k:"platform_why",label:"One reason it fits right now",ph:"e.g. Built-in referral program to hit the first 100 subs faster",type:"text"}
+   ]},
+   {t:"callout",tone:"ok",title:"Own your list, whatever you pick.",html:"<p>Export your subscriber emails regularly. The platform is rented; the list is the asset. As long as you can leave with your readers, you can always change your mind later.</p>"},
+   {t:"checklist",label:"Platform locked",items:[
+     {k:"p1",text:"Chosen one platform and stopped comparing"},
+     {k:"p2",text:"Confirmed it supports paid subscriptions (for later)"},
+     {k:"p3",text:"Created the account and connected payouts/Stripe"},
+     {k:"p4",text:"Know how to export the subscriber list"}
+   ]}
+  ]},
+
+ {tab:"Brand", kicker:"Step 3 · Name", title:"Name & branding",
+  lede:"The name is the first thing a stranger judges and the label a subscriber sees in their inbox forever. Make it easy to say, easy to spell, and unmistakably about your topic — then wrap it in a simple, consistent look.",
+  blocks:[
+   {t:"prose",html:"<p>Great newsletter names usually take one of a few shapes: a <strong>vivid noun</strong> (Morning Brew), a <strong>topic + payoff</strong> (Lenny's Newsletter, Not Boring), or a <strong>clear-what-it-is</strong> label. Avoid clever names nobody can spell. Pair it with a one-line tagline that states the promise, a simple logo/wordmark, and a consistent sender name.</p>"},
+   {t:"fields",items:[
+     {k:"name",label:"Newsletter name",ph:"e.g. The Cold Open",type:"text"},
+     {k:"tagline",label:"Tagline (the promise, short)",ph:"e.g. Cold-email teardowns for founders who do their own outbound",type:"text"},
+     {k:"sender",label:"Sender / from-name readers will see",ph:"e.g. The Cold Open (or the operator's name)",type:"text"}
+   ]},
+   {t:"template",label:"Copy-ready",title:"brand-checklist.txt",body:"BRAND STARTER PACK — {{name}}\n\nNAME:      {{name}}\nTAGLINE:   {{tagline}}\nSENDER:    {{sender}}\n\n[ ] Name is easy to say out loud and spell from hearing it\n[ ] .com / handle available? (check X, IG, the platform URL)\n[ ] Wordmark: name set in one clean typeface (that's enough to start)\n[ ] One accent color used everywhere (header, buttons, links)\n[ ] Subscribe landing page written: name + tagline + what you get + how often\n[ ] Welcome image / simple header banner\n[ ] Consistent issue title format decided (see next step)\n\nDON'T over-design. A clear name + one color + a consistent template\nbeats a logo you paid for and a look you can't reproduce weekly."},
+   {t:"template",label:"Copy-ready",title:"landing-page.txt",body:"SUBSCRIBE PAGE COPY\n\n{{name}}\n{{tagline}}\n\nEvery week, one issue that gives you: [the recurring promise].\n\nWHAT YOU GET:\n  • [thing 1 they get every issue]\n  • [thing 2]\n  • [thing 3]\n\nWHO IT'S FOR:\n  [the one specific reader].\n\nFree to join. Read the last issue → [link]\n\n[  Subscribe  ]\n\nNo spam. Unsubscribe anytime. Just [cadence] [the promise]."},
+   {t:"callout",tone:"info",title:"Check the name before you fall in love.",html:"<p>Say it in a sentence (\"I write <em>The Cold Open</em>\"), search it, and check the handle and URL are free. A name you have to spell out or explain will cost you subscribers on every share.</p>"},
+   {t:"checklist",label:"Branding done",items:[
+     {k:"b1",text:"Name chosen — sayable, spellable, on-topic"},
+     {k:"b2",text:"Handle/URL availability checked"},
+     {k:"b3",text:"Tagline states the promise in one line"},
+     {k:"b4",text:"Subscribe/landing page is live"},
+     {k:"b5",text:"One accent color + consistent sender name set"}
+   ]}
+  ]},
+
+ {tab:"Tiers", kicker:"Step 4 · Structure", title:"Set up free → paid tiers",
+  lede:"The model that works: give the free issue away to grow reach and trust, then put your most valuable, actionable, or exclusive material behind a paid tier. Design the paywall before you have subscribers so every free issue can point to it.",
+  blocks:[
+   {t:"prose",html:"<p>Free readers are your funnel; paid readers are the business. Decide now <strong>what stays free</strong> (enough value to build trust and get shared) and <strong>what's worth paying for</strong> (deeper, more actionable, more exclusive, or more frequent). Then price it simply — most successful paid newsletters land around <strong>$5–$15/month</strong> with a discounted annual plan.</p>"},
+   {t:"cards",items:[
+     {b:"Free",h:"The reach layer",d:"A genuinely useful issue anyone can read. Its job: grow the list, build trust, and tease the paid value."},
+     {b:"Paid",h:"The value layer",d:"Deep dives, full templates/data, archives, community, or extra issues — the stuff a serious reader will pay to get."},
+     {b:"Price",h:"Simple + annual",d:"Monthly + a discounted annual (e.g. $9/mo or $90/yr). Annual up front funds your runway and lowers churn."}
+   ]},
+   {t:"template",label:"Copy-ready",title:"free-vs-paid.txt",body:"FREE vs PAID SPLIT — {{name}}\n\nTopic: {{topic}}   Reader: {{reader}}\n\nFREE ISSUE (weekly) — the reach layer\n  • [core insight / teardown of the week]\n  • [1 usable takeaway]\n  • A tease of what paid readers got this week ↓\n\nPAID TIER — the value layer\n  Choose 2–3 of these to justify the price:\n  • Full templates / swipe files / spreadsheets\n  • Deep-dive or case study (the \"how\", not just the \"what\")\n  • Full searchable archive\n  • Subscriber-only Q&A / community thread\n  • An extra issue each week\n\nPRICE\n  Monthly:  $____ /mo\n  Annual:   $____ /yr  (≈ 2 months free — push this one)\n  Founding: $____ one-time or higher tier for early superfans\n\nRULE: paid must be a clear step up in value, not the same thing gated."},
+   {t:"callout",tone:"warn",title:"Don't gate too early or too hard.",html:"<p>If the free issue is thin, the list never grows and there's no one to convert. Give real value free for the first stretch, build the audience, and turn on paid once people would genuinely miss you (Step 7). A big free readership is what makes paid work.</p>"},
+   {t:"checklist",label:"Model designed",items:[
+     {k:"t1",text:"Decided what stays free (and it's genuinely valuable)"},
+     {k:"t2",text:"Chosen 2–3 things that make paid clearly worth it"},
+     {k:"t3",text:"Set monthly + discounted annual price"},
+     {k:"t4",text:"Every free issue has a natural place to mention paid"}
+   ]}
+  ]},
+
+ {tab:"First issue", kicker:"Step 5 · Write", title:"The first-issue template",
+  lede:"Your first issues set the format readers come to expect. Nail a repeatable structure now — a scannable, skimmable template you can fill every week without reinventing it — and write a welcome issue that tells new subscribers exactly what they signed up for.",
+  blocks:[
+   {t:"prose",html:"<p>Consistency is the whole game. A reliable structure — same sections, same rhythm, same length — trains readers to open and makes writing 3× faster. Keep it <strong>skimmable</strong> (short paragraphs, clear subheads, one idea per block) and always end with <strong>one clear takeaway or next step</strong>.</p>"},
+   {t:"template",label:"Copy-ready",title:"welcome-issue.txt",body:"ISSUE #0 — WELCOME (auto-send on subscribe)\n\nSubject: You're in — here's what to expect from {{name}}\n\nWelcome, and thanks for subscribing to {{name}}.\n\nHere's the deal: every [cadence], I'll send you {{promise}}.\nIt's written for {{reader}} — so if that's you, you're in the right place.\n\nWhat to expect:\n  • [section 1 you'll get every issue]\n  • [section 2]\n  • [section 3]\n\nWhile you wait for the next one, here's the best thing I've written:\n  → [link to your strongest piece]\n\nOne quick ask: hit reply and tell me the #1 thing you're stuck on with\n[topic]. I read every reply and it shapes what I write.\n\nTalk soon,\n{{sender}}"},
+   {t:"template",label:"Copy-ready",title:"regular-issue-template.txt",body:"REGULAR ISSUE TEMPLATE — reuse every time\n\nSubject: [specific + curiosity, ~6 words. Promise or number.]\nPreview text: [the reason to open, different from subject]\n\n1. THE HOOK  (2–3 lines)\n   Why this issue matters right now. Get to the point fast.\n\n2. THE MEAT  (the recurring promise, delivered)\n   The teardown / lesson / breakdown. Short paras. One idea each.\n   Use subheads so it's skimmable.\n\n3. THE TAKEAWAY  (1 block)\n   The single thing to DO or remember. Make it copy-paste usable.\n\n4. [PAID TEASE or P.S.]\n   \"Paid readers also got [X] this week → upgrade\" — once paid is on.\n\n5. SIGN-OFF + reply prompt\n   Ask a question. Replies boost deliverability and give you ideas.\n\nLENGTH: shorter than you think. Respect the inbox."},
+   {t:"callout",tone:"info",title:"Subject lines decide everything.",html:"<p>The best issue no one opens does nothing. Spend real time on the subject line and preview text — specific and curiosity-driven beats clever. Keep a running swipe file of subject lines that got high open rates.</p>"},
+   {t:"checklist",label:"Format locked",items:[
+     {k:"f1",text:"Welcome issue written and set to auto-send on subscribe"},
+     {k:"f2",text:"Repeatable regular-issue structure defined"},
+     {k:"f3",text:"Issues are skimmable — subheads, short paragraphs"},
+     {k:"f4",text:"Every issue ends with a takeaway + reply prompt"}
+   ]}
+  ]},
+
+ {tab:"First 100", kicker:"Step 6 · Grow", title:"Get your first 100 subscribers",
+  lede:"The first 100 come from you doing unscalable things by hand. No ads, no growth hacks yet — just direct outreach, showing up where your reader already is, and giving people an obvious reason to subscribe and share.",
+  blocks:[
+   {t:"prose",html:"<p>Zero to 100 is manual and personal. Your job is to get in front of your <code>{{reader}}</code> wherever they already gather and give them one clear reason to join. Do a few of these plays consistently for two to four weeks and 100 is very reachable.</p>"},
+   {t:"cards",items:[
+     {b:"Play 1",h:"Personally invite everyone",d:"DM/email people who fit the reader profile with a specific, non-spammy ask. Your network is the first 20–40 subs."},
+     {b:"Play 2",h:"Go where they gather",d:"Be genuinely useful in the communities, subreddits, and threads your reader reads — with a link in your bio/signature, not spammed."},
+     {b:"Play 3",h:"Publish in public",d:"Post the best idea from each issue as a standalone thread/post. End with: 'full version in the newsletter → [link].'"},
+     {b:"Play 4",h:"Recommendations / referrals",d:"Turn on your platform's recommendations and a simple referral reward. Ask your first readers to share with one peer."},
+     {b:"Play 5",h:"Lead magnet",d:"Offer one high-value freebie (template, checklist, the swipe file) in exchange for the email — the fastest opt-in booster."},
+     {b:"Play 6",h:"Guest & cross-promo",d:"Swap shout-outs with 2–3 small newsletters serving the same reader. Aligned audiences convert far better than ads."}
+   ]},
+   {t:"template",label:"Copy-ready",title:"personal-invite.txt",body:"PERSONAL INVITE (DM / email — send one at a time, tailored)\n\nHey [name] —\n\nI just started a short weekly newsletter, {{name}}: {{promise}}.\nIt's for {{reader}}, which made me think of you.\n\nNot trying to spam you — genuinely think you'd get something from it.\nHere's the last issue so you can judge: [link]\n\nWant me to add you? No worries either way."},
+   {t:"template",label:"Copy-ready",title:"cross-promo-pitch.txt",body:"CROSS-PROMO SWAP (to a same-size newsletter in your niche)\n\nSubject: Reader swap? {{name}} × [their newsletter]\n\nHi [name] — I write {{name}} ({{tagline}}), ~[N] subscribers of\n{{reader}}. Big overlap with your audience.\n\nWant to do a simple swap? I recommend you to my readers, you do the\nsame — or we each write a 2-line shout-out in an upcoming issue.\n\nHappy to go first. Here's my latest so you can see the fit: [link]"},
+   {t:"callout",tone:"ok",title:"Publish on a schedule from issue #1.",html:"<p>The single biggest growth lever early on is simply <strong>not stopping</strong>. A consistent, useful issue every week compounds; sporadic bursts don't. Ship on schedule even when the list is tiny — that's how it stops being tiny.</p>"},
+   {t:"checklist",label:"Growth engine started",items:[
+     {k:"g1",text:"Personally invited everyone who fits the reader profile"},
+     {k:"g2",text:"Active in 1–2 communities where the reader gathers"},
+     {k:"g3",text:"Publishing each issue's best idea in public"},
+     {k:"g4",text:"Recommendations/referrals turned on"},
+     {k:"g5",text:"Created one lead magnet to boost opt-ins"},
+     {k:"g6",text:"Reached the first 100 subscribers"}
+   ]}
+  ]},
+
+ {tab:"Go paid", kicker:"Step 7 · Monetize", title:"Turn on the paid tier",
+  lede:"Once you have an engaged free list and a body of proof, flip on paid. Launch it with a clear upgrade offer to the readers who already love the free issue — they're your warmest possible buyers.",
+  blocks:[
+   {t:"prose",html:"<p>Turn on paid when two things are true: you have <strong>enough engaged free readers</strong> (steady opens/replies, usually a few hundred+) and you've <strong>proven the value</strong> over several issues. Then make a direct upgrade offer — announce the paid tier, run a founding-member launch price, and give existing readers a real reason to pay now.</p>"},
+   {t:"template",label:"Copy-ready",title:"paid-launch-announcement.txt",body:"PAID LAUNCH — announcement issue\n\nSubject: {{name}} is going paid (founding price inside)\n\nA year/several months in, {{name}} has grown into [what it's become].\nStarting [date], I'm adding a paid tier so I can go deeper.\n\nThe free issue isn't going anywhere. Paid subscribers also get:\n  • [premium benefit 1]\n  • [premium benefit 2]\n  • [premium benefit 3]\n\nFOUNDING OFFER (first [N] / until [date]):\n  $____ /mo  or  $____ /yr  — locked in for as long as you stay.\n  After that it goes to $____.\n\nIf the free issue has been worth your time, this is how you keep it\ncoming and get the good stuff. Thank you for reading.\n\n[  Become a founding member  ]\n\n{{sender}}"},
+   {t:"template",label:"Copy-ready",title:"upgrade-nudges.txt",body:"ONGOING UPGRADE NUDGES (use gently, every issue)\n\nSOFT TEASE (bottom of every free issue):\n  \"Paid subscribers got [specific thing] this week. Upgrade → [link]\"\n\nTHE PREVIEW CUT:\n  Start a great paid piece in the free issue, cut it at the best part:\n  \"...here's the exact template that booked 12 meetings →\n   [the rest is for paid subscribers]\"\n\nMILESTONE PUSH (a few times a year):\n  Anniversary / archive milestone / limited founding-price window.\n\nRULE: always lead with value delivered, never guilt. Show, don't beg."},
+   {t:"callout",tone:"info",title:"Warm list first, ads never (yet).",html:"<p>Your existing free readers convert far better than any cold traffic. Launch paid to them before you spend a cent acquiring strangers. A small, engaged list that trusts you beats a big list that doesn't.</p>"},
+   {t:"checklist",label:"Paid is live",items:[
+     {k:"m1",text:"Confirmed the free list is engaged (steady opens/replies)"},
+     {k:"m2",text:"Premium benefits are genuinely a step up from free"},
+     {k:"m3",text:"Announced paid with a founding-member launch price"},
+     {k:"m4",text:"Set an ongoing, tasteful upgrade tease in free issues"},
+     {k:"m5",text:"Got the first paying subscribers"}
+   ]}
+  ]},
+
+ {tab:"Ops", kicker:"Step 8 · Run", title:"Publishing cadence & ops",
+  lede:"A newsletter is a promise to show up. The business is won or lost on consistency — so build a system that lets you publish reliably without burning out, and watch the few numbers that actually predict growth.",
+  blocks:[
+   {t:"prose",html:"<p>Pick a <strong>cadence you can sustain forever</strong> (weekly beats daily-then-quit) and protect it with a system: a running idea bank, a batching rhythm, and a simple pre-send checklist. Then track the handful of metrics that matter and let them steer what you write.</p>"},
+   {t:"cards",items:[
+     {b:"Cadence",h:"Sustainable + fixed",d:"Same day, same time, every week. Consistency trains opens and trust. Under-promise on frequency and never miss."},
+     {b:"System",h:"Idea bank + batching",d:"Capture ideas as they hit. Batch a few issues ahead when inspired so a bad week never breaks the streak."},
+     {b:"Metrics",h:"Watch what predicts growth",d:"Open rate, subscriber growth, reply/engagement, and (once paid) conversion + churn. Ignore vanity numbers."}
+   ]},
+   {t:"template",label:"Copy-ready",title:"publishing-system.txt",body:"PUBLISHING SYSTEM — {{name}}\n\nCADENCE: every [day] at [time]. Non-negotiable.\n\nIDEA BANK (keep a running list):\n  • Capture every reader question, reply, and idea here\n  • Never sit down to \"think of something\" — pull from the bank\n\nWEEKLY RHYTHM\n  [ ] Draft from the template (Step 5)\n  [ ] Write subject line + preview last (3 options, pick best)\n  [ ] Skim for skimmability: subheads, short paras, one takeaway\n  [ ] Send yourself a test — check links, images, mobile view\n  [ ] Schedule for the fixed slot\n\nBATCH WHEN YOU CAN\n  Write 2–3 issues ahead in good weeks = buffer for bad ones.\n\nMONTHLY REVIEW\n  [ ] Open rate trend + best/worst subject lines\n  [ ] Net subscriber growth (and where they came from)\n  [ ] Reply/engagement — what resonated?\n  [ ] Paid: new subs, churn, MRR\n  [ ] Double down on what worked; cut what didn't"},
+   {t:"template",label:"Copy-ready",title:"metrics-dashboard.txt",body:"METRICS THAT MATTER — track weekly\n\nGROWTH\n  Subscribers (total): ____   Net new this week: ____\n  Top source this week: ____\n\nENGAGEMENT\n  Open rate: ____%   (healthy is often 30–50%+ for a niche list)\n  Reply / click count: ____\n  Unsubscribes: ____  (watch spikes — what caused them?)\n\nMONEY (once paid is on)\n  Paying subscribers: ____   MRR: $____\n  Free→paid conversion: ____%\n  Monthly churn: ____%  (keep it low with real ongoing value)\n\nGROWTH > vanity. One engaged reader who replies and shares is\nworth more than ten who never open."},
+   {t:"callout",tone:"ok",title:"You now own a compounding asset.",html:"<p>You niched it, named it, built the free→paid model, and got it publishing on a rhythm. Keep showing up and the list compounds — more readers, more shares, more paid conversions — into an audience and a revenue stream that's genuinely yours.</p>"},
+   {t:"checklist",label:"Operating system running",items:[
+     {k:"o1",text:"Fixed, sustainable cadence set and protected"},
+     {k:"o2",text:"Idea bank + batching system in place"},
+     {k:"o3",text:"Pre-send checklist used every issue"},
+     {k:"o4",text:"Tracking growth, open rate, and (if paid) churn monthly"},
+     {k:"o5",text:"Using the numbers to steer what you write next"}
+   ]}
+  ]}
+];
+/* ========================== END CONTENT ========================== */
+
+var state={fields:{},checks:{},done:{},cur:0};
+try{ var raw=localStorage.getItem(KEY); if(raw){ var s=JSON.parse(raw); state.fields=s.fields||{}; state.checks=s.checks||{}; state.done=s.done||{}; state.cur=s.cur||0; } }catch(e){}
+function save(){ try{ localStorage.setItem(KEY,JSON.stringify(state)); }catch(e){} }
+
+function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c];});}
+function fieldVal(k){ return state.fields[k]||""; }
+
+function interp(text,forCopy){
+  return text.replace(/\{\{(\w+)\}\}/g,function(_,k){
+    var v=fieldVal(k);
+    if(v) return forCopy? v : '<span class="slot">'+esc(v)+'</span>';
+    var ph="["+k+"]";
+    return forCopy? ph : '<span class="slot">'+esc(ph)+'</span>';
+  });
+}
+
+function stepItems(step){ var n=0; (step.blocks||[]).forEach(function(b){ if(b.t==="checklist") n+=b.items.length; }); return n; }
+function stepChecked(si){ var step=STEPS[si],n=0; (step.blocks||[]).forEach(function(b){ if(b.t==="checklist") b.items.forEach(function(it){ if(state.checks[si+"."+it.k]) n++; }); }); return n; }
+function totals(){ var tot=0,done=0; STEPS.forEach(function(st,i){ tot+=stepItems(st); done+=stepChecked(i); }); return {tot:tot,done:done}; }
+function updateProgress(){
+  var t=totals(); var p=t.tot? Math.round(t.done/t.tot*100):0;
+  document.getElementById("fill").style.width=p+"%";
+  document.getElementById("pct").textContent=p+"%";
+}
+
+function buildRail(){
+  var el=document.getElementById("rail"); el.innerHTML="";
+  STEPS.forEach(function(st,i){
+    var tot=stepItems(st), ck=stepChecked(i);
+    var cls="idx"; if(state.done[i]||(tot>0&&ck===tot)) cls+=" done"; else if(ck>0) cls+=" part";
+    var b=document.createElement("button");
+    b.className="step-btn"+(i===state.cur?" active":"");
+    b.setAttribute("aria-current", i===state.cur?"step":"false");
+    b.innerHTML='<span class="'+cls+'">'+(state.done[i]||(tot>0&&ck===tot)?"✓":(i+1))+'</span>'+
+      '<span class="tx"><span class="tt">'+esc(st.tab)+'</span><span class="mini">'+ck+'/'+tot+'</span></span>';
+    b.onclick=function(){ goto(i); };
+    el.appendChild(b);
+  });
+}
+
+function rBlock(b,si){
+  var h="";
+  if(b.t==="prose"){ h='<div class="block"><div class="prose">'+interp(b.html)+'</div></div>'; }
+  else if(b.t==="fields"){
+    h='<div class="block"><div class="fields">'+b.items.map(function(it){
+      var v=fieldVal(it.k);
+      var input = it.type==="area"
+        ? '<textarea data-f="'+it.k+'" placeholder="'+esc(it.ph)+'">'+esc(v)+'</textarea>'
+        : '<input type="text" data-f="'+it.k+'" value="'+esc(v)+'" placeholder="'+esc(it.ph)+'">';
+      return '<div class="field"><label>'+esc(it.label)+'</label>'+(it.hint?'<div class="hint">'+esc(it.hint)+'</div>':'')+input+'</div>';
+    }).join("")+'</div></div>';
+  }
+  else if(b.t==="template"){
+    h='<div class="block">'+(b.label?'<p class="block-lbl">'+esc(b.label)+'</p>':'')+
+      '<div class="tpl"><div class="tpl-head"><span class="tn">'+esc(b.title)+'</span>'+
+      '<button class="copy" data-copy>Copy</button></div>'+
+      '<pre class="tpl-body" data-raw="'+esc(interp(b.body,true))+'">'+interp(b.body)+'</pre></div></div>';
+  }
+  else if(b.t==="checklist"){
+    h='<div class="block">'+(b.label?'<p class="block-lbl">'+esc(b.label)+'</p>':'')+
+      '<div class="checklist">'+b.items.map(function(it){
+        var id=si+"."+it.k, on=state.checks[id]?"checked":"";
+        return '<label class="chk"><input type="checkbox" data-chk="'+id+'" '+on+'><span>'+esc(it.text)+'</span></label>';
+      }).join("")+'</div></div>';
+  }
+  else if(b.t==="cards"){
+    h='<div class="block">'+(b.label?'<p class="block-lbl">'+esc(b.label)+'</p>':'')+
+      '<div class="cards">'+b.items.map(function(c){
+        return '<div class="card">'+(c.b?'<span class="cb">'+esc(c.b)+'</span>':'')+'<p class="ch">'+esc(c.h)+'</p><p class="cd">'+esc(c.d)+'</p></div>';
+      }).join("")+'</div></div>';
+  }
+  else if(b.t==="callout"){
+    var ic=b.tone==="warn"?"!":b.tone==="ok"?"✓":"i";
+    h='<div class="block"><div class="callout '+b.tone+'"><span class="ico">'+ic+'</span><div><span class="ct">'+esc(b.title)+'</span>'+interp(b.html)+'</div></div></div>';
+  }
+  else if(b.t==="table"){
+    h='<div class="block">'+(b.label?'<p class="block-lbl">'+esc(b.label)+'</p>':'')+
+      '<div class="tbl-wrap"><table><thead><tr>'+b.head.map(function(x){return '<th>'+esc(x)+'</th>';}).join("")+'</tr></thead><tbody>'+
+      b.rows.map(function(r){return '<tr>'+r.map(function(c){return '<td>'+esc(c)+'</td>';}).join("")+'</tr>';}).join("")+
+      '</tbody></table></div></div>';
+  }
+  return h;
+}
+
+function render(){
+  var si=state.cur, st=STEPS[si];
+  var main=document.getElementById("main");
+  var body=(st.blocks||[]).map(function(b){return rBlock(b,si);}).join("");
+  var doneOn=state.done[si]?" on":"";
+  main.innerHTML=
+    '<div class="kicker-row">'+esc(st.kicker)+'</div>'+
+    '<h1 class="step-title">'+esc(st.title)+'</h1>'+
+    '<p class="lede">'+esc(st.lede)+'</p>'+
+    body+
+    '<div class="step-foot">'+
+      '<button class="mark'+doneOn+'" id="markdone"><span class="box">'+(state.done[si]?"✓":"")+'</span>'+(state.done[si]?"Step complete":"Mark step complete")+'</button>'+
+      '<div class="nav">'+
+        '<button class="nb" id="prev"'+(si===0?" disabled":"")+'>← Prev</button>'+
+        '<button class="nb prim" id="next"'+(si===STEPS.length-1?" disabled":"")+'>Next →</button>'+
+      '</div>'+
+    '</div>';
+  wire(si);
+  buildRail(); updateProgress();
+  window.scrollTo({top:0,behavior: matchMedia("(prefers-reduced-motion:reduce)").matches?"auto":"smooth"});
+}
+
+function wire(si){
+  document.querySelectorAll("[data-f]").forEach(function(inp){
+    inp.addEventListener("input",function(){ state.fields[inp.getAttribute("data-f")]=inp.value; save(); });
+    inp.addEventListener("change",function(){ refreshTemplates(); });
+    inp.addEventListener("blur",function(){ refreshTemplates(); });
+  });
+  document.querySelectorAll("[data-chk]").forEach(function(cb){
+    cb.addEventListener("change",function(){ state.checks[cb.getAttribute("data-chk")]=cb.checked; save(); buildRail(); updateProgress(); });
+  });
+  document.querySelectorAll("[data-copy]").forEach(function(btn){
+    btn.addEventListener("click",function(){
+      var pre=btn.closest(".tpl").querySelector(".tpl-body");
+      var txt=pre.getAttribute("data-raw");
+      var done=function(){ btn.textContent="Copied ✓"; btn.classList.add("done"); toast("Template copied to clipboard"); setTimeout(function(){ btn.textContent="Copy"; btn.classList.remove("done"); },1600); };
+      if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(txt).then(done,function(){ legacyCopy(txt); done(); }); }
+      else { legacyCopy(txt); done(); }
+    });
+  });
+  document.getElementById("markdone").onclick=function(){ state.done[si]=!state.done[si]; save(); render(); };
+  document.getElementById("prev").onclick=function(){ if(si>0) goto(si-1); };
+  document.getElementById("next").onclick=function(){ if(si<STEPS.length-1) goto(si+1); };
+}
+
+function refreshTemplates(){
+  var si=state.cur, st=STEPS[si], idx=0;
+  var pres=document.querySelectorAll(".tpl-body");
+  (st.blocks||[]).forEach(function(b){
+    if(b.t==="template"){
+      var pre=pres[idx++]; if(!pre) return;
+      pre.innerHTML=interp(b.body);
+      pre.setAttribute("data-raw",interp(b.body,true));
+    }
+  });
+}
+
+function legacyCopy(t){ var ta=document.createElement("textarea"); ta.value=t; ta.style.position="fixed"; ta.style.opacity="0"; document.body.appendChild(ta); ta.select(); try{document.execCommand("copy");}catch(e){} document.body.removeChild(ta); }
+var toastT;
+function toast(m){ var el=document.getElementById("toast"); el.textContent=m; el.classList.add("show"); clearTimeout(toastT); toastT=setTimeout(function(){ el.classList.remove("show"); },1800); }
+
+function goto(i){ state.cur=i; save(); render(); }
+
+document.getElementById("theme").onclick=function(){
+  var c=document.documentElement.getAttribute("data-theme");
+  var n=c==="dark"?"light":(c==="light"?"dark":(matchMedia("(prefers-color-scheme: dark)").matches?"light":"dark"));
+  document.documentElement.setAttribute("data-theme",n); try{localStorage.setItem("th_"+KEY,n);}catch(e){}
+};
+document.getElementById("reset").onclick=function(){
+  if(!confirm("Reset all progress for the Newsletter Launch Kit? Your entries and checkmarks will be cleared from this browser.")) return;
+  state={fields:{},checks:{},done:{},cur:0}; save(); render();
+};
+try{var th=localStorage.getItem("th_"+KEY); if(th)document.documentElement.setAttribute("data-theme",th);}catch(e){}
+
+document.addEventListener("keydown",function(e){
+  if(e.target && /INPUT|TEXTAREA/.test(e.target.tagName)) return;
+  if(e.key==="ArrowRight" && state.cur<STEPS.length-1) goto(state.cur+1);
+  if(e.key==="ArrowLeft" && state.cur>0) goto(state.cur-1);
+});
+
+render();
+</script>
+</body>
+</html>

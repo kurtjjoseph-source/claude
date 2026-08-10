@@ -1,0 +1,72 @@
+.agenthub-tickets {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    margin-bottom: 1.5em;
+}
+
+.agenthub-card {
+    background: #fff;
+    border: 1px solid #dcdcde;
+    border-radius: 4px;
+    padding: 1em 1.25em;
+    max-width: 800px;
+}
+
+.agenthub-card h3 {
+    margin-top: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.6em;
+}
+
+.agenthub-risk {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 3px;
+    letter-spacing: 0.03em;
+}
+
+.agenthub-risk-low {
+    background: #edf7ed;
+    color: #1e5f2e;
+}
+
+.agenthub-risk-high {
+    background: #fbeaea;
+    color: #8a1f1f;
+}
+
+.agenthub-rationale {
+    color: #50575e;
+}
+
+.agenthub-why {
+    color: #646970;
+}
+
+.agenthub-question {
+    background: #fcf9e8;
+    padding: 0.75em 1em;
+    border-radius: 3px;
+}
+
+.agenthub-decision-form textarea {
+    width: 100%;
+    max-width: 600px;
+}
+
+.agenthub-decision-note {
+    background: #f6f7f7;
+    padding: 0.6em 0.9em;
+    border-radius: 3px;
+}
+
+.agenthub-profile-form {
+    margin-bottom: 1.5em;
+}
+
+.agenthub-profile-form input[type="text"] {
+    margin-right: 0.5em;
+}

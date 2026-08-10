@@ -1,0 +1,27 @@
+# What NOT to publish on vom-turnkey.vercel.app.
+#
+# `vercel deploy` uploads the whole folder, so anything living here that is not part
+# of the PUBLIC explainer ends up at a public URL. The product's working surfaces are
+# gated behind /os (served by api/os.js); the source that powers them must never be
+# fetchable as a static file.
+#
+# Public surface = index.html + api/ (the gate + the OS it serves).
+
+# The agent-side operating system: engine source, orchestrator skill, subagents,
+# and the operator profile (the white-label rails). Distributed by licence, not by URL.
+orchestrator
+
+# A separate Vercel project (vom-client-hub.vercel.app) that happens to live in this
+# folder. Its server source has no business being served from this host.
+client-hub
+
+# Operator tools that predate the /os convention — they are being folded into the
+# gated OS. Until then they are not public.
+launch-wizard.html
+hub-setup-wizard.html
+
+# Repo furniture
+README.md
+OS-SETUP.md
+.gitignore
+.git

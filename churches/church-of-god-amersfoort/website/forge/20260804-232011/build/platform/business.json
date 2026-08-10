@@ -1,0 +1,634 @@
+{
+  "schema": 1,
+  "business": {
+    "name": "church f god amersfoort",
+    "org_type": "church",
+    "org_label": "Church / faith community",
+    "platform_choice": "WordPress",
+    "operator": "Vision Outreach Media",
+    "operator_short": "",
+    "offer": "church f god amersfoort — A gathering-led community funded by giving. The platform runs Sunday and the week around it: services and sermons, events, giving, the people who serve, and the messages that come in.",
+    "organization": "A gathering-led community funded by giving. The platform runs Sunday and the week around it: services and sermons, events, giving, the people who serve, and the messages that come in.",
+    "generated": "2026-08-04T23:20:11Z"
+  },
+  "modules": [
+    {
+      "title": "Events",
+      "icon": "◷",
+      "record": "event",
+      "blurb": "What is happening, and who is coming.",
+      "view": "upcoming",
+      "fields": [
+        {
+          "k": "title",
+          "label": "Event",
+          "type": "text",
+          "required": true
+        },
+        {
+          "k": "date",
+          "label": "Date",
+          "type": "date",
+          "required": true
+        },
+        {
+          "k": "time",
+          "label": "Time",
+          "type": "text"
+        },
+        {
+          "k": "place",
+          "label": "Where",
+          "type": "text"
+        },
+        {
+          "k": "rsvp",
+          "label": "RSVPs",
+          "type": "number"
+        },
+        {
+          "k": "note",
+          "label": "Details",
+          "type": "textarea"
+        }
+      ],
+      "tiles": [
+        {
+          "label": "Upcoming",
+          "calc": "count_future:date"
+        },
+        {
+          "label": "Expected people",
+          "calc": "sum_future:rsvp"
+        }
+      ],
+      "key": "events"
+    },
+    {
+      "title": "Giving",
+      "icon": "♥",
+      "record": "gift",
+      "blurb": "Gifts and pledges, one-off and recurring.",
+      "view": "ledger",
+      "fields": [
+        {
+          "k": "giver",
+          "label": "Giver",
+          "type": "text",
+          "required": true
+        },
+        {
+          "k": "amount",
+          "label": "Amount",
+          "type": "money",
+          "required": true
+        },
+        {
+          "k": "date",
+          "label": "Date",
+          "type": "date"
+        },
+        {
+          "k": "recurring",
+          "label": "Recurring",
+          "type": "check"
+        },
+        {
+          "k": "fund",
+          "label": "Fund",
+          "type": "select",
+          "options": [
+            "General",
+            "Building",
+            "Missions",
+            "Benevolence"
+          ]
+        },
+        {
+          "k": "note",
+          "label": "Note",
+          "type": "textarea"
+        }
+      ],
+      "tiles": [
+        {
+          "label": "Given this month",
+          "calc": "sum_month:amount",
+          "money": true
+        },
+        {
+          "label": "Recurring givers",
+          "calc": "count_true:recurring"
+        },
+        {
+          "label": "Given all time",
+          "calc": "sum:amount",
+          "money": true
+        }
+      ],
+      "key": "donations"
+    },
+    {
+      "title": "Sermons",
+      "icon": "▶",
+      "record": "item",
+      "blurb": "Talks, sermons and recordings, with where they live.",
+      "fields": [
+        {
+          "k": "title",
+          "label": "Title",
+          "type": "text",
+          "required": true
+        },
+        {
+          "k": "speaker",
+          "label": "Speaker",
+          "type": "text"
+        },
+        {
+          "k": "date",
+          "label": "Date",
+          "type": "date"
+        },
+        {
+          "k": "series",
+          "label": "Series",
+          "type": "text"
+        },
+        {
+          "k": "url",
+          "label": "Link (YouTube/Spotify)",
+          "type": "text"
+        },
+        {
+          "k": "summary",
+          "label": "Summary",
+          "type": "textarea"
+        }
+      ],
+      "tiles": [
+        {
+          "label": "In the library",
+          "calc": "count"
+        }
+      ],
+      "key": "media_library"
+    },
+    {
+      "title": "Serving rota",
+      "icon": "◇",
+      "record": "slot",
+      "blurb": "Who is serving, when, and in what role.",
+      "view": "upcoming",
+      "fields": [
+        {
+          "k": "person",
+          "label": "Person",
+          "type": "text",
+          "required": true
+        },
+        {
+          "k": "role",
+          "label": "Role",
+          "type": "text"
+        },
+        {
+          "k": "date",
+          "label": "Date",
+          "type": "date",
+          "required": true
+        },
+        {
+          "k": "confirmed",
+          "label": "Confirmed",
+          "type": "check"
+        },
+        {
+          "k": "phone",
+          "label": "Phone",
+          "type": "text"
+        }
+      ],
+      "tiles": [
+        {
+          "label": "Slots ahead",
+          "calc": "count_future:date"
+        },
+        {
+          "label": "Unconfirmed",
+          "calc": "count_false:confirmed"
+        }
+      ],
+      "key": "people_roster"
+    },
+    {
+      "title": "People",
+      "icon": "◍",
+      "record": "contact",
+      "blurb": "Everyone this business deals with, and where each one stands.",
+      "view": "pipeline",
+      "stages": [
+        "Lead",
+        "Contacted",
+        "In conversation",
+        "Customer",
+        "Lapsed"
+      ],
+      "fields": [
+        {
+          "k": "name",
+          "label": "Name",
+          "type": "text",
+          "required": true
+        },
+        {
+          "k": "email",
+          "label": "Email",
+          "type": "text"
+        },
+        {
+          "k": "phone",
+          "label": "Phone",
+          "type": "text"
+        },
+        {
+          "k": "stage",
+          "label": "Stage",
+          "type": "select",
+          "from": "stages"
+        },
+        {
+          "k": "value",
+          "label": "Value",
+          "type": "money"
+        },
+        {
+          "k": "note",
+          "label": "Notes",
+          "type": "textarea"
+        }
+      ],
+      "tiles": [
+        {
+          "label": "Contacts",
+          "calc": "count"
+        },
+        {
+          "label": "In pipeline",
+          "calc": "sum:value",
+          "money": true
+        }
+      ],
+      "key": "crm"
+    },
+    {
+      "title": "Messages",
+      "icon": "✉",
+      "record": "message",
+      "blurb": "Questions coming in, and what was sent back.",
+      "fields": [
+        {
+          "k": "who",
+          "label": "From",
+          "type": "text",
+          "required": true
+        },
+        {
+          "k": "subject",
+          "label": "About",
+          "type": "text"
+        },
+        {
+          "k": "date",
+          "label": "Received",
+          "type": "date"
+        },
+        {
+          "k": "status",
+          "label": "Status",
+          "type": "select",
+          "options": [
+            "New",
+            "Replied",
+            "Closed"
+          ]
+        },
+        {
+          "k": "message",
+          "label": "What they said",
+          "type": "textarea"
+        },
+        {
+          "k": "reply",
+          "label": "Draft reply",
+          "type": "textarea"
+        }
+      ],
+      "tiles": [
+        {
+          "label": "Needs a reply",
+          "calc": "count_eq:status:New"
+        }
+      ],
+      "key": "support_inbox"
+    },
+    {
+      "title": "Content",
+      "icon": "✎",
+      "record": "post",
+      "blurb": "Posts and announcements, drafted here before they go out.",
+      "fields": [
+        {
+          "k": "title",
+          "label": "Title",
+          "type": "text",
+          "required": true
+        },
+        {
+          "k": "status",
+          "label": "Status",
+          "type": "select",
+          "options": [
+            "Idea",
+            "Draft",
+            "Ready",
+            "Published"
+          ]
+        },
+        {
+          "k": "channel",
+          "label": "Channel",
+          "type": "select",
+          "options": [
+            "Website",
+            "Newsletter",
+            "Facebook",
+            "Instagram",
+            "LinkedIn",
+            "YouTube"
+          ]
+        },
+        {
+          "k": "date",
+          "label": "Planned for",
+          "type": "date"
+        },
+        {
+          "k": "body",
+          "label": "The piece",
+          "type": "textarea"
+        }
+      ],
+      "tiles": [
+        {
+          "label": "Ready to publish",
+          "calc": "count_eq:status:Ready"
+        },
+        {
+          "label": "Published",
+          "calc": "count_eq:status:Published"
+        }
+      ],
+      "key": "content_publishing"
+    },
+    {
+      "title": "Mailing list",
+      "icon": "✦",
+      "record": "subscriber",
+      "blurb": "The list, and what has been sent to it.",
+      "fields": [
+        {
+          "k": "email",
+          "label": "Email",
+          "type": "text",
+          "required": true
+        },
+        {
+          "k": "name",
+          "label": "Name",
+          "type": "text"
+        },
+        {
+          "k": "source",
+          "label": "Came from",
+          "type": "text"
+        },
+        {
+          "k": "date",
+          "label": "Joined",
+          "type": "date"
+        },
+        {
+          "k": "subscribed",
+          "label": "Subscribed",
+          "type": "check"
+        }
+      ],
+      "tiles": [
+        {
+          "label": "On the list",
+          "calc": "count_true:subscribed"
+        }
+      ],
+      "key": "email_marketing"
+    },
+    {
+      "title": "Finances",
+      "icon": "◫",
+      "record": "invoice",
+      "blurb": "What has been billed, what has been paid, and the VAT on it.",
+      "view": "ledger",
+      "fields": [
+        {
+          "k": "number",
+          "label": "Invoice no.",
+          "type": "text",
+          "required": true
+        },
+        {
+          "k": "client",
+          "label": "To",
+          "type": "text",
+          "required": true
+        },
+        {
+          "k": "amount",
+          "label": "Amount (excl. VAT)",
+          "type": "money",
+          "required": true
+        },
+        {
+          "k": "vat",
+          "label": "VAT %",
+          "type": "number"
+        },
+        {
+          "k": "date",
+          "label": "Date",
+          "type": "date"
+        },
+        {
+          "k": "status",
+          "label": "Status",
+          "type": "select",
+          "options": [
+            "Draft",
+            "Sent",
+            "Paid",
+            "Overdue"
+          ]
+        }
+      ],
+      "tiles": [
+        {
+          "label": "Outstanding",
+          "calc": "sum_eq:amount:status:Sent",
+          "money": true
+        },
+        {
+          "label": "Paid this month",
+          "calc": "sum_month_eq:amount:status:Paid",
+          "money": true
+        },
+        {
+          "label": "VAT collected",
+          "calc": "sum_vat",
+          "money": true
+        }
+      ],
+      "key": "finance_admin"
+    },
+    {
+      "title": "New here",
+      "icon": "◌",
+      "record": "enquiry",
+      "blurb": "People who put their hand up, before they become contacts.",
+      "fields": [
+        {
+          "k": "name",
+          "label": "Name",
+          "type": "text",
+          "required": true
+        },
+        {
+          "k": "email",
+          "label": "Email",
+          "type": "text"
+        },
+        {
+          "k": "asked",
+          "label": "What they want",
+          "type": "textarea"
+        },
+        {
+          "k": "date",
+          "label": "When",
+          "type": "date"
+        },
+        {
+          "k": "handled",
+          "label": "Handled",
+          "type": "check"
+        }
+      ],
+      "tiles": [
+        {
+          "label": "New enquiries",
+          "calc": "count_false:handled"
+        }
+      ],
+      "key": "lead_capture"
+    }
+  ],
+  "seed": {
+    "events": [
+      {
+        "title": "Sunday gathering",
+        "date": "2026-08-09",
+        "time": "10:00",
+        "place": "your city",
+        "rsvp": 0,
+        "note": "Weekly. Children's programme runs during the talk."
+      },
+      {
+        "title": "Prayer evening",
+        "date": "2026-08-16",
+        "time": "19:30",
+        "place": "your city",
+        "rsvp": 0,
+        "note": "Second Tuesday of the month."
+      },
+      {
+        "title": "Newcomers' coffee",
+        "date": "2026-08-30",
+        "time": "11:45",
+        "place": "your city",
+        "rsvp": 0,
+        "note": "After the gathering, first Sunday of the month."
+      }
+    ],
+    "donations": [
+      {
+        "giver": "Example — replace me",
+        "amount": 50,
+        "date": "2026-07-28",
+        "recurring": true,
+        "fund": "General",
+        "note": "Seed record so the giving view is not empty. Delete when real gifts arrive."
+      }
+    ],
+    "media_library": [
+      {
+        "title": "Begin here",
+        "speaker": "Teaching team",
+        "date": "2026-07-28",
+        "series": "Foundations",
+        "summary": "An opening talk on what this church is for."
+      },
+      {
+        "title": "The long obedience",
+        "speaker": "Teaching team",
+        "date": "2026-07-21",
+        "series": "Foundations",
+        "summary": "On staying with something past the first enthusiasm."
+      }
+    ],
+    "people_roster": [
+      {
+        "person": "Example — replace me",
+        "role": "Welcome",
+        "date": "2026-08-09",
+        "confirmed": false
+      },
+      {
+        "person": "Example — replace me",
+        "role": "Sound",
+        "date": "2026-08-09",
+        "confirmed": false
+      }
+    ],
+    "content_publishing": [
+      {
+        "title": "Welcome to our new site",
+        "status": "Draft",
+        "channel": "Website",
+        "date": "2026-08-04",
+        "body": "A short post announcing the new site and how to plan a visit."
+      }
+    ]
+  },
+  "archetype": {
+    "id": "church",
+    "forge": {
+      "name": "CHURCHforge",
+      "scheme": "dark",
+      "base": "#0A0A0B",
+      "base_soft": "#141416",
+      "accent": "#F97316",
+      "accent_2": "#FDBA74",
+      "accent_site": "#e2670a",
+      "on_accent": "#0A0A0B",
+      "line": "Building a church platform."
+    }
+  }
+}

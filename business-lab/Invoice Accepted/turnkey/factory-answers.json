@@ -1,0 +1,17 @@
+{
+  "name": "Invoice Accepted",
+  "who": "Dutch SMEs with five to a hundred staff that invoice business customers in Belgium, France, Poland or Germany — manufacturers, wholesalers, transporters, installers and agencies with cross-border contracts, where one bookkeeper or office manager sends every invoice.",
+  "problem": "\"Our Belgian customer's system bounced our invoice in January and it took six weeks to get paid. Our bookkeeper says we need something called Peppol. Nobody here knows what that is, and nobody has time to find out.\"",
+  "solution": "We connect their existing accounting software to the Peppol network through an access point, map their invoice data to the format each destination country demands, run live test invoices against their real customers until those customers accept them, and then watch every outbound invoice so a rejection is caught and fixed the same week instead of surfacing sixty days later as an unpaid bill.",
+  "promise": "Your invoices to Belgium, France, Poland and Germany get accepted the first time, because they arrive in the format the law over there now demands.",
+  "gets": "A Peppol connection on the accounting software you already use — no new system to learn\nA country-by-country format check for every customer you invoice abroad, tested against their real system before it matters\nA monthly rejection report, with every failed invoice fixed and resent before it ages",
+  "price": 950,
+  "price_unit": "connection (then €95/month monitoring)",
+  "target": 6000,
+  "city": "Amersfoort",
+  "positioning": "Sold on the deadline, never on the technology. The opening line is the customer's own mandate — 'your Belgian customer legally cannot accept your PDF any more' — so nobody has to be persuaded that the problem is real. Deliberately not sold to Dutch firms that only invoice domestically: the Netherlands has no B2B mandate until 2030 and they know it.",
+  "voice": "Flat and factual, led by dates and country names. Talks about invoices being accepted and bills being paid, never about digital transformation or compliance journeys.",
+  "channels": "KVK export registers and branchevereniging member directories, accountants and bookkeepers with cross-border clients (referral fee), Google search for 'e-facturatie België verplicht' and 'Peppol verplicht 2026', LinkedIn to finance managers at NL manufacturers and wholesalers, partner referrals from accounting-software resellers",
+  "org_type": "service_business",
+  "email": "info@visionoutreachmedia.nl"
+}
