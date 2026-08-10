@@ -1,0 +1,28 @@
+# Secrets — never commit
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+keys.*
+client_secret*.json
+
+# Local databases
+*.db
+*.sqlite
+*.sqlite3
+
+# Dependencies & environments
+node_modules/
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# Deploy/tool metadata
+.vercel/
+.DS_Store
+.manus-logs/
+
+# Large generated output (regenerate with build scripts)
+vision-outreach-media/vom-systems/turnkey/forge/demos/
