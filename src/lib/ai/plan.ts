@@ -73,6 +73,15 @@ export async function generatePlan(
 // Deterministic fallback
 // ---------------------------------------------------------------------------
 
+/**
+ * Lowercases only the leading character so a finding title can be dropped
+ * mid-sentence. Flattening the whole string mangles the proper nouns these
+ * titles are full of — "Colorado's 10-year forfeiture period" and so on.
+ */
+function inSentence(title: string): string {
+  return title.charAt(0).toLowerCase() + title.slice(1);
+}
+
 function templatePlan(
   input: ParcelInput,
   assessment: Assessment,
@@ -96,7 +105,7 @@ function templatePlan(
   }
   thesisParts.push(
     criticals.length > 0
-      ? `${criticals.length} critical ${criticals.length === 1 ? "issue is" : "issues are"} open, starting with ${criticals[0]!.title.toLowerCase()}. That is the item that decides this deal.`
+      ? `${criticals.length} critical ${criticals.length === 1 ? "issue is" : "issues are"} open, starting with ${inSentence(criticals[0]!.title)}. That is the item that decides this deal.`
       : majors.length > 0
         ? `Nothing critical is open, but ${majors.length} major ${majors.length === 1 ? "item needs" : "items need"} resolution before money goes hard.`
         : "No critical or major issues were raised by the engine, which is uncommon and worth verifying rather than trusting.",
@@ -232,7 +241,7 @@ function buildNegotiation(input: ParcelInput, assessment: Assessment): string {
 
   parts.push(
     criticals.length > 0
-      ? `Lead with the critical findings, framed as questions rather than accusations — a seller who has to answer "${criticals[0]!.title.toLowerCase()}" in writing either resolves it or reveals that they cannot.`
+      ? `Lead with the critical findings, framed as questions rather than accusations — a seller who has to answer "${inSentence(criticals[0]!.title)}" in writing either resolves it or reveals that they cannot.`
       : "There is no critical defect to lead with, so leverage comes from the volume of unresolved diligence rather than from any single flaw.",
   );
 
