@@ -2,7 +2,7 @@
 
 This repo is the **single source of truth** for Kurt's Claude workspace. All work —
 on a Mac, in a cloud Cowork/Claude Code session, anywhere — syncs through
-`github.com/kurtjjoseph/claude-workspace`.
+`github.com/kurtjjoseph-source/claude-workspace`.
 
 ## Why
 
@@ -21,7 +21,7 @@ Anything not committed and pushed is lost. GitHub is the persistence layer.
 
 ## Working on the Mac
 
-- One-time: `git clone https://github.com/kurtjjoseph/claude-workspace.git`
+- One-time: `git clone https://github.com/kurtjjoseph-source/claude-workspace.git`
 - Before working: `git pull`
 - After working: `git add -A && git commit -m "..." && git push`
 
@@ -39,8 +39,8 @@ Anything not committed and pushed is lost. GitHub is the persistence layer.
 ## Account note
 
 The Claude↔GitHub connection authenticates as the GitHub account
-**`kurtjjoseph-source`**. That account must remain a collaborator on this repo
-(repo → Settings → Collaborators) for cloud sessions to push.
+**`kurtjjoseph-source`**. This repo is owned by that account, so the Claude GitHub App ("All repositories") covers it automatically
+Kurt's main account `kurtjjoseph` can be added as a collaborator if direct access is ever needed.
 
 ## Repo map
 

@@ -5,7 +5,7 @@ Consolidated workspace for all Claude / Cowork projects, migrated from the local
 pick up where you left off:
 
 ```
-git clone https://github.com/kurtjjoseph/claude-workspace.git
+git clone https://github.com/kurtjjoseph-source/claude-workspace.git
 ```
 
 ## Layout
