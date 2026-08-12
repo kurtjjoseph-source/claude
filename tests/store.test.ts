@@ -33,7 +33,7 @@ after(async () => {
 function draft(over: Partial<Parameters<typeof addHolding>[0]> = {}) {
   return {
     label: "Parcel",
-    stateCode: "CO",
+    jurisdictionCode: "US-CO",
     county: "Prowers",
     acres: 100,
     stage: "prospect" as const,

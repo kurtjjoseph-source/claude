@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { STATE_LIST } from "@/lib/water/states";
+import { JURISDICTIONS, INTERNATIONAL, US_STATES } from "@/lib/water/registry";
 
 const FAILURE_MODES = [
   {
@@ -58,8 +58,9 @@ function Stat({ value, label }: { value: string; label: string }) {
 }
 
 export default function Home() {
-  const appropriation = STATE_LIST.filter((s) => s.surfaceDoctrine === "prior-appropriation").length;
-  const hybrid = STATE_LIST.filter((s) => s.surfaceDoctrine === "hybrid").length;
+  const countries = Object.keys(INTERNATIONAL).length;
+  const states = Object.keys(US_STATES).length;
+  const openToForeign = JURISDICTIONS.filter((j) => j.foreignOwnership?.regime === "unrestricted").length;
 
   return (
     <div>
@@ -73,8 +74,9 @@ export default function Home() {
           Most land deals go wrong in the water, not the dirt.
         </h1>
         <p className="mt-6 text-lg max-w-2xl leading-relaxed" style={{ color: "var(--fg-muted)" }}>
-          Headgate screens a parcel against the water law of the state it sits in, scores what you are actually buying, and
-          hands you a sequenced plan for getting to closing — or for walking away before you have spent anything.
+          Headgate screens a parcel against the water law of the place it sits in — any US state or a growing set of
+          countries — scores what you are actually buying, and hands you a sequenced plan for getting to closing, or for
+          walking away before you have spent anything.
         </p>
 
         <div className="mt-8 flex flex-wrap items-center gap-3">
@@ -87,9 +89,9 @@ export default function Home() {
         </div>
 
         <div className="mt-14 grid grid-cols-2 sm:grid-cols-4 gap-8 max-w-3xl">
-          <Stat value="50" label="States modeled" />
-          <Stat value={String(appropriation)} label="Prior appropriation" />
-          <Stat value={String(hybrid)} label="Hybrid systems" />
+          <Stat value={String(states)} label="US states modeled" />
+          <Stat value={String(countries)} label="Countries modeled" />
+          <Stat value={String(openToForeign)} label="Open to foreign buyers" />
           <Stat value="1,000" label="Acre target tracked" />
         </div>
       </section>
@@ -145,6 +147,40 @@ export default function Home() {
             consequence or an agency requirement, because those are precisely the claims a buyer would act on and precisely
             where a model is least trustworthy.
           </p>
+        </div>
+      </section>
+
+      {/* International */}
+      <section style={{ background: "var(--bg-sunken)", borderTop: "1px solid var(--line)", borderBottom: "1px solid var(--line)" }}>
+        <div className="mx-auto max-w-6xl px-5 py-16">
+          <p className="label">Cross-border</p>
+          <h2 className="mt-3 text-2xl font-semibold tracking-tight" style={{ fontFamily: "var(--font-serif)" }}>
+            Abroad, the first question is whether you may own it at all
+          </h2>
+          <p className="mt-3 max-w-2xl leading-relaxed" style={{ color: "var(--fg-muted)" }}>
+            Going international inverts the risk order. At home the water right is the hard part and ownership is assumed.
+            In Georgia, Thailand, Morocco and Namibia a foreign buyer simply cannot hold farmland; in Mexico and Zambia you
+            can, but only through a prescribed vehicle; in Australia and New Zealand a screening body decides. A flawless
+            entitlement on land you may not own is worth nothing, so the engine scores eligibility before hydrology.
+          </p>
+          <div className="mt-9 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              { t: "Chile", d: "Water rights are registered, tradable property, separable from land — and foreigners get full national treatment." },
+              { t: "Uruguay", d: "No approval, no cap, strong registry, Guaraní Aquifer. The straightforward option, priced accordingly." },
+              { t: "Australia", d: "The deepest water market on earth. Entitlements trade on screen, but FIRB screens the land." },
+              { t: "Thailand", d: "Foreigners cannot own land, and the nominee company structures sold to them are criminal offences." },
+            ].map((c) => (
+              <div key={c.t} className="surface p-5">
+                <h3 className="font-semibold tracking-tight">{c.t}</h3>
+                <p className="mt-2 text-sm leading-relaxed" style={{ color: "var(--fg-muted)" }}>
+                  {c.d}
+                </p>
+              </div>
+            ))}
+          </div>
+          <Link href="/opportunities" className="btn btn-ghost mt-8">
+            See where to buy
+          </Link>
         </div>
       </section>
 

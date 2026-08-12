@@ -1,19 +1,33 @@
 import { z } from "zod";
-import { STATE_PROFILES } from "@/lib/water/states";
+import { ALL_JURISDICTIONS } from "@/lib/water/registry";
 
 const yesNoUnknown = z.enum(["yes", "no", "unknown"]);
 
 export const parcelInputSchema = z.object({
   label: z.string().trim().min(1, "Give the parcel a name").max(120),
-  stateCode: z
+  jurisdictionCode: z
     .string()
     .trim()
     .toUpperCase()
-    .refine((c) => c in STATE_PROFILES, "Unsupported state"),
+    .refine((c) => c in ALL_JURISDICTIONS, "Unsupported jurisdiction"),
   county: z.string().trim().min(1, "County is required").max(80),
   apn: z.string().trim().max(60).optional(),
   acres: z.number().positive("Acreage must be greater than zero").max(2_000_000),
   basinOrWatercourse: z.string().trim().max(120).optional(),
+
+  buyerCountry: z.string().trim().toUpperCase().min(2).max(2).optional(),
+  ownershipStructure: z
+    .enum([
+      "personal-freehold",
+      "local-company",
+      "foreign-company",
+      "trust-or-fideicomiso",
+      "long-lease",
+      "joint-venture-with-national",
+      "undecided",
+    ])
+    .optional(),
+  hasLocalResidency: yesNoUnknown.optional(),
 
   intent: z.enum([
     "irrigated-crop",
@@ -93,7 +107,7 @@ export const parcelInputSchema = z.object({
 
 export const holdingDraftSchema = z.object({
   label: z.string().trim().min(1).max(120),
-  stateCode: z.string().trim().toUpperCase().length(2),
+  jurisdictionCode: z.string().trim().toUpperCase().min(2).max(6),
   county: z.string().trim().max(80).default(""),
   acres: z.number().nonnegative().max(2_000_000),
   stage: z.enum(["prospect", "diligence", "loi", "under-contract", "closed", "passed"]),

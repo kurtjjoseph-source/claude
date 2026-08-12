@@ -12,7 +12,7 @@
 // Legal regimes
 // ---------------------------------------------------------------------------
 
-/** How a state allocates *surface* water. */
+/** How a jurisdiction allocates *surface* water. */
 export type SurfaceDoctrine =
   /** "First in time, first in right." Seniority governs; use it or lose it. */
   | "prior-appropriation"
@@ -21,7 +21,19 @@ export type SurfaceDoctrine =
   /** Rights run with land touching the watercourse; reasonable use, no permit. */
   | "riparian"
   /** Riparian in origin, but withdrawals above a threshold need a state permit. */
-  | "regulated-riparian";
+  | "regulated-riparian"
+  /**
+   * Civil-law default outside the Anglosphere: water is public domain and use
+   * is granted by revocable administrative concession, licence or permit.
+   */
+  | "administrative-concession"
+  /**
+   * A concession regime where the entitlement is a freely tradable asset in its
+   * own right, with a market and a register — Chile and the Australian states.
+   */
+  | "tradable-entitlement"
+  /** Allocation governed primarily by customary or communal tenure. */
+  | "customary";
 
 /** How a state allocates *groundwater* — a separate axis from surface water. */
 export type GroundwaterRegime =
@@ -36,7 +48,9 @@ export type GroundwaterRegime =
   /** Restatement (Second) of Torts § 858 reasonable-use balancing. */
   | "restatement"
   /** Allocation delegated primarily to local conservation districts. */
-  | "district-managed";
+  | "district-managed"
+  /** Groundwater is public domain, abstracted under a revocable licence. */
+  | "administrative-concession";
 
 /** A statutory overlay that changes the analysis inside part of a state. */
 export interface SpecialRegime {
@@ -58,9 +72,97 @@ export interface Agency {
   url: string;
 }
 
-export interface StateWaterProfile {
+export type Region =
+  | "united-states"
+  | "canada"
+  | "latin-america"
+  | "europe"
+  | "africa"
+  | "asia"
+  | "oceania";
+
+/**
+ * Whether a foreign buyer may hold the interest at all.
+ *
+ * For a cross-border acquisition this outranks every hydrological question:
+ * a perfect water right on land you are legally barred from owning is worth
+ * nothing, and the workaround people reach for — a local nominee holding title
+ * on your behalf — is a criminal offence in several of these countries.
+ */
+export type ForeignOwnershipRegime =
+  /** Foreign buyers are treated substantially the same as nationals. */
+  | "unrestricted"
+  /** Freehold is available but rural/agricultural land carries caps or conditions. */
+  | "restricted-rural"
+  /** A screening body must approve the acquisition before it can complete. */
+  | "approval-required"
+  /** No freehold for foreigners; long leases or use rights only. */
+  | "leasehold-only"
+  /** Freehold only through a prescribed vehicle — a trust or local company. */
+  | "structure-required"
+  /** Foreign acquisition of this class of land is barred outright. */
+  | "prohibited";
+
+export type TitleSystem =
+  /** State-guaranteed register; the register *is* the title. */
+  | "torrens"
+  /** Register of deeds; title is proved by the chain, not the register. */
+  | "deeds-registry"
+  | "mixed"
+  /** A formal register sitting over unextinguished customary/communal rights. */
+  | "customary-overlay"
+  /** The state owns the land and grants time-limited use rights. */
+  | "state-allocated";
+
+export interface ForeignOwnershipProfile {
+  regime: ForeignOwnershipRegime;
+  summary: string;
+  /** What specifically applies to farmland and large rural holdings. */
+  ruralLandRule: string;
+  /** Border, coastal and strategic exclusion zones, where they exist. */
+  borderCoastalRule: string | null;
+  /** Whether a foreign holder can take the water entitlement itself. */
+  waterRightsForeignRule: string;
+  /** The screening or approval body, where one exists. */
+  approvalBody: Agency | null;
+  /** Realistic elapsed time for approval, in days. */
+  approvalTimelineDays: number | null;
+  /** Acreage or percentage ceilings. */
+  caps: string | null;
+  /** Set where nominee arrangements are common *and* unlawful. */
+  nomineeWarning: string | null;
+  /** Reporting obligations that attach after closing. */
+  reportingObligation: string | null;
+}
+
+export interface CountryRiskProfile {
+  expropriationRisk: RiskLevel;
+  titleSystem: TitleSystem;
+  /** Risk that registered title turns out to be defective or contested. */
+  titleReliability: RiskLevel;
+  /** Risk that formally titled land carries live customary/communal claims. */
+  customaryTenureRisk: RiskLevel;
+  /** Controls on moving capital in and profits out. */
+  currencyControls: string | null;
+  repatriationNote: string;
+  notes: string;
+}
+
+export interface JurisdictionProfile {
   code: string;
   name: string;
+  /** Country this sits in. Equal to `name` for country-level entries. */
+  country: string;
+  region: Region;
+  /** True for states and provinces inside a larger country. */
+  subnational: boolean;
+  /** Present only for jurisdictions outside the buyer's home country. */
+  foreignOwnership?: ForeignOwnershipProfile;
+  countryRisk?: CountryRiskProfile;
+  /** Local term for the county-equivalent, used to label the wizard field. */
+  subdivisionLabel?: string;
+  /** Local unit buyers actually transact in, e.g. "hectares". */
+  areaUnitNote?: string;
   surfaceDoctrine: SurfaceDoctrine;
   groundwaterRegime: GroundwaterRegime;
   /** Primary state water agency — the office you call first. */
@@ -143,14 +245,31 @@ export type DocumentId =
   | "survey"
   | "water-quality-analysis";
 
+/** How the buyer would take title. Determines which restrictions bite. */
+export type OwnershipStructure =
+  | "personal-freehold"
+  | "local-company"
+  | "foreign-company"
+  | "trust-or-fideicomiso"
+  | "long-lease"
+  | "joint-venture-with-national"
+  | "undecided";
+
 export interface ParcelInput {
   // Step 1 — location & size
   label: string;
-  stateCode: string;
+  jurisdictionCode: string;
   county: string;
   apn?: string;
   acres: number;
   basinOrWatercourse?: string;
+
+  // Step 1b — the buyer, for cross-border deals
+  /** ISO-ish country code of the buyer's nationality/residence, or "US". */
+  buyerCountry?: string;
+  ownershipStructure?: OwnershipStructure;
+  /** Whether the buyer already holds residency in the target country. */
+  hasLocalResidency?: YesNoUnknown;
 
   // Step 2 — intent
   intent: WaterUseIntent;
@@ -217,6 +336,7 @@ export interface Finding {
 export type ScoreCategory =
   | "water-security"
   | "title-transferability"
+  | "foreign-ownership"
   | "physical-supply"
   | "land-access"
   | "economics";
@@ -269,7 +389,15 @@ export interface Assessment {
     reliabilityFactor: number;
     shortfall: number | null;
   };
-  stateProfile: StateWaterProfile;
+  jurisdiction: JurisdictionProfile;
+  /**
+   * Set when something makes the deal impossible rather than merely bad —
+   * chiefly an outright bar on foreign ownership with no lawful structure.
+   * Forces a walk verdict irrespective of the composite.
+   */
+  dealBreaker: string | null;
+  /** True when the buyer is acquiring outside their home country. */
+  crossBorder: boolean;
   generatedAt: string;
 }
 
@@ -307,7 +435,7 @@ export type HoldingStage =
 export interface Holding {
   id: string;
   label: string;
-  stateCode: string;
+  jurisdictionCode: string;
   county: string;
   acres: number;
   stage: HoldingStage;

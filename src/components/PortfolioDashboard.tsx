@@ -4,7 +4,7 @@ import { useCallback, useMemo, useState } from "react";
 import Link from "next/link";
 import type { Holding, HoldingStage, PortfolioGoal } from "@/lib/types";
 import { STAGE_LABELS, STAGE_ORDER } from "@/lib/portfolio/goal";
-import { STATE_LIST } from "@/lib/water/states";
+import { JURISDICTIONS } from "@/lib/water/registry";
 import { NumberField, TextField } from "@/components/ui";
 
 interface Runway {
@@ -59,7 +59,7 @@ export default function PortfolioDashboard({ initial }: { initial: Payload }) {
   const [adding, setAdding] = useState(false);
   const [draft, setDraft] = useState({
     label: "",
-    stateCode: "CO",
+    jurisdictionCode: "US-CO",
     county: "",
     acres: undefined as number | undefined,
     price: undefined as number | undefined,
@@ -110,7 +110,7 @@ export default function PortfolioDashboard({ initial }: { initial: Payload }) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         label: draft.label,
-        stateCode: draft.stateCode,
+        jurisdictionCode: draft.jurisdictionCode,
         county: draft.county,
         acres: draft.acres,
         stage: draft.stage,
@@ -121,7 +121,7 @@ export default function PortfolioDashboard({ initial }: { initial: Payload }) {
         verdict: null,
       }),
     });
-    setDraft({ label: "", stateCode: "CO", county: "", acres: undefined, price: undefined, reliableAcreFeet: undefined, stage: "prospect" });
+    setDraft({ label: "", jurisdictionCode: "US-CO", county: "", acres: undefined, price: undefined, reliableAcreFeet: undefined, stage: "prospect" });
     setAdding(false);
     await load();
   }
@@ -250,8 +250,8 @@ export default function PortfolioDashboard({ initial }: { initial: Payload }) {
             <label className="block">
               <span className="label">State</span>
               <span className="block mb-1.5" />
-              <select className="field" value={draft.stateCode} onChange={(e) => setDraft((d) => ({ ...d, stateCode: e.target.value }))}>
-                {STATE_LIST.map((s) => (
+              <select className="field" value={draft.jurisdictionCode} onChange={(e) => setDraft((d) => ({ ...d, jurisdictionCode: e.target.value }))}>
+                {JURISDICTIONS.map((s) => (
                   <option key={s.code} value={s.code}>
                     {s.code}
                   </option>
@@ -317,7 +317,7 @@ export default function PortfolioDashboard({ initial }: { initial: Payload }) {
                         <div className="font-medium">{h.label}</div>
                         <div className="text-xs mt-0.5" style={{ color: "var(--fg-muted)" }}>
                           {h.acres.toLocaleString()} ac · {h.county ? `${h.county} County, ` : ""}
-                          {h.stateCode}
+                          {h.jurisdictionCode}
                           {h.reliableAcreFeet ? ` · ${h.reliableAcreFeet} AF/yr` : ""}
                           {h.price ? ` · ${money(h.price)}` : ""}
                         </div>

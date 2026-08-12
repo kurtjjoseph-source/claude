@@ -10,7 +10,7 @@ import type { Assessment, ParcelInput, SellerQuestion } from "@/lib/types";
  */
 
 export function buildSellerQuestions(input: ParcelInput, assessment: Assessment): SellerQuestion[] {
-  const { stateProfile: sp } = assessment;
+  const { jurisdiction: sp } = assessment;
   const qs: SellerQuestion[] = [];
   const appropriative = sp.surfaceDoctrine === "prior-appropriation" || sp.surfaceDoctrine === "hybrid";
 
@@ -130,6 +130,33 @@ export function buildSellerQuestions(input: ParcelInput, assessment: Assessment)
       "Buyers check access to the house and forget access to the headgate. A right you cannot physically reach and maintain is not usable, and ditch easements are frequently unrecorded.",
     documentRequested: "Recorded easements for both parcel access and ditch/diversion access",
   });
+
+  if (assessment.crossBorder) {
+    qs.push({
+      id: "q-foreign-precedent",
+      question:
+        "Have you sold to a foreign buyer before, and can you put me in touch with the lawyer and notary who handled it?",
+      reading:
+        "A seller who has done it before knows what the process demands and their advisers have a track record you can check. A seller who has not may be sincere and still unable to deliver a clean transfer.",
+    });
+
+    qs.push({
+      id: "q-occupation",
+      question:
+        "Is anyone living on, grazing, cropping or otherwise using any part of this land, and on what basis?",
+      reading:
+        "Ask it about every part of the property, not the whole. Occupation by workers, neighbours or a community is the most common encumbrance that never reaches a register, and long occupation can ripen into a legal claim.",
+    });
+
+    qs.push({
+      id: "q-price-currency",
+      question:
+        "In what currency is the price fixed, how will the funds be routed, and who is responsible for the transfer taxes and registration fees?",
+      reading:
+        "Vagueness on routing is a warning. Purchase money that does not enter through the proper channel is frequently impossible to repatriate later, whatever the seller says at signing.",
+      documentRequested: "Draft contract showing price, currency, payment mechanism and cost allocation",
+    });
+  }
 
   qs.push({
     id: "q-why-selling",

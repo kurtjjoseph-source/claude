@@ -2,7 +2,14 @@
 
 import { useMemo, useState } from "react";
 import type { AcquisitionPlan, Assessment, DocumentId, ParcelInput } from "@/lib/types";
-import { STATE_LIST, DOCTRINE_LABELS } from "@/lib/water/states";
+import {
+  JURISDICTIONS,
+  DOCTRINE_LABELS,
+  BUYER_COUNTRIES,
+  byRegion,
+  countryCodeOf,
+  getJurisdiction,
+} from "@/lib/water/registry";
 import { CheckGroup, ChoiceGroup, NumberField, TextField } from "@/components/ui";
 import PlanView from "@/components/PlanView";
 
@@ -28,8 +35,11 @@ const DOCUMENTS: Array<{ value: DocumentId; label: string }> = [
 
 const INITIAL: ParcelInput = {
   label: "",
-  stateCode: "CO",
+  jurisdictionCode: "US-CO",
   county: "",
+  buyerCountry: "US",
+  ownershipStructure: "undecided",
+  hasLocalResidency: "no",
   acres: 0,
   intent: "irrigated-crop",
   surfaceRight: "unknown",
@@ -49,6 +59,7 @@ const INITIAL: ParcelInput = {
 
 const STEP_TITLES = [
   "Location & size",
+  "You, the buyer",
   "What the water is for",
   "The surface right",
   "Wells & groundwater",
@@ -70,8 +81,12 @@ export default function Wizard() {
   const [error, setError] = useState<string | null>(null);
   const [result, setResult] = useState<Result | null>(null);
 
-  const profile = useMemo(() => STATE_LIST.find((s) => s.code === input.stateCode) ?? null, [input.stateCode]);
+  const profile = useMemo(() => JURISDICTIONS.find((s) => s.code === input.jurisdictionCode) ?? null, [input.jurisdictionCode]);
   const appropriative = profile?.surfaceDoctrine === "prior-appropriation" || profile?.surfaceDoctrine === "hybrid";
+  const crossBorder = useMemo(() => {
+    const j = getJurisdiction(input.jurisdictionCode);
+    return j ? countryCodeOf(j) !== (input.buyerCountry ?? "US") : false;
+  }, [input.jurisdictionCode, input.buyerCountry]);
 
   function set<K extends keyof ParcelInput>(key: K, value: ParcelInput[K]) {
     setInput((prev) => ({ ...prev, [key]: value }));
@@ -181,15 +196,29 @@ export default function Wizard() {
               <label className="block">
                 <span className="label">State *</span>
                 <span className="block mb-1.5" />
-                <select className="field" value={input.stateCode} onChange={(e) => set("stateCode", e.target.value)}>
-                  {STATE_LIST.map((s) => (
-                    <option key={s.code} value={s.code}>
-                      {s.name}
-                    </option>
+                <select
+                  className="field"
+                  value={input.jurisdictionCode}
+                  onChange={(e) => set("jurisdictionCode", e.target.value)}
+                >
+                  {byRegion().map((group) => (
+                    <optgroup key={group.region} label={group.label}>
+                      {group.items.map((j) => (
+                        <option key={j.code} value={j.code}>
+                          {j.name}
+                        </option>
+                      ))}
+                    </optgroup>
                   ))}
                 </select>
               </label>
-              <TextField label="County" required value={input.county} onChange={(v) => set("county", v)} placeholder="Prowers" />
+              <TextField
+                label={profile?.subdivisionLabel ?? "County"}
+                required
+                value={input.county}
+                onChange={(v) => set("county", v)}
+                placeholder={profile?.subnational ? "Prowers" : "Region or province"}
+              />
             </div>
             <div className="grid gap-4 sm:grid-cols-2">
               <NumberField label="Deeded acres *" value={input.acres || undefined} onChange={(v) => set("acres", v ?? 0)} suffix="acres" placeholder="160" />
@@ -217,8 +246,82 @@ export default function Wizard() {
           </>
         )}
 
+
         {/* ---------------------------------------------------------------- */}
         {step === 1 && (
+          <>
+            <label className="block">
+              <span className="label">Where are you buying from? *</span>
+              <span className="block text-xs mt-0.5 mb-1.5" style={{ color: "var(--fg-subtle)" }}>
+                Your nationality or country of residence. This decides whether foreign ownership rules apply at all.
+              </span>
+              <select
+                className="field"
+                value={input.buyerCountry ?? "US"}
+                onChange={(e) => set("buyerCountry", e.target.value)}
+              >
+                {BUYER_COUNTRIES.map((c) => (
+                  <option key={c.code} value={c.code}>
+                    {c.name}
+                  </option>
+                ))}
+              </select>
+            </label>
+
+            {crossBorder && profile ? (
+              <>
+                <div className="rounded-lg p-4 text-sm" style={{ background: "var(--bg-sunken)" }}>
+                  <p className="label">Buying into {profile.name} as a foreigner</p>
+                  <p className="mt-2 leading-relaxed" style={{ color: "var(--fg-muted)" }}>
+                    {profile.foreignOwnership?.summary ?? "No eligibility profile is on record for this jurisdiction."}
+                  </p>
+                  {profile.foreignOwnership?.borderCoastalRule ? (
+                    <p className="mt-2 leading-relaxed" style={{ color: "var(--color-ochre-600)" }}>
+                      {profile.foreignOwnership.borderCoastalRule}
+                    </p>
+                  ) : null}
+                </div>
+
+                <ChoiceGroup
+                  label="How would you take title?"
+                  hint="Some countries permit freehold only through a prescribed vehicle, and it cannot be changed after closing."
+                  value={input.ownershipStructure ?? "undecided"}
+                  onChange={(v) => set("ownershipStructure", v)}
+                  options={[
+                    { value: "personal-freehold", label: "Personal freehold", hint: "In your own name" },
+                    { value: "local-company", label: "Local company", hint: "Incorporated in the target country" },
+                    { value: "foreign-company", label: "Foreign company", hint: "Your existing entity" },
+                    { value: "trust-or-fideicomiso", label: "Trust / fideicomiso", hint: "Bank trust, as Mexico requires in the restricted zone" },
+                    { value: "long-lease", label: "Long lease", hint: "Where freehold is unavailable" },
+                    { value: "joint-venture-with-national", label: "JV with a national", hint: "A genuine operating partner, not a nominee" },
+                    { value: "undecided", label: "Not decided yet" },
+                  ]}
+                  columns={2}
+                />
+
+                <ChoiceGroup
+                  label={`Do you hold residency in ${profile.name}?`}
+                  hint="Residency relaxes the rules in several countries and is irrelevant in others."
+                  value={input.hasLocalResidency ?? "no"}
+                  onChange={(v) => set("hasLocalResidency", v)}
+                  options={YES_NO_UNKNOWN}
+                  columns={3}
+                />
+              </>
+            ) : (
+              <div className="rounded-lg p-4 text-sm" style={{ background: "var(--bg-sunken)" }}>
+                <p className="label">Domestic acquisition</p>
+                <p className="mt-2 leading-relaxed" style={{ color: "var(--fg-muted)" }}>
+                  You are buying in your own country, so foreign ownership rules do not apply and the score weights water
+                  security more heavily. Change the jurisdiction or your country above to run this as a cross-border deal.
+                </p>
+              </div>
+            )}
+          </>
+        )}
+
+        {/* ---------------------------------------------------------------- */}
+        {step === 2 && (
           <>
             <ChoiceGroup
               label="What do you want the water for?"
@@ -256,7 +359,7 @@ export default function Wizard() {
         )}
 
         {/* ---------------------------------------------------------------- */}
-        {step === 2 && (
+        {step === 3 && (
           <>
             <ChoiceGroup
               label="What kind of surface water right comes with the land?"
@@ -330,7 +433,7 @@ export default function Wizard() {
         )}
 
         {/* ---------------------------------------------------------------- */}
-        {step === 3 && (
+        {step === 4 && (
           <>
             <ChoiceGroup
               label="Wells on the property"
@@ -391,7 +494,7 @@ export default function Wizard() {
         )}
 
         {/* ---------------------------------------------------------------- */}
-        {step === 4 && (
+        {step === 5 && (
           <>
             <CheckGroup
               label="Which documents has the seller actually produced?"
@@ -424,7 +527,7 @@ export default function Wizard() {
         )}
 
         {/* ---------------------------------------------------------------- */}
-        {step === 5 && (
+        {step === 6 && (
           <>
             <ChoiceGroup
               label="Is there recorded legal access?"
@@ -468,7 +571,7 @@ export default function Wizard() {
         )}
 
         {/* ---------------------------------------------------------------- */}
-        {step === 6 && (
+        {step === 7 && (
           <>
             <div className="grid gap-4 sm:grid-cols-2">
               <NumberField label="Asking price" value={input.askingPrice} onChange={(v) => set("askingPrice", v)} prefix="$" placeholder="1250000" />

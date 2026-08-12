@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import DoctrineBrowser from "@/components/DoctrineBrowser";
-import { STATE_LIST } from "@/lib/water/states";
+import { JURISDICTIONS } from "@/lib/water/registry";
 
 export const metadata: Metadata = {
-  title: "State water law",
+  title: "Jurisdictions",
   description:
     "Surface doctrine, groundwater regime, forfeiture periods, agencies and buyer traps for all fifty states.",
 };
@@ -13,7 +13,7 @@ export default function DoctrinePage() {
     <div className="mx-auto max-w-4xl px-5 py-10">
       <p className="label">Reference</p>
       <h1 className="mt-2 text-3xl font-semibold tracking-tight" style={{ fontFamily: "var(--font-serif)" }}>
-        State water law
+        Jurisdictions
       </h1>
       <p className="mt-3 max-w-2xl leading-relaxed" style={{ color: "var(--fg-muted)" }}>
         The registry the engine runs on. Surface doctrine and groundwater regime are separate axes and frequently disagree
@@ -24,7 +24,7 @@ export default function DoctrinePage() {
       </p>
 
       <div className="mt-8">
-        <DoctrineBrowser states={STATE_LIST} />
+        <DoctrineBrowser states={JURISDICTIONS} />
       </div>
     </div>
   );

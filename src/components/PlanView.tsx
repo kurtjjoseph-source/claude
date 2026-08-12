@@ -3,7 +3,7 @@
 import { useState } from "react";
 import type { AcquisitionPlan, Assessment, ChecklistItem, ParcelInput } from "@/lib/types";
 import { VERDICT_COPY } from "@/lib/water/engine";
-import { DOCTRINE_LABELS, GROUNDWATER_LABELS } from "@/lib/water/states";
+import { DOCTRINE_LABELS, GROUNDWATER_LABELS, OWNERSHIP_LABELS, TITLE_SYSTEM_LABELS } from "@/lib/water/registry";
 import { Bar, ScoreRing, SeverityBadge } from "@/components/ui";
 
 const VERDICT_TONE: Record<string, string> = {
@@ -51,7 +51,7 @@ export default function PlanView({
   const [saveState, setSaveState] = useState<"idle" | "saving" | "saved" | "locked" | "error">("idle");
   const verdict = VERDICT_COPY[assessment.verdict];
   const tone = VERDICT_TONE[assessment.verdict] ?? "var(--accent)";
-  const sp = assessment.stateProfile;
+  const sp = assessment.jurisdiction;
   const wb = assessment.waterBalance;
   const [done, setDone] = useState<Set<string>>(new Set());
 
@@ -65,7 +65,7 @@ export default function PlanView({
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           label: input.label,
-          stateCode: input.stateCode,
+          jurisdictionCode: input.jurisdictionCode,
           county: input.county,
           acres: input.acres,
           stage: "prospect",
@@ -106,7 +106,9 @@ export default function PlanView({
             {input.label}
           </h1>
           <p className="mt-1.5 text-sm" style={{ color: "var(--fg-muted)" }}>
-            {input.acres.toLocaleString()} acres · {input.county} County, {sp.name} · {DOCTRINE_LABELS[sp.surfaceDoctrine]}
+            {input.acres.toLocaleString()} acres
+            {sp.subnational ? "" : ` (${Math.round(input.acres * 0.4047).toLocaleString()} ha)`} · {input.county}
+            {sp.subnational ? " County" : ""}, {sp.name} · {DOCTRINE_LABELS[sp.surfaceDoctrine]}
           </p>
         </div>
         <div className="flex items-center gap-4">
@@ -119,6 +121,19 @@ export default function PlanView({
           </div>
         </div>
       </div>
+
+      {assessment.dealBreaker ? (
+        <div
+          className="mt-5 rounded-lg p-4"
+          style={{ background: "rgba(207,95,66,0.12)", borderLeft: "3px solid var(--color-rust-500)" }}
+          role="alert"
+        >
+          <p className="label" style={{ color: "var(--color-rust-600)" }}>
+            This deal cannot proceed as structured
+          </p>
+          <p className="mt-2 text-sm leading-relaxed">{assessment.dealBreaker}</p>
+        </div>
+      ) : null}
 
       <div className="mt-5 rounded-lg p-4 text-sm leading-relaxed" style={{ background: "var(--bg-sunken)", borderLeft: `3px solid ${tone}` }}>
         {verdict.blurb}
@@ -404,7 +419,53 @@ export default function PlanView({
         <p className="text-[15px] leading-relaxed">{plan.portfolioFit}</p>
       </Section>
 
-      {/* State reference */}
+      {/* Eligibility reference */}
+      {assessment.crossBorder && sp.foreignOwnership && sp.countryRisk ? (
+        <Section title="Buying here as a foreigner" kicker="Eligibility & country risk">
+          <div className="surface p-5 text-sm space-y-3">
+            <dl className="grid gap-x-6 gap-y-2 sm:grid-cols-2">
+              {[
+                ["Ownership regime", OWNERSHIP_LABELS[sp.foreignOwnership.regime] ?? sp.foreignOwnership.regime],
+                ["Title system", TITLE_SYSTEM_LABELS[sp.countryRisk.titleSystem] ?? sp.countryRisk.titleSystem],
+                ["Expropriation risk", sp.countryRisk.expropriationRisk],
+                ["Defective title risk", sp.countryRisk.titleReliability],
+                ["Community claim risk", sp.countryRisk.customaryTenureRisk],
+                ["Exchange controls", sp.countryRisk.currencyControls ? "Yes" : "None"],
+              ].map(([k, v]) => (
+                <div key={k}>
+                  <dt className="label">{k}</dt>
+                  <dd className="mt-0.5 capitalize">{v}</dd>
+                </div>
+              ))}
+            </dl>
+            <div className="pt-3 space-y-2" style={{ borderTop: "1px solid var(--line)" }}>
+              <p className="leading-relaxed">{sp.foreignOwnership.summary}</p>
+              <p className="leading-relaxed" style={{ color: "var(--fg-muted)" }}>
+                <span className="label">Rural land</span> {sp.foreignOwnership.ruralLandRule}
+              </p>
+              <p className="leading-relaxed" style={{ color: "var(--fg-muted)" }}>
+                <span className="label">Water rights</span> {sp.foreignOwnership.waterRightsForeignRule}
+              </p>
+              {sp.foreignOwnership.approvalBody ? (
+                <p className="leading-relaxed" style={{ color: "var(--fg-muted)" }}>
+                  <span className="label">Approval</span> {sp.foreignOwnership.approvalBody.name} —{" "}
+                  <a href={sp.foreignOwnership.approvalBody.url} target="_blank" rel="noreferrer" style={{ color: "var(--accent)" }}>
+                    {sp.foreignOwnership.approvalBody.url.replace(/^https?:\/\//, "")}
+                  </a>
+                  {sp.foreignOwnership.approvalTimelineDays ? ` · about ${sp.foreignOwnership.approvalTimelineDays} days` : ""}
+                </p>
+              ) : null}
+              {sp.foreignOwnership.nomineeWarning ? (
+                <p className="leading-relaxed" style={{ color: "var(--color-rust-500)" }}>
+                  <span className="label">Nominees</span> {sp.foreignOwnership.nomineeWarning}
+                </p>
+              ) : null}
+            </div>
+          </div>
+        </Section>
+      ) : null}
+
+      {/* Jurisdiction reference */}
       <Section title={`${sp.name} reference`} kicker="Governing law">
         <div className="surface p-5 text-sm space-y-3">
           <dl className="grid gap-x-6 gap-y-2 sm:grid-cols-2">

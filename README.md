@@ -5,10 +5,12 @@
 An AI-assisted diligence wizard for buying land with water rights, built around a
 single premise: **most land deals go wrong in the water, not the dirt.**
 
-You answer seven short steps about a parcel. A deterministic rules engine applies
-the governing state's water law to those facts and produces a scored assessment,
-ranked red flags, and a risk-adjusted estimate of how much water you can actually
-count on. A language model then writes the acquisition plan on top of that
+You answer eight short steps about a parcel and about yourself as a buyer. A
+deterministic rules engine applies the water law of the jurisdiction — any US
+state or one of twenty-three countries — plus, for cross-border deals, that
+country's foreign ownership rules, and produces a scored assessment, ranked red
+flags, and a risk-adjusted estimate of how much water you can actually count
+on. A language model then writes the acquisition plan on top of that
 output — sequencing, negotiation strategy, walk-away triggers, budget order.
 
 A private portfolio dashboard tracks every parcel from prospect to closing
@@ -23,8 +25,8 @@ against an acreage target (1,000 acres by default), separating deeded acres from
 
 Everything a buyer could act on — the composite score, the red flags, the
 forfeiture exposure, the reliable-yield estimate, the checklist, the seller
-questions — is computed in `src/lib/water/engine.ts` from a structured 50-state
-registry. The model receives that output and is explicitly barred from inventing
+questions — is computed in `src/lib/water/engine.ts` from a structured
+jurisdiction registry. The model receives that output and is explicitly barred from inventing
 a statutory period, a priority-date consequence, an agency requirement or a
 dollar figure.
 
@@ -41,6 +43,41 @@ ParcelInput ──▶ assessParcel()  ──▶ Assessment ──▶ generatePla
                                      questions                         walk-aways
                                      water balance                     portfolio fit
 ```
+
+## Cross-border acquisition
+
+Going international inverts the risk order. Domestically the water right is the
+hard part and ownership is assumed. Abroad the first question is whether a
+foreign buyer may hold the interest at all, and in several countries the answer
+is no — so the engine scores eligibility before hydrology and can return a
+**deal breaker** that forces a walk verdict irrespective of the composite.
+
+Twenty-three countries are modeled with a foreign-ownership profile (regime,
+rural land rule, border and coastal exclusion zones, approval body and
+timeline, caps, nominee warnings, post-closing reporting) and a country-risk
+profile (expropriation, title system and reliability, customary claim risk,
+exchange controls).
+
+| Regime | Examples |
+| --- | --- |
+| Open to foreign buyers | Chile, Uruguay, Portugal, Spain, South Africa |
+| Rural land restricted | Argentina, Brazil, Peru, Romania, France, Canada, Japan |
+| Screening approval required | Australia, New Zealand |
+| Structure required | Mexico (fideicomiso or Mexican company in the restricted zone) |
+| Leasehold only | Zambia, Mozambique, Kenya |
+| Closed | Georgia, Thailand, Morocco, Namibia |
+
+Jurisdictions are keyed ISO 3166-2 style — `US-CO`, `CL`, `AU`. Bare postal
+codes collide with ISO country codes on CA, MA and AR, and a test pins the
+namespaces apart.
+
+Two weighting tables apply. Domestic deals weight water security at 38% and
+drop the eligibility category entirely; cross-border deals give eligibility and
+country risk 20%, taken proportionally from the rest.
+
+The model layer is explicitly barred from proposing a nominee arrangement,
+because it is a criminal offence in several of these countries and
+unenforceable in most of the rest.
 
 ## What the engine actually models
 
@@ -67,8 +104,12 @@ the right largely runs with the land and the analysis genuinely is simpler.
 
 ### Scoring
 
-Five weighted categories: water security (38%), title and transferability (24%),
-physical supply (16%), land and access (12%), acquisition economics (10%).
+Domestic: water security (38%), title and transferability (24%), physical supply
+(16%), land and access (12%), acquisition economics (10%).
+
+Cross-border: eligibility and country risk takes 20%, and the rest scale down —
+water security (30%), title (19%), physical supply (13%), land and access (10%),
+economics (8%).
 
 Deal-quality credits and deductions net against a 100 baseline and clamp there.
 **Structural penalties — basin-closure risk — are applied after that clamp**, so
@@ -78,7 +119,9 @@ real calibration bug during development; `tests/engine.test.ts` now pins the
 ordering across all four risk tiers.
 
 Verdict is composite plus critical-finding count: three criticals is a walk
-regardless of score.
+regardless of score. A **deal breaker** — currently an outright bar on foreign
+ownership with no lawful structure — forces a walk on its own, because that is
+not a bad deal, it is the absence of a transaction.
 
 ### Water balance
 
@@ -128,7 +171,7 @@ Environment variables are set in the Netlify dashboard under Site
 configuration → Environment variables, and take effect on the next deploy.
 
 ```bash
-npm test        # 30 engine + registry tests
+npm test        # 53 engine, registry and store tests
 npm run build
 npm run typecheck
 ```
@@ -138,8 +181,9 @@ npm run typecheck
 | Route | |
 | --- | --- |
 | `/` | Public front door |
-| `/wizard` | Seven-step screening → acquisition plan |
-| `/doctrine` | Searchable 50-state law reference |
+| `/wizard` | Eight-step screening → acquisition plan |
+| `/opportunities` | Curated cross-border theses: what the play is, what kills it, who it suits |
+| `/doctrine` | Searchable reference across all jurisdictions |
 | `/portfolio` | Private dashboard (passphrase-gated) |
 | `POST /api/plan` | `{ input }` → `{ assessment, plan }` |
 | `GET/POST/PUT /api/portfolio` | List + roll-up, add holding, set target |
@@ -149,6 +193,9 @@ npm run typecheck
 
 ```
 src/lib/water/states.ts      50-state registry — doctrine, agency, forfeiture, regimes, traps
+src/lib/water/international.ts  23-country registry — water regime, foreign ownership, country risk
+src/lib/water/registry.ts    Merged lookup, region grouping, cross-border detection
+src/lib/opportunities.ts     Curated acquisition theses
 src/lib/water/engine.ts      Deterministic scoring, findings, water balance
 src/lib/plan/checklist.ts    Phased diligence checklist, blocking items flagged
 src/lib/plan/seller-questions.ts  Questions + how to read the answers

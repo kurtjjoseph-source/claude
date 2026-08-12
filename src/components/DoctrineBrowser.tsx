@@ -1,8 +1,8 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import type { StateWaterProfile } from "@/lib/types";
-import { DOCTRINE_LABELS, GROUNDWATER_LABELS } from "@/lib/water/states";
+import type { JurisdictionProfile } from "@/lib/types";
+import { DOCTRINE_LABELS, GROUNDWATER_LABELS, OWNERSHIP_LABELS } from "@/lib/water/registry";
 
 const RISK_TONE: Record<string, string> = {
   low: "var(--color-sage-400)",
@@ -12,24 +12,44 @@ const RISK_TONE: Record<string, string> = {
 };
 
 const FILTERS = [
-  { value: "all", label: "All states" },
+  { value: "all", label: "Everywhere" },
+  { value: "international", label: "International only" },
+  { value: "open", label: "Open to foreign buyers" },
+  { value: "closed", label: "Closed or restricted" },
+  { value: "tradable-entitlement", label: "Tradable water" },
   { value: "prior-appropriation", label: "Prior appropriation" },
-  { value: "hybrid", label: "Hybrid" },
-  { value: "regulated-riparian", label: "Regulated riparian" },
-  { value: "riparian", label: "Riparian" },
 ] as const;
 
-export default function DoctrineBrowser({ states }: { states: StateWaterProfile[] }) {
+const OWNERSHIP_TONE: Record<string, string> = {
+  unrestricted: "var(--color-sage-400)",
+  "restricted-rural": "var(--color-ochre-500)",
+  "approval-required": "var(--color-ochre-500)",
+  "structure-required": "var(--color-ochre-500)",
+  "leasehold-only": "var(--color-rust-400)",
+  prohibited: "var(--color-rust-500)",
+};
+
+export default function DoctrineBrowser({ states }: { states: JurisdictionProfile[] }) {
   const [query, setQuery] = useState("");
   const [doctrine, setDoctrine] = useState<(typeof FILTERS)[number]["value"]>("all");
 
   const visible = useMemo(() => {
     const q = query.trim().toLowerCase();
     return states.filter((s) => {
-      if (doctrine !== "all" && s.surfaceDoctrine !== doctrine) return false;
+      const regime = s.foreignOwnership?.regime;
+      if (doctrine === "international" && s.subnational) return false;
+      if (doctrine === "open" && regime !== "unrestricted") return false;
+      if (doctrine === "closed" && (!regime || regime === "unrestricted")) return false;
+      if (
+        (doctrine === "tradable-entitlement" || doctrine === "prior-appropriation") &&
+        s.surfaceDoctrine !== doctrine
+      ) {
+        return false;
+      }
       if (!q) return true;
       return (
         s.name.toLowerCase().includes(q) ||
+        s.country.toLowerCase().includes(q) ||
         s.code.toLowerCase() === q ||
         s.agency.short.toLowerCase().includes(q) ||
         s.specialRegimes.some((r) => r.name.toLowerCase().includes(q))
@@ -75,12 +95,20 @@ export default function DoctrineBrowser({ states }: { states: StateWaterProfile[
             <summary className="cursor-pointer list-none p-4 flex flex-wrap items-center gap-x-4 gap-y-2 justify-between hover:bg-[var(--bg-sunken)]">
               <div className="flex items-baseline gap-3 min-w-0">
                 <span className="font-mono text-xs" style={{ color: "var(--fg-subtle)" }}>
-                  {s.code}
+                  {s.subnational ? s.code.replace("US-", "") : s.code}
                 </span>
                 <span className="font-semibold tracking-tight">{s.name}</span>
                 <span className="text-xs" style={{ color: "var(--fg-muted)" }}>
                   {DOCTRINE_LABELS[s.surfaceDoctrine]}
                 </span>
+                {s.foreignOwnership ? (
+                  <span
+                    className="rounded px-1.5 py-0.5 text-[10px] font-medium uppercase tracking-wide"
+                    style={{ background: "var(--bg-sunken)", color: OWNERSHIP_TONE[s.foreignOwnership.regime] }}
+                  >
+                    {OWNERSHIP_LABELS[s.foreignOwnership.regime]}
+                  </span>
+                ) : null}
               </div>
               <div className="flex items-center gap-3 text-xs">
                 <span style={{ color: "var(--fg-subtle)" }}>
@@ -138,6 +166,31 @@ export default function DoctrineBrowser({ states }: { states: StateWaterProfile[
                   {s.agency.role}
                 </p>
               </div>
+
+              {s.foreignOwnership && s.countryRisk ? (
+                <div>
+                  <p className="label">Foreign buyers</p>
+                  <p className="mt-1 leading-relaxed">{s.foreignOwnership.summary}</p>
+                  <p className="mt-1 text-xs leading-relaxed" style={{ color: "var(--fg-muted)" }}>
+                    {s.foreignOwnership.ruralLandRule}
+                  </p>
+                  {s.foreignOwnership.borderCoastalRule ? (
+                    <p className="mt-1 text-xs leading-relaxed" style={{ color: "var(--fg-muted)" }}>
+                      {s.foreignOwnership.borderCoastalRule}
+                    </p>
+                  ) : null}
+                  {s.foreignOwnership.nomineeWarning ? (
+                    <p className="mt-1 text-xs leading-relaxed" style={{ color: "var(--color-rust-500)" }}>
+                      {s.foreignOwnership.nomineeWarning}
+                    </p>
+                  ) : null}
+                  <p className="mt-1.5 text-xs" style={{ color: "var(--fg-subtle)" }}>
+                    Expropriation risk {s.countryRisk.expropriationRisk} · defective title risk{" "}
+                    {s.countryRisk.titleReliability} · community claim risk {s.countryRisk.customaryTenureRisk}
+                    {s.countryRisk.currencyControls ? " · exchange controls apply" : ""}
+                  </p>
+                </div>
+              ) : null}
 
               {s.specialRegimes.length > 0 ? (
                 <div>

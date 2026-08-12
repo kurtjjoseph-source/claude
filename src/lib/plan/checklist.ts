@@ -10,12 +10,96 @@ import type { Assessment, ChecklistItem, ParcelInput } from "@/lib/types";
  */
 
 export function buildChecklist(input: ParcelInput, assessment: Assessment): ChecklistItem[] {
-  const { stateProfile: sp } = assessment;
+  const { jurisdiction: sp } = assessment;
   const items: ChecklistItem[] = [];
   const has = (id: string) => assessment.findings.some((f) => f.id === id);
   const severityOf = (id: string) => assessment.findings.find((f) => f.id === id)?.severity;
 
   const push = (item: ChecklistItem) => items.push(item);
+
+  // -------------------------------------------------------------------------
+  // Cross-border eligibility — before anything else, including the water
+  // -------------------------------------------------------------------------
+
+  if (assessment.crossBorder) {
+    const fo = sp.foreignOwnership;
+    const cr = sp.countryRisk;
+
+    push({
+      id: "confirm-eligibility",
+      phase: "pre-offer",
+      task: `Confirm in writing that a buyer of your nationality, using your intended structure, may lawfully hold this class of land in ${sp.name}.`,
+      owner: `${sp.name} counsel — engaged by you, not introduced by the seller or agent`,
+      rationale:
+        "Eligibility is binary and it precedes every other question. Money spent on water diligence before this is answered is money at risk.",
+      blocking: true,
+    });
+
+    if (fo?.borderCoastalRule) {
+      push({
+        id: "check-exclusion-zone",
+        phase: "pre-offer",
+        task: "Plot the parcel's coordinates against the border and coastal exclusion zones and confirm it falls outside them.",
+        owner: "Local surveyor or counsel",
+        rationale: fo.borderCoastalRule,
+        blocking: true,
+      });
+    }
+
+    if (fo?.approvalBody) {
+      push({
+        id: "screening-application",
+        phase: "escrow",
+        task: `Prepare and lodge the ${fo.approvalBody.short} application, and make completion conditional on consent with a long-stop date and full deposit refund on refusal.`,
+        owner: `${fo.approvalBody.name} — ${fo.approvalBody.url}`,
+        rationale: `Approval takes roughly ${fo.approvalTimelineDays ?? 90} days and is not guaranteed. An unconditional contract exposes the deposit to a refusal you do not control.`,
+        blocking: true,
+      });
+    }
+
+    if (fo?.regime === "structure-required" || fo?.regime === "leasehold-only") {
+      push({
+        id: "establish-structure",
+        phase: "pre-offer",
+        task: "Establish the holding vehicle before negotiating price, and model its tax, financing and exit consequences.",
+        owner: "Local counsel and a cross-border tax adviser",
+        rationale:
+          "The vehicle cannot be retrofitted after closing, and it determines what you can later sell and to whom.",
+        blocking: true,
+      });
+    }
+
+    if (cr?.currencyControls) {
+      push({
+        id: "register-inbound-capital",
+        phase: "closing",
+        task: "Route the purchase price through the prescribed banking channel and obtain the inbound investment registration or endorsement at the time of transfer.",
+        owner: "Central bank / authorised dealer bank",
+        rationale: cr.repatriationNote,
+        blocking: true,
+      });
+    }
+
+    push({
+      id: "walk-the-boundaries",
+      phase: "diligence",
+      task: "Visit the land, walk the boundaries with a local surveyor, and speak to neighbouring occupiers and the local authority about any competing claims.",
+      owner: "You, in person",
+      rationale:
+        "Occupation and community claims do not appear on any register. This is the only diligence step that reliably surfaces them, and it cannot be delegated to a desk.",
+      blocking: cr?.customaryTenureRisk === "high" || cr?.customaryTenureRisk === "severe",
+    });
+
+    push({
+      id: "tax-treaty-review",
+      phase: "diligence",
+      task: "Review withholding, capital gains and inheritance exposure in both countries, and check whether a bilateral investment treaty covers your nationality and structure.",
+      owner: "Cross-border tax counsel",
+      rationale:
+        "Treaty protection is a function of how you hold the asset, and it has to be in place before acquisition to be worth anything.",
+      blocking: false,
+    });
+  }
 
   // -------------------------------------------------------------------------
   // Pre-offer — cheap, fast, and disqualifying

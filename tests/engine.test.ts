@@ -1,14 +1,21 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { assessParcel } from "../src/lib/water/engine";
-import { STATE_LIST, STATE_PROFILES, getStateProfile } from "../src/lib/water/states";
+import {
+  ALL_JURISDICTIONS,
+  JURISDICTIONS,
+  INTERNATIONAL,
+  US_STATES,
+  getJurisdiction,
+  isCrossBorder,
+} from "../src/lib/water/registry";
 import type { ParcelInput } from "../src/lib/types";
 
 /** A deliberately clean deal: senior, adjudicated, documented, unencumbered. */
 function goodParcel(overrides: Partial<ParcelInput> = {}): ParcelInput {
   return {
     label: "Test parcel",
-    stateCode: "CO",
+    jurisdictionCode: "US-CO",
     county: "Prowers",
     acres: 160,
     intent: "irrigated-crop",
@@ -50,14 +57,19 @@ function goodParcel(overrides: Partial<ParcelInput> = {}): ParcelInput {
 // Registry integrity
 // ---------------------------------------------------------------------------
 
-test("registry covers 50 states with unique codes", () => {
-  assert.equal(STATE_LIST.length, 50);
-  const codes = new Set(STATE_LIST.map((s) => s.code));
-  assert.equal(codes.size, 50);
+test("registry covers 50 US states plus the international set, with no code collisions", () => {
+  assert.equal(Object.keys(US_STATES).length, 50);
+  assert.ok(Object.keys(INTERNATIONAL).length >= 20);
+
+  // US postal codes and ISO alpha-2 codes share a namespace, so a collision
+  // would silently shadow one entry with the other.
+  const overlap = Object.keys(US_STATES).filter((c) => c in INTERNATIONAL);
+  assert.deepEqual(overlap, [], `colliding codes: ${overlap.join(", ")}`);
+  assert.equal(JURISDICTIONS.length, Object.keys(ALL_JURISDICTIONS).length);
 });
 
 test("every profile has an agency, forum and at least one caution", () => {
-  for (const s of STATE_LIST) {
+  for (const s of JURISDICTIONS) {
     assert.ok(s.agency.name.length > 0, `${s.code} missing agency name`);
     assert.ok(s.agency.url.startsWith("https://"), `${s.code} agency url must be https`);
     assert.ok(s.adjudicationForum.length > 0, `${s.code} missing adjudication forum`);
@@ -67,7 +79,7 @@ test("every profile has an agency, forum and at least one caution", () => {
 });
 
 test("forfeiture periods are plausible where defined", () => {
-  for (const s of STATE_LIST) {
+  for (const s of JURISDICTIONS) {
     if (s.forfeitureYears !== null) {
       assert.ok(s.forfeitureYears >= 1 && s.forfeitureYears <= 20, `${s.code}: ${s.forfeitureYears}`);
     }
@@ -75,13 +87,21 @@ test("forfeiture periods are plausible where defined", () => {
 });
 
 test("known doctrine assignments are correct", () => {
-  assert.equal(STATE_PROFILES.CO?.surfaceDoctrine, "prior-appropriation");
-  assert.equal(STATE_PROFILES.TX?.groundwaterRegime, "rule-of-capture");
-  assert.equal(STATE_PROFILES.CA?.surfaceDoctrine, "hybrid");
-  assert.equal(STATE_PROFILES.NE?.groundwaterRegime, "correlative");
-  assert.equal(STATE_PROFILES.FL?.surfaceDoctrine, "regulated-riparian");
-  assert.equal(getStateProfile("co")?.code, "CO");
-  assert.equal(getStateProfile("ZZ"), null);
+  assert.equal(US_STATES["US-CO"]?.surfaceDoctrine, "prior-appropriation");
+  assert.equal(US_STATES["US-TX"]?.groundwaterRegime, "rule-of-capture");
+  assert.equal(US_STATES["US-CA"]?.surfaceDoctrine, "hybrid");
+  assert.equal(US_STATES["US-NE"]?.groundwaterRegime, "correlative");
+  assert.equal(US_STATES["US-FL"]?.surfaceDoctrine, "regulated-riparian");
+  assert.equal(getJurisdiction("us-co")?.code, "US-CO");
+  assert.equal(getJurisdiction("ZZ"), null);
+
+  // The three codes that used to collide must now resolve to distinct entries.
+  assert.equal(getJurisdiction("US-CA")?.name, "California");
+  assert.equal(getJurisdiction("CA")?.name, "Canada");
+  assert.equal(getJurisdiction("US-MA")?.name, "Massachusetts");
+  assert.equal(getJurisdiction("MA")?.name, "Morocco");
+  assert.equal(getJurisdiction("US-AR")?.name, "Arkansas");
+  assert.equal(getJurisdiction("AR")?.name, "Argentina");
 });
 
 // ---------------------------------------------------------------------------
@@ -89,8 +109,8 @@ test("known doctrine assignments are correct", () => {
 // ---------------------------------------------------------------------------
 
 test("assessParcel runs for every state without throwing", () => {
-  for (const s of STATE_LIST) {
-    const result = assessParcel(goodParcel({ stateCode: s.code }));
+  for (const s of JURISDICTIONS) {
+    const result = assessParcel(goodParcel({ jurisdictionCode: s.code }));
     assert.ok(result.composite >= 0 && result.composite <= 100, `${s.code} composite out of range`);
     assert.ok(result.checklist.length > 0, `${s.code} produced no checklist`);
     assert.ok(result.sellerQuestions.length > 0, `${s.code} produced no seller questions`);
@@ -104,8 +124,8 @@ test("a clean senior deal scores well and is not a walk", () => {
   assert.equal(r.findings.filter((f) => f.severity === "critical").length, 0);
 });
 
-test("unknown state code throws", () => {
-  assert.throws(() => assessParcel(goodParcel({ stateCode: "ZZ" })), /Unknown state code/);
+test("unknown jurisdiction code throws", () => {
+  assert.throws(() => assessParcel(goodParcel({ jurisdictionCode: "ZZ" })), /Unknown jurisdiction code/);
 });
 
 test("non-use beyond the forfeiture period raises a critical finding", () => {
@@ -127,8 +147,8 @@ test("non-use below the threshold does not raise forfeiture", () => {
 test("forfeiture threshold is state-specific", () => {
   // North Dakota forfeits after 3 years; the same 4-year gap is critical there
   // and unremarkable in Colorado.
-  const nd = assessParcel(goodParcel({ stateCode: "ND", longestNonUseGapYears: 4 }));
-  const co = assessParcel(goodParcel({ stateCode: "CO", longestNonUseGapYears: 4 }));
+  const nd = assessParcel(goodParcel({ jurisdictionCode: "US-ND", longestNonUseGapYears: 4 }));
+  const co = assessParcel(goodParcel({ jurisdictionCode: "US-CO", longestNonUseGapYears: 4 }));
   assert.ok(nd.findings.some((f) => f.id === "forfeiture-exposure"));
   assert.ok(!co.findings.some((f) => f.id === "forfeiture-exposure"));
 });
@@ -151,14 +171,14 @@ test("junior priority reduces reliable yield relative to senior", () => {
 });
 
 test("riparian claims are flagged in prior-appropriation states but not riparian ones", () => {
-  const co = assessParcel(goodParcel({ stateCode: "CO", surfaceRight: "riparian" }));
-  const ga = assessParcel(goodParcel({ stateCode: "GA", surfaceRight: "riparian" }));
+  const co = assessParcel(goodParcel({ jurisdictionCode: "US-CO", surfaceRight: "riparian" }));
+  const ga = assessParcel(goodParcel({ jurisdictionCode: "US-GA", surfaceRight: "riparian" }));
   assert.ok(co.findings.some((f) => f.id === "riparian-claim-in-appropriation-state"));
   assert.ok(!ga.findings.some((f) => f.id === "riparian-claim-in-appropriation-state"));
 });
 
 test("Texas surfaces the severable groundwater estate", () => {
-  const r = assessParcel(goodParcel({ stateCode: "TX" }));
+  const r = assessParcel(goodParcel({ jurisdictionCode: "US-TX" }));
   assert.ok(r.findings.some((f) => f.id === "groundwater-estate-severable"));
   assert.ok(r.checklist.some((c) => c.id === "groundwater-estate-search" && c.blocking));
 });
@@ -233,8 +253,8 @@ test("stacked critical failures produce a walk verdict", () => {
 });
 
 test("the reliability factor never exceeds 1 and never goes negative", () => {
-  for (const s of STATE_LIST) {
-    const r = assessParcel(goodParcel({ stateCode: s.code }));
+  for (const s of JURISDICTIONS) {
+    const r = assessParcel(goodParcel({ jurisdictionCode: s.code }));
     assert.ok(r.waterBalance.reliabilityFactor > 0 && r.waterBalance.reliabilityFactor <= 1, s.code);
   }
 });
@@ -246,7 +266,7 @@ test("category weights sum to 1", () => {
 });
 
 test("findings are deduplicated and severity-ordered", () => {
-  const r = assessParcel(goodParcel({ stateCode: "CA", previouslySevered: "unknown", aquiferTrend: "declining" }));
+  const r = assessParcel(goodParcel({ jurisdictionCode: "US-CA", previouslySevered: "unknown", aquiferTrend: "declining" }));
   const ids = r.findings.map((f) => f.id);
   assert.equal(new Set(ids).size, ids.length, "duplicate finding ids");
 
@@ -270,8 +290,8 @@ test("basin-closure risk survives the credit clamp", () => {
   // The same flawless deal must not score identically in a severely
   // over-appropriated basin and an open one. Credits must not absorb the
   // structural penalty.
-  const severe = assessParcel(goodParcel({ stateCode: "NV" })); // severe closure risk
-  const open = assessParcel(goodParcel({ stateCode: "AK" })); // low closure risk
+  const severe = assessParcel(goodParcel({ jurisdictionCode: "US-NV" })); // severe closure risk
+  const open = assessParcel(goodParcel({ jurisdictionCode: "US-AK" })); // low closure risk
   assert.ok(
     severe.composite < open.composite,
     `severe-risk basin (${severe.composite}) should score below an open one (${open.composite})`,
@@ -286,25 +306,25 @@ test("a top score is only reachable where the basin carries no structural risk",
   // A flawless set of answers can legitimately score 100 in a low-risk riparian
   // state — the water genuinely runs with the land there. It must never do so
   // anywhere the basin is under pressure, however clean the paperwork looks.
-  for (const s of STATE_LIST) {
-    const r = assessParcel(goodParcel({ stateCode: s.code }));
+  for (const s of JURISDICTIONS) {
+    const r = assessParcel(goodParcel({ jurisdictionCode: s.code }));
     if (s.closedBasinRisk !== "low") {
       assert.ok(r.composite < 100, `${s.code} (${s.closedBasinRisk} risk) scored ${r.composite}`);
     }
   }
 
   // And the penalty must scale with the risk tier.
-  const byTier = (code: string) => assessParcel(goodParcel({ stateCode: code })).composite;
-  assert.ok(byTier("NV") < byTier("CO"), "severe risk should score below high risk");
-  assert.ok(byTier("CO") < byTier("OK"), "high risk should score below moderate risk");
-  assert.ok(byTier("OK") < byTier("AK"), "moderate risk should score below low risk");
+  const byTier = (code: string) => assessParcel(goodParcel({ jurisdictionCode: code })).composite;
+  assert.ok(byTier("US-NV") < byTier("US-CO"), "severe risk should score below high risk");
+  assert.ok(byTier("US-CO") < byTier("US-OK"), "high risk should score below moderate risk");
+  assert.ok(byTier("US-OK") < byTier("US-AK"), "moderate risk should score below low risk");
 });
 
 test("groundwater-only parcels are not penalized for having no priority date", () => {
   // Texas groundwater has no priority dates at all; scoring it as though a
   // date went missing would be a category error.
   const gw = goodParcel({
-    stateCode: "TX",
+    jurisdictionCode: "US-TX",
     surfaceRight: "none",
     priorityDate: undefined,
     adjudication: "not-applicable",
@@ -318,15 +338,154 @@ test("groundwater-only parcels are not penalized for having no priority date", (
 });
 
 test("surface rights in the same state still take the seniority discount", () => {
-  const senior = assessParcel(goodParcel({ stateCode: "TX", surfaceRight: "decreed-appropriative", priorityDate: "1890" }));
-  const undated = assessParcel(goodParcel({ stateCode: "TX", surfaceRight: "decreed-appropriative", priorityDate: undefined }));
+  const senior = assessParcel(goodParcel({ jurisdictionCode: "US-TX", surfaceRight: "decreed-appropriative", priorityDate: "1890" }));
+  const undated = assessParcel(goodParcel({ jurisdictionCode: "US-TX", surfaceRight: "decreed-appropriative", priorityDate: undefined }));
   assert.ok(undated.findings.some((f) => f.id === "no-priority-date"));
   assert.ok(undated.waterBalance.reliabilityFactor < senior.waterBalance.reliabilityFactor);
 });
 
+// ---------------------------------------------------------------------------
+// International
+// ---------------------------------------------------------------------------
+
+test("every international profile carries ownership and country-risk data", () => {
+  for (const j of Object.values(INTERNATIONAL)) {
+    assert.ok(j.foreignOwnership, `${j.code} has no foreignOwnership profile`);
+    assert.ok(j.countryRisk, `${j.code} has no countryRisk profile`);
+    assert.equal(j.subnational, false, `${j.code} should be country-level`);
+    assert.equal(j.country, j.name, `${j.code} country should equal name`);
+    assert.ok(j.foreignOwnership!.summary.length > 0, `${j.code} ownership summary empty`);
+    assert.ok(j.foreignOwnership!.ruralLandRule.length > 0, `${j.code} rural rule empty`);
+  }
+});
+
+test("assessParcel runs for every international jurisdiction", () => {
+  for (const j of Object.values(INTERNATIONAL)) {
+    const r = assessParcel(goodParcel({ jurisdictionCode: j.code, buyerCountry: "US", county: "Test" }));
+    assert.ok(r.composite >= 0 && r.composite <= 100, `${j.code} composite out of range`);
+    assert.equal(r.crossBorder, true, `${j.code} should be cross-border for a US buyer`);
+    assert.ok(r.checklist.length > 0);
+  }
+});
+
+test("cross-border is decided by the buyer's country, not the jurisdiction", () => {
+  // A US buyer in Colorado is domestic; the same parcel for a Chilean buyer is not.
+  const domestic = assessParcel(goodParcel({ jurisdictionCode: "US-CO", buyerCountry: "US" }));
+  assert.equal(domestic.crossBorder, false);
+  assert.equal(isCrossBorder(getJurisdiction("US-CO")!, "US"), false);
+  assert.equal(isCrossBorder(getJurisdiction("US-CO")!, "CL"), true);
+
+  // A Chilean buying in Chile is domestic too.
+  const local = assessParcel(goodParcel({ jurisdictionCode: "CL", buyerCountry: "CL", county: "Maule" }));
+  assert.equal(local.crossBorder, false);
+
+  // Omitting buyerCountry must not silently invent a cross-border deal.
+  const unstated = assessParcel(goodParcel({ jurisdictionCode: "CL", county: "Maule" }));
+  assert.equal(unstated.crossBorder, false);
+});
+
+test("the eligibility category only carries weight on cross-border deals", () => {
+  const domestic = assessParcel(goodParcel({ jurisdictionCode: "US-CO", buyerCountry: "US" }));
+  assert.ok(
+    !domestic.categories.some((c) => c.category === "foreign-ownership"),
+    "a zero-weight category should be dropped rather than shown at 0%",
+  );
+
+  const abroad = assessParcel(goodParcel({ jurisdictionCode: "CL", buyerCountry: "US", county: "Maule" }));
+  const eligibility = abroad.categories.find((c) => c.category === "foreign-ownership");
+  assert.ok(eligibility, "cross-border deals must score eligibility");
+  assert.equal(eligibility!.weight, 0.2);
+
+  // Weights must still sum to 1 in both modes.
+  for (const a of [domestic, abroad]) {
+    const total = a.categories.reduce((t, c) => t + c.weight, 0);
+    assert.ok(Math.abs(total - 1) < 1e-9, `weights sum to ${total}`);
+  }
+});
+
+test("a country that bars foreign ownership yields a deal breaker and a walk", () => {
+  for (const code of ["GE", "TH", "NA", "MA"]) {
+    const r = assessParcel(goodParcel({ jurisdictionCode: code, buyerCountry: "US", county: "Test" }));
+    assert.ok(r.dealBreaker, `${code} should set a deal breaker`);
+    assert.equal(r.verdict, "walk", `${code} should be a walk`);
+    assert.ok(r.findings.some((f) => f.id === "ownership-prohibited" && f.severity === "critical"));
+  }
+});
+
+test("a prohibition forces a walk even when everything else is perfect", () => {
+  // Georgia is water-rich and cheap; without the constitutional bar this would
+  // score well. The verdict must not be reachable by arithmetic.
+  const r = assessParcel(
+    goodParcel({ jurisdictionCode: "GE", buyerCountry: "US", county: "Kakheti", askingPrice: 200_000 }),
+  );
+  assert.equal(r.verdict, "walk");
+  assert.match(r.dealBreaker!, /bars foreign ownership/);
+});
+
+test("a Georgian buyer in Georgia is not blocked by the foreign ownership bar", () => {
+  const r = assessParcel(goodParcel({ jurisdictionCode: "GE", buyerCountry: "GE", county: "Kakheti" }));
+  assert.equal(r.crossBorder, false);
+  assert.equal(r.dealBreaker, null);
+  assert.notEqual(r.verdict, "walk");
+});
+
+test("Mexico flags a structure mismatch for personal freehold", () => {
+  const wrong = assessParcel(
+    goodParcel({ jurisdictionCode: "MX", buyerCountry: "US", county: "Sonora", ownershipStructure: "personal-freehold" }),
+  );
+  assert.ok(wrong.findings.some((f) => f.id === "structure-mismatch" && f.severity === "critical"));
+
+  const right = assessParcel(
+    goodParcel({ jurisdictionCode: "MX", buyerCountry: "US", county: "Sonora", ownershipStructure: "trust-or-fideicomiso" }),
+  );
+  assert.ok(!right.findings.some((f) => f.id === "structure-mismatch"));
+  assert.ok(right.composite > wrong.composite);
+});
+
+test("open jurisdictions score eligibility well and closed ones badly", () => {
+  const score = (code: string) => {
+    const a = assessParcel(goodParcel({ jurisdictionCode: code, buyerCountry: "US", county: "Test" }));
+    return a.categories.find((c) => c.category === "foreign-ownership")!.score;
+  };
+  // Uruguay and Chile are genuinely open; Thailand and Kenya are not.
+  assert.ok(score("UY") > 80, `Uruguay scored ${score("UY")}`);
+  assert.ok(score("CL") > 70, `Chile scored ${score("CL")}`);
+  assert.ok(score("TH") < 20, `Thailand scored ${score("TH")}`);
+  assert.ok(score("KE") < 60, `Kenya scored ${score("KE")}`);
+});
+
+test("screening jurisdictions surface the approval body and a conditional-contract step", () => {
+  for (const code of ["AU", "NZ"]) {
+    const r = assessParcel(goodParcel({ jurisdictionCode: code, buyerCountry: "US", county: "Test" }));
+    assert.ok(r.findings.some((f) => f.id === "screening-approval"), `${code} missing screening finding`);
+    assert.ok(r.checklist.some((c) => c.id === "screening-application" && c.blocking), `${code} missing application step`);
+  }
+});
+
+test("exchange-control countries require the inbound capital step", () => {
+  const r = assessParcel(goodParcel({ jurisdictionCode: "ZA", buyerCountry: "US", county: "Northern Cape" }));
+  assert.ok(r.findings.some((f) => f.id === "currency-controls"));
+  assert.ok(r.checklist.some((c) => c.id === "register-inbound-capital" && c.blocking));
+});
+
+test("cross-border deals always add the eligibility and site-visit steps", () => {
+  const r = assessParcel(goodParcel({ jurisdictionCode: "UY", buyerCountry: "US", county: "Salto" }));
+  const first = r.checklist.find((c) => c.phase === "pre-offer");
+  assert.equal(first?.id, "confirm-eligibility", "eligibility must be the first pre-offer item");
+  assert.ok(r.checklist.some((c) => c.id === "walk-the-boundaries"));
+  assert.ok(r.sellerQuestions.some((q) => q.id === "q-occupation"));
+});
+
+test("Chile models water as an asset separable from the land", () => {
+  const cl = getJurisdiction("CL")!;
+  assert.equal(cl.surfaceDoctrine, "tradable-entitlement");
+  assert.equal(cl.transferability, "severable-freely");
+  assert.equal(cl.foreignOwnership!.regime, "unrestricted");
+});
+
 test("every checklist item names an owner and a rationale", () => {
-  for (const s of STATE_LIST) {
-    for (const item of assessParcel(goodParcel({ stateCode: s.code })).checklist) {
+  for (const s of JURISDICTIONS) {
+    for (const item of assessParcel(goodParcel({ jurisdictionCode: s.code })).checklist) {
       assert.ok(item.owner.trim().length > 0, `${s.code}/${item.id} has no owner`);
       assert.ok(item.rationale.trim().length > 0, `${s.code}/${item.id} has no rationale`);
     }
@@ -334,8 +493,8 @@ test("every checklist item names an owner and a rationale", () => {
 });
 
 test("checklist ids are unique per assessment", () => {
-  for (const s of STATE_LIST) {
-    const ids = assessParcel(goodParcel({ stateCode: s.code })).checklist.map((c) => c.id);
+  for (const s of JURISDICTIONS) {
+    const ids = assessParcel(goodParcel({ jurisdictionCode: s.code })).checklist.map((c) => c.id);
     assert.equal(new Set(ids).size, ids.length, `${s.code} has duplicate checklist ids`);
   }
 });

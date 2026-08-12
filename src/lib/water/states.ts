@@ -1,4 +1,4 @@
-import type { StateWaterProfile, SpecialRegime } from "@/lib/types";
+import type { JurisdictionProfile, SpecialRegime } from "@/lib/types";
 
 /**
  * Per-state water law registry.
@@ -48,7 +48,13 @@ const WINTERS_RESERVED: SpecialRegime = {
 // Builders
 // ---------------------------------------------------------------------------
 
-type Overrides = Partial<StateWaterProfile>;
+/**
+ * US states are written without the country/region fields and stamped with them
+ * further down, so fifty entries do not each repeat the same three lines.
+ */
+type StateEntry = Omit<JurisdictionProfile, "country" | "region" | "subnational">;
+
+type Overrides = Partial<StateEntry>;
 
 /** Eastern common-law riparian state with a modern withdrawal permit overlay. */
 function riparian(
@@ -58,7 +64,7 @@ function riparian(
   agencyShort: string,
   url: string,
   overrides: Overrides = {},
-): StateWaterProfile {
+): StateEntry {
   return {
     code,
     name,
@@ -94,7 +100,7 @@ function riparian(
 // The registry
 // ---------------------------------------------------------------------------
 
-export const STATE_PROFILES: Record<string, StateWaterProfile> = {
+const US_STATE_ENTRIES: Record<string, StateEntry> = {
   // =========================================================================
   // Pure prior appropriation — the West
   // =========================================================================
@@ -1052,20 +1058,38 @@ export const STATE_PROFILES: Record<string, StateWaterProfile> = {
 };
 
 // ---------------------------------------------------------------------------
-// Lookup helpers
+// Stamp the shared country fields onto every state
 // ---------------------------------------------------------------------------
 
-export const STATE_LIST = Object.values(STATE_PROFILES).sort((a, b) => a.name.localeCompare(b.name));
-
-export function getStateProfile(code: string): StateWaterProfile | null {
-  return STATE_PROFILES[code.toUpperCase()] ?? null;
-}
+/**
+ * States are keyed ISO 3166-2 style — "US-CO", not "CO".
+ *
+ * Bare postal codes collide with ISO country codes on CA (California/Canada),
+ * MA (Massachusetts/Morocco) and AR (Arkansas/Argentina), and in a single
+ * namespace the country entries silently shadowed those three states. Namespace
+ * the subnational side rather than hoping the overlap never grows.
+ */
+export const US_STATES: Record<string, JurisdictionProfile> = Object.fromEntries(
+  Object.entries(US_STATE_ENTRIES).map(([code, entry]) => [
+    `US-${code}`,
+    {
+      ...entry,
+      code: `US-${code}`,
+      country: "United States",
+      region: "united-states" as const,
+      subnational: true,
+    },
+  ]),
+);
 
 export const DOCTRINE_LABELS: Record<string, string> = {
   "prior-appropriation": "Prior appropriation",
   hybrid: "Hybrid (appropriative + riparian)",
   riparian: "Riparian",
   "regulated-riparian": "Regulated riparian",
+  "administrative-concession": "Administrative concession",
+  "tradable-entitlement": "Tradable entitlement",
+  customary: "Customary tenure",
 };
 
 export const GROUNDWATER_LABELS: Record<string, string> = {

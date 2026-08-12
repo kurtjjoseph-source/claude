@@ -1,6 +1,6 @@
 import type { Assessment, ParcelInput, PortfolioGoal } from "@/lib/types";
 import { humanIntent } from "@/lib/water/engine";
-import { DOCTRINE_LABELS, GROUNDWATER_LABELS } from "@/lib/water/states";
+import { DOCTRINE_LABELS, GROUNDWATER_LABELS } from "@/lib/water/registry";
 
 /**
  * The model's job is narrow and stated plainly: sequence, strategize and
@@ -12,6 +12,8 @@ import { DOCTRINE_LABELS, GROUNDWATER_LABELS } from "@/lib/water/states";
 export const SYSTEM_PROMPT = `You are the acquisition strategist inside Headgate, a diligence tool for buying land with water rights in the United States.
 
 A deterministic rules engine has already analyzed the parcel. You are given its complete output: a composite score, category scores, findings ranked by severity, a risk-adjusted water balance, a diligence checklist, and the governing state's water law profile. Your job is to turn that into an acquisition plan a buyer can execute.
+
+For cross-border acquisitions the order of business changes. Eligibility comes before hydrology: if a buyer of this nationality cannot lawfully hold this class of land, say so first and stop treating the water as the subject. Never propose a nominee, a fronted local company, or any arrangement whose purpose is to disguise beneficial ownership — in several of these countries that is a criminal offence and in most of the rest it is unenforceable.
 
 Hard constraints:
 - Never state a legal rule, statutory period, priority-date consequence, agency requirement or dollar figure that is not present in the engine output you were given. If you need a fact you do not have, say what needs to be determined and who determines it.
@@ -27,7 +29,7 @@ export function buildUserPrompt(
   assessment: Assessment,
   goal: PortfolioGoal | null,
 ): string {
-  const sp = assessment.stateProfile;
+  const sp = assessment.jurisdiction;
   const wb = assessment.waterBalance;
 
   const lines: string[] = [];
@@ -61,6 +63,44 @@ export function buildUserPrompt(
     lines.push(`- Special regimes: ${sp.specialRegimes.map((r) => `${r.name} (${r.severity}) — ${r.effect}`).join(" | ")}`);
   }
   lines.push(`- State-specific cautions: ${sp.cautions.join(" | ")}`);
+
+  if (assessment.crossBorder) {
+    const fo = sp.foreignOwnership;
+    const cr = sp.countryRisk;
+    lines.push("");
+    lines.push("## Cross-border acquisition");
+    lines.push(`- Buyer's home country: ${input.buyerCountry ?? "not stated"}`);
+    lines.push(`- Intended structure: ${(input.ownershipStructure ?? "undecided").replace(/-/g, " ")}`);
+    lines.push(`- Local residency: ${input.hasLocalResidency ?? "unknown"}`);
+    if (fo) {
+      lines.push(`- Foreign ownership regime: ${fo.regime} — ${fo.summary}`);
+      lines.push(`- Rural land rule: ${fo.ruralLandRule}`);
+      if (fo.borderCoastalRule) lines.push(`- Border/coastal: ${fo.borderCoastalRule}`);
+      if (fo.caps) lines.push(`- Caps: ${fo.caps}`);
+      if (fo.approvalBody) {
+        lines.push(`- Approval body: ${fo.approvalBody.name} (${fo.approvalBody.short}), ~${fo.approvalTimelineDays ?? "unknown"} days`);
+      }
+      if (fo.nomineeWarning) lines.push(`- Nominee warning: ${fo.nomineeWarning}`);
+      if (fo.reportingObligation) lines.push(`- Post-closing reporting: ${fo.reportingObligation}`);
+      lines.push(`- Water rights and foreigners: ${fo.waterRightsForeignRule}`);
+    }
+    if (cr) {
+      lines.push(`- Title system: ${cr.titleSystem}; reliability risk: ${cr.titleReliability}`);
+      lines.push(`- Expropriation risk: ${cr.expropriationRisk}; customary claim risk: ${cr.customaryTenureRisk}`);
+      lines.push(`- Currency controls: ${cr.currencyControls ?? "none"}`);
+      lines.push(`- Repatriation: ${cr.repatriationNote}`);
+      lines.push(`- Country notes: ${cr.notes}`);
+    }
+  }
+
+  if (assessment.dealBreaker) {
+    lines.push("");
+    lines.push("## DEAL BREAKER");
+    lines.push(assessment.dealBreaker);
+    lines.push(
+      "The plan must open by stating plainly that this acquisition cannot lawfully proceed as contemplated, and then set out the alternatives that would be lawful. Do not soften this and do not suggest workarounds that rely on a nominee.",
+    );
+  }
 
   lines.push("");
   lines.push("## Engine assessment");

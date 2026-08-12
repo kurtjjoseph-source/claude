@@ -87,15 +87,24 @@ function templatePlan(
   assessment: Assessment,
   goal: PortfolioGoal | null,
 ): AcquisitionPlan {
-  const sp = assessment.stateProfile;
+  const sp = assessment.jurisdiction;
   const wb = assessment.waterBalance;
   const criticals = assessment.findings.filter((f) => f.severity === "critical");
   const majors = assessment.findings.filter((f) => f.severity === "major");
   const verdict = VERDICT_COPY[assessment.verdict];
 
-  const thesisParts: string[] = [
-    `${input.label} is ${input.acres.toLocaleString()} acres in ${input.county} County, ${sp.name}, scored ${assessment.composite}/100 — ${verdict.label.toLowerCase()}.`,
-  ];
+  const where = sp.subnational ? `${input.county} County, ${sp.name}` : `${input.county}, ${sp.name}`;
+  const thesisParts: string[] = [];
+
+  if (assessment.dealBreaker) {
+    thesisParts.push(
+      `This acquisition cannot lawfully proceed as contemplated. ${assessment.dealBreaker} Everything below is written on the assumption that you either change the structure or change the country — the water on this parcel is not the subject.`,
+    );
+  }
+
+  thesisParts.push(
+    `${input.label} is ${input.acres.toLocaleString()} acres in ${where}, scored ${assessment.composite}/100 — ${verdict.label.toLowerCase()}.`,
+  );
   if (wb.reliableAcreFeet !== null && wb.requiredAcreFeet !== null) {
     thesisParts.push(
       wb.shortfall !== null && wb.shortfall > 0
@@ -232,7 +241,7 @@ function templatePlan(
 }
 
 function buildNegotiation(input: ParcelInput, assessment: Assessment): string {
-  const sp = assessment.stateProfile;
+  const sp = assessment.jurisdiction;
   const criticals = assessment.findings.filter((f) => f.severity === "critical");
   const majors = assessment.findings.filter((f) => f.severity === "major");
   const wb = assessment.waterBalance;

@@ -4,10 +4,10 @@ import type {
   Finding,
   ParcelInput,
   ScoreCategory,
-  StateWaterProfile,
+  JurisdictionProfile,
   Verdict,
 } from "@/lib/types";
-import { getStateProfile } from "@/lib/water/states";
+import { getJurisdiction, isCrossBorder } from "@/lib/water/registry";
 import { buildChecklist } from "@/lib/plan/checklist";
 import { buildSellerQuestions } from "@/lib/plan/seller-questions";
 
@@ -19,17 +19,38 @@ import { buildSellerQuestions } from "@/lib/plan/seller-questions";
  * The model layer never touches this; it only narrates the result.
  */
 
-const WEIGHTS: Record<ScoreCategory, number> = {
+/**
+ * Domestic weighting. Water security dominates because, at home, the right to
+ * own the land is assumed and the water right is the hard part.
+ */
+const WEIGHTS_DOMESTIC: Record<ScoreCategory, number> = {
   "water-security": 0.38,
   "title-transferability": 0.24,
+  "foreign-ownership": 0,
   "physical-supply": 0.16,
   "land-access": 0.12,
   economics: 0.1,
 };
 
+/**
+ * Cross-border weighting. Eligibility, title integrity and sovereign risk take
+ * a fifth of the score, drawn proportionally from the other categories: a
+ * flawless water entitlement on land a foreigner may not hold is worth nothing,
+ * and that has to be able to move the number, not just add a footnote.
+ */
+const WEIGHTS_CROSS_BORDER: Record<ScoreCategory, number> = {
+  "water-security": 0.3,
+  "title-transferability": 0.19,
+  "foreign-ownership": 0.2,
+  "physical-supply": 0.13,
+  "land-access": 0.1,
+  economics: 0.08,
+};
+
 const CATEGORY_LABELS: Record<ScoreCategory, string> = {
   "water-security": "Water security",
   "title-transferability": "Title & transferability",
+  "foreign-ownership": "Eligibility & country risk",
   "physical-supply": "Physical supply",
   "land-access": "Land & access",
   economics: "Acquisition economics",
@@ -69,7 +90,7 @@ function priorityYear(input: ParcelInput): number | null {
   return year >= 1600 && year <= new Date().getFullYear() ? year : null;
 }
 
-function isAppropriationState(profile: StateWaterProfile): boolean {
+function isAppropriationState(profile: JurisdictionProfile): boolean {
   return profile.surfaceDoctrine === "prior-appropriation" || profile.surfaceDoctrine === "hybrid";
 }
 
@@ -130,7 +151,7 @@ class Scorer {
 
 function scoreWaterSecurity(
   input: ParcelInput,
-  profile: StateWaterProfile,
+  profile: JurisdictionProfile,
   findings: Finding[],
 ): CategoryScore {
   const s = new Scorer();
@@ -421,7 +442,7 @@ function scoreWaterSecurity(
     category: "water-security",
     label: CATEGORY_LABELS["water-security"],
     score: s.value(),
-    weight: WEIGHTS["water-security"],
+    weight: 0,
     drivers: s.drivers,
   };
 }
@@ -430,7 +451,7 @@ function scoreWaterSecurity(
 // Category: title & transferability
 // ---------------------------------------------------------------------------
 
-function scoreTitle(input: ParcelInput, profile: StateWaterProfile, findings: Finding[]): CategoryScore {
+function scoreTitle(input: ParcelInput, profile: JurisdictionProfile, findings: Finding[]): CategoryScore {
   const s = new Scorer();
 
   if (input.previouslySevered === "yes") {
@@ -584,7 +605,7 @@ function scoreTitle(input: ParcelInput, profile: StateWaterProfile, findings: Fi
     category: "title-transferability",
     label: CATEGORY_LABELS["title-transferability"],
     score: s.value(),
-    weight: WEIGHTS["title-transferability"],
+    weight: 0,
     drivers: s.drivers,
   };
 }
@@ -593,7 +614,7 @@ function scoreTitle(input: ParcelInput, profile: StateWaterProfile, findings: Fi
 // Category: physical supply
 // ---------------------------------------------------------------------------
 
-function scorePhysical(input: ParcelInput, profile: StateWaterProfile, findings: Finding[]): CategoryScore {
+function scorePhysical(input: ParcelInput, profile: JurisdictionProfile, findings: Finding[]): CategoryScore {
   const s = new Scorer();
 
   switch (input.wellStatus) {
@@ -742,7 +763,7 @@ function scorePhysical(input: ParcelInput, profile: StateWaterProfile, findings:
     category: "physical-supply",
     label: CATEGORY_LABELS["physical-supply"],
     score: s.value(),
-    weight: WEIGHTS["physical-supply"],
+    weight: 0,
     drivers: s.drivers,
   };
 }
@@ -751,7 +772,7 @@ function scorePhysical(input: ParcelInput, profile: StateWaterProfile, findings:
 // Category: land & access
 // ---------------------------------------------------------------------------
 
-function scoreLand(input: ParcelInput, _profile: StateWaterProfile, findings: Finding[]): CategoryScore {
+function scoreLand(input: ParcelInput, _profile: JurisdictionProfile, findings: Finding[]): CategoryScore {
   const s = new Scorer();
 
   if (input.legalAccess === "no") {
@@ -823,7 +844,7 @@ function scoreLand(input: ParcelInput, _profile: StateWaterProfile, findings: Fi
     category: "land-access",
     label: CATEGORY_LABELS["land-access"],
     score: s.value(),
-    weight: WEIGHTS["land-access"],
+    weight: 0,
     drivers: s.drivers,
   };
 }
@@ -834,7 +855,7 @@ function scoreLand(input: ParcelInput, _profile: StateWaterProfile, findings: Fi
 
 function scoreEconomics(
   input: ParcelInput,
-  _profile: StateWaterProfile,
+  _profile: JurisdictionProfile,
   findings: Finding[],
   reliableAcreFeet: number | null,
 ): CategoryScore {
@@ -846,7 +867,7 @@ function scoreEconomics(
       category: "economics",
       label: CATEGORY_LABELS.economics,
       score: 60,
-      weight: WEIGHTS.economics,
+      weight: 0,
       drivers: ["Neutral placeholder: supply an asking price to score acquisition economics."],
     };
   }
@@ -905,8 +926,281 @@ function scoreEconomics(
     category: "economics",
     label: CATEGORY_LABELS.economics,
     score: s.value(),
-    weight: WEIGHTS.economics,
+    weight: 0,
     drivers: s.drivers,
+  };
+}
+
+// ---------------------------------------------------------------------------
+// Category: eligibility & country risk
+// ---------------------------------------------------------------------------
+
+const OWNERSHIP_PENALTY: Record<string, number> = {
+  unrestricted: 0,
+  "restricted-rural": 22,
+  "approval-required": 18,
+  "structure-required": 16,
+  "leasehold-only": 26,
+  prohibited: 100,
+};
+
+/** Structures that actually satisfy each regime, where one exists. */
+const LAWFUL_STRUCTURES: Record<string, string[]> = {
+  "structure-required": ["trust-or-fideicomiso", "local-company", "joint-venture-with-national"],
+  "leasehold-only": ["long-lease", "local-company", "joint-venture-with-national"],
+  "approval-required": ["personal-freehold", "local-company", "foreign-company", "joint-venture-with-national"],
+  "restricted-rural": ["personal-freehold", "local-company", "joint-venture-with-national"],
+};
+
+interface OwnershipOutcome {
+  category: CategoryScore;
+  dealBreaker: string | null;
+}
+
+function scoreForeignOwnership(
+  input: ParcelInput,
+  profile: JurisdictionProfile,
+  findings: Finding[],
+  crossBorder: boolean,
+): OwnershipOutcome {
+  const s = new Scorer();
+
+  if (!crossBorder) {
+    s.note("Domestic acquisition — foreign ownership rules do not apply.");
+    return {
+      category: {
+        category: "foreign-ownership",
+        label: CATEGORY_LABELS["foreign-ownership"],
+        score: 100,
+        weight: 0,
+        drivers: s.drivers,
+      },
+      dealBreaker: null,
+    };
+  }
+
+  const fo = profile.foreignOwnership;
+  const cr = profile.countryRisk;
+  let dealBreaker: string | null = null;
+
+  if (!fo || !cr) {
+    s.deduct(30, "no foreign ownership profile on record for this jurisdiction");
+    findings.push({
+      id: "ownership-unknown",
+      severity: "major",
+      title: `Foreign ownership rules for ${profile.name} are not modeled`,
+      detail:
+        "This jurisdiction has no eligibility profile in the registry, so the engine cannot tell you whether a foreign buyer may hold this land. That is a gap in the tool, not a clean bill of health.",
+      remedy: "Instruct local counsel on foreign ownership eligibility before any other diligence spend.",
+      category: "foreign-ownership",
+    });
+    return {
+      category: {
+        category: "foreign-ownership",
+        label: CATEGORY_LABELS["foreign-ownership"],
+        score: s.value(),
+        weight: 0,
+        drivers: s.drivers,
+      },
+      dealBreaker: null,
+    };
+  }
+
+  const structure = input.ownershipStructure ?? "undecided";
+
+  // --- Eligibility ----------------------------------------------------------
+  s.deduct(OWNERSHIP_PENALTY[fo.regime] ?? 0, `${fo.regime.replace(/-/g, " ")} regime in ${profile.name}`);
+
+  if (fo.regime === "prohibited") {
+    dealBreaker = `${profile.name} bars foreign ownership of this class of land. ${fo.ruralLandRule}`;
+    findings.push({
+      id: "ownership-prohibited",
+      severity: "critical",
+      title: `Foreign buyers cannot own this land in ${profile.name}`,
+      detail: `${fo.summary} ${fo.ruralLandRule}`,
+      remedy: fo.nomineeWarning
+        ? `Do not attempt a workaround. ${fo.nomineeWarning} If you want exposure to this country, look at a long lease or a genuine operating joint venture — and take local advice before spending anything.`
+        : "Consider a long lease or an operating joint venture instead, and take local advice before committing.",
+      cureCost: "Not curable — this is a legal bar, not a cost",
+      category: "foreign-ownership",
+    });
+  } else if (fo.regime === "leasehold-only") {
+    findings.push({
+      id: "leasehold-only",
+      severity: "major",
+      title: `${profile.name} offers use rights, not ownership`,
+      detail: `${fo.summary} ${fo.ruralLandRule} A finite, renewable interest behaves nothing like freehold: it amortises, its renewal is discretionary, and it is harder to finance and to sell.`,
+      remedy:
+        "Confirm the unexpired term, the renewal mechanism and who must consent to an assignment. Underwrite the asset over the remaining term, not in perpetuity.",
+      category: "foreign-ownership",
+    });
+  } else if (fo.regime === "structure-required") {
+    const lawful = LAWFUL_STRUCTURES[fo.regime] ?? [];
+    if (structure !== "undecided" && !lawful.includes(structure)) {
+      s.deduct(25, `${structure.replace(/-/g, " ")} is not an available route for a foreign buyer here`);
+      findings.push({
+        id: "structure-mismatch",
+        severity: "critical",
+        title: "The chosen ownership structure is not lawful here",
+        detail: `You selected ${structure.replace(/-/g, " ")}, but ${profile.name} requires one of: ${lawful
+          .map((l) => l.replace(/-/g, " "))
+          .join(", ")}. ${fo.borderCoastalRule ?? fo.ruralLandRule}`,
+        remedy:
+          "Restructure before making an offer. Getting this wrong is not a technicality — a purchase in breach can be void and unrecoverable.",
+        category: "foreign-ownership",
+      });
+    } else if (structure === "undecided") {
+      s.deduct(10, "ownership structure not yet chosen and one is mandatory");
+    }
+    findings.push({
+      id: "structure-required",
+      severity: "major",
+      title: `${profile.name} requires a specific holding structure`,
+      detail: `${fo.summary} ${fo.borderCoastalRule ?? ""}`,
+      remedy:
+        "Decide the vehicle before you negotiate price — it affects tax, financing, exit and the timetable, and it cannot be retrofitted after closing.",
+      category: "foreign-ownership",
+    });
+  } else if (fo.regime === "approval-required" && fo.approvalBody) {
+    findings.push({
+      id: "screening-approval",
+      severity: "major",
+      title: `${fo.approvalBody.short} approval is required before completion`,
+      detail: `${fo.ruralLandRule} Expect roughly ${fo.approvalTimelineDays ?? 90} days, and treat refusal as a live possibility rather than a formality.`,
+      remedy: `Make the contract conditional on ${fo.approvalBody.short} approval, with a long-stop date and a full deposit refund if consent is refused.`,
+      category: "foreign-ownership",
+    });
+  } else if (fo.regime === "restricted-rural") {
+    findings.push({
+      id: "rural-restriction",
+      severity: "major",
+      title: `${profile.name} restricts foreign acquisition of rural land`,
+      detail: `${fo.ruralLandRule}${fo.caps ? ` Caps: ${fo.caps}` : ""}`,
+      remedy:
+        "Confirm eligibility and headroom under the cap in writing before making an offer, and build the clearance into the contract as a condition precedent.",
+      category: "foreign-ownership",
+    });
+  }
+
+  // --- Border and coastal exclusion zones -----------------------------------
+  if (fo.borderCoastalRule && fo.regime !== "structure-required") {
+    s.deduct(6, "border or coastal exclusion zone rules apply somewhere in this country");
+    findings.push({
+      id: "border-zone",
+      severity: "moderate",
+      title: "Border or coastal exclusion zone",
+      detail: fo.borderCoastalRule,
+      remedy:
+        "Plot the parcel against the exclusion zone before anything else. This is a map question with a yes or no answer, and it is free to resolve.",
+      category: "foreign-ownership",
+    });
+  }
+
+  // --- Nominee structures ---------------------------------------------------
+  if (fo.nomineeWarning && fo.regime !== "prohibited") {
+    findings.push({
+      id: "nominee-warning",
+      severity: "major",
+      title: "Nominee arrangements do not work here",
+      detail: fo.nomineeWarning,
+      remedy:
+        "If the only route being offered involves a local person or company holding on your behalf, treat that as a reason to walk rather than a structuring idea.",
+      category: "foreign-ownership",
+    });
+  }
+
+  // --- Sovereign and title risk ---------------------------------------------
+  s.deduct(RISK_PENALTY[cr.expropriationRisk] ?? 0, `${cr.expropriationRisk} expropriation risk`);
+  s.deduct(RISK_PENALTY[cr.titleReliability] ?? 0, `${cr.titleReliability} risk of defective title`);
+
+  if (cr.expropriationRisk === "high" || cr.expropriationRisk === "severe") {
+    findings.push({
+      id: "expropriation-risk",
+      severity: "major",
+      title: `Elevated expropriation and tenure-policy risk in ${profile.name}`,
+      detail: cr.notes,
+      remedy:
+        "Check whether a bilateral investment treaty covers your nationality and structure the holding to sit inside it. Price the policy risk rather than assuming continuity.",
+      category: "foreign-ownership",
+    });
+  }
+
+  if (cr.titleReliability === "high" || cr.titleReliability === "severe") {
+    findings.push({
+      id: "title-fraud-risk",
+      severity: "critical",
+      title: `Registered title is not reliable on its own in ${profile.name}`,
+      detail: `${cr.notes} A ${cr.titleSystem.replace(/-/g, " ")} system proves ownership by the chain of transactions, so a clean-looking current extract can sit on top of a forged or duplicated link.`,
+      remedy:
+        "Commission an independent title investigation going back decades, using counsel you found yourself rather than anyone introduced by the seller or the agent.",
+      cureCost: "A few thousand dollars against the whole purchase price",
+      category: "foreign-ownership",
+    });
+  }
+
+  if (cr.customaryTenureRisk === "high" || cr.customaryTenureRisk === "severe") {
+    s.deduct(RISK_PENALTY[cr.customaryTenureRisk] ?? 0, `${cr.customaryTenureRisk} customary or community claim risk`);
+    findings.push({
+      id: "customary-claims",
+      severity: "major",
+      title: "Formal title may sit over live community claims",
+      detail:
+        "Land that is properly registered can still be occupied or claimed under customary, indigenous or agrarian-reform rights that the register does not show. These claims are frequently valid, and they are the most common source of post-closing conflict in this class of acquisition.",
+      remedy:
+        "Visit the land, walk the boundaries, and speak to neighbouring occupiers and the local authority before closing. A desk-only diligence process will not surface this.",
+      category: "foreign-ownership",
+    });
+  }
+
+  // --- Capital controls -----------------------------------------------------
+  if (cr.currencyControls) {
+    s.deduct(10, "exchange controls apply");
+    findings.push({
+      id: "currency-controls",
+      severity: "major",
+      title: "Exchange controls affect how you get money in and out",
+      detail: `${cr.currencyControls} ${cr.repatriationNote}`,
+      remedy:
+        "Route the purchase funds through the prescribed channel and obtain the registration or endorsement at the time of transfer. Retrofitting this after closing is usually impossible.",
+      category: "foreign-ownership",
+    });
+  }
+
+  if (fo.reportingObligation) {
+    findings.push({
+      id: "post-close-reporting",
+      severity: "moderate",
+      title: "Post-closing registration obligations",
+      detail: fo.reportingObligation,
+      remedy: "Diarise the filing deadlines at closing. Penalties for missing foreign-ownership registers are real and avoidable.",
+      category: "foreign-ownership",
+    });
+  }
+
+  if (input.hasLocalResidency === "yes" && (fo.regime === "restricted-rural" || fo.regime === "leasehold-only")) {
+    s.credit(12, "buyer holds local residency, which relaxes several restrictions");
+  }
+
+  if (fo.regime === "unrestricted" && cr.expropriationRisk === "low" && cr.titleReliability === "low") {
+    findings.push({
+      id: "clean-jurisdiction",
+      severity: "positive",
+      title: `${profile.name} is genuinely open to foreign buyers`,
+      detail: `${fo.summary} Combined with low expropriation risk and a reliable register, the eligibility question here is simply not a source of risk.`,
+      remedy: "Spend the diligence budget you would have used on structuring on the water and the land instead.",
+      category: "foreign-ownership",
+    });
+  }
+
+  return {
+    category: {
+      category: "foreign-ownership",
+      label: CATEGORY_LABELS["foreign-ownership"],
+      score: s.value(),
+      weight: 0,
+      drivers: s.drivers,
+    },
+    dealBreaker,
   };
 }
 
@@ -914,7 +1208,7 @@ function scoreEconomics(
 // Water balance
 // ---------------------------------------------------------------------------
 
-function computeWaterBalance(input: ParcelInput, profile: StateWaterProfile) {
+function computeWaterBalance(input: ParcelInput, profile: JurisdictionProfile) {
   const claimed = input.decreedAcreFeet ?? null;
 
   let required = input.intendedAcreFeet ?? null;
@@ -984,22 +1278,30 @@ function computeWaterBalance(input: ParcelInput, profile: StateWaterProfile) {
 // ---------------------------------------------------------------------------
 
 export function assessParcel(input: ParcelInput): Assessment {
-  const profile = getStateProfile(input.stateCode);
+  const profile = getJurisdiction(input.jurisdictionCode);
   if (!profile) {
-    throw new Error(`Unknown state code: ${input.stateCode}`);
+    throw new Error(`Unknown jurisdiction code: ${input.jurisdictionCode}`);
   }
 
   const findings: Finding[] = [];
+  const crossBorder = isCrossBorder(profile, input.buyerCountry);
+  const weights = crossBorder ? WEIGHTS_CROSS_BORDER : WEIGHTS_DOMESTIC;
 
   const balance = computeWaterBalance(input, profile);
+  const ownership = scoreForeignOwnership(input, profile, findings, crossBorder);
 
   const categories: CategoryScore[] = [
     scoreWaterSecurity(input, profile, findings),
     scoreTitle(input, profile, findings),
+    ownership.category,
     scorePhysical(input, profile, findings),
     scoreLand(input, profile, findings),
     scoreEconomics(input, profile, findings, balance.reliableAcreFeet),
-  ];
+  ]
+    // Weights depend on whether this is a cross-border deal, so they are
+    // applied here rather than baked into each scorer.
+    .map((c) => ({ ...c, weight: weights[c.category] }))
+    .filter((c) => c.weight > 0);
 
   if (balance.shortfall !== null && balance.shortfall > 0) {
     findings.push({
@@ -1035,7 +1337,7 @@ export function assessParcel(input: ParcelInput): Assessment {
   );
 
   const criticals = findings.filter((f) => f.severity === "critical").length;
-  const verdict = decideVerdict(composite, criticals);
+  const verdict = decideVerdict(composite, criticals, ownership.dealBreaker);
 
   const assessment: Assessment = {
     composite,
@@ -1045,7 +1347,9 @@ export function assessParcel(input: ParcelInput): Assessment {
     checklist: [],
     sellerQuestions: [],
     waterBalance: balance,
-    stateProfile: profile,
+    jurisdiction: profile,
+    dealBreaker: ownership.dealBreaker,
+    crossBorder,
     generatedAt: new Date().toISOString(),
   };
 
@@ -1055,7 +1359,9 @@ export function assessParcel(input: ParcelInput): Assessment {
   return assessment;
 }
 
-function decideVerdict(composite: number, criticals: number): Verdict {
+function decideVerdict(composite: number, criticals: number, dealBreaker: string | null): Verdict {
+  // A legal bar is not a bad score, it is the absence of a transaction.
+  if (dealBreaker) return "walk";
   if (criticals >= 3) return "walk";
   if (criticals >= 1 && composite < 55) return "walk";
   if (composite >= 78 && criticals === 0) return "pursue";
