@@ -120,3 +120,22 @@ export const holdingDraftSchema = z.object({
 });
 
 export const holdingPatchSchema = holdingDraftSchema.partial();
+
+export const buyerProfileSchema = z.object({
+  totalCapital: z.number().nonnegative().max(10_000_000_000),
+  financing: z.enum(["cash-only", "bank", "seller-carry", "partners", "undecided"]),
+  annualAddition: z.number().nonnegative().max(1_000_000_000).optional(),
+
+  targetAcres: z.number().positive().max(2_000_000),
+  monthsToFirstPurchase: z.number().int().min(1).max(120),
+
+  landExperience: z.enum(["none", "residential-only", "one-or-two-rural", "experienced"]),
+  waterKnowledge: z.enum(["none", "some", "strong"]),
+  operatingIntent: z.enum(["passive-hold", "lease-to-farmer", "operate-myself"]),
+
+  homeCountry: z.string().trim().toUpperCase().min(2).max(2),
+  canVisitInPerson: z.enum(["yes", "no", "unknown"]),
+  geographyPreference: z.enum(["near-home", "best-value-domestic", "international", "open"]),
+  riskAppetite: z.enum(["conservative", "balanced", "aggressive"]),
+  expectedPricePerAcre: z.number().nonnegative().max(10_000_000).optional(),
+});

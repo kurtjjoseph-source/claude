@@ -44,6 +44,42 @@ ParcelInput ──▶ assessParcel()  ──▶ Assessment ──▶ generatePla
                                      water balance                     portfolio fit
 ```
 
+## First purchase
+
+`/start` is upstream of the parcel wizard. It answers the question a first-time
+buyer actually has — what should my first purchase look like, can I afford it,
+and what do I do this week — from a short profile of capital, goal, experience
+and geography.
+
+The governing idea is that **the first purchase is not the one to optimise**.
+It is the one that has to teach you records searches, agency calls, escrow
+structure and how sellers behave, with downside you can absorb. The engine is
+biased toward simplicity and reversibility accordingly.
+
+The budget envelope is the load-bearing output:
+
+```
+capital = land + closing costs + working reserve + diligence programme
+```
+
+Diligence is costed per deal and multiplied by the deals a first-time buyer
+should expect to take into *paid* diligence before one closes — you pay for the
+ones you walk away from. Passive holds drop the pump test and engineer;
+cross-border adds local counsel, structuring and transfer taxes. Solving for
+the land leaves the only number that should ever be quoted to a seller. Thin
+capital fails a gate rather than producing a fantasy budget.
+
+Acreage is shown as a sensitivity table across reference prices rather than a
+single figure, because this tool carries no land price data and will not invent
+any.
+
+The jurisdiction shortlist blends two scores that pull in opposite directions:
+**ease** of transacting as a first-timer, and whether **water is an asset worth
+building a position around** there. Ranked on ease alone the engine recommends
+Delaware — riparian states are simplest precisely because water is not a
+separate asset in them. Both sub-scores are shown so the trade-off stays
+visible, and the blend shifts with risk appetite.
+
 ## Cross-border acquisition
 
 Going international inverts the risk order. Domestically the water right is the
@@ -171,7 +207,7 @@ Environment variables are set in the Netlify dashboard under Site
 configuration → Environment variables, and take effect on the next deploy.
 
 ```bash
-npm test        # 53 engine, registry and store tests
+npm test        # 77 engine, registry, store and first-purchase tests
 npm run build
 npm run typecheck
 ```
@@ -181,11 +217,13 @@ npm run typecheck
 | Route | |
 | --- | --- |
 | `/` | Public front door |
+| `/start` | First-purchase guide: readiness, budget envelope, shortlist, 10-step plan |
 | `/wizard` | Eight-step screening → acquisition plan |
 | `/opportunities` | Curated cross-border theses: what the play is, what kills it, who it suits |
 | `/doctrine` | Searchable reference across all jurisdictions |
 | `/portfolio` | Private dashboard (passphrase-gated) |
 | `POST /api/plan` | `{ input }` → `{ assessment, plan }` |
+| `POST /api/first-purchase` | `{ profile }` → `{ guide, brief }` |
 | `GET/POST/PUT /api/portfolio` | List + roll-up, add holding, set target |
 | `PATCH/DELETE /api/portfolio/:id` | Update stage, remove |
 
@@ -196,6 +234,7 @@ src/lib/water/states.ts      50-state registry — doctrine, agency, forfeiture,
 src/lib/water/international.ts  23-country registry — water regime, foreign ownership, country risk
 src/lib/water/registry.ts    Merged lookup, region grouping, cross-border detection
 src/lib/opportunities.ts     Curated acquisition theses
+src/lib/first-purchase/engine.ts  Readiness gates, budget envelope, shortlist, plan
 src/lib/water/engine.ts      Deterministic scoring, findings, water balance
 src/lib/plan/checklist.ts    Phased diligence checklist, blocking items flagged
 src/lib/plan/seller-questions.ts  Questions + how to read the answers

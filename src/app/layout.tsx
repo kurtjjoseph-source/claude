@@ -35,6 +35,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 Headgate
               </Link>
               <nav className="flex items-center gap-1 text-sm">
+                <Link href="/start" className="px-3 py-1.5 rounded-md hover:bg-[var(--bg-sunken)]">
+                  First purchase
+                </Link>
                 <Link href="/wizard" className="px-3 py-1.5 rounded-md hover:bg-[var(--bg-sunken)]">
                   Screen a parcel
                 </Link>

@@ -80,11 +80,11 @@ export default function Home() {
         </p>
 
         <div className="mt-8 flex flex-wrap items-center gap-3">
-          <Link href="/wizard" className="btn btn-primary">
-            Screen a parcel
+          <Link href="/start" className="btn btn-primary">
+            Plan my first purchase
           </Link>
-          <Link href="/doctrine" className="btn btn-ghost">
-            Browse state law
+          <Link href="/wizard" className="btn btn-ghost">
+            Screen a parcel
           </Link>
         </div>
 

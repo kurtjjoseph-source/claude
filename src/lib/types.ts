@@ -421,6 +421,149 @@ export interface PlanStep {
 }
 
 // ---------------------------------------------------------------------------
+// First purchase guide
+// ---------------------------------------------------------------------------
+
+export type LandExperience = "none" | "residential-only" | "one-or-two-rural" | "experienced";
+export type WaterKnowledge = "none" | "some" | "strong";
+export type OperatingIntent = "passive-hold" | "lease-to-farmer" | "operate-myself";
+export type GeographyPreference = "near-home" | "best-value-domestic" | "international" | "open";
+export type RiskAppetite = "conservative" | "balanced" | "aggressive";
+
+export interface BuyerProfile {
+  /** Everything available for this first purchase, all-in. */
+  totalCapital: number;
+  financing: "cash-only" | "bank" | "seller-carry" | "partners" | "undecided";
+  /** What can be added each year afterwards, for the accumulation path. */
+  annualAddition?: number;
+
+  targetAcres: number;
+  monthsToFirstPurchase: number;
+
+  landExperience: LandExperience;
+  waterKnowledge: WaterKnowledge;
+  operatingIntent: OperatingIntent;
+
+  homeCountry: string;
+  canVisitInPerson: YesNoUnknown;
+  geographyPreference: GeographyPreference;
+  riskAppetite: RiskAppetite;
+  /** Optional local knowledge — drives the acreage sensitivity table. */
+  expectedPricePerAcre?: number;
+}
+
+export type GateStatus = "pass" | "warn" | "fail";
+
+export interface ReadinessGate {
+  id: string;
+  status: GateStatus;
+  title: string;
+  detail: string;
+  /** What to do about it, when it is not a pass. */
+  action?: string;
+}
+
+export type ReadinessBand = "ready" | "nearly" | "prepare" | "not-yet";
+
+export interface BudgetEnvelope {
+  totalCapital: number;
+  /** Diligence on every deal you look at, including the ones you walk from. */
+  diligenceProgram: number;
+  perDealDiligence: number;
+  dealsScreenedAssumed: number;
+  closingCostsRate: number;
+  reserveRate: number;
+  /** The most you should pay for the land itself. */
+  maxPurchasePrice: number;
+  estimatedClosingCosts: number;
+  workingReserve: number;
+  /** Acreage this buys at several reference prices — not a market forecast. */
+  impliedAcres: Array<{ pricePerAcre: number; acres: number }>;
+  notes: string[];
+}
+
+export interface TargetProfile {
+  acreBandLow: number;
+  acreBandHigh: number;
+  minComposite: number;
+  prefer: string[];
+  avoid: string[];
+  rationale: string;
+}
+
+export interface JurisdictionPick {
+  code: string;
+  name: string;
+  /** Blend of ease and water relevance — see the engine for the weighting. */
+  score: number;
+  /** How simple this is to transact in as a first-time buyer. */
+  ease: number;
+  /** Whether water here is an asset worth building a position around. */
+  waterValue: number;
+  why: string;
+  watchOut: string;
+}
+
+export interface GuideStep {
+  order: number;
+  window: string;
+  title: string;
+  detail: string;
+  /** Nothing after this should start until it is done. */
+  gate: boolean;
+}
+
+export interface SearchBrief {
+  channels: string[];
+  filters: string[];
+  firstContactQuestions: string[];
+}
+
+export interface LearningItem {
+  topic: string;
+  why: string;
+  how: string;
+}
+
+export interface PathToTarget {
+  firstPurchaseAcres: number | null;
+  remainingAfterFirst: number | null;
+  parcelsAtThisSize: number | null;
+  /** Years to target if capital is recycled at the stated annual addition. */
+  yearsAtCurrentCadence: number | null;
+  cadenceNote: string;
+  compoundingNote: string;
+}
+
+export interface FirstPurchaseGuide {
+  readiness: {
+    score: number;
+    band: ReadinessBand;
+    headline: string;
+    gates: ReadinessGate[];
+  };
+  budget: BudgetEnvelope;
+  targetProfile: TargetProfile;
+  shortlist: JurisdictionPick[];
+  steps: GuideStep[];
+  searchBrief: SearchBrief;
+  learning: LearningItem[];
+  pathToTarget: PathToTarget;
+  crossBorder: boolean;
+  generatedAt: string;
+}
+
+/** The AI-authored layer over the deterministic guide. */
+export interface FirstPurchaseBrief {
+  opening: string;
+  whatGoodLooksLike: string;
+  biggestRisk: string;
+  thisWeek: string[];
+  encouragement: string;
+  templated: boolean;
+}
+
+// ---------------------------------------------------------------------------
 // Portfolio (private dashboard)
 // ---------------------------------------------------------------------------
 
