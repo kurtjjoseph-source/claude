@@ -38,6 +38,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <Link href="/start" className="px-3 py-1.5 rounded-md hover:bg-[var(--bg-sunken)]">
                   First purchase
                 </Link>
+                <Link href="/listings" className="px-3 py-1.5 rounded-md hover:bg-[var(--bg-sunken)]">
+                  Listings
+                </Link>
                 <Link href="/wizard" className="px-3 py-1.5 rounded-md hover:bg-[var(--bg-sunken)]">
                   Screen a parcel
                 </Link>

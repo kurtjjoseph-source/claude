@@ -6,6 +6,7 @@ import type { BuyerProfile, FirstPurchaseBrief, FirstPurchaseGuide, GateStatus }
 import { READINESS_COPY } from "@/lib/first-purchase/engine";
 import { BUYER_COUNTRIES } from "@/lib/water/registry";
 import { ChoiceGroup, NumberField } from "@/components/ui";
+import { saveProfileCookie } from "@/lib/profile-store";
 
 const STEP_TITLES = ["Capital", "Goal & timeline", "Experience", "Where & how"];
 
@@ -79,6 +80,8 @@ export default function FirstPurchase() {
         throw new Error(detail || data?.error || "Something went wrong building your guide.");
       }
       setResult({ guide: data.guide, brief: data.brief });
+      // Written as a cookie so the listings pages can match server-side.
+      saveProfileCookie(profile);
       window.scrollTo({ top: 0, behavior: "smooth" });
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong.");
@@ -112,8 +115,8 @@ export default function FirstPurchase() {
           <button type="button" className="btn btn-ghost" onClick={() => { setResult(null); setStep(0); }}>
             Change my answers
           </button>
-          <Link href="/wizard" className="btn btn-primary">
-            Screen a parcel
+          <Link href="/listings" className="btn btn-primary">
+            See matched listings
           </Link>
         </div>
 

@@ -200,13 +200,15 @@ function buildGates(profile: BuyerProfile, budget: BudgetEnvelope, crossBorder: 
 
   if (firstTimer && crossBorder) {
     gates.push({
+      // Advisory rather than blocking: this is a strong recommendation, not a
+      // legal impossibility, and an adult with the facts can weigh it.
       id: "first-deal-abroad",
-      status: "fail",
-      title: "Do not make your first purchase abroad",
+      status: "warn",
+      title: "Strongly consider making your first purchase at home",
       detail:
-        "A first purchase is where you learn conveyancing, diligence sequencing and how sellers behave. Doing that in a second legal system, in another language, with a foreign-ownership regime layered on top, multiplies the number of things that can go wrong at exactly the moment you are least able to spot them.",
+        "A first purchase is where you learn conveyancing, diligence sequencing and how sellers behave. Doing that in a second legal system, in another language, with a foreign-ownership regime layered on top, multiplies the number of things that can go wrong at exactly the moment you are least able to spot them. This is advice, not a rule — plenty of people have done it the other way round.",
       action:
-        "Make the first purchase domestically, close it, then take what you learned abroad for the second or third. The international registry is there for when you get to that point.",
+        "If you proceed abroad anyway, compensate deliberately: engage local counsel before you make any offer rather than at contract stage, budget the higher diligence and transfer costs shown below, and do not skip the site visit. The alternative is to close one domestically first and take what you learned with you.",
     });
   } else if (crossBorder) {
     gates.push({

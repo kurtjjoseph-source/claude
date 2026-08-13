@@ -80,6 +80,44 @@ Delaware — riparian states are simplest precisely because water is not a
 separate asset in them. Both sub-scores are shown so the trade-off stays
 visible, and the blend shifts with risk appetite.
 
+## Listings map
+
+`/listings` plots inventory on a real basemap — US states or world countries —
+with pins coloured by how well each parcel matches *you*, and detail pages
+behind each one.
+
+**The inventory is synthetic and labelled as such on every surface.** There is
+no public feed carrying structured water-right data, and inventing listings
+that looked real would undermine the point of the tool. What the sample set
+does is exercise scoring, matching and the map end to end, and define the shape
+a live feed must produce: implement `ListingSource` in
+`src/lib/listings/data.ts` and everything downstream already works.
+
+Two numbers are kept deliberately separate, because they answer different
+questions:
+
+- **Parcel score** — the engine's view of the parcel itself. Is the water real,
+  is the title clean. Independent of who is buying.
+- **Match** — whether *this buyer* can and should transact on it: budget fit,
+  jurisdiction shortlist, target size, eligibility. A superb parcel at three
+  times your budget is a bad match, and the tool says so rather than ranking it
+  first.
+
+Blockers are separate from deductions. Something you cannot lawfully or
+financially do is not a low score, it is a no — so blocked listings score zero,
+sort last, and say why.
+
+The basemap is projected server-side with d3-geo over bundled TopoJSON, so no
+map library or geometry reaches the browser, and there is no tile server, API
+key or external request. `geoAlbersUsa` returns null outside the United States,
+which is exactly the behaviour needed to keep foreign pins off the US view — a
+test pins that.
+
+The buyer profile lives in a cookie rather than localStorage so matching runs
+on the server at render time: no loading flash, no effect-driven fetch, and the
+page works without JavaScript. There is no account system; the profile travels
+only as far as the request that scores it.
+
 ## Cross-border acquisition
 
 Going international inverts the risk order. Domestically the water right is the
@@ -207,7 +245,7 @@ Environment variables are set in the Netlify dashboard under Site
 configuration → Environment variables, and take effect on the next deploy.
 
 ```bash
-npm test        # 77 engine, registry, store and first-purchase tests
+npm test        # 93 tests across the engine, registry, store, first purchase and listings
 npm run build
 npm run typecheck
 ```
@@ -218,6 +256,8 @@ npm run typecheck
 | --- | --- |
 | `/` | Public front door |
 | `/start` | First-purchase guide: readiness, budget envelope, shortlist, 10-step plan |
+| `/listings` | Map of sample inventory, matched against your profile |
+| `/listings/[id]` | Parcel detail: engine findings plus why it does or does not fit you |
 | `/wizard` | Eight-step screening → acquisition plan |
 | `/opportunities` | Curated cross-border theses: what the play is, what kills it, who it suits |
 | `/doctrine` | Searchable reference across all jurisdictions |
@@ -235,6 +275,9 @@ src/lib/water/international.ts  23-country registry — water regime, foreign ow
 src/lib/water/registry.ts    Merged lookup, region grouping, cross-border detection
 src/lib/opportunities.ts     Curated acquisition theses
 src/lib/first-purchase/engine.ts  Readiness gates, budget envelope, shortlist, plan
+src/lib/listings/data.ts     Sample inventory and the ListingSource seam
+src/lib/listings/match.ts    Buyer-versus-parcel matching, blockers separate from deductions
+src/lib/listings/basemap.ts  Server-side geo projection to SVG paths
 src/lib/water/engine.ts      Deterministic scoring, findings, water balance
 src/lib/plan/checklist.ts    Phased diligence checklist, blocking items flagged
 src/lib/plan/seller-questions.ts  Questions + how to read the answers
@@ -257,6 +300,7 @@ src/lib/portfolio/           JSON store and goal/runway math
 - **The registry is a routing aid, not a legal database.** Statutory periods
   change and basin-level facts vary within a state. Every checklist routes the
   buyer back to the agency of record for confirmation.
+- **The listing inventory is synthetic.** No parcel on the map is for sale.
 - **Nothing is verified against live agency data.** The wizard records what the
   seller has asserted and produced. That is the input, and it is the buyer's job
   — with the generated checklist — to go confirm it.

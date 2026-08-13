@@ -83,11 +83,15 @@ test("the acreage table reflects the land budget at each reference price", () =>
 // Readiness gates
 // ---------------------------------------------------------------------------
 
-test("a first-timer is told not to make their first purchase abroad", () => {
+test("a first-timer going abroad is advised, not blocked", () => {
+  // Strong recommendation, not a legal impossibility — an adult with the facts
+  // is entitled to weigh it, so this must never harden into a fail.
   const g = buildFirstPurchaseGuide(buyer({ landExperience: "none", geographyPreference: "international" }));
   const gate = g.readiness.gates.find((x) => x.id === "first-deal-abroad");
-  assert.equal(gate?.status, "fail");
-  assert.match(g.readiness.band, /prepare|not-yet/);
+  assert.equal(gate?.status, "warn");
+  assert.ok(gate?.action, "advisory gates still have to say what to do instead");
+  assert.match(gate!.action!, /proceed abroad anyway/i, "the action must cover proceeding, not just refusing");
+  assert.notEqual(g.readiness.band, "not-yet");
 });
 
 test("an experienced buyer going abroad gets a warning, not a block", () => {
@@ -123,7 +127,7 @@ test("readiness band degrades as gates fail", () => {
   const rough = buildFirstPurchaseGuide(
     buyer({ totalCapital: 20_000, geographyPreference: "international", canVisitInPerson: "no", monthsToFirstPurchase: 1 }),
   );
-  assert.equal(rough.readiness.band, "not-yet");
+  assert.match(rough.readiness.band, /prepare|not-yet/);
   assert.ok(rough.readiness.score < clean.readiness.score);
 });
 
