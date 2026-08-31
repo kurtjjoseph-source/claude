@@ -1,0 +1,7391 @@
+{
+ "items": [
+  {
+   "id": "I.1",
+   "part": "I",
+   "n": 1,
+   "prompt": {
+    "en": "The answer to the question, “Who Am I?” gives a person’s  .",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Identity",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Friendship",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Intelligence",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "A",
+   "keyPages2019": [
+    13
+   ],
+   "source": {
+    "chapter": "p1c1",
+    "block": 2,
+    "page": 13
+   },
+   "matchScore": 3.25
+  },
+  {
+   "id": "I.2",
+   "part": "I",
+   "n": 2,
+   "prompt": {
+    "en": "is a scripture that supports belief that believers are created in the image of God.",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Genesis 1:1",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Genesis 1:27",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Matthew 4:5",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "B",
+   "keyPages2019": [
+    13
+   ],
+   "source": {
+    "chapter": "p1c1",
+    "block": 7,
+    "page": 13
+   },
+   "matchScore": 3.179
+  },
+  {
+   "id": "I.3",
+   "part": "I",
+   "n": 3,
+   "prompt": {
+    "en": "An individual is created as  , emotional, and spiritual.",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Physical",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Autonomous",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Perfect",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "A",
+   "keyPages2019": [
+    13
+   ],
+   "source": {
+    "chapter": "p1c1",
+    "block": 8,
+    "page": 13
+   },
+   "matchScore": 3.25
+  },
+  {
+   "id": "I.4",
+   "part": "I",
+   "n": 4,
+   "prompt": {
+    "en": "is a scripture that indicates to the believer the experience of justification.",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Exodus 4:5",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Acts 2:4",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Romans 5:9",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "C",
+   "keyPages2019": [
+    15
+   ],
+   "source": {
+    "chapter": "p1c1",
+    "block": 23,
+    "page": 15
+   },
+   "matchScore": 2.75
+  },
+  {
+   "id": "I.5",
+   "part": "I",
+   "n": 5,
+   "prompt": {
+    "en": "is a Scripture that identifies the expression of redemption to the believer.",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Psalm 4:5, 6",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "1 Peter 1:18, 19",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "2 Thessalonians 2:3, 4",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "B",
+   "keyPages2019": [
+    15
+   ],
+   "source": {
+    "chapter": "p1c1",
+    "block": 36,
+    "page": 15
+   },
+   "matchScore": 2.75
+  },
+  {
+   "id": "I.6",
+   "part": "I",
+   "n": 6,
+   "prompt": {
+    "en": "behavior is the will of God.",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Childish",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Aggressive",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Passive",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "D",
+   "keyPages2019": [
+    16
+   ],
+   "source": {
+    "chapter": "p1c1",
+    "block": 45,
+    "page": 16
+   },
+   "matchScore": 1.55
+  },
+  {
+   "id": "I.7",
+   "part": "I",
+   "n": 7,
+   "prompt": {
+    "en": "Ministers must focus their faith on  .",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Growth",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Vision",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Christ",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "C",
+   "keyPages2019": [
+    22
+   ],
+   "source": {
+    "chapter": "p1c3",
+    "block": 9,
+    "page": 29
+   },
+   "matchScore": 2.867
+  },
+  {
+   "id": "I.8",
+   "part": "I",
+   "n": 8,
+   "prompt": {
+    "en": "In order to be spiritual, a minister must understand the contrast between the   mind and the sinful mind.",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Spiritual",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Fleshly",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Peaceful",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "A",
+   "keyPages2019": [
+    22
+   ],
+   "source": {
+    "chapter": "p1c2",
+    "block": 33,
+    "page": 22
+   },
+   "matchScore": 3.5
+  },
+  {
+   "id": "I.9",
+   "part": "I",
+   "n": 9,
+   "prompt": {
+    "en": "According to  , the sinful mind is hostile to God.",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Psalm 1:1",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Romans 8:7",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "1 Corinthians 3:3",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "B",
+   "keyPages2019": [
+    23
+   ],
+   "source": {
+    "chapter": "p1c2",
+    "block": 37,
+    "page": 23
+   },
+   "matchScore": 3.15
+  },
+  {
+   "id": "I.10",
+   "part": "I",
+   "n": 10,
+   "prompt": {
+    "en": "In  , the spiritual mind is described as transformed.",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "John 3:16",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Acts 15:4",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Romans 12:2",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "C",
+   "keyPages2019": [
+    23,
+    24
+   ],
+   "source": {
+    "chapter": "p1c2",
+    "block": 70,
+    "page": 24
+   },
+   "matchScore": 3.25
+  },
+  {
+   "id": "I.11",
+   "part": "I",
+   "n": 11,
+   "prompt": {
+    "en": "Jesus   people.",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Educated",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Harassed",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Badgered",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "A",
+   "keyPages2019": [
+    26
+   ],
+   "source": {
+    "chapter": "p1c2",
+    "block": 118,
+    "page": 26
+   },
+   "matchScore": 3.75
+  },
+  {
+   "id": "I.12",
+   "part": "I",
+   "n": 12,
+   "prompt": {
+    "en": "Ministry priority should build on the centrality of  .",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Offerings",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Dramas",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Singing",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "D",
+   "keyPages2019": [
+    26
+   ],
+   "source": {
+    "chapter": "p1c2",
+    "block": 128,
+    "page": 26
+   },
+   "matchScore": 1.05
+  },
+  {
+   "id": "I.13",
+   "part": "I",
+   "n": 13,
+   "prompt": {
+    "en": "The most important event in the life of the church each week is  .",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Celebration of worship",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Fellowship",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Benevolence",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "A",
+   "keyPages2019": [
+    29
+   ],
+   "source": {
+    "chapter": "p1c3",
+    "block": 2,
+    "page": 29
+   },
+   "matchScore": 3.75
+  },
+  {
+   "id": "I.14",
+   "part": "I",
+   "n": 14,
+   "prompt": {
+    "en": "The early church model of worship was based on the   style.",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Tabernacle",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Synagogue",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Graeco-Roman",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "B",
+   "keyPages2019": [
+    29
+   ],
+   "source": {
+    "chapter": "p1c3",
+    "block": 3,
+    "page": 29
+   },
+   "matchScore": 3.75
+  },
+  {
+   "id": "I.15",
+   "part": "I",
+   "n": 15,
+   "prompt": {
+    "en": "The purposes of worship are to exalt God, edify believers, and  .",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Receive the tithes",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Prayer and preaching",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Evangelize the lost",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "C",
+   "keyPages2019": [
+    30
+   ],
+   "source": {
+    "chapter": "p1c3",
+    "block": 20,
+    "page": 30
+   },
+   "matchScore": 1.85
+  },
+  {
+   "id": "I.16",
+   "part": "I",
+   "n": 16,
+   "prompt": {
+    "en": "A worship service should be designed to focus on  .",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "God",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Humanity",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Christians",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "A",
+   "keyPages2019": [
+    30
+   ],
+   "source": {
+    "chapter": "p1c3",
+    "block": 16,
+    "page": 30
+   },
+   "matchScore": 3.5
+  },
+  {
+   "id": "I.17",
+   "part": "I",
+   "n": 17,
+   "prompt": {
+    "en": "According to  , there should be public reading of Scripture.",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Mark 16:5",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Luke 24:12",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "1 Timothy 4:13",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "C",
+   "keyPages2019": [
+    32
+   ],
+   "source": {
+    "chapter": "p1c3",
+    "block": 51,
+    "page": 32
+   },
+   "matchScore": 3.5
+  },
+  {
+   "id": "I.18",
+   "part": "I",
+   "n": 18,
+   "prompt": {
+    "en": "represents Christ dwelling in the believer and the believer dwelling in Christ.",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Communion",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Footwashing",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Miracles",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "A",
+   "keyPages2019": [
+    37
+   ],
+   "source": {
+    "chapter": "p1c4",
+    "block": 4,
+    "page": 37
+   },
+   "matchScore": 3.5
+  },
+  {
+   "id": "I.19",
+   "part": "I",
+   "n": 19,
+   "prompt": {
+    "en": "Communion focuses the believer on the   of Christ.",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Birth",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Person",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Baptism",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "B",
+   "keyPages2019": [
+    38
+   ],
+   "source": {
+    "chapter": "p1c4",
+    "block": 25,
+    "page": 38
+   },
+   "matchScore": 3.25
+  },
+  {
+   "id": "I.20",
+   "part": "I",
+   "n": 20,
+   "prompt": {
+    "en": "Christ is present in Communion  .",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Transubstantially",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Consubstantially",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Spiritually",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "C",
+   "keyPages2019": [
+    39
+   ],
+   "source": {
+    "chapter": "p1c4",
+    "block": 48,
+    "page": 39
+   },
+   "matchScore": 3.75
+  },
+  {
+   "id": "I.21",
+   "part": "I",
+   "n": 21,
+   "prompt": {
+    "en": "The formula for baptism is found in  .",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Matthew 28:19",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Mark 16:4",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Luke 24:5",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "A",
+   "keyPages2019": [
+    42
+   ],
+   "source": {
+    "chapter": "p1c4",
+    "block": 131,
+    "page": 42
+   },
+   "matchScore": 3.417
+  },
+  {
+   "id": "I.22",
+   "part": "I",
+   "n": 22,
+   "prompt": {
+    "en": "is a Biblical passage about footwashing.",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Matthew 21:1-4",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Mark 16:7-9",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "John 13:1-17",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "C",
+   "keyPages2019": [
+    43
+   ],
+   "source": {
+    "chapter": "p1c4",
+    "block": 138,
+    "page": 43
+   },
+   "matchScore": 3.0
+  },
+  {
+   "id": "I.23",
+   "part": "I",
+   "n": 23,
+   "prompt": {
+    "en": "The practice of dedicating children comes from the dedication of   and  .",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Esau and Jacob",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Simon and Anna",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Samuel and Jesus",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "C",
+   "keyPages2019": [
+    45
+   ],
+   "source": {
+    "chapter": "p1c5",
+    "block": 4,
+    "page": 45
+   },
+   "matchScore": 2.45
+  },
+  {
+   "id": "I.24",
+   "part": "I",
+   "n": 24,
+   "prompt": {
+    "en": "Dedicating children to God is an act of  .",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Grace and mercy",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Praise and thanksgiving",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Kindness and goodness",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "B",
+   "keyPages2019": [
+    45
+   ],
+   "source": {
+    "chapter": "p1c5",
+    "block": 9,
+    "page": 45
+   },
+   "matchScore": 3.75
+  },
+  {
+   "id": "I.25",
+   "part": "I",
+   "n": 25,
+   "prompt": {
+    "en": "Dedicating a child to God is a time to claim the   of God.",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Promise",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Judgment",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Omniscience",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "A",
+   "keyPages2019": [
+    46
+   ],
+   "source": {
+    "chapter": "p1c5",
+    "block": 18,
+    "page": 46
+   },
+   "matchScore": 3.35
+  },
+  {
+   "id": "I.26",
+   "part": "I",
+   "n": 26,
+   "prompt": {
+    "en": "In a marriage service, the pastor should explain the meaning of marriage as a before God.",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Community affair",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Covenant relationship",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Private commitment",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "B",
+   "keyPages2019": [
+    48
+   ],
+   "source": {
+    "chapter": "p1c5",
+    "block": 58,
+    "page": 48
+   },
+   "matchScore": 3.607
+  },
+  {
+   "id": "I.27",
+   "part": "I",
+   "n": 27,
+   "prompt": {
+    "en": "The pastor’s role is that of a  .",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Shepherd",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Chief Executive Officer",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Administrator",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "A",
+   "keyPages2019": [
+    51
+   ],
+   "source": {
+    "chapter": "p1c6",
+    "block": 5,
+    "page": 51
+   },
+   "matchScore": 3.75
+  },
+  {
+   "id": "I.28",
+   "part": "I",
+   "n": 28,
+   "prompt": {
+    "en": "As ministers lead their congregations, they provide them with nurture and  .",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Mercy",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Grace",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Care",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "C",
+   "keyPages2019": [
+    51
+   ],
+   "source": {
+    "chapter": "p1c6",
+    "block": 5,
+    "page": 51
+   },
+   "matchScore": 3.417
+  },
+  {
+   "id": "I.29",
+   "part": "I",
+   "n": 29,
+   "prompt": {
+    "en": "The best ministerial description of a pastor might be found in  .",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Exodus 35",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Psalm 23",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "John 14",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "B",
+   "keyPages2019": [
+    51
+   ],
+   "source": {
+    "chapter": "p1c5",
+    "block": 9,
+    "page": 45
+   },
+   "matchScore": 2.2
+  },
+  {
+   "id": "I.30",
+   "part": "I",
+   "n": 30,
+   "prompt": {
+    "en": "Ministers prepare the congregation   to face challenges.",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Spiritually",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Economically",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Physically",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "A",
+   "keyPages2019": [
+    51
+   ],
+   "source": {
+    "chapter": "p1c6",
+    "block": 6,
+    "page": 51
+   },
+   "matchScore": 3.35
+  },
+  {
+   "id": "I.31",
+   "part": "I",
+   "n": 31,
+   "prompt": {
+    "en": "After a loved one passes away, the minister meets with the family to provide comfort and for the funeral service.",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Finances",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Preparation",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Food",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "B",
+   "keyPages2019": [
+    52
+   ],
+   "source": {
+    "chapter": "p1c6",
+    "block": 23,
+    "page": 52
+   },
+   "matchScore": 3.205
+  },
+  {
+   "id": "I.32",
+   "part": "I",
+   "n": 32,
+   "prompt": {
+    "en": "In ministering to the grieving family, a minister should focus on the   of God.",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Grace",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Judgment",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Omniscience",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "A",
+   "keyPages2019": [
+    52
+   ],
+   "source": {
+    "chapter": "p1c6",
+    "block": 22,
+    "page": 52
+   },
+   "matchScore": 3.417
+  },
+  {
+   "id": "I.33",
+   "part": "I",
+   "n": 33,
+   "prompt": {
+    "en": "In the sermon at a funeral, the minister should   the means of eternal life.",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Ignore",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Clarify",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Obfuscate",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "B",
+   "keyPages2019": [
+    54
+   ],
+   "source": {
+    "chapter": "p1c6",
+    "block": 54,
+    "page": 54
+   },
+   "matchScore": 3.417
+  },
+  {
+   "id": "I.34",
+   "part": "I",
+   "n": 34,
+   "prompt": {
+    "en": "The goal of a funeral is to  .",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Exalt Christ",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Comfort the family",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Clarify the means to eternal life",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "All of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "D",
+   "keyPages2019": [
+    53,
+    54
+   ],
+   "source": {
+    "chapter": "p1c6",
+    "block": 25,
+    "page": 53
+   },
+   "matchScore": 1.05
+  },
+  {
+   "id": "I.35",
+   "part": "I",
+   "n": 35,
+   "prompt": {
+    "en": "Administration means to  .",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Organize",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Plot",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Guide",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "All of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "D",
+   "keyPages2019": [
+    57
+   ],
+   "source": {
+    "chapter": "p1c7",
+    "block": 3,
+    "page": 57
+   },
+   "matchScore": 1.55
+  },
+  {
+   "id": "I.36",
+   "part": "I",
+   "n": 36,
+   "prompt": {
+    "en": "A vision of ministry consists of an objective, a purpose, and   for ministry.",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Status",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Benefits",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Obstacles",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "B",
+   "keyPages2019": [
+    57
+   ],
+   "source": {
+    "chapter": "p1c7",
+    "block": 6,
+    "page": 57
+   },
+   "matchScore": 3.75
+  },
+  {
+   "id": "I.37",
+   "part": "I",
+   "n": 37,
+   "prompt": {
+    "en": "The purpose of vision is to provide a church with focus and a means to measure ministry .",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Purpose",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Direction",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Effectiveness",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "C",
+   "keyPages2019": [
+    57
+   ],
+   "source": {
+    "chapter": "p1c7",
+    "block": 6,
+    "page": 57
+   },
+   "matchScore": 3.75
+  },
+  {
+   "id": "I.38",
+   "part": "I",
+   "n": 38,
+   "prompt": {
+    "en": "The Old Testament passage, , explains the necessity of a vision for a church.",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Deuteronomy 4:4",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Joshua 1:8",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Proverbs 29:18",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "C",
+   "keyPages2019": [
+    57
+   ],
+   "source": {
+    "chapter": "p1c7",
+    "block": 13,
+    "page": 57
+   },
+   "matchScore": 2.893
+  },
+  {
+   "id": "I.39",
+   "part": "I",
+   "n": 39,
+   "prompt": {
+    "en": "is a principle that should be used in writing a mission statement for ministry.",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Evangelism",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Edification",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Equipping",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "All of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "D",
+   "keyPages2019": [
+    59,
+    60
+   ],
+   "source": {
+    "chapter": "p1c7",
+    "block": 52,
+    "page": 59
+   },
+   "matchScore": 1.15
+  },
+  {
+   "id": "I.40",
+   "part": "I",
+   "n": 40,
+   "prompt": {
+    "en": "Making a vision a reality includes  .",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Selecting personnel",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Identifying plans",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Establishing a budget",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "All of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "D",
+   "keyPages2019": [
+    60
+   ],
+   "source": {
+    "chapter": "p1c7",
+    "block": 84,
+    "page": 60
+   },
+   "matchScore": 1.3
+  },
+  {
+   "id": "I.41",
+   "part": "I",
+   "n": 41,
+   "prompt": {
+    "en": "The church is a/an   that builds the body of Christ.",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Temple",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Bride",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Organization",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "C",
+   "keyPages2019": [
+    61
+   ],
+   "source": {
+    "chapter": "p1c7",
+    "block": 117,
+    "page": 61
+   },
+   "matchScore": 3.5
+  },
+  {
+   "id": "I.42",
+   "part": "I",
+   "n": 42,
+   "prompt": {
+    "en": "In  , Paul gives a description of the church as a body of many parts.",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Romans 10:17",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "First Corinthians 12:12-31",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Ephesians 4:7-16",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "B",
+   "keyPages2019": [
+    61
+   ],
+   "source": {
+    "chapter": "p1c7",
+    "block": 117,
+    "page": 61
+   },
+   "matchScore": 2.65
+  },
+  {
+   "id": "I.43",
+   "part": "I",
+   "n": 43,
+   "prompt": {
+    "en": "Organization gives the church for its vision to be carried out.",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Structure",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Vitality",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Vigor",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "A",
+   "keyPages2019": [
+    62
+   ],
+   "source": {
+    "chapter": "p1c7",
+    "block": 121,
+    "page": 62
+   },
+   "matchScore": 3.75
+  },
+  {
+   "id": "I.44",
+   "part": "I",
+   "n": 44,
+   "prompt": {
+    "en": "The church needs to be aware of the of the people who live in its surrounding com- munity.",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Hopes",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Expectations",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Needs",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "C",
+   "keyPages2019": [
+    63
+   ],
+   "source": {
+    "chapter": "p1c7",
+    "block": 133,
+    "page": 63
+   },
+   "matchScore": 3.5
+  },
+  {
+   "id": "I.45",
+   "part": "I",
+   "n": 45,
+   "prompt": {
+    "en": "is a spiritual discipline.",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Giving",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Spiritual warfare",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Kindness",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "A",
+   "keyPages2019": [
+    64
+   ],
+   "source": {
+    "chapter": "p1c7",
+    "block": 163,
+    "page": 64
+   },
+   "matchScore": 3.25
+  },
+  {
+   "id": "I.46",
+   "part": "I",
+   "n": 46,
+   "prompt": {
+    "en": "is a Bible passage that teaches about tithing.",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Deuteronomy 19:1-6",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Isaiah 37:5-8",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Malachi 3:7-10",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "C",
+   "keyPages2019": [
+    64,
+    65
+   ],
+   "source": {
+    "chapter": "p1c7",
+    "block": 164,
+    "page": 64
+   },
+   "matchScore": 2.75
+  },
+  {
+   "id": "I.47",
+   "part": "I",
+   "n": 47,
+   "prompt": {
+    "en": "The   should be composed of individuals whose gifts are in administration.",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Eldership",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Prophets",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Teachers",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "A",
+   "keyPages2019": [
+    68
+   ],
+   "source": {
+    "chapter": "p1c7",
+    "block": 199,
+    "page": 68
+   },
+   "matchScore": 3.35
+  },
+  {
+   "id": "I.48",
+   "part": "I",
+   "n": 48,
+   "prompt": {
+    "en": "Christ recognized people at the point of their  .",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Need",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Position",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Wants",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "A",
+   "keyPages2019": [
+    69
+   ],
+   "source": {
+    "chapter": "p1c7",
+    "block": 212,
+    "page": 69
+   },
+   "matchScore": 3.75
+  },
+  {
+   "id": "I.49",
+   "part": "I",
+   "n": 49,
+   "prompt": {
+    "en": "Christ related to people in spite of  .",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Prejudice",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Demands",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Customs",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "D",
+   "keyPages2019": [
+    69
+   ],
+   "source": {
+    "chapter": "p1c7",
+    "block": 213,
+    "page": 69
+   },
+   "matchScore": 1.55
+  },
+  {
+   "id": "I.50",
+   "part": "I",
+   "n": 50,
+   "prompt": {
+    "en": "is the central thrust of the local church.",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Evangelism",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Music",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Fellowship",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "All of these ",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "A",
+   "keyPages2019": [
+    71
+   ],
+   "source": {
+    "chapter": "p1c7",
+    "block": 265,
+    "page": 71
+   },
+   "matchScore": 3.25
+  },
+  {
+   "id": "II.1",
+   "part": "II",
+   "n": 1,
+   "prompt": {
+    "en": "The Church of God began in the Appalachian Mountains of  .",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Georgia",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "North Carolina",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Tennessee",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "All of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "D",
+   "keyPages2019": [
+    89
+   ],
+   "source": {
+    "chapter": "p2c1",
+    "block": 2,
+    "page": 89
+   },
+   "matchScore": 1.35
+  },
+  {
+   "id": "II.2",
+   "part": "II",
+   "n": 2,
+   "prompt": {
+    "en": "The founders of the Church of God preached a solid   message.",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Heavenly",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Holiness",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Millennial",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "B",
+   "keyPages2019": [
+    89
+   ],
+   "source": {
+    "chapter": "p2c1",
+    "block": 2,
+    "page": 89
+   },
+   "matchScore": 3.75
+  },
+  {
+   "id": "II.3",
+   "part": "II",
+   "n": 3,
+   "prompt": {
+    "en": "The existence of false teachings in the early days of Pentecostalism made the leaders of the church understand the need for the development of  .",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Educational institutions",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Evangelistic programs",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Holiness practices",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "A",
+   "keyPages2019": [
+    90
+   ],
+   "source": {
+    "chapter": "p2c1",
+    "block": 11,
+    "page": 90
+   },
+   "matchScore": 3.5
+  },
+  {
+   "id": "II.4",
+   "part": "II",
+   "n": 4,
+   "prompt": {
+    "en": "is the official history of the Church of God.",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "As the Saints Have Trod",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "The Church of God",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Like a Mighty Army",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "C",
+   "keyPages2019": [
+    93
+   ],
+   "source": {
+    "chapter": "p2c2",
+    "block": 1,
+    "page": 93
+   },
+   "matchScore": 3.75
+  },
+  {
+   "id": "II.5",
+   "part": "II",
+   "n": 5,
+   "prompt": {
+    "en": "The Church of God began in  .",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "1886",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "1896",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "1906",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "A",
+   "keyPages2019": [
+    93
+   ],
+   "source": {
+    "chapter": "p2c2",
+    "block": 6,
+    "page": 93
+   },
+   "matchScore": 3.417
+  },
+  {
+   "id": "II.6",
+   "part": "II",
+   "n": 6,
+   "prompt": {
+    "en": "was a significant layman in the early days of the Church of God.",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Glanville Charles",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "John Smith",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "W.F. Bryant",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "All of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "C",
+   "keyPages2019": [
+    95
+   ],
+   "source": {
+    "chapter": "p2c2",
+    "block": 16,
+    "page": 95
+   },
+   "matchScore": 2.917
+  },
+  {
+   "id": "II.7",
+   "part": "II",
+   "n": 7,
+   "prompt": {
+    "en": "The name, Church of God, was adopted in the   General Assembly.",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "First",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Second",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Third",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "B",
+   "keyPages2019": [
+    97
+   ],
+   "source": {
+    "chapter": "p2c2",
+    "block": 32,
+    "page": 97
+   },
+   "matchScore": 3.583
+  },
+  {
+   "id": "II.8",
+   "part": "II",
+   "n": 8,
+   "prompt": {
+    "en": "At the second General Assembly, the Assembly instituted a new order of ministry— .",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Apostle",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Evangelist",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Prophet",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "All of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "B",
+   "keyPages2019": [
+    97
+   ],
+   "source": {
+    "chapter": "p2c2",
+    "block": 32,
+    "page": 97
+   },
+   "matchScore": 3.464
+  },
+  {
+   "id": "II.9",
+   "part": "II",
+   "n": 9,
+   "prompt": {
+    "en": "The first general overseer of the Church of God was  .",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "A.J. Tomlinson",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "F.J. Lee",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "John C. Jernigan",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "A",
+   "keyPages2019": [
+    97
+   ],
+   "source": {
+    "chapter": "p2c2",
+    "block": 36,
+    "page": 97
+   },
+   "matchScore": 3.35
+  },
+  {
+   "id": "II.10",
+   "part": "II",
+   "n": 10,
+   "prompt": {
+    "en": "The Church of God Evangel was first published in  .",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "1886",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "1906",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "1910",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "C",
+   "keyPages2019": [
+    98
+   ],
+   "source": {
+    "chapter": "p2c2",
+    "block": 38,
+    "page": 98
+   },
+   "matchScore": 3.75
+  },
+  {
+   "id": "II.11",
+   "part": "II",
+   "n": 11,
+   "prompt": {
+    "en": "In 1948, the   was adopted.",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Declaration of Faith",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Holiness Code",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Practical Commitments",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "All of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "A",
+   "keyPages2019": [
+    104
+   ],
+   "source": {
+    "chapter": "p2c2",
+    "block": 90,
+    "page": 104
+   },
+   "matchScore": 3.75
+  },
+  {
+   "id": "II.12",
+   "part": "II",
+   "n": 12,
+   "prompt": {
+    "en": "In 1909, the General Assembly approved   to be licensed to preach.",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Adolescents",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Children",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Women",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "C",
+   "keyPages2019": [
+    103
+   ],
+   "source": {
+    "chapter": "p2c2",
+    "block": 82,
+    "page": 103
+   },
+   "matchScore": 3.25
+  },
+  {
+   "id": "II.13",
+   "part": "II",
+   "n": 13,
+   "prompt": {
+    "en": "The Church of God stands for the   rightly divided.",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Old Testament",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "New Testament",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Whole Bible",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "C",
+   "keyPages2019": [
+    98
+   ],
+   "source": {
+    "chapter": "p2c2",
+    "block": 42,
+    "page": 98
+   },
+   "matchScore": 3.55
+  },
+  {
+   "id": "II.14",
+   "part": "II",
+   "n": 14,
+   "prompt": {
+    "en": "The   remains the Church of God’s mandate from Christ.",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Great Commission",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Holiness Code",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Sermon on the Mount",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "A",
+   "keyPages2019": [
+    163
+   ],
+   "source": {
+    "chapter": "p2c7",
+    "block": 373,
+    "page": 165
+   },
+   "matchScore": 3.0
+  },
+  {
+   "id": "II.15",
+   "part": "II",
+   "n": 15,
+   "prompt": {
+    "en": "The Church of God is a   body.",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Executive",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Judicial",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Legislative",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "B",
+   "keyPages2019": [
+    115,
+    183
+   ],
+   "source": {
+    "chapter": "p2c3",
+    "block": 46,
+    "page": 115
+   },
+   "matchScore": 3.083
+  },
+  {
+   "id": "II.16",
+   "part": "II",
+   "n": 16,
+   "prompt": {
+    "en": "The official name of the Church of God is  .",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Church of God",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Churches of God",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Church of God Fellowships",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "All of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "A",
+   "keyPages2019": [
+    97,
+    183
+   ],
+   "source": {
+    "chapter": "p2c2",
+    "block": 32,
+    "page": 97
+   },
+   "matchScore": 3.5
+  },
+  {
+   "id": "II.17",
+   "part": "II",
+   "n": 17,
+   "prompt": {
+    "en": "The International   is composed of all members and ministers of the Church of God 16 years of age and above.",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Bishops Council",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "General Assembly",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "General Council",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "All of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "B",
+   "keyPages2019": [
+    186
+   ],
+   "source": {
+    "chapter": "p2c8",
+    "block": 155,
+    "page": 188
+   },
+   "matchScore": 3.2
+  },
+  {
+   "id": "II.18",
+   "part": "II",
+   "n": 18,
+   "prompt": {
+    "en": "The International General Assembly meets  .",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Annually",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Biennially",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Quadrennially",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "B",
+   "keyPages2019": [
+    186
+   ],
+   "source": {
+    "chapter": "p2c8",
+    "block": 160,
+    "page": 188
+   },
+   "matchScore": 2.95
+  },
+  {
+   "id": "II.19",
+   "part": "II",
+   "n": 19,
+   "prompt": {
+    "en": "The International   elects the Council of Eighteen.",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Council",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "General Assembly",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "General Council",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "C",
+   "keyPages2019": [
+    187
+   ],
+   "source": {
+    "chapter": "p2c8",
+    "block": 150,
+    "page": 187
+   },
+   "matchScore": 3.25
+  },
+  {
+   "id": "II.20",
+   "part": "II",
+   "n": 20,
+   "prompt": {
+    "en": "The general overseer, his assistants, the secretary-general, and   constitute the Inter- national Executive Council.",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Council of Eighteen",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "International Executive Committee",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "International Council",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "All of the Above",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "A",
+   "keyPages2019": [
+    188
+   ],
+   "source": {
+    "chapter": "p2c8",
+    "block": 223,
+    "page": 190
+   },
+   "matchScore": 2.867
+  },
+  {
+   "id": "II.21",
+   "part": "II",
+   "n": 21,
+   "prompt": {
+    "en": "Standing Boards are appointed by the  .",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "International Executive Committee",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "International Executive Council",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "International General Assembly",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "All of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "A",
+   "keyPages2019": [
+    188
+   ],
+   "source": {
+    "chapter": "p2c8",
+    "block": 235,
+    "page": 191
+   },
+   "matchScore": 3.2
+  },
+  {
+   "id": "II.22",
+   "part": "II",
+   "n": 22,
+   "prompt": {
+    "en": "are approved to sit in the International General Council.",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Exhorters",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Laity",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Ordained Ministers",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "All of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "D",
+   "keyPages2019": [
+    191
+   ],
+   "source": {
+    "chapter": "p2c8",
+    "block": 235,
+    "page": 191
+   },
+   "matchScore": 1.15
+  },
+  {
+   "id": "II.23",
+   "part": "II",
+   "n": 23,
+   "prompt": {
+    "en": "Who decides to reschedule or postpone a regularly scheduled General Assembly to an appropriate time and place?",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "International Executive Committee",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "International Executive Council",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Liaison to the General Overseer",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of the above",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "B",
+   "keyPages2019": [
+    190
+   ],
+   "source": {
+    "chapter": "p2c8",
+    "block": 225,
+    "page": 190
+   },
+   "matchScore": 2.95
+  },
+  {
+   "id": "II.24",
+   "part": "II",
+   "n": 24,
+   "prompt": {
+    "en": "The distribution of tithes sent to the International Offices is the responsibility of the .",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "General overseer",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "International Executive Council",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "General overseer and International Executive Council",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "C",
+   "keyPages2019": [
+    194
+   ],
+   "source": {
+    "chapter": "p2c8",
+    "block": 225,
+    "page": 190
+   },
+   "matchScore": 2.367
+  },
+  {
+   "id": "II.25",
+   "part": "II",
+   "n": 25,
+   "prompt": {
+    "en": "State and provincial overseers are appointed by the  .",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "General overseer",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "International Executive Committee",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "International Executive Council",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "All of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "B",
+   "keyPages2019": [
+    196
+   ],
+   "source": {
+    "chapter": "p2c8",
+    "block": 231,
+    "page": 190
+   },
+   "matchScore": 2.45
+  },
+  {
+   "id": "II.26",
+   "part": "II",
+   "n": 26,
+   "prompt": {
+    "en": "The   provides diverse involvement in order to support an international perspective in fulfilling the mission of the Church of God.",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "International Council",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "International Executive Committee",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "World Missions",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "A",
+   "keyPages2019": [
+    203
+   ],
+   "source": {
+    "chapter": "p2c8",
+    "block": 612,
+    "page": 204
+   },
+   "matchScore": 2.564
+  },
+  {
+   "id": "II.27",
+   "part": "II",
+   "n": 27,
+   "prompt": {
+    "en": "The tenure of office for the state overseer is for a maximum of   years in nonmission states.",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "4",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "8",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "12",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "C",
+   "keyPages2019": [
+    244
+   ],
+   "source": {
+    "chapter": "p2c10",
+    "block": 53,
+    "page": 248
+   },
+   "matchScore": 0.875
+  },
+  {
+   "id": "II.28",
+   "part": "II",
+   "n": 28,
+   "prompt": {
+    "en": "The state overseer appoints   when necessary.",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "District overseers",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Local church officers",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Pastors",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "All of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "D",
+   "keyPages2019": [
+    245
+   ],
+   "source": {
+    "chapter": "p2c10",
+    "block": 136,
+    "page": 251
+   },
+   "matchScore": 0.75
+  },
+  {
+   "id": "II.29",
+   "part": "II",
+   "n": 29,
+   "prompt": {
+    "en": "The state overseer approves the selection, purchase, and construction of all church, par- sonage, or Sunday school properties, together with the respective  .",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Building committee",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "District overseer",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Pastor",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "B",
+   "keyPages2019": [
+    245
+   ],
+   "source": {
+    "chapter": "p2c10",
+    "block": 99,
+    "page": 250
+   },
+   "matchScore": 2.343
+  },
+  {
+   "id": "II.30",
+   "part": "II",
+   "n": 30,
+   "prompt": {
+    "en": "Before launching large financial projects, the state overseer must have the approval of the .",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "International Council",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "International Executive Committee",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "International Executive Council",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "All of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "B",
+   "keyPages2019": [
+    245
+   ],
+   "source": {
+    "chapter": "p2c9",
+    "block": 678,
+    "page": 244
+   },
+   "matchScore": 2.422
+  },
+  {
+   "id": "II.31",
+   "part": "II",
+   "n": 31,
+   "prompt": {
+    "en": "The   is appointed biennially by the state overseer.",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "State Board of Ministerial Development",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "State Music Board",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "State World Missions Board",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "All of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "D",
+   "keyPages2019": [
+    248,
+    251
+   ],
+   "source": {
+    "chapter": "p2c10",
+    "block": 53,
+    "page": 248
+   },
+   "matchScore": 1.05
+  },
+  {
+   "id": "II.32",
+   "part": "II",
+   "n": 32,
+   "prompt": {
+    "en": "The state Youth and Discipleship director is elected by the",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "State Council",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "State Overseer",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "State Youth Board",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "All of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "A",
+   "keyPages2019": [
+    250
+   ],
+   "source": {
+    "chapter": "p2c10",
+    "block": 245,
+    "page": 254
+   },
+   "matchScore": 3.0
+  },
+  {
+   "id": "II.33",
+   "part": "II",
+   "n": 33,
+   "prompt": {
+    "en": "Evangelistic organizations cannot be organized in the Church of God without the express approval of the  .",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "International Council",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "International Executive Committee",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "International Executive Council",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "All of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "C",
+   "keyPages2019": [
+    251
+   ],
+   "source": {
+    "chapter": "p2c10",
+    "block": 285,
+    "page": 255
+   },
+   "matchScore": 3.089
+  },
+  {
+   "id": "II.34",
+   "part": "II",
+   "n": 34,
+   "prompt": {
+    "en": "The Church of God has a   form of government.",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Centralized",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Congregational",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Theocentric",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "A",
+   "keyPages2019": [
+    257
+   ],
+   "source": {
+    "chapter": "p2c11",
+    "block": 4,
+    "page": 261
+   },
+   "matchScore": 2.8
+  },
+  {
+   "id": "II.35",
+   "part": "II",
+   "n": 35,
+   "prompt": {
+    "en": "The  , the highest authority of the Church of God, governs the ownership of all church property.",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "International Executive Committee",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "International General Council",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "International General Assembly",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "C",
+   "keyPages2019": [
+    257
+   ],
+   "source": {
+    "chapter": "p2c11",
+    "block": 22,
+    "page": 261
+   },
+   "matchScore": 2.771
+  },
+  {
+   "id": "II.36",
+   "part": "II",
+   "n": 36,
+   "prompt": {
+    "en": "A request for transfer of membership should be granted within  , providing no charges are pending.",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "One week",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Two weeks",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "One month",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "B",
+   "keyPages2019": [
+    261
+   ],
+   "source": {
+    "chapter": "p2c11",
+    "block": 118,
+    "page": 265
+   },
+   "matchScore": 2.45
+  },
+  {
+   "id": "II.37",
+   "part": "II",
+   "n": 37,
+   "prompt": {
+    "en": "A   is a business meeting for the purpose of transacting any business necessary for the operations of the local church.",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Church conference",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "District conference",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "State conference",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "A",
+   "keyPages2019": [
+    263
+   ],
+   "source": {
+    "chapter": "p2c11",
+    "block": 147,
+    "page": 267
+   },
+   "matchScore": 2.95
+  },
+  {
+   "id": "II.38",
+   "part": "II",
+   "n": 38,
+   "prompt": {
+    "en": "No church conference will be held in a district except under the direction of the  .",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Church and Pastor’s Council",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "District overseer",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Pastor",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "B",
+   "keyPages2019": [
+    263
+   ],
+   "source": {
+    "chapter": "p2c11",
+    "block": 156,
+    "page": 267
+   },
+   "matchScore": 2.629
+  },
+  {
+   "id": "II.39",
+   "part": "II",
+   "n": 39,
+   "prompt": {
+    "en": "The state and district overseers should see that at least   conference is conducted in each local church each year.",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "One",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Two",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Three",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "A",
+   "keyPages2019": [
+    263
+   ],
+   "source": {
+    "chapter": "p2c11",
+    "block": 75,
+    "page": 263
+   },
+   "matchScore": 0.85
+  },
+  {
+   "id": "II.40",
+   "part": "II",
+   "n": 40,
+   "prompt": {
+    "en": "The regular church conference consists of the  .",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Church and Pastor’s Council",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Membership",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Regular Attendees",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "B",
+   "keyPages2019": [
+    263
+   ],
+   "source": {
+    "chapter": "p2c11",
+    "block": 66,
+    "page": 263
+   },
+   "matchScore": 2.75
+  },
+  {
+   "id": "II.41",
+   "part": "II",
+   "n": 41,
+   "prompt": {
+    "en": "The purpose of a church conference is to inform the church of its  .",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Church status",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Financial status",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Membership status",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "B",
+   "keyPages2019": [
+    263
+   ],
+   "source": {
+    "chapter": "p2c11",
+    "block": 166,
+    "page": 267
+   },
+   "matchScore": 3.2
+  },
+  {
+   "id": "II.42",
+   "part": "II",
+   "n": 42,
+   "prompt": {
+    "en": "Assistant pastors are subject to the approval and appointment of the  .",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Church and Pastor’s Council",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "District overseer",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "State overseer",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "C",
+   "keyPages2019": [
+    265
+   ],
+   "source": {
+    "chapter": "p2c11",
+    "block": 208,
+    "page": 269
+   },
+   "matchScore": 3.2
+  },
+  {
+   "id": "II.43",
+   "part": "II",
+   "n": 43,
+   "prompt": {
+    "en": "The   serves as chairperson of the Church and Pastor’s Council.",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Clerk",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Pastor",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Treasurer",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "B",
+   "keyPages2019": [
+    266
+   ],
+   "source": {
+    "chapter": "p2c11",
+    "block": 141,
+    "page": 266
+   },
+   "matchScore": 2.95
+  },
+  {
+   "id": "II.44",
+   "part": "II",
+   "n": 44,
+   "prompt": {
+    "en": "The Church and Pastor’s Council assists the pastor in the following aspects of the church: .",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Financial",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Physical",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Spiritual",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "All of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "D",
+   "keyPages2019": [
+    266,
+    267
+   ],
+   "source": {
+    "chapter": "p2c11",
+    "block": 137,
+    "page": 266
+   },
+   "matchScore": 1.05
+  },
+  {
+   "id": "II.45",
+   "part": "II",
+   "n": 45,
+   "prompt": {
+    "en": "All major local church disbursements must be approved by the church in  .",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Conference",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Deliberation",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Session",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "A",
+   "keyPages2019": [
+    266
+   ],
+   "source": {
+    "chapter": "p2c11",
+    "block": 247,
+    "page": 271
+   },
+   "matchScore": 3.0
+  },
+  {
+   "id": "II.46",
+   "part": "II",
+   "n": 46,
+   "prompt": {
+    "en": "The Finance Committee in a local church consists of the treasurer and   other mem- bers.",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "One",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Two",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Three",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "B",
+   "keyPages2019": [
+    268
+   ],
+   "source": {
+    "chapter": "p2c11",
+    "block": 169,
+    "page": 268
+   },
+   "matchScore": 0.883
+  },
+  {
+   "id": "II.47",
+   "part": "II",
+   "n": 47,
+   "prompt": {
+    "en": "A local church that owns property will appoint a   to oversee the property.",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Church and Pastor’s Council",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Elders",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Local Board of Trustees",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "All of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "C",
+   "keyPages2019": [
+    274
+   ],
+   "source": {
+    "chapter": "p2c11",
+    "block": 473,
+    "page": 280
+   },
+   "matchScore": 3.033
+  },
+  {
+   "id": "II.48",
+   "part": "II",
+   "n": 48,
+   "prompt": {
+    "en": "In order to preserve the doctrinal integrity of the Church of God as part of the body of Christ, and to provide a biblical role model to our movement, it is imperative that all persons employed by the church in any capacity, or who serve as ministerial volunteers, agree to and abide by the  .",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "The Practical Commitments",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "The Ten Commandments",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "The Declaration of Faith",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of the above",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "C",
+   "keyPages2019": [
+    230
+   ],
+   "source": {
+    "chapter": "p2c9",
+    "block": 415,
+    "page": 233
+   },
+   "matchScore": 2.33
+  },
+  {
+   "id": "II.49",
+   "part": "II",
+   "n": 49,
+   "prompt": {
+    "en": "No church will implement a   without permission from the state overseer.",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Christian day school",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Discipleship ministry",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Bible school",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "A",
+   "keyPages2019": [
+    278
+   ],
+   "source": {
+    "chapter": "p2c11",
+    "block": 554,
+    "page": 284
+   },
+   "matchScore": 3.033
+  },
+  {
+   "id": "II.50",
+   "part": "II",
+   "n": 50,
+   "prompt": {
+    "en": "An applicant for ordination may be ordained when he is 25 years of age, provided he has had at least   year(s) of active ministry.",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "One",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Ten",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Fifteen",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these ",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "D",
+   "keyPages2019": [
+    224
+   ],
+   "source": {
+    "chapter": "p2c9",
+    "block": 241,
+    "page": 228
+   },
+   "matchScore": 0.75
+  },
+  {
+   "id": "III.1",
+   "part": "III",
+   "n": 1,
+   "prompt": {
+    "en": "The word “inspiration” means  .",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Anointed",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Breathed by God",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Infallible",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "Incorrupt",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "B",
+   "keyPages2019": [
+    309
+   ],
+   "source": {
+    "chapter": "p3c1",
+    "block": 4,
+    "page": 313
+   },
+   "matchScore": 3.75
+  },
+  {
+   "id": "III.2",
+   "part": "III",
+   "n": 2,
+   "prompt": {
+    "en": "The   is the single moral standard of the Bible.",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Life of faith",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Love of God",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Holiness of God",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "Grace of God",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "C",
+   "keyPages2019": [
+    310
+   ],
+   "source": {
+    "chapter": "p3c1",
+    "block": 13,
+    "page": 314
+   },
+   "matchScore": 3.5
+  },
+  {
+   "id": "III.3",
+   "part": "III",
+   "n": 3,
+   "prompt": {
+    "en": "The Bible is the only infallible rule of   and  .",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Merit; good works",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Faith; practice",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Love; obedience",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "Government; doctrine",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "B",
+   "keyPages2019": [
+    310
+   ],
+   "source": {
+    "chapter": "p3c1",
+    "block": 16,
+    "page": 314
+   },
+   "matchScore": 3.75
+  },
+  {
+   "id": "III.4",
+   "part": "III",
+   "n": 4,
+   "prompt": {
+    "en": "In the relationship of the persons of the Trinity to each other, they exist  .",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Temporarily",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "In title only",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Figuratively",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "Eternally",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "D",
+   "keyPages2019": [
+    311
+   ],
+   "source": {
+    "chapter": "p3c1",
+    "block": 21,
+    "page": 315
+   },
+   "matchScore": 3.15
+  },
+  {
+   "id": "III.5",
+   "part": "III",
+   "n": 5,
+   "prompt": {
+    "en": "In 1 Timothy 2:5, Paul argues that since there is only one God, there is only one  .",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Law",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Plan of salvation",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Mediator",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "Bible",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "C",
+   "keyPages2019": [
+    311
+   ],
+   "source": {
+    "chapter": "p3c1",
+    "block": 34,
+    "page": 316
+   },
+   "matchScore": 2.533
+  },
+  {
+   "id": "III.6",
+   "part": "III",
+   "n": 6,
+   "prompt": {
+    "en": "Which word does not describe the deity of each person of the Trinity?",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Infinite",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Transient",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Eternal",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "Unchangeable",
+      "nl": ""
+     }
+    },
+    {
+     "key": "E",
+     "text": {
+      "en": "None of the above",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "B",
+   "keyPages2019": [
+    311
+   ],
+   "source": {
+    "chapter": "p3c1",
+    "block": 21,
+    "page": 315
+   },
+   "matchScore": 0.75
+  },
+  {
+   "id": "III.7",
+   "part": "III",
+   "n": 7,
+   "prompt": {
+    "en": "According to the Scriptures, Jesus is the Son of God  .",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "By adoption",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "By being begotten",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "By creation",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "In a figurative sense",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "B",
+   "keyPages2019": [
+    314
+   ],
+   "source": {
+    "chapter": "p3c1",
+    "block": 77,
+    "page": 318
+   },
+   "matchScore": 2.25
+  },
+  {
+   "id": "III.8",
+   "part": "III",
+   "n": 8,
+   "prompt": {
+    "en": "The deity of Jesus Christ, the Son of God, is proven in Scripture by  .",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "The love and kindness He showed to people",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "The ascribing to Him of divine names and divine attributes",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "The divine works performed by Him and divine worship offered to Him",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "A and B",
+      "nl": ""
+     }
+    },
+    {
+     "key": "E",
+     "text": {
+      "en": "B and C",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "E",
+   "keyPages2019": [
+    314
+   ],
+   "source": {
+    "chapter": "p3c1",
+    "block": 77,
+    "page": 318
+   },
+   "matchScore": 1.121
+  },
+  {
+   "id": "III.9",
+   "part": "III",
+   "n": 9,
+   "prompt": {
+    "en": "The redemptive office(s) of Jesus Christ is  .",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Priest",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "King",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Prophet",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "All of the above",
+      "nl": ""
+     }
+    },
+    {
+     "key": "E",
+     "text": {
+      "en": "None of the above",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "D",
+   "keyPages2019": [
+    314,
+    318
+   ],
+   "source": {
+    "chapter": "p3c1",
+    "block": 78,
+    "page": 318
+   },
+   "matchScore": 1.3
+  },
+  {
+   "id": "III.10",
+   "part": "III",
+   "n": 10,
+   "prompt": {
+    "en": "Christ the Redeemer must be God and man in order to serve as  .",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Mediator",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Judge",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Healer",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "Prophet",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "A",
+   "keyPages2019": [
+    315
+   ],
+   "source": {
+    "chapter": "p3c1",
+    "block": 87,
+    "page": 319
+   },
+   "matchScore": 3.417
+  },
+  {
+   "id": "III.11",
+   "part": "III",
+   "n": 11,
+   "prompt": {
+    "en": "When the Son of God was conceived and born of a virgin, He became a man. Choose the statement below that best describes His human nature.",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "He was a man in body, but His Spirit was the Holy Spirit.",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "He was a man, but was not subject to all the weakness of human nature.",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "He was fully man, completely identifiable with mankind.",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "His manhood was united with the divine nature in such a way that He was more than man.",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "C",
+   "keyPages2019": [
+    315
+   ],
+   "source": {
+    "chapter": "p3c1",
+    "block": 87,
+    "page": 319
+   },
+   "matchScore": 1.93
+  },
+  {
+   "id": "III.12",
+   "part": "III",
+   "n": 12,
+   "prompt": {
+    "en": "When the Son of God became man, God united the human nature and divine nature. Choose the statement below that best describes His divine nature.",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "He was divine in all attributes and powers.",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "He gave up some of His divine nature.",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "The divine nature and the human nature were mixed with each other.",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "The divine nature came upon Him at the resurrection.",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "A",
+   "keyPages2019": [
+    314
+   ],
+   "source": {
+    "chapter": "p3c1",
+    "block": 77,
+    "page": 318
+   },
+   "matchScore": 2.906
+  },
+  {
+   "id": "III.13",
+   "part": "III",
+   "n": 13,
+   "prompt": {
+    "en": "The crucifixion of Christ was necessary in order to satisfy divine  .",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Punishment",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Judgment",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Righteousness",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "Holiness",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "B",
+   "keyPages2019": [
+    315
+   ],
+   "source": {
+    "chapter": "p3c1",
+    "block": 90,
+    "page": 319
+   },
+   "matchScore": 3.417
+  },
+  {
+   "id": "III.14",
+   "part": "III",
+   "n": 14,
+   "prompt": {
+    "en": "By His  , Christ was lifted above all principalities and power and was exalted by the Father to the right hand of power.",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Atonement",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Miracles",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Words",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "Ascension",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "D",
+   "keyPages2019": [
+    317
+   ],
+   "source": {
+    "chapter": "p3c1",
+    "block": 118,
+    "page": 321
+   },
+   "matchScore": 3.375
+  },
+  {
+   "id": "III.15",
+   "part": "III",
+   "n": 15,
+   "prompt": {
+    "en": "Repentance from sin is a benefit of  .",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Man’s depravity",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Godly sorrow",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Divine grace",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "Obedience",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "C",
+   "keyPages2019": [
+    319
+   ],
+   "source": {
+    "chapter": "p3c1",
+    "block": 136,
+    "page": 323
+   },
+   "matchScore": 3.75
+  },
+  {
+   "id": "III.16",
+   "part": "III",
+   "n": 16,
+   "prompt": {
+    "en": "It is a work of   to reprove the world of sin.",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "The prophet",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "The Holy Spirit",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Preachers",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "The Bible",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "B",
+   "keyPages2019": [
+    320
+   ],
+   "source": {
+    "chapter": "p3c1",
+    "block": 151,
+    "page": 324
+   },
+   "matchScore": 3.75
+  },
+  {
+   "id": "III.17",
+   "part": "III",
+   "n": 17,
+   "prompt": {
+    "en": "As God’s gift, justification is an act of divine  .",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Patience",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Grace",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Self-control",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "Hope",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "B",
+   "keyPages2019": [
+    321
+   ],
+   "source": {
+    "chapter": "p3c1",
+    "block": 158,
+    "page": 325
+   },
+   "matchScore": 3.75
+  },
+  {
+   "id": "III.18",
+   "part": "III",
+   "n": 18,
+   "prompt": {
+    "en": "The image of God is restored in man by  .",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Justification",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Repentance",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Adoption",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "Regeneration",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "D",
+   "keyPages2019": [
+    322
+   ],
+   "source": {
+    "chapter": "p3c1",
+    "block": 168,
+    "page": 326
+   },
+   "matchScore": 3.25
+  },
+  {
+   "id": "III.19",
+   "part": "III",
+   "n": 19,
+   "prompt": {
+    "en": "The result of new birth is  .",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "A radical change in manner of life",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "That we are given an opportunity to prove our worthiness of life eternal",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "That we will never again have to worry about temptation",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "That we become sinless and pure physically and spiritually as Christ was when He was on earth",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "A",
+   "keyPages2019": [
+    323
+   ],
+   "source": {
+    "chapter": "p3c1",
+    "block": 170,
+    "page": 327
+   },
+   "matchScore": 3.75
+  },
+  {
+   "id": "III.20",
+   "part": "III",
+   "n": 20,
+   "prompt": {
+    "en": "Sanctification is an act of faith by which the believer reckons himself to be  .",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Holy",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Clean",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Dead to sin",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "Pure in heart",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "C",
+   "keyPages2019": [
+    325
+   ],
+   "source": {
+    "chapter": "p3c1",
+    "block": 191,
+    "page": 329
+   },
+   "matchScore": 3.25
+  },
+  {
+   "id": "III.21",
+   "part": "III",
+   "n": 21,
+   "prompt": {
+    "en": "The pursuit of   is the normal manner of life for the believer.",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Holy living",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Miracles",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Excellence",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "Eternal life",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "A",
+   "keyPages2019": [
+    325
+   ],
+   "source": {
+    "chapter": "p3c1",
+    "block": 194,
+    "page": 329
+   },
+   "matchScore": 3.75
+  },
+  {
+   "id": "III.22",
+   "part": "III",
+   "n": 22,
+   "prompt": {
+    "en": "In all instances in the Book of Acts in which people received the Holy Spirit, they were already in  .",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "The ministry of preaching",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "The body of the apostles",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "A covenant relationship with Israel",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "A saved relationship with God",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "D",
+   "keyPages2019": [
+    327
+   ],
+   "source": {
+    "chapter": "p3c1",
+    "block": 236,
+    "page": 334
+   },
+   "matchScore": 1.717
+  },
+  {
+   "id": "III.23",
+   "part": "III",
+   "n": 23,
+   "prompt": {
+    "en": "Speaking in tongues as the Holy Spirit gives the utterance is  .",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Full proof of the infilling of the Holy Spirit",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "A divine-human communication",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "The will of God for some, but not for every believer",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "A and B",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "B",
+   "keyPages2019": [
+    327
+   ],
+   "source": {
+    "chapter": "p3c1",
+    "block": 217,
+    "page": 331
+   },
+   "matchScore": 3.417
+  },
+  {
+   "id": "III.24",
+   "part": "III",
+   "n": 24,
+   "prompt": {
+    "en": "Select the statement below that correctly describes the continuing ministry of the Holy Spirit in the gift of tongues.",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Speaking in tongues was intended only for the Apostolic Age.",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Speaking in tongues occurs only under the direct ministry of the apostles.",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Speaking in tongues is a continuing ministry from the Holy Spirit to the individual in private.",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "Speaking in tongues is a continuing ministry from the Holy Spirit to the individual and to the church.",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "D",
+   "keyPages2019": [
+    328
+   ],
+   "source": {
+    "chapter": "p3c1",
+    "block": 225,
+    "page": 332
+   },
+   "matchScore": 2.771
+  },
+  {
+   "id": "III.25",
+   "part": "III",
+   "n": 25,
+   "prompt": {
+    "en": "The act of   represents the believer’s death, burial, and resurrection with Christ.",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Sanctification",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Regeneration",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Immersion",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "Submission",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "C",
+   "keyPages2019": [
+    329
+   ],
+   "source": {
+    "chapter": "p3c1",
+    "block": 230,
+    "page": 333
+   },
+   "matchScore": 3.75
+  },
+  {
+   "id": "III.26",
+   "part": "III",
+   "n": 26,
+   "prompt": {
+    "en": "Which of the following is a consequence of man’s sin and violation of God’s moral law?",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Man’s spiritual depravity",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Man’s alienation from God",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Man’s bodily corruption and death",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "All of the above",
+      "nl": ""
+     }
+    },
+    {
+     "key": "E",
+     "text": {
+      "en": "None of the above",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "D",
+   "keyPages2019": [
+    331
+   ],
+   "source": {
+    "chapter": "p3c1",
+    "block": 244,
+    "page": 335
+   },
+   "matchScore": 1.121
+  },
+  {
+   "id": "III.27",
+   "part": "III",
+   "n": 27,
+   "prompt": {
+    "en": "Divine healing is associated with the going forth of  .",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "The Word of God",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "The church",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "The love of God",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "The mercy of God",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "A",
+   "keyPages2019": [
+    331
+   ],
+   "source": {
+    "chapter": "p3c1",
+    "block": 246,
+    "page": 335
+   },
+   "matchScore": 3.35
+  },
+  {
+   "id": "III.28",
+   "part": "III",
+   "n": 28,
+   "prompt": {
+    "en": "The Lord’s Supper provides for our frequent return to  .",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "The Upper Room",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Calvary",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Worship",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "Pentecost",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "B",
+   "keyPages2019": [
+    334
+   ],
+   "source": {
+    "chapter": "p3c1",
+    "block": 269,
+    "page": 338
+   },
+   "matchScore": 3.35
+  },
+  {
+   "id": "III.29",
+   "part": "III",
+   "n": 29,
+   "prompt": {
+    "en": "The first purpose of Christ’s second advent is  .",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "The glorification of all believers",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "To judge all mankind",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "To destroy Satan forever",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of the above",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "A",
+   "keyPages2019": [
+    334
+   ],
+   "source": {
+    "chapter": "p3c1",
+    "block": 278,
+    "page": 338
+   },
+   "matchScore": 3.75
+  },
+  {
+   "id": "III.30",
+   "part": "III",
+   "n": 30,
+   "prompt": {
+    "en": "In ordaining the sacrament of the Lord’s Supper, Christ explained that the shedding of blood was for  .",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "The sealing of the new covenant",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "The sealing of the Holy Spirit as the gift of God",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "The uniting of the body of Christ as one",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "The fulfillment of the Old Testament sacrifices",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "A",
+   "keyPages2019": [
+    332
+   ],
+   "source": {
+    "chapter": "p3c1",
+    "block": 255,
+    "page": 336
+   },
+   "matchScore": 2.392
+  },
+  {
+   "id": "III.31",
+   "part": "III",
+   "n": 31,
+   "prompt": {
+    "en": "By the term premillennial, we designate that  .",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Christ will return prior to the beginning of the millennial reign",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "There will be a reign of peace and righteousness before Christ returns",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Christ will reign as human king",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "Before the final Great Judgment Christ will return",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "A",
+   "keyPages2019": [
+    334
+   ],
+   "source": {
+    "chapter": "p3c1",
+    "block": 277,
+    "page": 338
+   },
+   "matchScore": 2.35
+  },
+  {
+   "id": "III.32",
+   "part": "III",
+   "n": 32,
+   "prompt": {
+    "en": "An example of spiritual discipline is  .",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Prayer",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Fasting",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Study",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "All of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "D",
+   "keyPages2019": [
+    343
+   ],
+   "source": {
+    "chapter": "p3c2",
+    "block": 4,
+    "page": 347
+   },
+   "matchScore": 1.217
+  },
+  {
+   "id": "III.33",
+   "part": "III",
+   "n": 33,
+   "prompt": {
+    "en": "Christians are to unite   with other members of the church.",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Regularly",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "When called upon",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Intermittently",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "A",
+   "keyPages2019": [
+    343
+   ],
+   "source": {
+    "chapter": "p3c2",
+    "block": 6,
+    "page": 347
+   },
+   "matchScore": 3.75
+  },
+  {
+   "id": "III.34",
+   "part": "III",
+   "n": 34,
+   "prompt": {
+    "en": "The body is the   of the Holy Ghost, and we are to glorify God in our bodies.",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Offering",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Organization",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Temple",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "C",
+   "keyPages2019": [
+    344
+   ],
+   "source": {
+    "chapter": "p3c2",
+    "block": 12,
+    "page": 348
+   },
+   "matchScore": 3.583
+  },
+  {
+   "id": "III.35",
+   "part": "III",
+   "n": 35,
+   "prompt": {
+    "en": "The practice of Christian disciplines and virtues should begin in the  .",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Church",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Home",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "World",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "B",
+   "keyPages2019": [
+    346
+   ],
+   "source": {
+    "chapter": "p3c2",
+    "block": 28,
+    "page": 350
+   },
+   "matchScore": 3.75
+  },
+  {
+   "id": "III.36",
+   "part": "III",
+   "n": 36,
+   "prompt": {
+    "en": "Which statement reflects the primary concern for the work of the church in our world today?",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "We should preach the gospel of God’s reconciling grace in Christ and then minister to the many needs of the people.",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "We should be separate and apart from secular society and avoid most social involve- ment.",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "Our focus should be on spiritual matters alone and any social ministries of the church should be only a means of converting sinners.",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "We should support liberation theology and get totally involved in changing our world through civil disobedience and even violence if necessary.",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "A",
+   "keyPages2019": [
+    349
+   ],
+   "source": {
+    "chapter": "p3c2",
+    "block": 6,
+    "page": 347
+   },
+   "matchScore": 1.023
+  },
+  {
+   "id": "III.37",
+   "part": "III",
+   "n": 37,
+   "prompt": {
+    "en": "supports the verbal inspiration of the Bible.",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Acts 3:21",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "2 Timothy 3:16",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "A and B",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "C",
+   "keyPages2019": [
+    383
+   ],
+   "source": {
+    "chapter": "refs",
+    "block": 1,
+    "page": 387
+   },
+   "matchScore": 0.55
+  },
+  {
+   "id": "III.38",
+   "part": "III",
+   "n": 38,
+   "prompt": {
+    "en": "reinforces that there is one God existing in three persons; namely, the Father, Son, and Holy Ghost.",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Ezekiel 4:8",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "1 Corinthians 8:4",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "A and B",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "B",
+   "keyPages2019": [
+    383
+   ],
+   "source": {
+    "chapter": "refs",
+    "block": 9,
+    "page": 387
+   },
+   "matchScore": 1.85
+  },
+  {
+   "id": "III.39",
+   "part": "III",
+   "n": 39,
+   "prompt": {
+    "en": "substantiates that Jesus Christ is the only begotten Son of the Father, conceived of the Holy Ghost, and born of the Virgin Mary. That Jesus was crucified, buried, and raised from the dead. That He ascended to heaven and is today at the right hand of the Father as the Intercessor.",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Matthew 5:9-10",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "John 3:16",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "A and B",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "B",
+   "keyPages2019": [
+    383
+   ],
+   "source": {
+    "chapter": "refs",
+    "block": 13,
+    "page": 387
+   },
+   "matchScore": 1.85
+  },
+  {
+   "id": "III.40",
+   "part": "III",
+   "n": 40,
+   "prompt": {
+    "en": "sustains that all have sinned and come short of the glory of God and that repen- tance is commanded of God for all and necessary for forgiveness of sins.",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Luke 24:47",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Romans 5:1, 7",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "A and B",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "A",
+   "keyPages2019": [
+    383
+   ],
+   "source": {
+    "chapter": "refs",
+    "block": 18,
+    "page": 387
+   },
+   "matchScore": 1.85
+  },
+  {
+   "id": "III.41",
+   "part": "III",
+   "n": 41,
+   "prompt": {
+    "en": "upholds that justification, regeneration, and the new birth are wrought by faith in the blood of Jesus Christ.",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Acts 3:24",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Romans 5:1, 7",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "A and B",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "B",
+   "keyPages2019": [
+    383
+   ],
+   "source": {
+    "chapter": "refs",
+    "block": 14,
+    "page": 387
+   },
+   "matchScore": 1.85
+  },
+  {
+   "id": "III.42",
+   "part": "III",
+   "n": 42,
+   "prompt": {
+    "en": "establishes that sanctification is subsequent to the new birth, through faith in the blood of Christ; through the Word, and by the Holy Ghost.",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "1 Thessalonians 5:23",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "John 17:17",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "A and B",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "C",
+   "keyPages2019": [
+    383
+   ],
+   "source": {
+    "chapter": "refs",
+    "block": 23,
+    "page": 387
+   },
+   "matchScore": 1.217
+  },
+  {
+   "id": "III.43",
+   "part": "III",
+   "n": 43,
+   "prompt": {
+    "en": "endorses holiness to be God’s standard of living for His people.",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Hebrews 12:14",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "1 John 4:3, 7",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "A and B",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "A",
+   "keyPages2019": [
+    383
+   ],
+   "source": {
+    "chapter": "refs",
+    "block": 28,
+    "page": 387
+   },
+   "matchScore": 1.85
+  },
+  {
+   "id": "III.44",
+   "part": "III",
+   "n": 44,
+   "prompt": {
+    "en": "verifies baptism with the Holy Ghost subsequent to a clean heart.",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Acts 1:8",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Ephesians 5:18",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "A and B",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "C",
+   "keyPages2019": [
+    384
+   ],
+   "source": {
+    "chapter": "refs",
+    "block": 29,
+    "page": 388
+   },
+   "matchScore": 1.407
+  },
+  {
+   "id": "III.45",
+   "part": "III",
+   "n": 45,
+   "prompt": {
+    "en": "testifies about speaking with other tongues as the Spirit gives utterance and that it is the initial evidence of the baptism of the Holy Ghost.",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Luke 4:4",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Acts 3:1-4",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "A and B",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "D",
+   "keyPages2019": [
+    384
+   ],
+   "source": {
+    "chapter": "refs",
+    "block": 32,
+    "page": 388
+   },
+   "matchScore": 1.165
+  },
+  {
+   "id": "III.46",
+   "part": "III",
+   "n": 46,
+   "prompt": {
+    "en": "validates water baptism by immersion, and all who repent should be baptized in the name of the Father, and of the Son, and of the Holy Ghost.",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Matthew 16:16",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Romans 7:4",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "A and B",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "D",
+   "keyPages2019": [
+    384
+   ],
+   "source": {
+    "chapter": "refs",
+    "block": 36,
+    "page": 388
+   },
+   "matchScore": 1.095
+  },
+  {
+   "id": "III.47",
+   "part": "III",
+   "n": 47,
+   "prompt": {
+    "en": "attests to divine healing being provided for all in the Atonement.",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Isaiah 4:5",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "Matthew 8:16-17",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "A and B",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "B",
+   "keyPages2019": [
+    384
+   ],
+   "source": {
+    "chapter": "refs",
+    "block": 38,
+    "page": 388
+   },
+   "matchScore": 1.85
+  },
+  {
+   "id": "III.48",
+   "part": "III",
+   "n": 48,
+   "prompt": {
+    "en": "documents the Lord’s Supper and washing of the saints’ feet.",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Luke 22:19-20",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "1 John 3:4-7",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "A and B",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "A",
+   "keyPages2019": [
+    384
+   ],
+   "source": {
+    "chapter": "refs",
+    "block": 44,
+    "page": 388
+   },
+   "matchScore": 1.85
+  },
+  {
+   "id": "III.49",
+   "part": "III",
+   "n": 49,
+   "prompt": {
+    "en": "proves the premillennial second coming of Jesus. First, to resurrect the righteous dead and to catch away the living saints to Him in the air. Second, to reign on the earth a thousand years.",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Luke 24:1, 2",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "2 Thessalonians 4:13-18",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "A and B",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "D",
+   "keyPages2019": [
+    384
+   ],
+   "source": {
+    "chapter": "refs",
+    "block": 47,
+    "page": 388
+   },
+   "matchScore": 1.076
+  },
+  {
+   "id": "III.50",
+   "part": "III",
+   "n": 50,
+   "prompt": {
+    "en": "demonstrates the bodily resurrection; eternal life for the righteous, and eternal punishment for the wicked.",
+    "nl": ""
+   },
+   "choices": [
+    {
+     "key": "A",
+     "text": {
+      "en": "Philippians 3:20, 21",
+      "nl": ""
+     }
+    },
+    {
+     "key": "B",
+     "text": {
+      "en": "John 11:25-26",
+      "nl": ""
+     }
+    },
+    {
+     "key": "C",
+     "text": {
+      "en": "A and B",
+      "nl": ""
+     }
+    },
+    {
+     "key": "D",
+     "text": {
+      "en": "None of these",
+      "nl": ""
+     }
+    }
+   ],
+   "answer": "C",
+   "keyPages2019": [
+    384
+   ],
+   "source": {
+    "chapter": "refs",
+    "block": 50,
+    "page": 388
+   },
+   "matchScore": 1.425
+  }
+ ]
+}

@@ -1,0 +1,70 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+
+  --color-ink: oklch(0.22 0.012 260);
+  --color-paper: oklch(0.985 0.004 90);
+  --color-accent: oklch(0.48 0.11 250);
+  --color-accent-soft: oklch(0.93 0.03 250);
+  --color-rule: oklch(0.9 0.006 260);
+  --color-muted: oklch(0.52 0.012 260);
+  --color-mark: oklch(0.93 0.13 95);
+}
+
+:root { color-scheme: light; }
+html[data-theme="dark"] { color-scheme: dark; }
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --color-ink: oklch(0.92 0.008 250);
+    --color-paper: oklch(0.19 0.012 260);
+    --color-accent: oklch(0.75 0.1 250);
+    --color-accent-soft: oklch(0.3 0.04 250);
+    --color-rule: oklch(0.32 0.01 260);
+    --color-muted: oklch(0.68 0.012 260);
+    --color-mark: oklch(0.45 0.1 95);
+  }
+}
+html[data-theme="dark"] {
+  --color-ink: oklch(0.92 0.008 250);
+  --color-paper: oklch(0.19 0.012 260);
+  --color-accent: oklch(0.75 0.1 250);
+  --color-accent-soft: oklch(0.3 0.04 250);
+  --color-rule: oklch(0.32 0.01 260);
+  --color-muted: oklch(0.68 0.012 260);
+  --color-mark: oklch(0.45 0.1 95);
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: calc(1rem * var(--font-scale, 1));
+}
+
+/* The reading column: serif, generous measure, book-like rhythm. */
+.prose-course { font-family: var(--font-serif); line-height: 1.62; }
+.prose-course p { margin-block: 0.75em; }
+.prose-course .quote {
+  border-left: 3px solid var(--color-accent-soft);
+  padding-left: 1rem; font-size: 0.96em;
+}
+.prose-course mark, mark.hit {
+  background: var(--color-mark); color: inherit;
+  padding: 0.05em 0.15em; border-radius: 2px;
+}
+.block-target { animation: flash 2.4s ease-out 1; scroll-margin-top: 6rem; }
+@keyframes flash {
+  0%, 55% { background: var(--color-mark); }
+  100% { background: transparent; }
+}
+
+@media print {
+  .no-print { display: none !important; }
+  body { background: #fff; color: #000; font-size: 10.5pt; }
+  .prose-course { font-size: 10.5pt; }
+  .page-break { break-before: page; }
+  a { color: inherit; text-decoration: none; }
+}
