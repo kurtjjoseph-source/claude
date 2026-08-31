@@ -9,15 +9,39 @@ import { blobsBackend } from "./blobs";
  * one document makes the admin errata editor and the progress dashboard cheap
  * to implement.
  *
+ * The backend is chosen by trying it rather than by reading an environment
+ * variable: on Netlify the filesystem is read-only and Blobs is the only place
+ * a write can land, but which env vars are present at runtime varies by
+ * platform version. A probe read settles it once per instance.
+ *
  * Writes are serialised through one in-process promise chain so two concurrent
  * requests cannot read-modify-write over each other within a single instance.
  */
-let backend: Backend | null = null;
+let chosen: Backend | null = null;
+let choosing: Promise<Backend> | null = null;
 
-function pick(): Backend {
-  if (backend) return backend;
-  backend = process.env.NETLIFY ? blobsBackend() : fileBackend();
-  return backend;
+async function probe(candidate: Backend): Promise<Backend | null> {
+  try {
+    await candidate.read();          // null is fine; throwing is not
+    return candidate;
+  } catch {
+    return null;
+  }
+}
+
+async function pick(): Promise<Backend> {
+  if (chosen) return chosen;
+  choosing ??= (async () => {
+    for (const candidate of [blobsBackend(), fileBackend()]) {
+      const ok = await probe(candidate);
+      if (ok) {
+        chosen = ok;
+        return ok;
+      }
+    }
+    throw new Error("No writable store: neither Netlify Blobs nor the filesystem is available.");
+  })();
+  return choosing;
 }
 
 let queue: Promise<unknown> = Promise.resolve();
@@ -25,7 +49,7 @@ let queue: Promise<unknown> = Promise.resolve();
 /** Run `fn` with exclusive access to the database, persisting any changes. */
 export function transact<T>(fn: (db: Db) => T | Promise<T>): Promise<T> {
   const run = async (): Promise<T> => {
-    const store = pick();
+    const store = await pick();
     const db = (await store.read()) ?? emptyDb();
     const before = JSON.stringify(db);
     const result = await fn(db);
@@ -41,8 +65,13 @@ export function transact<T>(fn: (db: Db) => T | Promise<T>): Promise<T> {
 
 /** Read-only access. */
 export async function read<T>(fn: (db: Db) => T): Promise<T> {
-  const db = (await pick().read()) ?? emptyDb();
+  const db = (await (await pick()).read()) ?? emptyDb();
   return fn(db);
+}
+
+/** Which backend is in use, for the health check. */
+export async function backendName(): Promise<string> {
+  return (await pick()).name;
 }
 
 export { emptyDb };
