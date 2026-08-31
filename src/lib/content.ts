@@ -52,6 +52,9 @@ export type ReviewItem = {
   id: string; bank: string; module: string; section: string; n: number; page: number;
   q: { en: string; nl: string };
   a: { en: string; nl: string };
+  /** Passage in the teaching text that states this answer, where one was found. */
+  source: { chapter: string; block: number; page: number } | null;
+  matchScore: number;
 };
 
 /* --------------------------------------------------------------- loading */

@@ -14,7 +14,13 @@
    "a": {
     "en": "identity",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c1",
+    "block": 2,
+    "page": 13
+   },
+   "matchScore": 2.7
   },
   {
    "id": "bank1-2-1",
@@ -30,7 +36,13 @@
    "a": {
     "en": "created; image of God",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c1",
+    "block": 5,
+    "page": 13
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank1-3-2",
@@ -46,7 +58,13 @@
    "a": {
     "en": "Genesis 1:27",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c1",
+    "block": 7,
+    "page": 13
+   },
+   "matchScore": 2.629
   },
   {
    "id": "bank1-4-3",
@@ -62,7 +80,13 @@
    "a": {
     "en": "emotional; spiritual",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c1",
+    "block": 19,
+    "page": 14
+   },
+   "matchScore": 2.867
   },
   {
    "id": "bank1-5-4",
@@ -78,7 +102,13 @@
    "a": {
     "en": "emotions",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c1",
+    "block": 10,
+    "page": 13
+   },
+   "matchScore": 3.075
   },
   {
    "id": "bank1-6-5",
@@ -94,7 +124,13 @@
    "a": {
     "en": "ministers",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c2",
+    "block": 9,
+    "page": 21
+   },
+   "matchScore": 2.422
   },
   {
    "id": "bank1-7-6",
@@ -110,7 +146,13 @@
    "a": {
     "en": "Romans 5:9",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c4",
+    "block": 133,
+    "page": 42
+   },
+   "matchScore": 2.6
   },
   {
    "id": "bank1-8-7",
@@ -126,7 +168,13 @@
    "a": {
     "en": "1 Peter 1:18, 19",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c1",
+    "block": 17,
+    "page": 14
+   },
+   "matchScore": 2.2
   },
   {
    "id": "bank1-9-8",
@@ -142,7 +190,13 @@
    "a": {
     "en": "Christlike",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c1",
+    "block": 45,
+    "page": 16
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank1-10-9",
@@ -158,7 +212,13 @@
    "a": {
     "en": "lost",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c1",
+    "block": 52,
+    "page": 16
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank1-11-10",
@@ -174,7 +234,13 @@
    "a": {
     "en": "Scripture",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c1",
+    "block": 57,
+    "page": 17
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank1-12-11",
@@ -190,7 +256,13 @@
    "a": {
     "en": "faith; love; and endurance",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c1",
+    "block": 127,
+    "page": 19
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank1-13-12",
@@ -206,7 +278,13 @@
    "a": {
     "en": "necessity",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c1",
+    "block": 134,
+    "page": 19
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank1-14-13",
@@ -222,7 +300,13 @@
    "a": {
     "en": "willingly",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c1",
+    "block": 138,
+    "page": 19
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank1-15-14",
@@ -238,7 +322,13 @@
    "a": {
     "en": "spiritual change",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c1",
+    "block": 3,
+    "page": 13
+   },
+   "matchScore": 2.7
   },
   {
    "id": "bank1-1-15",
@@ -254,7 +344,13 @@
    "a": {
     "en": "spiritual response patterns",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c2",
+    "block": 9,
+    "page": 21
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank1-2-16",
@@ -270,7 +366,13 @@
    "a": {
     "en": "mind",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c2",
+    "block": 5,
+    "page": 21
+   },
+   "matchScore": 2.7
   },
   {
    "id": "bank1-3-17",
@@ -286,7 +388,13 @@
    "a": {
     "en": "Christ",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c3",
+    "block": 9,
+    "page": 29
+   },
+   "matchScore": 2.867
   },
   {
    "id": "bank1-4-18",
@@ -302,7 +410,13 @@
    "a": {
     "en": "spiritual; sinful",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c2",
+    "block": 33,
+    "page": 22
+   },
+   "matchScore": 2.914
   },
   {
    "id": "bank1-5-19",
@@ -318,7 +432,13 @@
    "a": {
     "en": "hostile",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c2",
+    "block": 46,
+    "page": 23
+   },
+   "matchScore": 2.95
   },
   {
    "id": "bank1-6-20",
@@ -334,7 +454,13 @@
    "a": {
     "en": "transformed",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c2",
+    "block": 68,
+    "page": 23
+   },
+   "matchScore": 2.867
   },
   {
    "id": "bank1-7-21",
@@ -350,7 +476,13 @@
    "a": {
     "en": "workable plan",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c2",
+    "block": 86,
+    "page": 24
+   },
+   "matchScore": 2.45
   },
   {
    "id": "bank1-8-22",
@@ -366,7 +498,13 @@
    "a": {
     "en": "purpose",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c2",
+    "block": 83,
+    "page": 24
+   },
+   "matchScore": 2.367
   },
   {
    "id": "bank1-9-23",
@@ -382,7 +520,13 @@
    "a": {
     "en": "prayer",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c3",
+    "block": 137,
+    "page": 34
+   },
+   "matchScore": 2.8
   },
   {
    "id": "bank1-10-24",
@@ -398,7 +542,13 @@
    "a": {
     "en": "leadership",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c2",
+    "block": 106,
+    "page": 25
+   },
+   "matchScore": 2.6
   },
   {
    "id": "bank1-11-25",
@@ -414,7 +564,13 @@
    "a": {
     "en": "educated",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c2",
+    "block": 118,
+    "page": 26
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank1-12-26",
@@ -430,7 +586,13 @@
    "a": {
     "en": "priorities",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c2",
+    "block": 120,
+    "page": 26
+   },
+   "matchScore": 1.5
   },
   {
    "id": "bank1-13-27",
@@ -446,7 +608,13 @@
    "a": {
     "en": "worship",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c2",
+    "block": 128,
+    "page": 26
+   },
+   "matchScore": 2.7
   },
   {
    "id": "bank1-14-28",
@@ -462,7 +630,13 @@
    "a": {
     "en": "influence",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c2",
+    "block": 137,
+    "page": 26
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank1-15-29",
@@ -478,7 +652,13 @@
    "a": {
     "en": "heart and spirit",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c1",
+    "block": 56,
+    "page": 17
+   },
+   "matchScore": 2.2
   },
   {
    "id": "bank1-1-30",
@@ -494,7 +674,13 @@
    "a": {
     "en": "Celebration of worship",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c3",
+    "block": 2,
+    "page": 29
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank1-2-31",
@@ -510,7 +696,13 @@
    "a": {
     "en": "Synagogue",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c3",
+    "block": 3,
+    "page": 29
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank1-3-32",
@@ -526,7 +718,13 @@
    "a": {
     "en": "hub",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c3",
+    "block": 8,
+    "page": 29
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank1-4-33",
@@ -542,7 +740,13 @@
    "a": {
     "en": "exalt God; edify believers; evangelize the lost",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c3",
+    "block": 19,
+    "page": 30
+   },
+   "matchScore": 1.6
   },
   {
    "id": "bank1-5-34",
@@ -558,7 +762,13 @@
    "a": {
     "en": "mature",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c3",
+    "block": 19,
+    "page": 30
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank1-6-35",
@@ -574,7 +784,13 @@
    "a": {
     "en": "different",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c3",
+    "block": 24,
+    "page": 31
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank1-7-36",
@@ -590,7 +806,13 @@
    "a": {
     "en": "thought; prayed; designed",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c3",
+    "block": 34,
+    "page": 31
+   },
+   "matchScore": 1.867
   },
   {
    "id": "bank1-8-37",
@@ -606,7 +828,13 @@
    "a": {
     "en": "focus",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c3",
+    "block": 16,
+    "page": 30
+   },
+   "matchScore": 2.7
   },
   {
    "id": "bank1-9-38",
@@ -622,7 +850,13 @@
    "a": {
     "en": "1 Timothy 4:13",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c3",
+    "block": 51,
+    "page": 32
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank1-10-39",
@@ -638,7 +872,13 @@
    "a": {
     "en": "congregational",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c3",
+    "block": 60,
+    "page": 32
+   },
+   "matchScore": 2.771
   },
   {
    "id": "bank1-11-40",
@@ -654,7 +894,13 @@
    "a": {
     "en": "unproductive",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c3",
+    "block": 114,
+    "page": 34
+   },
+   "matchScore": 2.8
   },
   {
    "id": "bank1-12-41",
@@ -670,7 +916,13 @@
    "a": {
     "en": "ministry of the Word of God",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c3",
+    "block": 19,
+    "page": 30
+   },
+   "matchScore": 2.95
   },
   {
    "id": "bank1-13-42",
@@ -686,7 +938,13 @@
    "a": {
     "en": "teaching",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c3",
+    "block": 140,
+    "page": 35
+   },
+   "matchScore": 3.033
   },
   {
    "id": "bank1-14-43",
@@ -702,7 +960,13 @@
    "a": {
     "en": "center",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c3",
+    "block": 148,
+    "page": 35
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank1-15-44",
@@ -718,7 +982,13 @@
    "a": {
     "en": "biblically",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c3",
+    "block": 150,
+    "page": 35
+   },
+   "matchScore": 2.3
   },
   {
    "id": "bank1-1-45",
@@ -734,7 +1004,13 @@
    "a": {
     "en": "Communion; baptism;",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c4",
+    "block": 3,
+    "page": 37
+   },
+   "matchScore": 2.7
   },
   {
    "id": "bank1-2-46",
@@ -750,7 +1026,13 @@
    "a": {
     "en": "footwashing mystery and celebration",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c4",
+    "block": 3,
+    "page": 37
+   },
+   "matchScore": 1.733
   },
   {
    "id": "bank1-3-47",
@@ -766,7 +1048,13 @@
    "a": {
     "en": "Communion",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c4",
+    "block": 4,
+    "page": 37
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank1-4-48",
@@ -782,7 +1070,13 @@
    "a": {
     "en": "Baptism",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c4",
+    "block": 4,
+    "page": 37
+   },
+   "matchScore": 2.95
   },
   {
    "id": "bank1-5-49",
@@ -798,7 +1092,13 @@
    "a": {
     "en": "Communion",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c4",
+    "block": 4,
+    "page": 37
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank1-6-50",
@@ -814,7 +1114,13 @@
    "a": {
     "en": "person",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c4",
+    "block": 25,
+    "page": 38
+   },
+   "matchScore": 2.7
   },
   {
    "id": "bank1-7-51",
@@ -830,7 +1136,13 @@
    "a": {
     "en": "fosters fellowship",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c4",
+    "block": 44,
+    "page": 38
+   },
+   "matchScore": 1.6
   },
   {
    "id": "bank1-8-52",
@@ -846,7 +1158,13 @@
    "a": {
     "en": "forgiven",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c4",
+    "block": 44,
+    "page": 38
+   },
+   "matchScore": 2.4
   },
   {
    "id": "bank1-9-53",
@@ -862,7 +1180,13 @@
    "a": {
     "en": "spiritually",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c4",
+    "block": 48,
+    "page": 39
+   },
+   "matchScore": 2.533
   },
   {
    "id": "bank1-10-54",
@@ -878,7 +1202,13 @@
    "a": {
     "en": "expression",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c4",
+    "block": 93,
+    "page": 41
+   },
+   "matchScore": 2.533
   },
   {
    "id": "bank1-11-55",
@@ -894,7 +1224,13 @@
    "a": {
     "en": "believers",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c4",
+    "block": 4,
+    "page": 37
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank1-12-56",
@@ -910,7 +1246,13 @@
    "a": {
     "en": "identification",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c4",
+    "block": 92,
+    "page": 40
+   },
+   "matchScore": 2.2
   },
   {
    "id": "bank1-13-57",
@@ -926,7 +1268,13 @@
    "a": {
     "en": "save",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c4",
+    "block": 4,
+    "page": 37
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank1-14-58",
@@ -942,7 +1290,13 @@
    "a": {
     "en": "Immersion",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c4",
+    "block": 133,
+    "page": 42
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank1-15-59",
@@ -958,7 +1312,13 @@
    "a": {
     "en": "conversion",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c4",
+    "block": 129,
+    "page": 42
+   },
+   "matchScore": 2.7
   },
   {
    "id": "bank1-16-60",
@@ -974,7 +1334,13 @@
    "a": {
     "en": "28:19",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c4",
+    "block": 129,
+    "page": 42
+   },
+   "matchScore": 1.0
   },
   {
    "id": "bank1-17-61",
@@ -990,7 +1356,13 @@
    "a": {
     "en": "hospitality",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c1",
+    "block": 160,
+    "page": 20
+   },
+   "matchScore": 2.2
   },
   {
    "id": "bank1-18-62",
@@ -1006,7 +1378,13 @@
    "a": {
     "en": "John 13:1-17",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c4",
+    "block": 140,
+    "page": 44
+   },
+   "matchScore": 2.7
   },
   {
    "id": "bank1-19-63",
@@ -1022,7 +1400,9 @@
    "a": {
     "en": "crucifixion",
     "nl": ""
-   }
+   },
+   "source": null,
+   "matchScore": 0.5
   },
   {
    "id": "bank1-1-65",
@@ -1038,7 +1418,13 @@
    "a": {
     "en": "Samuel and Jesus",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c5",
+    "block": 4,
+    "page": 45
+   },
+   "matchScore": 1.9
   },
   {
    "id": "bank1-2-66",
@@ -1054,7 +1440,13 @@
    "a": {
     "en": "praise and thanksgiving",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c5",
+    "block": 9,
+    "page": 45
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank1-3-67",
@@ -1070,7 +1462,13 @@
    "a": {
     "en": "pledge",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c4",
+    "block": 5,
+    "page": 37
+   },
+   "matchScore": 2.486
   },
   {
    "id": "bank1-4-68",
@@ -1086,7 +1484,13 @@
    "a": {
     "en": "promise",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c5",
+    "block": 18,
+    "page": 46
+   },
+   "matchScore": 2.8
   },
   {
    "id": "bank1-5-69",
@@ -1102,7 +1506,13 @@
    "a": {
     "en": "purpose relationship",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c5",
+    "block": 58,
+    "page": 48
+   },
+   "matchScore": 1.433
   },
   {
    "id": "bank1-6-70",
@@ -1118,7 +1528,13 @@
    "a": {
     "en": "service",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c5",
+    "block": 54,
+    "page": 47
+   },
+   "matchScore": 2.867
   },
   {
    "id": "bank1-8-72",
@@ -1134,7 +1550,13 @@
    "a": {
     "en": "covenant relationship",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c5",
+    "block": 58,
+    "page": 48
+   },
+   "matchScore": 3.057
   },
   {
    "id": "bank1-1-73",
@@ -1150,7 +1572,13 @@
    "a": {
     "en": "shepherd",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c6",
+    "block": 5,
+    "page": 51
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank1-2-74",
@@ -1166,7 +1594,13 @@
    "a": {
     "en": "nurture and care",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c6",
+    "block": 5,
+    "page": 51
+   },
+   "matchScore": 3.0
   },
   {
    "id": "bank1-3-75",
@@ -1182,7 +1616,13 @@
    "a": {
     "en": "Psalm 23",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c3",
+    "block": 16,
+    "page": 30
+   },
+   "matchScore": 2.45
   },
   {
    "id": "bank1-4-76",
@@ -1198,7 +1638,13 @@
    "a": {
     "en": "guidance",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c6",
+    "block": 6,
+    "page": 51
+   },
+   "matchScore": 2.45
   },
   {
    "id": "bank1-5-77",
@@ -1214,7 +1660,13 @@
    "a": {
     "en": "spiritually",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c6",
+    "block": 6,
+    "page": 51
+   },
+   "matchScore": 2.8
   },
   {
    "id": "bank1-6-78",
@@ -1230,7 +1682,13 @@
    "a": {
     "en": "pastoral",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c6",
+    "block": 16,
+    "page": 52
+   },
+   "matchScore": 2.867
   },
   {
    "id": "bank1-7-79",
@@ -1246,7 +1704,13 @@
    "a": {
     "en": "comfort and preparation",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c6",
+    "block": 23,
+    "page": 52
+   },
+   "matchScore": 1.6
   },
   {
    "id": "bank1-8-80",
@@ -1262,7 +1726,13 @@
    "a": {
     "en": "faithfulness and grace",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c6",
+    "block": 22,
+    "page": 52
+   },
+   "matchScore": 2.867
   },
   {
    "id": "bank1-9-81",
@@ -1278,7 +1748,13 @@
    "a": {
     "en": "wants and desires",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c6",
+    "block": 23,
+    "page": 52
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank1-10-82",
@@ -1294,7 +1770,13 @@
    "a": {
     "en": "exalt; comfort; clarify",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c6",
+    "block": 63,
+    "page": 54
+   },
+   "matchScore": 1.717
   },
   {
    "id": "bank1-1-83",
@@ -1310,7 +1792,13 @@
    "a": {
     "en": "philosophy;",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c2",
+    "block": 97,
+    "page": 25
+   },
+   "matchScore": 2.867
   },
   {
    "id": "bank1-2-84",
@@ -1326,7 +1814,13 @@
    "a": {
     "en": "plan strategy",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c7",
+    "block": 3,
+    "page": 57
+   },
+   "matchScore": 3.057
   },
   {
    "id": "bank1-3-85",
@@ -1342,7 +1836,13 @@
    "a": {
     "en": "Administration",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c7",
+    "block": 3,
+    "page": 57
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank1-4-86",
@@ -1358,7 +1858,13 @@
    "a": {
     "en": "guides and directs",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c7",
+    "block": 3,
+    "page": 57
+   },
+   "matchScore": 2.1
   },
   {
    "id": "bank1-5-87",
@@ -1374,7 +1880,13 @@
    "a": {
     "en": "objective; purpose; benefits",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c7",
+    "block": 6,
+    "page": 57
+   },
+   "matchScore": 2.45
   },
   {
    "id": "bank1-6-88",
@@ -1390,7 +1902,13 @@
    "a": {
     "en": "focus; effectiveness",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c7",
+    "block": 6,
+    "page": 57
+   },
+   "matchScore": 2.867
   },
   {
    "id": "bank1-7-89",
@@ -1406,7 +1924,13 @@
    "a": {
     "en": "Proverbs 29:18",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c7",
+    "block": 13,
+    "page": 57
+   },
+   "matchScore": 2.486
   },
   {
    "id": "bank1-8-90",
@@ -1422,7 +1946,13 @@
    "a": {
     "en": "visionaries",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c7",
+    "block": 13,
+    "page": 57
+   },
+   "matchScore": 2.343
   },
   {
    "id": "bank1-9-91",
@@ -1438,7 +1968,13 @@
    "a": {
     "en": "future possibility",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c7",
+    "block": 45,
+    "page": 59
+   },
+   "matchScore": 2.2
   },
   {
    "id": "bank1-10-92",
@@ -1454,7 +1990,13 @@
    "a": {
     "en": "evangelism; edification;",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c7",
+    "block": 315,
+    "page": 74
+   },
+   "matchScore": 2.2
   },
   {
    "id": "bank1-11-93",
@@ -1470,7 +2012,9 @@
    "a": {
     "en": "equipping; encouraging; and excellence selecting personnel; identi",
     "nl": ""
-   }
+   },
+   "source": null,
+   "matchScore": 0.571
   },
   {
    "id": "bank1-12-94",
@@ -1486,7 +2030,13 @@
    "a": {
     "en": "fying ministry plans; establishing a budget for the ministry plan organization",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c7",
+    "block": 195,
+    "page": 67
+   },
+   "matchScore": 1.4
   },
   {
    "id": "bank1-13-95",
@@ -1502,7 +2052,13 @@
    "a": {
     "en": "1 Corinthians 12:12-31",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c3",
+    "block": 21,
+    "page": 30
+   },
+   "matchScore": 2.95
   },
   {
    "id": "bank1-15-97",
@@ -1518,7 +2074,13 @@
    "a": {
     "en": "spirit and form",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c7",
+    "block": 120,
+    "page": 62
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank1-16-98",
@@ -1534,7 +2096,13 @@
    "a": {
     "en": "structure",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c7",
+    "block": 121,
+    "page": 62
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank1-17-99",
@@ -1550,7 +2118,13 @@
    "a": {
     "en": "distinctive",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c7",
+    "block": 129,
+    "page": 63
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank1-18-100",
@@ -1566,7 +2140,13 @@
    "a": {
     "en": "need-oriented, job-described; and distinctive in style.",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c7",
+    "block": 131,
+    "page": 63
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank1-19-101",
@@ -1582,7 +2162,13 @@
    "a": {
     "en": "needs",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c7",
+    "block": 133,
+    "page": 63
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank1-20-102",
@@ -1598,7 +2184,13 @@
    "a": {
     "en": "Giving",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c1",
+    "block": 46,
+    "page": 16
+   },
+   "matchScore": 2.7
   },
   {
    "id": "bank1-21-103",
@@ -1614,7 +2206,13 @@
    "a": {
     "en": "Malachi 3:7-10",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c7",
+    "block": 164,
+    "page": 64
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank1-22-104",
@@ -1630,7 +2228,13 @@
    "a": {
     "en": "purpose and benefits",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c7",
+    "block": 182,
+    "page": 66
+   },
+   "matchScore": 2.4
   },
   {
    "id": "bank1-23-105",
@@ -1646,7 +2250,13 @@
    "a": {
     "en": "eldership; teachers; musicians; and auxiliary workers",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c7",
+    "block": 203,
+    "page": 68
+   },
+   "matchScore": 1.48
   },
   {
    "id": "bank1-24-106",
@@ -1662,7 +2272,13 @@
    "a": {
     "en": "eldership",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c7",
+    "block": 199,
+    "page": 68
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank1-25-107",
@@ -1678,7 +2294,13 @@
    "a": {
     "en": "people person",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c7",
+    "block": 211,
+    "page": 69
+   },
+   "matchScore": 2.6
   },
   {
    "id": "bank1-26-108",
@@ -1694,7 +2316,13 @@
    "a": {
     "en": "need",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c7",
+    "block": 212,
+    "page": 69
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank1-27-109",
@@ -1710,7 +2338,13 @@
    "a": {
     "en": "tradition",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c7",
+    "block": 213,
+    "page": 69
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank1-28-110",
@@ -1726,7 +2360,13 @@
    "a": {
     "en": "significant and purposeful",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c7",
+    "block": 217,
+    "page": 70
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank1-29-111",
@@ -1742,7 +2382,13 @@
    "a": {
     "en": "priority",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c7",
+    "block": 220,
+    "page": 70
+   },
+   "matchScore": 2.95
   },
   {
    "id": "bank1-30-112",
@@ -1758,7 +2404,13 @@
    "a": {
     "en": "open",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c4",
+    "block": 65,
+    "page": 39
+   },
+   "matchScore": 2.533
   },
   {
    "id": "bank1-31-113",
@@ -1774,7 +2426,13 @@
    "a": {
     "en": "Evangelism",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c7",
+    "block": 347,
+    "page": 75
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank1-32-114",
@@ -1790,7 +2448,13 @@
    "a": {
     "en": "lay-empowered",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c7",
+    "block": 286,
+    "page": 72
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank1-33-115",
@@ -1806,7 +2470,13 @@
    "a": {
     "en": "sending; satisfied",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c7",
+    "block": 293,
+    "page": 73
+   },
+   "matchScore": 2.7
   },
   {
    "id": "bank1-34-116",
@@ -1822,7 +2492,13 @@
    "a": {
     "en": "Easter and Christmas",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c7",
+    "block": 297,
+    "page": 73
+   },
+   "matchScore": 2.2
   },
   {
    "id": "bank1-35-117",
@@ -1838,7 +2514,13 @@
    "a": {
     "en": "Training people",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c7",
+    "block": 311,
+    "page": 73
+   },
+   "matchScore": 2.7
   },
   {
    "id": "bank1-36-118",
@@ -1854,7 +2536,13 @@
    "a": {
     "en": "relational",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c7",
+    "block": 312,
+    "page": 74
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank1-37-119",
@@ -1870,7 +2558,13 @@
    "a": {
     "en": "Preaching the Word",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c3",
+    "block": 137,
+    "page": 34
+   },
+   "matchScore": 2.2
   },
   {
    "id": "bank1-38-120",
@@ -1886,7 +2580,13 @@
    "a": {
     "en": "focus",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c7",
+    "block": 347,
+    "page": 75
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank1-39-121",
@@ -1902,7 +2602,13 @@
    "a": {
     "en": "move forward",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c7",
+    "block": 347,
+    "page": 75
+   },
+   "matchScore": 2.1
   },
   {
    "id": "bank1-40-122",
@@ -1918,7 +2624,13 @@
    "a": {
     "en": "evangelistic message",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p1c7",
+    "block": 348,
+    "page": 75
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank2-1-123",
@@ -1934,7 +2646,13 @@
    "a": {
     "en": "Appalachian Mountains",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c1",
+    "block": 2,
+    "page": 89
+   },
+   "matchScore": 3.057
   },
   {
    "id": "bank2-2-124",
@@ -1950,7 +2668,13 @@
    "a": {
     "en": "Holiness",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c1",
+    "block": 2,
+    "page": 89
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank2-3-125",
@@ -1966,7 +2690,13 @@
    "a": {
     "en": "Movement",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c1",
+    "block": 4,
+    "page": 89
+   },
+   "matchScore": 2.978
   },
   {
    "id": "bank2-4-126",
@@ -1982,7 +2712,13 @@
    "a": {
     "en": "educational institutions",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c1",
+    "block": 11,
+    "page": 90
+   },
+   "matchScore": 2.95
   },
   {
    "id": "bank2-5-127",
@@ -1998,7 +2734,13 @@
    "a": {
     "en": "human organization; divine organism",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c1",
+    "block": 13,
+    "page": 90
+   },
+   "matchScore": 2.7
   },
   {
    "id": "bank2-6-128",
@@ -2014,7 +2756,13 @@
    "a": {
     "en": "what the church ought to do",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c1",
+    "block": 21,
+    "page": 91
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank2-7-129",
@@ -2030,7 +2778,9 @@
    "a": {
     "en": "16",
     "nl": ""
-   }
+   },
+   "source": null,
+   "matchScore": 0.9
   },
   {
    "id": "bank2-8-130",
@@ -2046,7 +2796,13 @@
    "a": {
     "en": "centralized",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c1",
+    "block": 24,
+    "page": 91
+   },
+   "matchScore": 2.95
   },
   {
    "id": "bank2-9-131",
@@ -2062,7 +2818,13 @@
    "a": {
     "en": "Like a Mighty Army",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c2",
+    "block": 1,
+    "page": 93
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank2-10-132",
@@ -2078,7 +2840,13 @@
    "a": {
     "en": "1886",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c2",
+    "block": 6,
+    "page": 93
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank2-11-133",
@@ -2094,7 +2862,13 @@
    "a": {
     "en": "Richard Spurling; R.G. Spurling Jr.",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c2",
+    "block": 8,
+    "page": 94
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank2-12-134",
@@ -2110,7 +2884,13 @@
    "a": {
     "en": "Christian Union",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c2",
+    "block": 8,
+    "page": 94
+   },
+   "matchScore": 2.95
   },
   {
    "id": "bank2-13-135",
@@ -2126,7 +2906,13 @@
    "a": {
     "en": "Shearer Schoolhouse",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c2",
+    "block": 13,
+    "page": 94
+   },
+   "matchScore": 2.836
   },
   {
    "id": "bank2-14-136",
@@ -2142,7 +2928,13 @@
    "a": {
     "en": "W.F. Bryant",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c2",
+    "block": 137,
+    "page": 110
+   },
+   "matchScore": 2.533
   },
   {
    "id": "bank2-15-137",
@@ -2158,7 +2950,13 @@
    "a": {
     "en": "1906; North Carolina",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c2",
+    "block": 27,
+    "page": 96
+   },
+   "matchScore": 3.057
   },
   {
    "id": "bank2-16-138",
@@ -2174,7 +2972,13 @@
    "a": {
     "en": "second",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c2",
+    "block": 32,
+    "page": 97
+   },
+   "matchScore": 3.033
   },
   {
    "id": "bank2-17-139",
@@ -2190,7 +2994,13 @@
    "a": {
     "en": "“evangelist”",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c2",
+    "block": 32,
+    "page": 97
+   },
+   "matchScore": 2.914
   },
   {
    "id": "bank2-18-140",
@@ -2206,7 +3016,13 @@
    "a": {
     "en": "A.J. Tomlinson",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c2",
+    "block": 51,
+    "page": 99
+   },
+   "matchScore": 3.0
   },
   {
    "id": "bank2-19-141",
@@ -2222,7 +3038,13 @@
    "a": {
     "en": "1910",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c2",
+    "block": 38,
+    "page": 98
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank2-20-142",
@@ -2238,7 +3060,13 @@
    "a": {
     "en": "Bible Training School",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c2",
+    "block": 40,
+    "page": 98
+   },
+   "matchScore": 3.0
   },
   {
    "id": "bank2-21-143",
@@ -2254,7 +3082,13 @@
    "a": {
     "en": "Edmund, Rebecca",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c2",
+    "block": 44,
+    "page": 98
+   },
+   "matchScore": 1.878
   },
   {
    "id": "bank2-22-144",
@@ -2270,7 +3104,13 @@
    "a": {
     "en": "F.J. Lee",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c2",
+    "block": 58,
+    "page": 100
+   },
+   "matchScore": 2.914
   },
   {
    "id": "bank2-23-145",
@@ -2286,7 +3126,13 @@
    "a": {
     "en": "general secretary",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c2",
+    "block": 65,
+    "page": 101
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank2-24-146",
@@ -2302,7 +3148,13 @@
    "a": {
     "en": "Missions Board; Board of Education, and the Publishing Committee",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c2",
+    "block": 65,
+    "page": 101
+   },
+   "matchScore": 2.76
   },
   {
    "id": "bank2-25-147",
@@ -2318,7 +3170,13 @@
    "a": {
     "en": "Bishops Council",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c2",
+    "block": 67,
+    "page": 101
+   },
+   "matchScore": 2.825
   },
   {
    "id": "bank2-26-148",
@@ -2334,7 +3192,13 @@
    "a": {
     "en": "Lee College",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c2",
+    "block": 74,
+    "page": 102
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank2-27-149",
@@ -2350,7 +3214,13 @@
    "a": {
     "en": "Declaration of Faith",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c2",
+    "block": 90,
+    "page": 104
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank2-28-150",
@@ -2366,7 +3236,13 @@
    "a": {
     "en": "women",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c2",
+    "block": 83,
+    "page": 103
+   },
+   "matchScore": 2.8
   },
   {
    "id": "bank2-1-151",
@@ -2382,7 +3258,13 @@
    "a": {
     "en": "whole Bible",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c7",
+    "block": 84,
+    "page": 152
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank2-2-152",
@@ -2398,7 +3280,13 @@
    "a": {
     "en": "New Testament",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c7",
+    "block": 84,
+    "page": 152
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank2-3-153",
@@ -2414,7 +3302,13 @@
    "a": {
     "en": "Great Commission",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c7",
+    "block": 373,
+    "page": 165
+   },
+   "matchScore": 3.0
   },
   {
    "id": "bank2-4-154",
@@ -2430,7 +3324,13 @@
    "a": {
     "en": "Spirit and power",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c7",
+    "block": 394,
+    "page": 166
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank2-5-155",
@@ -2446,7 +3346,13 @@
    "a": {
     "en": "communication",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c7",
+    "block": 472,
+    "page": 169
+   },
+   "matchScore": 2.431
   },
   {
    "id": "bank2-6-156",
@@ -2462,7 +3368,13 @@
    "a": {
     "en": "intentional",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c7",
+    "block": 183,
+    "page": 154
+   },
+   "matchScore": 2.4
   },
   {
    "id": "bank2-7-157",
@@ -2478,7 +3390,13 @@
    "a": {
     "en": "education",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c2",
+    "block": 123,
+    "page": 108
+   },
+   "matchScore": 2.414
   },
   {
    "id": "bank2-8-158",
@@ -2494,7 +3412,13 @@
    "a": {
     "en": "judicial",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c3",
+    "block": 70,
+    "page": 118
+   },
+   "matchScore": 2.867
   },
   {
    "id": "bank2-9-159",
@@ -2510,7 +3434,13 @@
    "a": {
     "en": "cannot",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c3",
+    "block": 27,
+    "page": 115
+   },
+   "matchScore": 2.7
   },
   {
    "id": "bank2-10-160",
@@ -2526,7 +3456,13 @@
    "a": {
     "en": "Church of God",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c8",
+    "block": 137,
+    "page": 187
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank2-11-161",
@@ -2542,7 +3478,13 @@
    "a": {
     "en": "teachings, doctrines, and government",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c11",
+    "block": 124,
+    "page": 265
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank2-12-162",
@@ -2558,7 +3500,13 @@
    "a": {
     "en": "General Assembly",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c3",
+    "block": 58,
+    "page": 117
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank2-13-163",
@@ -2574,7 +3522,13 @@
    "a": {
     "en": "mission, vision, and commitments",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c5",
+    "block": 6,
+    "page": 125
+   },
+   "matchScore": 2.629
   },
   {
    "id": "bank2-14-164",
@@ -2590,7 +3544,13 @@
    "a": {
     "en": "biennially",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c4",
+    "block": 4,
+    "page": 119
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank2-15-165",
@@ -2606,7 +3566,13 @@
    "a": {
     "en": "Robert’s Rules of Order Newly Revised",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c8",
+    "block": 162,
+    "page": 188
+   },
+   "matchScore": 3.057
   },
   {
    "id": "bank2-16-166",
@@ -2622,7 +3588,13 @@
    "a": {
     "en": "assistant general overseers, the secretarygeneral, the director of Youth and Discipleship, the director of Evangelism, Evangelism, the assistant director of Youth and Discipleship, the the director of World Missions, and assistant director of World Missions.",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c4",
+    "block": 31,
+    "page": 121
+   },
+   "matchScore": 2.837
   },
   {
    "id": "bank2-17-167",
@@ -2638,7 +3610,13 @@
    "a": {
     "en": "moderator",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c3",
+    "block": 63,
+    "page": 117
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank2-18-168",
@@ -2654,7 +3632,13 @@
    "a": {
     "en": "secretary general",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c3",
+    "block": 61,
+    "page": 117
+   },
+   "matchScore": 3.0
   },
   {
    "id": "bank2-20-170",
@@ -2670,7 +3654,13 @@
    "a": {
     "en": "General Council",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c8",
+    "block": 199,
+    "page": 189
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank2-21-171",
@@ -2686,7 +3676,13 @@
    "a": {
     "en": "Council of Eighteen",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c8",
+    "block": 223,
+    "page": 190
+   },
+   "matchScore": 3.075
   },
   {
    "id": "bank2-22-172",
@@ -2702,7 +3698,13 @@
    "a": {
     "en": "International Executive Committee",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c8",
+    "block": 235,
+    "page": 191
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank2-23-173",
@@ -2718,7 +3720,13 @@
    "a": {
     "en": "laity",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c3",
+    "block": 25,
+    "page": 114
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank2-24-174",
@@ -2734,7 +3742,13 @@
    "a": {
     "en": "ordained ministers, exhorters, and laity",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c4",
+    "block": 5,
+    "page": 119
+   },
+   "matchScore": 3.0
   },
   {
    "id": "bank2-25-175",
@@ -2750,7 +3764,13 @@
    "a": {
     "en": "biennially",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c4",
+    "block": 4,
+    "page": 119
+   },
+   "matchScore": 2.825
   },
   {
    "id": "bank2-26-176",
@@ -2766,7 +3786,13 @@
    "a": {
     "en": "International Executive Council",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c3",
+    "block": 54,
+    "page": 116
+   },
+   "matchScore": 2.6
   },
   {
    "id": "bank2-27-177",
@@ -2782,7 +3808,9 @@
    "a": {
     "en": "one",
     "nl": ""
-   }
+   },
+   "source": null,
+   "matchScore": 0.857
   },
   {
    "id": "bank2-28-178",
@@ -2798,7 +3826,13 @@
    "a": {
     "en": "general overseer and the International Executive Council",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c4",
+    "block": 28,
+    "page": 120
+   },
+   "matchScore": 2.533
   },
   {
    "id": "bank2-29-179",
@@ -2814,7 +3848,13 @@
    "a": {
     "en": "Committee",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c5",
+    "block": 75,
+    "page": 129
+   },
+   "matchScore": 3.033
   },
   {
    "id": "bank2-30-180",
@@ -2830,7 +3870,9 @@
    "a": {
     "en": "two",
     "nl": ""
-   }
+   },
+   "source": null,
+   "matchScore": 0.692
   },
   {
    "id": "bank2-32-182",
@@ -2846,7 +3888,13 @@
    "a": {
     "en": "four",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c8",
+    "block": 532,
+    "page": 201
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank2-34-184",
@@ -2862,7 +3910,13 @@
    "a": {
     "en": "one four-year term",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c8",
+    "block": 565,
+    "page": 202
+   },
+   "matchScore": 2.771
   },
   {
    "id": "bank2-35-185",
@@ -2878,7 +3932,13 @@
    "a": {
     "en": "World Missions Board",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c5",
+    "block": 92,
+    "page": 130
+   },
+   "matchScore": 2.575
   },
   {
    "id": "bank2-36-186",
@@ -2894,7 +3954,13 @@
    "a": {
     "en": "World Missions Board",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c8",
+    "block": 693,
+    "page": 207
+   },
+   "matchScore": 2.45
   },
   {
    "id": "bank2-37-187",
@@ -2910,7 +3976,13 @@
    "a": {
     "en": "International Council",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c8",
+    "block": 612,
+    "page": 204
+   },
+   "matchScore": 2.564
   },
   {
    "id": "bank2-38-188",
@@ -2926,7 +3998,13 @@
    "a": {
     "en": "International Council",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c4",
+    "block": 28,
+    "page": 120
+   },
+   "matchScore": 2.867
   },
   {
    "id": "bank2-39-189",
@@ -2942,7 +4020,13 @@
    "a": {
     "en": "assistant director of World Missions",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c3",
+    "block": 61,
+    "page": 117
+   },
+   "matchScore": 2.7
   },
   {
    "id": "bank2-40-190",
@@ -2958,7 +4042,13 @@
    "a": {
     "en": "Spirit",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c2",
+    "block": 18,
+    "page": 95
+   },
+   "matchScore": 2.8
   },
   {
    "id": "bank2-41-191",
@@ -2974,7 +4064,13 @@
    "a": {
     "en": "1 Timothy 3:1-7",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c9",
+    "block": 136,
+    "page": 224
+   },
+   "matchScore": 2.486
   },
   {
    "id": "bank2-42-192",
@@ -2990,7 +4086,13 @@
    "a": {
     "en": "eight",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c9",
+    "block": 241,
+    "page": 228
+   },
+   "matchScore": 2.791
   },
   {
    "id": "bank2-43-193",
@@ -3006,7 +4108,13 @@
    "a": {
     "en": "weddings",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c2",
+    "block": 143,
+    "page": 110
+   },
+   "matchScore": 2.325
   },
   {
    "id": "bank2-44-194",
@@ -3022,7 +4130,13 @@
    "a": {
     "en": "Christlike",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c9",
+    "block": 430,
+    "page": 234
+   },
+   "matchScore": 2.771
   },
   {
    "id": "bank2-45-195",
@@ -3038,7 +4152,13 @@
    "a": {
     "en": "one man and one woman",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c7",
+    "block": 244,
+    "page": 158
+   },
+   "matchScore": 2.508
   },
   {
    "id": "bank2-46-196",
@@ -3054,7 +4174,13 @@
    "a": {
     "en": "Declaration of Faith",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c7",
+    "block": 361,
+    "page": 165
+   },
+   "matchScore": 2.722
   },
   {
    "id": "bank2-47-197",
@@ -3070,7 +4196,13 @@
    "a": {
     "en": "state overseer",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c5",
+    "block": 119,
+    "page": 132
+   },
+   "matchScore": 2.325
   },
   {
    "id": "bank2-48-198",
@@ -3086,7 +4218,13 @@
    "a": {
     "en": "four",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c10",
+    "block": 48,
+    "page": 248
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank2-49-199",
@@ -3102,7 +4240,13 @@
    "a": {
     "en": "twelve",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c8",
+    "block": 647,
+    "page": 205
+   },
+   "matchScore": 2.644
   },
   {
    "id": "bank2-50-200",
@@ -3118,7 +4262,13 @@
    "a": {
     "en": "district overseers, pastors, and local church officers",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c2",
+    "block": 58,
+    "page": 100
+   },
+   "matchScore": 1.717
   },
   {
    "id": "bank2-51-201",
@@ -3134,7 +4284,13 @@
    "a": {
     "en": "district overseer",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c5",
+    "block": 100,
+    "page": 131
+   },
+   "matchScore": 2.431
   },
   {
    "id": "bank2-52-202",
@@ -3150,7 +4306,13 @@
    "a": {
     "en": "International Executive Committee",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c11",
+    "block": 139,
+    "page": 266
+   },
+   "matchScore": 2.533
   },
   {
    "id": "bank2-54-204",
@@ -3166,7 +4328,13 @@
    "a": {
     "en": "ordained bishops",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c10",
+    "block": 124,
+    "page": 250
+   },
+   "matchScore": 3.075
   },
   {
    "id": "bank2-55-205",
@@ -3182,7 +4350,13 @@
    "a": {
     "en": "State Council",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c5",
+    "block": 43,
+    "page": 127
+   },
+   "matchScore": 2.467
   },
   {
    "id": "bank2-56-206",
@@ -3198,7 +4372,13 @@
    "a": {
     "en": "State Board of Ministerial Development, State Youth and Discipleship Board, Evangelism Board, State World Missions Board, and State Music Board",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c5",
+    "block": 89,
+    "page": 130
+   },
+   "matchScore": 2.54
   },
   {
    "id": "bank2-57-207",
@@ -3214,7 +4394,13 @@
    "a": {
     "en": "State Board of Ministerial Development, State World Missions Board, and State Music Board",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c5",
+    "block": 92,
+    "page": 130
+   },
+   "matchScore": 2.45
   },
   {
    "id": "bank2-58-208",
@@ -3230,7 +4416,13 @@
    "a": {
     "en": "State Council",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c2",
+    "block": 126,
+    "page": 108
+   },
+   "matchScore": 2.771
   },
   {
    "id": "bank2-59-209",
@@ -3246,7 +4438,13 @@
    "a": {
     "en": "State Board of Ministerial Development",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c2",
+    "block": 126,
+    "page": 108
+   },
+   "matchScore": 2.486
   },
   {
    "id": "bank2-60-210",
@@ -3262,7 +4460,13 @@
    "a": {
     "en": "State Youth and Discipleship Board",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c5",
+    "block": 89,
+    "page": 130
+   },
+   "matchScore": 2.867
   },
   {
    "id": "bank2-61-211",
@@ -3278,7 +4482,13 @@
    "a": {
     "en": "state overseer",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c10",
+    "block": 238,
+    "page": 254
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank2-62-212",
@@ -3294,7 +4504,13 @@
    "a": {
     "en": "State Council",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c10",
+    "block": 245,
+    "page": 254
+   },
+   "matchScore": 3.0
   },
   {
    "id": "bank2-64-214",
@@ -3310,7 +4526,13 @@
    "a": {
     "en": "eight",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c5",
+    "block": 89,
+    "page": 130
+   },
+   "matchScore": 2.564
   },
   {
    "id": "bank2-65-215",
@@ -3326,7 +4548,13 @@
    "a": {
     "en": "International Executive Council",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c10",
+    "block": 285,
+    "page": 255
+   },
+   "matchScore": 3.117
   },
   {
    "id": "bank2-66-216",
@@ -3342,7 +4570,13 @@
    "a": {
     "en": "biennially",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c10",
+    "block": 198,
+    "page": 252
+   },
+   "matchScore": 2.914
   },
   {
    "id": "bank2-67-217",
@@ -3358,7 +4592,13 @@
    "a": {
     "en": "district overseer",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c10",
+    "block": 322,
+    "page": 257
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank2-68-218",
@@ -3374,7 +4614,13 @@
    "a": {
     "en": "evangelistic effort",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c10",
+    "block": 327,
+    "page": 257
+   },
+   "matchScore": 2.914
   },
   {
    "id": "bank2-69-219",
@@ -3390,7 +4636,13 @@
    "a": {
     "en": "State Youth and Discipleship director",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c10",
+    "block": 337,
+    "page": 257
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank2-70-220",
@@ -3406,7 +4658,13 @@
    "a": {
     "en": "wife of the state overseer",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c2",
+    "block": 82,
+    "page": 103
+   },
+   "matchScore": 2.038
   },
   {
    "id": "bank2-71-221",
@@ -3422,7 +4680,13 @@
    "a": {
     "en": "centralized",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c1",
+    "block": 24,
+    "page": 91
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank2-72-222",
@@ -3438,7 +4702,13 @@
    "a": {
     "en": "Assembly",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c11",
+    "block": 401,
+    "page": 276
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank2-73-223",
@@ -3454,7 +4724,13 @@
    "a": {
     "en": "international, national, state/territorial, district, and local",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c11",
+    "block": 22,
+    "page": 261
+   },
+   "matchScore": 2.95
   },
   {
    "id": "bank2-74-224",
@@ -3470,7 +4746,13 @@
    "a": {
     "en": "local Board of Trustees",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c11",
+    "block": 455,
+    "page": 279
+   },
+   "matchScore": 2.655
   },
   {
    "id": "bank2-75-225",
@@ -3486,7 +4768,13 @@
    "a": {
     "en": "elders and deacons.",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c11",
+    "block": 75,
+    "page": 263
+   },
+   "matchScore": 2.6
   },
   {
    "id": "bank2-76-226",
@@ -3502,7 +4790,13 @@
    "a": {
     "en": "official request",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c11",
+    "block": 116,
+    "page": 265
+   },
+   "matchScore": 2.95
   },
   {
    "id": "bank2-77-227",
@@ -3518,7 +4812,13 @@
    "a": {
     "en": "two weeks",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c11",
+    "block": 118,
+    "page": 265
+   },
+   "matchScore": 2.45
   },
   {
    "id": "bank2-79-229",
@@ -3534,7 +4834,13 @@
    "a": {
     "en": "church conference",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c11",
+    "block": 147,
+    "page": 267
+   },
+   "matchScore": 3.057
   },
   {
    "id": "bank2-80-230",
@@ -3550,7 +4856,13 @@
    "a": {
     "en": "pastor",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c11",
+    "block": 149,
+    "page": 267
+   },
+   "matchScore": 3.075
   },
   {
    "id": "bank2-81-231",
@@ -3566,7 +4878,13 @@
    "a": {
     "en": "district overseer",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c10",
+    "block": 322,
+    "page": 257
+   },
+   "matchScore": 2.533
   },
   {
    "id": "bank2-82-232",
@@ -3582,7 +4900,9 @@
    "a": {
     "en": "one",
     "nl": ""
-   }
+   },
+   "source": null,
+   "matchScore": 0.667
   },
   {
    "id": "bank2-83-233",
@@ -3598,7 +4918,13 @@
    "a": {
     "en": "membership",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c11",
+    "block": 165,
+    "page": 267
+   },
+   "matchScore": 2.867
   },
   {
    "id": "bank2-84-234",
@@ -3614,7 +4940,13 @@
    "a": {
     "en": "financial status",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c11",
+    "block": 166,
+    "page": 267
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank2-85-235",
@@ -3630,7 +4962,13 @@
    "a": {
     "en": "ten",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c11",
+    "block": 167,
+    "page": 268
+   },
+   "matchScore": 3.057
   },
   {
    "id": "bank2-86-236",
@@ -3646,7 +4984,13 @@
    "a": {
     "en": "called conference",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c11",
+    "block": 165,
+    "page": 267
+   },
+   "matchScore": 2.343
   },
   {
    "id": "bank2-87-237",
@@ -3662,7 +5006,13 @@
    "a": {
     "en": "financial reports of various departments of the church; other reports of committees, and so forth; transfer of membership, if any; unfinished business, if any; and new business",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c11",
+    "block": 166,
+    "page": 267
+   },
+   "matchScore": 1.077
   },
   {
    "id": "bank2-88-238",
@@ -3678,7 +5028,13 @@
    "a": {
     "en": "state overseer",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c5",
+    "block": 119,
+    "page": 132
+   },
+   "matchScore": 2.7
   },
   {
    "id": "bank2-89-239",
@@ -3694,7 +5050,13 @@
    "a": {
     "en": "state overseer",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c11",
+    "block": 204,
+    "page": 269
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank2-90-240",
@@ -3710,7 +5072,13 @@
    "a": {
     "en": "district overseer",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c11",
+    "block": 206,
+    "page": 269
+   },
+   "matchScore": 2.9
   },
   {
    "id": "bank2-92-242",
@@ -3726,7 +5094,13 @@
    "a": {
     "en": "Church and Pastor’s Council",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c11",
+    "block": 137,
+    "page": 266
+   },
+   "matchScore": 3.0
   },
   {
    "id": "bank2-93-243",
@@ -3742,7 +5116,13 @@
    "a": {
     "en": "biennially",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c5",
+    "block": 125,
+    "page": 133
+   },
+   "matchScore": 3.0
   },
   {
    "id": "bank2-94-244",
@@ -3758,7 +5138,13 @@
    "a": {
     "en": "pastor",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c5",
+    "block": 125,
+    "page": 133
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank2-95-245",
@@ -3774,7 +5160,13 @@
    "a": {
     "en": "pastor, district overseer, or state overseer",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c11",
+    "block": 230,
+    "page": 270
+   },
+   "matchScore": 3.057
   },
   {
    "id": "bank2-96-246",
@@ -3790,7 +5182,13 @@
    "a": {
     "en": "spiritual, financial, and physical",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c5",
+    "block": 134,
+    "page": 134
+   },
+   "matchScore": 2.133
   },
   {
    "id": "bank2-97-247",
@@ -3806,7 +5204,13 @@
    "a": {
     "en": "conference",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c11",
+    "block": 247,
+    "page": 271
+   },
+   "matchScore": 3.0
   },
   {
    "id": "bank2-98-248",
@@ -3822,7 +5226,13 @@
    "a": {
     "en": "pastor",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c5",
+    "block": 160,
+    "page": 135
+   },
+   "matchScore": 3.033
   },
   {
    "id": "bank2-99-249",
@@ -3838,7 +5248,13 @@
    "a": {
     "en": "Minutes",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c5",
+    "block": 163,
+    "page": 136
+   },
+   "matchScore": 2.95
   },
   {
    "id": "bank2-100-250",
@@ -3854,7 +5270,9 @@
    "a": {
     "en": "two",
     "nl": ""
-   }
+   },
+   "source": null,
+   "matchScore": 0.833
   },
   {
    "id": "bank2-101-251",
@@ -3870,7 +5288,13 @@
    "a": {
     "en": "Local Board of Trustees",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c11",
+    "block": 473,
+    "page": 280
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank2-102-252",
@@ -3886,7 +5310,13 @@
    "a": {
     "en": "state overseer",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c11",
+    "block": 522,
+    "page": 282
+   },
+   "matchScore": 3.123
   },
   {
    "id": "bank2-103-253",
@@ -3902,7 +5332,13 @@
    "a": {
     "en": "Christian day school",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c11",
+    "block": 554,
+    "page": 284
+   },
+   "matchScore": 3.033
   },
   {
    "id": "bank2-104-254",
@@ -3918,7 +5354,13 @@
    "a": {
     "en": "president, vice president, and secretary-treasurer",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c11",
+    "block": 297,
+    "page": 272
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank2-105-255",
@@ -3934,7 +5376,13 @@
    "a": {
     "en": "pastor",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p2c11",
+    "block": 297,
+    "page": 272
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-1-256",
@@ -3950,7 +5398,13 @@
    "a": {
     "en": "breathed by God",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 4,
+    "page": 313
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-2-257",
@@ -3966,7 +5420,13 @@
    "a": {
     "en": "inspiration",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 3,
+    "page": 313
+   },
+   "matchScore": 2.45
   },
   {
    "id": "bank3-3-258",
@@ -3982,7 +5442,13 @@
    "a": {
     "en": "Holy Spirit",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 4,
+    "page": 313
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-4-259",
@@ -3998,7 +5464,13 @@
    "a": {
     "en": "infallibility",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 6,
+    "page": 313
+   },
+   "matchScore": 2.45
   },
   {
    "id": "bank3-5-260",
@@ -4014,7 +5486,13 @@
    "a": {
     "en": "Jesus; apostles",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 7,
+    "page": 313
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-6-261",
@@ -4030,7 +5508,13 @@
    "a": {
     "en": "Gospels; Acts",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 7,
+    "page": 313
+   },
+   "matchScore": 2.914
   },
   {
    "id": "bank3-7-262",
@@ -4046,7 +5530,13 @@
    "a": {
     "en": "Paul",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 7,
+    "page": 313
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-8-263",
@@ -4062,7 +5552,13 @@
    "a": {
     "en": "unity",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 10,
+    "page": 314
+   },
+   "matchScore": 2.533
   },
   {
    "id": "bank3-9-264",
@@ -4078,7 +5574,13 @@
    "a": {
     "en": "forgiveness",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 11,
+    "page": 314
+   },
+   "matchScore": 2.9
   },
   {
    "id": "bank3-10-265",
@@ -4094,7 +5596,13 @@
    "a": {
     "en": "faith",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 12,
+    "page": 314
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-11-266",
@@ -4110,7 +5618,13 @@
    "a": {
     "en": "holiness",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 13,
+    "page": 314
+   },
+   "matchScore": 3.0
   },
   {
    "id": "bank3-12-267",
@@ -4126,7 +5640,13 @@
    "a": {
     "en": "Holy Spirit; Holy Word",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 15,
+    "page": 314
+   },
+   "matchScore": 2.7
   },
   {
    "id": "bank3-13-268",
@@ -4142,7 +5662,13 @@
    "a": {
     "en": "faith; practice",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 16,
+    "page": 314
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-14-269",
@@ -4158,7 +5684,13 @@
    "a": {
     "en": "government",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 16,
+    "page": 314
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-15-270",
@@ -4174,7 +5706,13 @@
    "a": {
     "en": "faith",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 16,
+    "page": 314
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-1-271",
@@ -4190,7 +5728,13 @@
    "a": {
     "en": "indivisible, personal",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 20,
+    "page": 315
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-2-272",
@@ -4206,7 +5750,13 @@
    "a": {
     "en": "incommunicable",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 20,
+    "page": 315
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-3-273",
@@ -4222,7 +5772,13 @@
    "a": {
     "en": "self-existence, unchangeableness, and infinity",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 20,
+    "page": 315
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-4-274",
@@ -4238,7 +5794,13 @@
    "a": {
     "en": "communicable",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 20,
+    "page": 315
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-5-275",
@@ -4254,7 +5816,13 @@
    "a": {
     "en": "intellectual; volitional; moral",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 20,
+    "page": 315
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-6-276",
@@ -4270,7 +5838,13 @@
    "a": {
     "en": "Father",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 21,
+    "page": 315
+   },
+   "matchScore": 2.8
   },
   {
    "id": "bank3-7-277",
@@ -4286,7 +5860,13 @@
    "a": {
     "en": "Son",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 21,
+    "page": 315
+   },
+   "matchScore": 2.8
   },
   {
    "id": "bank3-8-278",
@@ -4302,7 +5882,13 @@
    "a": {
     "en": "Holy Spirit",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 21,
+    "page": 315
+   },
+   "matchScore": 2.8
   },
   {
    "id": "bank3-9-279",
@@ -4318,7 +5904,13 @@
    "a": {
     "en": "divine nature",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 22,
+    "page": 315
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-10-280",
@@ -4334,7 +5926,13 @@
    "a": {
     "en": "infinite, eternal, and unchangeable",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 22,
+    "page": 315
+   },
+   "matchScore": 2.4
   },
   {
    "id": "bank3-11-281",
@@ -4350,7 +5948,13 @@
    "a": {
     "en": "substance; power; glory",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 22,
+    "page": 315
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-12-282",
@@ -4366,7 +5970,13 @@
    "a": {
     "en": "Old Testament",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 25,
+    "page": 315
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-13-283",
@@ -4382,7 +5992,13 @@
    "a": {
     "en": "unity; tri-personalness",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 25,
+    "page": 315
+   },
+   "matchScore": 1.4
   },
   {
    "id": "bank3-14-284",
@@ -4398,7 +6014,13 @@
    "a": {
     "en": "unity",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 10,
+    "page": 314
+   },
+   "matchScore": 2.533
   },
   {
    "id": "bank3-15-285",
@@ -4414,7 +6036,13 @@
    "a": {
     "en": "1 Kings 8:60",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 28,
+    "page": 316
+   },
+   "matchScore": 2.4
   },
   {
    "id": "bank3-16-286",
@@ -4430,7 +6058,13 @@
    "a": {
     "en": "God the Father; Lord Jesus Christ",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 70,
+    "page": 317
+   },
+   "matchScore": 2.533
   },
   {
    "id": "bank3-17-287",
@@ -4446,7 +6080,13 @@
    "a": {
     "en": "Mediator",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 34,
+    "page": 316
+   },
+   "matchScore": 2.533
   },
   {
    "id": "bank3-18-288",
@@ -4462,7 +6102,13 @@
    "a": {
     "en": "one God",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 36,
+    "page": 316
+   },
+   "matchScore": 2.8
   },
   {
    "id": "bank3-19-289",
@@ -4478,7 +6124,13 @@
    "a": {
     "en": "Elohim",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 41,
+    "page": 316
+   },
+   "matchScore": 2.4
   },
   {
    "id": "bank3-20-290",
@@ -4494,7 +6146,9 @@
    "a": {
     "en": "us; our",
     "nl": ""
-   }
+   },
+   "source": null,
+   "matchScore": 0.429
   },
   {
    "id": "bank3-21-291",
@@ -4510,7 +6164,13 @@
    "a": {
     "en": "Lord",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 45,
+    "page": 316
+   },
+   "matchScore": 2.45
   },
   {
    "id": "bank3-22-292",
@@ -4526,7 +6186,13 @@
    "a": {
     "en": "Trinity",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 45,
+    "page": 316
+   },
+   "matchScore": 2.533
   },
   {
    "id": "bank3-23-293",
@@ -4542,7 +6208,13 @@
    "a": {
     "en": "God",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 21,
+    "page": 315
+   },
+   "matchScore": 2.8
   },
   {
    "id": "bank3-24-294",
@@ -4558,7 +6230,13 @@
    "a": {
     "en": "God; His Spirit",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 87,
+    "page": 319
+   },
+   "matchScore": 2.7
   },
   {
    "id": "bank3-25-295",
@@ -4574,7 +6252,13 @@
    "a": {
     "en": "Spirit",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 318,
+    "page": 344
+   },
+   "matchScore": 2.95
   },
   {
    "id": "bank3-26-296",
@@ -4590,7 +6274,13 @@
    "a": {
     "en": "baptism",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 232,
+    "page": 333
+   },
+   "matchScore": 2.914
   },
   {
    "id": "bank3-27-297",
@@ -4606,7 +6296,13 @@
    "a": {
     "en": "Trinity; unity",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 70,
+    "page": 317
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-28-298",
@@ -4622,7 +6318,13 @@
    "a": {
     "en": "Father",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 70,
+    "page": 317
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-29-299",
@@ -4638,7 +6340,13 @@
    "a": {
     "en": "Spirit",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 70,
+    "page": 317
+   },
+   "matchScore": 3.0
   },
   {
    "id": "bank3-30-300",
@@ -4654,7 +6362,13 @@
    "a": {
     "en": "Son",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 70,
+    "page": 317
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-1-301",
@@ -4670,7 +6384,13 @@
    "a": {
     "en": "eternal",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 77,
+    "page": 318
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-2-302",
@@ -4686,7 +6406,13 @@
    "a": {
     "en": "glory, power; divine attributes",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 77,
+    "page": 318
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-3-303",
@@ -4702,7 +6428,13 @@
    "a": {
     "en": "divine",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 77,
+    "page": 318
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-4-304",
@@ -4718,7 +6450,13 @@
    "a": {
     "en": "divine; human",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 77,
+    "page": 318
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-5-305",
@@ -4734,7 +6472,13 @@
    "a": {
     "en": "natures; Person",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 77,
+    "page": 318
+   },
+   "matchScore": 2.867
   },
   {
    "id": "bank3-6-306",
@@ -4750,7 +6494,13 @@
    "a": {
     "en": "Prophet",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 78,
+    "page": 318
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-7-307",
@@ -4766,7 +6516,13 @@
    "a": {
     "en": "Himself; intercession",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 78,
+    "page": 318
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-8-308",
@@ -4782,7 +6538,13 @@
    "a": {
     "en": "calls, defends, protects, and perfects",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 78,
+    "page": 318
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-9-309",
@@ -4798,7 +6560,13 @@
    "a": {
     "en": "His mother",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 82,
+    "page": 318
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-10-310",
@@ -4814,7 +6582,13 @@
    "a": {
     "en": "Holy Spirit",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 82,
+    "page": 318
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-11-311",
@@ -4830,7 +6604,13 @@
    "a": {
     "en": "infirmities; tempted; punishment; righteousness; High Priest",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 86,
+    "page": 319
+   },
+   "matchScore": 2.745
   },
   {
    "id": "bank3-12-312",
@@ -4846,7 +6626,13 @@
    "a": {
     "en": "mediator",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 87,
+    "page": 319
+   },
+   "matchScore": 3.0
   },
   {
    "id": "bank3-13-313",
@@ -4862,7 +6648,13 @@
    "a": {
     "en": "last man Adam",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 89,
+    "page": 319
+   },
+   "matchScore": 2.867
   },
   {
    "id": "bank3-14-314",
@@ -4878,7 +6670,13 @@
    "a": {
     "en": "righteousness",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 89,
+    "page": 319
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-15-315",
@@ -4894,7 +6692,13 @@
    "a": {
     "en": "judgment",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 90,
+    "page": 319
+   },
+   "matchScore": 2.867
   },
   {
    "id": "bank3-16-316",
@@ -4910,7 +6714,13 @@
    "a": {
     "en": "offenses; justification",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 93,
+    "page": 320
+   },
+   "matchScore": 1.6
   },
   {
    "id": "bank3-17-317",
@@ -4926,7 +6736,13 @@
    "a": {
     "en": "reconciled; saved",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 95,
+    "page": 320
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-18-318",
@@ -4942,7 +6758,13 @@
    "a": {
     "en": "offense",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c2",
+    "block": 38,
+    "page": 351
+   },
+   "matchScore": 2.2
   },
   {
    "id": "bank3-19-319",
@@ -4958,7 +6780,13 @@
    "a": {
     "en": "righteousness",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 97,
+    "page": 320
+   },
+   "matchScore": 2.771
   },
   {
    "id": "bank3-20-320",
@@ -4974,7 +6802,13 @@
    "a": {
     "en": "reconciliation",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 99,
+    "page": 320
+   },
+   "matchScore": 2.533
   },
   {
    "id": "bank3-21-321",
@@ -4990,7 +6824,13 @@
    "a": {
     "en": "God",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 99,
+    "page": 320
+   },
+   "matchScore": 2.7
   },
   {
    "id": "bank3-22-322",
@@ -5006,7 +6846,13 @@
    "a": {
     "en": "imputing",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 99,
+    "page": 320
+   },
+   "matchScore": 3.033
   },
   {
    "id": "bank3-23-323",
@@ -5022,7 +6868,13 @@
    "a": {
     "en": "sin",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 100,
+    "page": 320
+   },
+   "matchScore": 2.7
   },
   {
    "id": "bank3-24-324",
@@ -5038,7 +6890,13 @@
    "a": {
     "en": "righteousness",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 155,
+    "page": 325
+   },
+   "matchScore": 2.8
   },
   {
    "id": "bank3-25-325",
@@ -5054,7 +6912,13 @@
    "a": {
     "en": "Abraham",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 103,
+    "page": 320
+   },
+   "matchScore": 2.486
   },
   {
    "id": "bank3-26-326",
@@ -5070,7 +6934,13 @@
    "a": {
     "en": "High Priest",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 86,
+    "page": 319
+   },
+   "matchScore": 2.533
   },
   {
    "id": "bank3-27-327",
@@ -5086,7 +6956,13 @@
    "a": {
     "en": "resurrection",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 104,
+    "page": 320
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-28-328",
@@ -5102,7 +6978,13 @@
    "a": {
     "en": "literal, fleshly, and glorified",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 105,
+    "page": 320
+   },
+   "matchScore": 1.733
   },
   {
    "id": "bank3-29-329",
@@ -5118,7 +7000,13 @@
    "a": {
     "en": "immortal and glorious",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 105,
+    "page": 320
+   },
+   "matchScore": 3.057
   },
   {
    "id": "bank3-30-330",
@@ -5134,7 +7022,13 @@
    "a": {
     "en": "seal; approval; personally; life and death",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 106,
+    "page": 320
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-31-331",
@@ -5150,7 +7044,13 @@
    "a": {
     "en": "death, burial, and resurrection",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 230,
+    "page": 333
+   },
+   "matchScore": 2.325
   },
   {
    "id": "bank3-32-332",
@@ -5166,7 +7066,13 @@
    "a": {
     "en": "mystery; godliness",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 112,
+    "page": 321
+   },
+   "matchScore": 2.367
   },
   {
    "id": "bank3-33-333",
@@ -5182,7 +7088,13 @@
    "a": {
     "en": "justification; spiritual quickening; victory; resurrection",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 116,
+    "page": 321
+   },
+   "matchScore": 2.756
   },
   {
    "id": "bank3-34-334",
@@ -5198,7 +7110,13 @@
    "a": {
     "en": "resurrection and ascension",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 118,
+    "page": 321
+   },
+   "matchScore": 2.343
   },
   {
    "id": "bank3-35-335",
@@ -5214,7 +7132,13 @@
    "a": {
     "en": "will; God",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 78,
+    "page": 318
+   },
+   "matchScore": 2.867
   },
   {
    "id": "bank3-36-336",
@@ -5230,7 +7154,13 @@
    "a": {
     "en": "Scripture",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 128,
+    "page": 322
+   },
+   "matchScore": 2.7
   },
   {
    "id": "bank3-37-337",
@@ -5246,7 +7176,13 @@
    "a": {
     "en": "atonement",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 129,
+    "page": 322
+   },
+   "matchScore": 2.8
   },
   {
    "id": "bank3-38-338",
@@ -5262,7 +7198,13 @@
    "a": {
     "en": "everlasting",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 78,
+    "page": 318
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-39-339",
@@ -5278,7 +7220,13 @@
    "a": {
     "en": "His kingdom; world",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 130,
+    "page": 322
+   },
+   "matchScore": 2.7
   },
   {
    "id": "bank3-40-340",
@@ -5294,7 +7242,13 @@
    "a": {
     "en": "Creator; Sustainer",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 130,
+    "page": 322
+   },
+   "matchScore": 2.95
   },
   {
    "id": "bank3-1-341",
@@ -5310,7 +7264,13 @@
    "a": {
     "en": "faculties",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 135,
+    "page": 322
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-2-342",
@@ -5326,7 +7286,13 @@
    "a": {
     "en": "divine grace",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 70,
+    "page": 317
+   },
+   "matchScore": 2.2
   },
   {
    "id": "bank3-3-343",
@@ -5342,7 +7308,13 @@
    "a": {
     "en": "mind, emotions, and will",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 136,
+    "page": 323
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-4-344",
@@ -5358,7 +7330,13 @@
    "a": {
     "en": "guilt, corruption, and",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 136,
+    "page": 323
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-5-345",
@@ -5374,7 +7352,13 @@
    "a": {
     "en": "offensiveness will",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 136,
+    "page": 323
+   },
+   "matchScore": 2.95
   },
   {
    "id": "bank3-6-346",
@@ -5390,7 +7374,9 @@
    "a": {
     "en": "will",
     "nl": ""
-   }
+   },
+   "source": null,
+   "matchScore": 0.6
   },
   {
    "id": "bank3-7-347",
@@ -5406,7 +7392,13 @@
    "a": {
     "en": "religious experience",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 141,
+    "page": 323
+   },
+   "matchScore": 2.533
   },
   {
    "id": "bank3-8-348",
@@ -5422,7 +7414,13 @@
    "a": {
     "en": "sinfulness",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 141,
+    "page": 323
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-9-349",
@@ -5438,7 +7436,13 @@
    "a": {
     "en": "goodness; God",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 143,
+    "page": 323
+   },
+   "matchScore": 2.7
   },
   {
    "id": "bank3-10-350",
@@ -5454,7 +7458,13 @@
    "a": {
     "en": "repentance",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 143,
+    "page": 323
+   },
+   "matchScore": 2.7
   },
   {
    "id": "bank3-11-351",
@@ -5470,7 +7480,13 @@
    "a": {
     "en": "repentance",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 143,
+    "page": 323
+   },
+   "matchScore": 2.533
   },
   {
    "id": "bank3-12-352",
@@ -5486,7 +7502,13 @@
    "a": {
     "en": "cease; sin",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 144,
+    "page": 324
+   },
+   "matchScore": 2.367
   },
   {
    "id": "bank3-13-353",
@@ -5502,7 +7524,13 @@
    "a": {
     "en": "gospel",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 294,
+    "page": 341
+   },
+   "matchScore": 2.4
   },
   {
    "id": "bank3-14-354",
@@ -5518,7 +7546,9 @@
    "a": {
     "en": "will",
     "nl": ""
-   }
+   },
+   "source": null,
+   "matchScore": 0.833
   },
   {
    "id": "bank3-15-355",
@@ -5534,7 +7564,13 @@
    "a": {
     "en": "salvation",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 10,
+    "page": 314
+   },
+   "matchScore": 2.486
   },
   {
    "id": "bank3-17-357",
@@ -5550,7 +7586,13 @@
    "a": {
     "en": "godly sorrow",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 146,
+    "page": 324
+   },
+   "matchScore": 1.6
   },
   {
    "id": "bank3-18-358",
@@ -5566,7 +7608,13 @@
    "a": {
     "en": "repentance",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 146,
+    "page": 324
+   },
+   "matchScore": 2.95
   },
   {
    "id": "bank3-19-359",
@@ -5582,7 +7630,13 @@
    "a": {
     "en": "enslaved",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 147,
+    "page": 324
+   },
+   "matchScore": 2.7
   },
   {
    "id": "bank3-20-360",
@@ -5598,7 +7652,13 @@
    "a": {
     "en": "Holy Spirit",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 147,
+    "page": 324
+   },
+   "matchScore": 2.8
   },
   {
    "id": "bank3-21-361",
@@ -5614,7 +7674,13 @@
    "a": {
     "en": "reversal",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 148,
+    "page": 324
+   },
+   "matchScore": 2.95
   },
   {
    "id": "bank3-22-362",
@@ -5630,7 +7696,13 @@
    "a": {
     "en": "forsaking; restitution; confession",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 148,
+    "page": 324
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-23-363",
@@ -5646,7 +7718,13 @@
    "a": {
     "en": "reason; Scripture",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 149,
+    "page": 324
+   },
+   "matchScore": 2.95
   },
   {
    "id": "bank3-24-364",
@@ -5662,7 +7740,13 @@
    "a": {
     "en": "John; Jesus",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 150,
+    "page": 324
+   },
+   "matchScore": 2.914
   },
   {
    "id": "bank3-25-365",
@@ -5678,7 +7762,13 @@
    "a": {
     "en": "Acts 2:38",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 155,
+    "page": 325
+   },
+   "matchScore": 2.45
   },
   {
    "id": "bank3-26-366",
@@ -5694,7 +7784,13 @@
    "a": {
     "en": "return",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 150,
+    "page": 324
+   },
+   "matchScore": 2.7
   },
   {
    "id": "bank3-27-367",
@@ -5710,7 +7806,13 @@
    "a": {
     "en": "dead",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 306,
+    "page": 342
+   },
+   "matchScore": 2.629
   },
   {
    "id": "bank3-28-368",
@@ -5726,7 +7828,13 @@
    "a": {
     "en": "godly sorrow",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c2",
+    "block": 8,
+    "page": 348
+   },
+   "matchScore": 1.267
   },
   {
    "id": "bank3-29-369",
@@ -5742,7 +7850,13 @@
    "a": {
     "en": "sin; righteousness; judgment",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 151,
+    "page": 324
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-30-370",
@@ -5758,7 +7872,13 @@
    "a": {
     "en": "reprove",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 151,
+    "page": 324
+   },
+   "matchScore": 2.978
   },
   {
    "id": "bank3-1-371",
@@ -5774,7 +7894,13 @@
    "a": {
     "en": "Christ’s life; His death; His resurrection",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 155,
+    "page": 325
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-2-372",
@@ -5790,7 +7916,13 @@
    "a": {
     "en": "guilt; judgment; merit",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 155,
+    "page": 325
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-3-373",
@@ -5806,7 +7938,13 @@
    "a": {
     "en": "faith",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 155,
+    "page": 325
+   },
+   "matchScore": 3.0
   },
   {
    "id": "bank3-4-374",
@@ -5822,7 +7960,13 @@
    "a": {
     "en": "creative",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 157,
+    "page": 325
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-5-375",
@@ -5838,7 +7982,13 @@
    "a": {
     "en": "Word and Spirit",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 157,
+    "page": 325
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-6-376",
@@ -5854,7 +8004,13 @@
    "a": {
     "en": "mind, heart, and will",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 157,
+    "page": 325
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-7-377",
@@ -5870,7 +8026,13 @@
    "a": {
     "en": "divine grace",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 158,
+    "page": 325
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-8-378",
@@ -5886,7 +8048,13 @@
    "a": {
     "en": "justifies",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 158,
+    "page": 325
+   },
+   "matchScore": 2.7
   },
   {
    "id": "bank3-9-379",
@@ -5902,7 +8070,13 @@
    "a": {
     "en": "grace",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 158,
+    "page": 325
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-10-380",
@@ -5918,7 +8092,13 @@
    "a": {
     "en": "forgiveness; righteousness",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 155,
+    "page": 325
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-11-381",
@@ -5934,7 +8114,13 @@
    "a": {
     "en": "pardoned",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 159,
+    "page": 325
+   },
+   "matchScore": 3.057
   },
   {
    "id": "bank3-12-382",
@@ -5950,7 +8136,13 @@
    "a": {
     "en": "condemnation",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 160,
+    "page": 325
+   },
+   "matchScore": 2.95
   },
   {
    "id": "bank3-13-383",
@@ -5966,7 +8158,13 @@
    "a": {
     "en": "judgment",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 160,
+    "page": 325
+   },
+   "matchScore": 3.057
   },
   {
    "id": "bank3-14-384",
@@ -5982,7 +8180,13 @@
    "a": {
     "en": "redemption",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 160,
+    "page": 325
+   },
+   "matchScore": 2.914
   },
   {
    "id": "bank3-15-385",
@@ -5998,7 +8202,13 @@
    "a": {
     "en": "perfection",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 162,
+    "page": 326
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-16-386",
@@ -6014,7 +8224,13 @@
    "a": {
     "en": "character",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 162,
+    "page": 326
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-17-387",
@@ -6030,7 +8246,13 @@
    "a": {
     "en": "legal",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 163,
+    "page": 326
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-18-388",
@@ -6046,7 +8268,13 @@
    "a": {
     "en": "family; heirs",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 165,
+    "page": 326
+   },
+   "matchScore": 3.0
   },
   {
    "id": "bank3-19-389",
@@ -6062,7 +8290,13 @@
    "a": {
     "en": "position",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 167,
+    "page": 326
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-20-390",
@@ -6078,7 +8312,13 @@
    "a": {
     "en": "character",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 167,
+    "page": 326
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-21-391",
@@ -6094,7 +8334,13 @@
    "a": {
     "en": "agent",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 168,
+    "page": 326
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-22-392",
@@ -6110,7 +8356,13 @@
    "a": {
     "en": "image; God",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 157,
+    "page": 325
+   },
+   "matchScore": 2.533
   },
   {
    "id": "bank3-23-393",
@@ -6126,7 +8378,13 @@
    "a": {
     "en": "righteousness; holiness; mind",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 168,
+    "page": 326
+   },
+   "matchScore": 2.825
   },
   {
    "id": "bank3-24-394",
@@ -6142,7 +8400,13 @@
    "a": {
     "en": "stone; flesh",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 169,
+    "page": 327
+   },
+   "matchScore": 2.8
   },
   {
    "id": "bank3-25-395",
@@ -6158,7 +8422,9 @@
    "a": {
     "en": "will",
     "nl": ""
-   }
+   },
+   "source": null,
+   "matchScore": 0.667
   },
   {
    "id": "bank3-26-396",
@@ -6174,7 +8440,13 @@
    "a": {
     "en": "radical",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 170,
+    "page": 327
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-27-397",
@@ -6190,7 +8462,13 @@
    "a": {
     "en": "Holiness",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 170,
+    "page": 327
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-28-398",
@@ -6206,7 +8484,13 @@
    "a": {
     "en": "Love",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 170,
+    "page": 327
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-29-399",
@@ -6222,7 +8506,13 @@
    "a": {
     "en": "sin",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 170,
+    "page": 327
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-30-400",
@@ -6238,7 +8528,13 @@
    "a": {
     "en": "Word; Spirit",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 172,
+    "page": 327
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-1-401",
@@ -6254,7 +8550,13 @@
    "a": {
     "en": "blood",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 177,
+    "page": 327
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-2-402",
@@ -6270,7 +8572,13 @@
    "a": {
     "en": "sin; purged",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 177,
+    "page": 327
+   },
+   "matchScore": 3.033
   },
   {
    "id": "bank3-3-403",
@@ -6286,7 +8594,13 @@
    "a": {
     "en": "justification, regeneration,",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 167,
+    "page": 326
+   },
+   "matchScore": 2.367
   },
   {
    "id": "bank3-4-404",
@@ -6302,7 +8616,13 @@
    "a": {
     "en": "and adoption Sanctification",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 178,
+    "page": 327
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-5-405",
@@ -6318,7 +8638,13 @@
    "a": {
     "en": "sin; world",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 151,
+    "page": 324
+   },
+   "matchScore": 2.2
   },
   {
    "id": "bank3-6-406",
@@ -6334,7 +8660,13 @@
    "a": {
     "en": "fruit bearing",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c2",
+    "block": 18,
+    "page": 349
+   },
+   "matchScore": 2.2
   },
   {
    "id": "bank3-7-407",
@@ -6350,7 +8682,13 @@
    "a": {
     "en": "old man; sin; death; flesh;",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 188,
+    "page": 328
+   },
+   "matchScore": 2.2
   },
   {
    "id": "bank3-8-408",
@@ -6366,7 +8704,13 @@
    "a": {
     "en": "sin; death; carnal crucifixion",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 188,
+    "page": 328
+   },
+   "matchScore": 2.483
   },
   {
    "id": "bank3-9-409",
@@ -6382,7 +8726,13 @@
    "a": {
     "en": "set free",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 201,
+    "page": 330
+   },
+   "matchScore": 2.2
   },
   {
    "id": "bank3-10-410",
@@ -6398,7 +8748,13 @@
    "a": {
     "en": "crucified",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 177,
+    "page": 327
+   },
+   "matchScore": 2.7
   },
   {
    "id": "bank3-11-411",
@@ -6414,7 +8770,13 @@
    "a": {
     "en": "Word",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 189,
+    "page": 328
+   },
+   "matchScore": 2.95
   },
   {
    "id": "bank3-12-412",
@@ -6430,7 +8792,13 @@
    "a": {
     "en": "flesh; and spirit",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 189,
+    "page": 328
+   },
+   "matchScore": 2.95
   },
   {
    "id": "bank3-13-413",
@@ -6446,7 +8814,13 @@
    "a": {
     "en": "blood; Holy Spirit",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 190,
+    "page": 328
+   },
+   "matchScore": 2.6
   },
   {
    "id": "bank3-14-414",
@@ -6462,7 +8836,13 @@
    "a": {
     "en": "faith",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 155,
+    "page": 325
+   },
+   "matchScore": 2.422
   },
   {
    "id": "bank3-1-416",
@@ -6478,7 +8858,13 @@
    "a": {
     "en": "holy living",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 194,
+    "page": 329
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-2-417",
@@ -6494,7 +8880,13 @@
    "a": {
     "en": "Word; Spirit; death",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 195,
+    "page": 329
+   },
+   "matchScore": 3.075
   },
   {
    "id": "bank3-3-418",
@@ -6510,7 +8902,13 @@
    "a": {
     "en": "flesh",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 195,
+    "page": 329
+   },
+   "matchScore": 2.7
   },
   {
    "id": "bank3-4-419",
@@ -6526,7 +8924,9 @@
    "a": {
     "en": "advocate",
     "nl": ""
-   }
+   },
+   "source": null,
+   "matchScore": 0.444
   },
   {
    "id": "bank3-5-420",
@@ -6542,7 +8942,13 @@
    "a": {
     "en": "priesthood",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 197,
+    "page": 329
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-6-421",
@@ -6558,7 +8964,13 @@
    "a": {
     "en": "promises",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 198,
+    "page": 329
+   },
+   "matchScore": 3.089
   },
   {
    "id": "bank3-7-422",
@@ -6574,7 +8986,13 @@
    "a": {
     "en": "holiness; fruit",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 198,
+    "page": 329
+   },
+   "matchScore": 2.644
   },
   {
    "id": "bank3-8-423",
@@ -6590,7 +9008,13 @@
    "a": {
     "en": "chastening",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 198,
+    "page": 329
+   },
+   "matchScore": 2.45
   },
   {
    "id": "bank3-9-424",
@@ -6606,7 +9030,13 @@
    "a": {
     "en": "holiness",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 198,
+    "page": 329
+   },
+   "matchScore": 2.771
   },
   {
    "id": "bank3-10-425",
@@ -6622,7 +9052,13 @@
    "a": {
     "en": "operating techniques",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 199,
+    "page": 329
+   },
+   "matchScore": 3.033
   },
   {
    "id": "bank3-11-426",
@@ -6638,7 +9074,13 @@
    "a": {
     "en": "faith",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 199,
+    "page": 329
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-12-427",
@@ -6654,7 +9096,13 @@
    "a": {
     "en": "Word",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 200,
+    "page": 329
+   },
+   "matchScore": 2.95
   },
   {
    "id": "bank3-13-428",
@@ -6670,7 +9118,13 @@
    "a": {
     "en": "Truth",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 290,
+    "page": 340
+   },
+   "matchScore": 2.533
   },
   {
    "id": "bank3-14-429",
@@ -6686,7 +9140,13 @@
    "a": {
     "en": "1 Peter 2:1, 2",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 200,
+    "page": 329
+   },
+   "matchScore": 3.1
   },
   {
    "id": "bank3-15-430",
@@ -6702,7 +9162,13 @@
    "a": {
     "en": "Holy Spirit",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 201,
+    "page": 330
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-16-431",
@@ -6718,7 +9184,13 @@
    "a": {
     "en": "righteousness",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 201,
+    "page": 330
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-17-432",
@@ -6734,7 +9206,13 @@
    "a": {
     "en": "deeds",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 201,
+    "page": 330
+   },
+   "matchScore": 3.033
   },
   {
    "id": "bank3-18-433",
@@ -6750,7 +9228,13 @@
    "a": {
     "en": "flesh",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 201,
+    "page": 330
+   },
+   "matchScore": 2.867
   },
   {
    "id": "bank3-19-434",
@@ -6766,7 +9250,13 @@
    "a": {
     "en": "fruit",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 168,
+    "page": 326
+   },
+   "matchScore": 2.867
   },
   {
    "id": "bank3-20-435",
@@ -6782,7 +9272,13 @@
    "a": {
     "en": "faith; Word; Spirit",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 202,
+    "page": 330
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-1-436",
@@ -6798,7 +9294,13 @@
    "a": {
     "en": "filled",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 205,
+    "page": 330
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-2-437",
@@ -6814,7 +9316,13 @@
    "a": {
     "en": "power",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 77,
+    "page": 318
+   },
+   "matchScore": 2.7
   },
   {
    "id": "bank3-3-438",
@@ -6830,7 +9338,13 @@
    "a": {
     "en": "drunk with wine",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 209,
+    "page": 330
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-4-439",
@@ -6846,7 +9360,13 @@
    "a": {
     "en": "personal",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 209,
+    "page": 330
+   },
+   "matchScore": 2.978
   },
   {
    "id": "bank3-5-440",
@@ -6862,7 +9382,13 @@
    "a": {
     "en": "revelation",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 210,
+    "page": 330
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-6-441",
@@ -6878,7 +9404,13 @@
    "a": {
     "en": "Spirit of God; Spirit of your Father; Spirit of the Lord; Spirit of Christ; and Spirit of God’s Son",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 210,
+    "page": 330
+   },
+   "matchScore": 3.033
   },
   {
    "id": "bank3-7-442",
@@ -6894,7 +9426,13 @@
    "a": {
     "en": "believers",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 212,
+    "page": 331
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-8-443",
@@ -6910,7 +9448,13 @@
    "a": {
     "en": "sanctification",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 190,
+    "page": 328
+   },
+   "matchScore": 2.575
   },
   {
    "id": "bank3-9-444",
@@ -6926,7 +9470,13 @@
    "a": {
     "en": "John 17",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 200,
+    "page": 329
+   },
+   "matchScore": 2.95
   },
   {
    "id": "bank3-10-445",
@@ -6942,7 +9492,13 @@
    "a": {
     "en": "holiness",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 212,
+    "page": 331
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-1-446",
@@ -6958,7 +9514,13 @@
    "a": {
     "en": "divine-human",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 217,
+    "page": 331
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-2-447",
@@ -6974,7 +9536,13 @@
    "a": {
     "en": "mind",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 217,
+    "page": 331
+   },
+   "matchScore": 2.914
   },
   {
    "id": "bank3-3-448",
@@ -6990,7 +9558,13 @@
    "a": {
     "en": "baptism",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 218,
+    "page": 331
+   },
+   "matchScore": 2.7
   },
   {
    "id": "bank3-4-449",
@@ -7006,7 +9580,13 @@
    "a": {
     "en": "prompted; provided",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 219,
+    "page": 331
+   },
+   "matchScore": 2.914
   },
   {
    "id": "bank3-5-450",
@@ -7022,7 +9602,9 @@
    "a": {
     "en": "initiate",
     "nl": ""
-   }
+   },
+   "source": null,
+   "matchScore": 0.778
   },
   {
    "id": "bank3-6-451",
@@ -7038,7 +9620,13 @@
    "a": {
     "en": "Cornelius",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 220,
+    "page": 331
+   },
+   "matchScore": 2.533
   },
   {
    "id": "bank3-7-452",
@@ -7054,7 +9642,13 @@
    "a": {
     "en": "speak with tongues",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 219,
+    "page": 331
+   },
+   "matchScore": 2.914
   },
   {
    "id": "bank3-8-453",
@@ -7070,7 +9664,13 @@
    "a": {
     "en": "Christ; Christian; Holy Spirit",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 221,
+    "page": 332
+   },
+   "matchScore": 2.508
   },
   {
    "id": "bank3-9-454",
@@ -7086,7 +9686,13 @@
    "a": {
     "en": "laid hands on them",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 221,
+    "page": 332
+   },
+   "matchScore": 2.783
   },
   {
    "id": "bank3-10-455",
@@ -7102,7 +9708,13 @@
    "a": {
     "en": "spoke with tongues,and",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 221,
+    "page": 332
+   },
+   "matchScore": 1.671
   },
   {
    "id": "bank3-11-456",
@@ -7118,7 +9730,13 @@
    "a": {
     "en": "prophesied baptism",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 221,
+    "page": 332
+   },
+   "matchScore": 2.45
   },
   {
    "id": "bank3-12-457",
@@ -7134,7 +9752,13 @@
    "a": {
     "en": "initiated; dependent",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 222,
+    "page": 332
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-14-459",
@@ -7150,7 +9774,13 @@
    "a": {
     "en": "evidence",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 222,
+    "page": 332
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-15-460",
@@ -7166,7 +9796,13 @@
    "a": {
     "en": "all believers",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 208,
+    "page": 330
+   },
+   "matchScore": 2.575
   },
   {
    "id": "bank3-16-461",
@@ -7182,7 +9818,13 @@
    "a": {
     "en": "Peter",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 224,
+    "page": 332
+   },
+   "matchScore": 2.914
   },
   {
    "id": "bank3-17-462",
@@ -7198,7 +9840,13 @@
    "a": {
     "en": "extension",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 224,
+    "page": 332
+   },
+   "matchScore": 3.0
   },
   {
    "id": "bank3-18-463",
@@ -7214,7 +9862,9 @@
    "a": {
     "en": "universal",
     "nl": ""
-   }
+   },
+   "source": null,
+   "matchScore": 0.571
   },
   {
    "id": "bank3-19-464",
@@ -7230,7 +9880,13 @@
    "a": {
     "en": "Corinthians",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 225,
+    "page": 332
+   },
+   "matchScore": 2.825
   },
   {
    "id": "bank3-1-465",
@@ -7246,7 +9902,13 @@
    "a": {
     "en": "ordained",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 229,
+    "page": 333
+   },
+   "matchScore": 2.867
   },
   {
    "id": "bank3-2-466",
@@ -7262,7 +9924,13 @@
    "a": {
     "en": "church",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 229,
+    "page": 333
+   },
+   "matchScore": 3.0
   },
   {
    "id": "bank3-3-467",
@@ -7278,7 +9946,13 @@
    "a": {
     "en": "kingdom of God",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 229,
+    "page": 333
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-4-468",
@@ -7294,7 +9968,13 @@
    "a": {
     "en": "water; immersion",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 229,
+    "page": 333
+   },
+   "matchScore": 3.0
   },
   {
    "id": "bank3-5-469",
@@ -7310,7 +9990,13 @@
    "a": {
     "en": "regeneration",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 229,
+    "page": 333
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-6-470",
@@ -7326,7 +10012,13 @@
    "a": {
     "en": "Word; blood",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 230,
+    "page": 333
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-7-471",
@@ -7342,7 +10034,13 @@
    "a": {
     "en": "death; burial; and resurrection",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 234,
+    "page": 333
+   },
+   "matchScore": 2.533
   },
   {
    "id": "bank3-8-472",
@@ -7358,7 +10056,13 @@
    "a": {
     "en": "repentance; new life",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 231,
+    "page": 333
+   },
+   "matchScore": 2.6
   },
   {
    "id": "bank3-9-473",
@@ -7374,7 +10078,13 @@
    "a": {
     "en": "sign and seal",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 231,
+    "page": 333
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-10-474",
@@ -7390,7 +10100,13 @@
    "a": {
     "en": "obedience",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 229,
+    "page": 333
+   },
+   "matchScore": 2.7
   },
   {
    "id": "bank3-11-475",
@@ -7406,7 +10122,13 @@
    "a": {
     "en": "religious experience",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 234,
+    "page": 333
+   },
+   "matchScore": 2.95
   },
   {
    "id": "bank3-12-476",
@@ -7422,7 +10144,13 @@
    "a": {
     "en": "immersion",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 234,
+    "page": 333
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-13-477",
@@ -7438,7 +10166,13 @@
    "a": {
     "en": "resurrection",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 234,
+    "page": 333
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-14-478",
@@ -7454,7 +10188,13 @@
    "a": {
     "en": "agent",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 190,
+    "page": 328
+   },
+   "matchScore": 2.533
   },
   {
    "id": "bank3-15-479",
@@ -7470,7 +10210,13 @@
    "a": {
     "en": "testimony",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 236,
+    "page": 334
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-17-481",
@@ -7486,7 +10232,13 @@
    "a": {
     "en": "conscience",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 236,
+    "page": 334
+   },
+   "matchScore": 3.033
   },
   {
    "id": "bank3-18-482",
@@ -7502,7 +10254,13 @@
    "a": {
     "en": "body of Christ",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 237,
+    "page": 334
+   },
+   "matchScore": 2.95
   },
   {
    "id": "bank3-19-483",
@@ -7518,7 +10276,13 @@
    "a": {
     "en": "Father; Son; Holy Ghost",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 232,
+    "page": 333
+   },
+   "matchScore": 3.0
   },
   {
    "id": "bank3-20-484",
@@ -7534,7 +10298,13 @@
    "a": {
     "en": "Triune God",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 239,
+    "page": 334
+   },
+   "matchScore": 2.7
   },
   {
    "id": "bank3-1-485",
@@ -7550,7 +10320,13 @@
    "a": {
     "en": "body, soul, spirit",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 242,
+    "page": 334
+   },
+   "matchScore": 3.033
   },
   {
    "id": "bank3-2-486",
@@ -7566,7 +10342,13 @@
    "a": {
     "en": "sin; judicial",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 242,
+    "page": 334
+   },
+   "matchScore": 3.033
   },
   {
    "id": "bank3-3-487",
@@ -7582,7 +10364,13 @@
    "a": {
     "en": "moral; nature",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 244,
+    "page": 335
+   },
+   "matchScore": 3.033
   },
   {
    "id": "bank3-4-488",
@@ -7598,7 +10386,13 @@
    "a": {
     "en": "depravity; alienation",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 244,
+    "page": 335
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-5-489",
@@ -7614,7 +10408,13 @@
    "a": {
     "en": "corruption; death",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 244,
+    "page": 335
+   },
+   "matchScore": 3.0
   },
   {
    "id": "bank3-6-490",
@@ -7630,7 +10430,13 @@
    "a": {
     "en": "healing",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 245,
+    "page": 335
+   },
+   "matchScore": 3.033
   },
   {
    "id": "bank3-7-491",
@@ -7646,7 +10452,13 @@
    "a": {
     "en": "diseases",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 245,
+    "page": 335
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-8-492",
@@ -7662,7 +10474,13 @@
    "a": {
     "en": "Word",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 246,
+    "page": 335
+   },
+   "matchScore": 3.057
   },
   {
    "id": "bank3-9-493",
@@ -7678,7 +10496,13 @@
    "a": {
     "en": "forgiveness",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 247,
+    "page": 335
+   },
+   "matchScore": 2.8
   },
   {
    "id": "bank3-10-494",
@@ -7694,7 +10518,13 @@
    "a": {
     "en": "Isaiah 53:4, 5",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 248,
+    "page": 335
+   },
+   "matchScore": 2.914
   },
   {
    "id": "bank3-1-495",
@@ -7710,7 +10540,13 @@
    "a": {
     "en": "bread; fruit; vine",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 254,
+    "page": 336
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-2-496",
@@ -7726,7 +10562,13 @@
    "a": {
     "en": "body; Christ",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 255,
+    "page": 336
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-3-497",
@@ -7742,7 +10584,13 @@
    "a": {
     "en": "blood; Christ; new covenant",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 255,
+    "page": 336
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-4-498",
@@ -7758,7 +10606,13 @@
    "a": {
     "en": "faith",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 258,
+    "page": 336
+   },
+   "matchScore": 2.7
   },
   {
    "id": "bank3-5-499",
@@ -7774,7 +10628,13 @@
    "a": {
     "en": "memorial; return",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 256,
+    "page": 336
+   },
+   "matchScore": 2.8
   },
   {
    "id": "bank3-6-500",
@@ -7790,7 +10650,13 @@
    "a": {
     "en": "obedience; nurture",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 257,
+    "page": 336
+   },
+   "matchScore": 2.8
   },
   {
    "id": "bank3-7-501",
@@ -7806,7 +10672,13 @@
    "a": {
     "en": "union; Christ; purification; servanthood",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 259,
+    "page": 336
+   },
+   "matchScore": 3.109
   },
   {
    "id": "bank3-8-502",
@@ -7822,7 +10694,13 @@
    "a": {
     "en": "washing",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 230,
+    "page": 333
+   },
+   "matchScore": 3.0
   },
   {
    "id": "bank3-9-503",
@@ -7838,7 +10716,13 @@
    "a": {
     "en": "subjection",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 260,
+    "page": 336
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-10-504",
@@ -7854,7 +10738,13 @@
    "a": {
     "en": "purification; fellowship",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 260,
+    "page": 336
+   },
+   "matchScore": 2.7
   },
   {
    "id": "bank3-11-505",
@@ -7870,7 +10760,13 @@
    "a": {
     "en": "nourishment",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 261,
+    "page": 336
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-12-506",
@@ -7886,7 +10782,13 @@
    "a": {
     "en": "shedding",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 263,
+    "page": 337
+   },
+   "matchScore": 2.867
   },
   {
    "id": "bank3-13-507",
@@ -7902,7 +10804,13 @@
    "a": {
     "en": "new testament",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 262,
+    "page": 337
+   },
+   "matchScore": 2.95
   },
   {
    "id": "bank3-14-508",
@@ -7918,7 +10826,13 @@
    "a": {
     "en": "celebration",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 264,
+    "page": 337
+   },
+   "matchScore": 2.4
   },
   {
    "id": "bank3-15-509",
@@ -7934,7 +10848,13 @@
    "a": {
     "en": "example",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 265,
+    "page": 337
+   },
+   "matchScore": 2.95
   },
   {
    "id": "bank3-16-510",
@@ -7950,7 +10870,13 @@
    "a": {
     "en": "1 Timothy 5:10",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 266,
+    "page": 337
+   },
+   "matchScore": 2.629
   },
   {
    "id": "bank3-17-511",
@@ -7966,7 +10892,13 @@
    "a": {
     "en": "redemptive",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 267,
+    "page": 337
+   },
+   "matchScore": 2.6
   },
   {
    "id": "bank3-18-512",
@@ -7982,7 +10914,13 @@
    "a": {
     "en": "symbolical",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 294,
+    "page": 341
+   },
+   "matchScore": 2.2
   },
   {
    "id": "bank3-19-513",
@@ -7998,7 +10936,13 @@
    "a": {
     "en": "repetitive",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 269,
+    "page": 338
+   },
+   "matchScore": 3.057
   },
   {
    "id": "bank3-20-514",
@@ -8014,7 +10958,13 @@
    "a": {
     "en": "nourishment; return",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 269,
+    "page": 338
+   },
+   "matchScore": 2.644
   },
   {
    "id": "bank3-1-515",
@@ -8030,7 +10980,13 @@
    "a": {
     "en": "premillennial",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 277,
+    "page": 338
+   },
+   "matchScore": 2.486
   },
   {
    "id": "bank3-2-516",
@@ -8046,7 +11002,13 @@
    "a": {
     "en": "glorification",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 278,
+    "page": 338
+   },
+   "matchScore": 2.45
   },
   {
    "id": "bank3-3-517",
@@ -8062,7 +11024,13 @@
    "a": {
     "en": "literal; bodily",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 278,
+    "page": 338
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-4-518",
@@ -8078,7 +11046,13 @@
    "a": {
     "en": "personal, and physical",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 90,
+    "page": 319
+   },
+   "matchScore": 2.2
   },
   {
    "id": "bank3-5-519",
@@ -8094,7 +11068,13 @@
    "a": {
     "en": "redemptive",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 202,
+    "page": 330
+   },
+   "matchScore": 2.6
   },
   {
    "id": "bank3-6-520",
@@ -8110,7 +11090,13 @@
    "a": {
     "en": "glorification",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 286,
+    "page": 339
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-7-521",
@@ -8126,7 +11112,13 @@
    "a": {
     "en": "1 Thessalonians 4:16",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 288,
+    "page": 340
+   },
+   "matchScore": 2.7
   },
   {
    "id": "bank3-8-522",
@@ -8142,7 +11134,13 @@
    "a": {
     "en": "raised; caught up",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 278,
+    "page": 338
+   },
+   "matchScore": 2.343
   },
   {
    "id": "bank3-9-523",
@@ -8158,7 +11156,13 @@
    "a": {
     "en": "redemption",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 289,
+    "page": 340
+   },
+   "matchScore": 2.629
   },
   {
    "id": "bank3-10-524",
@@ -8174,7 +11178,13 @@
    "a": {
     "en": "incorruption, glory, and",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 289,
+    "page": 340
+   },
+   "matchScore": 2.7
   },
   {
    "id": "bank3-11-525",
@@ -8190,7 +11200,13 @@
    "a": {
     "en": "power; spiritual see Him",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 318,
+    "page": 344
+   },
+   "matchScore": 2.65
   },
   {
    "id": "bank3-12-526",
@@ -8206,7 +11222,13 @@
    "a": {
     "en": "earth",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 280,
+    "page": 339
+   },
+   "matchScore": 2.4
   },
   {
    "id": "bank3-13-527",
@@ -8222,7 +11244,13 @@
    "a": {
     "en": "resurrection",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 291,
+    "page": 340
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-15-529",
@@ -8238,7 +11266,13 @@
    "a": {
     "en": "amillennial",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 293,
+    "page": 340
+   },
+   "matchScore": 2.8
   },
   {
    "id": "bank3-16-530",
@@ -8254,7 +11288,9 @@
    "a": {
     "en": "Postmillennialism",
     "nl": ""
-   }
+   },
+   "source": null,
+   "matchScore": 0.7
   },
   {
    "id": "bank3-17-531",
@@ -8270,7 +11306,13 @@
    "a": {
     "en": "Son; Man; Son; David",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 77,
+    "page": 318
+   },
+   "matchScore": 1.842
   },
   {
    "id": "bank3-18-532",
@@ -8286,7 +11328,13 @@
    "a": {
     "en": "David",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 296,
+    "page": 341
+   },
+   "matchScore": 2.575
   },
   {
    "id": "bank3-19-533",
@@ -8302,7 +11350,13 @@
    "a": {
     "en": "Spirit; Lord",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 297,
+    "page": 341
+   },
+   "matchScore": 2.771
   },
   {
    "id": "bank3-20-534",
@@ -8318,7 +11372,13 @@
    "a": {
     "en": "bound; nations",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 298,
+    "page": 341
+   },
+   "matchScore": 2.756
   },
   {
    "id": "bank3-1-535",
@@ -8334,7 +11394,13 @@
    "a": {
     "en": "body; spirit",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 303,
+    "page": 342
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-2-536",
@@ -8350,7 +11416,13 @@
    "a": {
     "en": "Millennium",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 304,
+    "page": 342
+   },
+   "matchScore": 2.6
   },
   {
    "id": "bank3-3-537",
@@ -8366,7 +11438,13 @@
    "a": {
     "en": "body; spirit",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 304,
+    "page": 342
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-4-538",
@@ -8382,7 +11460,13 @@
    "a": {
     "en": "pledge",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 306,
+    "page": 342
+   },
+   "matchScore": 2.2
   },
   {
    "id": "bank3-5-539",
@@ -8398,7 +11482,13 @@
    "a": {
     "en": "Spirit",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 306,
+    "page": 342
+   },
+   "matchScore": 2.978
   },
   {
    "id": "bank3-6-540",
@@ -8414,7 +11504,13 @@
    "a": {
     "en": "redemption",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 160,
+    "page": 325
+   },
+   "matchScore": 2.8
   },
   {
    "id": "bank3-7-541",
@@ -8430,7 +11526,13 @@
    "a": {
     "en": "provide",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c2",
+    "block": 6,
+    "page": 347
+   },
+   "matchScore": 2.7
   },
   {
    "id": "bank3-8-542",
@@ -8446,7 +11548,13 @@
    "a": {
     "en": "death",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 310,
+    "page": 343
+   },
+   "matchScore": 2.867
   },
   {
    "id": "bank3-9-543",
@@ -8462,7 +11570,13 @@
    "a": {
     "en": "1 Corinthians 15:52;",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 311,
+    "page": 343
+   },
+   "matchScore": 2.644
   },
   {
    "id": "bank3-10-544",
@@ -8478,7 +11592,13 @@
    "a": {
     "en": "1 Thessalonians 4:16, 17 incorruption; immortality;",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 278,
+    "page": 338
+   },
+   "matchScore": 1.911
   },
   {
    "id": "bank3-11-545",
@@ -8494,7 +11614,13 @@
    "a": {
     "en": "death spirit-body",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 177,
+    "page": 327
+   },
+   "matchScore": 2.325
   },
   {
    "id": "bank3-12-546",
@@ -8510,7 +11636,13 @@
    "a": {
     "en": "earthly; heavenly",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 130,
+    "page": 322
+   },
+   "matchScore": 2.2
   },
   {
    "id": "bank3-14-548",
@@ -8526,7 +11658,13 @@
    "a": {
     "en": "He appears in glory",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 235,
+    "page": 334
+   },
+   "matchScore": 1.5
   },
   {
    "id": "bank3-15-549",
@@ -8542,7 +11680,13 @@
    "a": {
     "en": "vile; glorious",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 319,
+    "page": 344
+   },
+   "matchScore": 3.057
   },
   {
    "id": "bank3-16-550",
@@ -8558,7 +11702,13 @@
    "a": {
     "en": "damnation",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 321,
+    "page": 344
+   },
+   "matchScore": 2.6
   },
   {
    "id": "bank3-17-551",
@@ -8574,7 +11724,13 @@
    "a": {
     "en": "shame; contempt",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 321,
+    "page": 344
+   },
+   "matchScore": 2.95
   },
   {
    "id": "bank3-18-552",
@@ -8590,7 +11746,13 @@
    "a": {
     "en": "White Throne; works",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 322,
+    "page": 345
+   },
+   "matchScore": 2.978
   },
   {
    "id": "bank3-19-553",
@@ -8606,7 +11768,13 @@
    "a": {
     "en": "contrast",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 323,
+    "page": 345
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-20-554",
@@ -8622,7 +11790,13 @@
    "a": {
     "en": "death",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 292,
+    "page": 340
+   },
+   "matchScore": 2.7
   },
   {
    "id": "bank3-1-555",
@@ -8638,7 +11812,13 @@
    "a": {
     "en": "prayer; praise; worship; confession; fasting; meditation; study",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c2",
+    "block": 4,
+    "page": 347
+   },
+   "matchScore": 2.6
   },
   {
    "id": "bank3-2-556",
@@ -8654,7 +11834,13 @@
    "a": {
     "en": "dependence",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c2",
+    "block": 4,
+    "page": 347
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-3-557",
@@ -8670,7 +11856,13 @@
    "a": {
     "en": "submit",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c2",
+    "block": 4,
+    "page": 347
+   },
+   "matchScore": 3.138
   },
   {
    "id": "bank3-4-558",
@@ -8686,7 +11878,13 @@
    "a": {
     "en": "confession of our sins to God",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c2",
+    "block": 4,
+    "page": 347
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-5-559",
@@ -8702,7 +11900,13 @@
    "a": {
     "en": "instruct",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c2",
+    "block": 4,
+    "page": 347
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-6-560",
@@ -8718,7 +11922,13 @@
    "a": {
     "en": "regularly",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c2",
+    "block": 6,
+    "page": 347
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-7-561",
@@ -8734,7 +11944,13 @@
    "a": {
     "en": "resurrection",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c2",
+    "block": 6,
+    "page": 347
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-8-562",
@@ -8750,7 +11966,13 @@
    "a": {
     "en": "tithes",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c2",
+    "block": 6,
+    "page": 347
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-9-563",
@@ -8766,7 +11988,13 @@
    "a": {
     "en": "submit",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c2",
+    "block": 6,
+    "page": 347
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-10-564",
@@ -8782,7 +12010,13 @@
    "a": {
     "en": "allegiance",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c2",
+    "block": 6,
+    "page": 347
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-11-565",
@@ -8798,7 +12032,13 @@
    "a": {
     "en": "waste",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c2",
+    "block": 8,
+    "page": 348
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-12-566",
@@ -8814,7 +12054,13 @@
    "a": {
     "en": "time; talent; and money",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c2",
+    "block": 8,
+    "page": 348
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-13-567",
@@ -8830,7 +12076,13 @@
    "a": {
     "en": "recreation",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c2",
+    "block": 8,
+    "page": 348
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-14-568",
@@ -8846,7 +12098,13 @@
    "a": {
     "en": "renewal",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c2",
+    "block": 8,
+    "page": 348
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-15-569",
@@ -8862,7 +12120,13 @@
    "a": {
     "en": "honor",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c2",
+    "block": 8,
+    "page": 348
+   },
+   "matchScore": 2.867
   },
   {
    "id": "bank3-1-570",
@@ -8878,7 +12142,13 @@
    "a": {
     "en": "temple",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c2",
+    "block": 12,
+    "page": 348
+   },
+   "matchScore": 3.033
   },
   {
    "id": "bank3-2-571",
@@ -8894,7 +12164,13 @@
    "a": {
     "en": "fleshly behaviors",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c2",
+    "block": 12,
+    "page": 348
+   },
+   "matchScore": 1.475
   },
   {
    "id": "bank3-3-572",
@@ -8910,7 +12186,13 @@
    "a": {
     "en": "attitudes",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c2",
+    "block": 12,
+    "page": 348
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-4-573",
@@ -8926,7 +12208,13 @@
    "a": {
     "en": "communication",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c2",
+    "block": 12,
+    "page": 348
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-5-574",
@@ -8942,7 +12230,13 @@
    "a": {
     "en": "feel",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c2",
+    "block": 14,
+    "page": 348
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-6-575",
@@ -8958,7 +12252,13 @@
    "a": {
     "en": "challenge",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c2",
+    "block": 14,
+    "page": 348
+   },
+   "matchScore": 3.109
   },
   {
    "id": "bank3-7-576",
@@ -8974,7 +12274,13 @@
    "a": {
     "en": "demoralizing",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c2",
+    "block": 14,
+    "page": 348
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-8-577",
@@ -8990,7 +12296,13 @@
    "a": {
     "en": "individual; body",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c2",
+    "block": 16,
+    "page": 349
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-9-578",
@@ -9006,7 +12318,13 @@
    "a": {
     "en": "fleshly",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c2",
+    "block": 16,
+    "page": 349
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-10-579",
@@ -9022,7 +12340,13 @@
    "a": {
     "en": "testimony",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c2",
+    "block": 16,
+    "page": 349
+   },
+   "matchScore": 2.825
   },
   {
    "id": "bank3-1-580",
@@ -9038,7 +12362,13 @@
    "a": {
     "en": "trustworthy, dependable, and a person of his/her word",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c2",
+    "block": 20,
+    "page": 349
+   },
+   "matchScore": 1.65
   },
   {
    "id": "bank3-2-581",
@@ -9054,7 +12384,13 @@
    "a": {
     "en": "trustful",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c2",
+    "block": 22,
+    "page": 349
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-3-582",
@@ -9070,7 +12406,13 @@
    "a": {
     "en": "love",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c2",
+    "block": 24,
+    "page": 349
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-4-583",
@@ -9086,7 +12428,13 @@
    "a": {
     "en": "trustworthiness",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c2",
+    "block": 20,
+    "page": 349
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-5-584",
@@ -9102,7 +12450,13 @@
    "a": {
     "en": "example",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c2",
+    "block": 20,
+    "page": 349
+   },
+   "matchScore": 2.914
   },
   {
    "id": "bank3-6-585",
@@ -9118,7 +12472,13 @@
    "a": {
     "en": "Christ",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c2",
+    "block": 20,
+    "page": 349
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-7-586",
@@ -9134,7 +12494,13 @@
    "a": {
     "en": "attitudes and actions",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c2",
+    "block": 22,
+    "page": 349
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-8-587",
@@ -9150,7 +12516,13 @@
    "a": {
     "en": "flesh",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c2",
+    "block": 22,
+    "page": 349
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-9-588",
@@ -9166,7 +12538,13 @@
    "a": {
     "en": "Lord",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c2",
+    "block": 22,
+    "page": 349
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-10-589",
@@ -9182,7 +12560,13 @@
    "a": {
     "en": "judged",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c2",
+    "block": 22,
+    "page": 349
+   },
+   "matchScore": 2.867
   },
   {
    "id": "bank3-1-590",
@@ -9198,7 +12582,13 @@
    "a": {
     "en": "human relationship",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c2",
+    "block": 28,
+    "page": 350
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-2-591",
@@ -9214,7 +12604,13 @@
    "a": {
     "en": "foundational",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c2",
+    "block": 28,
+    "page": 350
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-3-592",
@@ -9230,7 +12626,13 @@
    "a": {
     "en": "home",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c2",
+    "block": 28,
+    "page": 350
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-4-593",
@@ -9246,7 +12648,13 @@
    "a": {
     "en": "devotions",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c2",
+    "block": 28,
+    "page": 350
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-5-594",
@@ -9262,7 +12670,13 @@
    "a": {
     "en": "Christian",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c2",
+    "block": 28,
+    "page": 350
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-6-595",
@@ -9278,7 +12692,13 @@
    "a": {
     "en": "God",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c2",
+    "block": 30,
+    "page": 350
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-7-596",
@@ -9294,7 +12714,13 @@
    "a": {
     "en": "spiritual",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c2",
+    "block": 30,
+    "page": 350
+   },
+   "matchScore": 2.6
   },
   {
    "id": "bank3-8-597",
@@ -9310,7 +12736,13 @@
    "a": {
     "en": "God",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c2",
+    "block": 30,
+    "page": 350
+   },
+   "matchScore": 3.057
   },
   {
    "id": "bank3-9-598",
@@ -9326,7 +12758,13 @@
    "a": {
     "en": "lifelong",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c2",
+    "block": 30,
+    "page": 350
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-10-599",
@@ -9342,7 +12780,13 @@
    "a": {
     "en": "strictly forbidden",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c2",
+    "block": 30,
+    "page": 350
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-11-600",
@@ -9358,7 +12802,13 @@
    "a": {
     "en": "counsel",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c2",
+    "block": 30,
+    "page": 350
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-12-601",
@@ -9374,7 +12824,13 @@
    "a": {
     "en": "family",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c2",
+    "block": 28,
+    "page": 350
+   },
+   "matchScore": 2.6
   },
   {
    "id": "bank3-13-602",
@@ -9390,7 +12846,9 @@
    "a": {
     "en": "marital",
     "nl": ""
-   }
+   },
+   "source": null,
+   "matchScore": 0.5
   },
   {
    "id": "bank3-14-603",
@@ -9406,7 +12864,13 @@
    "a": {
     "en": "personal",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 90,
+    "page": 319
+   },
+   "matchScore": 2.486
   },
   {
    "id": "bank3-1-604",
@@ -9422,7 +12886,13 @@
    "a": {
     "en": "self-control",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c2",
+    "block": 36,
+    "page": 351
+   },
+   "matchScore": 2.533
   },
   {
    "id": "bank3-2-605",
@@ -9438,7 +12908,13 @@
    "a": {
     "en": "moderation",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c2",
+    "block": 36,
+    "page": 351
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-3-606",
@@ -9454,7 +12930,13 @@
    "a": {
     "en": "thinking, anger, and communication",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c2",
+    "block": 36,
+    "page": 351
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-4-607",
@@ -9470,7 +12952,13 @@
    "a": {
     "en": "love",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c2",
+    "block": 38,
+    "page": 351
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-5-608",
@@ -9486,7 +12974,13 @@
    "a": {
     "en": "offense",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c2",
+    "block": 38,
+    "page": 351
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-6-609",
@@ -9502,7 +12996,13 @@
    "a": {
     "en": "outward behavior",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c2",
+    "block": 38,
+    "page": 351
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-7-610",
@@ -9518,7 +13018,13 @@
    "a": {
     "en": "tolerance",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c2",
+    "block": 38,
+    "page": 351
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-8-611",
@@ -9534,7 +13040,13 @@
    "a": {
     "en": "totally abstain",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c2",
+    "block": 40,
+    "page": 351
+   },
+   "matchScore": 2.978
   },
   {
    "id": "bank3-9-612",
@@ -9550,7 +13062,13 @@
    "a": {
     "en": "any; temple",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c2",
+    "block": 40,
+    "page": 351
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-10-613",
@@ -9566,7 +13084,13 @@
    "a": {
     "en": "spirit",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c2",
+    "block": 47,
+    "page": 352
+   },
+   "matchScore": 2.4
   },
   {
    "id": "bank3-1-614",
@@ -9582,7 +13106,13 @@
    "a": {
     "en": "an inner spiritual grace",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c2",
+    "block": 44,
+    "page": 351
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-2-615",
@@ -9598,7 +13128,13 @@
    "a": {
     "en": "anything",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c2",
+    "block": 44,
+    "page": 351
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-3-616",
@@ -9614,7 +13150,13 @@
    "a": {
     "en": "thought",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c2",
+    "block": 44,
+    "page": 351
+   },
+   "matchScore": 2.95
   },
   {
    "id": "bank3-4-617",
@@ -9630,7 +13172,13 @@
    "a": {
     "en": "Modesty",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c2",
+    "block": 45,
+    "page": 352
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-5-618",
@@ -9646,7 +13194,13 @@
    "a": {
     "en": "actions",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c2",
+    "block": 22,
+    "page": 349
+   },
+   "matchScore": 2.2
   },
   {
    "id": "bank3-6-619",
@@ -9662,7 +13216,13 @@
    "a": {
     "en": "well",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c2",
+    "block": 47,
+    "page": 352
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-7-620",
@@ -9678,7 +13238,13 @@
    "a": {
     "en": "spiritual",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c2",
+    "block": 47,
+    "page": 352
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-8-621",
@@ -9694,7 +13260,13 @@
    "a": {
     "en": "outward",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c2",
+    "block": 47,
+    "page": 352
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-9-622",
@@ -9710,7 +13282,13 @@
    "a": {
     "en": "godly",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c2",
+    "block": 49,
+    "page": 352
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-10-623",
@@ -9726,7 +13304,13 @@
    "a": {
     "en": "relationship with Christ",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c2",
+    "block": 49,
+    "page": 352
+   },
+   "matchScore": 3.057
   },
   {
    "id": "bank3-1-624",
@@ -9742,7 +13326,13 @@
    "a": {
     "en": "this world",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c2",
+    "block": 53,
+    "page": 352
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-2-625",
@@ -9758,7 +13348,13 @@
    "a": {
     "en": "support",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c2",
+    "block": 53,
+    "page": 352
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-3-626",
@@ -9774,7 +13370,13 @@
    "a": {
     "en": "God’s",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c2",
+    "block": 53,
+    "page": 352
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-4-627",
@@ -9790,7 +13392,13 @@
    "a": {
     "en": "laws",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c2",
+    "block": 53,
+    "page": 352
+   },
+   "matchScore": 3.057
   },
   {
    "id": "bank3-5-628",
@@ -9806,7 +13414,13 @@
    "a": {
     "en": "righteousness",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c2",
+    "block": 53,
+    "page": 352
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-6-629",
@@ -9822,7 +13436,13 @@
    "a": {
     "en": "sight of God",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c2",
+    "block": 55,
+    "page": 352
+   },
+   "matchScore": 3.109
   },
   {
    "id": "bank3-7-630",
@@ -9838,7 +13458,13 @@
    "a": {
     "en": "racial",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c2",
+    "block": 56,
+    "page": 353
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-8-631",
@@ -9854,7 +13480,13 @@
    "a": {
     "en": "worship; participate",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c2",
+    "block": 56,
+    "page": 353
+   },
+   "matchScore": 3.117
   },
   {
    "id": "bank3-9-632",
@@ -9870,7 +13502,13 @@
    "a": {
     "en": "God",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c2",
+    "block": 58,
+    "page": 353
+   },
+   "matchScore": 3.2
   },
   {
    "id": "bank3-10-633",
@@ -9886,7 +13524,13 @@
    "a": {
     "en": "lives",
     "nl": ""
-   }
+   },
+   "source": {
+    "chapter": "p3c2",
+    "block": 22,
+    "page": 349
+   },
+   "matchScore": 2.2
   }
  ]
 }

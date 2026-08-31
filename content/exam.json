@@ -5,7 +5,7 @@
    "part": "I",
    "n": 1,
    "prompt": {
-    "en": "The answer to the question, “Who Am I?” gives a person’s  .",
+    "en": "The answer to the question, “Who Am I?” gives a person’s _____.",
     "nl": ""
    },
    "choices": [
@@ -54,7 +54,7 @@
    "part": "I",
    "n": 2,
    "prompt": {
-    "en": "is a scripture that supports belief that believers are created in the image of God.",
+    "en": "_____ is a scripture that supports belief that believers are created in the image of God.",
     "nl": ""
    },
    "choices": [
@@ -103,7 +103,7 @@
    "part": "I",
    "n": 3,
    "prompt": {
-    "en": "An individual is created as  , emotional, and spiritual.",
+    "en": "An individual is created as _____, emotional, and spiritual.",
     "nl": ""
    },
    "choices": [
@@ -152,7 +152,7 @@
    "part": "I",
    "n": 4,
    "prompt": {
-    "en": "is a scripture that indicates to the believer the experience of justification.",
+    "en": "_____ is a scripture that indicates to the believer the experience of justification.",
     "nl": ""
    },
    "choices": [
@@ -201,7 +201,7 @@
    "part": "I",
    "n": 5,
    "prompt": {
-    "en": "is a Scripture that identifies the expression of redemption to the believer.",
+    "en": "_____ is a Scripture that identifies the expression of redemption to the believer.",
     "nl": ""
    },
    "choices": [
@@ -250,7 +250,7 @@
    "part": "I",
    "n": 6,
    "prompt": {
-    "en": "behavior is the will of God.",
+    "en": "_____ behavior is the will of God.",
     "nl": ""
    },
    "choices": [
@@ -299,7 +299,7 @@
    "part": "I",
    "n": 7,
    "prompt": {
-    "en": "Ministers must focus their faith on  .",
+    "en": "Ministers must focus their faith on _____.",
     "nl": ""
    },
    "choices": [
@@ -348,7 +348,7 @@
    "part": "I",
    "n": 8,
    "prompt": {
-    "en": "In order to be spiritual, a minister must understand the contrast between the   mind and the sinful mind.",
+    "en": "In order to be spiritual, a minister must understand the contrast between the _____ mind and the sinful mind.",
     "nl": ""
    },
    "choices": [
@@ -397,7 +397,7 @@
    "part": "I",
    "n": 9,
    "prompt": {
-    "en": "According to  , the sinful mind is hostile to God.",
+    "en": "According to _____, the sinful mind is hostile to God.",
     "nl": ""
    },
    "choices": [
@@ -446,7 +446,7 @@
    "part": "I",
    "n": 10,
    "prompt": {
-    "en": "In  , the spiritual mind is described as transformed.",
+    "en": "In _____, the spiritual mind is described as transformed.",
     "nl": ""
    },
    "choices": [
@@ -496,7 +496,7 @@
    "part": "I",
    "n": 11,
    "prompt": {
-    "en": "Jesus   people.",
+    "en": "Jesus _____ people.",
     "nl": ""
    },
    "choices": [
@@ -545,7 +545,7 @@
    "part": "I",
    "n": 12,
    "prompt": {
-    "en": "Ministry priority should build on the centrality of  .",
+    "en": "Ministry priority should build on the centrality of _____.",
     "nl": ""
    },
    "choices": [
@@ -594,7 +594,7 @@
    "part": "I",
    "n": 13,
    "prompt": {
-    "en": "The most important event in the life of the church each week is  .",
+    "en": "The most important event in the life of the church each week is _____.",
     "nl": ""
    },
    "choices": [
@@ -643,7 +643,7 @@
    "part": "I",
    "n": 14,
    "prompt": {
-    "en": "The early church model of worship was based on the   style.",
+    "en": "The early church model of worship was based on the _____ style.",
     "nl": ""
    },
    "choices": [
@@ -692,7 +692,7 @@
    "part": "I",
    "n": 15,
    "prompt": {
-    "en": "The purposes of worship are to exalt God, edify believers, and  .",
+    "en": "The purposes of worship are to exalt God, edify believers, and _____.",
     "nl": ""
    },
    "choices": [
@@ -741,7 +741,7 @@
    "part": "I",
    "n": 16,
    "prompt": {
-    "en": "A worship service should be designed to focus on  .",
+    "en": "A worship service should be designed to focus on _____.",
     "nl": ""
    },
    "choices": [
@@ -790,7 +790,7 @@
    "part": "I",
    "n": 17,
    "prompt": {
-    "en": "According to  , there should be public reading of Scripture.",
+    "en": "According to _____, there should be public reading of Scripture.",
     "nl": ""
    },
    "choices": [
@@ -839,7 +839,7 @@
    "part": "I",
    "n": 18,
    "prompt": {
-    "en": "represents Christ dwelling in the believer and the believer dwelling in Christ.",
+    "en": "_____ represents Christ dwelling in the believer and the believer dwelling in Christ.",
     "nl": ""
    },
    "choices": [
@@ -888,7 +888,7 @@
    "part": "I",
    "n": 19,
    "prompt": {
-    "en": "Communion focuses the believer on the   of Christ.",
+    "en": "Communion focuses the believer on the _____ of Christ.",
     "nl": ""
    },
    "choices": [
@@ -937,7 +937,7 @@
    "part": "I",
    "n": 20,
    "prompt": {
-    "en": "Christ is present in Communion  .",
+    "en": "Christ is present in Communion _____.",
     "nl": ""
    },
    "choices": [
@@ -986,7 +986,7 @@
    "part": "I",
    "n": 21,
    "prompt": {
-    "en": "The formula for baptism is found in  .",
+    "en": "The formula for baptism is found in _____.",
     "nl": ""
    },
    "choices": [
@@ -1035,7 +1035,7 @@
    "part": "I",
    "n": 22,
    "prompt": {
-    "en": "is a Biblical passage about footwashing.",
+    "en": "_____ is a Biblical passage about footwashing.",
     "nl": ""
    },
    "choices": [
@@ -1084,7 +1084,7 @@
    "part": "I",
    "n": 23,
    "prompt": {
-    "en": "The practice of dedicating children comes from the dedication of   and  .",
+    "en": "The practice of dedicating children comes from the dedication of _____ and _____.",
     "nl": ""
    },
    "choices": [
@@ -1133,7 +1133,7 @@
    "part": "I",
    "n": 24,
    "prompt": {
-    "en": "Dedicating children to God is an act of  .",
+    "en": "Dedicating children to God is an act of _____.",
     "nl": ""
    },
    "choices": [
@@ -1182,7 +1182,7 @@
    "part": "I",
    "n": 25,
    "prompt": {
-    "en": "Dedicating a child to God is a time to claim the   of God.",
+    "en": "Dedicating a child to God is a time to claim the _____ of God.",
     "nl": ""
    },
    "choices": [
@@ -1280,7 +1280,7 @@
    "part": "I",
    "n": 27,
    "prompt": {
-    "en": "The pastor’s role is that of a  .",
+    "en": "The pastor’s role is that of a _____.",
     "nl": ""
    },
    "choices": [
@@ -1329,7 +1329,7 @@
    "part": "I",
    "n": 28,
    "prompt": {
-    "en": "As ministers lead their congregations, they provide them with nurture and  .",
+    "en": "As ministers lead their congregations, they provide them with nurture and _____.",
     "nl": ""
    },
    "choices": [
@@ -1378,7 +1378,7 @@
    "part": "I",
    "n": 29,
    "prompt": {
-    "en": "The best ministerial description of a pastor might be found in  .",
+    "en": "The best ministerial description of a pastor might be found in _____.",
     "nl": ""
    },
    "choices": [
@@ -1427,7 +1427,7 @@
    "part": "I",
    "n": 30,
    "prompt": {
-    "en": "Ministers prepare the congregation   to face challenges.",
+    "en": "Ministers prepare the congregation _____ to face challenges.",
     "nl": ""
    },
    "choices": [
@@ -1525,7 +1525,7 @@
    "part": "I",
    "n": 32,
    "prompt": {
-    "en": "In ministering to the grieving family, a minister should focus on the   of God.",
+    "en": "In ministering to the grieving family, a minister should focus on the _____ of God.",
     "nl": ""
    },
    "choices": [
@@ -1574,7 +1574,7 @@
    "part": "I",
    "n": 33,
    "prompt": {
-    "en": "In the sermon at a funeral, the minister should   the means of eternal life.",
+    "en": "In the sermon at a funeral, the minister should _____ the means of eternal life.",
     "nl": ""
    },
    "choices": [
@@ -1623,7 +1623,7 @@
    "part": "I",
    "n": 34,
    "prompt": {
-    "en": "The goal of a funeral is to  .",
+    "en": "The goal of a funeral is to _____.",
     "nl": ""
    },
    "choices": [
@@ -1673,7 +1673,7 @@
    "part": "I",
    "n": 35,
    "prompt": {
-    "en": "Administration means to  .",
+    "en": "Administration means to _____.",
     "nl": ""
    },
    "choices": [
@@ -1722,7 +1722,7 @@
    "part": "I",
    "n": 36,
    "prompt": {
-    "en": "A vision of ministry consists of an objective, a purpose, and   for ministry.",
+    "en": "A vision of ministry consists of an objective, a purpose, and _____ for ministry.",
     "nl": ""
    },
    "choices": [
@@ -1771,7 +1771,7 @@
    "part": "I",
    "n": 37,
    "prompt": {
-    "en": "The purpose of vision is to provide a church with focus and a means to measure ministry .",
+    "en": "The purpose of vision is to provide a church with focus and a means to measure ministry.",
     "nl": ""
    },
    "choices": [
@@ -1820,7 +1820,7 @@
    "part": "I",
    "n": 38,
    "prompt": {
-    "en": "The Old Testament passage, , explains the necessity of a vision for a church.",
+    "en": "The Old Testament passage,, explains the necessity of a vision for a church.",
     "nl": ""
    },
    "choices": [
@@ -1869,7 +1869,7 @@
    "part": "I",
    "n": 39,
    "prompt": {
-    "en": "is a principle that should be used in writing a mission statement for ministry.",
+    "en": "_____ is a principle that should be used in writing a mission statement for ministry.",
     "nl": ""
    },
    "choices": [
@@ -1919,7 +1919,7 @@
    "part": "I",
    "n": 40,
    "prompt": {
-    "en": "Making a vision a reality includes  .",
+    "en": "Making a vision a reality includes _____.",
     "nl": ""
    },
    "choices": [
@@ -1968,7 +1968,7 @@
    "part": "I",
    "n": 41,
    "prompt": {
-    "en": "The church is a/an   that builds the body of Christ.",
+    "en": "The church is a/an _____ that builds the body of Christ.",
     "nl": ""
    },
    "choices": [
@@ -2017,7 +2017,7 @@
    "part": "I",
    "n": 42,
    "prompt": {
-    "en": "In  , Paul gives a description of the church as a body of many parts.",
+    "en": "In _____, Paul gives a description of the church as a body of many parts.",
     "nl": ""
    },
    "choices": [
@@ -2164,7 +2164,7 @@
    "part": "I",
    "n": 45,
    "prompt": {
-    "en": "is a spiritual discipline.",
+    "en": "_____ is a spiritual discipline.",
     "nl": ""
    },
    "choices": [
@@ -2213,7 +2213,7 @@
    "part": "I",
    "n": 46,
    "prompt": {
-    "en": "is a Bible passage that teaches about tithing.",
+    "en": "_____ is a Bible passage that teaches about tithing.",
     "nl": ""
    },
    "choices": [
@@ -2263,7 +2263,7 @@
    "part": "I",
    "n": 47,
    "prompt": {
-    "en": "The   should be composed of individuals whose gifts are in administration.",
+    "en": "The _____ should be composed of individuals whose gifts are in administration.",
     "nl": ""
    },
    "choices": [
@@ -2312,7 +2312,7 @@
    "part": "I",
    "n": 48,
    "prompt": {
-    "en": "Christ recognized people at the point of their  .",
+    "en": "Christ recognized people at the point of their _____.",
     "nl": ""
    },
    "choices": [
@@ -2361,7 +2361,7 @@
    "part": "I",
    "n": 49,
    "prompt": {
-    "en": "Christ related to people in spite of  .",
+    "en": "Christ related to people in spite of _____.",
     "nl": ""
    },
    "choices": [
@@ -2410,7 +2410,7 @@
    "part": "I",
    "n": 50,
    "prompt": {
-    "en": "is the central thrust of the local church.",
+    "en": "_____ is the central thrust of the local church.",
     "nl": ""
    },
    "choices": [
@@ -2459,7 +2459,7 @@
    "part": "II",
    "n": 1,
    "prompt": {
-    "en": "The Church of God began in the Appalachian Mountains of  .",
+    "en": "The Church of God began in the Appalachian Mountains of _____.",
     "nl": ""
    },
    "choices": [
@@ -2508,7 +2508,7 @@
    "part": "II",
    "n": 2,
    "prompt": {
-    "en": "The founders of the Church of God preached a solid   message.",
+    "en": "The founders of the Church of God preached a solid _____ message.",
     "nl": ""
    },
    "choices": [
@@ -2557,7 +2557,7 @@
    "part": "II",
    "n": 3,
    "prompt": {
-    "en": "The existence of false teachings in the early days of Pentecostalism made the leaders of the church understand the need for the development of  .",
+    "en": "The existence of false teachings in the early days of Pentecostalism made the leaders of the church understand the need for the development of _____.",
     "nl": ""
    },
    "choices": [
@@ -2606,7 +2606,7 @@
    "part": "II",
    "n": 4,
    "prompt": {
-    "en": "is the official history of the Church of God.",
+    "en": "_____ is the official history of the Church of God.",
     "nl": ""
    },
    "choices": [
@@ -2655,7 +2655,7 @@
    "part": "II",
    "n": 5,
    "prompt": {
-    "en": "The Church of God began in  .",
+    "en": "The Church of God began in _____.",
     "nl": ""
    },
    "choices": [
@@ -2704,7 +2704,7 @@
    "part": "II",
    "n": 6,
    "prompt": {
-    "en": "was a significant layman in the early days of the Church of God.",
+    "en": "_____ was a significant layman in the early days of the Church of God.",
     "nl": ""
    },
    "choices": [
@@ -2753,7 +2753,7 @@
    "part": "II",
    "n": 7,
    "prompt": {
-    "en": "The name, Church of God, was adopted in the   General Assembly.",
+    "en": "The name, Church of God, was adopted in the _____ General Assembly.",
     "nl": ""
    },
    "choices": [
@@ -2802,7 +2802,7 @@
    "part": "II",
    "n": 8,
    "prompt": {
-    "en": "At the second General Assembly, the Assembly instituted a new order of ministry— .",
+    "en": "At the second General Assembly, the Assembly instituted a new order of ministry—_____.",
     "nl": ""
    },
    "choices": [
@@ -2851,7 +2851,7 @@
    "part": "II",
    "n": 9,
    "prompt": {
-    "en": "The first general overseer of the Church of God was  .",
+    "en": "The first general overseer of the Church of God was _____.",
     "nl": ""
    },
    "choices": [
@@ -2900,7 +2900,7 @@
    "part": "II",
    "n": 10,
    "prompt": {
-    "en": "The Church of God Evangel was first published in  .",
+    "en": "The Church of God Evangel was first published in _____.",
     "nl": ""
    },
    "choices": [
@@ -2949,7 +2949,7 @@
    "part": "II",
    "n": 11,
    "prompt": {
-    "en": "In 1948, the   was adopted.",
+    "en": "In 1948, the _____ was adopted.",
     "nl": ""
    },
    "choices": [
@@ -2998,7 +2998,7 @@
    "part": "II",
    "n": 12,
    "prompt": {
-    "en": "In 1909, the General Assembly approved   to be licensed to preach.",
+    "en": "In 1909, the General Assembly approved _____ to be licensed to preach.",
     "nl": ""
    },
    "choices": [
@@ -3047,7 +3047,7 @@
    "part": "II",
    "n": 13,
    "prompt": {
-    "en": "The Church of God stands for the   rightly divided.",
+    "en": "The Church of God stands for the _____ rightly divided.",
     "nl": ""
    },
    "choices": [
@@ -3096,7 +3096,7 @@
    "part": "II",
    "n": 14,
    "prompt": {
-    "en": "The   remains the Church of God’s mandate from Christ.",
+    "en": "The _____ remains the Church of God’s mandate from Christ.",
     "nl": ""
    },
    "choices": [
@@ -3145,7 +3145,7 @@
    "part": "II",
    "n": 15,
    "prompt": {
-    "en": "The Church of God is a   body.",
+    "en": "The Church of God is a _____ body.",
     "nl": ""
    },
    "choices": [
@@ -3195,7 +3195,7 @@
    "part": "II",
    "n": 16,
    "prompt": {
-    "en": "The official name of the Church of God is  .",
+    "en": "The official name of the Church of God is _____.",
     "nl": ""
    },
    "choices": [
@@ -3245,7 +3245,7 @@
    "part": "II",
    "n": 17,
    "prompt": {
-    "en": "The International   is composed of all members and ministers of the Church of God 16 years of age and above.",
+    "en": "The International _____ is composed of all members and ministers of the Church of God 16 years of age and above.",
     "nl": ""
    },
    "choices": [
@@ -3294,7 +3294,7 @@
    "part": "II",
    "n": 18,
    "prompt": {
-    "en": "The International General Assembly meets  .",
+    "en": "The International General Assembly meets _____.",
     "nl": ""
    },
    "choices": [
@@ -3343,7 +3343,7 @@
    "part": "II",
    "n": 19,
    "prompt": {
-    "en": "The International   elects the Council of Eighteen.",
+    "en": "The International _____ elects the Council of Eighteen.",
     "nl": ""
    },
    "choices": [
@@ -3392,7 +3392,7 @@
    "part": "II",
    "n": 20,
    "prompt": {
-    "en": "The general overseer, his assistants, the secretary-general, and   constitute the Inter- national Executive Council.",
+    "en": "The general overseer, his assistants, the secretary-general, and _____ constitute the Inter- national Executive Council.",
     "nl": ""
    },
    "choices": [
@@ -3441,7 +3441,7 @@
    "part": "II",
    "n": 21,
    "prompt": {
-    "en": "Standing Boards are appointed by the  .",
+    "en": "Standing Boards are appointed by the _____.",
     "nl": ""
    },
    "choices": [
@@ -3490,7 +3490,7 @@
    "part": "II",
    "n": 22,
    "prompt": {
-    "en": "are approved to sit in the International General Council.",
+    "en": "_____ are approved to sit in the International General Council.",
     "nl": ""
    },
    "choices": [
@@ -3588,7 +3588,7 @@
    "part": "II",
    "n": 24,
    "prompt": {
-    "en": "The distribution of tithes sent to the International Offices is the responsibility of the .",
+    "en": "The distribution of tithes sent to the International Offices is the responsibility of the.",
     "nl": ""
    },
    "choices": [
@@ -3637,7 +3637,7 @@
    "part": "II",
    "n": 25,
    "prompt": {
-    "en": "State and provincial overseers are appointed by the  .",
+    "en": "State and provincial overseers are appointed by the _____.",
     "nl": ""
    },
    "choices": [
@@ -3686,7 +3686,7 @@
    "part": "II",
    "n": 26,
    "prompt": {
-    "en": "The   provides diverse involvement in order to support an international perspective in fulfilling the mission of the Church of God.",
+    "en": "The _____ provides diverse involvement in order to support an international perspective in fulfilling the mission of the Church of God.",
     "nl": ""
    },
    "choices": [
@@ -3735,7 +3735,7 @@
    "part": "II",
    "n": 27,
    "prompt": {
-    "en": "The tenure of office for the state overseer is for a maximum of   years in nonmission states.",
+    "en": "The tenure of office for the state overseer is for a maximum of _____ years in nonmission states.",
     "nl": ""
    },
    "choices": [
@@ -3784,7 +3784,7 @@
    "part": "II",
    "n": 28,
    "prompt": {
-    "en": "The state overseer appoints   when necessary.",
+    "en": "The state overseer appoints _____ when necessary.",
     "nl": ""
    },
    "choices": [
@@ -3833,7 +3833,7 @@
    "part": "II",
    "n": 29,
    "prompt": {
-    "en": "The state overseer approves the selection, purchase, and construction of all church, par- sonage, or Sunday school properties, together with the respective  .",
+    "en": "The state overseer approves the selection, purchase, and construction of all church, par- sonage, or Sunday school properties, together with the respective _____.",
     "nl": ""
    },
    "choices": [
@@ -3882,7 +3882,7 @@
    "part": "II",
    "n": 30,
    "prompt": {
-    "en": "Before launching large financial projects, the state overseer must have the approval of the .",
+    "en": "Before launching large financial projects, the state overseer must have the approval of the.",
     "nl": ""
    },
    "choices": [
@@ -3931,7 +3931,7 @@
    "part": "II",
    "n": 31,
    "prompt": {
-    "en": "The   is appointed biennially by the state overseer.",
+    "en": "The _____ is appointed biennially by the state overseer.",
     "nl": ""
    },
    "choices": [
@@ -4030,7 +4030,7 @@
    "part": "II",
    "n": 33,
    "prompt": {
-    "en": "Evangelistic organizations cannot be organized in the Church of God without the express approval of the  .",
+    "en": "Evangelistic organizations cannot be organized in the Church of God without the express approval of the _____.",
     "nl": ""
    },
    "choices": [
@@ -4079,7 +4079,7 @@
    "part": "II",
    "n": 34,
    "prompt": {
-    "en": "The Church of God has a   form of government.",
+    "en": "The Church of God has a _____ form of government.",
     "nl": ""
    },
    "choices": [
@@ -4128,7 +4128,7 @@
    "part": "II",
    "n": 35,
    "prompt": {
-    "en": "The  , the highest authority of the Church of God, governs the ownership of all church property.",
+    "en": "The _____, the highest authority of the Church of God, governs the ownership of all church property.",
     "nl": ""
    },
    "choices": [
@@ -4177,7 +4177,7 @@
    "part": "II",
    "n": 36,
    "prompt": {
-    "en": "A request for transfer of membership should be granted within  , providing no charges are pending.",
+    "en": "A request for transfer of membership should be granted within _____, providing no charges are pending.",
     "nl": ""
    },
    "choices": [
@@ -4226,7 +4226,7 @@
    "part": "II",
    "n": 37,
    "prompt": {
-    "en": "A   is a business meeting for the purpose of transacting any business necessary for the operations of the local church.",
+    "en": "A _____ is a business meeting for the purpose of transacting any business necessary for the operations of the local church.",
     "nl": ""
    },
    "choices": [
@@ -4275,7 +4275,7 @@
    "part": "II",
    "n": 38,
    "prompt": {
-    "en": "No church conference will be held in a district except under the direction of the  .",
+    "en": "No church conference will be held in a district except under the direction of the _____.",
     "nl": ""
    },
    "choices": [
@@ -4324,7 +4324,7 @@
    "part": "II",
    "n": 39,
    "prompt": {
-    "en": "The state and district overseers should see that at least   conference is conducted in each local church each year.",
+    "en": "The state and district overseers should see that at least _____ conference is conducted in each local church each year.",
     "nl": ""
    },
    "choices": [
@@ -4373,7 +4373,7 @@
    "part": "II",
    "n": 40,
    "prompt": {
-    "en": "The regular church conference consists of the  .",
+    "en": "The regular church conference consists of the _____.",
     "nl": ""
    },
    "choices": [
@@ -4422,7 +4422,7 @@
    "part": "II",
    "n": 41,
    "prompt": {
-    "en": "The purpose of a church conference is to inform the church of its  .",
+    "en": "The purpose of a church conference is to inform the church of its _____.",
     "nl": ""
    },
    "choices": [
@@ -4471,7 +4471,7 @@
    "part": "II",
    "n": 42,
    "prompt": {
-    "en": "Assistant pastors are subject to the approval and appointment of the  .",
+    "en": "Assistant pastors are subject to the approval and appointment of the _____.",
     "nl": ""
    },
    "choices": [
@@ -4520,7 +4520,7 @@
    "part": "II",
    "n": 43,
    "prompt": {
-    "en": "The   serves as chairperson of the Church and Pastor’s Council.",
+    "en": "The _____ serves as chairperson of the Church and Pastor’s Council.",
     "nl": ""
    },
    "choices": [
@@ -4569,7 +4569,7 @@
    "part": "II",
    "n": 44,
    "prompt": {
-    "en": "The Church and Pastor’s Council assists the pastor in the following aspects of the church: .",
+    "en": "The Church and Pastor’s Council assists the pastor in the following aspects of the church:_____.",
     "nl": ""
    },
    "choices": [
@@ -4619,7 +4619,7 @@
    "part": "II",
    "n": 45,
    "prompt": {
-    "en": "All major local church disbursements must be approved by the church in  .",
+    "en": "All major local church disbursements must be approved by the church in _____.",
     "nl": ""
    },
    "choices": [
@@ -4668,7 +4668,7 @@
    "part": "II",
    "n": 46,
    "prompt": {
-    "en": "The Finance Committee in a local church consists of the treasurer and   other mem- bers.",
+    "en": "The Finance Committee in a local church consists of the treasurer and _____ other mem- bers.",
     "nl": ""
    },
    "choices": [
@@ -4717,7 +4717,7 @@
    "part": "II",
    "n": 47,
    "prompt": {
-    "en": "A local church that owns property will appoint a   to oversee the property.",
+    "en": "A local church that owns property will appoint a _____ to oversee the property.",
     "nl": ""
    },
    "choices": [
@@ -4766,7 +4766,7 @@
    "part": "II",
    "n": 48,
    "prompt": {
-    "en": "In order to preserve the doctrinal integrity of the Church of God as part of the body of Christ, and to provide a biblical role model to our movement, it is imperative that all persons employed by the church in any capacity, or who serve as ministerial volunteers, agree to and abide by the  .",
+    "en": "In order to preserve the doctrinal integrity of the Church of God as part of the body of Christ, and to provide a biblical role model to our movement, it is imperative that all persons employed by the church in any capacity, or who serve as ministerial volunteers, agree to and abide by the _____.",
     "nl": ""
    },
    "choices": [
@@ -4815,7 +4815,7 @@
    "part": "II",
    "n": 49,
    "prompt": {
-    "en": "No church will implement a   without permission from the state overseer.",
+    "en": "No church will implement a _____ without permission from the state overseer.",
     "nl": ""
    },
    "choices": [
@@ -4864,7 +4864,7 @@
    "part": "II",
    "n": 50,
    "prompt": {
-    "en": "An applicant for ordination may be ordained when he is 25 years of age, provided he has had at least   year(s) of active ministry.",
+    "en": "An applicant for ordination may be ordained when he is 25 years of age, provided he has had at least _____ year(s) of active ministry.",
     "nl": ""
    },
    "choices": [
@@ -4913,7 +4913,7 @@
    "part": "III",
    "n": 1,
    "prompt": {
-    "en": "The word “inspiration” means  .",
+    "en": "The word “inspiration” means _____.",
     "nl": ""
    },
    "choices": [
@@ -4962,7 +4962,7 @@
    "part": "III",
    "n": 2,
    "prompt": {
-    "en": "The   is the single moral standard of the Bible.",
+    "en": "The _____ is the single moral standard of the Bible.",
     "nl": ""
    },
    "choices": [
@@ -5011,7 +5011,7 @@
    "part": "III",
    "n": 3,
    "prompt": {
-    "en": "The Bible is the only infallible rule of   and  .",
+    "en": "The Bible is the only infallible rule of _____ and _____.",
     "nl": ""
    },
    "choices": [
@@ -5060,7 +5060,7 @@
    "part": "III",
    "n": 4,
    "prompt": {
-    "en": "In the relationship of the persons of the Trinity to each other, they exist  .",
+    "en": "In the relationship of the persons of the Trinity to each other, they exist _____.",
     "nl": ""
    },
    "choices": [
@@ -5109,7 +5109,7 @@
    "part": "III",
    "n": 5,
    "prompt": {
-    "en": "In 1 Timothy 2:5, Paul argues that since there is only one God, there is only one  .",
+    "en": "In 1 Timothy 2:5, Paul argues that since there is only one God, there is only one _____.",
     "nl": ""
    },
    "choices": [
@@ -5214,7 +5214,7 @@
    "part": "III",
    "n": 7,
    "prompt": {
-    "en": "According to the Scriptures, Jesus is the Son of God  .",
+    "en": "According to the Scriptures, Jesus is the Son of God _____.",
     "nl": ""
    },
    "choices": [
@@ -5263,7 +5263,7 @@
    "part": "III",
    "n": 8,
    "prompt": {
-    "en": "The deity of Jesus Christ, the Son of God, is proven in Scripture by  .",
+    "en": "The deity of Jesus Christ, the Son of God, is proven in Scripture by _____.",
     "nl": ""
    },
    "choices": [
@@ -5319,7 +5319,7 @@
    "part": "III",
    "n": 9,
    "prompt": {
-    "en": "The redemptive office(s) of Jesus Christ is  .",
+    "en": "The redemptive office(s) of Jesus Christ is _____.",
     "nl": ""
    },
    "choices": [
@@ -5376,7 +5376,7 @@
    "part": "III",
    "n": 10,
    "prompt": {
-    "en": "Christ the Redeemer must be God and man in order to serve as  .",
+    "en": "Christ the Redeemer must be God and man in order to serve as _____.",
     "nl": ""
    },
    "choices": [
@@ -5523,7 +5523,7 @@
    "part": "III",
    "n": 13,
    "prompt": {
-    "en": "The crucifixion of Christ was necessary in order to satisfy divine  .",
+    "en": "The crucifixion of Christ was necessary in order to satisfy divine _____.",
     "nl": ""
    },
    "choices": [
@@ -5572,7 +5572,7 @@
    "part": "III",
    "n": 14,
    "prompt": {
-    "en": "By His  , Christ was lifted above all principalities and power and was exalted by the Father to the right hand of power.",
+    "en": "By His _____, Christ was lifted above all principalities and power and was exalted by the Father to the right hand of power.",
     "nl": ""
    },
    "choices": [
@@ -5621,7 +5621,7 @@
    "part": "III",
    "n": 15,
    "prompt": {
-    "en": "Repentance from sin is a benefit of  .",
+    "en": "Repentance from sin is a benefit of _____.",
     "nl": ""
    },
    "choices": [
@@ -5670,7 +5670,7 @@
    "part": "III",
    "n": 16,
    "prompt": {
-    "en": "It is a work of   to reprove the world of sin.",
+    "en": "It is a work of _____ to reprove the world of sin.",
     "nl": ""
    },
    "choices": [
@@ -5719,7 +5719,7 @@
    "part": "III",
    "n": 17,
    "prompt": {
-    "en": "As God’s gift, justification is an act of divine  .",
+    "en": "As God’s gift, justification is an act of divine _____.",
     "nl": ""
    },
    "choices": [
@@ -5768,7 +5768,7 @@
    "part": "III",
    "n": 18,
    "prompt": {
-    "en": "The image of God is restored in man by  .",
+    "en": "The image of God is restored in man by _____.",
     "nl": ""
    },
    "choices": [
@@ -5817,7 +5817,7 @@
    "part": "III",
    "n": 19,
    "prompt": {
-    "en": "The result of new birth is  .",
+    "en": "The result of new birth is _____.",
     "nl": ""
    },
    "choices": [
@@ -5866,7 +5866,7 @@
    "part": "III",
    "n": 20,
    "prompt": {
-    "en": "Sanctification is an act of faith by which the believer reckons himself to be  .",
+    "en": "Sanctification is an act of faith by which the believer reckons himself to be _____.",
     "nl": ""
    },
    "choices": [
@@ -5915,7 +5915,7 @@
    "part": "III",
    "n": 21,
    "prompt": {
-    "en": "The pursuit of   is the normal manner of life for the believer.",
+    "en": "The pursuit of _____ is the normal manner of life for the believer.",
     "nl": ""
    },
    "choices": [
@@ -5964,7 +5964,7 @@
    "part": "III",
    "n": 22,
    "prompt": {
-    "en": "In all instances in the Book of Acts in which people received the Holy Spirit, they were already in  .",
+    "en": "In all instances in the Book of Acts in which people received the Holy Spirit, they were already in _____.",
     "nl": ""
    },
    "choices": [
@@ -6013,7 +6013,7 @@
    "part": "III",
    "n": 23,
    "prompt": {
-    "en": "Speaking in tongues as the Holy Spirit gives the utterance is  .",
+    "en": "Speaking in tongues as the Holy Spirit gives the utterance is _____.",
     "nl": ""
    },
    "choices": [
@@ -6111,7 +6111,7 @@
    "part": "III",
    "n": 25,
    "prompt": {
-    "en": "The act of   represents the believer’s death, burial, and resurrection with Christ.",
+    "en": "The act of _____ represents the believer’s death, burial, and resurrection with Christ.",
     "nl": ""
    },
    "choices": [
@@ -6216,7 +6216,7 @@
    "part": "III",
    "n": 27,
    "prompt": {
-    "en": "Divine healing is associated with the going forth of  .",
+    "en": "Divine healing is associated with the going forth of _____.",
     "nl": ""
    },
    "choices": [
@@ -6265,7 +6265,7 @@
    "part": "III",
    "n": 28,
    "prompt": {
-    "en": "The Lord’s Supper provides for our frequent return to  .",
+    "en": "The Lord’s Supper provides for our frequent return to _____.",
     "nl": ""
    },
    "choices": [
@@ -6314,7 +6314,7 @@
    "part": "III",
    "n": 29,
    "prompt": {
-    "en": "The first purpose of Christ’s second advent is  .",
+    "en": "The first purpose of Christ’s second advent is _____.",
     "nl": ""
    },
    "choices": [
@@ -6363,7 +6363,7 @@
    "part": "III",
    "n": 30,
    "prompt": {
-    "en": "In ordaining the sacrament of the Lord’s Supper, Christ explained that the shedding of blood was for  .",
+    "en": "In ordaining the sacrament of the Lord’s Supper, Christ explained that the shedding of blood was for _____.",
     "nl": ""
    },
    "choices": [
@@ -6412,7 +6412,7 @@
    "part": "III",
    "n": 31,
    "prompt": {
-    "en": "By the term premillennial, we designate that  .",
+    "en": "By the term premillennial, we designate that _____.",
     "nl": ""
    },
    "choices": [
@@ -6461,7 +6461,7 @@
    "part": "III",
    "n": 32,
    "prompt": {
-    "en": "An example of spiritual discipline is  .",
+    "en": "An example of spiritual discipline is _____.",
     "nl": ""
    },
    "choices": [
@@ -6510,7 +6510,7 @@
    "part": "III",
    "n": 33,
    "prompt": {
-    "en": "Christians are to unite   with other members of the church.",
+    "en": "Christians are to unite _____ with other members of the church.",
     "nl": ""
    },
    "choices": [
@@ -6559,7 +6559,7 @@
    "part": "III",
    "n": 34,
    "prompt": {
-    "en": "The body is the   of the Holy Ghost, and we are to glorify God in our bodies.",
+    "en": "The body is the _____ of the Holy Ghost, and we are to glorify God in our bodies.",
     "nl": ""
    },
    "choices": [
@@ -6608,7 +6608,7 @@
    "part": "III",
    "n": 35,
    "prompt": {
-    "en": "The practice of Christian disciplines and virtues should begin in the  .",
+    "en": "The practice of Christian disciplines and virtues should begin in the _____.",
     "nl": ""
    },
    "choices": [
@@ -6706,7 +6706,7 @@
    "part": "III",
    "n": 37,
    "prompt": {
-    "en": "supports the verbal inspiration of the Bible.",
+    "en": "_____ supports the verbal inspiration of the Bible.",
     "nl": ""
    },
    "choices": [
@@ -6755,7 +6755,7 @@
    "part": "III",
    "n": 38,
    "prompt": {
-    "en": "reinforces that there is one God existing in three persons; namely, the Father, Son, and Holy Ghost.",
+    "en": "_____ reinforces that there is one God existing in three persons; namely, the Father, Son, and Holy Ghost.",
     "nl": ""
    },
    "choices": [
@@ -6804,7 +6804,7 @@
    "part": "III",
    "n": 39,
    "prompt": {
-    "en": "substantiates that Jesus Christ is the only begotten Son of the Father, conceived of the Holy Ghost, and born of the Virgin Mary. That Jesus was crucified, buried, and raised from the dead. That He ascended to heaven and is today at the right hand of the Father as the Intercessor.",
+    "en": "_____ substantiates that Jesus Christ is the only begotten Son of the Father, conceived of the Holy Ghost, and born of the Virgin Mary. That Jesus was crucified, buried, and raised from the dead. That He ascended to heaven and is today at the right hand of the Father as the Intercessor.",
     "nl": ""
    },
    "choices": [
@@ -6853,7 +6853,7 @@
    "part": "III",
    "n": 40,
    "prompt": {
-    "en": "sustains that all have sinned and come short of the glory of God and that repen- tance is commanded of God for all and necessary for forgiveness of sins.",
+    "en": "_____ sustains that all have sinned and come short of the glory of God and that repen- tance is commanded of God for all and necessary for forgiveness of sins.",
     "nl": ""
    },
    "choices": [
@@ -6902,7 +6902,7 @@
    "part": "III",
    "n": 41,
    "prompt": {
-    "en": "upholds that justification, regeneration, and the new birth are wrought by faith in the blood of Jesus Christ.",
+    "en": "_____ upholds that justification, regeneration, and the new birth are wrought by faith in the blood of Jesus Christ.",
     "nl": ""
    },
    "choices": [
@@ -6951,7 +6951,7 @@
    "part": "III",
    "n": 42,
    "prompt": {
-    "en": "establishes that sanctification is subsequent to the new birth, through faith in the blood of Christ; through the Word, and by the Holy Ghost.",
+    "en": "_____ establishes that sanctification is subsequent to the new birth, through faith in the blood of Christ; through the Word, and by the Holy Ghost.",
     "nl": ""
    },
    "choices": [
@@ -7000,7 +7000,7 @@
    "part": "III",
    "n": 43,
    "prompt": {
-    "en": "endorses holiness to be God’s standard of living for His people.",
+    "en": "_____ endorses holiness to be God’s standard of living for His people.",
     "nl": ""
    },
    "choices": [
@@ -7049,7 +7049,7 @@
    "part": "III",
    "n": 44,
    "prompt": {
-    "en": "verifies baptism with the Holy Ghost subsequent to a clean heart.",
+    "en": "_____ verifies baptism with the Holy Ghost subsequent to a clean heart.",
     "nl": ""
    },
    "choices": [
@@ -7098,7 +7098,7 @@
    "part": "III",
    "n": 45,
    "prompt": {
-    "en": "testifies about speaking with other tongues as the Spirit gives utterance and that it is the initial evidence of the baptism of the Holy Ghost.",
+    "en": "_____ testifies about speaking with other tongues as the Spirit gives utterance and that it is the initial evidence of the baptism of the Holy Ghost.",
     "nl": ""
    },
    "choices": [
@@ -7147,7 +7147,7 @@
    "part": "III",
    "n": 46,
    "prompt": {
-    "en": "validates water baptism by immersion, and all who repent should be baptized in the name of the Father, and of the Son, and of the Holy Ghost.",
+    "en": "_____ validates water baptism by immersion, and all who repent should be baptized in the name of the Father, and of the Son, and of the Holy Ghost.",
     "nl": ""
    },
    "choices": [
@@ -7196,7 +7196,7 @@
    "part": "III",
    "n": 47,
    "prompt": {
-    "en": "attests to divine healing being provided for all in the Atonement.",
+    "en": "_____ attests to divine healing being provided for all in the Atonement.",
     "nl": ""
    },
    "choices": [
@@ -7245,7 +7245,7 @@
    "part": "III",
    "n": 48,
    "prompt": {
-    "en": "documents the Lord’s Supper and washing of the saints’ feet.",
+    "en": "_____ documents the Lord’s Supper and washing of the saints’ feet.",
     "nl": ""
    },
    "choices": [
@@ -7294,7 +7294,7 @@
    "part": "III",
    "n": 49,
    "prompt": {
-    "en": "proves the premillennial second coming of Jesus. First, to resurrect the righteous dead and to catch away the living saints to Him in the air. Second, to reign on the earth a thousand years.",
+    "en": "_____ proves the premillennial second coming of Jesus. First, to resurrect the righteous dead and to catch away the living saints to Him in the air. Second, to reign on the earth a thousand years.",
     "nl": ""
    },
    "choices": [
@@ -7343,7 +7343,7 @@
    "part": "III",
    "n": 50,
    "prompt": {
-    "en": "demonstrates the bodily resurrection; eternal life for the righteous, and eternal punishment for the wicked.",
+    "en": "_____ demonstrates the bodily resurrection; eternal life for the righteous, and eternal punishment for the wicked.",
     "nl": ""
    },
    "choices": [
