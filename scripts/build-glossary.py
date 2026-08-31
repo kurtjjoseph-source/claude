@@ -14,6 +14,11 @@ from pathlib import Path
 
 course = json.load(open("content/course.en.json"))
 reviews = json.load(open("content/reviews.json"))["items"]
+# Dutch definitions come from the translated course text as it lands.
+try:
+    course_nl = json.load(open("content/course.nl.json"))
+except FileNotFoundError:
+    course_nl = {}
 
 TEXT = [c for c in course["chapters"] if c["kind"] == "text"]
 CHAPTER_TITLE = {c["id"]: c["title"] for c in course["chapters"]}
@@ -42,11 +47,18 @@ def is_term(s):
 
 # Split compound answers ("created; image of God") into their parts.
 raw_terms = defaultdict(list)                     # lowercase term -> review items
+dutch_for = {}                                    # lowercase English term -> Dutch term
 for r in reviews:
-    for part in re.split(r"[;]|\s+and\s+", r["a"]["en"]):
-        term = part.strip().strip(".,").strip()
-        if is_term(term):
-            raw_terms[term.lower()].append(r)
+    en_parts = [p.strip().strip(".,") for p in re.split(r"[;]|\s+and\s+", r["a"]["en"])]
+    nl_parts = [p.strip().strip(".,") for p in re.split(r"[;]|\s+en\s+", r["a"]["nl"] or "")]
+    for i, term in enumerate(en_parts):
+        if not is_term(term):
+            continue
+        raw_terms[term.lower()].append(r)
+        # Only pair up when the two languages split into the same shape;
+        # otherwise the pairing would be a guess.
+        if len(nl_parts) == len(en_parts) and i < len(nl_parts) and nl_parts[i]:
+            dutch_for.setdefault(term.lower(), nl_parts[i])
 
 # Index the teaching text once, for occurrences and definitions.
 blocks = [(c["id"], b["i"], b["p"], b["x"]) for c in TEXT for b in c["blocks"]]
@@ -84,10 +96,16 @@ for key, items in sorted(raw_terms.items()):
     sentences = re.split(r"(?<=[.!?])\s+", definition)
     best = max(sentences, key=lambda s: len(pattern.findall(s)) * 100 - abs(len(s) - 180),
                default=definition)
+    definition_nl = ""
+    if source:
+        definition_nl = course_nl.get(source["chapter"], {}).get(str(source["block"]), "")
+        if definition_nl:
+            sents = re.split(r"(?<=[.!?])\s+", definition_nl)
+            definition_nl = max(sents, key=lambda x: -abs(len(x) - 180), default=definition_nl).strip()
     glossary.append({
         "id": re.sub(r"[^a-z0-9]+", "-", key).strip("-"),
-        "term": {"en": display, "nl": ""},
-        "definition": {"en": best.strip(), "nl": ""},
+        "term": {"en": display, "nl": dutch_for.get(key, "")},
+        "definition": {"en": best.strip(), "nl": definition_nl},
         "questions": [i["id"] for i in items][:6],
         "occurrences": occurrences[:24],
         "module": CHAPTER_MODULE.get(occurrences[0]["chapter"], ""),
