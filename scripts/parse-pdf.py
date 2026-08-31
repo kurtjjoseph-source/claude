@@ -113,11 +113,22 @@ for pno, lines in enumerate(page_lines):
         while end < n and lines[end]["kind"] == kind:
             end += 1
         base = min(l["x0"] for l in lines[i:end])
+        # A numbered or lettered item is set with a hanging indent: the marker
+        # sits at the base and the rest of the item is indented under it. Such
+        # an item runs until the next line back at the base, rather than
+        # breaking at every indented line.
+        hanging = bool(NUM_RE.match(ln["text"]) or LETTER_RE.match(ln["text"])) \
+                  and abs(ln["x0"] - base) <= 2
         buf = [ln["text"]]
         j = i + 1
         while j < end:
             nx = lines[j]
-            if nx["x0"] > base + 8 or NUM_RE.match(nx["text"]) or LETTER_RE.match(nx["text"]):
+            indented = nx["x0"] > base + 8
+            opens_item = NUM_RE.match(nx["text"]) or LETTER_RE.match(nx["text"])
+            if hanging:
+                if not indented or opens_item:
+                    break                   # back at the base: a new item
+            elif indented or opens_item:
                 break                       # a new paragraph opens here
             buf.append(nx["text"])
             j += 1

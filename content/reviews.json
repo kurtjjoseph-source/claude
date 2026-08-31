@@ -149,7 +149,7 @@
    },
    "source": {
     "chapter": "p1c4",
-    "block": 133,
+    "block": 47,
     "page": 42
    },
    "matchScore": 2.6
@@ -193,7 +193,7 @@
    },
    "source": {
     "chapter": "p1c1",
-    "block": 45,
+    "block": 42,
     "page": 16
    },
    "matchScore": 3.2
@@ -215,7 +215,7 @@
    },
    "source": {
     "chapter": "p1c1",
-    "block": 52,
+    "block": 48,
     "page": 16
    },
    "matchScore": 3.2
@@ -237,7 +237,7 @@
    },
    "source": {
     "chapter": "p1c1",
-    "block": 57,
+    "block": 52,
     "page": 17
    },
    "matchScore": 3.2
@@ -259,7 +259,7 @@
    },
    "source": {
     "chapter": "p1c1",
-    "block": 127,
+    "block": 120,
     "page": 19
    },
    "matchScore": 3.2
@@ -281,7 +281,7 @@
    },
    "source": {
     "chapter": "p1c1",
-    "block": 134,
+    "block": 127,
     "page": 19
    },
    "matchScore": 3.2
@@ -303,7 +303,7 @@
    },
    "source": {
     "chapter": "p1c1",
-    "block": 138,
+    "block": 131,
     "page": 19
    },
    "matchScore": 3.2
@@ -390,11 +390,11 @@
     "nl": "Christus"
    },
    "source": {
-    "chapter": "p1c3",
-    "block": 9,
-    "page": 29
+    "chapter": "p1c2",
+    "block": 20,
+    "page": 22
    },
-   "matchScore": 2.867
+   "matchScore": 3.2
   },
   {
    "id": "bank1-4-18",
@@ -413,7 +413,7 @@
    },
    "source": {
     "chapter": "p1c2",
-    "block": 33,
+    "block": 23,
     "page": 22
    },
    "matchScore": 2.914
@@ -435,10 +435,10 @@
    },
    "source": {
     "chapter": "p1c2",
-    "block": 46,
+    "block": 24,
     "page": 23
    },
-   "matchScore": 2.95
+   "matchScore": 3.2
   },
   {
    "id": "bank1-6-20",
@@ -457,7 +457,7 @@
    },
    "source": {
     "chapter": "p1c2",
-    "block": 68,
+    "block": 25,
     "page": 23
    },
    "matchScore": 2.867
@@ -479,7 +479,7 @@
    },
    "source": {
     "chapter": "p1c2",
-    "block": 86,
+    "block": 43,
     "page": 24
    },
    "matchScore": 2.45
@@ -500,11 +500,11 @@
     "nl": "doel"
    },
    "source": {
-    "chapter": "p1c2",
-    "block": 83,
-    "page": 24
+    "chapter": "p1c3",
+    "block": 112,
+    "page": 35
    },
-   "matchScore": 2.367
+   "matchScore": 2.533
   },
   {
    "id": "bank1-9-23",
@@ -523,8 +523,8 @@
    },
    "source": {
     "chapter": "p1c3",
-    "block": 137,
-    "page": 34
+    "block": 70,
+    "page": 33
    },
    "matchScore": 2.8
   },
@@ -545,7 +545,7 @@
    },
    "source": {
     "chapter": "p1c2",
-    "block": 106,
+    "block": 63,
     "page": 25
    },
    "matchScore": 2.6
@@ -567,7 +567,7 @@
    },
    "source": {
     "chapter": "p1c2",
-    "block": 118,
+    "block": 72,
     "page": 26
    },
    "matchScore": 3.2
@@ -589,7 +589,7 @@
    },
    "source": {
     "chapter": "p1c2",
-    "block": 120,
+    "block": 74,
     "page": 26
    },
    "matchScore": 1.5
@@ -611,7 +611,7 @@
    },
    "source": {
     "chapter": "p1c2",
-    "block": 128,
+    "block": 77,
     "page": 26
    },
    "matchScore": 2.7
@@ -633,7 +633,7 @@
    },
    "source": {
     "chapter": "p1c2",
-    "block": 137,
+    "block": 81,
     "page": 26
    },
    "matchScore": 3.2
@@ -655,7 +655,7 @@
    },
    "source": {
     "chapter": "p1c1",
-    "block": 56,
+    "block": 51,
     "page": 17
    },
    "matchScore": 2.2
@@ -809,10 +809,10 @@
    },
    "source": {
     "chapter": "p1c3",
-    "block": 34,
+    "block": 30,
     "page": 31
    },
-   "matchScore": 1.867
+   "matchScore": 3.0
   },
   {
    "id": "bank1-8-37",
@@ -831,10 +831,10 @@
    },
    "source": {
     "chapter": "p1c3",
-    "block": 16,
-    "page": 30
+    "block": 34,
+    "page": 32
    },
-   "matchScore": 2.7
+   "matchScore": 3.2
   },
   {
    "id": "bank1-9-38",
@@ -853,7 +853,7 @@
    },
    "source": {
     "chapter": "p1c3",
-    "block": 51,
+    "block": 35,
     "page": 32
    },
    "matchScore": 3.2
@@ -875,10 +875,10 @@
    },
    "source": {
     "chapter": "p1c3",
-    "block": 60,
+    "block": 36,
     "page": 32
    },
-   "matchScore": 2.771
+   "matchScore": 3.057
   },
   {
    "id": "bank1-11-40",
@@ -897,7 +897,7 @@
    },
    "source": {
     "chapter": "p1c3",
-    "block": 114,
+    "block": 76,
     "page": 34
    },
    "matchScore": 2.8
@@ -941,7 +941,7 @@
    },
    "source": {
     "chapter": "p1c3",
-    "block": 140,
+    "block": 100,
     "page": 35
    },
    "matchScore": 3.033
@@ -963,7 +963,7 @@
    },
    "source": {
     "chapter": "p1c3",
-    "block": 148,
+    "block": 108,
     "page": 35
    },
    "matchScore": 3.2
@@ -985,7 +985,7 @@
    },
    "source": {
     "chapter": "p1c3",
-    "block": 150,
+    "block": 110,
     "page": 35
    },
    "matchScore": 2.3
@@ -1117,10 +1117,10 @@
    },
    "source": {
     "chapter": "p1c4",
-    "block": 8,
-    "page": 37
+    "block": 17,
+    "page": 38
    },
-   "matchScore": 2.7
+   "matchScore": 2.95
   },
   {
    "id": "bank1-7-51",
@@ -1139,7 +1139,7 @@
    },
    "source": {
     "chapter": "p1c4",
-    "block": 25,
+    "block": 16,
     "page": 38
    },
    "matchScore": 2.7
@@ -1161,10 +1161,10 @@
    },
    "source": {
     "chapter": "p1c4",
-    "block": 31,
+    "block": 17,
     "page": 38
    },
-   "matchScore": 1.7
+   "matchScore": 2.1
   },
   {
    "id": "bank1-9-53",
@@ -1183,7 +1183,7 @@
    },
    "source": {
     "chapter": "p1c4",
-    "block": 44,
+    "block": 18,
     "page": 38
    },
    "matchScore": 2.533
@@ -1205,7 +1205,7 @@
    },
    "source": {
     "chapter": "p1c4",
-    "block": 48,
+    "block": 22,
     "page": 39
    },
    "matchScore": 3.2
@@ -1227,10 +1227,10 @@
    },
    "source": {
     "chapter": "p1c4",
-    "block": 59,
+    "block": 23,
     "page": 39
    },
-   "matchScore": 2.867
+   "matchScore": 3.2
   },
   {
    "id": "bank1-12-56",
@@ -1249,7 +1249,7 @@
    },
    "source": {
     "chapter": "p1c4",
-    "block": 65,
+    "block": 24,
     "page": 39
    },
    "matchScore": 3.2
@@ -1271,7 +1271,7 @@
    },
    "source": {
     "chapter": "p1c4",
-    "block": 92,
+    "block": 34,
     "page": 40
    },
    "matchScore": 3.2
@@ -1315,7 +1315,7 @@
    },
    "source": {
     "chapter": "p1c4",
-    "block": 120,
+    "block": 42,
     "page": 42
    },
    "matchScore": 2.7
@@ -1337,7 +1337,7 @@
    },
    "source": {
     "chapter": "p1c4",
-    "block": 129,
+    "block": 43,
     "page": 42
    },
    "matchScore": 3.2
@@ -1377,7 +1377,7 @@
    },
    "source": {
     "chapter": "p1c4",
-    "block": 136,
+    "block": 50,
     "page": 43
    },
    "matchScore": 3.2
@@ -1399,10 +1399,10 @@
    },
    "source": {
     "chapter": "p1c4",
-    "block": 105,
+    "block": 39,
     "page": 41
    },
-   "matchScore": 2.45
+   "matchScore": 2.7
   },
   {
    "id": "bank1-20-64",
@@ -1421,7 +1421,7 @@
    },
    "source": {
     "chapter": "p1c4",
-    "block": 25,
+    "block": 16,
     "page": 38
    },
    "matchScore": 1.0
@@ -1486,11 +1486,11 @@
     "nl": "verplichten"
    },
    "source": {
-    "chapter": "p1c4",
-    "block": 5,
-    "page": 37
+    "chapter": "p1c5",
+    "block": 17,
+    "page": 46
    },
-   "matchScore": 2.486
+   "matchScore": 2.771
   },
   {
    "id": "bank1-4-68",
@@ -1509,10 +1509,10 @@
    },
    "source": {
     "chapter": "p1c5",
-    "block": 18,
+    "block": 13,
     "page": 46
    },
-   "matchScore": 2.8
+   "matchScore": 3.0
   },
   {
    "id": "bank1-5-69",
@@ -1530,11 +1530,11 @@
     "nl": "het doel"
    },
    "source": {
-    "chapter": "p1c3",
-    "block": 14,
-    "page": 30
+    "chapter": "p1c5",
+    "block": 19,
+    "page": 47
    },
-   "matchScore": 2.367
+   "matchScore": 2.7
   },
   {
    "id": "bank1-6-70",
@@ -1553,7 +1553,7 @@
    },
    "source": {
     "chapter": "p1c5",
-    "block": 54,
+    "block": 26,
     "page": 47
    },
    "matchScore": 2.867
@@ -1575,7 +1575,7 @@
    },
    "source": {
     "chapter": "p1c5",
-    "block": 54,
+    "block": 26,
     "page": 47
    },
    "matchScore": 2.771
@@ -1597,7 +1597,7 @@
    },
    "source": {
     "chapter": "p1c5",
-    "block": 58,
+    "block": 30,
     "page": 48
    },
    "matchScore": 3.057
@@ -1729,7 +1729,7 @@
    },
    "source": {
     "chapter": "p1c6",
-    "block": 16,
+    "block": 13,
     "page": 52
    },
    "matchScore": 2.867
@@ -1751,7 +1751,7 @@
    },
    "source": {
     "chapter": "p1c6",
-    "block": 23,
+    "block": 19,
     "page": 52
    },
    "matchScore": 1.6
@@ -1773,7 +1773,7 @@
    },
    "source": {
     "chapter": "p1c6",
-    "block": 22,
+    "block": 18,
     "page": 52
    },
    "matchScore": 2.867
@@ -1795,7 +1795,7 @@
    },
    "source": {
     "chapter": "p1c6",
-    "block": 23,
+    "block": 19,
     "page": 52
    },
    "matchScore": 3.2
@@ -1817,7 +1817,7 @@
    },
    "source": {
     "chapter": "p1c6",
-    "block": 63,
+    "block": 39,
     "page": 54
    },
    "matchScore": 1.717
@@ -1993,7 +1993,7 @@
    },
    "source": {
     "chapter": "p1c7",
-    "block": 33,
+    "block": 32,
     "page": 59
    },
    "matchScore": 2.629
@@ -2037,10 +2037,10 @@
    },
    "source": {
     "chapter": "p1c7",
-    "block": 45,
+    "block": 32,
     "page": 59
    },
-   "matchScore": 2.7
+   "matchScore": 2.867
   },
   {
    "id": "bank1-11-93",
@@ -2077,7 +2077,7 @@
    },
    "source": {
     "chapter": "p1c7",
-    "block": 195,
+    "block": 172,
     "page": 67
    },
    "matchScore": 1.243
@@ -2099,7 +2099,7 @@
    },
    "source": {
     "chapter": "p1c7",
-    "block": 117,
+    "block": 98,
     "page": 61
    },
    "matchScore": 2.95
@@ -2121,7 +2121,7 @@
    },
    "source": {
     "chapter": "p1c7",
-    "block": 117,
+    "block": 98,
     "page": 61
    },
    "matchScore": 3.075
@@ -2143,7 +2143,7 @@
    },
    "source": {
     "chapter": "p1c7",
-    "block": 120,
+    "block": 101,
     "page": 62
    },
    "matchScore": 3.2
@@ -2165,7 +2165,7 @@
    },
    "source": {
     "chapter": "p1c7",
-    "block": 121,
+    "block": 102,
     "page": 62
    },
    "matchScore": 3.2
@@ -2187,7 +2187,7 @@
    },
    "source": {
     "chapter": "p1c7",
-    "block": 129,
+    "block": 110,
     "page": 63
    },
    "matchScore": 3.2
@@ -2209,7 +2209,7 @@
    },
    "source": {
     "chapter": "p1c7",
-    "block": 131,
+    "block": 112,
     "page": 63
    },
    "matchScore": 3.2
@@ -2231,7 +2231,7 @@
    },
    "source": {
     "chapter": "p1c7",
-    "block": 133,
+    "block": 114,
     "page": 63
    },
    "matchScore": 3.2
@@ -2253,7 +2253,7 @@
    },
    "source": {
     "chapter": "p1c1",
-    "block": 46,
+    "block": 43,
     "page": 16
    },
    "matchScore": 2.7
@@ -2275,7 +2275,7 @@
    },
    "source": {
     "chapter": "p1c7",
-    "block": 164,
+    "block": 145,
     "page": 64
    },
    "matchScore": 3.2
@@ -2297,7 +2297,7 @@
    },
    "source": {
     "chapter": "p1c7",
-    "block": 182,
+    "block": 163,
     "page": 66
    },
    "matchScore": 2.4
@@ -2319,7 +2319,7 @@
    },
    "source": {
     "chapter": "p1c7",
-    "block": 203,
+    "block": 180,
     "page": 68
    },
    "matchScore": 1.48
@@ -2341,7 +2341,7 @@
    },
    "source": {
     "chapter": "p1c7",
-    "block": 199,
+    "block": 176,
     "page": 68
    },
    "matchScore": 3.2
@@ -2363,7 +2363,7 @@
    },
    "source": {
     "chapter": "p1c7",
-    "block": 211,
+    "block": 188,
     "page": 69
    },
    "matchScore": 2.6
@@ -2385,7 +2385,7 @@
    },
    "source": {
     "chapter": "p1c7",
-    "block": 212,
+    "block": 189,
     "page": 69
    },
    "matchScore": 3.2
@@ -2407,7 +2407,7 @@
    },
    "source": {
     "chapter": "p1c7",
-    "block": 213,
+    "block": 190,
     "page": 69
    },
    "matchScore": 3.2
@@ -2429,7 +2429,7 @@
    },
    "source": {
     "chapter": "p1c7",
-    "block": 217,
+    "block": 194,
     "page": 70
    },
    "matchScore": 3.2
@@ -2451,7 +2451,7 @@
    },
    "source": {
     "chapter": "p1c7",
-    "block": 220,
+    "block": 197,
     "page": 70
    },
    "matchScore": 2.95
@@ -2472,11 +2472,11 @@
     "nl": "open"
    },
    "source": {
-    "chapter": "p1c4",
-    "block": 65,
-    "page": 39
+    "chapter": "p1c7",
+    "block": 202,
+    "page": 70
    },
-   "matchScore": 2.533
+   "matchScore": 3.2
   },
   {
    "id": "bank1-31-113",
@@ -2495,7 +2495,7 @@
    },
    "source": {
     "chapter": "p1c7",
-    "block": 347,
+    "block": 276,
     "page": 75
    },
    "matchScore": 3.2
@@ -2517,7 +2517,7 @@
    },
    "source": {
     "chapter": "p1c7",
-    "block": 286,
+    "block": 245,
     "page": 72
    },
    "matchScore": 3.2
@@ -2539,7 +2539,7 @@
    },
    "source": {
     "chapter": "p1c7",
-    "block": 293,
+    "block": 251,
     "page": 73
    },
    "matchScore": 2.7
@@ -2561,10 +2561,10 @@
    },
    "source": {
     "chapter": "p1c7",
-    "block": 297,
+    "block": 254,
     "page": 73
    },
-   "matchScore": 2.2
+   "matchScore": 2.7
   },
   {
    "id": "bank1-35-117",
@@ -2583,7 +2583,7 @@
    },
    "source": {
     "chapter": "p1c7",
-    "block": 311,
+    "block": 256,
     "page": 73
    },
    "matchScore": 2.7
@@ -2605,7 +2605,7 @@
    },
    "source": {
     "chapter": "p1c7",
-    "block": 312,
+    "block": 257,
     "page": 74
    },
    "matchScore": 3.2
@@ -2627,8 +2627,8 @@
    },
    "source": {
     "chapter": "p1c3",
-    "block": 137,
-    "page": 34
+    "block": 35,
+    "page": 32
    },
    "matchScore": 2.2
   },
@@ -2649,7 +2649,7 @@
    },
    "source": {
     "chapter": "p1c7",
-    "block": 347,
+    "block": 276,
     "page": 75
    },
    "matchScore": 3.2
@@ -2671,7 +2671,7 @@
    },
    "source": {
     "chapter": "p1c7",
-    "block": 347,
+    "block": 276,
     "page": 75
    },
    "matchScore": 2.1
@@ -2693,7 +2693,7 @@
    },
    "source": {
     "chapter": "p1c7",
-    "block": 348,
+    "block": 277,
     "page": 75
    },
    "matchScore": 3.2
@@ -3327,7 +3327,7 @@
    },
    "source": {
     "chapter": "p2c7",
-    "block": 84,
+    "block": 79,
     "page": 152
    },
    "matchScore": 3.2
@@ -3349,7 +3349,7 @@
    },
    "source": {
     "chapter": "p2c7",
-    "block": 84,
+    "block": 79,
     "page": 152
    },
    "matchScore": 3.2
@@ -3371,7 +3371,7 @@
    },
    "source": {
     "chapter": "p2c7",
-    "block": 373,
+    "block": 338,
     "page": 165
    },
    "matchScore": 3.0
@@ -3393,7 +3393,7 @@
    },
    "source": {
     "chapter": "p2c7",
-    "block": 394,
+    "block": 350,
     "page": 166
    },
    "matchScore": 3.2
@@ -3415,7 +3415,7 @@
    },
    "source": {
     "chapter": "p2c7",
-    "block": 472,
+    "block": 428,
     "page": 169
    },
    "matchScore": 2.431
@@ -3437,7 +3437,7 @@
    },
    "source": {
     "chapter": "p2c7",
-    "block": 183,
+    "block": 159,
     "page": 154
    },
    "matchScore": 2.4
@@ -3481,7 +3481,7 @@
    },
    "source": {
     "chapter": "p2c3",
-    "block": 70,
+    "block": 64,
     "page": 118
    },
    "matchScore": 2.867
@@ -3503,7 +3503,7 @@
    },
    "source": {
     "chapter": "p2c3",
-    "block": 27,
+    "block": 21,
     "page": 115
    },
    "matchScore": 2.7
@@ -3525,7 +3525,7 @@
    },
    "source": {
     "chapter": "p2c8",
-    "block": 137,
+    "block": 124,
     "page": 187
    },
    "matchScore": 3.2
@@ -3547,7 +3547,7 @@
    },
    "source": {
     "chapter": "p2c11",
-    "block": 124,
+    "block": 64,
     "page": 265
    },
    "matchScore": 3.2
@@ -3569,7 +3569,7 @@
    },
    "source": {
     "chapter": "p2c3",
-    "block": 58,
+    "block": 52,
     "page": 117
    },
    "matchScore": 3.2
@@ -3635,7 +3635,7 @@
    },
    "source": {
     "chapter": "p2c8",
-    "block": 162,
+    "block": 149,
     "page": 188
    },
    "matchScore": 3.057
@@ -3679,7 +3679,7 @@
    },
    "source": {
     "chapter": "p2c3",
-    "block": 63,
+    "block": 57,
     "page": 117
    },
    "matchScore": 3.2
@@ -3701,7 +3701,7 @@
    },
    "source": {
     "chapter": "p2c3",
-    "block": 61,
+    "block": 55,
     "page": 117
    },
    "matchScore": 3.0
@@ -3723,7 +3723,7 @@
    },
    "source": {
     "chapter": "p2c8",
-    "block": 199,
+    "block": 169,
     "page": 189
    },
    "matchScore": 3.2
@@ -3745,10 +3745,10 @@
    },
    "source": {
     "chapter": "p2c8",
-    "block": 223,
-    "page": 190
+    "block": 258,
+    "page": 194
    },
-   "matchScore": 3.075
+   "matchScore": 3.2
   },
   {
    "id": "bank2-22-172",
@@ -3767,7 +3767,7 @@
    },
    "source": {
     "chapter": "p2c8",
-    "block": 235,
+    "block": 193,
     "page": 191
    },
    "matchScore": 3.2
@@ -3789,7 +3789,7 @@
    },
    "source": {
     "chapter": "p2c3",
-    "block": 25,
+    "block": 19,
     "page": 114
    },
    "matchScore": 3.2
@@ -3832,11 +3832,11 @@
     "nl": "tweejaarlijks"
    },
    "source": {
-    "chapter": "p2c4",
-    "block": 4,
-    "page": 119
+    "chapter": "p2c8",
+    "block": 237,
+    "page": 193
    },
-   "matchScore": 2.825
+   "matchScore": 2.95
   },
   {
    "id": "bank2-26-176",
@@ -3854,11 +3854,11 @@
     "nl": "de Internationale Uitvoerende Raad"
    },
    "source": {
-    "chapter": "p2c3",
-    "block": 54,
-    "page": 116
+    "chapter": "p2c8",
+    "block": 213,
+    "page": 192
    },
-   "matchScore": 2.6
+   "matchScore": 3.0
   },
   {
    "id": "bank2-27-177",
@@ -3875,8 +3875,12 @@
     "en": "one",
     "nl": "één"
    },
-   "source": null,
-   "matchScore": 0.857
+   "source": {
+    "chapter": "p2c8",
+    "block": 262,
+    "page": 195
+   },
+   "matchScore": 1.0
   },
   {
    "id": "bank2-28-178",
@@ -3894,11 +3898,11 @@
     "nl": "de algemeen opziener en de Internationale Uitvoerende Raad"
    },
    "source": {
-    "chapter": "p2c4",
-    "block": 28,
-    "page": 120
+    "chapter": "p2c8",
+    "block": 273,
+    "page": 196
    },
-   "matchScore": 2.533
+   "matchScore": 3.033
   },
   {
    "id": "bank2-29-179",
@@ -3917,7 +3921,7 @@
    },
    "source": {
     "chapter": "p2c5",
-    "block": 75,
+    "block": 67,
     "page": 129
    },
    "matchScore": 3.033
@@ -3938,7 +3942,7 @@
     "nl": "twee"
    },
    "source": null,
-   "matchScore": 0.692
+   "matchScore": 0.846
   },
   {
    "id": "bank2-32-182",
@@ -3957,7 +3961,7 @@
    },
    "source": {
     "chapter": "p2c8",
-    "block": 532,
+    "block": 380,
     "page": 201
    },
    "matchScore": 3.2
@@ -3979,10 +3983,10 @@
    },
    "source": {
     "chapter": "p2c8",
-    "block": 565,
+    "block": 403,
     "page": 202
    },
-   "matchScore": 2.771
+   "matchScore": 3.2
   },
   {
    "id": "bank2-35-185",
@@ -4001,7 +4005,7 @@
    },
    "source": {
     "chapter": "p2c5",
-    "block": 92,
+    "block": 84,
     "page": 130
    },
    "matchScore": 2.575
@@ -4023,10 +4027,10 @@
    },
    "source": {
     "chapter": "p2c8",
-    "block": 693,
-    "page": 207
+    "block": 520,
+    "page": 208
    },
-   "matchScore": 2.45
+   "matchScore": 2.7
   },
   {
    "id": "bank2-37-187",
@@ -4045,7 +4049,7 @@
    },
    "source": {
     "chapter": "p2c8",
-    "block": 612,
+    "block": 433,
     "page": 204
    },
    "matchScore": 2.564
@@ -4089,7 +4093,7 @@
    },
    "source": {
     "chapter": "p2c3",
-    "block": 61,
+    "block": 55,
     "page": 117
    },
    "matchScore": 2.7
@@ -4133,10 +4137,10 @@
    },
    "source": {
     "chapter": "p2c9",
-    "block": 136,
-    "page": 224
+    "block": 75,
+    "page": 226
    },
-   "matchScore": 2.486
+   "matchScore": 3.057
   },
   {
    "id": "bank2-42-192",
@@ -4155,10 +4159,10 @@
    },
    "source": {
     "chapter": "p2c9",
-    "block": 241,
-    "page": 228
+    "block": 76,
+    "page": 226
    },
-   "matchScore": 2.791
+   "matchScore": 3.2
   },
   {
    "id": "bank2-43-193",
@@ -4199,10 +4203,10 @@
    },
    "source": {
     "chapter": "p2c9",
-    "block": 430,
+    "block": 222,
     "page": 234
    },
-   "matchScore": 2.771
+   "matchScore": 3.2
   },
   {
    "id": "bank2-45-195",
@@ -4220,11 +4224,11 @@
     "nl": "één man en één vrouw"
    },
    "source": {
-    "chapter": "p2c7",
-    "block": 244,
-    "page": 158
+    "chapter": "p2c9",
+    "block": 218,
+    "page": 233
    },
-   "matchScore": 2.508
+   "matchScore": 2.969
   },
   {
    "id": "bank2-46-196",
@@ -4243,7 +4247,7 @@
    },
    "source": {
     "chapter": "p2c7",
-    "block": 361,
+    "block": 326,
     "page": 165
    },
    "matchScore": 2.722
@@ -4265,7 +4269,7 @@
    },
    "source": {
     "chapter": "p2c5",
-    "block": 119,
+    "block": 104,
     "page": 132
    },
    "matchScore": 2.325
@@ -4287,7 +4291,7 @@
    },
    "source": {
     "chapter": "p2c10",
-    "block": 48,
+    "block": 25,
     "page": 248
    },
    "matchScore": 3.2
@@ -4309,7 +4313,7 @@
    },
    "source": {
     "chapter": "p2c8",
-    "block": 647,
+    "block": 458,
     "page": 205
    },
    "matchScore": 2.644
@@ -4352,11 +4356,11 @@
     "nl": "districtsopziener"
    },
    "source": {
-    "chapter": "p2c5",
-    "block": 100,
-    "page": 131
+    "chapter": "p2c10",
+    "block": 226,
+    "page": 257
    },
-   "matchScore": 2.431
+   "matchScore": 2.815
   },
   {
    "id": "bank2-52-202",
@@ -4375,7 +4379,7 @@
    },
    "source": {
     "chapter": "p2c11",
-    "block": 139,
+    "block": 73,
     "page": 266
    },
    "matchScore": 2.533
@@ -4397,7 +4401,7 @@
    },
    "source": {
     "chapter": "p2c10",
-    "block": 124,
+    "block": 82,
     "page": 250
    },
    "matchScore": 3.075
@@ -4419,7 +4423,7 @@
    },
    "source": {
     "chapter": "p2c5",
-    "block": 43,
+    "block": 36,
     "page": 127
    },
    "matchScore": 2.467
@@ -4441,7 +4445,7 @@
    },
    "source": {
     "chapter": "p2c5",
-    "block": 89,
+    "block": 81,
     "page": 130
    },
    "matchScore": 2.54
@@ -4463,7 +4467,7 @@
    },
    "source": {
     "chapter": "p2c5",
-    "block": 92,
+    "block": 84,
     "page": 130
    },
    "matchScore": 2.45
@@ -4484,11 +4488,11 @@
     "nl": "Staatsraad"
    },
    "source": {
-    "chapter": "p2c2",
-    "block": 126,
-    "page": 108
+    "chapter": "p2c10",
+    "block": 132,
+    "page": 252
    },
-   "matchScore": 2.771
+   "matchScore": 2.914
   },
   {
    "id": "bank2-59-209",
@@ -4529,7 +4533,7 @@
    },
    "source": {
     "chapter": "p2c5",
-    "block": 89,
+    "block": 81,
     "page": 130
    },
    "matchScore": 2.867
@@ -4551,7 +4555,7 @@
    },
    "source": {
     "chapter": "p2c10",
-    "block": 238,
+    "block": 159,
     "page": 254
    },
    "matchScore": 3.2
@@ -4573,10 +4577,10 @@
    },
    "source": {
     "chapter": "p2c10",
-    "block": 245,
+    "block": 159,
     "page": 254
    },
-   "matchScore": 3.0
+   "matchScore": 3.2
   },
   {
    "id": "bank2-64-214",
@@ -4595,7 +4599,7 @@
    },
    "source": {
     "chapter": "p2c5",
-    "block": 89,
+    "block": 81,
     "page": 130
    },
    "matchScore": 2.564
@@ -4617,7 +4621,7 @@
    },
    "source": {
     "chapter": "p2c10",
-    "block": 285,
+    "block": 190,
     "page": 255
    },
    "matchScore": 3.117
@@ -4639,7 +4643,7 @@
    },
    "source": {
     "chapter": "p2c10",
-    "block": 198,
+    "block": 132,
     "page": 252
    },
    "matchScore": 2.914
@@ -4661,7 +4665,7 @@
    },
    "source": {
     "chapter": "p2c10",
-    "block": 322,
+    "block": 219,
     "page": 257
    },
    "matchScore": 3.2
@@ -4683,7 +4687,7 @@
    },
    "source": {
     "chapter": "p2c10",
-    "block": 327,
+    "block": 223,
     "page": 257
    },
    "matchScore": 2.914
@@ -4705,7 +4709,7 @@
    },
    "source": {
     "chapter": "p2c10",
-    "block": 337,
+    "block": 230,
     "page": 257
    },
    "matchScore": 3.2
@@ -4771,8 +4775,8 @@
    },
    "source": {
     "chapter": "p2c11",
-    "block": 401,
-    "page": 276
+    "block": 4,
+    "page": 261
    },
    "matchScore": 3.2
   },
@@ -4793,10 +4797,10 @@
    },
    "source": {
     "chapter": "p2c11",
-    "block": 22,
+    "block": 6,
     "page": 261
    },
-   "matchScore": 2.95
+   "matchScore": 3.2
   },
   {
    "id": "bank2-74-224",
@@ -4815,10 +4819,10 @@
    },
    "source": {
     "chapter": "p2c11",
-    "block": 455,
-    "page": 279
+    "block": 9,
+    "page": 261
    },
-   "matchScore": 2.655
+   "matchScore": 2.927
   },
   {
    "id": "bank2-75-225",
@@ -4836,11 +4840,11 @@
     "nl": "oudsten en diakenen"
    },
    "source": {
-    "chapter": "p2c11",
-    "block": 75,
-    "page": 263
+    "chapter": "p2c7",
+    "block": 513,
+    "page": 172
    },
-   "matchScore": 2.6
+   "matchScore": 2.8
   },
   {
    "id": "bank2-76-226",
@@ -4859,10 +4863,10 @@
    },
    "source": {
     "chapter": "p2c11",
-    "block": 116,
+    "block": 60,
     "page": 265
    },
-   "matchScore": 2.95
+   "matchScore": 3.2
   },
   {
    "id": "bank2-77-227",
@@ -4881,10 +4885,10 @@
    },
    "source": {
     "chapter": "p2c11",
-    "block": 118,
+    "block": 61,
     "page": 265
    },
-   "matchScore": 2.45
+   "matchScore": 2.825
   },
   {
    "id": "bank2-79-229",
@@ -4903,7 +4907,7 @@
    },
    "source": {
     "chapter": "p2c11",
-    "block": 147,
+    "block": 81,
     "page": 267
    },
    "matchScore": 3.057
@@ -4925,10 +4929,10 @@
    },
    "source": {
     "chapter": "p2c11",
-    "block": 149,
+    "block": 83,
     "page": 267
    },
-   "matchScore": 3.075
+   "matchScore": 3.2
   },
   {
    "id": "bank2-81-231",
@@ -4946,11 +4950,11 @@
     "nl": "districtsopziener"
    },
    "source": {
-    "chapter": "p2c10",
-    "block": 322,
-    "page": 257
+    "chapter": "p2c11",
+    "block": 84,
+    "page": 267
    },
-   "matchScore": 2.533
+   "matchScore": 3.2
   },
   {
    "id": "bank2-82-232",
@@ -4967,8 +4971,12 @@
     "en": "one",
     "nl": "één"
    },
-   "source": null,
-   "matchScore": 0.667
+   "source": {
+    "chapter": "p2c11",
+    "block": 88,
+    "page": 267
+   },
+   "matchScore": 1.0
   },
   {
    "id": "bank2-83-233",
@@ -4987,7 +4995,7 @@
    },
    "source": {
     "chapter": "p2c11",
-    "block": 165,
+    "block": 91,
     "page": 267
    },
    "matchScore": 2.867
@@ -5009,7 +5017,7 @@
    },
    "source": {
     "chapter": "p2c11",
-    "block": 166,
+    "block": 91,
     "page": 267
    },
    "matchScore": 3.2
@@ -5031,7 +5039,7 @@
    },
    "source": {
     "chapter": "p2c11",
-    "block": 167,
+    "block": 92,
     "page": 268
    },
    "matchScore": 3.057
@@ -5053,10 +5061,10 @@
    },
    "source": {
     "chapter": "p2c11",
-    "block": 165,
-    "page": 267
+    "block": 94,
+    "page": 268
    },
-   "matchScore": 2.343
+   "matchScore": 2.914
   },
   {
    "id": "bank2-87-237",
@@ -5075,10 +5083,10 @@
    },
    "source": {
     "chapter": "p2c11",
-    "block": 166,
+    "block": 91,
     "page": 267
    },
-   "matchScore": 1.077
+   "matchScore": 1.246
   },
   {
    "id": "bank2-88-238",
@@ -5097,7 +5105,7 @@
    },
    "source": {
     "chapter": "p2c5",
-    "block": 119,
+    "block": 104,
     "page": 132
    },
    "matchScore": 2.7
@@ -5119,7 +5127,7 @@
    },
    "source": {
     "chapter": "p2c11",
-    "block": 204,
+    "block": 118,
     "page": 269
    },
    "matchScore": 3.2
@@ -5141,7 +5149,7 @@
    },
    "source": {
     "chapter": "p2c11",
-    "block": 206,
+    "block": 120,
     "page": 269
    },
    "matchScore": 2.9
@@ -5163,7 +5171,7 @@
    },
    "source": {
     "chapter": "p2c11",
-    "block": 137,
+    "block": 71,
     "page": 266
    },
    "matchScore": 3.0
@@ -5185,7 +5193,7 @@
    },
    "source": {
     "chapter": "p2c5",
-    "block": 125,
+    "block": 110,
     "page": 133
    },
    "matchScore": 3.0
@@ -5207,7 +5215,7 @@
    },
    "source": {
     "chapter": "p2c5",
-    "block": 125,
+    "block": 110,
     "page": 133
    },
    "matchScore": 3.2
@@ -5229,7 +5237,7 @@
    },
    "source": {
     "chapter": "p2c11",
-    "block": 230,
+    "block": 139,
     "page": 270
    },
    "matchScore": 3.057
@@ -5251,7 +5259,7 @@
    },
    "source": {
     "chapter": "p2c5",
-    "block": 134,
+    "block": 118,
     "page": 134
    },
    "matchScore": 2.133
@@ -5273,7 +5281,7 @@
    },
    "source": {
     "chapter": "p2c11",
-    "block": 247,
+    "block": 153,
     "page": 271
    },
    "matchScore": 3.0
@@ -5294,11 +5302,11 @@
     "nl": "voorganger"
    },
    "source": {
-    "chapter": "p2c5",
-    "block": 160,
-    "page": 135
+    "chapter": "p2c11",
+    "block": 159,
+    "page": 271
    },
-   "matchScore": 3.033
+   "matchScore": 3.2
   },
   {
    "id": "bank2-99-249",
@@ -5317,7 +5325,7 @@
    },
    "source": {
     "chapter": "p2c5",
-    "block": 163,
+    "block": 146,
     "page": 136
    },
    "matchScore": 2.95
@@ -5357,7 +5365,7 @@
    },
    "source": {
     "chapter": "p2c11",
-    "block": 473,
+    "block": 308,
     "page": 280
    },
    "matchScore": 3.2
@@ -5379,7 +5387,7 @@
    },
    "source": {
     "chapter": "p2c11",
-    "block": 522,
+    "block": 341,
     "page": 282
    },
    "matchScore": 3.123
@@ -5401,7 +5409,7 @@
    },
    "source": {
     "chapter": "p2c11",
-    "block": 554,
+    "block": 373,
     "page": 284
    },
    "matchScore": 3.033
@@ -5423,7 +5431,7 @@
    },
    "source": {
     "chapter": "p2c11",
-    "block": 297,
+    "block": 194,
     "page": 272
    },
    "matchScore": 3.2
@@ -5445,7 +5453,7 @@
    },
    "source": {
     "chapter": "p2c11",
-    "block": 297,
+    "block": 194,
     "page": 272
    },
    "matchScore": 3.2
@@ -6321,7 +6329,7 @@
    },
    "source": {
     "chapter": "p3c1",
-    "block": 318,
+    "block": 319,
     "page": 344
    },
    "matchScore": 2.95
@@ -7897,7 +7905,7 @@
    },
    "source": {
     "chapter": "p3c1",
-    "block": 306,
+    "block": 307,
     "page": 342
    },
    "matchScore": 2.629
@@ -9231,7 +9239,7 @@
    },
    "source": {
     "chapter": "p3c1",
-    "block": 290,
+    "block": 291,
     "page": 340
    },
    "matchScore": 2.533
@@ -11031,7 +11039,7 @@
    },
    "source": {
     "chapter": "p3c1",
-    "block": 266,
+    "block": 267,
     "page": 337
    },
    "matchScore": 2.629
@@ -11053,7 +11061,7 @@
    },
    "source": {
     "chapter": "p3c1",
-    "block": 267,
+    "block": 268,
     "page": 337
    },
    "matchScore": 2.6
@@ -11075,7 +11083,7 @@
    },
    "source": {
     "chapter": "p3c1",
-    "block": 294,
+    "block": 295,
     "page": 341
    },
    "matchScore": 2.2
@@ -11097,7 +11105,7 @@
    },
    "source": {
     "chapter": "p3c1",
-    "block": 269,
+    "block": 270,
     "page": 338
    },
    "matchScore": 3.057
@@ -11119,7 +11127,7 @@
    },
    "source": {
     "chapter": "p3c1",
-    "block": 269,
+    "block": 270,
     "page": 338
    },
    "matchScore": 2.644
@@ -11141,7 +11149,7 @@
    },
    "source": {
     "chapter": "p3c1",
-    "block": 276,
+    "block": 277,
     "page": 338
    },
    "matchScore": 2.486
@@ -11163,7 +11171,7 @@
    },
    "source": {
     "chapter": "p3c1",
-    "block": 277,
+    "block": 278,
     "page": 338
    },
    "matchScore": 2.7
@@ -11185,7 +11193,7 @@
    },
    "source": {
     "chapter": "p3c1",
-    "block": 278,
+    "block": 279,
     "page": 338
    },
    "matchScore": 3.2
@@ -11207,7 +11215,7 @@
    },
    "source": {
     "chapter": "p3c1",
-    "block": 278,
+    "block": 279,
     "page": 338
    },
    "matchScore": 3.2
@@ -11229,7 +11237,7 @@
    },
    "source": {
     "chapter": "p3c1",
-    "block": 279,
+    "block": 280,
     "page": 338
    },
    "matchScore": 3.0
@@ -11251,7 +11259,7 @@
    },
    "source": {
     "chapter": "p3c1",
-    "block": 286,
+    "block": 287,
     "page": 339
    },
    "matchScore": 3.2
@@ -11273,7 +11281,7 @@
    },
    "source": {
     "chapter": "p3c1",
-    "block": 286,
+    "block": 287,
     "page": 339
    },
    "matchScore": 2.867
@@ -11295,7 +11303,7 @@
    },
    "source": {
     "chapter": "p3c1",
-    "block": 288,
+    "block": 289,
     "page": 340
    },
    "matchScore": 2.914
@@ -11317,7 +11325,7 @@
    },
    "source": {
     "chapter": "p3c1",
-    "block": 320,
+    "block": 321,
     "page": 344
    },
    "matchScore": 2.771
@@ -11339,7 +11347,7 @@
    },
    "source": {
     "chapter": "p3c1",
-    "block": 289,
+    "block": 290,
     "page": 340
    },
    "matchScore": 2.7
@@ -11361,7 +11369,7 @@
    },
    "source": {
     "chapter": "p3c1",
-    "block": 289,
+    "block": 290,
     "page": 340
    },
    "matchScore": 2.7
@@ -11383,7 +11391,7 @@
    },
    "source": {
     "chapter": "p3c1",
-    "block": 319,
+    "block": 320,
     "page": 344
    },
    "matchScore": 2.6
@@ -11405,7 +11413,7 @@
    },
    "source": {
     "chapter": "p3c1",
-    "block": 291,
+    "block": 292,
     "page": 340
    },
    "matchScore": 3.2
@@ -11427,7 +11435,7 @@
    },
    "source": {
     "chapter": "p3c1",
-    "block": 291,
+    "block": 292,
     "page": 340
    },
    "matchScore": 2.644
@@ -11449,7 +11457,7 @@
    },
    "source": {
     "chapter": "p3c1",
-    "block": 293,
+    "block": 294,
     "page": 340
    },
    "matchScore": 2.8
@@ -11511,7 +11519,7 @@
    },
    "source": {
     "chapter": "p3c1",
-    "block": 296,
+    "block": 297,
     "page": 341
    },
    "matchScore": 2.575
@@ -11533,7 +11541,7 @@
    },
    "source": {
     "chapter": "p3c1",
-    "block": 297,
+    "block": 298,
     "page": 341
    },
    "matchScore": 2.771
@@ -11555,7 +11563,7 @@
    },
    "source": {
     "chapter": "p3c1",
-    "block": 298,
+    "block": 299,
     "page": 341
    },
    "matchScore": 2.756
@@ -11577,7 +11585,7 @@
    },
    "source": {
     "chapter": "p3c1",
-    "block": 303,
+    "block": 304,
     "page": 342
    },
    "matchScore": 3.2
@@ -11599,7 +11607,7 @@
    },
    "source": {
     "chapter": "p3c1",
-    "block": 303,
+    "block": 304,
     "page": 342
    },
    "matchScore": 3.0
@@ -11621,7 +11629,7 @@
    },
    "source": {
     "chapter": "p3c1",
-    "block": 304,
+    "block": 305,
     "page": 342
    },
    "matchScore": 3.2
@@ -11643,7 +11651,7 @@
    },
    "source": {
     "chapter": "p3c1",
-    "block": 304,
+    "block": 305,
     "page": 342
    },
    "matchScore": 3.2
@@ -11665,7 +11673,7 @@
    },
    "source": {
     "chapter": "p3c1",
-    "block": 306,
+    "block": 307,
     "page": 342
    },
    "matchScore": 2.978
@@ -11687,7 +11695,7 @@
    },
    "source": {
     "chapter": "p3c1",
-    "block": 318,
+    "block": 319,
     "page": 344
    },
    "matchScore": 3.2
@@ -11709,7 +11717,7 @@
    },
    "source": {
     "chapter": "p3c1",
-    "block": 309,
+    "block": 310,
     "page": 343
    },
    "matchScore": 3.2
@@ -11753,7 +11761,7 @@
    },
    "source": {
     "chapter": "p3c1",
-    "block": 311,
+    "block": 312,
     "page": 343
    },
    "matchScore": 2.644
@@ -11797,7 +11805,7 @@
    },
    "source": {
     "chapter": "p3c1",
-    "block": 317,
+    "block": 318,
     "page": 344
    },
    "matchScore": 2.95
@@ -11819,7 +11827,7 @@
    },
    "source": {
     "chapter": "p3c1",
-    "block": 318,
+    "block": 319,
     "page": 344
    },
    "matchScore": 3.0
@@ -11885,7 +11893,7 @@
    },
    "source": {
     "chapter": "p3c1",
-    "block": 319,
+    "block": 320,
     "page": 344
    },
    "matchScore": 3.057
@@ -11907,7 +11915,7 @@
    },
    "source": {
     "chapter": "p3c1",
-    "block": 321,
+    "block": 322,
     "page": 344
    },
    "matchScore": 2.6
@@ -11929,7 +11937,7 @@
    },
    "source": {
     "chapter": "p3c1",
-    "block": 321,
+    "block": 322,
     "page": 344
    },
    "matchScore": 2.95
@@ -11951,7 +11959,7 @@
    },
    "source": {
     "chapter": "p3c1",
-    "block": 322,
+    "block": 323,
     "page": 345
    },
    "matchScore": 2.978
@@ -11973,7 +11981,7 @@
    },
    "source": {
     "chapter": "p3c1",
-    "block": 323,
+    "block": 324,
     "page": 345
    },
    "matchScore": 3.2
@@ -11995,7 +12003,7 @@
    },
    "source": {
     "chapter": "p3c1",
-    "block": 292,
+    "block": 293,
     "page": 340
    },
    "matchScore": 2.7

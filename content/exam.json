@@ -5,7 +5,7 @@
    "part": "I",
    "n": 1,
    "prompt": {
-    "en": "The answer to the question, “Who Am I?” gives a person’s _____.",
+    "en": "The answer to the question, “Who Am I?” gives a person’s  .",
     "nl": "Het antwoord op de vraag “Wie ben ik?” geeft iemands _____."
    },
    "choices": [
@@ -54,7 +54,7 @@
    "part": "I",
    "n": 2,
    "prompt": {
-    "en": "_____ is a scripture that supports belief that believers are created in the image of God.",
+    "en": "is a scripture that supports belief that believers are created in the image of God.",
     "nl": "_____ is een schriftgedeelte dat het geloof ondersteunt dat gelovigen naar het beeld van God geschapen zijn."
    },
    "choices": [
@@ -103,7 +103,7 @@
    "part": "I",
    "n": 3,
    "prompt": {
-    "en": "An individual is created as _____, emotional, and spiritual.",
+    "en": "An individual is created as  , emotional, and spiritual.",
     "nl": "Een mens is geschapen als _____, emotioneel en geestelijk."
    },
    "choices": [
@@ -152,7 +152,7 @@
    "part": "I",
    "n": 4,
    "prompt": {
-    "en": "_____ is a scripture that indicates to the believer the experience of justification.",
+    "en": "is a scripture that indicates to the believer the experience of justification.",
     "nl": "_____ is een schriftgedeelte dat de gelovige wijst op de ervaring van rechtvaardiging."
    },
    "choices": [
@@ -201,7 +201,7 @@
    "part": "I",
    "n": 5,
    "prompt": {
-    "en": "_____ is a Scripture that identifies the expression of redemption to the believer.",
+    "en": "is a Scripture that identifies the expression of redemption to the believer.",
     "nl": "_____ is een schriftgedeelte dat de uitdrukking van verlossing voor de gelovige aanwijst."
    },
    "choices": [
@@ -240,7 +240,7 @@
    ],
    "source": {
     "chapter": "p1c1",
-    "block": 36,
+    "block": 34,
     "page": 15
    },
    "matchScore": 2.75
@@ -250,7 +250,7 @@
    "part": "I",
    "n": 6,
    "prompt": {
-    "en": "_____ behavior is the will of God.",
+    "en": "behavior is the will of God.",
     "nl": "_____ gedrag is de wil van God."
    },
    "choices": [
@@ -289,7 +289,7 @@
    ],
    "source": {
     "chapter": "p1c1",
-    "block": 45,
+    "block": 42,
     "page": 16
    },
    "matchScore": 1.55
@@ -299,7 +299,7 @@
    "part": "I",
    "n": 7,
    "prompt": {
-    "en": "Ministers must focus their faith on _____.",
+    "en": "Ministers must focus their faith on  .",
     "nl": "Dienaren moeten hun geloof richten op _____."
    },
    "choices": [
@@ -337,18 +337,18 @@
     22
    ],
    "source": {
-    "chapter": "p1c3",
-    "block": 9,
-    "page": 29
+    "chapter": "p1c2",
+    "block": 20,
+    "page": 22
    },
-   "matchScore": 2.867
+   "matchScore": 3.75
   },
   {
    "id": "I.8",
    "part": "I",
    "n": 8,
    "prompt": {
-    "en": "In order to be spiritual, a minister must understand the contrast between the _____ mind and the sinful mind.",
+    "en": "In order to be spiritual, a minister must understand the contrast between the   mind and the sinful mind.",
     "nl": "Om geestelijk te zijn moet een dienaar het verschil begrijpen tussen de _____ gezindheid en de zondige gezindheid."
    },
    "choices": [
@@ -387,7 +387,7 @@
    ],
    "source": {
     "chapter": "p1c2",
-    "block": 33,
+    "block": 23,
     "page": 22
    },
    "matchScore": 3.5
@@ -397,7 +397,7 @@
    "part": "I",
    "n": 9,
    "prompt": {
-    "en": "According to _____, the sinful mind is hostile to God.",
+    "en": "According to  , the sinful mind is hostile to God.",
     "nl": "Volgens _____ is de zondige gezindheid vijandschap tegen God."
    },
    "choices": [
@@ -436,17 +436,17 @@
    ],
    "source": {
     "chapter": "p1c2",
-    "block": 37,
+    "block": 24,
     "page": 23
    },
-   "matchScore": 3.15
+   "matchScore": 3.55
   },
   {
    "id": "I.10",
    "part": "I",
    "n": 10,
    "prompt": {
-    "en": "In _____, the spiritual mind is described as transformed.",
+    "en": "In  , the spiritual mind is described as transformed.",
     "nl": "In _____ wordt de geestelijke gezindheid beschreven als vernieuwd."
    },
    "choices": [
@@ -486,7 +486,7 @@
    ],
    "source": {
     "chapter": "p1c2",
-    "block": 70,
+    "block": 27,
     "page": 24
    },
    "matchScore": 3.25
@@ -496,7 +496,7 @@
    "part": "I",
    "n": 11,
    "prompt": {
-    "en": "Jesus _____ people.",
+    "en": "Jesus   people.",
     "nl": "Jezus _____ mensen."
    },
    "choices": [
@@ -535,7 +535,7 @@
    ],
    "source": {
     "chapter": "p1c2",
-    "block": 118,
+    "block": 72,
     "page": 26
    },
    "matchScore": 3.75
@@ -545,7 +545,7 @@
    "part": "I",
    "n": 12,
    "prompt": {
-    "en": "Ministry priority should build on the centrality of _____.",
+    "en": "Ministry priority should build on the centrality of  .",
     "nl": "De prioriteit van de bediening moet gebouwd zijn op de centrale plaats van _____."
    },
    "choices": [
@@ -584,7 +584,7 @@
    ],
    "source": {
     "chapter": "p1c2",
-    "block": 128,
+    "block": 77,
     "page": 26
    },
    "matchScore": 1.05
@@ -594,7 +594,7 @@
    "part": "I",
    "n": 13,
    "prompt": {
-    "en": "The most important event in the life of the church each week is _____.",
+    "en": "The most important event in the life of the church each week is  .",
     "nl": "De belangrijkste gebeurtenis in het leven van de gemeente is elke week _____."
    },
    "choices": [
@@ -643,7 +643,7 @@
    "part": "I",
    "n": 14,
    "prompt": {
-    "en": "The early church model of worship was based on the _____ style.",
+    "en": "The early church model of worship was based on the   style.",
     "nl": "Het aanbiddingsmodel van de vroege kerk was gebaseerd op de stijl van _____."
    },
    "choices": [
@@ -692,7 +692,7 @@
    "part": "I",
    "n": 15,
    "prompt": {
-    "en": "The purposes of worship are to exalt God, edify believers, and _____.",
+    "en": "The purposes of worship are to exalt God, edify believers, and  .",
     "nl": "De doelen van de eredienst zijn God verhogen, gelovigen opbouwen en _____."
    },
    "choices": [
@@ -741,7 +741,7 @@
    "part": "I",
    "n": 16,
    "prompt": {
-    "en": "A worship service should be designed to focus on _____.",
+    "en": "A worship service should be designed to focus on  .",
     "nl": "Een eredienst moet zo opgezet zijn dat de aandacht gericht is op _____."
    },
    "choices": [
@@ -790,7 +790,7 @@
    "part": "I",
    "n": 17,
    "prompt": {
-    "en": "According to _____, there should be public reading of Scripture.",
+    "en": "According to  , there should be public reading of Scripture.",
     "nl": "Volgens _____ behoort er openbare voorlezing van de Schrift te zijn."
    },
    "choices": [
@@ -829,7 +829,7 @@
    ],
    "source": {
     "chapter": "p1c3",
-    "block": 51,
+    "block": 35,
     "page": 32
    },
    "matchScore": 3.5
@@ -839,7 +839,7 @@
    "part": "I",
    "n": 18,
    "prompt": {
-    "en": "_____ represents Christ dwelling in the believer and the believer dwelling in Christ.",
+    "en": "represents Christ dwelling in the believer and the believer dwelling in Christ.",
     "nl": "_____ stelt voor dat Christus in de gelovige woont en de gelovige in Christus."
    },
    "choices": [
@@ -888,7 +888,7 @@
    "part": "I",
    "n": 19,
    "prompt": {
-    "en": "Communion focuses the believer on the _____ of Christ.",
+    "en": "Communion focuses the believer on the   of Christ.",
     "nl": "Het Avondmaal richt de gelovige op _____ van Christus."
    },
    "choices": [
@@ -927,7 +927,7 @@
    ],
    "source": {
     "chapter": "p1c4",
-    "block": 25,
+    "block": 16,
     "page": 38
    },
    "matchScore": 3.25
@@ -937,7 +937,7 @@
    "part": "I",
    "n": 20,
    "prompt": {
-    "en": "Christ is present in Communion _____.",
+    "en": "Christ is present in Communion  .",
     "nl": "Christus is in het Avondmaal _____ aanwezig."
    },
    "choices": [
@@ -976,7 +976,7 @@
    ],
    "source": {
     "chapter": "p1c4",
-    "block": 48,
+    "block": 22,
     "page": 39
    },
    "matchScore": 3.75
@@ -986,7 +986,7 @@
    "part": "I",
    "n": 21,
    "prompt": {
-    "en": "The formula for baptism is found in _____.",
+    "en": "The formula for baptism is found in  .",
     "nl": "De formule voor de doop staat in _____."
    },
    "choices": [
@@ -1025,7 +1025,7 @@
    ],
    "source": {
     "chapter": "p1c4",
-    "block": 131,
+    "block": 45,
     "page": 42
    },
    "matchScore": 3.417
@@ -1035,7 +1035,7 @@
    "part": "I",
    "n": 22,
    "prompt": {
-    "en": "_____ is a Biblical passage about footwashing.",
+    "en": "is a Biblical passage about footwashing.",
     "nl": "_____ is een Bijbelgedeelte over de voetwassing."
    },
    "choices": [
@@ -1074,7 +1074,7 @@
    ],
    "source": {
     "chapter": "p1c4",
-    "block": 138,
+    "block": 52,
     "page": 43
    },
    "matchScore": 3.0
@@ -1084,7 +1084,7 @@
    "part": "I",
    "n": 23,
    "prompt": {
-    "en": "The practice of dedicating children comes from the dedication of _____ and _____.",
+    "en": "The practice of dedicating children comes from the dedication of   and  .",
     "nl": "De praktijk van het opdragen van kinderen komt voort uit het opdragen van _____ en _____."
    },
    "choices": [
@@ -1133,7 +1133,7 @@
    "part": "I",
    "n": 24,
    "prompt": {
-    "en": "Dedicating children to God is an act of _____.",
+    "en": "Dedicating children to God is an act of  .",
     "nl": "Kinderen aan God opdragen is een daad van _____."
    },
    "choices": [
@@ -1182,7 +1182,7 @@
    "part": "I",
    "n": 25,
    "prompt": {
-    "en": "Dedicating a child to God is a time to claim the _____ of God.",
+    "en": "Dedicating a child to God is a time to claim the   of God.",
     "nl": "Een kind aan God opdragen is een moment om _____ van God te claimen."
    },
    "choices": [
@@ -1221,10 +1221,10 @@
    ],
    "source": {
     "chapter": "p1c5",
-    "block": 18,
+    "block": 13,
     "page": 46
    },
-   "matchScore": 3.35
+   "matchScore": 3.55
   },
   {
    "id": "I.26",
@@ -1270,7 +1270,7 @@
    ],
    "source": {
     "chapter": "p1c5",
-    "block": 58,
+    "block": 30,
     "page": 48
    },
    "matchScore": 3.607
@@ -1280,7 +1280,7 @@
    "part": "I",
    "n": 27,
    "prompt": {
-    "en": "The pastor’s role is that of a _____.",
+    "en": "The pastor’s role is that of a  .",
     "nl": "De rol van de voorganger is die van een _____."
    },
    "choices": [
@@ -1329,7 +1329,7 @@
    "part": "I",
    "n": 28,
    "prompt": {
-    "en": "As ministers lead their congregations, they provide them with nurture and _____.",
+    "en": "As ministers lead their congregations, they provide them with nurture and  .",
     "nl": "Terwijl dienaren hun gemeente leiden, geven zij haar voeding en _____."
    },
    "choices": [
@@ -1378,7 +1378,7 @@
    "part": "I",
    "n": 29,
    "prompt": {
-    "en": "The best ministerial description of a pastor might be found in _____.",
+    "en": "The best ministerial description of a pastor might be found in  .",
     "nl": "De beste omschrijving van de bediening van een voorganger is te vinden in _____."
    },
    "choices": [
@@ -1427,7 +1427,7 @@
    "part": "I",
    "n": 30,
    "prompt": {
-    "en": "Ministers prepare the congregation _____ to face challenges.",
+    "en": "Ministers prepare the congregation   to face challenges.",
     "nl": "Dienaren bereiden de gemeente _____ voor om uitdagingen het hoofd te bieden."
    },
    "choices": [
@@ -1515,7 +1515,7 @@
    ],
    "source": {
     "chapter": "p1c6",
-    "block": 23,
+    "block": 19,
     "page": 52
    },
    "matchScore": 3.205
@@ -1525,7 +1525,7 @@
    "part": "I",
    "n": 32,
    "prompt": {
-    "en": "In ministering to the grieving family, a minister should focus on the _____ of God.",
+    "en": "In ministering to the grieving family, a minister should focus on the   of God.",
     "nl": "In de zorg voor de rouwende familie moet een dienaar zich richten op _____ van God."
    },
    "choices": [
@@ -1564,7 +1564,7 @@
    ],
    "source": {
     "chapter": "p1c6",
-    "block": 22,
+    "block": 18,
     "page": 52
    },
    "matchScore": 3.417
@@ -1574,7 +1574,7 @@
    "part": "I",
    "n": 33,
    "prompt": {
-    "en": "In the sermon at a funeral, the minister should _____ the means of eternal life.",
+    "en": "In the sermon at a funeral, the minister should   the means of eternal life.",
     "nl": "In de preek bij een uitvaart moet de dienaar de weg tot het eeuwige leven _____."
    },
    "choices": [
@@ -1613,7 +1613,7 @@
    ],
    "source": {
     "chapter": "p1c6",
-    "block": 54,
+    "block": 30,
     "page": 54
    },
    "matchScore": 3.417
@@ -1623,7 +1623,7 @@
    "part": "I",
    "n": 34,
    "prompt": {
-    "en": "The goal of a funeral is to _____.",
+    "en": "The goal of a funeral is to  .",
     "nl": "Het doel van een uitvaartdienst is _____."
    },
    "choices": [
@@ -1663,7 +1663,7 @@
    ],
    "source": {
     "chapter": "p1c6",
-    "block": 25,
+    "block": 21,
     "page": 53
    },
    "matchScore": 1.05
@@ -1673,7 +1673,7 @@
    "part": "I",
    "n": 35,
    "prompt": {
-    "en": "Administration means to _____.",
+    "en": "Administration means to  .",
     "nl": "Besturen betekent _____."
    },
    "choices": [
@@ -1722,7 +1722,7 @@
    "part": "I",
    "n": 36,
    "prompt": {
-    "en": "A vision of ministry consists of an objective, a purpose, and _____ for ministry.",
+    "en": "A vision of ministry consists of an objective, a purpose, and   for ministry.",
     "nl": "Een visie op bediening bestaat uit een doelstelling, een doel en _____ voor de bediening."
    },
    "choices": [
@@ -1771,7 +1771,7 @@
    "part": "I",
    "n": 37,
    "prompt": {
-    "en": "The purpose of vision is to provide a church with focus and a means to measure ministry.",
+    "en": "The purpose of vision is to provide a church with focus and a means to measure ministry .",
     "nl": "Het doel van visie is een gemeente focus geven en een middel om de _____ van de bediening te meten."
    },
    "choices": [
@@ -1820,7 +1820,7 @@
    "part": "I",
    "n": 38,
    "prompt": {
-    "en": "The Old Testament passage,, explains the necessity of a vision for a church.",
+    "en": "The Old Testament passage, , explains the necessity of a vision for a church.",
     "nl": "Het oudtestamentische gedeelte _____ legt de noodzaak van een visie voor een gemeente uit."
    },
    "choices": [
@@ -1869,7 +1869,7 @@
    "part": "I",
    "n": 39,
    "prompt": {
-    "en": "_____ is a principle that should be used in writing a mission statement for ministry.",
+    "en": "is a principle that should be used in writing a mission statement for ministry.",
     "nl": "_____ is een principe dat gebruikt moet worden bij het schrijven van een missieverklaring voor de bediening."
    },
    "choices": [
@@ -1909,7 +1909,7 @@
    ],
    "source": {
     "chapter": "p1c7",
-    "block": 52,
+    "block": 36,
     "page": 59
    },
    "matchScore": 1.15
@@ -1919,7 +1919,7 @@
    "part": "I",
    "n": 40,
    "prompt": {
-    "en": "Making a vision a reality includes _____.",
+    "en": "Making a vision a reality includes  .",
     "nl": "Een visie werkelijkheid maken houdt in: _____."
    },
    "choices": [
@@ -1958,7 +1958,7 @@
    ],
    "source": {
     "chapter": "p1c7",
-    "block": 84,
+    "block": 66,
     "page": 60
    },
    "matchScore": 1.3
@@ -1968,7 +1968,7 @@
    "part": "I",
    "n": 41,
    "prompt": {
-    "en": "The church is a/an _____ that builds the body of Christ.",
+    "en": "The church is a/an   that builds the body of Christ.",
     "nl": "De gemeente is een _____ die het lichaam van Christus opbouwt."
    },
    "choices": [
@@ -2007,7 +2007,7 @@
    ],
    "source": {
     "chapter": "p1c7",
-    "block": 117,
+    "block": 98,
     "page": 61
    },
    "matchScore": 3.5
@@ -2017,7 +2017,7 @@
    "part": "I",
    "n": 42,
    "prompt": {
-    "en": "In _____, Paul gives a description of the church as a body of many parts.",
+    "en": "In  , Paul gives a description of the church as a body of many parts.",
     "nl": "In _____ geeft Paulus een beschrijving van de gemeente als een lichaam met vele delen."
    },
    "choices": [
@@ -2056,7 +2056,7 @@
    ],
    "source": {
     "chapter": "p1c7",
-    "block": 117,
+    "block": 98,
     "page": 61
    },
    "matchScore": 2.65
@@ -2105,7 +2105,7 @@
    ],
    "source": {
     "chapter": "p1c7",
-    "block": 121,
+    "block": 102,
     "page": 62
    },
    "matchScore": 3.75
@@ -2154,7 +2154,7 @@
    ],
    "source": {
     "chapter": "p1c7",
-    "block": 133,
+    "block": 114,
     "page": 63
    },
    "matchScore": 3.5
@@ -2164,7 +2164,7 @@
    "part": "I",
    "n": 45,
    "prompt": {
-    "en": "_____ is a spiritual discipline.",
+    "en": "is a spiritual discipline.",
     "nl": "_____ is een geestelijke discipline."
    },
    "choices": [
@@ -2203,7 +2203,7 @@
    ],
    "source": {
     "chapter": "p1c7",
-    "block": 163,
+    "block": 144,
     "page": 64
    },
    "matchScore": 3.25
@@ -2213,7 +2213,7 @@
    "part": "I",
    "n": 46,
    "prompt": {
-    "en": "_____ is a Bible passage that teaches about tithing.",
+    "en": "is a Bible passage that teaches about tithing.",
     "nl": "_____ is een Bijbelgedeelte dat onderwijs geeft over het tienden geven."
    },
    "choices": [
@@ -2253,7 +2253,7 @@
    ],
    "source": {
     "chapter": "p1c7",
-    "block": 164,
+    "block": 145,
     "page": 64
    },
    "matchScore": 2.75
@@ -2263,7 +2263,7 @@
    "part": "I",
    "n": 47,
    "prompt": {
-    "en": "The _____ should be composed of individuals whose gifts are in administration.",
+    "en": "The   should be composed of individuals whose gifts are in administration.",
     "nl": "De _____ behoort te bestaan uit mensen met gaven op het gebied van bestuur."
    },
    "choices": [
@@ -2302,7 +2302,7 @@
    ],
    "source": {
     "chapter": "p1c7",
-    "block": 199,
+    "block": 176,
     "page": 68
    },
    "matchScore": 3.35
@@ -2312,7 +2312,7 @@
    "part": "I",
    "n": 48,
    "prompt": {
-    "en": "Christ recognized people at the point of their _____.",
+    "en": "Christ recognized people at the point of their  .",
     "nl": "Christus erkende mensen op het punt van hun _____."
    },
    "choices": [
@@ -2351,7 +2351,7 @@
    ],
    "source": {
     "chapter": "p1c7",
-    "block": 212,
+    "block": 189,
     "page": 69
    },
    "matchScore": 3.75
@@ -2361,7 +2361,7 @@
    "part": "I",
    "n": 49,
    "prompt": {
-    "en": "Christ related to people in spite of _____.",
+    "en": "Christ related to people in spite of  .",
     "nl": "Christus ging met mensen om ondanks _____."
    },
    "choices": [
@@ -2400,7 +2400,7 @@
    ],
    "source": {
     "chapter": "p1c7",
-    "block": 213,
+    "block": 190,
     "page": 69
    },
    "matchScore": 1.55
@@ -2410,7 +2410,7 @@
    "part": "I",
    "n": 50,
    "prompt": {
-    "en": "_____ is the central thrust of the local church.",
+    "en": "is the central thrust of the local church.",
     "nl": "_____ is de kern van het werk van de plaatselijke gemeente."
    },
    "choices": [
@@ -2449,7 +2449,7 @@
    ],
    "source": {
     "chapter": "p1c7",
-    "block": 265,
+    "block": 230,
     "page": 71
    },
    "matchScore": 3.25
@@ -2459,7 +2459,7 @@
    "part": "II",
    "n": 1,
    "prompt": {
-    "en": "The Church of God began in the Appalachian Mountains of _____.",
+    "en": "The Church of God began in the Appalachian Mountains of  .",
     "nl": "De Church of God is ontstaan in de Appalachen van _____."
    },
    "choices": [
@@ -2508,7 +2508,7 @@
    "part": "II",
    "n": 2,
    "prompt": {
-    "en": "The founders of the Church of God preached a solid _____ message.",
+    "en": "The founders of the Church of God preached a solid   message.",
     "nl": "De grondleggers van de Church of God predikten een gedegen _____ boodschap."
    },
    "choices": [
@@ -2557,7 +2557,7 @@
    "part": "II",
    "n": 3,
    "prompt": {
-    "en": "The existence of false teachings in the early days of Pentecostalism made the leaders of the church understand the need for the development of _____.",
+    "en": "The existence of false teachings in the early days of Pentecostalism made the leaders of the church understand the need for the development of  .",
     "nl": "Het bestaan van valse leringen in de begintijd van het pinksterchristendom deed de leiders van de kerk de noodzaak inzien van de ontwikkeling van _____."
    },
    "choices": [
@@ -2606,7 +2606,7 @@
    "part": "II",
    "n": 4,
    "prompt": {
-    "en": "_____ is the official history of the Church of God.",
+    "en": "is the official history of the Church of God.",
     "nl": "_____ is de officiële geschiedenis van de Church of God."
    },
    "choices": [
@@ -2655,7 +2655,7 @@
    "part": "II",
    "n": 5,
    "prompt": {
-    "en": "The Church of God began in _____.",
+    "en": "The Church of God began in  .",
     "nl": "De Church of God is begonnen in _____."
    },
    "choices": [
@@ -2704,7 +2704,7 @@
    "part": "II",
    "n": 6,
    "prompt": {
-    "en": "_____ was a significant layman in the early days of the Church of God.",
+    "en": "was a significant layman in the early days of the Church of God.",
     "nl": "_____ was een belangrijke leek in de begintijd van de Church of God."
    },
    "choices": [
@@ -2753,7 +2753,7 @@
    "part": "II",
    "n": 7,
    "prompt": {
-    "en": "The name, Church of God, was adopted in the _____ General Assembly.",
+    "en": "The name, Church of God, was adopted in the   General Assembly.",
     "nl": "De naam Church of God werd aangenomen tijdens de _____ Generale Assemblee."
    },
    "choices": [
@@ -2802,7 +2802,7 @@
    "part": "II",
    "n": 8,
    "prompt": {
-    "en": "At the second General Assembly, the Assembly instituted a new order of ministry—_____.",
+    "en": "At the second General Assembly, the Assembly instituted a new order of ministry— .",
     "nl": "Tijdens de tweede Generale Assemblee stelde de Assemblee een nieuwe orde van bediening in: _____."
    },
    "choices": [
@@ -2851,7 +2851,7 @@
    "part": "II",
    "n": 9,
    "prompt": {
-    "en": "The first general overseer of the Church of God was _____.",
+    "en": "The first general overseer of the Church of God was  .",
     "nl": "De eerste algemeen opziener van de Church of God was _____."
    },
    "choices": [
@@ -2900,7 +2900,7 @@
    "part": "II",
    "n": 10,
    "prompt": {
-    "en": "The Church of God Evangel was first published in _____.",
+    "en": "The Church of God Evangel was first published in  .",
     "nl": "De Church of God Evangel verscheen voor het eerst in _____."
    },
    "choices": [
@@ -2949,7 +2949,7 @@
    "part": "II",
    "n": 11,
    "prompt": {
-    "en": "In 1948, the _____ was adopted.",
+    "en": "In 1948, the   was adopted.",
     "nl": "In 1948 werd _____ aangenomen."
    },
    "choices": [
@@ -2998,7 +2998,7 @@
    "part": "II",
    "n": 12,
    "prompt": {
-    "en": "In 1909, the General Assembly approved _____ to be licensed to preach.",
+    "en": "In 1909, the General Assembly approved   to be licensed to preach.",
     "nl": "In 1909 keurde de Generale Assemblee goed dat _____ een preeklicentie konden krijgen."
    },
    "choices": [
@@ -3047,7 +3047,7 @@
    "part": "II",
    "n": 13,
    "prompt": {
-    "en": "The Church of God stands for the _____ rightly divided.",
+    "en": "The Church of God stands for the   rightly divided.",
     "nl": "De Church of God staat voor _____, recht gesneden."
    },
    "choices": [
@@ -3096,7 +3096,7 @@
    "part": "II",
    "n": 14,
    "prompt": {
-    "en": "The _____ remains the Church of God’s mandate from Christ.",
+    "en": "The   remains the Church of God’s mandate from Christ.",
     "nl": "_____ blijft het mandaat van de Church of God vanuit Christus."
    },
    "choices": [
@@ -3135,7 +3135,7 @@
    ],
    "source": {
     "chapter": "p2c7",
-    "block": 373,
+    "block": 338,
     "page": 165
    },
    "matchScore": 3.0
@@ -3145,7 +3145,7 @@
    "part": "II",
    "n": 15,
    "prompt": {
-    "en": "The Church of God is a _____ body.",
+    "en": "The Church of God is a   body.",
     "nl": "De Church of God is een _____ lichaam."
    },
    "choices": [
@@ -3185,7 +3185,7 @@
    ],
    "source": {
     "chapter": "p2c3",
-    "block": 46,
+    "block": 40,
     "page": 115
    },
    "matchScore": 3.083
@@ -3195,7 +3195,7 @@
    "part": "II",
    "n": 16,
    "prompt": {
-    "en": "The official name of the Church of God is _____.",
+    "en": "The official name of the Church of God is  .",
     "nl": "De officiële naam van de Church of God is _____."
    },
    "choices": [
@@ -3245,7 +3245,7 @@
    "part": "II",
    "n": 17,
    "prompt": {
-    "en": "The International _____ is composed of all members and ministers of the Church of God 16 years of age and above.",
+    "en": "The International   is composed of all members and ministers of the Church of God 16 years of age and above.",
     "nl": "De Internationale _____ bestaat uit alle leden en dienaren van de Church of God van 16 jaar en ouder."
    },
    "choices": [
@@ -3284,17 +3284,17 @@
    ],
    "source": {
     "chapter": "p2c8",
-    "block": 155,
-    "page": 188
+    "block": 109,
+    "page": 186
    },
-   "matchScore": 3.2
+   "matchScore": 3.25
   },
   {
    "id": "II.18",
    "part": "II",
    "n": 18,
    "prompt": {
-    "en": "The International General Assembly meets _____.",
+    "en": "The International General Assembly meets  .",
     "nl": "De Internationale Generale Assemblee komt _____ bijeen."
    },
    "choices": [
@@ -3333,7 +3333,7 @@
    ],
    "source": {
     "chapter": "p2c8",
-    "block": 160,
+    "block": 147,
     "page": 188
    },
    "matchScore": 2.95
@@ -3343,7 +3343,7 @@
    "part": "II",
    "n": 19,
    "prompt": {
-    "en": "The International _____ elects the Council of Eighteen.",
+    "en": "The International   elects the Council of Eighteen.",
     "nl": "De Internationale _____ kiest de Raad van Achttien."
    },
    "choices": [
@@ -3382,7 +3382,7 @@
    ],
    "source": {
     "chapter": "p2c8",
-    "block": 150,
+    "block": 137,
     "page": 187
    },
    "matchScore": 3.25
@@ -3392,7 +3392,7 @@
    "part": "II",
    "n": 20,
    "prompt": {
-    "en": "The general overseer, his assistants, the secretary-general, and _____ constitute the Inter- national Executive Council.",
+    "en": "The general overseer, his assistants, the secretary-general, and   constitute the Inter- national Executive Council.",
     "nl": "De algemeen opziener, zijn assistenten, de secretaris-generaal en _____ vormen samen de Internationale Uitvoerende Raad."
    },
    "choices": [
@@ -3431,17 +3431,17 @@
    ],
    "source": {
     "chapter": "p2c8",
-    "block": 223,
-    "page": 190
+    "block": 258,
+    "page": 194
    },
-   "matchScore": 2.867
+   "matchScore": 2.978
   },
   {
    "id": "II.21",
    "part": "II",
    "n": 21,
    "prompt": {
-    "en": "Standing Boards are appointed by the _____.",
+    "en": "Standing Boards are appointed by the  .",
     "nl": "Vaste commissies worden benoemd door _____."
    },
    "choices": [
@@ -3480,7 +3480,7 @@
    ],
    "source": {
     "chapter": "p2c8",
-    "block": 235,
+    "block": 193,
     "page": 191
    },
    "matchScore": 3.2
@@ -3490,7 +3490,7 @@
    "part": "II",
    "n": 22,
    "prompt": {
-    "en": "_____ are approved to sit in the International General Council.",
+    "en": "are approved to sit in the International General Council.",
     "nl": "_____ zijn toegelaten tot de Internationale Generale Raad."
    },
    "choices": [
@@ -3529,7 +3529,7 @@
    ],
    "source": {
     "chapter": "p2c8",
-    "block": 235,
+    "block": 193,
     "page": 191
    },
    "matchScore": 1.15
@@ -3578,17 +3578,17 @@
    ],
    "source": {
     "chapter": "p2c8",
-    "block": 225,
-    "page": 190
+    "block": 213,
+    "page": 192
    },
-   "matchScore": 2.95
+   "matchScore": 3.0
   },
   {
    "id": "II.24",
    "part": "II",
    "n": 24,
    "prompt": {
-    "en": "The distribution of tithes sent to the International Offices is the responsibility of the.",
+    "en": "The distribution of tithes sent to the International Offices is the responsibility of the .",
     "nl": "De verdeling van de tienden die naar de Internationale Kantoren worden gestuurd, is de verantwoordelijkheid van _____."
    },
    "choices": [
@@ -3627,17 +3627,17 @@
    ],
    "source": {
     "chapter": "p2c8",
-    "block": 225,
-    "page": 190
+    "block": 273,
+    "page": 196
    },
-   "matchScore": 2.367
+   "matchScore": 3.033
   },
   {
    "id": "II.25",
    "part": "II",
    "n": 25,
    "prompt": {
-    "en": "State and provincial overseers are appointed by the _____.",
+    "en": "State and provincial overseers are appointed by the  .",
     "nl": "Staats- en provinciale opzieners worden benoemd door _____."
    },
    "choices": [
@@ -3676,17 +3676,17 @@
    ],
    "source": {
     "chapter": "p2c8",
-    "block": 231,
-    "page": 190
+    "block": 271,
+    "page": 196
    },
-   "matchScore": 2.45
+   "matchScore": 2.75
   },
   {
    "id": "II.26",
    "part": "II",
    "n": 26,
    "prompt": {
-    "en": "The _____ provides diverse involvement in order to support an international perspective in fulfilling the mission of the Church of God.",
+    "en": "The   provides diverse involvement in order to support an international perspective in fulfilling the mission of the Church of God.",
     "nl": "_____ zorgt voor brede betrokkenheid om een internationaal perspectief te ondersteunen bij het vervullen van de missie van de Church of God."
    },
    "choices": [
@@ -3725,17 +3725,17 @@
    ],
    "source": {
     "chapter": "p2c8",
-    "block": 612,
-    "page": 204
+    "block": 415,
+    "page": 203
    },
-   "matchScore": 2.564
+   "matchScore": 2.841
   },
   {
    "id": "II.27",
    "part": "II",
    "n": 27,
    "prompt": {
-    "en": "The tenure of office for the state overseer is for a maximum of _____ years in nonmission states.",
+    "en": "The tenure of office for the state overseer is for a maximum of   years in nonmission states.",
     "nl": "De ambtstermijn van de staatsopziener bedraagt in niet-zendingsstaten maximaal _____ jaar."
    },
    "choices": [
@@ -3774,7 +3774,7 @@
    ],
    "source": {
     "chapter": "p2c10",
-    "block": 53,
+    "block": 29,
     "page": 248
    },
    "matchScore": 0.875
@@ -3784,7 +3784,7 @@
    "part": "II",
    "n": 28,
    "prompt": {
-    "en": "The state overseer appoints _____ when necessary.",
+    "en": "The state overseer appoints   when necessary.",
     "nl": "De staatsopziener benoemt zo nodig _____."
    },
    "choices": [
@@ -3823,7 +3823,7 @@
    ],
    "source": {
     "chapter": "p2c10",
-    "block": 136,
+    "block": 87,
     "page": 251
    },
    "matchScore": 0.75
@@ -3833,7 +3833,7 @@
    "part": "II",
    "n": 29,
    "prompt": {
-    "en": "The state overseer approves the selection, purchase, and construction of all church, par- sonage, or Sunday school properties, together with the respective _____.",
+    "en": "The state overseer approves the selection, purchase, and construction of all church, par- sonage, or Sunday school properties, together with the respective  .",
     "nl": "De staatsopziener keurt de keuze, aankoop en bouw van alle kerk-, pastorie- of zondagsschoolpanden goed, samen met de betreffende _____."
    },
    "choices": [
@@ -3872,17 +3872,17 @@
    ],
    "source": {
     "chapter": "p2c10",
-    "block": 99,
+    "block": 66,
     "page": 250
    },
-   "matchScore": 2.343
+   "matchScore": 2.414
   },
   {
    "id": "II.30",
    "part": "II",
    "n": 30,
    "prompt": {
-    "en": "Before launching large financial projects, the state overseer must have the approval of the.",
+    "en": "Before launching large financial projects, the state overseer must have the approval of the .",
     "nl": "Voordat hij grote financiële projecten start, moet de staatsopziener de goedkeuring hebben van _____."
    },
    "choices": [
@@ -3920,9 +3920,9 @@
     245
    ],
    "source": {
-    "chapter": "p2c9",
-    "block": 678,
-    "page": 244
+    "chapter": "p2c10",
+    "block": 5,
+    "page": 247
    },
    "matchScore": 2.422
   },
@@ -3931,7 +3931,7 @@
    "part": "II",
    "n": 31,
    "prompt": {
-    "en": "The _____ is appointed biennially by the state overseer.",
+    "en": "The   is appointed biennially by the state overseer.",
     "nl": "_____ wordt tweejaarlijks benoemd door de staatsopziener."
    },
    "choices": [
@@ -3971,7 +3971,7 @@
    ],
    "source": {
     "chapter": "p2c10",
-    "block": 53,
+    "block": 29,
     "page": 248
    },
    "matchScore": 1.05
@@ -4020,17 +4020,17 @@
    ],
    "source": {
     "chapter": "p2c10",
-    "block": 245,
+    "block": 159,
     "page": 254
    },
-   "matchScore": 3.0
+   "matchScore": 3.2
   },
   {
    "id": "II.33",
    "part": "II",
    "n": 33,
    "prompt": {
-    "en": "Evangelistic organizations cannot be organized in the Church of God without the express approval of the _____.",
+    "en": "Evangelistic organizations cannot be organized in the Church of God without the express approval of the  .",
     "nl": "Evangelisatieorganisaties kunnen binnen de Church of God niet worden opgericht zonder de uitdrukkelijke goedkeuring van _____."
    },
    "choices": [
@@ -4069,7 +4069,7 @@
    ],
    "source": {
     "chapter": "p2c10",
-    "block": 285,
+    "block": 190,
     "page": 255
    },
    "matchScore": 3.089
@@ -4079,7 +4079,7 @@
    "part": "II",
    "n": 34,
    "prompt": {
-    "en": "The Church of God has a _____ form of government.",
+    "en": "The Church of God has a   form of government.",
     "nl": "De Church of God heeft een _____ bestuursvorm."
    },
    "choices": [
@@ -4121,14 +4121,14 @@
     "block": 4,
     "page": 261
    },
-   "matchScore": 2.8
+   "matchScore": 3.2
   },
   {
    "id": "II.35",
    "part": "II",
    "n": 35,
    "prompt": {
-    "en": "The _____, the highest authority of the Church of God, governs the ownership of all church property.",
+    "en": "The  , the highest authority of the Church of God, governs the ownership of all church property.",
     "nl": "_____, het hoogste gezag van de Church of God, bepaalt het eigendom van alle kerkelijke eigendommen."
    },
    "choices": [
@@ -4167,17 +4167,17 @@
    ],
    "source": {
     "chapter": "p2c11",
-    "block": 22,
+    "block": 4,
     "page": 261
    },
-   "matchScore": 2.771
+   "matchScore": 3.2
   },
   {
    "id": "II.36",
    "part": "II",
    "n": 36,
    "prompt": {
-    "en": "A request for transfer of membership should be granted within _____, providing no charges are pending.",
+    "en": "A request for transfer of membership should be granted within  , providing no charges are pending.",
     "nl": "Een verzoek tot overschrijving van lidmaatschap moet binnen _____ worden ingewilligd, mits er geen aanklachten in behandeling zijn."
    },
    "choices": [
@@ -4216,17 +4216,17 @@
    ],
    "source": {
     "chapter": "p2c11",
-    "block": 118,
+    "block": 61,
     "page": 265
    },
-   "matchScore": 2.45
+   "matchScore": 2.825
   },
   {
    "id": "II.37",
    "part": "II",
    "n": 37,
    "prompt": {
-    "en": "A _____ is a business meeting for the purpose of transacting any business necessary for the operations of the local church.",
+    "en": "A   is a business meeting for the purpose of transacting any business necessary for the operations of the local church.",
     "nl": "Een _____ is een zakelijke vergadering met het doel alle zaken af te handelen die nodig zijn voor het functioneren van de plaatselijke gemeente."
    },
    "choices": [
@@ -4265,7 +4265,7 @@
    ],
    "source": {
     "chapter": "p2c11",
-    "block": 147,
+    "block": 81,
     "page": 267
    },
    "matchScore": 2.95
@@ -4275,7 +4275,7 @@
    "part": "II",
    "n": 38,
    "prompt": {
-    "en": "No church conference will be held in a district except under the direction of the _____.",
+    "en": "No church conference will be held in a district except under the direction of the  .",
     "nl": "In een district wordt geen gemeentevergadering gehouden dan onder leiding van _____."
    },
    "choices": [
@@ -4314,17 +4314,17 @@
    ],
    "source": {
     "chapter": "p2c11",
-    "block": 156,
+    "block": 84,
     "page": 267
    },
-   "matchScore": 2.629
+   "matchScore": 3.057
   },
   {
    "id": "II.39",
    "part": "II",
    "n": 39,
    "prompt": {
-    "en": "The state and district overseers should see that at least _____ conference is conducted in each local church each year.",
+    "en": "The state and district overseers should see that at least   conference is conducted in each local church each year.",
     "nl": "De staats- en districtsopzieners moeten erop toezien dat er per jaar ten minste _____ vergadering in elke plaatselijke gemeente wordt gehouden."
    },
    "choices": [
@@ -4363,17 +4363,17 @@
    ],
    "source": {
     "chapter": "p2c11",
-    "block": 75,
-    "page": 263
+    "block": 88,
+    "page": 267
    },
-   "matchScore": 0.85
+   "matchScore": 1.0
   },
   {
    "id": "II.40",
    "part": "II",
    "n": 40,
    "prompt": {
-    "en": "The regular church conference consists of the _____.",
+    "en": "The regular church conference consists of the  .",
     "nl": "De gewone gemeentevergadering bestaat uit _____."
    },
    "choices": [
@@ -4412,17 +4412,17 @@
    ],
    "source": {
     "chapter": "p2c11",
-    "block": 66,
+    "block": 30,
     "page": 263
    },
-   "matchScore": 2.75
+   "matchScore": 3.0
   },
   {
    "id": "II.41",
    "part": "II",
    "n": 41,
    "prompt": {
-    "en": "The purpose of a church conference is to inform the church of its _____.",
+    "en": "The purpose of a church conference is to inform the church of its  .",
     "nl": "Het doel van een gemeentevergadering is de gemeente te informeren over haar _____."
    },
    "choices": [
@@ -4461,7 +4461,7 @@
    ],
    "source": {
     "chapter": "p2c11",
-    "block": 166,
+    "block": 91,
     "page": 267
    },
    "matchScore": 3.2
@@ -4471,7 +4471,7 @@
    "part": "II",
    "n": 42,
    "prompt": {
-    "en": "Assistant pastors are subject to the approval and appointment of the _____.",
+    "en": "Assistant pastors are subject to the approval and appointment of the  .",
     "nl": "Hulppredikanten zijn onderworpen aan de goedkeuring en benoeming door _____."
    },
    "choices": [
@@ -4510,7 +4510,7 @@
    ],
    "source": {
     "chapter": "p2c11",
-    "block": 208,
+    "block": 122,
     "page": 269
    },
    "matchScore": 3.2
@@ -4520,7 +4520,7 @@
    "part": "II",
    "n": 43,
    "prompt": {
-    "en": "The _____ serves as chairperson of the Church and Pastor’s Council.",
+    "en": "The   serves as chairperson of the Church and Pastor’s Council.",
     "nl": "_____ treedt op als voorzitter van de Gemeente- en Voorgangersraad."
    },
    "choices": [
@@ -4559,7 +4559,7 @@
    ],
    "source": {
     "chapter": "p2c11",
-    "block": 141,
+    "block": 75,
     "page": 266
    },
    "matchScore": 2.95
@@ -4569,7 +4569,7 @@
    "part": "II",
    "n": 44,
    "prompt": {
-    "en": "The Church and Pastor’s Council assists the pastor in the following aspects of the church:_____.",
+    "en": "The Church and Pastor’s Council assists the pastor in the following aspects of the church: .",
     "nl": "De Gemeente- en Voorgangersraad staat de voorganger bij op de volgende terreinen van de gemeente: _____."
    },
    "choices": [
@@ -4609,7 +4609,7 @@
    ],
    "source": {
     "chapter": "p2c11",
-    "block": 137,
+    "block": 71,
     "page": 266
    },
    "matchScore": 1.05
@@ -4619,7 +4619,7 @@
    "part": "II",
    "n": 45,
    "prompt": {
-    "en": "All major local church disbursements must be approved by the church in _____.",
+    "en": "All major local church disbursements must be approved by the church in  .",
     "nl": "Alle grote uitgaven van de plaatselijke gemeente moeten door de gemeente in _____ worden goedgekeurd."
    },
    "choices": [
@@ -4658,7 +4658,7 @@
    ],
    "source": {
     "chapter": "p2c11",
-    "block": 247,
+    "block": 153,
     "page": 271
    },
    "matchScore": 3.0
@@ -4668,7 +4668,7 @@
    "part": "II",
    "n": 46,
    "prompt": {
-    "en": "The Finance Committee in a local church consists of the treasurer and _____ other mem- bers.",
+    "en": "The Finance Committee in a local church consists of the treasurer and   other mem- bers.",
     "nl": "De financiële commissie in een plaatselijke gemeente bestaat uit de penningmeester en _____ andere leden."
    },
    "choices": [
@@ -4707,7 +4707,7 @@
    ],
    "source": {
     "chapter": "p2c11",
-    "block": 169,
+    "block": 94,
     "page": 268
    },
    "matchScore": 0.883
@@ -4717,7 +4717,7 @@
    "part": "II",
    "n": 47,
    "prompt": {
-    "en": "A local church that owns property will appoint a _____ to oversee the property.",
+    "en": "A local church that owns property will appoint a   to oversee the property.",
     "nl": "Een plaatselijke gemeente die eigendom bezit, benoemt _____ om het beheer te voeren."
    },
    "choices": [
@@ -4756,7 +4756,7 @@
    ],
    "source": {
     "chapter": "p2c11",
-    "block": 473,
+    "block": 308,
     "page": 280
    },
    "matchScore": 3.033
@@ -4766,7 +4766,7 @@
    "part": "II",
    "n": 48,
    "prompt": {
-    "en": "In order to preserve the doctrinal integrity of the Church of God as part of the body of Christ, and to provide a biblical role model to our movement, it is imperative that all persons employed by the church in any capacity, or who serve as ministerial volunteers, agree to and abide by the _____.",
+    "en": "In order to preserve the doctrinal integrity of the Church of God as part of the body of Christ, and to provide a biblical role model to our movement, it is imperative that all persons employed by the church in any capacity, or who serve as ministerial volunteers, agree to and abide by the  .",
     "nl": "Om de leerstellige integriteit van de Church of God als deel van het lichaam van Christus te bewaren, en om een Bijbels rolmodel te bieden aan onze beweging, is het noodzakelijk dat alle personen die in welke hoedanigheid dan ook door de kerk worden aangesteld, of die als vrijwilliger in de bediening dienen, instemmen met en zich houden aan _____."
    },
    "choices": [
@@ -4805,7 +4805,7 @@
    ],
    "source": {
     "chapter": "p2c9",
-    "block": 415,
+    "block": 215,
     "page": 233
    },
    "matchScore": 2.33
@@ -4815,7 +4815,7 @@
    "part": "II",
    "n": 49,
    "prompt": {
-    "en": "No church will implement a _____ without permission from the state overseer.",
+    "en": "No church will implement a   without permission from the state overseer.",
     "nl": "Geen enkele gemeente zal _____ starten zonder toestemming van de staatsopziener."
    },
    "choices": [
@@ -4854,7 +4854,7 @@
    ],
    "source": {
     "chapter": "p2c11",
-    "block": 554,
+    "block": 373,
     "page": 284
    },
    "matchScore": 3.033
@@ -4864,7 +4864,7 @@
    "part": "II",
    "n": 50,
    "prompt": {
-    "en": "An applicant for ordination may be ordained when he is 25 years of age, provided he has had at least _____ year(s) of active ministry.",
+    "en": "An applicant for ordination may be ordained when he is 25 years of age, provided he has had at least   year(s) of active ministry.",
     "nl": "Een kandidaat voor ordinatie kan worden geordineerd wanneer hij 25 jaar oud is, mits hij ten minste _____ jaar actief in de bediening is geweest."
    },
    "choices": [
@@ -4903,17 +4903,17 @@
    ],
    "source": {
     "chapter": "p2c9",
-    "block": 241,
-    "page": 228
+    "block": 76,
+    "page": 226
    },
-   "matchScore": 0.75
+   "matchScore": 0.917
   },
   {
    "id": "III.1",
    "part": "III",
    "n": 1,
    "prompt": {
-    "en": "The word “inspiration” means _____.",
+    "en": "The word “inspiration” means  .",
     "nl": "Het woord “inspiratie” betekent _____."
    },
    "choices": [
@@ -4962,7 +4962,7 @@
    "part": "III",
    "n": 2,
    "prompt": {
-    "en": "The _____ is the single moral standard of the Bible.",
+    "en": "The   is the single moral standard of the Bible.",
     "nl": "_____ is de enige morele maatstaf van de Bijbel."
    },
    "choices": [
@@ -5011,7 +5011,7 @@
    "part": "III",
    "n": 3,
    "prompt": {
-    "en": "The Bible is the only infallible rule of _____ and _____.",
+    "en": "The Bible is the only infallible rule of   and  .",
     "nl": "De Bijbel is de enige onfeilbare regel voor _____ en _____."
    },
    "choices": [
@@ -5060,7 +5060,7 @@
    "part": "III",
    "n": 4,
    "prompt": {
-    "en": "In the relationship of the persons of the Trinity to each other, they exist _____.",
+    "en": "In the relationship of the persons of the Trinity to each other, they exist  .",
     "nl": "In de verhouding van de Personen van de Drie-eenheid tot elkaar bestaan zij _____."
    },
    "choices": [
@@ -5109,7 +5109,7 @@
    "part": "III",
    "n": 5,
    "prompt": {
-    "en": "In 1 Timothy 2:5, Paul argues that since there is only one God, there is only one _____.",
+    "en": "In 1 Timothy 2:5, Paul argues that since there is only one God, there is only one  .",
     "nl": "In 1 Timotheüs 2:5 betoogt Paulus dat, omdat er slechts één God is, er ook slechts één _____ is."
    },
    "choices": [
@@ -5214,7 +5214,7 @@
    "part": "III",
    "n": 7,
    "prompt": {
-    "en": "According to the Scriptures, Jesus is the Son of God _____.",
+    "en": "According to the Scriptures, Jesus is the Son of God  .",
     "nl": "Volgens de Schriften is Jezus de Zoon van God _____."
    },
    "choices": [
@@ -5263,7 +5263,7 @@
    "part": "III",
    "n": 8,
    "prompt": {
-    "en": "The deity of Jesus Christ, the Son of God, is proven in Scripture by _____.",
+    "en": "The deity of Jesus Christ, the Son of God, is proven in Scripture by  .",
     "nl": "De godheid van Jezus Christus, de Zoon van God, wordt in de Schrift bewezen door _____."
    },
    "choices": [
@@ -5319,7 +5319,7 @@
    "part": "III",
    "n": 9,
    "prompt": {
-    "en": "The redemptive office(s) of Jesus Christ is _____.",
+    "en": "The redemptive office(s) of Jesus Christ is  .",
     "nl": "Het verlossende ambt (of de ambten) van Jezus Christus is _____."
    },
    "choices": [
@@ -5376,7 +5376,7 @@
    "part": "III",
    "n": 10,
    "prompt": {
-    "en": "Christ the Redeemer must be God and man in order to serve as _____.",
+    "en": "Christ the Redeemer must be God and man in order to serve as  .",
     "nl": "Christus de Verlosser moest God én mens zijn om te kunnen dienen als _____."
    },
    "choices": [
@@ -5523,7 +5523,7 @@
    "part": "III",
    "n": 13,
    "prompt": {
-    "en": "The crucifixion of Christ was necessary in order to satisfy divine _____.",
+    "en": "The crucifixion of Christ was necessary in order to satisfy divine  .",
     "nl": "De kruisiging van Christus was noodzakelijk om te voldoen aan het goddelijke _____."
    },
    "choices": [
@@ -5572,7 +5572,7 @@
    "part": "III",
    "n": 14,
    "prompt": {
-    "en": "By His _____, Christ was lifted above all principalities and power and was exalted by the Father to the right hand of power.",
+    "en": "By His  , Christ was lifted above all principalities and power and was exalted by the Father to the right hand of power.",
     "nl": "Door Zijn _____ werd Christus verhoogd boven alle overheid en macht en door de Vader verhoogd tot de rechterhand van de kracht."
    },
    "choices": [
@@ -5621,7 +5621,7 @@
    "part": "III",
    "n": 15,
    "prompt": {
-    "en": "Repentance from sin is a benefit of _____.",
+    "en": "Repentance from sin is a benefit of  .",
     "nl": "Bekering van zonde is een weldaad van _____."
    },
    "choices": [
@@ -5670,7 +5670,7 @@
    "part": "III",
    "n": 16,
    "prompt": {
-    "en": "It is a work of _____ to reprove the world of sin.",
+    "en": "It is a work of   to reprove the world of sin.",
     "nl": "Het is een werk van _____ om de wereld van zonde te overtuigen."
    },
    "choices": [
@@ -5719,7 +5719,7 @@
    "part": "III",
    "n": 17,
    "prompt": {
-    "en": "As God’s gift, justification is an act of divine _____.",
+    "en": "As God’s gift, justification is an act of divine  .",
     "nl": "Als gave van God is rechtvaardiging een daad van goddelijke _____."
    },
    "choices": [
@@ -5768,7 +5768,7 @@
    "part": "III",
    "n": 18,
    "prompt": {
-    "en": "The image of God is restored in man by _____.",
+    "en": "The image of God is restored in man by  .",
     "nl": "Het beeld van God wordt in de mens hersteld door _____."
    },
    "choices": [
@@ -5817,7 +5817,7 @@
    "part": "III",
    "n": 19,
    "prompt": {
-    "en": "The result of new birth is _____.",
+    "en": "The result of new birth is  .",
     "nl": "Het gevolg van de nieuwe geboorte is _____."
    },
    "choices": [
@@ -5866,7 +5866,7 @@
    "part": "III",
    "n": 20,
    "prompt": {
-    "en": "Sanctification is an act of faith by which the believer reckons himself to be _____.",
+    "en": "Sanctification is an act of faith by which the believer reckons himself to be  .",
     "nl": "Heiliging is een daad van geloof waardoor de gelovige zichzelf rekent _____ te zijn."
    },
    "choices": [
@@ -5915,7 +5915,7 @@
    "part": "III",
    "n": 21,
    "prompt": {
-    "en": "The pursuit of _____ is the normal manner of life for the believer.",
+    "en": "The pursuit of   is the normal manner of life for the believer.",
     "nl": "Het najagen van _____ is de normale levenswijze voor de gelovige."
    },
    "choices": [
@@ -5964,7 +5964,7 @@
    "part": "III",
    "n": 22,
    "prompt": {
-    "en": "In all instances in the Book of Acts in which people received the Holy Spirit, they were already in _____.",
+    "en": "In all instances in the Book of Acts in which people received the Holy Spirit, they were already in  .",
     "nl": "In alle gevallen in het boek Handelingen waarin mensen de Heilige Geest ontvingen, verkeerden zij reeds in _____."
    },
    "choices": [
@@ -6013,7 +6013,7 @@
    "part": "III",
    "n": 23,
    "prompt": {
-    "en": "Speaking in tongues as the Holy Spirit gives the utterance is _____.",
+    "en": "Speaking in tongues as the Holy Spirit gives the utterance is  .",
     "nl": "Spreken in tongen zoals de Heilige Geest het geeft uit te spreken, is _____."
    },
    "choices": [
@@ -6111,7 +6111,7 @@
    "part": "III",
    "n": 25,
    "prompt": {
-    "en": "The act of _____ represents the believer’s death, burial, and resurrection with Christ.",
+    "en": "The act of   represents the believer’s death, burial, and resurrection with Christ.",
     "nl": "De handeling van _____ stelt de dood, begrafenis en opstanding van de gelovige met Christus voor."
    },
    "choices": [
@@ -6216,7 +6216,7 @@
    "part": "III",
    "n": 27,
    "prompt": {
-    "en": "Divine healing is associated with the going forth of _____.",
+    "en": "Divine healing is associated with the going forth of  .",
     "nl": "Goddelijke genezing gaat samen met het uitgaan van _____."
    },
    "choices": [
@@ -6265,7 +6265,7 @@
    "part": "III",
    "n": 28,
    "prompt": {
-    "en": "The Lord’s Supper provides for our frequent return to _____.",
+    "en": "The Lord’s Supper provides for our frequent return to  .",
     "nl": "Het Avondmaal des Heeren voorziet in onze veelvuldige terugkeer naar _____."
    },
    "choices": [
@@ -6304,7 +6304,7 @@
    ],
    "source": {
     "chapter": "p3c1",
-    "block": 269,
+    "block": 270,
     "page": 338
    },
    "matchScore": 3.35
@@ -6314,7 +6314,7 @@
    "part": "III",
    "n": 29,
    "prompt": {
-    "en": "The first purpose of Christ’s second advent is _____.",
+    "en": "The first purpose of Christ’s second advent is  .",
     "nl": "Het eerste doel van de tweede komst van Christus is _____."
    },
    "choices": [
@@ -6353,7 +6353,7 @@
    ],
    "source": {
     "chapter": "p3c1",
-    "block": 278,
+    "block": 279,
     "page": 338
    },
    "matchScore": 3.75
@@ -6363,7 +6363,7 @@
    "part": "III",
    "n": 30,
    "prompt": {
-    "en": "In ordaining the sacrament of the Lord’s Supper, Christ explained that the shedding of blood was for _____.",
+    "en": "In ordaining the sacrament of the Lord’s Supper, Christ explained that the shedding of blood was for  .",
     "nl": "Bij het instellen van het sacrament van het Avondmaal legde Christus uit dat het vergieten van bloed diende tot _____."
    },
    "choices": [
@@ -6412,7 +6412,7 @@
    "part": "III",
    "n": 31,
    "prompt": {
-    "en": "By the term premillennial, we designate that _____.",
+    "en": "By the term premillennial, we designate that  .",
     "nl": "Met de term premillennialistisch duiden wij aan dat _____."
    },
    "choices": [
@@ -6451,7 +6451,7 @@
    ],
    "source": {
     "chapter": "p3c1",
-    "block": 277,
+    "block": 278,
     "page": 338
    },
    "matchScore": 2.35
@@ -6461,7 +6461,7 @@
    "part": "III",
    "n": 32,
    "prompt": {
-    "en": "An example of spiritual discipline is _____.",
+    "en": "An example of spiritual discipline is  .",
     "nl": "Een voorbeeld van een geestelijke discipline is _____."
    },
    "choices": [
@@ -6510,7 +6510,7 @@
    "part": "III",
    "n": 33,
    "prompt": {
-    "en": "Christians are to unite _____ with other members of the church.",
+    "en": "Christians are to unite   with other members of the church.",
     "nl": "Christenen moeten zich _____ met andere leden van de gemeente verenigen."
    },
    "choices": [
@@ -6559,7 +6559,7 @@
    "part": "III",
    "n": 34,
    "prompt": {
-    "en": "The body is the _____ of the Holy Ghost, and we are to glorify God in our bodies.",
+    "en": "The body is the   of the Holy Ghost, and we are to glorify God in our bodies.",
     "nl": "Het lichaam is _____ van de Heilige Geest, en wij moeten God verheerlijken in ons lichaam."
    },
    "choices": [
@@ -6608,7 +6608,7 @@
    "part": "III",
    "n": 35,
    "prompt": {
-    "en": "The practice of Christian disciplines and virtues should begin in the _____.",
+    "en": "The practice of Christian disciplines and virtues should begin in the  .",
     "nl": "De beoefening van christelijke disciplines en deugden behoort te beginnen in _____."
    },
    "choices": [
@@ -6706,7 +6706,7 @@
    "part": "III",
    "n": 37,
    "prompt": {
-    "en": "_____ supports the verbal inspiration of the Bible.",
+    "en": "supports the verbal inspiration of the Bible.",
     "nl": "_____ ondersteunt de woordelijke inspiratie van de Bijbel."
    },
    "choices": [
@@ -6745,17 +6745,17 @@
    ],
    "source": {
     "chapter": "refs",
-    "block": 1,
+    "block": 4,
     "page": 387
    },
-   "matchScore": 0.55
+   "matchScore": 1.3
   },
   {
    "id": "III.38",
    "part": "III",
    "n": 38,
    "prompt": {
-    "en": "_____ reinforces that there is one God existing in three persons; namely, the Father, Son, and Holy Ghost.",
+    "en": "reinforces that there is one God existing in three persons; namely, the Father, Son, and Holy Ghost.",
     "nl": "_____ bevestigt dat er één God is die bestaat in drie Personen, namelijk de Vader, de Zoon en de Heilige Geest."
    },
    "choices": [
@@ -6794,17 +6794,17 @@
    ],
    "source": {
     "chapter": "refs",
-    "block": 9,
+    "block": 5,
     "page": 387
    },
-   "matchScore": 1.85
+   "matchScore": 3.639
   },
   {
    "id": "III.39",
    "part": "III",
    "n": 39,
    "prompt": {
-    "en": "_____ substantiates that Jesus Christ is the only begotten Son of the Father, conceived of the Holy Ghost, and born of the Virgin Mary. That Jesus was crucified, buried, and raised from the dead. That He ascended to heaven and is today at the right hand of the Father as the Intercessor.",
+    "en": "substantiates that Jesus Christ is the only begotten Son of the Father, conceived of the Holy Ghost, and born of the Virgin Mary. That Jesus was crucified, buried, and raised from the dead. That He ascended to heaven and is today at the right hand of the Father as the Intercessor.",
     "nl": "_____ onderbouwt dat Jezus Christus de eniggeboren Zoon van de Vader is, ontvangen van de Heilige Geest en geboren uit de maagd Maria; dat Jezus gekruisigd, begraven en uit de doden opgewekt is; dat Hij is opgevaren naar de hemel en vandaag aan de rechterhand van de Vader is als de Voorbidder."
    },
    "choices": [
@@ -6843,17 +6843,17 @@
    ],
    "source": {
     "chapter": "refs",
-    "block": 13,
+    "block": 6,
     "page": 387
    },
-   "matchScore": 1.85
+   "matchScore": 3.707
   },
   {
    "id": "III.40",
    "part": "III",
    "n": 40,
    "prompt": {
-    "en": "_____ sustains that all have sinned and come short of the glory of God and that repen- tance is commanded of God for all and necessary for forgiveness of sins.",
+    "en": "sustains that all have sinned and come short of the glory of God and that repen- tance is commanded of God for all and necessary for forgiveness of sins.",
     "nl": "_____ houdt staande dat allen gezondigd hebben en de heerlijkheid van God missen, en dat bekering door God aan allen geboden is en noodzakelijk is voor vergeving van zonden."
    },
    "choices": [
@@ -6892,17 +6892,17 @@
    ],
    "source": {
     "chapter": "refs",
-    "block": 18,
+    "block": 7,
     "page": 387
    },
-   "matchScore": 1.85
+   "matchScore": 3.519
   },
   {
    "id": "III.41",
    "part": "III",
    "n": 41,
    "prompt": {
-    "en": "_____ upholds that justification, regeneration, and the new birth are wrought by faith in the blood of Jesus Christ.",
+    "en": "upholds that justification, regeneration, and the new birth are wrought by faith in the blood of Jesus Christ.",
     "nl": "_____ bevestigt dat rechtvaardiging, wedergeboorte en de nieuwe geboorte tot stand komen door geloof in het bloed van Jezus Christus."
    },
    "choices": [
@@ -6941,17 +6941,17 @@
    ],
    "source": {
     "chapter": "refs",
-    "block": 14,
+    "block": 8,
     "page": 387
    },
-   "matchScore": 1.85
+   "matchScore": 3.65
   },
   {
    "id": "III.42",
    "part": "III",
    "n": 42,
    "prompt": {
-    "en": "_____ establishes that sanctification is subsequent to the new birth, through faith in the blood of Christ; through the Word, and by the Holy Ghost.",
+    "en": "establishes that sanctification is subsequent to the new birth, through faith in the blood of Christ; through the Word, and by the Holy Ghost.",
     "nl": "_____ stelt vast dat heiliging volgt op de nieuwe geboorte, door geloof in het bloed van Christus, door het Woord en door de Heilige Geest."
    },
    "choices": [
@@ -6990,17 +6990,17 @@
    ],
    "source": {
     "chapter": "refs",
-    "block": 23,
+    "block": 9,
     "page": 387
    },
-   "matchScore": 1.217
+   "matchScore": 1.467
   },
   {
    "id": "III.43",
    "part": "III",
    "n": 43,
    "prompt": {
-    "en": "_____ endorses holiness to be God’s standard of living for His people.",
+    "en": "endorses holiness to be God’s standard of living for His people.",
     "nl": "_____ bekrachtigt dat heiligheid Gods maatstaf voor het leven van Zijn volk is."
    },
    "choices": [
@@ -7039,17 +7039,17 @@
    ],
    "source": {
     "chapter": "refs",
-    "block": 28,
+    "block": 10,
     "page": 387
    },
-   "matchScore": 1.85
+   "matchScore": 3.583
   },
   {
    "id": "III.44",
    "part": "III",
    "n": 44,
    "prompt": {
-    "en": "_____ verifies baptism with the Holy Ghost subsequent to a clean heart.",
+    "en": "verifies baptism with the Holy Ghost subsequent to a clean heart.",
     "nl": "_____ bevestigt de doop met de Heilige Geest als volgend op een rein hart."
    },
    "choices": [
@@ -7088,7 +7088,7 @@
    ],
    "source": {
     "chapter": "refs",
-    "block": 29,
+    "block": 11,
     "page": 388
    },
    "matchScore": 1.407
@@ -7098,7 +7098,7 @@
    "part": "III",
    "n": 45,
    "prompt": {
-    "en": "_____ testifies about speaking with other tongues as the Spirit gives utterance and that it is the initial evidence of the baptism of the Holy Ghost.",
+    "en": "testifies about speaking with other tongues as the Spirit gives utterance and that it is the initial evidence of the baptism of the Holy Ghost.",
     "nl": "_____ getuigt van het spreken in andere tongen zoals de Geest het geeft uit te spreken, en dat dit het eerste bewijs is van de doop met de Heilige Geest."
    },
    "choices": [
@@ -7137,17 +7137,17 @@
    ],
    "source": {
     "chapter": "refs",
-    "block": 32,
+    "block": 12,
     "page": 388
    },
-   "matchScore": 1.165
+   "matchScore": 1.396
   },
   {
    "id": "III.46",
    "part": "III",
    "n": 46,
    "prompt": {
-    "en": "_____ validates water baptism by immersion, and all who repent should be baptized in the name of the Father, and of the Son, and of the Holy Ghost.",
+    "en": "validates water baptism by immersion, and all who repent should be baptized in the name of the Father, and of the Son, and of the Holy Ghost.",
     "nl": "_____ bevestigt de waterdoop door onderdompeling, en dat allen die zich bekeren gedoopt behoren te worden in de naam van de Vader, en van de Zoon, en van de Heilige Geest."
    },
    "choices": [
@@ -7186,17 +7186,17 @@
    ],
    "source": {
     "chapter": "refs",
-    "block": 36,
+    "block": 13,
     "page": 388
    },
-   "matchScore": 1.095
+   "matchScore": 1.459
   },
   {
    "id": "III.47",
    "part": "III",
    "n": 47,
    "prompt": {
-    "en": "_____ attests to divine healing being provided for all in the Atonement.",
+    "en": "attests to divine healing being provided for all in the Atonement.",
     "nl": "_____ getuigt ervan dat goddelijke genezing voor allen voorzien is in de verzoening."
    },
    "choices": [
@@ -7235,17 +7235,17 @@
    ],
    "source": {
     "chapter": "refs",
-    "block": 38,
+    "block": 14,
     "page": 388
    },
-   "matchScore": 1.85
+   "matchScore": 3.417
   },
   {
    "id": "III.48",
    "part": "III",
    "n": 48,
    "prompt": {
-    "en": "_____ documents the Lord’s Supper and washing of the saints’ feet.",
+    "en": "documents the Lord’s Supper and washing of the saints’ feet.",
     "nl": "_____ documenteert het Avondmaal des Heeren en de wassing van de voeten der heiligen."
    },
    "choices": [
@@ -7284,17 +7284,17 @@
    ],
    "source": {
     "chapter": "refs",
-    "block": 44,
+    "block": 15,
     "page": 388
    },
-   "matchScore": 1.85
+   "matchScore": 3.583
   },
   {
    "id": "III.49",
    "part": "III",
    "n": 49,
    "prompt": {
-    "en": "_____ proves the premillennial second coming of Jesus. First, to resurrect the righteous dead and to catch away the living saints to Him in the air. Second, to reign on the earth a thousand years.",
+    "en": "proves the premillennial second coming of Jesus. First, to resurrect the righteous dead and to catch away the living saints to Him in the air. Second, to reign on the earth a thousand years.",
     "nl": "_____ bewijst de premillennialistische wederkomst van Jezus: ten eerste om de rechtvaardige doden op te wekken en de levende heiligen Hem tegemoet te voeren in de lucht; ten tweede om duizend jaar op aarde te regeren."
    },
    "choices": [
@@ -7333,17 +7333,17 @@
    ],
    "source": {
     "chapter": "refs",
-    "block": 47,
+    "block": 16,
     "page": 388
    },
-   "matchScore": 1.076
+   "matchScore": 1.497
   },
   {
    "id": "III.50",
    "part": "III",
    "n": 50,
    "prompt": {
-    "en": "_____ demonstrates the bodily resurrection; eternal life for the righteous, and eternal punishment for the wicked.",
+    "en": "demonstrates the bodily resurrection; eternal life for the righteous, and eternal punishment for the wicked.",
     "nl": "_____ toont de lichamelijke opstanding aan; eeuwig leven voor de rechtvaardigen en eeuwige straf voor de goddelozen."
    },
    "choices": [
@@ -7382,7 +7382,7 @@
    ],
    "source": {
     "chapter": "refs",
-    "block": 50,
+    "block": 17,
     "page": 388
    },
    "matchScore": 1.425
