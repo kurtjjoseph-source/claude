@@ -6,35 +6,35 @@
    "n": 1,
    "prompt": {
     "en": "The answer to the question, “Who Am I?” gives a person’s _____.",
-    "nl": ""
+    "nl": "Het antwoord op de vraag “Wie ben ik?” geeft iemands _____."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Identity",
-      "nl": ""
+      "nl": "Identiteit"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Friendship",
-      "nl": ""
+      "nl": "Vriendschap"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Intelligence",
-      "nl": ""
+      "nl": "Intelligentie"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -55,35 +55,35 @@
    "n": 2,
    "prompt": {
     "en": "_____ is a scripture that supports belief that believers are created in the image of God.",
-    "nl": ""
+    "nl": "_____ is een schriftgedeelte dat het geloof ondersteunt dat gelovigen naar het beeld van God geschapen zijn."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Genesis 1:1",
-      "nl": ""
+      "nl": "Genesis 1:1"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Genesis 1:27",
-      "nl": ""
+      "nl": "Genesis 1:27"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Matthew 4:5",
-      "nl": ""
+      "nl": "Mattheüs 4:5"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -104,35 +104,35 @@
    "n": 3,
    "prompt": {
     "en": "An individual is created as _____, emotional, and spiritual.",
-    "nl": ""
+    "nl": "Een mens is geschapen als _____, emotioneel en geestelijk."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Physical",
-      "nl": ""
+      "nl": "Fysiek"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Autonomous",
-      "nl": ""
+      "nl": "Autonoom"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Perfect",
-      "nl": ""
+      "nl": "Volmaakt"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -153,35 +153,35 @@
    "n": 4,
    "prompt": {
     "en": "_____ is a scripture that indicates to the believer the experience of justification.",
-    "nl": ""
+    "nl": "_____ is een schriftgedeelte dat de gelovige wijst op de ervaring van rechtvaardiging."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Exodus 4:5",
-      "nl": ""
+      "nl": "Exodus 4:5"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Acts 2:4",
-      "nl": ""
+      "nl": "Handelingen 2:4"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Romans 5:9",
-      "nl": ""
+      "nl": "Romeinen 5:9"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -202,35 +202,35 @@
    "n": 5,
    "prompt": {
     "en": "_____ is a Scripture that identifies the expression of redemption to the believer.",
-    "nl": ""
+    "nl": "_____ is een schriftgedeelte dat de uitdrukking van verlossing voor de gelovige aanwijst."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Psalm 4:5, 6",
-      "nl": ""
+      "nl": "Psalm 4:5, 6"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "1 Peter 1:18, 19",
-      "nl": ""
+      "nl": "1 Petrus 1:18, 19"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "2 Thessalonians 2:3, 4",
-      "nl": ""
+      "nl": "2 Thessalonicenzen 2:3, 4"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -251,35 +251,35 @@
    "n": 6,
    "prompt": {
     "en": "_____ behavior is the will of God.",
-    "nl": ""
+    "nl": "_____ gedrag is de wil van God."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Childish",
-      "nl": ""
+      "nl": "Kinderachtig"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Aggressive",
-      "nl": ""
+      "nl": "Agressief"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Passive",
-      "nl": ""
+      "nl": "Passief"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -300,35 +300,35 @@
    "n": 7,
    "prompt": {
     "en": "Ministers must focus their faith on _____.",
-    "nl": ""
+    "nl": "Dienaren moeten hun geloof richten op _____."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Growth",
-      "nl": ""
+      "nl": "Groei"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Vision",
-      "nl": ""
+      "nl": "Visie"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Christ",
-      "nl": ""
+      "nl": "Christus"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -349,35 +349,35 @@
    "n": 8,
    "prompt": {
     "en": "In order to be spiritual, a minister must understand the contrast between the _____ mind and the sinful mind.",
-    "nl": ""
+    "nl": "Om geestelijk te zijn moet een dienaar het verschil begrijpen tussen de _____ gezindheid en de zondige gezindheid."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Spiritual",
-      "nl": ""
+      "nl": "Geestelijke"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Fleshly",
-      "nl": ""
+      "nl": "Vleselijke"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Peaceful",
-      "nl": ""
+      "nl": "Vreedzame"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -398,35 +398,35 @@
    "n": 9,
    "prompt": {
     "en": "According to _____, the sinful mind is hostile to God.",
-    "nl": ""
+    "nl": "Volgens _____ is de zondige gezindheid vijandschap tegen God."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Psalm 1:1",
-      "nl": ""
+      "nl": "Psalm 1:1"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Romans 8:7",
-      "nl": ""
+      "nl": "Romeinen 8:7"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "1 Corinthians 3:3",
-      "nl": ""
+      "nl": "1 Korinthe 3:3"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -447,35 +447,35 @@
    "n": 10,
    "prompt": {
     "en": "In _____, the spiritual mind is described as transformed.",
-    "nl": ""
+    "nl": "In _____ wordt de geestelijke gezindheid beschreven als vernieuwd."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "John 3:16",
-      "nl": ""
+      "nl": "Johannes 3:16"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Acts 15:4",
-      "nl": ""
+      "nl": "Handelingen 15:4"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Romans 12:2",
-      "nl": ""
+      "nl": "Romeinen 12:2"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -497,35 +497,35 @@
    "n": 11,
    "prompt": {
     "en": "Jesus _____ people.",
-    "nl": ""
+    "nl": "Jezus _____ mensen."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Educated",
-      "nl": ""
+      "nl": "Onderwees"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Harassed",
-      "nl": ""
+      "nl": "Viel lastig"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Badgered",
-      "nl": ""
+      "nl": "Bestookte"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -546,35 +546,35 @@
    "n": 12,
    "prompt": {
     "en": "Ministry priority should build on the centrality of _____.",
-    "nl": ""
+    "nl": "De prioriteit van de bediening moet gebouwd zijn op de centrale plaats van _____."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Offerings",
-      "nl": ""
+      "nl": "Offergaven"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Dramas",
-      "nl": ""
+      "nl": "Toneelstukken"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Singing",
-      "nl": ""
+      "nl": "Zang"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -595,35 +595,35 @@
    "n": 13,
    "prompt": {
     "en": "The most important event in the life of the church each week is _____.",
-    "nl": ""
+    "nl": "De belangrijkste gebeurtenis in het leven van de gemeente is elke week _____."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Celebration of worship",
-      "nl": ""
+      "nl": "De viering van de eredienst"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Fellowship",
-      "nl": ""
+      "nl": "Onderlinge gemeenschap"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Benevolence",
-      "nl": ""
+      "nl": "Barmhartigheid"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -644,35 +644,35 @@
    "n": 14,
    "prompt": {
     "en": "The early church model of worship was based on the _____ style.",
-    "nl": ""
+    "nl": "Het aanbiddingsmodel van de vroege kerk was gebaseerd op de stijl van _____."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Tabernacle",
-      "nl": ""
+      "nl": "De tabernakel"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Synagogue",
-      "nl": ""
+      "nl": "De synagoge"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Graeco-Roman",
-      "nl": ""
+      "nl": "Grieks-Romeinse gebruiken"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -693,35 +693,35 @@
    "n": 15,
    "prompt": {
     "en": "The purposes of worship are to exalt God, edify believers, and _____.",
-    "nl": ""
+    "nl": "De doelen van de eredienst zijn God verhogen, gelovigen opbouwen en _____."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Receive the tithes",
-      "nl": ""
+      "nl": "De tienden ontvangen"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Prayer and preaching",
-      "nl": ""
+      "nl": "Gebed en prediking"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Evangelize the lost",
-      "nl": ""
+      "nl": "De verlorenen evangeliseren"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -742,35 +742,35 @@
    "n": 16,
    "prompt": {
     "en": "A worship service should be designed to focus on _____.",
-    "nl": ""
+    "nl": "Een eredienst moet zo opgezet zijn dat de aandacht gericht is op _____."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "God",
-      "nl": ""
+      "nl": "God"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Humanity",
-      "nl": ""
+      "nl": "De mens"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Christians",
-      "nl": ""
+      "nl": "Christenen"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -791,35 +791,35 @@
    "n": 17,
    "prompt": {
     "en": "According to _____, there should be public reading of Scripture.",
-    "nl": ""
+    "nl": "Volgens _____ behoort er openbare voorlezing van de Schrift te zijn."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Mark 16:5",
-      "nl": ""
+      "nl": "Markus 16:5"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Luke 24:12",
-      "nl": ""
+      "nl": "Lukas 24:12"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "1 Timothy 4:13",
-      "nl": ""
+      "nl": "1 Timotheüs 4:13"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -840,35 +840,35 @@
    "n": 18,
    "prompt": {
     "en": "_____ represents Christ dwelling in the believer and the believer dwelling in Christ.",
-    "nl": ""
+    "nl": "_____ stelt voor dat Christus in de gelovige woont en de gelovige in Christus."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Communion",
-      "nl": ""
+      "nl": "Het Avondmaal"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Footwashing",
-      "nl": ""
+      "nl": "De voetwassing"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Miracles",
-      "nl": ""
+      "nl": "Wonderen"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -889,35 +889,35 @@
    "n": 19,
    "prompt": {
     "en": "Communion focuses the believer on the _____ of Christ.",
-    "nl": ""
+    "nl": "Het Avondmaal richt de gelovige op _____ van Christus."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Birth",
-      "nl": ""
+      "nl": "De geboorte"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Person",
-      "nl": ""
+      "nl": "De persoon"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Baptism",
-      "nl": ""
+      "nl": "De doop"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -938,35 +938,35 @@
    "n": 20,
    "prompt": {
     "en": "Christ is present in Communion _____.",
-    "nl": ""
+    "nl": "Christus is in het Avondmaal _____ aanwezig."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Transubstantially",
-      "nl": ""
+      "nl": "Transsubstantieel"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Consubstantially",
-      "nl": ""
+      "nl": "Consubstantieel"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Spiritually",
-      "nl": ""
+      "nl": "Geestelijk"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -987,35 +987,35 @@
    "n": 21,
    "prompt": {
     "en": "The formula for baptism is found in _____.",
-    "nl": ""
+    "nl": "De formule voor de doop staat in _____."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Matthew 28:19",
-      "nl": ""
+      "nl": "Mattheüs 28:19"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Mark 16:4",
-      "nl": ""
+      "nl": "Markus 16:4"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Luke 24:5",
-      "nl": ""
+      "nl": "Lukas 24:5"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -1036,35 +1036,35 @@
    "n": 22,
    "prompt": {
     "en": "_____ is a Biblical passage about footwashing.",
-    "nl": ""
+    "nl": "_____ is een Bijbelgedeelte over de voetwassing."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Matthew 21:1-4",
-      "nl": ""
+      "nl": "Mattheüs 21:1-4"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Mark 16:7-9",
-      "nl": ""
+      "nl": "Markus 16:7-9"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "John 13:1-17",
-      "nl": ""
+      "nl": "Johannes 13:1-17"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -1085,35 +1085,35 @@
    "n": 23,
    "prompt": {
     "en": "The practice of dedicating children comes from the dedication of _____ and _____.",
-    "nl": ""
+    "nl": "De praktijk van het opdragen van kinderen komt voort uit het opdragen van _____ en _____."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Esau and Jacob",
-      "nl": ""
+      "nl": "Ezau en Jakob"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Simon and Anna",
-      "nl": ""
+      "nl": "Simeon en Anna"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Samuel and Jesus",
-      "nl": ""
+      "nl": "Samuel en Jezus"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -1134,35 +1134,35 @@
    "n": 24,
    "prompt": {
     "en": "Dedicating children to God is an act of _____.",
-    "nl": ""
+    "nl": "Kinderen aan God opdragen is een daad van _____."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Grace and mercy",
-      "nl": ""
+      "nl": "Genade en barmhartigheid"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Praise and thanksgiving",
-      "nl": ""
+      "nl": "Lofprijzing en dankzegging"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Kindness and goodness",
-      "nl": ""
+      "nl": "Vriendelijkheid en goedheid"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -1183,35 +1183,35 @@
    "n": 25,
    "prompt": {
     "en": "Dedicating a child to God is a time to claim the _____ of God.",
-    "nl": ""
+    "nl": "Een kind aan God opdragen is een moment om _____ van God te claimen."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Promise",
-      "nl": ""
+      "nl": "De belofte"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Judgment",
-      "nl": ""
+      "nl": "Het oordeel"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Omniscience",
-      "nl": ""
+      "nl": "De alwetendheid"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -1232,35 +1232,35 @@
    "n": 26,
    "prompt": {
     "en": "In a marriage service, the pastor should explain the meaning of marriage as a before God.",
-    "nl": ""
+    "nl": "In een huwelijksdienst moet de voorganger de betekenis van het huwelijk uitleggen als een _____ voor Gods aangezicht."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Community affair",
-      "nl": ""
+      "nl": "Aangelegenheid van de gemeenschap"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Covenant relationship",
-      "nl": ""
+      "nl": "Verbondsrelatie"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Private commitment",
-      "nl": ""
+      "nl": "Persoonlijke toezegging"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -1281,35 +1281,35 @@
    "n": 27,
    "prompt": {
     "en": "The pastor’s role is that of a _____.",
-    "nl": ""
+    "nl": "De rol van de voorganger is die van een _____."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Shepherd",
-      "nl": ""
+      "nl": "Herder"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Chief Executive Officer",
-      "nl": ""
+      "nl": "Algemeen directeur"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Administrator",
-      "nl": ""
+      "nl": "Bestuurder"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -1330,35 +1330,35 @@
    "n": 28,
    "prompt": {
     "en": "As ministers lead their congregations, they provide them with nurture and _____.",
-    "nl": ""
+    "nl": "Terwijl dienaren hun gemeente leiden, geven zij haar voeding en _____."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Mercy",
-      "nl": ""
+      "nl": "Barmhartigheid"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Grace",
-      "nl": ""
+      "nl": "Genade"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Care",
-      "nl": ""
+      "nl": "Zorg"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -1379,35 +1379,35 @@
    "n": 29,
    "prompt": {
     "en": "The best ministerial description of a pastor might be found in _____.",
-    "nl": ""
+    "nl": "De beste omschrijving van de bediening van een voorganger is te vinden in _____."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Exodus 35",
-      "nl": ""
+      "nl": "Exodus 35"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Psalm 23",
-      "nl": ""
+      "nl": "Psalm 23"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "John 14",
-      "nl": ""
+      "nl": "Johannes 14"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -1428,35 +1428,35 @@
    "n": 30,
    "prompt": {
     "en": "Ministers prepare the congregation _____ to face challenges.",
-    "nl": ""
+    "nl": "Dienaren bereiden de gemeente _____ voor om uitdagingen het hoofd te bieden."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Spiritually",
-      "nl": ""
+      "nl": "Geestelijk"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Economically",
-      "nl": ""
+      "nl": "Economisch"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Physically",
-      "nl": ""
+      "nl": "Lichamelijk"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -1477,35 +1477,35 @@
    "n": 31,
    "prompt": {
     "en": "After a loved one passes away, the minister meets with the family to provide comfort and for the funeral service.",
-    "nl": ""
+    "nl": "Nadat een geliefde is overleden, ontmoet de dienaar de familie om troost te bieden en _____ voor de uitvaartdienst."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Finances",
-      "nl": ""
+      "nl": "Financiën"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Preparation",
-      "nl": ""
+      "nl": "Voorbereiding"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Food",
-      "nl": ""
+      "nl": "Eten"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -1526,35 +1526,35 @@
    "n": 32,
    "prompt": {
     "en": "In ministering to the grieving family, a minister should focus on the _____ of God.",
-    "nl": ""
+    "nl": "In de zorg voor de rouwende familie moet een dienaar zich richten op _____ van God."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Grace",
-      "nl": ""
+      "nl": "De genade"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Judgment",
-      "nl": ""
+      "nl": "Het oordeel"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Omniscience",
-      "nl": ""
+      "nl": "De alwetendheid"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -1575,35 +1575,35 @@
    "n": 33,
    "prompt": {
     "en": "In the sermon at a funeral, the minister should _____ the means of eternal life.",
-    "nl": ""
+    "nl": "In de preek bij een uitvaart moet de dienaar de weg tot het eeuwige leven _____."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Ignore",
-      "nl": ""
+      "nl": "Negeren"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Clarify",
-      "nl": ""
+      "nl": "Verduidelijken"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Obfuscate",
-      "nl": ""
+      "nl": "Versluieren"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -1624,35 +1624,35 @@
    "n": 34,
    "prompt": {
     "en": "The goal of a funeral is to _____.",
-    "nl": ""
+    "nl": "Het doel van een uitvaartdienst is _____."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Exalt Christ",
-      "nl": ""
+      "nl": "Christus verhogen"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Comfort the family",
-      "nl": ""
+      "nl": "De familie troosten"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Clarify the means to eternal life",
-      "nl": ""
+      "nl": "De weg tot het eeuwige leven verduidelijken"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "All of these",
-      "nl": ""
+      "nl": "Al deze"
      }
     }
    ],
@@ -1674,35 +1674,35 @@
    "n": 35,
    "prompt": {
     "en": "Administration means to _____.",
-    "nl": ""
+    "nl": "Besturen betekent _____."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Organize",
-      "nl": ""
+      "nl": "Organiseren"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Plot",
-      "nl": ""
+      "nl": "Samenspannen"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Guide",
-      "nl": ""
+      "nl": "Leiding geven"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "All of these",
-      "nl": ""
+      "nl": "Al deze"
      }
     }
    ],
@@ -1723,35 +1723,35 @@
    "n": 36,
    "prompt": {
     "en": "A vision of ministry consists of an objective, a purpose, and _____ for ministry.",
-    "nl": ""
+    "nl": "Een visie op bediening bestaat uit een doelstelling, een doel en _____ voor de bediening."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Status",
-      "nl": ""
+      "nl": "Status"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Benefits",
-      "nl": ""
+      "nl": "Voordelen"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Obstacles",
-      "nl": ""
+      "nl": "Obstakels"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -1772,35 +1772,35 @@
    "n": 37,
    "prompt": {
     "en": "The purpose of vision is to provide a church with focus and a means to measure ministry.",
-    "nl": ""
+    "nl": "Het doel van visie is een gemeente focus geven en een middel om de _____ van de bediening te meten."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Purpose",
-      "nl": ""
+      "nl": "Bedoeling"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Direction",
-      "nl": ""
+      "nl": "Richting"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Effectiveness",
-      "nl": ""
+      "nl": "Effectiviteit"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -1821,35 +1821,35 @@
    "n": 38,
    "prompt": {
     "en": "The Old Testament passage,, explains the necessity of a vision for a church.",
-    "nl": ""
+    "nl": "Het oudtestamentische gedeelte _____ legt de noodzaak van een visie voor een gemeente uit."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Deuteronomy 4:4",
-      "nl": ""
+      "nl": "Deuteronomium 4:4"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Joshua 1:8",
-      "nl": ""
+      "nl": "Jozua 1:8"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Proverbs 29:18",
-      "nl": ""
+      "nl": "Spreuken 29:18"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -1870,35 +1870,35 @@
    "n": 39,
    "prompt": {
     "en": "_____ is a principle that should be used in writing a mission statement for ministry.",
-    "nl": ""
+    "nl": "_____ is een principe dat gebruikt moet worden bij het schrijven van een missieverklaring voor de bediening."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Evangelism",
-      "nl": ""
+      "nl": "Evangelisatie"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Edification",
-      "nl": ""
+      "nl": "Opbouw"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Equipping",
-      "nl": ""
+      "nl": "Toerusting"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "All of these",
-      "nl": ""
+      "nl": "Al deze"
      }
     }
    ],
@@ -1920,35 +1920,35 @@
    "n": 40,
    "prompt": {
     "en": "Making a vision a reality includes _____.",
-    "nl": ""
+    "nl": "Een visie werkelijkheid maken houdt in: _____."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Selecting personnel",
-      "nl": ""
+      "nl": "Personeel kiezen"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Identifying plans",
-      "nl": ""
+      "nl": "Plannen vaststellen"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Establishing a budget",
-      "nl": ""
+      "nl": "Een begroting opstellen"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "All of these",
-      "nl": ""
+      "nl": "Al deze"
      }
     }
    ],
@@ -1969,35 +1969,35 @@
    "n": 41,
    "prompt": {
     "en": "The church is a/an _____ that builds the body of Christ.",
-    "nl": ""
+    "nl": "De gemeente is een _____ die het lichaam van Christus opbouwt."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Temple",
-      "nl": ""
+      "nl": "Tempel"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Bride",
-      "nl": ""
+      "nl": "Bruid"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Organization",
-      "nl": ""
+      "nl": "Organisatie"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -2018,35 +2018,35 @@
    "n": 42,
    "prompt": {
     "en": "In _____, Paul gives a description of the church as a body of many parts.",
-    "nl": ""
+    "nl": "In _____ geeft Paulus een beschrijving van de gemeente als een lichaam met vele delen."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Romans 10:17",
-      "nl": ""
+      "nl": "Romeinen 10:17"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "First Corinthians 12:12-31",
-      "nl": ""
+      "nl": "1 Korinthe 12:12-31"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Ephesians 4:7-16",
-      "nl": ""
+      "nl": "Efeze 4:7-16"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -2067,35 +2067,35 @@
    "n": 43,
    "prompt": {
     "en": "Organization gives the church for its vision to be carried out.",
-    "nl": ""
+    "nl": "Organisatie geeft de gemeente _____ om haar visie uit te voeren."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Structure",
-      "nl": ""
+      "nl": "Structuur"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Vitality",
-      "nl": ""
+      "nl": "Vitaliteit"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Vigor",
-      "nl": ""
+      "nl": "Kracht"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -2116,35 +2116,35 @@
    "n": 44,
    "prompt": {
     "en": "The church needs to be aware of the of the people who live in its surrounding com- munity.",
-    "nl": ""
+    "nl": "De gemeente moet zich bewust zijn van _____ van de mensen die in haar omgeving wonen."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Hopes",
-      "nl": ""
+      "nl": "De verwachtingen"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Expectations",
-      "nl": ""
+      "nl": "De verlangens"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Needs",
-      "nl": ""
+      "nl": "De noden"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -2165,35 +2165,35 @@
    "n": 45,
    "prompt": {
     "en": "_____ is a spiritual discipline.",
-    "nl": ""
+    "nl": "_____ is een geestelijke discipline."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Giving",
-      "nl": ""
+      "nl": "Geven"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Spiritual warfare",
-      "nl": ""
+      "nl": "Geestelijke strijd"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Kindness",
-      "nl": ""
+      "nl": "Vriendelijkheid"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -2214,35 +2214,35 @@
    "n": 46,
    "prompt": {
     "en": "_____ is a Bible passage that teaches about tithing.",
-    "nl": ""
+    "nl": "_____ is een Bijbelgedeelte dat onderwijs geeft over het tienden geven."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Deuteronomy 19:1-6",
-      "nl": ""
+      "nl": "Deuteronomium 19:1-6"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Isaiah 37:5-8",
-      "nl": ""
+      "nl": "Jesaja 37:5-8"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Malachi 3:7-10",
-      "nl": ""
+      "nl": "Maleachi 3:7-10"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -2264,35 +2264,35 @@
    "n": 47,
    "prompt": {
     "en": "The _____ should be composed of individuals whose gifts are in administration.",
-    "nl": ""
+    "nl": "De _____ behoort te bestaan uit mensen met gaven op het gebied van bestuur."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Eldership",
-      "nl": ""
+      "nl": "Oudstenraad"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Prophets",
-      "nl": ""
+      "nl": "Profeten"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Teachers",
-      "nl": ""
+      "nl": "Leraars"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -2313,35 +2313,35 @@
    "n": 48,
    "prompt": {
     "en": "Christ recognized people at the point of their _____.",
-    "nl": ""
+    "nl": "Christus erkende mensen op het punt van hun _____."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Need",
-      "nl": ""
+      "nl": "Nood"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Position",
-      "nl": ""
+      "nl": "Positie"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Wants",
-      "nl": ""
+      "nl": "Verlangens"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -2362,35 +2362,35 @@
    "n": 49,
    "prompt": {
     "en": "Christ related to people in spite of _____.",
-    "nl": ""
+    "nl": "Christus ging met mensen om ondanks _____."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Prejudice",
-      "nl": ""
+      "nl": "Vooroordeel"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Demands",
-      "nl": ""
+      "nl": "Eisen"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Customs",
-      "nl": ""
+      "nl": "Gewoonten"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -2411,35 +2411,35 @@
    "n": 50,
    "prompt": {
     "en": "_____ is the central thrust of the local church.",
-    "nl": ""
+    "nl": "_____ is de kern van het werk van de plaatselijke gemeente."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Evangelism",
-      "nl": ""
+      "nl": "Evangelisatie"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Music",
-      "nl": ""
+      "nl": "Muziek"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Fellowship",
-      "nl": ""
+      "nl": "Onderlinge gemeenschap"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "All of these ",
-      "nl": ""
+      "nl": "Al deze"
      }
     }
    ],
@@ -2460,35 +2460,35 @@
    "n": 1,
    "prompt": {
     "en": "The Church of God began in the Appalachian Mountains of _____.",
-    "nl": ""
+    "nl": "De Church of God is ontstaan in de Appalachen van _____."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Georgia",
-      "nl": ""
+      "nl": "Georgia"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "North Carolina",
-      "nl": ""
+      "nl": "North Carolina"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Tennessee",
-      "nl": ""
+      "nl": "Tennessee"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "All of these",
-      "nl": ""
+      "nl": "Al deze"
      }
     }
    ],
@@ -2509,35 +2509,35 @@
    "n": 2,
    "prompt": {
     "en": "The founders of the Church of God preached a solid _____ message.",
-    "nl": ""
+    "nl": "De grondleggers van de Church of God predikten een gedegen _____ boodschap."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Heavenly",
-      "nl": ""
+      "nl": "Hemelse"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Holiness",
-      "nl": ""
+      "nl": "Heiligings-"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Millennial",
-      "nl": ""
+      "nl": "Millennium-"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -2558,35 +2558,35 @@
    "n": 3,
    "prompt": {
     "en": "The existence of false teachings in the early days of Pentecostalism made the leaders of the church understand the need for the development of _____.",
-    "nl": ""
+    "nl": "Het bestaan van valse leringen in de begintijd van het pinksterchristendom deed de leiders van de kerk de noodzaak inzien van de ontwikkeling van _____."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Educational institutions",
-      "nl": ""
+      "nl": "Onderwijsinstellingen"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Evangelistic programs",
-      "nl": ""
+      "nl": "Evangelisatieprogramma’s"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Holiness practices",
-      "nl": ""
+      "nl": "Heiligingspraktijken"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -2607,35 +2607,35 @@
    "n": 4,
    "prompt": {
     "en": "_____ is the official history of the Church of God.",
-    "nl": ""
+    "nl": "_____ is de officiële geschiedenis van de Church of God."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "As the Saints Have Trod",
-      "nl": ""
+      "nl": "As the Saints Have Trod"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "The Church of God",
-      "nl": ""
+      "nl": "The Church of God"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Like a Mighty Army",
-      "nl": ""
+      "nl": "Like a Mighty Army"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -2656,35 +2656,35 @@
    "n": 5,
    "prompt": {
     "en": "The Church of God began in _____.",
-    "nl": ""
+    "nl": "De Church of God is begonnen in _____."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "1886",
-      "nl": ""
+      "nl": "1886"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "1896",
-      "nl": ""
+      "nl": "1896"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "1906",
-      "nl": ""
+      "nl": "1906"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -2705,35 +2705,35 @@
    "n": 6,
    "prompt": {
     "en": "_____ was a significant layman in the early days of the Church of God.",
-    "nl": ""
+    "nl": "_____ was een belangrijke leek in de begintijd van de Church of God."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Glanville Charles",
-      "nl": ""
+      "nl": "Glanville Charles"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "John Smith",
-      "nl": ""
+      "nl": "John Smith"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "W.F. Bryant",
-      "nl": ""
+      "nl": "W.F. Bryant"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "All of these",
-      "nl": ""
+      "nl": "Al deze"
      }
     }
    ],
@@ -2754,35 +2754,35 @@
    "n": 7,
    "prompt": {
     "en": "The name, Church of God, was adopted in the _____ General Assembly.",
-    "nl": ""
+    "nl": "De naam Church of God werd aangenomen tijdens de _____ Generale Assemblee."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "First",
-      "nl": ""
+      "nl": "Eerste"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Second",
-      "nl": ""
+      "nl": "Tweede"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Third",
-      "nl": ""
+      "nl": "Derde"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -2803,35 +2803,35 @@
    "n": 8,
    "prompt": {
     "en": "At the second General Assembly, the Assembly instituted a new order of ministry—_____.",
-    "nl": ""
+    "nl": "Tijdens de tweede Generale Assemblee stelde de Assemblee een nieuwe orde van bediening in: _____."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Apostle",
-      "nl": ""
+      "nl": "Apostel"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Evangelist",
-      "nl": ""
+      "nl": "Evangelist"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Prophet",
-      "nl": ""
+      "nl": "Profeet"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "All of these",
-      "nl": ""
+      "nl": "Al deze"
      }
     }
    ],
@@ -2852,35 +2852,35 @@
    "n": 9,
    "prompt": {
     "en": "The first general overseer of the Church of God was _____.",
-    "nl": ""
+    "nl": "De eerste algemeen opziener van de Church of God was _____."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "A.J. Tomlinson",
-      "nl": ""
+      "nl": "A.J. Tomlinson"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "F.J. Lee",
-      "nl": ""
+      "nl": "F.J. Lee"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "John C. Jernigan",
-      "nl": ""
+      "nl": "John C. Jernigan"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -2901,35 +2901,35 @@
    "n": 10,
    "prompt": {
     "en": "The Church of God Evangel was first published in _____.",
-    "nl": ""
+    "nl": "De Church of God Evangel verscheen voor het eerst in _____."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "1886",
-      "nl": ""
+      "nl": "1886"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "1906",
-      "nl": ""
+      "nl": "1906"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "1910",
-      "nl": ""
+      "nl": "1910"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -2950,35 +2950,35 @@
    "n": 11,
    "prompt": {
     "en": "In 1948, the _____ was adopted.",
-    "nl": ""
+    "nl": "In 1948 werd _____ aangenomen."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Declaration of Faith",
-      "nl": ""
+      "nl": "De Geloofsverklaring"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Holiness Code",
-      "nl": ""
+      "nl": "De Heiligingscode"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Practical Commitments",
-      "nl": ""
+      "nl": "De Praktische Verbintenissen"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "All of these",
-      "nl": ""
+      "nl": "Al deze"
      }
     }
    ],
@@ -2999,35 +2999,35 @@
    "n": 12,
    "prompt": {
     "en": "In 1909, the General Assembly approved _____ to be licensed to preach.",
-    "nl": ""
+    "nl": "In 1909 keurde de Generale Assemblee goed dat _____ een preeklicentie konden krijgen."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Adolescents",
-      "nl": ""
+      "nl": "Jongeren"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Children",
-      "nl": ""
+      "nl": "Kinderen"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Women",
-      "nl": ""
+      "nl": "Vrouwen"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -3048,35 +3048,35 @@
    "n": 13,
    "prompt": {
     "en": "The Church of God stands for the _____ rightly divided.",
-    "nl": ""
+    "nl": "De Church of God staat voor _____, recht gesneden."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Old Testament",
-      "nl": ""
+      "nl": "Het Oude Testament"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "New Testament",
-      "nl": ""
+      "nl": "Het Nieuwe Testament"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Whole Bible",
-      "nl": ""
+      "nl": "De hele Bijbel"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -3097,35 +3097,35 @@
    "n": 14,
    "prompt": {
     "en": "The _____ remains the Church of God’s mandate from Christ.",
-    "nl": ""
+    "nl": "_____ blijft het mandaat van de Church of God vanuit Christus."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Great Commission",
-      "nl": ""
+      "nl": "De Grote Opdracht"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Holiness Code",
-      "nl": ""
+      "nl": "De Heiligingscode"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Sermon on the Mount",
-      "nl": ""
+      "nl": "De Bergrede"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -3146,35 +3146,35 @@
    "n": 15,
    "prompt": {
     "en": "The Church of God is a _____ body.",
-    "nl": ""
+    "nl": "De Church of God is een _____ lichaam."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Executive",
-      "nl": ""
+      "nl": "Uitvoerend"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Judicial",
-      "nl": ""
+      "nl": "Rechtsprekend"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Legislative",
-      "nl": ""
+      "nl": "Wetgevend"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -3196,35 +3196,35 @@
    "n": 16,
    "prompt": {
     "en": "The official name of the Church of God is _____.",
-    "nl": ""
+    "nl": "De officiële naam van de Church of God is _____."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Church of God",
-      "nl": ""
+      "nl": "Church of God"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Churches of God",
-      "nl": ""
+      "nl": "Churches of God"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Church of God Fellowships",
-      "nl": ""
+      "nl": "Church of God Fellowships"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "All of these",
-      "nl": ""
+      "nl": "Al deze"
      }
     }
    ],
@@ -3246,35 +3246,35 @@
    "n": 17,
    "prompt": {
     "en": "The International _____ is composed of all members and ministers of the Church of God 16 years of age and above.",
-    "nl": ""
+    "nl": "De Internationale _____ bestaat uit alle leden en dienaren van de Church of God van 16 jaar en ouder."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Bishops Council",
-      "nl": ""
+      "nl": "Bisschoppenraad"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "General Assembly",
-      "nl": ""
+      "nl": "Generale Assemblee"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "General Council",
-      "nl": ""
+      "nl": "Generale Raad"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "All of these",
-      "nl": ""
+      "nl": "Al deze"
      }
     }
    ],
@@ -3295,35 +3295,35 @@
    "n": 18,
    "prompt": {
     "en": "The International General Assembly meets _____.",
-    "nl": ""
+    "nl": "De Internationale Generale Assemblee komt _____ bijeen."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Annually",
-      "nl": ""
+      "nl": "Jaarlijks"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Biennially",
-      "nl": ""
+      "nl": "Tweejaarlijks"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Quadrennially",
-      "nl": ""
+      "nl": "Vierjaarlijks"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -3344,35 +3344,35 @@
    "n": 19,
    "prompt": {
     "en": "The International _____ elects the Council of Eighteen.",
-    "nl": ""
+    "nl": "De Internationale _____ kiest de Raad van Achttien."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Council",
-      "nl": ""
+      "nl": "Raad"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "General Assembly",
-      "nl": ""
+      "nl": "Generale Assemblee"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "General Council",
-      "nl": ""
+      "nl": "Generale Raad"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -3393,35 +3393,35 @@
    "n": 20,
    "prompt": {
     "en": "The general overseer, his assistants, the secretary-general, and _____ constitute the Inter- national Executive Council.",
-    "nl": ""
+    "nl": "De algemeen opziener, zijn assistenten, de secretaris-generaal en _____ vormen samen de Internationale Uitvoerende Raad."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Council of Eighteen",
-      "nl": ""
+      "nl": "De Raad van Achttien"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "International Executive Committee",
-      "nl": ""
+      "nl": "Het Internationaal Uitvoerend Comité"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "International Council",
-      "nl": ""
+      "nl": "De Internationale Raad"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "All of the Above",
-      "nl": ""
+      "nl": "Al het bovenstaande"
      }
     }
    ],
@@ -3442,35 +3442,35 @@
    "n": 21,
    "prompt": {
     "en": "Standing Boards are appointed by the _____.",
-    "nl": ""
+    "nl": "Vaste commissies worden benoemd door _____."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "International Executive Committee",
-      "nl": ""
+      "nl": "Het Internationaal Uitvoerend Comité"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "International Executive Council",
-      "nl": ""
+      "nl": "De Internationale Uitvoerende Raad"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "International General Assembly",
-      "nl": ""
+      "nl": "De Internationale Generale Assemblee"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "All of these",
-      "nl": ""
+      "nl": "Al deze"
      }
     }
    ],
@@ -3491,35 +3491,35 @@
    "n": 22,
    "prompt": {
     "en": "_____ are approved to sit in the International General Council.",
-    "nl": ""
+    "nl": "_____ zijn toegelaten tot de Internationale Generale Raad."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Exhorters",
-      "nl": ""
+      "nl": "Exhorters"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Laity",
-      "nl": ""
+      "nl": "Leken"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Ordained Ministers",
-      "nl": ""
+      "nl": "Geordineerde dienaren"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "All of these",
-      "nl": ""
+      "nl": "Al deze"
      }
     }
    ],
@@ -3540,35 +3540,35 @@
    "n": 23,
    "prompt": {
     "en": "Who decides to reschedule or postpone a regularly scheduled General Assembly to an appropriate time and place?",
-    "nl": ""
+    "nl": "Wie beslist over het verplaatsen of uitstellen van een regulier geplande Generale Assemblee naar een geschikt tijdstip en plaats?"
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "International Executive Committee",
-      "nl": ""
+      "nl": "Het Internationaal Uitvoerend Comité"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "International Executive Council",
-      "nl": ""
+      "nl": "De Internationale Uitvoerende Raad"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Liaison to the General Overseer",
-      "nl": ""
+      "nl": "De verbindingspersoon van de algemeen opziener"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of the above",
-      "nl": ""
+      "nl": "Geen van het bovenstaande"
      }
     }
    ],
@@ -3589,35 +3589,35 @@
    "n": 24,
    "prompt": {
     "en": "The distribution of tithes sent to the International Offices is the responsibility of the.",
-    "nl": ""
+    "nl": "De verdeling van de tienden die naar de Internationale Kantoren worden gestuurd, is de verantwoordelijkheid van _____."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "General overseer",
-      "nl": ""
+      "nl": "De algemeen opziener"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "International Executive Council",
-      "nl": ""
+      "nl": "De Internationale Uitvoerende Raad"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "General overseer and International Executive Council",
-      "nl": ""
+      "nl": "De algemeen opziener en de Internationale Uitvoerende Raad"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -3638,35 +3638,35 @@
    "n": 25,
    "prompt": {
     "en": "State and provincial overseers are appointed by the _____.",
-    "nl": ""
+    "nl": "Staats- en provinciale opzieners worden benoemd door _____."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "General overseer",
-      "nl": ""
+      "nl": "De algemeen opziener"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "International Executive Committee",
-      "nl": ""
+      "nl": "Het Internationaal Uitvoerend Comité"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "International Executive Council",
-      "nl": ""
+      "nl": "De Internationale Uitvoerende Raad"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "All of these",
-      "nl": ""
+      "nl": "Al deze"
      }
     }
    ],
@@ -3687,35 +3687,35 @@
    "n": 26,
    "prompt": {
     "en": "The _____ provides diverse involvement in order to support an international perspective in fulfilling the mission of the Church of God.",
-    "nl": ""
+    "nl": "_____ zorgt voor brede betrokkenheid om een internationaal perspectief te ondersteunen bij het vervullen van de missie van de Church of God."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "International Council",
-      "nl": ""
+      "nl": "De Internationale Raad"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "International Executive Committee",
-      "nl": ""
+      "nl": "Het Internationaal Uitvoerend Comité"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "World Missions",
-      "nl": ""
+      "nl": "Wereldzending"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -3736,35 +3736,35 @@
    "n": 27,
    "prompt": {
     "en": "The tenure of office for the state overseer is for a maximum of _____ years in nonmission states.",
-    "nl": ""
+    "nl": "De ambtstermijn van de staatsopziener bedraagt in niet-zendingsstaten maximaal _____ jaar."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "4",
-      "nl": ""
+      "nl": "4"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "8",
-      "nl": ""
+      "nl": "8"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "12",
-      "nl": ""
+      "nl": "12"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -3785,35 +3785,35 @@
    "n": 28,
    "prompt": {
     "en": "The state overseer appoints _____ when necessary.",
-    "nl": ""
+    "nl": "De staatsopziener benoemt zo nodig _____."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "District overseers",
-      "nl": ""
+      "nl": "Districtsopzieners"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Local church officers",
-      "nl": ""
+      "nl": "Ambtsdragers van de plaatselijke gemeente"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Pastors",
-      "nl": ""
+      "nl": "Voorgangers"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "All of these",
-      "nl": ""
+      "nl": "Al deze"
      }
     }
    ],
@@ -3834,35 +3834,35 @@
    "n": 29,
    "prompt": {
     "en": "The state overseer approves the selection, purchase, and construction of all church, par- sonage, or Sunday school properties, together with the respective _____.",
-    "nl": ""
+    "nl": "De staatsopziener keurt de keuze, aankoop en bouw van alle kerk-, pastorie- of zondagsschoolpanden goed, samen met de betreffende _____."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Building committee",
-      "nl": ""
+      "nl": "Bouwcommissie"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "District overseer",
-      "nl": ""
+      "nl": "Districtsopziener"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Pastor",
-      "nl": ""
+      "nl": "Voorganger"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -3883,35 +3883,35 @@
    "n": 30,
    "prompt": {
     "en": "Before launching large financial projects, the state overseer must have the approval of the.",
-    "nl": ""
+    "nl": "Voordat hij grote financiële projecten start, moet de staatsopziener de goedkeuring hebben van _____."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "International Council",
-      "nl": ""
+      "nl": "De Internationale Raad"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "International Executive Committee",
-      "nl": ""
+      "nl": "Het Internationaal Uitvoerend Comité"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "International Executive Council",
-      "nl": ""
+      "nl": "De Internationale Uitvoerende Raad"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "All of these",
-      "nl": ""
+      "nl": "Al deze"
      }
     }
    ],
@@ -3932,35 +3932,35 @@
    "n": 31,
    "prompt": {
     "en": "The _____ is appointed biennially by the state overseer.",
-    "nl": ""
+    "nl": "_____ wordt tweejaarlijks benoemd door de staatsopziener."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "State Board of Ministerial Development",
-      "nl": ""
+      "nl": "De Staatscommissie voor Ministeriële Ontwikkeling"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "State Music Board",
-      "nl": ""
+      "nl": "De Staatscommissie voor Muziek"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "State World Missions Board",
-      "nl": ""
+      "nl": "De Staatscommissie voor Wereldzending"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "All of these",
-      "nl": ""
+      "nl": "Al deze"
      }
     }
    ],
@@ -3982,35 +3982,35 @@
    "n": 32,
    "prompt": {
     "en": "The state Youth and Discipleship director is elected by the",
-    "nl": ""
+    "nl": "De staatsdirecteur Jeugd en Discipelschap wordt gekozen door _____."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "State Council",
-      "nl": ""
+      "nl": "De Staatsraad"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "State Overseer",
-      "nl": ""
+      "nl": "De staatsopziener"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "State Youth Board",
-      "nl": ""
+      "nl": "De Staatsjeugdcommissie"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "All of these",
-      "nl": ""
+      "nl": "Al deze"
      }
     }
    ],
@@ -4031,35 +4031,35 @@
    "n": 33,
    "prompt": {
     "en": "Evangelistic organizations cannot be organized in the Church of God without the express approval of the _____.",
-    "nl": ""
+    "nl": "Evangelisatieorganisaties kunnen binnen de Church of God niet worden opgericht zonder de uitdrukkelijke goedkeuring van _____."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "International Council",
-      "nl": ""
+      "nl": "De Internationale Raad"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "International Executive Committee",
-      "nl": ""
+      "nl": "Het Internationaal Uitvoerend Comité"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "International Executive Council",
-      "nl": ""
+      "nl": "De Internationale Uitvoerende Raad"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "All of these",
-      "nl": ""
+      "nl": "Al deze"
      }
     }
    ],
@@ -4080,35 +4080,35 @@
    "n": 34,
    "prompt": {
     "en": "The Church of God has a _____ form of government.",
-    "nl": ""
+    "nl": "De Church of God heeft een _____ bestuursvorm."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Centralized",
-      "nl": ""
+      "nl": "Gecentraliseerde"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Congregational",
-      "nl": ""
+      "nl": "Congregationalistische"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Theocentric",
-      "nl": ""
+      "nl": "Theocentrische"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -4129,35 +4129,35 @@
    "n": 35,
    "prompt": {
     "en": "The _____, the highest authority of the Church of God, governs the ownership of all church property.",
-    "nl": ""
+    "nl": "_____, het hoogste gezag van de Church of God, bepaalt het eigendom van alle kerkelijke eigendommen."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "International Executive Committee",
-      "nl": ""
+      "nl": "Het Internationaal Uitvoerend Comité"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "International General Council",
-      "nl": ""
+      "nl": "De Internationale Generale Raad"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "International General Assembly",
-      "nl": ""
+      "nl": "De Internationale Generale Assemblee"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -4178,35 +4178,35 @@
    "n": 36,
    "prompt": {
     "en": "A request for transfer of membership should be granted within _____, providing no charges are pending.",
-    "nl": ""
+    "nl": "Een verzoek tot overschrijving van lidmaatschap moet binnen _____ worden ingewilligd, mits er geen aanklachten in behandeling zijn."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "One week",
-      "nl": ""
+      "nl": "Één week"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Two weeks",
-      "nl": ""
+      "nl": "Twee weken"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "One month",
-      "nl": ""
+      "nl": "Één maand"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -4227,35 +4227,35 @@
    "n": 37,
    "prompt": {
     "en": "A _____ is a business meeting for the purpose of transacting any business necessary for the operations of the local church.",
-    "nl": ""
+    "nl": "Een _____ is een zakelijke vergadering met het doel alle zaken af te handelen die nodig zijn voor het functioneren van de plaatselijke gemeente."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Church conference",
-      "nl": ""
+      "nl": "Gemeentevergadering"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "District conference",
-      "nl": ""
+      "nl": "Districtsvergadering"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "State conference",
-      "nl": ""
+      "nl": "Staatsvergadering"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -4276,35 +4276,35 @@
    "n": 38,
    "prompt": {
     "en": "No church conference will be held in a district except under the direction of the _____.",
-    "nl": ""
+    "nl": "In een district wordt geen gemeentevergadering gehouden dan onder leiding van _____."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Church and Pastor’s Council",
-      "nl": ""
+      "nl": "De Gemeente- en Voorgangersraad"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "District overseer",
-      "nl": ""
+      "nl": "De districtsopziener"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Pastor",
-      "nl": ""
+      "nl": "De voorganger"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -4325,35 +4325,35 @@
    "n": 39,
    "prompt": {
     "en": "The state and district overseers should see that at least _____ conference is conducted in each local church each year.",
-    "nl": ""
+    "nl": "De staats- en districtsopzieners moeten erop toezien dat er per jaar ten minste _____ vergadering in elke plaatselijke gemeente wordt gehouden."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "One",
-      "nl": ""
+      "nl": "Één"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Two",
-      "nl": ""
+      "nl": "Twee"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Three",
-      "nl": ""
+      "nl": "Drie"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -4374,35 +4374,35 @@
    "n": 40,
    "prompt": {
     "en": "The regular church conference consists of the _____.",
-    "nl": ""
+    "nl": "De gewone gemeentevergadering bestaat uit _____."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Church and Pastor’s Council",
-      "nl": ""
+      "nl": "De Gemeente- en Voorgangersraad"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Membership",
-      "nl": ""
+      "nl": "De leden"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Regular Attendees",
-      "nl": ""
+      "nl": "De vaste bezoekers"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -4423,35 +4423,35 @@
    "n": 41,
    "prompt": {
     "en": "The purpose of a church conference is to inform the church of its _____.",
-    "nl": ""
+    "nl": "Het doel van een gemeentevergadering is de gemeente te informeren over haar _____."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Church status",
-      "nl": ""
+      "nl": "Kerkelijke status"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Financial status",
-      "nl": ""
+      "nl": "Financiële status"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Membership status",
-      "nl": ""
+      "nl": "Ledenstatus"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -4472,35 +4472,35 @@
    "n": 42,
    "prompt": {
     "en": "Assistant pastors are subject to the approval and appointment of the _____.",
-    "nl": ""
+    "nl": "Hulppredikanten zijn onderworpen aan de goedkeuring en benoeming door _____."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Church and Pastor’s Council",
-      "nl": ""
+      "nl": "De Gemeente- en Voorgangersraad"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "District overseer",
-      "nl": ""
+      "nl": "De districtsopziener"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "State overseer",
-      "nl": ""
+      "nl": "De staatsopziener"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -4521,35 +4521,35 @@
    "n": 43,
    "prompt": {
     "en": "The _____ serves as chairperson of the Church and Pastor’s Council.",
-    "nl": ""
+    "nl": "_____ treedt op als voorzitter van de Gemeente- en Voorgangersraad."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Clerk",
-      "nl": ""
+      "nl": "De scriba"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Pastor",
-      "nl": ""
+      "nl": "De voorganger"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Treasurer",
-      "nl": ""
+      "nl": "De penningmeester"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -4570,35 +4570,35 @@
    "n": 44,
    "prompt": {
     "en": "The Church and Pastor’s Council assists the pastor in the following aspects of the church:_____.",
-    "nl": ""
+    "nl": "De Gemeente- en Voorgangersraad staat de voorganger bij op de volgende terreinen van de gemeente: _____."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Financial",
-      "nl": ""
+      "nl": "Financieel"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Physical",
-      "nl": ""
+      "nl": "Materieel"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Spiritual",
-      "nl": ""
+      "nl": "Geestelijk"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "All of these",
-      "nl": ""
+      "nl": "Al deze"
      }
     }
    ],
@@ -4620,35 +4620,35 @@
    "n": 45,
    "prompt": {
     "en": "All major local church disbursements must be approved by the church in _____.",
-    "nl": ""
+    "nl": "Alle grote uitgaven van de plaatselijke gemeente moeten door de gemeente in _____ worden goedgekeurd."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Conference",
-      "nl": ""
+      "nl": "Vergadering"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Deliberation",
-      "nl": ""
+      "nl": "Beraad"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Session",
-      "nl": ""
+      "nl": "Zitting"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -4669,35 +4669,35 @@
    "n": 46,
    "prompt": {
     "en": "The Finance Committee in a local church consists of the treasurer and _____ other mem- bers.",
-    "nl": ""
+    "nl": "De financiële commissie in een plaatselijke gemeente bestaat uit de penningmeester en _____ andere leden."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "One",
-      "nl": ""
+      "nl": "Eén"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Two",
-      "nl": ""
+      "nl": "Twee"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Three",
-      "nl": ""
+      "nl": "Drie"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -4718,35 +4718,35 @@
    "n": 47,
    "prompt": {
     "en": "A local church that owns property will appoint a _____ to oversee the property.",
-    "nl": ""
+    "nl": "Een plaatselijke gemeente die eigendom bezit, benoemt _____ om het beheer te voeren."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Church and Pastor’s Council",
-      "nl": ""
+      "nl": "De Gemeente- en Voorgangersraad"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Elders",
-      "nl": ""
+      "nl": "De oudsten"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Local Board of Trustees",
-      "nl": ""
+      "nl": "Een plaatselijk College van Beheerders"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "All of these",
-      "nl": ""
+      "nl": "Al deze"
      }
     }
    ],
@@ -4767,35 +4767,35 @@
    "n": 48,
    "prompt": {
     "en": "In order to preserve the doctrinal integrity of the Church of God as part of the body of Christ, and to provide a biblical role model to our movement, it is imperative that all persons employed by the church in any capacity, or who serve as ministerial volunteers, agree to and abide by the _____.",
-    "nl": ""
+    "nl": "Om de leerstellige integriteit van de Church of God als deel van het lichaam van Christus te bewaren, en om een Bijbels rolmodel te bieden aan onze beweging, is het noodzakelijk dat alle personen die in welke hoedanigheid dan ook door de kerk worden aangesteld, of die als vrijwilliger in de bediening dienen, instemmen met en zich houden aan _____."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "The Practical Commitments",
-      "nl": ""
+      "nl": "De Praktische Verbintenissen"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "The Ten Commandments",
-      "nl": ""
+      "nl": "De Tien Geboden"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "The Declaration of Faith",
-      "nl": ""
+      "nl": "De Geloofsverklaring"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of the above",
-      "nl": ""
+      "nl": "Geen van het bovenstaande"
      }
     }
    ],
@@ -4816,35 +4816,35 @@
    "n": 49,
    "prompt": {
     "en": "No church will implement a _____ without permission from the state overseer.",
-    "nl": ""
+    "nl": "Geen enkele gemeente zal _____ starten zonder toestemming van de staatsopziener."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Christian day school",
-      "nl": ""
+      "nl": "Een christelijke dagschool"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Discipleship ministry",
-      "nl": ""
+      "nl": "Een discipelschapsbediening"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Bible school",
-      "nl": ""
+      "nl": "Een Bijbelschool"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -4865,35 +4865,35 @@
    "n": 50,
    "prompt": {
     "en": "An applicant for ordination may be ordained when he is 25 years of age, provided he has had at least _____ year(s) of active ministry.",
-    "nl": ""
+    "nl": "Een kandidaat voor ordinatie kan worden geordineerd wanneer hij 25 jaar oud is, mits hij ten minste _____ jaar actief in de bediening is geweest."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "One",
-      "nl": ""
+      "nl": "Eén"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Ten",
-      "nl": ""
+      "nl": "Tien"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Fifteen",
-      "nl": ""
+      "nl": "Vijftien"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these ",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -4914,35 +4914,35 @@
    "n": 1,
    "prompt": {
     "en": "The word “inspiration” means _____.",
-    "nl": ""
+    "nl": "Het woord “inspiratie” betekent _____."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Anointed",
-      "nl": ""
+      "nl": "Gezalfd"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Breathed by God",
-      "nl": ""
+      "nl": "Door God geademd"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Infallible",
-      "nl": ""
+      "nl": "Onfeilbaar"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "Incorrupt",
-      "nl": ""
+      "nl": "Onbedorven"
      }
     }
    ],
@@ -4963,35 +4963,35 @@
    "n": 2,
    "prompt": {
     "en": "The _____ is the single moral standard of the Bible.",
-    "nl": ""
+    "nl": "_____ is de enige morele maatstaf van de Bijbel."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Life of faith",
-      "nl": ""
+      "nl": "Het geloofsleven"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Love of God",
-      "nl": ""
+      "nl": "De liefde van God"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Holiness of God",
-      "nl": ""
+      "nl": "De heiligheid van God"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "Grace of God",
-      "nl": ""
+      "nl": "De genade van God"
      }
     }
    ],
@@ -5012,35 +5012,35 @@
    "n": 3,
    "prompt": {
     "en": "The Bible is the only infallible rule of _____ and _____.",
-    "nl": ""
+    "nl": "De Bijbel is de enige onfeilbare regel voor _____ en _____."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Merit; good works",
-      "nl": ""
+      "nl": "Verdienste; goede werken"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Faith; practice",
-      "nl": ""
+      "nl": "Geloof; praktijk"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Love; obedience",
-      "nl": ""
+      "nl": "Liefde; gehoorzaamheid"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "Government; doctrine",
-      "nl": ""
+      "nl": "Bestuur; leer"
      }
     }
    ],
@@ -5061,35 +5061,35 @@
    "n": 4,
    "prompt": {
     "en": "In the relationship of the persons of the Trinity to each other, they exist _____.",
-    "nl": ""
+    "nl": "In de verhouding van de Personen van de Drie-eenheid tot elkaar bestaan zij _____."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Temporarily",
-      "nl": ""
+      "nl": "Tijdelijk"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "In title only",
-      "nl": ""
+      "nl": "Alleen in naam"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Figuratively",
-      "nl": ""
+      "nl": "Figuurlijk"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "Eternally",
-      "nl": ""
+      "nl": "Eeuwig"
      }
     }
    ],
@@ -5110,35 +5110,35 @@
    "n": 5,
    "prompt": {
     "en": "In 1 Timothy 2:5, Paul argues that since there is only one God, there is only one _____.",
-    "nl": ""
+    "nl": "In 1 Timotheüs 2:5 betoogt Paulus dat, omdat er slechts één God is, er ook slechts één _____ is."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Law",
-      "nl": ""
+      "nl": "Wet"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Plan of salvation",
-      "nl": ""
+      "nl": "Heilsplan"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Mediator",
-      "nl": ""
+      "nl": "Middelaar"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "Bible",
-      "nl": ""
+      "nl": "Bijbel"
      }
     }
    ],
@@ -5159,42 +5159,42 @@
    "n": 6,
    "prompt": {
     "en": "Which word does not describe the deity of each person of the Trinity?",
-    "nl": ""
+    "nl": "Welk woord beschrijft de godheid van elke Persoon van de Drie-eenheid níet?"
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Infinite",
-      "nl": ""
+      "nl": "Oneindig"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Transient",
-      "nl": ""
+      "nl": "Vergankelijk"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Eternal",
-      "nl": ""
+      "nl": "Eeuwig"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "Unchangeable",
-      "nl": ""
+      "nl": "Onveranderlijk"
      }
     },
     {
      "key": "E",
      "text": {
       "en": "None of the above",
-      "nl": ""
+      "nl": "Geen van het bovenstaande"
      }
     }
    ],
@@ -5215,35 +5215,35 @@
    "n": 7,
    "prompt": {
     "en": "According to the Scriptures, Jesus is the Son of God _____.",
-    "nl": ""
+    "nl": "Volgens de Schriften is Jezus de Zoon van God _____."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "By adoption",
-      "nl": ""
+      "nl": "Door aanneming"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "By being begotten",
-      "nl": ""
+      "nl": "Doordat Hij verwekt is"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "By creation",
-      "nl": ""
+      "nl": "Door schepping"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "In a figurative sense",
-      "nl": ""
+      "nl": "In figuurlijke zin"
      }
     }
    ],
@@ -5264,42 +5264,42 @@
    "n": 8,
    "prompt": {
     "en": "The deity of Jesus Christ, the Son of God, is proven in Scripture by _____.",
-    "nl": ""
+    "nl": "De godheid van Jezus Christus, de Zoon van God, wordt in de Schrift bewezen door _____."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "The love and kindness He showed to people",
-      "nl": ""
+      "nl": "De liefde en vriendelijkheid die Hij mensen betoonde"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "The ascribing to Him of divine names and divine attributes",
-      "nl": ""
+      "nl": "Het toekennen aan Hem van goddelijke namen en goddelijke eigenschappen"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "The divine works performed by Him and divine worship offered to Him",
-      "nl": ""
+      "nl": "De goddelijke werken die Hij verrichtte en de goddelijke aanbidding die Hem gebracht werd"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "A and B",
-      "nl": ""
+      "nl": "A en B"
      }
     },
     {
      "key": "E",
      "text": {
       "en": "B and C",
-      "nl": ""
+      "nl": "B en C"
      }
     }
    ],
@@ -5320,42 +5320,42 @@
    "n": 9,
    "prompt": {
     "en": "The redemptive office(s) of Jesus Christ is _____.",
-    "nl": ""
+    "nl": "Het verlossende ambt (of de ambten) van Jezus Christus is _____."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Priest",
-      "nl": ""
+      "nl": "Priester"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "King",
-      "nl": ""
+      "nl": "Koning"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Prophet",
-      "nl": ""
+      "nl": "Profeet"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "All of the above",
-      "nl": ""
+      "nl": "Al het bovenstaande"
      }
     },
     {
      "key": "E",
      "text": {
       "en": "None of the above",
-      "nl": ""
+      "nl": "Geen van het bovenstaande"
      }
     }
    ],
@@ -5377,35 +5377,35 @@
    "n": 10,
    "prompt": {
     "en": "Christ the Redeemer must be God and man in order to serve as _____.",
-    "nl": ""
+    "nl": "Christus de Verlosser moest God én mens zijn om te kunnen dienen als _____."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Mediator",
-      "nl": ""
+      "nl": "Middelaar"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Judge",
-      "nl": ""
+      "nl": "Rechter"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Healer",
-      "nl": ""
+      "nl": "Genezer"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "Prophet",
-      "nl": ""
+      "nl": "Profeet"
      }
     }
    ],
@@ -5426,35 +5426,35 @@
    "n": 11,
    "prompt": {
     "en": "When the Son of God was conceived and born of a virgin, He became a man. Choose the statement below that best describes His human nature.",
-    "nl": ""
+    "nl": "Toen de Zoon van God ontvangen en uit een maagd geboren werd, werd Hij mens. Kies de uitspraak die Zijn menselijke natuur het beste beschrijft."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "He was a man in body, but His Spirit was the Holy Spirit.",
-      "nl": ""
+      "nl": "Hij was mens naar het lichaam, maar Zijn geest was de Heilige Geest."
      }
     },
     {
      "key": "B",
      "text": {
       "en": "He was a man, but was not subject to all the weakness of human nature.",
-      "nl": ""
+      "nl": "Hij was mens, maar was niet onderworpen aan alle zwakheid van de menselijke natuur."
      }
     },
     {
      "key": "C",
      "text": {
       "en": "He was fully man, completely identifiable with mankind.",
-      "nl": ""
+      "nl": "Hij was volledig mens, volkomen één te noemen met de mensheid."
      }
     },
     {
      "key": "D",
      "text": {
       "en": "His manhood was united with the divine nature in such a way that He was more than man.",
-      "nl": ""
+      "nl": "Zijn mens-zijn was zo met de goddelijke natuur verenigd dat Hij meer dan mens was."
      }
     }
    ],
@@ -5475,35 +5475,35 @@
    "n": 12,
    "prompt": {
     "en": "When the Son of God became man, God united the human nature and divine nature. Choose the statement below that best describes His divine nature.",
-    "nl": ""
+    "nl": "Toen de Zoon van God mens werd, verenigde God de menselijke en de goddelijke natuur. Kies de uitspraak die Zijn goddelijke natuur het beste beschrijft."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "He was divine in all attributes and powers.",
-      "nl": ""
+      "nl": "Hij was goddelijk in alle eigenschappen en machten."
      }
     },
     {
      "key": "B",
      "text": {
       "en": "He gave up some of His divine nature.",
-      "nl": ""
+      "nl": "Hij gaf een deel van Zijn goddelijke natuur op."
      }
     },
     {
      "key": "C",
      "text": {
       "en": "The divine nature and the human nature were mixed with each other.",
-      "nl": ""
+      "nl": "De goddelijke en de menselijke natuur werden met elkaar vermengd."
      }
     },
     {
      "key": "D",
      "text": {
       "en": "The divine nature came upon Him at the resurrection.",
-      "nl": ""
+      "nl": "De goddelijke natuur kwam bij de opstanding op Hem."
      }
     }
    ],
@@ -5524,35 +5524,35 @@
    "n": 13,
    "prompt": {
     "en": "The crucifixion of Christ was necessary in order to satisfy divine _____.",
-    "nl": ""
+    "nl": "De kruisiging van Christus was noodzakelijk om te voldoen aan het goddelijke _____."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Punishment",
-      "nl": ""
+      "nl": "Strafgericht"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Judgment",
-      "nl": ""
+      "nl": "Oordeel"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Righteousness",
-      "nl": ""
+      "nl": "Gerechtigheid"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "Holiness",
-      "nl": ""
+      "nl": "Heiligheid"
      }
     }
    ],
@@ -5573,35 +5573,35 @@
    "n": 14,
    "prompt": {
     "en": "By His _____, Christ was lifted above all principalities and power and was exalted by the Father to the right hand of power.",
-    "nl": ""
+    "nl": "Door Zijn _____ werd Christus verhoogd boven alle overheid en macht en door de Vader verhoogd tot de rechterhand van de kracht."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Atonement",
-      "nl": ""
+      "nl": "Verzoening"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Miracles",
-      "nl": ""
+      "nl": "Wonderen"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Words",
-      "nl": ""
+      "nl": "Woorden"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "Ascension",
-      "nl": ""
+      "nl": "Hemelvaart"
      }
     }
    ],
@@ -5622,35 +5622,35 @@
    "n": 15,
    "prompt": {
     "en": "Repentance from sin is a benefit of _____.",
-    "nl": ""
+    "nl": "Bekering van zonde is een weldaad van _____."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Man’s depravity",
-      "nl": ""
+      "nl": "De verdorvenheid van de mens"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Godly sorrow",
-      "nl": ""
+      "nl": "Droefheid naar God"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Divine grace",
-      "nl": ""
+      "nl": "Goddelijke genade"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "Obedience",
-      "nl": ""
+      "nl": "Gehoorzaamheid"
      }
     }
    ],
@@ -5671,35 +5671,35 @@
    "n": 16,
    "prompt": {
     "en": "It is a work of _____ to reprove the world of sin.",
-    "nl": ""
+    "nl": "Het is een werk van _____ om de wereld van zonde te overtuigen."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "The prophet",
-      "nl": ""
+      "nl": "De profeet"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "The Holy Spirit",
-      "nl": ""
+      "nl": "De Heilige Geest"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Preachers",
-      "nl": ""
+      "nl": "Predikers"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "The Bible",
-      "nl": ""
+      "nl": "De Bijbel"
      }
     }
    ],
@@ -5720,35 +5720,35 @@
    "n": 17,
    "prompt": {
     "en": "As God’s gift, justification is an act of divine _____.",
-    "nl": ""
+    "nl": "Als gave van God is rechtvaardiging een daad van goddelijke _____."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Patience",
-      "nl": ""
+      "nl": "Geduld"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Grace",
-      "nl": ""
+      "nl": "Genade"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Self-control",
-      "nl": ""
+      "nl": "Zelfbeheersing"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "Hope",
-      "nl": ""
+      "nl": "Hoop"
      }
     }
    ],
@@ -5769,35 +5769,35 @@
    "n": 18,
    "prompt": {
     "en": "The image of God is restored in man by _____.",
-    "nl": ""
+    "nl": "Het beeld van God wordt in de mens hersteld door _____."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Justification",
-      "nl": ""
+      "nl": "Rechtvaardiging"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Repentance",
-      "nl": ""
+      "nl": "Bekering"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Adoption",
-      "nl": ""
+      "nl": "Aanneming tot kind"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "Regeneration",
-      "nl": ""
+      "nl": "Wedergeboorte"
      }
     }
    ],
@@ -5818,35 +5818,35 @@
    "n": 19,
    "prompt": {
     "en": "The result of new birth is _____.",
-    "nl": ""
+    "nl": "Het gevolg van de nieuwe geboorte is _____."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "A radical change in manner of life",
-      "nl": ""
+      "nl": "Een radicale verandering van levenswandel"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "That we are given an opportunity to prove our worthiness of life eternal",
-      "nl": ""
+      "nl": "Dat wij gelegenheid krijgen te bewijzen dat wij het eeuwige leven waard zijn"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "That we will never again have to worry about temptation",
-      "nl": ""
+      "nl": "Dat wij ons nooit meer zorgen hoeven te maken over verleiding"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "That we become sinless and pure physically and spiritually as Christ was when He was on earth",
-      "nl": ""
+      "nl": "Dat wij lichamelijk en geestelijk zondeloos en rein worden zoals Christus was toen Hij op aarde was"
      }
     }
    ],
@@ -5867,35 +5867,35 @@
    "n": 20,
    "prompt": {
     "en": "Sanctification is an act of faith by which the believer reckons himself to be _____.",
-    "nl": ""
+    "nl": "Heiliging is een daad van geloof waardoor de gelovige zichzelf rekent _____ te zijn."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Holy",
-      "nl": ""
+      "nl": "Heilig"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Clean",
-      "nl": ""
+      "nl": "Rein"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Dead to sin",
-      "nl": ""
+      "nl": "Dood voor de zonde"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "Pure in heart",
-      "nl": ""
+      "nl": "Rein van hart"
      }
     }
    ],
@@ -5916,35 +5916,35 @@
    "n": 21,
    "prompt": {
     "en": "The pursuit of _____ is the normal manner of life for the believer.",
-    "nl": ""
+    "nl": "Het najagen van _____ is de normale levenswijze voor de gelovige."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Holy living",
-      "nl": ""
+      "nl": "Heilig leven"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Miracles",
-      "nl": ""
+      "nl": "Wonderen"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Excellence",
-      "nl": ""
+      "nl": "Uitmuntendheid"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "Eternal life",
-      "nl": ""
+      "nl": "Eeuwig leven"
      }
     }
    ],
@@ -5965,35 +5965,35 @@
    "n": 22,
    "prompt": {
     "en": "In all instances in the Book of Acts in which people received the Holy Spirit, they were already in _____.",
-    "nl": ""
+    "nl": "In alle gevallen in het boek Handelingen waarin mensen de Heilige Geest ontvingen, verkeerden zij reeds in _____."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "The ministry of preaching",
-      "nl": ""
+      "nl": "De bediening van de prediking"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "The body of the apostles",
-      "nl": ""
+      "nl": "De kring van de apostelen"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "A covenant relationship with Israel",
-      "nl": ""
+      "nl": "Een verbondsrelatie met Israël"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "A saved relationship with God",
-      "nl": ""
+      "nl": "Een verloste relatie met God"
      }
     }
    ],
@@ -6014,35 +6014,35 @@
    "n": 23,
    "prompt": {
     "en": "Speaking in tongues as the Holy Spirit gives the utterance is _____.",
-    "nl": ""
+    "nl": "Spreken in tongen zoals de Heilige Geest het geeft uit te spreken, is _____."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Full proof of the infilling of the Holy Spirit",
-      "nl": ""
+      "nl": "Het volle bewijs van de vervulling met de Heilige Geest"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "A divine-human communication",
-      "nl": ""
+      "nl": "Een goddelijk-menselijke communicatie"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "The will of God for some, but not for every believer",
-      "nl": ""
+      "nl": "Gods wil voor sommigen, maar niet voor elke gelovige"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "A and B",
-      "nl": ""
+      "nl": "A en B"
      }
     }
    ],
@@ -6063,35 +6063,35 @@
    "n": 24,
    "prompt": {
     "en": "Select the statement below that correctly describes the continuing ministry of the Holy Spirit in the gift of tongues.",
-    "nl": ""
+    "nl": "Kies de uitspraak die de voortdurende bediening van de Heilige Geest in de gave van tongen juist beschrijft."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Speaking in tongues was intended only for the Apostolic Age.",
-      "nl": ""
+      "nl": "Spreken in tongen was alleen bedoeld voor het apostolische tijdperk."
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Speaking in tongues occurs only under the direct ministry of the apostles.",
-      "nl": ""
+      "nl": "Spreken in tongen vindt alleen plaats onder de rechtstreekse bediening van de apostelen."
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Speaking in tongues is a continuing ministry from the Holy Spirit to the individual in private.",
-      "nl": ""
+      "nl": "Spreken in tongen is een voortdurende bediening van de Heilige Geest aan de enkeling in het verborgene."
      }
     },
     {
      "key": "D",
      "text": {
       "en": "Speaking in tongues is a continuing ministry from the Holy Spirit to the individual and to the church.",
-      "nl": ""
+      "nl": "Spreken in tongen is een voortdurende bediening van de Heilige Geest aan de enkeling én aan de gemeente."
      }
     }
    ],
@@ -6112,35 +6112,35 @@
    "n": 25,
    "prompt": {
     "en": "The act of _____ represents the believer’s death, burial, and resurrection with Christ.",
-    "nl": ""
+    "nl": "De handeling van _____ stelt de dood, begrafenis en opstanding van de gelovige met Christus voor."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Sanctification",
-      "nl": ""
+      "nl": "Heiliging"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Regeneration",
-      "nl": ""
+      "nl": "Wedergeboorte"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Immersion",
-      "nl": ""
+      "nl": "Onderdompeling"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "Submission",
-      "nl": ""
+      "nl": "Onderwerping"
      }
     }
    ],
@@ -6161,42 +6161,42 @@
    "n": 26,
    "prompt": {
     "en": "Which of the following is a consequence of man’s sin and violation of God’s moral law?",
-    "nl": ""
+    "nl": "Wat van het volgende is een gevolg van de zonde van de mens en zijn overtreding van Gods morele wet?"
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Man’s spiritual depravity",
-      "nl": ""
+      "nl": "De geestelijke verdorvenheid van de mens"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Man’s alienation from God",
-      "nl": ""
+      "nl": "De vervreemding van de mens van God"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Man’s bodily corruption and death",
-      "nl": ""
+      "nl": "De lichamelijke ontbinding en dood van de mens"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "All of the above",
-      "nl": ""
+      "nl": "Al het bovenstaande"
      }
     },
     {
      "key": "E",
      "text": {
       "en": "None of the above",
-      "nl": ""
+      "nl": "Geen van het bovenstaande"
      }
     }
    ],
@@ -6217,35 +6217,35 @@
    "n": 27,
    "prompt": {
     "en": "Divine healing is associated with the going forth of _____.",
-    "nl": ""
+    "nl": "Goddelijke genezing gaat samen met het uitgaan van _____."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "The Word of God",
-      "nl": ""
+      "nl": "Het Woord van God"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "The church",
-      "nl": ""
+      "nl": "De gemeente"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "The love of God",
-      "nl": ""
+      "nl": "De liefde van God"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "The mercy of God",
-      "nl": ""
+      "nl": "De barmhartigheid van God"
      }
     }
    ],
@@ -6266,35 +6266,35 @@
    "n": 28,
    "prompt": {
     "en": "The Lord’s Supper provides for our frequent return to _____.",
-    "nl": ""
+    "nl": "Het Avondmaal des Heeren voorziet in onze veelvuldige terugkeer naar _____."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "The Upper Room",
-      "nl": ""
+      "nl": "De Opperzaal"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Calvary",
-      "nl": ""
+      "nl": "Golgotha"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Worship",
-      "nl": ""
+      "nl": "De aanbidding"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "Pentecost",
-      "nl": ""
+      "nl": "Pinksteren"
      }
     }
    ],
@@ -6315,35 +6315,35 @@
    "n": 29,
    "prompt": {
     "en": "The first purpose of Christ’s second advent is _____.",
-    "nl": ""
+    "nl": "Het eerste doel van de tweede komst van Christus is _____."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "The glorification of all believers",
-      "nl": ""
+      "nl": "De verheerlijking van alle gelovigen"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "To judge all mankind",
-      "nl": ""
+      "nl": "Het oordelen van de gehele mensheid"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "To destroy Satan forever",
-      "nl": ""
+      "nl": "Satan voor altijd te vernietigen"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of the above",
-      "nl": ""
+      "nl": "Geen van het bovenstaande"
      }
     }
    ],
@@ -6364,35 +6364,35 @@
    "n": 30,
    "prompt": {
     "en": "In ordaining the sacrament of the Lord’s Supper, Christ explained that the shedding of blood was for _____.",
-    "nl": ""
+    "nl": "Bij het instellen van het sacrament van het Avondmaal legde Christus uit dat het vergieten van bloed diende tot _____."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "The sealing of the new covenant",
-      "nl": ""
+      "nl": "De bezegeling van het nieuwe verbond"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "The sealing of the Holy Spirit as the gift of God",
-      "nl": ""
+      "nl": "De verzegeling van de Heilige Geest als gave van God"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "The uniting of the body of Christ as one",
-      "nl": ""
+      "nl": "De vereniging van het lichaam van Christus tot één"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "The fulfillment of the Old Testament sacrifices",
-      "nl": ""
+      "nl": "De vervulling van de oudtestamentische offers"
      }
     }
    ],
@@ -6413,35 +6413,35 @@
    "n": 31,
    "prompt": {
     "en": "By the term premillennial, we designate that _____.",
-    "nl": ""
+    "nl": "Met de term premillennialistisch duiden wij aan dat _____."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Christ will return prior to the beginning of the millennial reign",
-      "nl": ""
+      "nl": "Christus zal terugkeren vóór het begin van het duizendjarig rijk"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "There will be a reign of peace and righteousness before Christ returns",
-      "nl": ""
+      "nl": "er een heerschappij van vrede en gerechtigheid zal zijn vóórdat Christus terugkeert"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Christ will reign as human king",
-      "nl": ""
+      "nl": "Christus zal regeren als menselijk koning"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "Before the final Great Judgment Christ will return",
-      "nl": ""
+      "nl": "Christus vóór het laatste Grote Oordeel zal terugkeren"
      }
     }
    ],
@@ -6462,35 +6462,35 @@
    "n": 32,
    "prompt": {
     "en": "An example of spiritual discipline is _____.",
-    "nl": ""
+    "nl": "Een voorbeeld van een geestelijke discipline is _____."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Prayer",
-      "nl": ""
+      "nl": "Gebed"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Fasting",
-      "nl": ""
+      "nl": "Vasten"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Study",
-      "nl": ""
+      "nl": "Studie"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "All of these",
-      "nl": ""
+      "nl": "Al deze"
      }
     }
    ],
@@ -6511,35 +6511,35 @@
    "n": 33,
    "prompt": {
     "en": "Christians are to unite _____ with other members of the church.",
-    "nl": ""
+    "nl": "Christenen moeten zich _____ met andere leden van de gemeente verenigen."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Regularly",
-      "nl": ""
+      "nl": "Regelmatig"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "When called upon",
-      "nl": ""
+      "nl": "Wanneer daarom gevraagd wordt"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Intermittently",
-      "nl": ""
+      "nl": "Bij tijd en wijle"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -6560,35 +6560,35 @@
    "n": 34,
    "prompt": {
     "en": "The body is the _____ of the Holy Ghost, and we are to glorify God in our bodies.",
-    "nl": ""
+    "nl": "Het lichaam is _____ van de Heilige Geest, en wij moeten God verheerlijken in ons lichaam."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Offering",
-      "nl": ""
+      "nl": "Het offer"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Organization",
-      "nl": ""
+      "nl": "De organisatie"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Temple",
-      "nl": ""
+      "nl": "De tempel"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -6609,35 +6609,35 @@
    "n": 35,
    "prompt": {
     "en": "The practice of Christian disciplines and virtues should begin in the _____.",
-    "nl": ""
+    "nl": "De beoefening van christelijke disciplines en deugden behoort te beginnen in _____."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Church",
-      "nl": ""
+      "nl": "De gemeente"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Home",
-      "nl": ""
+      "nl": "Het gezin"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "World",
-      "nl": ""
+      "nl": "De wereld"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -6658,35 +6658,35 @@
    "n": 36,
    "prompt": {
     "en": "Which statement reflects the primary concern for the work of the church in our world today?",
-    "nl": ""
+    "nl": "Welke uitspraak geeft de voornaamste zorg weer voor het werk van de kerk in onze wereld van vandaag?"
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "We should preach the gospel of God’s reconciling grace in Christ and then minister to the many needs of the people.",
-      "nl": ""
+      "nl": "Wij moeten het evangelie van Gods verzoenende genade in Christus prediken en vervolgens dienstbaar zijn aan de vele noden van de mensen."
      }
     },
     {
      "key": "B",
      "text": {
       "en": "We should be separate and apart from secular society and avoid most social involve- ment.",
-      "nl": ""
+      "nl": "Wij moeten afgezonderd blijven van de seculiere samenleving en de meeste maatschappelijke betrokkenheid mijden."
      }
     },
     {
      "key": "C",
      "text": {
       "en": "Our focus should be on spiritual matters alone and any social ministries of the church should be only a means of converting sinners.",
-      "nl": ""
+      "nl": "Onze aandacht moet uitsluitend uitgaan naar geestelijke zaken, en sociale bedieningen van de kerk mogen alleen een middel zijn om zondaren te bekeren."
      }
     },
     {
      "key": "D",
      "text": {
       "en": "We should support liberation theology and get totally involved in changing our world through civil disobedience and even violence if necessary.",
-      "nl": ""
+      "nl": "Wij moeten de bevrijdingstheologie steunen en ons volledig inzetten om onze wereld te veranderen door burgerlijke ongehoorzaamheid en zo nodig geweld."
      }
     }
    ],
@@ -6707,35 +6707,35 @@
    "n": 37,
    "prompt": {
     "en": "_____ supports the verbal inspiration of the Bible.",
-    "nl": ""
+    "nl": "_____ ondersteunt de woordelijke inspiratie van de Bijbel."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Acts 3:21",
-      "nl": ""
+      "nl": "Handelingen 3:21"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "2 Timothy 3:16",
-      "nl": ""
+      "nl": "2 Timotheüs 3:16"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "A and B",
-      "nl": ""
+      "nl": "A en B"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -6756,35 +6756,35 @@
    "n": 38,
    "prompt": {
     "en": "_____ reinforces that there is one God existing in three persons; namely, the Father, Son, and Holy Ghost.",
-    "nl": ""
+    "nl": "_____ bevestigt dat er één God is die bestaat in drie Personen, namelijk de Vader, de Zoon en de Heilige Geest."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Ezekiel 4:8",
-      "nl": ""
+      "nl": "Ezechiël 4:8"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "1 Corinthians 8:4",
-      "nl": ""
+      "nl": "1 Korinthe 8:4"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "A and B",
-      "nl": ""
+      "nl": "A en B"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -6805,35 +6805,35 @@
    "n": 39,
    "prompt": {
     "en": "_____ substantiates that Jesus Christ is the only begotten Son of the Father, conceived of the Holy Ghost, and born of the Virgin Mary. That Jesus was crucified, buried, and raised from the dead. That He ascended to heaven and is today at the right hand of the Father as the Intercessor.",
-    "nl": ""
+    "nl": "_____ onderbouwt dat Jezus Christus de eniggeboren Zoon van de Vader is, ontvangen van de Heilige Geest en geboren uit de maagd Maria; dat Jezus gekruisigd, begraven en uit de doden opgewekt is; dat Hij is opgevaren naar de hemel en vandaag aan de rechterhand van de Vader is als de Voorbidder."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Matthew 5:9-10",
-      "nl": ""
+      "nl": "Mattheüs 5:9-10"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "John 3:16",
-      "nl": ""
+      "nl": "Johannes 3:16"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "A and B",
-      "nl": ""
+      "nl": "A en B"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -6854,35 +6854,35 @@
    "n": 40,
    "prompt": {
     "en": "_____ sustains that all have sinned and come short of the glory of God and that repen- tance is commanded of God for all and necessary for forgiveness of sins.",
-    "nl": ""
+    "nl": "_____ houdt staande dat allen gezondigd hebben en de heerlijkheid van God missen, en dat bekering door God aan allen geboden is en noodzakelijk is voor vergeving van zonden."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Luke 24:47",
-      "nl": ""
+      "nl": "Lukas 24:47"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Romans 5:1, 7",
-      "nl": ""
+      "nl": "Romeinen 5:1, 7"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "A and B",
-      "nl": ""
+      "nl": "A en B"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -6903,35 +6903,35 @@
    "n": 41,
    "prompt": {
     "en": "_____ upholds that justification, regeneration, and the new birth are wrought by faith in the blood of Jesus Christ.",
-    "nl": ""
+    "nl": "_____ bevestigt dat rechtvaardiging, wedergeboorte en de nieuwe geboorte tot stand komen door geloof in het bloed van Jezus Christus."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Acts 3:24",
-      "nl": ""
+      "nl": "Handelingen 3:24"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Romans 5:1, 7",
-      "nl": ""
+      "nl": "Romeinen 5:1, 7"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "A and B",
-      "nl": ""
+      "nl": "A en B"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -6952,35 +6952,35 @@
    "n": 42,
    "prompt": {
     "en": "_____ establishes that sanctification is subsequent to the new birth, through faith in the blood of Christ; through the Word, and by the Holy Ghost.",
-    "nl": ""
+    "nl": "_____ stelt vast dat heiliging volgt op de nieuwe geboorte, door geloof in het bloed van Christus, door het Woord en door de Heilige Geest."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "1 Thessalonians 5:23",
-      "nl": ""
+      "nl": "1 Thessalonicenzen 5:23"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "John 17:17",
-      "nl": ""
+      "nl": "Johannes 17:17"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "A and B",
-      "nl": ""
+      "nl": "A en B"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -7001,35 +7001,35 @@
    "n": 43,
    "prompt": {
     "en": "_____ endorses holiness to be God’s standard of living for His people.",
-    "nl": ""
+    "nl": "_____ bekrachtigt dat heiligheid Gods maatstaf voor het leven van Zijn volk is."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Hebrews 12:14",
-      "nl": ""
+      "nl": "Hebreeën 12:14"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "1 John 4:3, 7",
-      "nl": ""
+      "nl": "1 Johannes 4:3, 7"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "A and B",
-      "nl": ""
+      "nl": "A en B"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -7050,35 +7050,35 @@
    "n": 44,
    "prompt": {
     "en": "_____ verifies baptism with the Holy Ghost subsequent to a clean heart.",
-    "nl": ""
+    "nl": "_____ bevestigt de doop met de Heilige Geest als volgend op een rein hart."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Acts 1:8",
-      "nl": ""
+      "nl": "Handelingen 1:8"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Ephesians 5:18",
-      "nl": ""
+      "nl": "Efeze 5:18"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "A and B",
-      "nl": ""
+      "nl": "A en B"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -7099,35 +7099,35 @@
    "n": 45,
    "prompt": {
     "en": "_____ testifies about speaking with other tongues as the Spirit gives utterance and that it is the initial evidence of the baptism of the Holy Ghost.",
-    "nl": ""
+    "nl": "_____ getuigt van het spreken in andere tongen zoals de Geest het geeft uit te spreken, en dat dit het eerste bewijs is van de doop met de Heilige Geest."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Luke 4:4",
-      "nl": ""
+      "nl": "Lukas 4:4"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Acts 3:1-4",
-      "nl": ""
+      "nl": "Handelingen 3:1-4"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "A and B",
-      "nl": ""
+      "nl": "A en B"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -7148,35 +7148,35 @@
    "n": 46,
    "prompt": {
     "en": "_____ validates water baptism by immersion, and all who repent should be baptized in the name of the Father, and of the Son, and of the Holy Ghost.",
-    "nl": ""
+    "nl": "_____ bevestigt de waterdoop door onderdompeling, en dat allen die zich bekeren gedoopt behoren te worden in de naam van de Vader, en van de Zoon, en van de Heilige Geest."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Matthew 16:16",
-      "nl": ""
+      "nl": "Mattheüs 16:16"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Romans 7:4",
-      "nl": ""
+      "nl": "Romeinen 7:4"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "A and B",
-      "nl": ""
+      "nl": "A en B"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -7197,35 +7197,35 @@
    "n": 47,
    "prompt": {
     "en": "_____ attests to divine healing being provided for all in the Atonement.",
-    "nl": ""
+    "nl": "_____ getuigt ervan dat goddelijke genezing voor allen voorzien is in de verzoening."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Isaiah 4:5",
-      "nl": ""
+      "nl": "Jesaja 4:5"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "Matthew 8:16-17",
-      "nl": ""
+      "nl": "Mattheüs 8:16-17"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "A and B",
-      "nl": ""
+      "nl": "A en B"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -7246,35 +7246,35 @@
    "n": 48,
    "prompt": {
     "en": "_____ documents the Lord’s Supper and washing of the saints’ feet.",
-    "nl": ""
+    "nl": "_____ documenteert het Avondmaal des Heeren en de wassing van de voeten der heiligen."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Luke 22:19-20",
-      "nl": ""
+      "nl": "Lukas 22:19-20"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "1 John 3:4-7",
-      "nl": ""
+      "nl": "1 Johannes 3:4-7"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "A and B",
-      "nl": ""
+      "nl": "A en B"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -7295,35 +7295,35 @@
    "n": 49,
    "prompt": {
     "en": "_____ proves the premillennial second coming of Jesus. First, to resurrect the righteous dead and to catch away the living saints to Him in the air. Second, to reign on the earth a thousand years.",
-    "nl": ""
+    "nl": "_____ bewijst de premillennialistische wederkomst van Jezus: ten eerste om de rechtvaardige doden op te wekken en de levende heiligen Hem tegemoet te voeren in de lucht; ten tweede om duizend jaar op aarde te regeren."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Luke 24:1, 2",
-      "nl": ""
+      "nl": "Lukas 24:1, 2"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "2 Thessalonians 4:13-18",
-      "nl": ""
+      "nl": "2 Thessalonicenzen 4:13-18"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "A and B",
-      "nl": ""
+      "nl": "A en B"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],
@@ -7344,35 +7344,35 @@
    "n": 50,
    "prompt": {
     "en": "_____ demonstrates the bodily resurrection; eternal life for the righteous, and eternal punishment for the wicked.",
-    "nl": ""
+    "nl": "_____ toont de lichamelijke opstanding aan; eeuwig leven voor de rechtvaardigen en eeuwige straf voor de goddelozen."
    },
    "choices": [
     {
      "key": "A",
      "text": {
       "en": "Philippians 3:20, 21",
-      "nl": ""
+      "nl": "Filippenzen 3:20, 21"
      }
     },
     {
      "key": "B",
      "text": {
       "en": "John 11:25-26",
-      "nl": ""
+      "nl": "Johannes 11:25-26"
      }
     },
     {
      "key": "C",
      "text": {
       "en": "A and B",
-      "nl": ""
+      "nl": "A en B"
      }
     },
     {
      "key": "D",
      "text": {
       "en": "None of these",
-      "nl": ""
+      "nl": "Geen van deze"
      }
     }
    ],

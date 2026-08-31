@@ -1002,7 +1002,7 @@
     "nl": ""
    },
    "a": {
-    "en": "Communion; baptism;",
+    "en": "sacraments",
     "nl": ""
    },
    "source": {
@@ -1024,7 +1024,7 @@
     "nl": ""
    },
    "a": {
-    "en": "footwashing mystery and celebration",
+    "en": "Communion; baptism; footwashing",
     "nl": ""
    },
    "source": {
@@ -1032,7 +1032,7 @@
     "block": 3,
     "page": 37
    },
-   "matchScore": 1.733
+   "matchScore": 3.2
   },
   {
    "id": "bank1-3-47",
@@ -1046,7 +1046,7 @@
     "nl": ""
    },
    "a": {
-    "en": "Communion",
+    "en": "mystery and celebration",
     "nl": ""
    },
    "source": {
@@ -1054,7 +1054,7 @@
     "block": 4,
     "page": 37
    },
-   "matchScore": 3.2
+   "matchScore": 2.1
   },
   {
    "id": "bank1-4-48",
@@ -1068,7 +1068,7 @@
     "nl": ""
    },
    "a": {
-    "en": "Baptism",
+    "en": "Communion",
     "nl": ""
    },
    "source": {
@@ -1090,7 +1090,7 @@
     "nl": ""
    },
    "a": {
-    "en": "Communion",
+    "en": "Baptism",
     "nl": ""
    },
    "source": {
@@ -1112,13 +1112,13 @@
     "nl": ""
    },
    "a": {
-    "en": "person",
+    "en": "Communion",
     "nl": ""
    },
    "source": {
     "chapter": "p1c4",
-    "block": 25,
-    "page": 38
+    "block": 8,
+    "page": 37
    },
    "matchScore": 2.7
   },
@@ -1134,15 +1134,15 @@
     "nl": ""
    },
    "a": {
-    "en": "fosters fellowship",
+    "en": "person",
     "nl": ""
    },
    "source": {
     "chapter": "p1c4",
-    "block": 44,
+    "block": 25,
     "page": 38
    },
-   "matchScore": 1.6
+   "matchScore": 2.7
   },
   {
    "id": "bank1-8-52",
@@ -1156,15 +1156,15 @@
     "nl": ""
    },
    "a": {
-    "en": "forgiven",
+    "en": "fosters fellowship",
     "nl": ""
    },
    "source": {
     "chapter": "p1c4",
-    "block": 44,
+    "block": 31,
     "page": 38
    },
-   "matchScore": 2.4
+   "matchScore": 1.7
   },
   {
    "id": "bank1-9-53",
@@ -1178,13 +1178,13 @@
     "nl": ""
    },
    "a": {
-    "en": "spiritually",
+    "en": "forgiven",
     "nl": ""
    },
    "source": {
     "chapter": "p1c4",
-    "block": 48,
-    "page": 39
+    "block": 44,
+    "page": 38
    },
    "matchScore": 2.533
   },
@@ -1200,15 +1200,15 @@
     "nl": ""
    },
    "a": {
-    "en": "expression",
+    "en": "spiritually",
     "nl": ""
    },
    "source": {
     "chapter": "p1c4",
-    "block": 93,
-    "page": 41
+    "block": 48,
+    "page": 39
    },
-   "matchScore": 2.533
+   "matchScore": 3.2
   },
   {
    "id": "bank1-11-55",
@@ -1222,15 +1222,15 @@
     "nl": ""
    },
    "a": {
-    "en": "believers",
+    "en": "expression",
     "nl": ""
    },
    "source": {
     "chapter": "p1c4",
-    "block": 4,
-    "page": 37
+    "block": 59,
+    "page": 39
    },
-   "matchScore": 3.2
+   "matchScore": 2.867
   },
   {
    "id": "bank1-12-56",
@@ -1244,15 +1244,15 @@
     "nl": ""
    },
    "a": {
-    "en": "identification",
+    "en": "believers",
     "nl": ""
    },
    "source": {
     "chapter": "p1c4",
-    "block": 92,
-    "page": 40
+    "block": 65,
+    "page": 39
    },
-   "matchScore": 2.2
+   "matchScore": 3.2
   },
   {
    "id": "bank1-13-57",
@@ -1266,13 +1266,13 @@
     "nl": ""
    },
    "a": {
-    "en": "save",
+    "en": "identification",
     "nl": ""
    },
    "source": {
     "chapter": "p1c4",
-    "block": 4,
-    "page": 37
+    "block": 92,
+    "page": 40
    },
    "matchScore": 3.2
   },
@@ -1288,15 +1288,15 @@
     "nl": ""
    },
    "a": {
-    "en": "Immersion",
+    "en": "save",
     "nl": ""
    },
    "source": {
     "chapter": "p1c4",
-    "block": 133,
-    "page": 42
+    "block": 4,
+    "page": 37
    },
-   "matchScore": 3.2
+   "matchScore": 2.7
   },
   {
    "id": "bank1-15-59",
@@ -1310,12 +1310,12 @@
     "nl": ""
    },
    "a": {
-    "en": "conversion",
+    "en": "Immersion",
     "nl": ""
    },
    "source": {
     "chapter": "p1c4",
-    "block": 129,
+    "block": 120,
     "page": 42
    },
    "matchScore": 2.7
@@ -1332,7 +1332,7 @@
     "nl": ""
    },
    "a": {
-    "en": "28:19",
+    "en": "conversion",
     "nl": ""
    },
    "source": {
@@ -1340,7 +1340,7 @@
     "block": 129,
     "page": 42
    },
-   "matchScore": 1.0
+   "matchScore": 3.2
   },
   {
    "id": "bank1-17-61",
@@ -1354,15 +1354,11 @@
     "nl": ""
    },
    "a": {
-    "en": "hospitality",
+    "en": "28:19",
     "nl": ""
    },
-   "source": {
-    "chapter": "p1c1",
-    "block": 160,
-    "page": 20
-   },
-   "matchScore": 2.2
+   "source": null,
+   "matchScore": 0.5
   },
   {
    "id": "bank1-18-62",
@@ -1376,15 +1372,15 @@
     "nl": ""
    },
    "a": {
-    "en": "John 13:1-17",
+    "en": "hospitality",
     "nl": ""
    },
    "source": {
     "chapter": "p1c4",
-    "block": 140,
-    "page": 44
+    "block": 136,
+    "page": 43
    },
-   "matchScore": 2.7
+   "matchScore": 3.2
   },
   {
    "id": "bank1-19-63",
@@ -1398,11 +1394,37 @@
     "nl": ""
    },
    "a": {
+    "en": "John 13:1-17",
+    "nl": ""
+   },
+   "source": {
+    "chapter": "p1c4",
+    "block": 105,
+    "page": 41
+   },
+   "matchScore": 2.45
+  },
+  {
+   "id": "bank1-20-64",
+   "bank": "bank1",
+   "module": "part1",
+   "section": "THE MINISTER: “HOW DO I ADMINISTER THE SACRAMENTS?”",
+   "n": 20,
+   "page": 80,
+   "q": {
+    "en": "The Lord’s Supper focuses on the _____ of Christ.",
+    "nl": ""
+   },
+   "a": {
     "en": "crucifixion",
     "nl": ""
    },
-   "source": null,
-   "matchScore": 0.5
+   "source": {
+    "chapter": "p1c4",
+    "block": 25,
+    "page": 38
+   },
+   "matchScore": 1.0
   },
   {
    "id": "bank1-1-65",
@@ -1504,15 +1526,15 @@
     "nl": ""
    },
    "a": {
-    "en": "purpose relationship",
+    "en": "purpose",
     "nl": ""
    },
    "source": {
-    "chapter": "p1c5",
-    "block": 58,
-    "page": 48
+    "chapter": "p1c3",
+    "block": 14,
+    "page": 30
    },
-   "matchScore": 1.433
+   "matchScore": 2.367
   },
   {
    "id": "bank1-6-70",
@@ -1526,7 +1548,7 @@
     "nl": ""
    },
    "a": {
-    "en": "service",
+    "en": "relationship",
     "nl": ""
    },
    "source": {
@@ -1535,6 +1557,28 @@
     "page": 47
    },
    "matchScore": 2.867
+  },
+  {
+   "id": "bank1-7-71",
+   "bank": "bank1",
+   "module": "part1",
+   "section": "THE MINISTER: “HOW DO I CONDUCT FAMILY MINISTRY?”",
+   "n": 7,
+   "page": 81,
+   "q": {
+    "en": "In premarital counseling, the pastor goes over the order of _____ with the couple.",
+    "nl": ""
+   },
+   "a": {
+    "en": "service",
+    "nl": ""
+   },
+   "source": {
+    "chapter": "p1c5",
+    "block": 54,
+    "page": 47
+   },
+   "matchScore": 2.771
   },
   {
    "id": "bank1-8-72",
@@ -1790,13 +1834,13 @@
     "nl": ""
    },
    "a": {
-    "en": "philosophy;",
+    "en": "Administration",
     "nl": ""
    },
    "source": {
-    "chapter": "p1c2",
-    "block": 97,
-    "page": 25
+    "chapter": "p1c7",
+    "block": 3,
+    "page": 57
    },
    "matchScore": 2.867
   },
@@ -1812,7 +1856,7 @@
     "nl": ""
    },
    "a": {
-    "en": "plan strategy",
+    "en": "philosophy; plan",
     "nl": ""
    },
    "source": {
@@ -1834,7 +1878,7 @@
     "nl": ""
    },
    "a": {
-    "en": "Administration",
+    "en": "strategy",
     "nl": ""
    },
    "source": {
@@ -1856,7 +1900,7 @@
     "nl": ""
    },
    "a": {
-    "en": "guides and directs",
+    "en": "Administration",
     "nl": ""
    },
    "source": {
@@ -1864,7 +1908,7 @@
     "block": 3,
     "page": 57
    },
-   "matchScore": 2.1
+   "matchScore": 3.2
   },
   {
    "id": "bank1-5-87",
@@ -1878,15 +1922,15 @@
     "nl": ""
    },
    "a": {
-    "en": "objective; purpose; benefits",
+    "en": "guides and directs",
     "nl": ""
    },
    "source": {
     "chapter": "p1c7",
-    "block": 6,
+    "block": 3,
     "page": 57
    },
-   "matchScore": 2.45
+   "matchScore": 2.1
   },
   {
    "id": "bank1-6-88",
@@ -1900,7 +1944,7 @@
     "nl": ""
    },
    "a": {
-    "en": "focus; effectiveness",
+    "en": "objective; purpose; benefits",
     "nl": ""
    },
    "source": {
@@ -1922,15 +1966,15 @@
     "nl": ""
    },
    "a": {
-    "en": "Proverbs 29:18",
+    "en": "focus; effectiveness",
     "nl": ""
    },
    "source": {
     "chapter": "p1c7",
-    "block": 13,
+    "block": 6,
     "page": 57
    },
-   "matchScore": 2.486
+   "matchScore": 3.2
   },
   {
    "id": "bank1-8-90",
@@ -1944,15 +1988,15 @@
     "nl": ""
    },
    "a": {
-    "en": "visionaries",
+    "en": "Proverbs 29:18",
     "nl": ""
    },
    "source": {
     "chapter": "p1c7",
-    "block": 13,
-    "page": 57
+    "block": 33,
+    "page": 59
    },
-   "matchScore": 2.343
+   "matchScore": 2.629
   },
   {
    "id": "bank1-9-91",
@@ -1966,15 +2010,15 @@
     "nl": ""
    },
    "a": {
-    "en": "future possibility",
+    "en": "visionaries",
     "nl": ""
    },
    "source": {
     "chapter": "p1c7",
-    "block": 45,
-    "page": 59
+    "block": 13,
+    "page": 57
    },
-   "matchScore": 2.2
+   "matchScore": 2.291
   },
   {
    "id": "bank1-10-92",
@@ -1988,15 +2032,15 @@
     "nl": ""
    },
    "a": {
-    "en": "evangelism; edification;",
+    "en": "future possibility",
     "nl": ""
    },
    "source": {
     "chapter": "p1c7",
-    "block": 315,
-    "page": 74
+    "block": 45,
+    "page": 59
    },
-   "matchScore": 2.2
+   "matchScore": 2.7
   },
   {
    "id": "bank1-11-93",
@@ -2010,11 +2054,11 @@
     "nl": ""
    },
    "a": {
-    "en": "equipping; encouraging; and excellence selecting personnel; identi",
+    "en": "evangelism; edification; equipping; encouraging; and excellence",
     "nl": ""
    },
    "source": null,
-   "matchScore": 0.571
+   "matchScore": 0.88
   },
   {
    "id": "bank1-12-94",
@@ -2028,7 +2072,7 @@
     "nl": ""
    },
    "a": {
-    "en": "fying ministry plans; establishing a budget for the ministry plan organization",
+    "en": "selecting personnel; identifying ministry plans; establishing a budget for the ministry plan",
     "nl": ""
    },
    "source": {
@@ -2036,7 +2080,7 @@
     "block": 195,
     "page": 67
    },
-   "matchScore": 1.4
+   "matchScore": 1.243
   },
   {
    "id": "bank1-13-95",
@@ -2050,15 +2094,37 @@
     "nl": ""
    },
    "a": {
+    "en": "organization",
+    "nl": ""
+   },
+   "source": {
+    "chapter": "p1c7",
+    "block": 117,
+    "page": 61
+   },
+   "matchScore": 2.95
+  },
+  {
+   "id": "bank1-14-96",
+   "bank": "bank1",
+   "module": "part1",
+   "section": "THE MINISTER: “HOW DO I SERVE AS AN ADMINISTRATOR?”",
+   "n": 14,
+   "page": 83,
+   "q": {
+    "en": "Paul gives an illustrative description of the church as a body of many parts in _____.",
+    "nl": ""
+   },
+   "a": {
     "en": "1 Corinthians 12:12-31",
     "nl": ""
    },
    "source": {
-    "chapter": "p1c3",
-    "block": 21,
-    "page": 30
+    "chapter": "p1c7",
+    "block": 117,
+    "page": 61
    },
-   "matchScore": 2.95
+   "matchScore": 3.075
   },
   {
    "id": "bank1-15-97",
@@ -7262,7 +7328,7 @@
     "nl": ""
    },
    "a": {
-    "en": "faculties",
+    "en": "trespasses; sins",
     "nl": ""
    },
    "source": {
@@ -7284,15 +7350,15 @@
     "nl": ""
    },
    "a": {
-    "en": "divine grace",
+    "en": "faculties",
     "nl": ""
    },
    "source": {
     "chapter": "p3c1",
-    "block": 70,
-    "page": 317
+    "block": 135,
+    "page": 322
    },
-   "matchScore": 2.2
+   "matchScore": 3.2
   },
   {
    "id": "bank3-3-343",
@@ -7306,7 +7372,7 @@
     "nl": ""
    },
    "a": {
-    "en": "mind, emotions, and will",
+    "en": "divine grace",
     "nl": ""
    },
    "source": {
@@ -7328,7 +7394,7 @@
     "nl": ""
    },
    "a": {
-    "en": "guilt, corruption, and",
+    "en": "mind, emotions, and will",
     "nl": ""
    },
    "source": {
@@ -7350,7 +7416,7 @@
     "nl": ""
    },
    "a": {
-    "en": "offensiveness will",
+    "en": "guilt, corruption, and offensiveness",
     "nl": ""
    },
    "source": {
@@ -7390,15 +7456,15 @@
     "nl": ""
    },
    "a": {
-    "en": "religious experience",
+    "en": "will",
     "nl": ""
    },
    "source": {
     "chapter": "p3c1",
-    "block": 141,
+    "block": 138,
     "page": 323
    },
-   "matchScore": 2.533
+   "matchScore": 1.0
   },
   {
    "id": "bank3-8-348",
@@ -7412,7 +7478,7 @@
     "nl": ""
    },
    "a": {
-    "en": "sinfulness",
+    "en": "religious experience",
     "nl": ""
    },
    "source": {
@@ -7434,15 +7500,15 @@
     "nl": ""
    },
    "a": {
-    "en": "goodness; God",
+    "en": "sinfulness",
     "nl": ""
    },
    "source": {
     "chapter": "p3c1",
-    "block": 143,
+    "block": 141,
     "page": 323
    },
-   "matchScore": 2.7
+   "matchScore": 2.533
   },
   {
    "id": "bank3-10-350",
@@ -7456,7 +7522,7 @@
     "nl": ""
    },
    "a": {
-    "en": "repentance",
+    "en": "goodness; God",
     "nl": ""
    },
    "source": {
@@ -7500,15 +7566,15 @@
     "nl": ""
    },
    "a": {
-    "en": "cease; sin",
+    "en": "repentance",
     "nl": ""
    },
    "source": {
     "chapter": "p3c1",
-    "block": 144,
-    "page": 324
+    "block": 143,
+    "page": 323
    },
-   "matchScore": 2.367
+   "matchScore": 3.033
   },
   {
    "id": "bank3-13-353",
@@ -7522,13 +7588,13 @@
     "nl": ""
    },
    "a": {
-    "en": "gospel",
+    "en": "cease; sin",
     "nl": ""
    },
    "source": {
     "chapter": "p3c1",
-    "block": 294,
-    "page": 341
+    "block": 144,
+    "page": 324
    },
    "matchScore": 2.4
   },
@@ -7544,11 +7610,15 @@
     "nl": ""
    },
    "a": {
-    "en": "will",
+    "en": "gospel",
     "nl": ""
    },
-   "source": null,
-   "matchScore": 0.833
+   "source": {
+    "chapter": "p3c1",
+    "block": 145,
+    "page": 324
+   },
+   "matchScore": 3.033
   },
   {
    "id": "bank3-15-355",
@@ -7562,6 +7632,24 @@
     "nl": ""
    },
    "a": {
+    "en": "will",
+    "nl": ""
+   },
+   "source": null,
+   "matchScore": 0.429
+  },
+  {
+   "id": "bank3-16-356",
+   "bank": "bank3",
+   "module": "part3",
+   "section": "Article 4",
+   "n": 16,
+   "page": 361,
+   "q": {
+    "en": "Romans 1:16, 17 declares that the gospel is the power of God to _____.",
+    "nl": ""
+   },
+   "a": {
     "en": "salvation",
     "nl": ""
    },
@@ -7570,7 +7658,7 @@
     "block": 10,
     "page": 314
    },
-   "matchScore": 2.486
+   "matchScore": 2.6
   },
   {
    "id": "bank3-17-357",
@@ -8548,7 +8636,7 @@
     "nl": ""
    },
    "a": {
-    "en": "blood",
+    "en": "act",
     "nl": ""
    },
    "source": {
@@ -8570,7 +8658,7 @@
     "nl": ""
    },
    "a": {
-    "en": "sin; purged",
+    "en": "blood",
     "nl": ""
    },
    "source": {
@@ -8592,15 +8680,15 @@
     "nl": ""
    },
    "a": {
-    "en": "justification, regeneration,",
+    "en": "sin; purged",
     "nl": ""
    },
    "source": {
     "chapter": "p3c1",
-    "block": 167,
-    "page": 326
+    "block": 177,
+    "page": 327
    },
-   "matchScore": 2.367
+   "matchScore": 3.2
   },
   {
    "id": "bank3-4-404",
@@ -8614,7 +8702,7 @@
     "nl": ""
    },
    "a": {
-    "en": "and adoption Sanctification",
+    "en": "justification, regeneration, and adoption",
     "nl": ""
    },
    "source": {
@@ -8636,15 +8724,15 @@
     "nl": ""
    },
    "a": {
-    "en": "sin; world",
+    "en": "Sanctification",
     "nl": ""
    },
    "source": {
     "chapter": "p3c1",
-    "block": 151,
-    "page": 324
+    "block": 181,
+    "page": 328
    },
-   "matchScore": 2.2
+   "matchScore": 2.7
   },
   {
    "id": "bank3-6-406",
@@ -8658,15 +8746,15 @@
     "nl": ""
    },
    "a": {
-    "en": "fruit bearing",
+    "en": "sin; world",
     "nl": ""
    },
    "source": {
-    "chapter": "p3c2",
-    "block": 18,
-    "page": 349
+    "chapter": "p3c1",
+    "block": 180,
+    "page": 328
    },
-   "matchScore": 2.2
+   "matchScore": 2.867
   },
   {
    "id": "bank3-7-407",
@@ -8680,15 +8768,15 @@
     "nl": ""
    },
    "a": {
-    "en": "old man; sin; death; flesh;",
+    "en": "fruit bearing",
     "nl": ""
    },
    "source": {
-    "chapter": "p3c1",
-    "block": 188,
-    "page": 328
+    "chapter": "p3c2",
+    "block": 22,
+    "page": 349
    },
-   "matchScore": 2.2
+   "matchScore": 2.45
   },
   {
    "id": "bank3-8-408",
@@ -8702,7 +8790,7 @@
     "nl": ""
    },
    "a": {
-    "en": "sin; death; carnal crucifixion",
+    "en": "old man; sin; death; flesh; sin; death; carnal",
     "nl": ""
    },
    "source": {
@@ -8710,7 +8798,7 @@
     "block": 188,
     "page": 328
    },
-   "matchScore": 2.483
+   "matchScore": 3.033
   },
   {
    "id": "bank3-9-409",
@@ -8724,15 +8812,15 @@
     "nl": ""
    },
    "a": {
-    "en": "set free",
+    "en": "crucifixion",
     "nl": ""
    },
    "source": {
     "chapter": "p3c1",
-    "block": 201,
-    "page": 330
+    "block": 189,
+    "page": 328
    },
-   "matchScore": 2.2
+   "matchScore": 3.2
   },
   {
    "id": "bank3-10-410",
@@ -8746,15 +8834,15 @@
     "nl": ""
    },
    "a": {
-    "en": "crucified",
+    "en": "set free",
     "nl": ""
    },
    "source": {
     "chapter": "p3c1",
-    "block": 177,
-    "page": 327
+    "block": 201,
+    "page": 330
    },
-   "matchScore": 2.7
+   "matchScore": 3.033
   },
   {
    "id": "bank3-11-411",
@@ -8768,13 +8856,13 @@
     "nl": ""
    },
    "a": {
-    "en": "Word",
+    "en": "crucified",
     "nl": ""
    },
    "source": {
     "chapter": "p3c1",
-    "block": 189,
-    "page": 328
+    "block": 202,
+    "page": 330
    },
    "matchScore": 2.95
   },
@@ -8790,7 +8878,7 @@
     "nl": ""
    },
    "a": {
-    "en": "flesh; and spirit",
+    "en": "Word",
     "nl": ""
    },
    "source": {
@@ -8812,15 +8900,15 @@
     "nl": ""
    },
    "a": {
-    "en": "blood; Holy Spirit",
+    "en": "flesh; and spirit",
     "nl": ""
    },
    "source": {
     "chapter": "p3c1",
-    "block": 190,
+    "block": 189,
     "page": 328
    },
-   "matchScore": 2.6
+   "matchScore": 3.0
   },
   {
    "id": "bank3-14-414",
@@ -8834,15 +8922,37 @@
     "nl": ""
    },
    "a": {
+    "en": "blood; Holy Spirit",
+    "nl": ""
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 190,
+    "page": 328
+   },
+   "matchScore": 2.756
+  },
+  {
+   "id": "bank3-15-415",
+   "bank": "bank3",
+   "module": "part3",
+   "section": "Article 6",
+   "n": 15,
+   "page": 365,
+   "q": {
+    "en": "According to Acts 26:18, believers are sanctified by _____.",
+    "nl": ""
+   },
+   "a": {
     "en": "faith",
     "nl": ""
    },
    "source": {
     "chapter": "p3c1",
-    "block": 155,
-    "page": 325
+    "block": 191,
+    "page": 329
    },
-   "matchScore": 2.422
+   "matchScore": 2.95
   },
   {
    "id": "bank3-1-416",
@@ -9512,7 +9622,7 @@
     "nl": ""
    },
    "a": {
-    "en": "divine-human",
+    "en": "Holy Spirit",
     "nl": ""
    },
    "source": {
@@ -9534,7 +9644,7 @@
     "nl": ""
    },
    "a": {
-    "en": "mind",
+    "en": "divine-human",
     "nl": ""
    },
    "source": {
@@ -9556,15 +9666,15 @@
     "nl": ""
    },
    "a": {
-    "en": "baptism",
+    "en": "mind",
     "nl": ""
    },
    "source": {
     "chapter": "p3c1",
-    "block": 218,
+    "block": 217,
     "page": 331
    },
-   "matchScore": 2.7
+   "matchScore": 3.2
   },
   {
    "id": "bank3-4-449",
@@ -9578,15 +9688,15 @@
     "nl": ""
    },
    "a": {
-    "en": "prompted; provided",
+    "en": "baptism",
     "nl": ""
    },
    "source": {
     "chapter": "p3c1",
-    "block": 219,
+    "block": 218,
     "page": 331
    },
-   "matchScore": 2.914
+   "matchScore": 3.2
   },
   {
    "id": "bank3-5-450",
@@ -9600,11 +9710,15 @@
     "nl": ""
    },
    "a": {
-    "en": "initiate",
+    "en": "prompted; provided",
     "nl": ""
    },
-   "source": null,
-   "matchScore": 0.778
+   "source": {
+    "chapter": "p3c1",
+    "block": 219,
+    "page": 331
+   },
+   "matchScore": 2.978
   },
   {
    "id": "bank3-6-451",
@@ -9618,15 +9732,15 @@
     "nl": ""
    },
    "a": {
-    "en": "Cornelius",
+    "en": "initiate",
     "nl": ""
    },
    "source": {
     "chapter": "p3c1",
-    "block": 220,
+    "block": 217,
     "page": 331
    },
-   "matchScore": 2.533
+   "matchScore": 1.0
   },
   {
    "id": "bank3-7-452",
@@ -9640,15 +9754,15 @@
     "nl": ""
    },
    "a": {
-    "en": "speak with tongues",
+    "en": "Cornelius",
     "nl": ""
    },
    "source": {
     "chapter": "p3c1",
-    "block": 219,
+    "block": 220,
     "page": 331
    },
-   "matchScore": 2.914
+   "matchScore": 2.486
   },
   {
    "id": "bank3-8-453",
@@ -9662,15 +9776,15 @@
     "nl": ""
    },
    "a": {
-    "en": "Christ; Christian; Holy Spirit",
+    "en": "speak with tongues",
     "nl": ""
    },
    "source": {
     "chapter": "p3c1",
-    "block": 221,
-    "page": 332
+    "block": 220,
+    "page": 331
    },
-   "matchScore": 2.508
+   "matchScore": 2.892
   },
   {
    "id": "bank3-9-454",
@@ -9684,7 +9798,7 @@
     "nl": ""
    },
    "a": {
-    "en": "laid hands on them",
+    "en": "Christ; Christian; Holy Spirit",
     "nl": ""
    },
    "source": {
@@ -9706,7 +9820,7 @@
     "nl": ""
    },
    "a": {
-    "en": "spoke with tongues,and",
+    "en": "laid hands on them",
     "nl": ""
    },
    "source": {
@@ -9714,7 +9828,7 @@
     "block": 221,
     "page": 332
    },
-   "matchScore": 1.671
+   "matchScore": 2.771
   },
   {
    "id": "bank3-11-456",
@@ -9728,7 +9842,7 @@
     "nl": ""
    },
    "a": {
-    "en": "prophesied baptism",
+    "en": "spoke with tongues,and prophesied",
     "nl": ""
    },
    "source": {
@@ -9736,7 +9850,7 @@
     "block": 221,
     "page": 332
    },
-   "matchScore": 2.45
+   "matchScore": 1.717
   },
   {
    "id": "bank3-12-457",
@@ -9747,6 +9861,28 @@
    "page": 369,
    "q": {
     "en": "Speaking in tongues is an experience associated with the _____ in the Holy Spirit.",
+    "nl": ""
+   },
+   "a": {
+    "en": "baptism",
+    "nl": ""
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 222,
+    "page": 332
+   },
+   "matchScore": 3.2
+  },
+  {
+   "id": "bank3-13-458",
+   "bank": "bank3",
+   "module": "part3",
+   "section": "Article 9",
+   "n": 13,
+   "page": 369,
+   "q": {
+    "en": "Speaking in tongues is an experience _____ by and _____ upon the moving of the Holy Spirit.",
     "nl": ""
    },
    "a": {
@@ -9900,7 +10036,7 @@
     "nl": ""
    },
    "a": {
-    "en": "ordained",
+    "en": "sacrament",
     "nl": ""
    },
    "source": {
@@ -9922,7 +10058,7 @@
     "nl": ""
    },
    "a": {
-    "en": "church",
+    "en": "ordained",
     "nl": ""
    },
    "source": {
@@ -9944,7 +10080,7 @@
     "nl": ""
    },
    "a": {
-    "en": "kingdom of God",
+    "en": "church",
     "nl": ""
    },
    "source": {
@@ -9966,7 +10102,7 @@
     "nl": ""
    },
    "a": {
-    "en": "water; immersion",
+    "en": "kingdom of God",
     "nl": ""
    },
    "source": {
@@ -9988,7 +10124,7 @@
     "nl": ""
    },
    "a": {
-    "en": "regeneration",
+    "en": "water; immersion",
     "nl": ""
    },
    "source": {
@@ -10010,7 +10146,7 @@
     "nl": ""
    },
    "a": {
-    "en": "Word; blood",
+    "en": "regeneration",
     "nl": ""
    },
    "source": {
@@ -10032,15 +10168,15 @@
     "nl": ""
    },
    "a": {
-    "en": "death; burial; and resurrection",
+    "en": "Word; blood",
     "nl": ""
    },
    "source": {
     "chapter": "p3c1",
-    "block": 234,
-    "page": 333
+    "block": 190,
+    "page": 328
    },
-   "matchScore": 2.533
+   "matchScore": 2.7
   },
   {
    "id": "bank3-8-472",
@@ -10054,15 +10190,15 @@
     "nl": ""
    },
    "a": {
-    "en": "repentance; new life",
+    "en": "death; burial; and resurrection",
     "nl": ""
    },
    "source": {
     "chapter": "p3c1",
-    "block": 231,
+    "block": 230,
     "page": 333
    },
-   "matchScore": 2.6
+   "matchScore": 3.2
   },
   {
    "id": "bank3-9-473",
@@ -10076,7 +10212,7 @@
     "nl": ""
    },
    "a": {
-    "en": "sign and seal",
+    "en": "repentance; new life",
     "nl": ""
    },
    "source": {
@@ -10098,15 +10234,15 @@
     "nl": ""
    },
    "a": {
-    "en": "obedience",
+    "en": "sign and seal",
     "nl": ""
    },
    "source": {
     "chapter": "p3c1",
-    "block": 229,
+    "block": 231,
     "page": 333
    },
-   "matchScore": 2.7
+   "matchScore": 3.2
   },
   {
    "id": "bank3-11-475",
@@ -10120,15 +10256,15 @@
     "nl": ""
    },
    "a": {
-    "en": "religious experience",
+    "en": "obedience",
     "nl": ""
    },
    "source": {
     "chapter": "p3c1",
-    "block": 234,
+    "block": 232,
     "page": 333
    },
-   "matchScore": 2.95
+   "matchScore": 3.2
   },
   {
    "id": "bank3-12-476",
@@ -10142,7 +10278,7 @@
     "nl": ""
    },
    "a": {
-    "en": "immersion",
+    "en": "religious experience",
     "nl": ""
    },
    "source": {
@@ -10164,7 +10300,7 @@
     "nl": ""
    },
    "a": {
-    "en": "resurrection",
+    "en": "immersion",
     "nl": ""
    },
    "source": {
@@ -10186,15 +10322,15 @@
     "nl": ""
    },
    "a": {
-    "en": "agent",
+    "en": "resurrection",
     "nl": ""
    },
    "source": {
     "chapter": "p3c1",
-    "block": 190,
-    "page": 328
+    "block": 235,
+    "page": 334
    },
-   "matchScore": 2.533
+   "matchScore": 2.756
   },
   {
    "id": "bank3-15-479",
@@ -10208,7 +10344,7 @@
     "nl": ""
    },
    "a": {
-    "en": "testimony",
+    "en": "agent",
     "nl": ""
    },
    "source": {
@@ -10217,6 +10353,28 @@
     "page": 334
    },
    "matchScore": 3.2
+  },
+  {
+   "id": "bank3-16-480",
+   "bank": "bank3",
+   "module": "part3",
+   "section": "Article 10",
+   "n": 16,
+   "page": 371,
+   "q": {
+    "en": "When the church baptizes an individual, it is an acknowledgement that the church accepts the _____ of the individual concerning his salvation.",
+    "nl": ""
+   },
+   "a": {
+    "en": "testimony",
+    "nl": ""
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 236,
+    "page": 334
+   },
+   "matchScore": 2.629
   },
   {
    "id": "bank3-17-481",
@@ -10978,12 +11136,12 @@
     "nl": ""
    },
    "a": {
-    "en": "premillennial",
+    "en": "personal, literal, and bodily",
     "nl": ""
    },
    "source": {
     "chapter": "p3c1",
-    "block": 277,
+    "block": 276,
     "page": 338
    },
    "matchScore": 2.486
@@ -11000,15 +11158,15 @@
     "nl": ""
    },
    "a": {
-    "en": "glorification",
+    "en": "premillennial",
     "nl": ""
    },
    "source": {
     "chapter": "p3c1",
-    "block": 278,
+    "block": 277,
     "page": 338
    },
-   "matchScore": 2.45
+   "matchScore": 2.7
   },
   {
    "id": "bank3-3-517",
@@ -11022,7 +11180,7 @@
     "nl": ""
    },
    "a": {
-    "en": "literal; bodily",
+    "en": "glorification",
     "nl": ""
    },
    "source": {
@@ -11044,15 +11202,15 @@
     "nl": ""
    },
    "a": {
-    "en": "personal, and physical",
+    "en": "literal; bodily",
     "nl": ""
    },
    "source": {
     "chapter": "p3c1",
-    "block": 90,
-    "page": 319
+    "block": 278,
+    "page": 338
    },
-   "matchScore": 2.2
+   "matchScore": 3.2
   },
   {
    "id": "bank3-5-519",
@@ -11066,15 +11224,15 @@
     "nl": ""
    },
    "a": {
-    "en": "redemptive",
+    "en": "personal, and physical",
     "nl": ""
    },
    "source": {
     "chapter": "p3c1",
-    "block": 202,
-    "page": 330
+    "block": 279,
+    "page": 338
    },
-   "matchScore": 2.6
+   "matchScore": 3.0
   },
   {
    "id": "bank3-6-520",
@@ -11088,7 +11246,7 @@
     "nl": ""
    },
    "a": {
-    "en": "glorification",
+    "en": "redemptive",
     "nl": ""
    },
    "source": {
@@ -11110,15 +11268,15 @@
     "nl": ""
    },
    "a": {
-    "en": "1 Thessalonians 4:16",
+    "en": "glorification",
     "nl": ""
    },
    "source": {
     "chapter": "p3c1",
-    "block": 288,
-    "page": 340
+    "block": 286,
+    "page": 339
    },
-   "matchScore": 2.7
+   "matchScore": 2.867
   },
   {
    "id": "bank3-8-522",
@@ -11132,15 +11290,15 @@
     "nl": ""
    },
    "a": {
-    "en": "raised; caught up",
+    "en": "1 Thessalonians 4:16",
     "nl": ""
    },
    "source": {
     "chapter": "p3c1",
-    "block": 278,
-    "page": 338
+    "block": 288,
+    "page": 340
    },
-   "matchScore": 2.343
+   "matchScore": 2.914
   },
   {
    "id": "bank3-9-523",
@@ -11154,15 +11312,15 @@
     "nl": ""
    },
    "a": {
-    "en": "redemption",
+    "en": "raised; caught up",
     "nl": ""
    },
    "source": {
     "chapter": "p3c1",
-    "block": 289,
-    "page": 340
+    "block": 320,
+    "page": 344
    },
-   "matchScore": 2.629
+   "matchScore": 2.771
   },
   {
    "id": "bank3-10-524",
@@ -11176,7 +11334,7 @@
     "nl": ""
    },
    "a": {
-    "en": "incorruption, glory, and",
+    "en": "redemption",
     "nl": ""
    },
    "source": {
@@ -11198,15 +11356,15 @@
     "nl": ""
    },
    "a": {
-    "en": "power; spiritual see Him",
+    "en": "incorruption, glory, and power; spiritual",
     "nl": ""
    },
    "source": {
     "chapter": "p3c1",
-    "block": 318,
-    "page": 344
+    "block": 289,
+    "page": 340
    },
-   "matchScore": 2.65
+   "matchScore": 2.7
   },
   {
    "id": "bank3-12-526",
@@ -11220,15 +11378,15 @@
     "nl": ""
    },
    "a": {
-    "en": "earth",
+    "en": "see Him",
     "nl": ""
    },
    "source": {
     "chapter": "p3c1",
-    "block": 280,
-    "page": 339
+    "block": 319,
+    "page": 344
    },
-   "matchScore": 2.4
+   "matchScore": 2.6
   },
   {
    "id": "bank3-13-527",
@@ -11242,7 +11400,7 @@
     "nl": ""
    },
    "a": {
-    "en": "resurrection",
+    "en": "earth",
     "nl": ""
    },
    "source": {
@@ -11251,6 +11409,28 @@
     "page": 340
    },
    "matchScore": 3.2
+  },
+  {
+   "id": "bank3-14-528",
+   "bank": "bank3",
+   "module": "part3",
+   "section": "Article 13",
+   "n": 14,
+   "page": 376,
+   "q": {
+    "en": "According to Revelation 20:4-6, those who are alive with Christ before the 1,000 years are partakers of the first _____.",
+    "nl": ""
+   },
+   "a": {
+    "en": "resurrection",
+    "nl": ""
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 291,
+    "page": 340
+   },
+   "matchScore": 2.644
   },
   {
    "id": "bank3-15-529",
@@ -11392,7 +11572,7 @@
     "nl": ""
    },
    "a": {
-    "en": "body; spirit",
+    "en": "Jesus Christ; earnest",
     "nl": ""
    },
    "source": {
@@ -11414,15 +11594,15 @@
     "nl": ""
    },
    "a": {
-    "en": "Millennium",
+    "en": "body; spirit",
     "nl": ""
    },
    "source": {
     "chapter": "p3c1",
-    "block": 304,
+    "block": 303,
     "page": 342
    },
-   "matchScore": 2.6
+   "matchScore": 3.0
   },
   {
    "id": "bank3-3-537",
@@ -11436,7 +11616,7 @@
     "nl": ""
    },
    "a": {
-    "en": "body; spirit",
+    "en": "Millennium",
     "nl": ""
    },
    "source": {
@@ -11458,15 +11638,15 @@
     "nl": ""
    },
    "a": {
-    "en": "pledge",
+    "en": "body; spirit",
     "nl": ""
    },
    "source": {
     "chapter": "p3c1",
-    "block": 306,
+    "block": 304,
     "page": 342
    },
-   "matchScore": 2.2
+   "matchScore": 3.2
   },
   {
    "id": "bank3-5-539",
@@ -11480,7 +11660,7 @@
     "nl": ""
    },
    "a": {
-    "en": "Spirit",
+    "en": "pledge",
     "nl": ""
    },
    "source": {
@@ -11502,15 +11682,15 @@
     "nl": ""
    },
    "a": {
-    "en": "redemption",
+    "en": "Spirit",
     "nl": ""
    },
    "source": {
     "chapter": "p3c1",
-    "block": 160,
-    "page": 325
+    "block": 318,
+    "page": 344
    },
-   "matchScore": 2.8
+   "matchScore": 3.2
   },
   {
    "id": "bank3-7-541",
@@ -11524,15 +11704,15 @@
     "nl": ""
    },
    "a": {
-    "en": "provide",
+    "en": "redemption",
     "nl": ""
    },
    "source": {
-    "chapter": "p3c2",
-    "block": 6,
-    "page": 347
+    "chapter": "p3c1",
+    "block": 309,
+    "page": 343
    },
-   "matchScore": 2.7
+   "matchScore": 3.2
   },
   {
    "id": "bank3-8-542",
@@ -11546,15 +11726,15 @@
     "nl": ""
    },
    "a": {
-    "en": "death",
+    "en": "provide",
     "nl": ""
    },
    "source": {
-    "chapter": "p3c1",
-    "block": 310,
-    "page": 343
+    "chapter": "p3c2",
+    "block": 6,
+    "page": 347
    },
-   "matchScore": 2.867
+   "matchScore": 2.367
   },
   {
    "id": "bank3-9-543",
@@ -11568,7 +11748,7 @@
     "nl": ""
    },
    "a": {
-    "en": "1 Corinthians 15:52;",
+    "en": "death",
     "nl": ""
    },
    "source": {
@@ -11590,15 +11770,15 @@
     "nl": ""
    },
    "a": {
-    "en": "1 Thessalonians 4:16, 17 incorruption; immortality;",
+    "en": "1 Corinthians 15:52; 1 Thessalonians 4:16, 17",
     "nl": ""
    },
    "source": {
-    "chapter": "p3c1",
-    "block": 278,
-    "page": 338
+    "chapter": "p3c2",
+    "block": 6,
+    "page": 347
    },
-   "matchScore": 1.911
+   "matchScore": 2.422
   },
   {
    "id": "bank3-11-545",
@@ -11612,15 +11792,15 @@
     "nl": ""
    },
    "a": {
-    "en": "death spirit-body",
+    "en": "incorruption; immortality; death",
     "nl": ""
    },
    "source": {
     "chapter": "p3c1",
-    "block": 177,
-    "page": 327
+    "block": 317,
+    "page": 344
    },
-   "matchScore": 2.325
+   "matchScore": 2.95
   },
   {
    "id": "bank3-12-546",
@@ -11631,6 +11811,28 @@
    "page": 378,
    "q": {
     "en": "The resurrected body is called a spiritual body and is distinct from a so-called __________.",
+    "nl": ""
+   },
+   "a": {
+    "en": "spirit-body",
+    "nl": ""
+   },
+   "source": {
+    "chapter": "p3c1",
+    "block": 318,
+    "page": 344
+   },
+   "matchScore": 3.0
+  },
+  {
+   "id": "bank3-13-547",
+   "bank": "bank3",
+   "module": "part3",
+   "section": "Article 14",
+   "n": 13,
+   "page": 378,
+   "q": {
+    "en": "According to 1 Corinthians 15:48, 49, the natural body is _____ and the spiritual body is _____.",
     "nl": ""
    },
    "a": {

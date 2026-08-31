@@ -1,0 +1,518 @@
+{
+  "users": [
+    {
+      "id": "pQirMZk7O6uT",
+      "email": "kurtjjoseph@gmail.com",
+      "name": "Kurt",
+      "role": "admin",
+      "passwordHash": "dd909feab77e59b0c2c789e642f8eaa70491ebf28a58ba8e58a85035a9ba0ad7bd1577bec407429db9e1a53cb91b07553956cb6059630a9d354ad2edef5b5ee3",
+      "salt": "50547a6d01b04d3b3e0459ac09ad9a63",
+      "createdAt": "2026-08-31T06:44:43.393Z",
+      "lastSeenAt": "2026-08-31T06:44:43.393Z",
+      "settings": {
+        "lang": "nl",
+        "bilingual": false,
+        "theme": "system",
+        "fontScale": 1
+      },
+      "progress": {
+        "chapters": {
+          "p1c1": {
+            "read": [
+              0,
+              1,
+              2,
+              3,
+              4
+            ],
+            "done": false,
+            "updatedAt": "2026-08-31T06:45:03.317Z"
+          }
+        },
+        "answers": {
+          "III.1": {
+            "correct": true,
+            "attempts": 2,
+            "chose": "B",
+            "lastAt": "2026-08-31T06:45:03.466Z"
+          },
+          "III.2": {
+            "correct": true,
+            "attempts": 2,
+            "chose": "C",
+            "lastAt": "2026-08-31T06:45:03.466Z"
+          },
+          "III.3": {
+            "correct": true,
+            "attempts": 2,
+            "chose": "B",
+            "lastAt": "2026-08-31T06:45:03.466Z"
+          },
+          "III.4": {
+            "correct": true,
+            "attempts": 2,
+            "chose": "D",
+            "lastAt": "2026-08-31T06:45:03.466Z"
+          },
+          "III.5": {
+            "correct": true,
+            "attempts": 2,
+            "chose": "C",
+            "lastAt": "2026-08-31T06:45:03.466Z"
+          },
+          "III.6": {
+            "correct": true,
+            "attempts": 2,
+            "chose": "B",
+            "lastAt": "2026-08-31T06:45:03.466Z"
+          },
+          "III.7": {
+            "correct": true,
+            "attempts": 2,
+            "chose": "B",
+            "lastAt": "2026-08-31T06:45:03.466Z"
+          },
+          "III.8": {
+            "correct": true,
+            "attempts": 2,
+            "chose": "E",
+            "lastAt": "2026-08-31T06:45:03.466Z"
+          },
+          "III.9": {
+            "correct": true,
+            "attempts": 2,
+            "chose": "D",
+            "lastAt": "2026-08-31T06:45:03.466Z"
+          },
+          "III.10": {
+            "correct": true,
+            "attempts": 2,
+            "chose": "A",
+            "lastAt": "2026-08-31T06:45:03.466Z"
+          },
+          "III.11": {
+            "correct": true,
+            "attempts": 2,
+            "chose": "C",
+            "lastAt": "2026-08-31T06:45:03.466Z"
+          },
+          "III.12": {
+            "correct": true,
+            "attempts": 2,
+            "chose": "A",
+            "lastAt": "2026-08-31T06:45:03.466Z"
+          },
+          "III.13": {
+            "correct": true,
+            "attempts": 2,
+            "chose": "B",
+            "lastAt": "2026-08-31T06:45:03.466Z"
+          },
+          "III.14": {
+            "correct": true,
+            "attempts": 2,
+            "chose": "D",
+            "lastAt": "2026-08-31T06:45:03.466Z"
+          },
+          "III.15": {
+            "correct": true,
+            "attempts": 2,
+            "chose": "C",
+            "lastAt": "2026-08-31T06:45:03.466Z"
+          },
+          "III.16": {
+            "correct": true,
+            "attempts": 2,
+            "chose": "B",
+            "lastAt": "2026-08-31T06:45:03.466Z"
+          },
+          "III.17": {
+            "correct": true,
+            "attempts": 2,
+            "chose": "B",
+            "lastAt": "2026-08-31T06:45:03.466Z"
+          },
+          "III.18": {
+            "correct": true,
+            "attempts": 2,
+            "chose": "D",
+            "lastAt": "2026-08-31T06:45:03.466Z"
+          },
+          "III.19": {
+            "correct": true,
+            "attempts": 2,
+            "chose": "A",
+            "lastAt": "2026-08-31T06:45:03.466Z"
+          },
+          "III.20": {
+            "correct": true,
+            "attempts": 2,
+            "chose": "C",
+            "lastAt": "2026-08-31T06:45:03.466Z"
+          },
+          "III.21": {
+            "correct": true,
+            "attempts": 2,
+            "chose": "A",
+            "lastAt": "2026-08-31T06:45:03.466Z"
+          },
+          "III.22": {
+            "correct": true,
+            "attempts": 2,
+            "chose": "D",
+            "lastAt": "2026-08-31T06:45:03.466Z"
+          },
+          "III.23": {
+            "correct": true,
+            "attempts": 2,
+            "chose": "B",
+            "lastAt": "2026-08-31T06:45:03.466Z"
+          },
+          "III.24": {
+            "correct": true,
+            "attempts": 2,
+            "chose": "D",
+            "lastAt": "2026-08-31T06:45:03.466Z"
+          },
+          "III.25": {
+            "correct": true,
+            "attempts": 2,
+            "chose": "C",
+            "lastAt": "2026-08-31T06:45:03.466Z"
+          },
+          "III.26": {
+            "correct": true,
+            "attempts": 2,
+            "chose": "D",
+            "lastAt": "2026-08-31T06:45:03.466Z"
+          },
+          "III.27": {
+            "correct": true,
+            "attempts": 2,
+            "chose": "A",
+            "lastAt": "2026-08-31T06:45:03.466Z"
+          },
+          "III.28": {
+            "correct": false,
+            "attempts": 2,
+            "chose": "A",
+            "lastAt": "2026-08-31T06:45:03.466Z"
+          },
+          "III.29": {
+            "correct": false,
+            "attempts": 2,
+            "chose": "B",
+            "lastAt": "2026-08-31T06:45:03.466Z"
+          },
+          "III.30": {
+            "correct": false,
+            "attempts": 2,
+            "chose": "B",
+            "lastAt": "2026-08-31T06:45:03.466Z"
+          },
+          "III.31": {
+            "correct": false,
+            "attempts": 2,
+            "chose": "B",
+            "lastAt": "2026-08-31T06:45:03.466Z"
+          },
+          "III.32": {
+            "correct": false,
+            "attempts": 2,
+            "chose": "A",
+            "lastAt": "2026-08-31T06:45:03.466Z"
+          },
+          "III.33": {
+            "correct": false,
+            "attempts": 2,
+            "chose": "B",
+            "lastAt": "2026-08-31T06:45:03.466Z"
+          },
+          "III.34": {
+            "correct": false,
+            "attempts": 2,
+            "chose": "A",
+            "lastAt": "2026-08-31T06:45:03.466Z"
+          },
+          "III.35": {
+            "correct": false,
+            "attempts": 2,
+            "chose": "A",
+            "lastAt": "2026-08-31T06:45:03.466Z"
+          },
+          "III.36": {
+            "correct": false,
+            "attempts": 2,
+            "chose": "B",
+            "lastAt": "2026-08-31T06:45:03.466Z"
+          },
+          "III.37": {
+            "correct": false,
+            "attempts": 2,
+            "chose": "A",
+            "lastAt": "2026-08-31T06:45:03.466Z"
+          },
+          "III.38": {
+            "correct": false,
+            "attempts": 2,
+            "chose": "A",
+            "lastAt": "2026-08-31T06:45:03.466Z"
+          },
+          "III.39": {
+            "correct": false,
+            "attempts": 2,
+            "chose": "A",
+            "lastAt": "2026-08-31T06:45:03.466Z"
+          },
+          "III.40": {
+            "correct": false,
+            "attempts": 2,
+            "chose": "B",
+            "lastAt": "2026-08-31T06:45:03.466Z"
+          },
+          "III.41": {
+            "correct": false,
+            "attempts": 2,
+            "chose": "A",
+            "lastAt": "2026-08-31T06:45:03.466Z"
+          },
+          "III.42": {
+            "correct": false,
+            "attempts": 2,
+            "chose": "A",
+            "lastAt": "2026-08-31T06:45:03.466Z"
+          },
+          "III.43": {
+            "correct": false,
+            "attempts": 2,
+            "chose": "B",
+            "lastAt": "2026-08-31T06:45:03.466Z"
+          },
+          "III.44": {
+            "correct": false,
+            "attempts": 2,
+            "chose": "A",
+            "lastAt": "2026-08-31T06:45:03.466Z"
+          },
+          "III.45": {
+            "correct": false,
+            "attempts": 2,
+            "chose": "A",
+            "lastAt": "2026-08-31T06:45:03.466Z"
+          },
+          "III.46": {
+            "correct": false,
+            "attempts": 2,
+            "chose": "A",
+            "lastAt": "2026-08-31T06:45:03.466Z"
+          },
+          "III.47": {
+            "correct": false,
+            "attempts": 2,
+            "chose": "A",
+            "lastAt": "2026-08-31T06:45:03.466Z"
+          },
+          "III.48": {
+            "correct": false,
+            "attempts": 2,
+            "chose": "B",
+            "lastAt": "2026-08-31T06:45:03.466Z"
+          },
+          "III.49": {
+            "correct": false,
+            "attempts": 2,
+            "chose": "A",
+            "lastAt": "2026-08-31T06:45:03.466Z"
+          },
+          "III.50": {
+            "correct": false,
+            "attempts": 2,
+            "chose": "A",
+            "lastAt": "2026-08-31T06:45:03.466Z"
+          }
+        },
+        "cards": {},
+        "exams": [
+          {
+            "id": "0glKAi0_",
+            "startedAt": "2026-08-30T04:00:00.000Z",
+            "finishedAt": "2026-08-31T06:45:03.403Z",
+            "scope": "III",
+            "perPart": {
+              "III": {
+                "correct": 50,
+                "total": 50
+              }
+            },
+            "score": 100,
+            "passed": true,
+            "answers": {
+              "III.1": "B",
+              "III.2": "C",
+              "III.3": "B",
+              "III.4": "D",
+              "III.5": "C",
+              "III.6": "B",
+              "III.7": "B",
+              "III.8": "E",
+              "III.9": "D",
+              "III.10": "A",
+              "III.11": "C",
+              "III.12": "A",
+              "III.13": "B",
+              "III.14": "D",
+              "III.15": "C",
+              "III.16": "B",
+              "III.17": "B",
+              "III.18": "D",
+              "III.19": "A",
+              "III.20": "C",
+              "III.21": "A",
+              "III.22": "D",
+              "III.23": "B",
+              "III.24": "D",
+              "III.25": "C",
+              "III.26": "D",
+              "III.27": "A",
+              "III.28": "B",
+              "III.29": "A",
+              "III.30": "A",
+              "III.31": "A",
+              "III.32": "D",
+              "III.33": "A",
+              "III.34": "C",
+              "III.35": "B",
+              "III.36": "A",
+              "III.37": "C",
+              "III.38": "B",
+              "III.39": "B",
+              "III.40": "A",
+              "III.41": "B",
+              "III.42": "C",
+              "III.43": "A",
+              "III.44": "C",
+              "III.45": "D",
+              "III.46": "D",
+              "III.47": "B",
+              "III.48": "A",
+              "III.49": "D",
+              "III.50": "C"
+            }
+          },
+          {
+            "id": "13ubCmVs",
+            "startedAt": "2026-08-30T04:00:00.000Z",
+            "finishedAt": "2026-08-31T06:45:03.466Z",
+            "scope": "III",
+            "perPart": {
+              "III": {
+                "correct": 27,
+                "total": 50
+              }
+            },
+            "score": 54,
+            "passed": false,
+            "answers": {
+              "III.1": "B",
+              "III.2": "C",
+              "III.3": "B",
+              "III.4": "D",
+              "III.5": "C",
+              "III.6": "B",
+              "III.7": "B",
+              "III.8": "E",
+              "III.9": "D",
+              "III.10": "A",
+              "III.11": "C",
+              "III.12": "A",
+              "III.13": "B",
+              "III.14": "D",
+              "III.15": "C",
+              "III.16": "B",
+              "III.17": "B",
+              "III.18": "D",
+              "III.19": "A",
+              "III.20": "C",
+              "III.21": "A",
+              "III.22": "D",
+              "III.23": "B",
+              "III.24": "D",
+              "III.25": "C",
+              "III.26": "D",
+              "III.27": "A",
+              "III.28": "A",
+              "III.29": "B",
+              "III.30": "B",
+              "III.31": "B",
+              "III.32": "A",
+              "III.33": "B",
+              "III.34": "A",
+              "III.35": "A",
+              "III.36": "B",
+              "III.37": "A",
+              "III.38": "A",
+              "III.39": "A",
+              "III.40": "B",
+              "III.41": "A",
+              "III.42": "A",
+              "III.43": "B",
+              "III.44": "A",
+              "III.45": "A",
+              "III.46": "A",
+              "III.47": "A",
+              "III.48": "B",
+              "III.49": "A",
+              "III.50": "A"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "wT8i9HwXNo0F",
+      "email": "student@example.org",
+      "name": "Student",
+      "role": "student",
+      "passwordHash": "ed5acc0539d857223eba67d0570779273938d57bc8cd316247b9690ed08d58a0797a253b4b4d2be1b1abad3a2a69d63c34d828ff93ebfb12da31a7492822ee94",
+      "salt": "d76c16f72f5687308609def2e919db56",
+      "createdAt": "2026-08-31T06:45:03.272Z",
+      "lastSeenAt": "2026-08-31T06:45:03.272Z",
+      "settings": {
+        "lang": "nl",
+        "bilingual": false,
+        "theme": "system",
+        "fontScale": 1
+      },
+      "progress": {
+        "chapters": {},
+        "answers": {},
+        "cards": {},
+        "exams": []
+      }
+    }
+  ],
+  "invitations": [
+    {
+      "token": "OXKyGWVu-CKwBrkWOUYXevc1Sz9hoxim",
+      "email": "student@example.org",
+      "role": "student",
+      "invitedBy": "Kurt",
+      "createdAt": "2026-08-31T06:45:03.169Z",
+      "expiresAt": "2026-09-14T06:45:03.169Z",
+      "deliveryError": "Geen e-mailprovider ingesteld (RESEND_API_KEY / MAIL_FROM).",
+      "acceptedAt": "2026-08-31T06:45:03.216Z"
+    }
+  ],
+  "errata": [
+    {
+      "id": "Q7WQ5LCw",
+      "chapterId": "p1c1",
+      "blockIndex": 2,
+      "lang": "nl",
+      "text": "PROEFCORRECTIE — deze tekst komt uit de errata-editor.",
+      "note": "smoke test",
+      "editedBy": "Kurt",
+      "editedAt": "2026-08-31T06:45:03.500Z"
+    }
+  ]
+}
