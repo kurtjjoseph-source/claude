@@ -135,7 +135,10 @@ Current coverage:
 | Exam (150 items, prompts and every option) | complete |
 | Review questions (627) — drives practice, flashcards, cheat sheet | complete |
 | Glossary terms (392 of 404) | complete |
-| Course reading text | General Information and Practical Commitments complete; Declaration of Faith in progress |
+| **Part Three — Doctrine** (Declaration of Faith, Practical Commitments) | **complete** |
+| General Information | complete |
+| Part One — Bible | not started |
+| Part Two — History and Polity | not started |
 
 **Untranslated paragraphs are shown in English and marked `· EN`**, and each
 chapter shows its own percentage, so partial translation is a visible state
