@@ -15,6 +15,7 @@ git clone https://github.com/kurtjjoseph-source/claude-workspace.git
 | `.claude/` | Custom skills (`onboard-business`, `wizard`) and biz agents — active when a session runs from this repo root | `~/Business Ideas/.claude` |
 | `vision-outreach-media/` | All VOM client-business systems: vom-systems (turnkey, hub, gallery, academies…), front-door, house-tour, event-registration, picnic-signup, engage-ai (WP plugins + cloud API), agent-cloud-api, agent-hub-wordpress, plus VOM docs | `~/Business Ideas` + `~/Downloads` |
 | `churches/church-of-god-amersfoort/` | Church website + bundle, sermon slide decks, housing seed script | `~/Business Ideas` + `~/Downloads` |
+| `churches/church-of-god-amersfoort/exhorter-studie/` | Bilingual (NL/EN) study platform for the Church of God **Exhorter** ministerial licensure exam — built from the 2025 study guide, exam and answer key. Live at [exhorter-studie.netlify.app](https://exhorter-studie.netlify.app) | Claude session, Aug 2026 |
 | `churches/gods-generation-church/` | Gods Generation Church materials | `~/Business Ideas` |
 | `business-lab/` | Business ideation & playbook projects (SMB Pain Point Seeds, Invoice Accepted, Paid in Full, Digital Membership Club, playbooks by Isenberg/RoboNuggets/Schneider/Bo Sar, …) + loose plans in `docs/` | `~/Business Ideas` + `~/Downloads` |
 | `business-profiles/` | Client/business profile folders (Vision Outreach Media, barber amore, gentle) — *josephs store media stayed on the Mac* | `~/Downloads/business profiles` |

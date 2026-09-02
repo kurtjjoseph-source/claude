@@ -1,0 +1,12902 @@
+{
+ "refs": [
+  {
+   "ref": "1 Chronicles 29:11,12",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c2",
+     "block": 60,
+     "page": 25
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "1 Corinthians 10:16",
+   "count": 3,
+   "occurrences": [
+    {
+     "chapter": "p1c4",
+     "block": 12,
+     "page": 38
+    },
+    {
+     "chapter": "p1c4",
+     "block": 13,
+     "page": 38
+    },
+    {
+     "chapter": "p3c1",
+     "block": 263,
+     "page": 337
+    }
+   ],
+   "modules": [
+    "part1",
+    "part3"
+   ]
+  },
+  {
+   "ref": "1 Corinthians 10:16,17,21",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 264,
+     "page": 337
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "1 Corinthians 10:31",
+   "count": 3,
+   "occurrences": [
+    {
+     "chapter": "p1c3",
+     "block": 12,
+     "page": 30
+    },
+    {
+     "chapter": "p2c7",
+     "block": 197,
+     "page": 156
+    },
+    {
+     "chapter": "p3c2",
+     "block": 8,
+     "page": 348
+    }
+   ],
+   "modules": [
+    "part1",
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "1 Corinthians 10:31,32",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c2",
+     "block": 16,
+     "page": 349
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "1 Corinthians 11:1",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 210,
+     "page": 158
+    },
+    {
+     "chapter": "p3c2",
+     "block": 20,
+     "page": 349
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "1 Corinthians 11:14,15",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 224,
+     "page": 159
+    },
+    {
+     "chapter": "p3c2",
+     "block": 32,
+     "page": 350
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "1 Corinthians 11:20",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c4",
+     "block": 8,
+     "page": 37
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "1 Corinthians 11:23,24",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 261,
+     "page": 336
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "1 Corinthians 11:23-26",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 111,
+     "page": 153
+    },
+    {
+     "chapter": "p3c1",
+     "block": 264,
+     "page": 337
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "1 Corinthians 11:25,26",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 263,
+     "page": 337
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "1 Corinthians 11:3,11",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 326,
+     "page": 165
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "1 Corinthians 12:1,7,10,28,31",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 107,
+     "page": 153
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "1 Corinthians 12:1-11",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 469,
+     "page": 170
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "1 Corinthians 12:1-11,27-31",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 197,
+     "page": 156
+    },
+    {
+     "chapter": "p3c2",
+     "block": 8,
+     "page": 348
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "1 Corinthians 12:1-11,28,29",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c9",
+     "block": 48,
+     "page": 223
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "1 Corinthians 12:10",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 225,
+     "page": 332
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "1 Corinthians 12:12",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c9",
+     "block": 230,
+     "page": 234
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "1 Corinthians 12:13",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 237,
+     "page": 334
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "1 Corinthians 12:14-31",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 425,
+     "page": 168
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "1 Corinthians 12:18,20,25,28-30",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c10",
+     "block": 19,
+     "page": 248
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "1 Corinthians 12:25",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 495,
+     "page": 172
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "1 Corinthians 12:25,26",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c9",
+     "block": 229,
+     "page": 234
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "1 Corinthians 12:28",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c7",
+     "block": 107,
+     "page": 63
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "1 Corinthians 12:4-11",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 369,
+     "page": 167
+    },
+    {
+     "chapter": "p2c7",
+     "block": 455,
+     "page": 169
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "1 Corinthians 12:4-12,28-30",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c9",
+     "block": 63,
+     "page": 225
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "1 Corinthians 12:9,10",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 250,
+     "page": 335
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "1 Corinthians 14:13,27,28",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 225,
+     "page": 332
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "1 Corinthians 14:14,15",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 360,
+     "page": 166
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "1 Corinthians 14:15",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 225,
+     "page": 332
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "1 Corinthians 14:2,14,15,27,28",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 225,
+     "page": 332
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "1 Corinthians 14:40",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c1",
+     "block": 26,
+     "page": 91
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "1 Corinthians 14:5",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 225,
+     "page": 332
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "1 Corinthians 15:20,21",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 306,
+     "page": 342
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "1 Corinthians 15:22-26",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 312,
+     "page": 343
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "1 Corinthians 15:3,4",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 110,
+     "page": 321
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "1 Corinthians 15:35-40",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 314,
+     "page": 343
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "1 Corinthians 15:42-44",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 290,
+     "page": 340
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "1 Corinthians 15:44,45",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 319,
+     "page": 344
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "1 Corinthians 15:48,49",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 319,
+     "page": 344
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "1 Corinthians 15:51",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c6",
+     "block": 25,
+     "page": 53
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "1 Corinthians 15:51,52",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 290,
+     "page": 340
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "1 Corinthians 15:51-54",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 318,
+     "page": 344
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "1 Corinthians 15:52",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 115,
+     "page": 153
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "1 Corinthians 16:1",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c10",
+     "block": 12,
+     "page": 247
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "1 Corinthians 16:1-3,15-19",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c8",
+     "block": 219,
+     "page": 192
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "1 Corinthians 16:2",
+   "count": 4,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 195,
+     "page": 156
+    },
+    {
+     "chapter": "p2c7",
+     "block": 195,
+     "page": 156
+    },
+    {
+     "chapter": "p3c2",
+     "block": 6,
+     "page": 347
+    },
+    {
+     "chapter": "p3c2",
+     "block": 6,
+     "page": 347
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "1 Corinthians 1:2",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c8",
+     "block": 94,
+     "page": 185
+    },
+    {
+     "chapter": "p2c8",
+     "block": 124,
+     "page": 187
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "1 Corinthians 1:30",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p1c1",
+     "block": 103,
+     "page": 18
+    },
+    {
+     "chapter": "p2c7",
+     "block": 99,
+     "page": 152
+    }
+   ],
+   "modules": [
+    "part1",
+    "part2"
+   ]
+  },
+  {
+   "ref": "1 Corinthians 2:10",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 63,
+     "page": 317
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "1 Corinthians 2:9-11",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 4,
+     "page": 313
+    },
+    {
+     "chapter": "p3c1",
+     "block": 210,
+     "page": 330
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "1 Corinthians 3:16,17",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 106,
+     "page": 153
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "1 Corinthians 3:17",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 232,
+     "page": 159
+    },
+    {
+     "chapter": "p3c2",
+     "block": 40,
+     "page": 351
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "1 Corinthians 3:9",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c5",
+     "block": 167,
+     "page": 138
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "1 Corinthians 5:7",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c4",
+     "block": 8,
+     "page": 37
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "1 Corinthians 6:11",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 186,
+     "page": 328
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "1 Corinthians 6:15-18",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 221,
+     "page": 158
+    },
+    {
+     "chapter": "p3c2",
+     "block": 30,
+     "page": 350
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "1 Corinthians 6:19,20",
+   "count": 3,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 201,
+     "page": 157
+    },
+    {
+     "chapter": "p3c1",
+     "block": 212,
+     "page": 331
+    },
+    {
+     "chapter": "p3c2",
+     "block": 12,
+     "page": 348
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "1 Corinthians 6:9,10",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 201,
+     "page": 157
+    },
+    {
+     "chapter": "p3c2",
+     "block": 12,
+     "page": 348
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "1 Corinthians 7:15",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c9",
+     "block": 35,
+     "page": 222
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "1 Corinthians 7:2,10,11",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 221,
+     "page": 158
+    },
+    {
+     "chapter": "p3c2",
+     "block": 30,
+     "page": 350
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "1 Corinthians 7:34",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 506,
+     "page": 172
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "1 Corinthians 7:8,32-34",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 222,
+     "page": 159
+    },
+    {
+     "chapter": "p3c2",
+     "block": 30,
+     "page": 350
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "1 Corinthians 8:4",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 30,
+     "page": 316
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "1 Corinthians 8:6",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 32,
+     "page": 316
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "1 Corinthians 8:8",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 230,
+     "page": 159
+    },
+    {
+     "chapter": "p3c2",
+     "block": 38,
+     "page": 351
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "1 Corinthians 8:9-13",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 230,
+     "page": 159
+    },
+    {
+     "chapter": "p3c2",
+     "block": 38,
+     "page": 351
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "1 Corinthians 9:13,14",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c12",
+     "block": 38,
+     "page": 290
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "1 Corinthians 9:25",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 228,
+     "page": 159
+    },
+    {
+     "chapter": "p3c2",
+     "block": 36,
+     "page": 351
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "1 Corinthians 9:27",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 228,
+     "page": 159
+    },
+    {
+     "chapter": "p3c2",
+     "block": 36,
+     "page": 351
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "1 Corinthians 9:6-9",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 113,
+     "page": 153
+    },
+    {
+     "chapter": "p2c11",
+     "block": 245,
+     "page": 275
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "1 John 1:6,7",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 106,
+     "page": 153
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "1 John 1:7",
+   "count": 3,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 212,
+     "page": 158
+    },
+    {
+     "chapter": "p3c1",
+     "block": 271,
+     "page": 338
+    },
+    {
+     "chapter": "p3c2",
+     "block": 22,
+     "page": 349
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "1 John 1:7-9",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 190,
+     "page": 328
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "1 John 1:9",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 193,
+     "page": 156
+    },
+    {
+     "chapter": "p3c1",
+     "block": 179,
+     "page": 328
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "1 John 1:9–2",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c2",
+     "block": 4,
+     "page": 347
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "1 John 2:1",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 196,
+     "page": 329
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "1 John 2:15,16",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c11",
+     "block": 49,
+     "page": 264
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "1 John 2:15-17",
+   "count": 3,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 205,
+     "page": 157
+    },
+    {
+     "chapter": "p3c1",
+     "block": 199,
+     "page": 329
+    },
+    {
+     "chapter": "p3c2",
+     "block": 16,
+     "page": 349
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "1 John 3:1-3",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 597,
+     "page": 176
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "1 John 3:16",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 210,
+     "page": 158
+    },
+    {
+     "chapter": "p3c2",
+     "block": 20,
+     "page": 349
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "1 John 3:17",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 247,
+     "page": 161
+    },
+    {
+     "chapter": "p3c2",
+     "block": 56,
+     "page": 353
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "1 John 3:2",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 291,
+     "page": 340
+    },
+    {
+     "chapter": "p3c1",
+     "block": 320,
+     "page": 344
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "1 John 3:9",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 98,
+     "page": 152
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "1 John 4:7-11",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c2",
+     "block": 24,
+     "page": 349
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "1 John 4:711",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 214,
+     "page": 158
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "1 John 5:11-13",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 117,
+     "page": 153
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "1 Kings 8:60",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 28,
+     "page": 316
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "1 Peter 1:18,19",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c1",
+     "block": 34,
+     "page": 15
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "1 Peter 1:2",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 190,
+     "page": 328
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "1 Peter 1:22,23",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 214,
+     "page": 158
+    },
+    {
+     "chapter": "p3c2",
+     "block": 24,
+     "page": 349
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "1 Peter 1:23",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p1c1",
+     "block": 74,
+     "page": 17
+    },
+    {
+     "chapter": "p2c7",
+     "block": 98,
+     "page": 152
+    }
+   ],
+   "modules": [
+    "part1",
+    "part2"
+   ]
+  },
+  {
+   "ref": "1 Peter 2:1,2",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 200,
+     "page": 329
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "1 Peter 2:11",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 240,
+     "page": 160
+    },
+    {
+     "chapter": "p3c2",
+     "block": 49,
+     "page": 352
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "1 Peter 2:11,12",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 209,
+     "page": 157
+    },
+    {
+     "chapter": "p3c2",
+     "block": 20,
+     "page": 349
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "1 Peter 2:13-17",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 244,
+     "page": 160
+    },
+    {
+     "chapter": "p3c2",
+     "block": 53,
+     "page": 352
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "1 Peter 2:24",
+   "count": 3,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 110,
+     "page": 153
+    },
+    {
+     "chapter": "p3c1",
+     "block": 243,
+     "page": 335
+    },
+    {
+     "chapter": "p3c1",
+     "block": 249,
+     "page": 335
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "1 Peter 2:9",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 106,
+     "page": 153
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "1 Peter 3:1-7",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 224,
+     "page": 159
+    },
+    {
+     "chapter": "p3c2",
+     "block": 32,
+     "page": 350
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "1 Peter 3:21",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 232,
+     "page": 333
+    },
+    {
+     "chapter": "p3c1",
+     "block": 236,
+     "page": 334
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "1 Peter 3:3,4",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c11",
+     "block": 51,
+     "page": 264
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "1 Peter 3:3-5",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 238,
+     "page": 160
+    },
+    {
+     "chapter": "p3c2",
+     "block": 47,
+     "page": 352
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "1 Peter 3:7",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 224,
+     "page": 159
+    },
+    {
+     "chapter": "p3c2",
+     "block": 32,
+     "page": 350
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "1 Peter 4:10,11",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 472,
+     "page": 170
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "1 Peter 4:9",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c1",
+     "block": 139,
+     "page": 20
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "1 Peter 4:9-11",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 197,
+     "page": 156
+    },
+    {
+     "chapter": "p3c2",
+     "block": 8,
+     "page": 348
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "1 Peter 5:1-3",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 195,
+     "page": 156
+    },
+    {
+     "chapter": "p3c2",
+     "block": 6,
+     "page": 347
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "1 Peter 5:2",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 492,
+     "page": 171
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "1 Peter 5:2,3",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c2",
+     "block": 65,
+     "page": 25
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "1 Peter 5:5,6",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 195,
+     "page": 156
+    },
+    {
+     "chapter": "p3c2",
+     "block": 6,
+     "page": 347
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "1 Samuel 1:27,28",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c5",
+     "block": 4,
+     "page": 45
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "1 Samuel 25:41",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c4",
+     "block": 50,
+     "page": 43
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "1 Thessalonians 1:4-10",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 478,
+     "page": 171
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "1 Thessalonians 2:1-12",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c10",
+     "block": 13,
+     "page": 247
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "1 Thessalonians 2:7,8",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 506,
+     "page": 172
+    },
+    {
+     "chapter": "p2c7",
+     "block": 507,
+     "page": 172
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "1 Thessalonians 4:15-17",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 115,
+     "page": 153
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "1 Thessalonians 4:16",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 289,
+     "page": 340
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "1 Thessalonians 4:17",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 289,
+     "page": 340
+    },
+    {
+     "chapter": "p3c1",
+     "block": 321,
+     "page": 344
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "1 Thessalonians 4:7",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 100,
+     "page": 152
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "1 Thessalonians 5:11",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c1",
+     "block": 139,
+     "page": 20
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "1 Thessalonians 5:12,13",
+   "count": 3,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 195,
+     "page": 156
+    },
+    {
+     "chapter": "p2c10",
+     "block": 19,
+     "page": 248
+    },
+    {
+     "chapter": "p3c2",
+     "block": 6,
+     "page": 347
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "1 Thessalonians 5:17",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 360,
+     "page": 166
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "1 Thessalonians 5:19-23",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 455,
+     "page": 169
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "1 Thessalonians 5:20",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 508,
+     "page": 172
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "1 Thessalonians 5:21,22",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 205,
+     "page": 157
+    },
+    {
+     "chapter": "p3c2",
+     "block": 16,
+     "page": 349
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "1 Thessalonians 5:22,23",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 238,
+     "page": 160
+    },
+    {
+     "chapter": "p3c2",
+     "block": 47,
+     "page": 352
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "1 Timothy 1:18,19",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c10",
+     "block": 12,
+     "page": 247
+    },
+    {
+     "chapter": "p2c10",
+     "block": 13,
+     "page": 247
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "1 Timothy 2:1-4,8",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 360,
+     "page": 166
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "1 Timothy 2:5",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 34,
+     "page": 316
+    },
+    {
+     "chapter": "p3c1",
+     "block": 84,
+     "page": 319
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "1 Timothy 2:9",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c11",
+     "block": 50,
+     "page": 264
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "1 Timothy 2:9,10",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 236,
+     "page": 160
+    },
+    {
+     "chapter": "p3c2",
+     "block": 45,
+     "page": 352
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "1 Timothy 3:1-13",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c11",
+     "block": 36,
+     "page": 263
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "1 Timothy 3:1-7",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 496,
+     "page": 172
+    },
+    {
+     "chapter": "p2c9",
+     "block": 75,
+     "page": 226
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "1 Timothy 3:15",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 495,
+     "page": 172
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "1 Timothy 3:16",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 112,
+     "page": 321
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "1 Timothy 3:2",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c1",
+     "block": 116,
+     "page": 19
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "1 Timothy 3:2,4,5",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c10",
+     "block": 19,
+     "page": 248
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "1 Timothy 3:3,4",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 218,
+     "page": 158
+    },
+    {
+     "chapter": "p3c2",
+     "block": 28,
+     "page": 350
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "1 Timothy 3:6",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c1",
+     "block": 114,
+     "page": 19
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "1 Timothy 3:8-13",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 479,
+     "page": 171
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "1 Timothy 4:1-5",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 230,
+     "page": 159
+    },
+    {
+     "chapter": "p3c2",
+     "block": 38,
+     "page": 351
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "1 Timothy 4:11-16",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 472,
+     "page": 170
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "1 Timothy 4:13",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c3",
+     "block": 35,
+     "page": 32
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "1 Timothy 4:14",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c9",
+     "block": 56,
+     "page": 224
+    },
+    {
+     "chapter": "p2c9",
+     "block": 58,
+     "page": 224
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "1 Timothy 5:10",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 267,
+     "page": 337
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "1 Timothy 5:13",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 197,
+     "page": 156
+    },
+    {
+     "chapter": "p3c2",
+     "block": 8,
+     "page": 348
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "1 Timothy 5:17,18",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c12",
+     "block": 50,
+     "page": 291
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "1 Timothy 5:9,10",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 112,
+     "page": 153
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "1 Timothy 6:12,14",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c10",
+     "block": 19,
+     "page": 248
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "2 Chronicles 7:14",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 505,
+     "page": 172
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "2 Corinthians 13:14",
+   "count": 5,
+   "occurrences": [
+    {
+     "chapter": "p1c3",
+     "block": 120,
+     "page": 36
+    },
+    {
+     "chapter": "p1c5",
+     "block": 36,
+     "page": 49
+    },
+    {
+     "chapter": "p1c6",
+     "block": 42,
+     "page": 54
+    },
+    {
+     "chapter": "p3c1",
+     "block": 67,
+     "page": 317
+    },
+    {
+     "chapter": "p3c1",
+     "block": 70,
+     "page": 317
+    }
+   ],
+   "modules": [
+    "part1",
+    "part3"
+   ]
+  },
+  {
+   "ref": "2 Corinthians 1:1",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c8",
+     "block": 94,
+     "page": 185
+    },
+    {
+     "chapter": "p2c8",
+     "block": 124,
+     "page": 187
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "2 Corinthians 3:3",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 169,
+     "page": 327
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "2 Corinthians 4:1-3",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c10",
+     "block": 13,
+     "page": 247
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "2 Corinthians 5:16",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 230,
+     "page": 159
+    },
+    {
+     "chapter": "p3c2",
+     "block": 38,
+     "page": 351
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "2 Corinthians 5:17",
+   "count": 3,
+   "occurrences": [
+    {
+     "chapter": "p1c1",
+     "block": 21,
+     "page": 14
+    },
+    {
+     "chapter": "p1c1",
+     "block": 108,
+     "page": 19
+    },
+    {
+     "chapter": "p2c9",
+     "block": 35,
+     "page": 222
+    }
+   ],
+   "modules": [
+    "part1",
+    "part2"
+   ]
+  },
+  {
+   "ref": "2 Corinthians 5:18,19",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 98,
+     "page": 320
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "2 Corinthians 5:19",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c4",
+     "block": 19,
+     "page": 39
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "2 Corinthians 5:21",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 100,
+     "page": 320
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "2 Corinthians 5:4,5",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 307,
+     "page": 342
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "2 Corinthians 5:7",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c7",
+     "block": 211,
+     "page": 71
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "2 Corinthians 6:14-18",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 195,
+     "page": 156
+    },
+    {
+     "chapter": "p3c2",
+     "block": 6,
+     "page": 347
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "2 Corinthians 6:16-18",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 106,
+     "page": 153
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "2 Corinthians 6:16–7",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c2",
+     "block": 61,
+     "page": 25
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "2 Corinthians 6:17",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 205,
+     "page": 157
+    },
+    {
+     "chapter": "p3c2",
+     "block": 16,
+     "page": 349
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "2 Corinthians 6:3,4",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c10",
+     "block": 18,
+     "page": 248
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "2 Corinthians 7:1",
+   "count": 5,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 232,
+     "page": 159
+    },
+    {
+     "chapter": "p2c7",
+     "block": 506,
+     "page": 172
+    },
+    {
+     "chapter": "p3c1",
+     "block": 189,
+     "page": 328
+    },
+    {
+     "chapter": "p3c1",
+     "block": 198,
+     "page": 329
+    },
+    {
+     "chapter": "p3c2",
+     "block": 40,
+     "page": 351
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "2 Corinthians 7:10",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 146,
+     "page": 324
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "2 Corinthians 7:11",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c9",
+     "block": 247,
+     "page": 235
+    },
+    {
+     "chapter": "p3c1",
+     "block": 146,
+     "page": 324
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "2 Corinthians 7:611",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c9",
+     "block": 252,
+     "page": 236
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "2 Corinthians 7:9,10",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c9",
+     "block": 247,
+     "page": 235
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "2 Corinthians 8:1-24",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 195,
+     "page": 156
+    },
+    {
+     "chapter": "p3c2",
+     "block": 6,
+     "page": 347
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "2 Corinthians 8:1-6",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c7",
+     "block": 155,
+     "page": 66
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "2 Corinthians 8:18,19",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c8",
+     "block": 219,
+     "page": 192
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "2 Corinthians 9:7",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p1c3",
+     "block": 78,
+     "page": 34
+    },
+    {
+     "chapter": "p1c7",
+     "block": 154,
+     "page": 65
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "2 Peter 1:21",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 5,
+     "page": 313
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "2 Peter 1:3",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c1",
+     "block": 110,
+     "page": 19
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "2 Peter 1:3,4",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c1",
+     "block": 18,
+     "page": 14
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "2 Peter 1:4",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 240,
+     "page": 160
+    },
+    {
+     "chapter": "p3c2",
+     "block": 49,
+     "page": 352
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "2 Peter 1:5-11",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 228,
+     "page": 159
+    },
+    {
+     "chapter": "p3c2",
+     "block": 36,
+     "page": 351
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "2 Peter 3:15,16",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 7,
+     "page": 313
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "2 Peter 3:9",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 150,
+     "page": 324
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "2 Thessalonians 1:7-10",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 115,
+     "page": 153
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "2 Thessalonians 1:8,9",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 118,
+     "page": 153
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "2 Thessalonians 2:13",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 190,
+     "page": 328
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "2 Thessalonians 3:6-13",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 197,
+     "page": 156
+    },
+    {
+     "chapter": "p3c2",
+     "block": 8,
+     "page": 348
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "2 Timothy 1:8–2",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c2",
+     "block": 111,
+     "page": 27
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "2 Timothy 1:9",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 506,
+     "page": 172
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "2 Timothy 2:15",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p1c1",
+     "block": 57,
+     "page": 17
+    },
+    {
+     "chapter": "p2c7",
+     "block": 471,
+     "page": 170
+    }
+   ],
+   "modules": [
+    "part1",
+    "part2"
+   ]
+  },
+  {
+   "ref": "2 Timothy 2:15,23-26",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 193,
+     "page": 156
+    },
+    {
+     "chapter": "p3c2",
+     "block": 4,
+     "page": 347
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "2 Timothy 2:2",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 406,
+     "page": 168
+    },
+    {
+     "chapter": "p2c11",
+     "block": 36,
+     "page": 263
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "2 Timothy 2:23",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c1",
+     "block": 94,
+     "page": 18
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "2 Timothy 2:24,25",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c10",
+     "block": 19,
+     "page": 248
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "2 Timothy 2:25",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 143,
+     "page": 323
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "2 Timothy 2:4,5",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c10",
+     "block": 17,
+     "page": 248
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "2 Timothy 3:16",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p1c1",
+     "block": 81,
+     "page": 18
+    },
+    {
+     "chapter": "p3c1",
+     "block": 4,
+     "page": 313
+    }
+   ],
+   "modules": [
+    "part1",
+    "part3"
+   ]
+  },
+  {
+   "ref": "2 Timothy 3:16-17",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c8",
+     "block": 101,
+     "page": 185
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "2 Timothy 4:1",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 81,
+     "page": 318
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "2 Timothy 4:1,2",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c10",
+     "block": 14,
+     "page": 247
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "2 Timothy 4:5",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 487,
+     "page": 171
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Acts 10:23,45",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 220,
+     "page": 331
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Acts 10:34",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 247,
+     "page": 161
+    },
+    {
+     "chapter": "p3c2",
+     "block": 55,
+     "page": 352
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Acts 10:44",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 220,
+     "page": 331
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Acts 10:45,46",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 220,
+     "page": 331
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Acts 10:47",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 229,
+     "page": 333
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Acts 10:47,48",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 220,
+     "page": 331
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Acts 11:15-18",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 222,
+     "page": 332
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Acts 11:18",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 143,
+     "page": 323
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Acts 13:1-4",
+   "count": 4,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 486,
+     "page": 171
+    },
+    {
+     "chapter": "p2c9",
+     "block": 56,
+     "page": 224
+    },
+    {
+     "chapter": "p2c9",
+     "block": 58,
+     "page": 224
+    },
+    {
+     "chapter": "p2c9",
+     "block": 58,
+     "page": 224
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Acts 13:4",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 494,
+     "page": 171
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Acts 14:23",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 193,
+     "page": 156
+    },
+    {
+     "chapter": "p3c2",
+     "block": 4,
+     "page": 347
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Acts 15:1-21",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c8",
+     "block": 465,
+     "page": 206
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Acts 15:13-29",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c9",
+     "block": 190,
+     "page": 232
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Acts 15:13–29",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c11",
+     "block": 271,
+     "page": 277
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Acts 16:14,15,40",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 489,
+     "page": 171
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Acts 16:31",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c5",
+     "block": 13,
+     "page": 46
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Acts 16:31-33",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 236,
+     "page": 334
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Acts 17:11",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c1",
+     "block": 55,
+     "page": 17
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Acts 17:23",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c1",
+     "block": 65,
+     "page": 17
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Acts 17:26",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 563,
+     "page": 174
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Acts 17:30",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 150,
+     "page": 324
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Acts 19:1-5",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 221,
+     "page": 332
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Acts 19:6",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 221,
+     "page": 332
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Acts 1:4-8",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 103,
+     "page": 153
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Acts 1:5",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 208,
+     "page": 330
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Acts 1:8",
+   "count": 3,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 106,
+     "page": 153
+    },
+    {
+     "chapter": "p2c7",
+     "block": 384,
+     "page": 167
+    },
+    {
+     "chapter": "p2c7",
+     "block": 455,
+     "page": 169
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Acts 1:9-11",
+   "count": 3,
+   "occurrences": [
+    {
+     "chapter": "p1c7",
+     "block": 239,
+     "page": 72
+    },
+    {
+     "chapter": "p3c1",
+     "block": 121,
+     "page": 321
+    },
+    {
+     "chapter": "p3c1",
+     "block": 284,
+     "page": 339
+    }
+   ],
+   "modules": [
+    "part1",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Acts 20:28",
+   "count": 3,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 414,
+     "page": 168
+    },
+    {
+     "chapter": "p2c10",
+     "block": 9,
+     "page": 247
+    },
+    {
+     "chapter": "p2c10",
+     "block": 10,
+     "page": 247
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Acts 20:7",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 195,
+     "page": 156
+    },
+    {
+     "chapter": "p3c2",
+     "block": 6,
+     "page": 347
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Acts 22:16",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 234,
+     "page": 333
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Acts 24:15",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 116,
+     "page": 153
+    },
+    {
+     "chapter": "p3c1",
+     "block": 322,
+     "page": 344
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Acts 26:18",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 191,
+     "page": 329
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Acts 26:19",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p1c7",
+     "block": 32,
+     "page": 59
+    },
+    {
+     "chapter": "p2c7",
+     "block": 507,
+     "page": 172
+    }
+   ],
+   "modules": [
+    "part1",
+    "part2"
+   ]
+  },
+  {
+   "ref": "Acts 2:1-4",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 208,
+     "page": 330
+    },
+    {
+     "chapter": "p3c1",
+     "block": 212,
+     "page": 331
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Acts 2:1-4,6,13-18",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 350,
+     "page": 166
+    },
+    {
+     "chapter": "p2c8",
+     "block": 134,
+     "page": 187
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Acts 2:16-18",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c7",
+     "block": 230,
+     "page": 71
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Acts 2:17",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 224,
+     "page": 332
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Acts 2:21",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c7",
+     "block": 232,
+     "page": 72
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Acts 2:22-36",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c7",
+     "block": 239,
+     "page": 72
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Acts 2:38",
+   "count": 5,
+   "occurrences": [
+    {
+     "chapter": "p1c4",
+     "block": 34,
+     "page": 40
+    },
+    {
+     "chapter": "p1c4",
+     "block": 34,
+     "page": 40
+    },
+    {
+     "chapter": "p1c7",
+     "block": 240,
+     "page": 72
+    },
+    {
+     "chapter": "p3c1",
+     "block": 150,
+     "page": 324
+    },
+    {
+     "chapter": "p3c1",
+     "block": 233,
+     "page": 333
+    }
+   ],
+   "modules": [
+    "part1",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Acts 2:38,39",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p1c7",
+     "block": 240,
+     "page": 72
+    },
+    {
+     "chapter": "p3c1",
+     "block": 224,
+     "page": 332
+    }
+   ],
+   "modules": [
+    "part1",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Acts 2:4",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 105,
+     "page": 153
+    },
+    {
+     "chapter": "p3c1",
+     "block": 219,
+     "page": 331
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Acts 2:40-47",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c1",
+     "block": 139,
+     "page": 20
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Acts 2:41",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 236,
+     "page": 334
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Acts 2:42",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c4",
+     "block": 11,
+     "page": 38
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Acts 2:42,46,47",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 195,
+     "page": 156
+    },
+    {
+     "chapter": "p3c2",
+     "block": 6,
+     "page": 347
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Acts 2:47",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 397,
+     "page": 167
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Acts 3:19",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 95,
+     "page": 152
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Acts 4:10-12",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 508,
+     "page": 172
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Acts 5:29",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 244,
+     "page": 160
+    },
+    {
+     "chapter": "p3c2",
+     "block": 53,
+     "page": 352
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Acts 5:42",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c2",
+     "block": 86,
+     "page": 27
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Acts 6:1-7",
+   "count": 5,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 478,
+     "page": 171
+    },
+    {
+     "chapter": "p2c8",
+     "block": 218,
+     "page": 192
+    },
+    {
+     "chapter": "p2c9",
+     "block": 63,
+     "page": 225
+    },
+    {
+     "chapter": "p2c10",
+     "block": 14,
+     "page": 247
+    },
+    {
+     "chapter": "p2c11",
+     "block": 36,
+     "page": 263
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Acts 6:17",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 479,
+     "page": 171
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Acts 6:3",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 498,
+     "page": 172
+    },
+    {
+     "chapter": "p2c11",
+     "block": 141,
+     "page": 270
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Acts 6:4",
+   "count": 3,
+   "occurrences": [
+    {
+     "chapter": "p1c3",
+     "block": 97,
+     "page": 34
+    },
+    {
+     "chapter": "p2c7",
+     "block": 471,
+     "page": 170
+    },
+    {
+     "chapter": "p2c7",
+     "block": 498,
+     "page": 172
+    }
+   ],
+   "modules": [
+    "part1",
+    "part2"
+   ]
+  },
+  {
+   "ref": "Acts 8:12",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 233,
+     "page": 333
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Acts 8:14-17",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 208,
+     "page": 330
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Acts 8:16",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 238,
+     "page": 334
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Acts 8:30",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c1",
+     "block": 64,
+     "page": 17
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Acts 8:36,38",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 101,
+     "page": 153
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Acts 9:17,19",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 231,
+     "page": 333
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Amos 5:1-27",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 508,
+     "page": 172
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Colossians 1:16",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 81,
+     "page": 318
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Colossians 1:17",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 81,
+     "page": 318
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Colossians 1:18",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c8",
+     "block": 101,
+     "page": 185
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Colossians 1:19,20",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c1",
+     "block": 40,
+     "page": 16
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Colossians 1:21,22",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 506,
+     "page": 172
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Colossians 1:9-12",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c1",
+     "block": 43,
+     "page": 16
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Colossians 1:9-14",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c3",
+     "block": 68,
+     "page": 33
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Colossians 1:9-20",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 473,
+     "page": 170
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Colossians 2:11,12",
+   "count": 3,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 229,
+     "page": 333
+    },
+    {
+     "chapter": "p3c1",
+     "block": 230,
+     "page": 333
+    },
+    {
+     "chapter": "p3c1",
+     "block": 235,
+     "page": 334
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Colossians 2:16,17",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 195,
+     "page": 156
+    },
+    {
+     "chapter": "p3c2",
+     "block": 6,
+     "page": 347
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Colossians 2:18",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c2",
+     "block": 24,
+     "page": 23
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Colossians 2:19",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 425,
+     "page": 168
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Colossians 2:3",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 81,
+     "page": 318
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Colossians 2:6,7",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c7",
+     "block": 42,
+     "page": 60
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Colossians 3:1-3",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c2",
+     "block": 24,
+     "page": 23
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Colossians 3:1-7",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c2",
+     "block": 6,
+     "page": 21
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Colossians 3:10",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 168,
+     "page": 326
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Colossians 3:13",
+   "count": 3,
+   "occurrences": [
+    {
+     "chapter": "p1c1",
+     "block": 139,
+     "page": 20
+    },
+    {
+     "chapter": "p2c7",
+     "block": 230,
+     "page": 159
+    },
+    {
+     "chapter": "p3c2",
+     "block": 38,
+     "page": 351
+    }
+   ],
+   "modules": [
+    "part1",
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Colossians 3:18,19",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 224,
+     "page": 159
+    },
+    {
+     "chapter": "p3c2",
+     "block": 32,
+     "page": 350
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Colossians 3:20",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 224,
+     "page": 159
+    },
+    {
+     "chapter": "p3c2",
+     "block": 32,
+     "page": 350
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Colossians 3:21",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 224,
+     "page": 159
+    },
+    {
+     "chapter": "p3c2",
+     "block": 32,
+     "page": 350
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Colossians 3:8",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 228,
+     "page": 159
+    },
+    {
+     "chapter": "p3c2",
+     "block": 36,
+     "page": 351
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Colossians 4:17",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 495,
+     "page": 172
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Colossians 4:5",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 197,
+     "page": 156
+    },
+    {
+     "chapter": "p3c2",
+     "block": 8,
+     "page": 348
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Daniel 12:2",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 322,
+     "page": 344
+    },
+    {
+     "chapter": "p3c1",
+     "block": 325,
+     "page": 345
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Deuteronomy 28:58",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 7,
+     "page": 313
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Deuteronomy 6:4",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 27,
+     "page": 316
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Deuteronomy 6:4,5",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c3",
+     "block": 36,
+     "page": 32
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Deuteronomy 6:6,7",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 218,
+     "page": 158
+    },
+    {
+     "chapter": "p3c2",
+     "block": 28,
+     "page": 350
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Ecclesiastes 10:19",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c7",
+     "block": 72,
+     "page": 60
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Ephesians 1:15-23",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c3",
+     "block": 68,
+     "page": 33
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Ephesians 1:17,18",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c1",
+     "block": 16,
+     "page": 14
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Ephesians 1:19-23",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 125,
+     "page": 322
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Ephesians 1:22-23",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c8",
+     "block": 101,
+     "page": 185
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Ephesians 1:23",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 81,
+     "page": 318
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Ephesians 1:3-6",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c1",
+     "block": 15,
+     "page": 90
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Ephesians 1:3-7",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c1",
+     "block": 15,
+     "page": 14
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Ephesians 1:7",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 160,
+     "page": 325
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Ephesians 2:1-3",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 164,
+     "page": 326
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Ephesians 2:19-22",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 106,
+     "page": 153
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Ephesians 2:8",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c4",
+     "block": 23,
+     "page": 39
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Ephesians 2:8,9",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p1c4",
+     "block": 35,
+     "page": 41
+    },
+    {
+     "chapter": "p3c1",
+     "block": 172,
+     "page": 327
+    }
+   ],
+   "modules": [
+    "part1",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Ephesians 4:1",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c7",
+     "block": 213,
+     "page": 71
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Ephesians 4:11",
+   "count": 3,
+   "occurrences": [
+    {
+     "chapter": "p1c2",
+     "block": 66,
+     "page": 25
+    },
+    {
+     "chapter": "p1c7",
+     "block": 107,
+     "page": 63
+    },
+    {
+     "chapter": "p2c5",
+     "block": 169,
+     "page": 139
+    }
+   ],
+   "modules": [
+    "part1",
+    "part2"
+   ]
+  },
+  {
+   "ref": "Ephesians 4:11,12",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c9",
+     "block": 63,
+     "page": 225
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Ephesians 4:11-13",
+   "count": 3,
+   "occurrences": [
+    {
+     "chapter": "p1c2",
+     "block": 57,
+     "page": 25
+    },
+    {
+     "chapter": "p2c5",
+     "block": 119,
+     "page": 134
+    },
+    {
+     "chapter": "p2c7",
+     "block": 406,
+     "page": 168
+    }
+   ],
+   "modules": [
+    "part1",
+    "part2"
+   ]
+  },
+  {
+   "ref": "Ephesians 4:11-16",
+   "count": 4,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 197,
+     "page": 156
+    },
+    {
+     "chapter": "p2c7",
+     "block": 472,
+     "page": 170
+    },
+    {
+     "chapter": "p2c7",
+     "block": 478,
+     "page": 171
+    },
+    {
+     "chapter": "p3c2",
+     "block": 8,
+     "page": 348
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Ephesians 4:12",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c5",
+     "block": 170,
+     "page": 139
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Ephesians 4:15",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c9",
+     "block": 203,
+     "page": 233
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Ephesians 4:17",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c2",
+     "block": 24,
+     "page": 23
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Ephesians 4:2",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 230,
+     "page": 159
+    },
+    {
+     "chapter": "p3c2",
+     "block": 38,
+     "page": 351
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Ephesians 4:22-24",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c2",
+     "block": 31,
+     "page": 24
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Ephesians 4:23",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 168,
+     "page": 326
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Ephesians 4:25,29,31",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 236,
+     "page": 160
+    },
+    {
+     "chapter": "p3c2",
+     "block": 45,
+     "page": 352
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Ephesians 4:26",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 228,
+     "page": 159
+    },
+    {
+     "chapter": "p3c2",
+     "block": 36,
+     "page": 351
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Ephesians 4:29",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 228,
+     "page": 159
+    },
+    {
+     "chapter": "p3c2",
+     "block": 36,
+     "page": 351
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Ephesians 4:32",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c9",
+     "block": 240,
+     "page": 235
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Ephesians 5:15",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c7",
+     "block": 215,
+     "page": 71
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Ephesians 5:16",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 197,
+     "page": 156
+    },
+    {
+     "chapter": "p3c2",
+     "block": 8,
+     "page": 348
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Ephesians 5:18",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 209,
+     "page": 330
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Ephesians 5:2",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c7",
+     "block": 214,
+     "page": 71
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Ephesians 5:21",
+   "count": 3,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 195,
+     "page": 156
+    },
+    {
+     "chapter": "p2c7",
+     "block": 470,
+     "page": 170
+    },
+    {
+     "chapter": "p3c2",
+     "block": 6,
+     "page": 347
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Ephesians 5:22-31",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 224,
+     "page": 159
+    },
+    {
+     "chapter": "p3c2",
+     "block": 32,
+     "page": 350
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Ephesians 5:25,26",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 189,
+     "page": 328
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Ephesians 5:25-28",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 397,
+     "page": 167
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Ephesians 5:3",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 326,
+     "page": 165
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Ephesians 5:9",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 109,
+     "page": 153
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Ephesians 6:1-3",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 224,
+     "page": 159
+    },
+    {
+     "chapter": "p3c2",
+     "block": 32,
+     "page": 350
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Ephesians 6:1020",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c2",
+     "block": 38,
+     "page": 24
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Ephesians 6:20",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 508,
+     "page": 172
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Ephesians 6:4",
+   "count": 3,
+   "occurrences": [
+    {
+     "chapter": "p1c5",
+     "block": 12,
+     "page": 46
+    },
+    {
+     "chapter": "p2c7",
+     "block": 224,
+     "page": 159
+    },
+    {
+     "chapter": "p3c2",
+     "block": 32,
+     "page": 350
+    }
+   ],
+   "modules": [
+    "part1",
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Exodus 13:12,13",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c5",
+     "block": 6,
+     "page": 45
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Exodus 15:26",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 245,
+     "page": 335
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Exodus 19:5,6",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 106,
+     "page": 153
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Exodus 20:12",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 224,
+     "page": 159
+    },
+    {
+     "chapter": "p3c2",
+     "block": 32,
+     "page": 350
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Exodus 20:14",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 221,
+     "page": 158
+    },
+    {
+     "chapter": "p3c2",
+     "block": 30,
+     "page": 350
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Galatians 3:27",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 232,
+     "page": 333
+    },
+    {
+     "chapter": "p3c1",
+     "block": 237,
+     "page": 334
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Galatians 4:4",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 53,
+     "page": 317
+    },
+    {
+     "chapter": "p3c1",
+     "block": 84,
+     "page": 319
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Galatians 4:4,5",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 164,
+     "page": 326
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Galatians 4:4-6",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 165,
+     "page": 326
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Galatians 4:6",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 165,
+     "page": 326
+    },
+    {
+     "chapter": "p3c1",
+     "block": 210,
+     "page": 330
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Galatians 5:1",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 232,
+     "page": 159
+    },
+    {
+     "chapter": "p3c2",
+     "block": 40,
+     "page": 351
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Galatians 5:13",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c1",
+     "block": 139,
+     "page": 20
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Galatians 5:13-21",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 240,
+     "page": 160
+    },
+    {
+     "chapter": "p3c2",
+     "block": 49,
+     "page": 352
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Galatians 5:16",
+   "count": 4,
+   "occurrences": [
+    {
+     "chapter": "p1c7",
+     "block": 212,
+     "page": 71
+    },
+    {
+     "chapter": "p2c7",
+     "block": 201,
+     "page": 157
+    },
+    {
+     "chapter": "p3c1",
+     "block": 201,
+     "page": 330
+    },
+    {
+     "chapter": "p3c2",
+     "block": 12,
+     "page": 348
+    }
+   ],
+   "modules": [
+    "part1",
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Galatians 5:16,22-25",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 212,
+     "page": 158
+    },
+    {
+     "chapter": "p3c2",
+     "block": 22,
+     "page": 349
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Galatians 5:16-25",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 213,
+     "page": 331
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Galatians 5:18",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 201,
+     "page": 330
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Galatians 5:19-21",
+   "count": 4,
+   "occurrences": [
+    {
+     "chapter": "p1c1",
+     "block": 26,
+     "page": 15
+    },
+    {
+     "chapter": "p1c2",
+     "block": 24,
+     "page": 23
+    },
+    {
+     "chapter": "p2c7",
+     "block": 201,
+     "page": 157
+    },
+    {
+     "chapter": "p3c2",
+     "block": 12,
+     "page": 348
+    }
+   ],
+   "modules": [
+    "part1",
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Galatians 5:22,23",
+   "count": 3,
+   "occurrences": [
+    {
+     "chapter": "p1c1",
+     "block": 27,
+     "page": 15
+    },
+    {
+     "chapter": "p2c7",
+     "block": 109,
+     "page": 153
+    },
+    {
+     "chapter": "p3c1",
+     "block": 168,
+     "page": 326
+    }
+   ],
+   "modules": [
+    "part1",
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Galatians 5:22-25",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 455,
+     "page": 169
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Galatians 5:22-26",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 201,
+     "page": 330
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Galatians 5:23",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 228,
+     "page": 159
+    },
+    {
+     "chapter": "p3c2",
+     "block": 36,
+     "page": 351
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Galatians 6:1",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c9",
+     "block": 234,
+     "page": 234
+    },
+    {
+     "chapter": "p2c9",
+     "block": 245,
+     "page": 235
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Galatians 6:1,2",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p1c2",
+     "block": 58,
+     "page": 25
+    },
+    {
+     "chapter": "p2c8",
+     "block": 555,
+     "page": 211
+    }
+   ],
+   "modules": [
+    "part1",
+    "part2"
+   ]
+  },
+  {
+   "ref": "Galatians 6:1-6",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 425,
+     "page": 168
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Galatians 6:14",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 189,
+     "page": 328
+    },
+    {
+     "chapter": "p3c1",
+     "block": 202,
+     "page": 330
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Galatians 6:2",
+   "count": 3,
+   "occurrences": [
+    {
+     "chapter": "p1c1",
+     "block": 139,
+     "page": 20
+    },
+    {
+     "chapter": "p2c7",
+     "block": 193,
+     "page": 156
+    },
+    {
+     "chapter": "p3c2",
+     "block": 4,
+     "page": 347
+    }
+   ],
+   "modules": [
+    "part1",
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Galatians 6:2-4",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c9",
+     "block": 245,
+     "page": 235
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Genesis 11:7",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 44,
+     "page": 316
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Genesis 14:18-20",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 113,
+     "page": 153
+    },
+    {
+     "chapter": "p2c11",
+     "block": 245,
+     "page": 275
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Genesis 18:4",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c4",
+     "block": 50,
+     "page": 43
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Genesis 19:2",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c4",
+     "block": 50,
+     "page": 43
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Genesis 1:1",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 40,
+     "page": 316
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Genesis 1:1-31",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 249,
+     "page": 161
+    },
+    {
+     "chapter": "p3c2",
+     "block": 58,
+     "page": 353
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Genesis 1:26",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 42,
+     "page": 316
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Genesis 1:26-30",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 249,
+     "page": 161
+    },
+    {
+     "chapter": "p3c2",
+     "block": 59,
+     "page": 353
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Genesis 1:27",
+   "count": 4,
+   "occurrences": [
+    {
+     "chapter": "p1c1",
+     "block": 7,
+     "page": 13
+    },
+    {
+     "chapter": "p2c7",
+     "block": 224,
+     "page": 159
+    },
+    {
+     "chapter": "p2c7",
+     "block": 321,
+     "page": 164
+    },
+    {
+     "chapter": "p3c2",
+     "block": 32,
+     "page": 350
+    }
+   ],
+   "modules": [
+    "part1",
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Genesis 1:27,2",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 326,
+     "page": 165
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Genesis 1:28",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c7",
+     "block": 150,
+     "page": 65
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Genesis 24:32",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c4",
+     "block": 50,
+     "page": 43
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Genesis 2:18-24",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 218,
+     "page": 158
+    },
+    {
+     "chapter": "p3c2",
+     "block": 28,
+     "page": 350
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Genesis 2:24",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 220,
+     "page": 158
+    },
+    {
+     "chapter": "p3c2",
+     "block": 30,
+     "page": 350
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Genesis 3:15",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c9",
+     "block": 234,
+     "page": 234
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Genesis 3:16-19",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 224,
+     "page": 159
+    },
+    {
+     "chapter": "p3c2",
+     "block": 32,
+     "page": 350
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Hebrews 10:25",
+   "count": 3,
+   "occurrences": [
+    {
+     "chapter": "p2c1",
+     "block": 16,
+     "page": 90
+    },
+    {
+     "chapter": "p2c7",
+     "block": 195,
+     "page": 156
+    },
+    {
+     "chapter": "p3c2",
+     "block": 6,
+     "page": 347
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Hebrews 12:1-3",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c2",
+     "block": 16,
+     "page": 22
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Hebrews 12:14",
+   "count": 3,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 100,
+     "page": 152
+    },
+    {
+     "chapter": "p2c7",
+     "block": 506,
+     "page": 172
+    },
+    {
+     "chapter": "p3c1",
+     "block": 198,
+     "page": 329
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Hebrews 12:15",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c4",
+     "block": 19,
+     "page": 39
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Hebrews 12:9-11",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 198,
+     "page": 329
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Hebrews 13:12",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 99,
+     "page": 152
+    },
+    {
+     "chapter": "p3c1",
+     "block": 190,
+     "page": 328
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Hebrews 13:17",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 495,
+     "page": 172
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Hebrews 13:17,18",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 470,
+     "page": 170
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Hebrews 13:21",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 169,
+     "page": 327
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Hebrews 13:7",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c10",
+     "block": 11,
+     "page": 247
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Hebrews 13:7,17",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 195,
+     "page": 156
+    },
+    {
+     "chapter": "p3c2",
+     "block": 6,
+     "page": 347
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Hebrews 13:8",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 81,
+     "page": 318
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Hebrews 1:10",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 81,
+     "page": 318
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Hebrews 1:6",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 81,
+     "page": 318
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Hebrews 1:8",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 48,
+     "page": 317
+    },
+    {
+     "chapter": "p3c1",
+     "block": 81,
+     "page": 318
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Hebrews 2:12",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 106,
+     "page": 153
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Hebrews 2:16-18",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 102,
+     "page": 320
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Hebrews 2:4",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 108,
+     "page": 153
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Hebrews 2:9",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 84,
+     "page": 319
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Hebrews 3:1",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c1",
+     "block": 126,
+     "page": 19
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Hebrews 4:12",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c1",
+     "block": 85,
+     "page": 18
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Hebrews 6:10",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c10",
+     "block": 13,
+     "page": 247
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Hebrews 7:1-21",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 113,
+     "page": 153
+    },
+    {
+     "chapter": "p2c11",
+     "block": 245,
+     "page": 275
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Hebrews 9:28",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 286,
+     "page": 339
+    },
+    {
+     "chapter": "p3c1",
+     "block": 321,
+     "page": 344
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Isaiah 11:1-4",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 298,
+     "page": 341
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Isaiah 11:2",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 210,
+     "page": 330
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Isaiah 11:9,10",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 298,
+     "page": 341
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Isaiah 28:7",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 232,
+     "page": 159
+    },
+    {
+     "chapter": "p3c2",
+     "block": 40,
+     "page": 351
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Isaiah 29:18",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 248,
+     "page": 335
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Isaiah 33:22",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c3",
+     "block": 38,
+     "page": 115
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Isaiah 42:8",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 139,
+     "page": 323
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Isaiah 48:16",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 50,
+     "page": 317
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Isaiah 53:4,5",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 110,
+     "page": 153
+    },
+    {
+     "chapter": "p3c1",
+     "block": 243,
+     "page": 335
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Isaiah 53:5",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p1c4",
+     "block": 16,
+     "page": 38
+    },
+    {
+     "chapter": "p3c1",
+     "block": 249,
+     "page": 335
+    }
+   ],
+   "modules": [
+    "part1",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Isaiah 55:2",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 197,
+     "page": 156
+    },
+    {
+     "chapter": "p3c2",
+     "block": 8,
+     "page": 348
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Isaiah 55:7",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 150,
+     "page": 324
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Isaiah 56:7",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 360,
+     "page": 166
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Isaiah 6:1-4",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 468,
+     "page": 170
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Isaiah 7:14",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 296,
+     "page": 341
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Isaiah 8:20",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 7,
+     "page": 313
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Isaiah 9:6",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 296,
+     "page": 341
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Isaiah 9:7",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 297,
+     "page": 341
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "James 1:17",
+   "count": 4,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 197,
+     "page": 156
+    },
+    {
+     "chapter": "p2c7",
+     "block": 247,
+     "page": 161
+    },
+    {
+     "chapter": "p3c2",
+     "block": 8,
+     "page": 348
+    },
+    {
+     "chapter": "p3c2",
+     "block": 56,
+     "page": 353
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "James 1:21",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 232,
+     "page": 159
+    },
+    {
+     "chapter": "p3c2",
+     "block": 40,
+     "page": 351
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "James 2:1-4",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 240,
+     "page": 160
+    },
+    {
+     "chapter": "p3c2",
+     "block": 49,
+     "page": 352
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "James 2:19",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 36,
+     "page": 316
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "James 3:17",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c11",
+     "block": 53,
+     "page": 264
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "James 4:11",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c10",
+     "block": 19,
+     "page": 248
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "James 4:8-10",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 505,
+     "page": 172
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "James 5:12",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 209,
+     "page": 157
+    },
+    {
+     "chapter": "p3c2",
+     "block": 20,
+     "page": 349
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "James 5:13-18",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 192,
+     "page": 155
+    },
+    {
+     "chapter": "p3c2",
+     "block": 4,
+     "page": 347
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "James 5:14,15",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c5",
+     "block": 105,
+     "page": 132
+    },
+    {
+     "chapter": "p2c7",
+     "block": 360,
+     "page": 166
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "James 5:14-16",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 110,
+     "page": 153
+    },
+    {
+     "chapter": "p3c1",
+     "block": 251,
+     "page": 335
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "James 5:16",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 193,
+     "page": 156
+    },
+    {
+     "chapter": "p3c2",
+     "block": 4,
+     "page": 347
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Jeremiah 13:23",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 144,
+     "page": 324
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Jeremiah 1:5",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 249,
+     "page": 161
+    },
+    {
+     "chapter": "p3c2",
+     "block": 58,
+     "page": 353
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Joel 2:15-17",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 505,
+     "page": 172
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Joel 2:28",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 507,
+     "page": 172
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Joel 2:28-32",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 224,
+     "page": 332
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "John 10:11",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 492,
+     "page": 171
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "John 10:28",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 117,
+     "page": 153
+    },
+    {
+     "chapter": "p3c1",
+     "block": 81,
+     "page": 318
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "John 12:1-8",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c4",
+     "block": 51,
+     "page": 43
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "John 13:1-17",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c4",
+     "block": 52,
+     "page": 43
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "John 13:10",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 268,
+     "page": 337
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "John 13:14",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c4",
+     "block": 52,
+     "page": 43
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "John 13:14,15",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 267,
+     "page": 337
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "John 13:34,35",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 214,
+     "page": 158
+    },
+    {
+     "chapter": "p3c2",
+     "block": 24,
+     "page": 349
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "John 13:35",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c11",
+     "block": 53,
+     "page": 264
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "John 13:4",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 265,
+     "page": 337
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "John 13:4-17",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 112,
+     "page": 153
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "John 13:8",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 268,
+     "page": 337
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "John 13:9",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 268,
+     "page": 337
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "John 14:15,21-23",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 455,
+     "page": 169
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "John 14:15-17",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 212,
+     "page": 331
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "John 14:16",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 212,
+     "page": 331
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "John 14:16-26",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 282,
+     "page": 339
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "John 14:19",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c6",
+     "block": 28,
+     "page": 53
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "John 14:2,3",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 282,
+     "page": 339
+    },
+    {
+     "chapter": "p3c1",
+     "block": 285,
+     "page": 339
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "John 14:26",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 55,
+     "page": 317
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "John 15:1-8",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c2",
+     "block": 22,
+     "page": 349
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "John 15:13",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 249,
+     "page": 161
+    },
+    {
+     "chapter": "p3c2",
+     "block": 58,
+     "page": 353
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "John 15:2",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 184,
+     "page": 328
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "John 15:26",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 105,
+     "page": 153
+    },
+    {
+     "chapter": "p3c1",
+     "block": 57,
+     "page": 317
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "John 15:3",
+   "count": 3,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 214,
+     "page": 158
+    },
+    {
+     "chapter": "p3c1",
+     "block": 200,
+     "page": 329
+    },
+    {
+     "chapter": "p3c2",
+     "block": 24,
+     "page": 349
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "John 15:4,5",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 214,
+     "page": 158
+    },
+    {
+     "chapter": "p3c2",
+     "block": 24,
+     "page": 349
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "John 16:13",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c8",
+     "block": 101,
+     "page": 185
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "John 16:7",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 282,
+     "page": 339
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "John 16:7-11",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 151,
+     "page": 324
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "John 17:17",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 190,
+     "page": 328
+    },
+    {
+     "chapter": "p3c1",
+     "block": 200,
+     "page": 329
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "John 17:17-19",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 190,
+     "page": 328
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "John 17:21-23",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 195,
+     "page": 156
+    },
+    {
+     "chapter": "p3c2",
+     "block": 6,
+     "page": 347
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "John 18:20",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 195,
+     "page": 156
+    },
+    {
+     "chapter": "p3c2",
+     "block": 6,
+     "page": 347
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "John 19:28",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 84,
+     "page": 319
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "John 1:1-14",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 81,
+     "page": 318
+    },
+    {
+     "chapter": "p3c1",
+     "block": 81,
+     "page": 318
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "John 1:14",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 87,
+     "page": 319
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "John 1:3",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 81,
+     "page": 318
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "John 20:21",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c6",
+     "block": 23,
+     "page": 143
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "John 2:24,25",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 81,
+     "page": 318
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "John 3:13",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 81,
+     "page": 318
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "John 3:16",
+   "count": 4,
+   "occurrences": [
+    {
+     "chapter": "p1c4",
+     "block": 16,
+     "page": 38
+    },
+    {
+     "chapter": "p1c6",
+     "block": 36,
+     "page": 54
+    },
+    {
+     "chapter": "p2c7",
+     "block": 564,
+     "page": 174
+    },
+    {
+     "chapter": "p3c1",
+     "block": 51,
+     "page": 317
+    }
+   ],
+   "modules": [
+    "part1",
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "John 3:18",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c11",
+     "block": 53,
+     "page": 264
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "John 3:22,23",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 101,
+     "page": 153
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "John 3:3",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 98,
+     "page": 152
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "John 3:5",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 252,
+     "page": 161
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "John 3:6",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 253,
+     "page": 161
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "John 4:23",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 195,
+     "page": 156
+    },
+    {
+     "chapter": "p3c2",
+     "block": 6,
+     "page": 347
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "John 4:23,24",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 468,
+     "page": 170
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "John 4:24",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 369,
+     "page": 167
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "John 4:34",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 214,
+     "page": 158
+    },
+    {
+     "chapter": "p3c2",
+     "block": 24,
+     "page": 349
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "John 4:35",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 397,
+     "page": 167
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "John 4:6",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 84,
+     "page": 319
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "John 4:7",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c1",
+     "block": 62,
+     "page": 17
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "John 5:14",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 196,
+     "page": 329
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "John 5:22,23",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 81,
+     "page": 318
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "John 5:23",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 81,
+     "page": 318
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "John 5:28,29",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 116,
+     "page": 153
+    },
+    {
+     "chapter": "p3c1",
+     "block": 322,
+     "page": 344
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "John 5:29",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 325,
+     "page": 345
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "John 7:37",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c2",
+     "block": 76,
+     "page": 26
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "John 8:11",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 214,
+     "page": 158
+    },
+    {
+     "chapter": "p3c2",
+     "block": 24,
+     "page": 349
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "John 8:32,36",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 232,
+     "page": 159
+    },
+    {
+     "chapter": "p3c2",
+     "block": 40,
+     "page": 351
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Joshua 1:8",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 193,
+     "page": 156
+    },
+    {
+     "chapter": "p3c2",
+     "block": 4,
+     "page": 347
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Joshua 4:6,7",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c2",
+     "block": 3,
+     "page": 93
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Leviticus 27:30",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p1c3",
+     "block": 81,
+     "page": 34
+    },
+    {
+     "chapter": "p1c7",
+     "block": 153,
+     "page": 65
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Luke 10:1",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c4",
+     "block": 46,
+     "page": 122
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Luke 10:30-37",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 247,
+     "page": 161
+    },
+    {
+     "chapter": "p3c2",
+     "block": 56,
+     "page": 353
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Luke 11:1-13",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 192,
+     "page": 155
+    },
+    {
+     "chapter": "p3c2",
+     "block": 4,
+     "page": 347
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Luke 11:42",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 113,
+     "page": 153
+    },
+    {
+     "chapter": "p2c11",
+     "block": 245,
+     "page": 275
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Luke 13:3",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 95,
+     "page": 152
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Luke 13:6-9",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 212,
+     "page": 158
+    },
+    {
+     "chapter": "p3c2",
+     "block": 22,
+     "page": 349
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Luke 14:23",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c2",
+     "block": 76,
+     "page": 26
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Luke 16:18",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 221,
+     "page": 158
+    },
+    {
+     "chapter": "p3c2",
+     "block": 30,
+     "page": 350
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Luke 16:2",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c10",
+     "block": 17,
+     "page": 248
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Luke 17:21",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c7",
+     "block": 233,
+     "page": 72
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Luke 18:30",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 117,
+     "page": 153
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Luke 19:10",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c7",
+     "block": 188,
+     "page": 69
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Luke 19:8,9",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 114,
+     "page": 153
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Luke 1:41",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 249,
+     "page": 161
+    },
+    {
+     "chapter": "p3c2",
+     "block": 58,
+     "page": 353
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Luke 1:75",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 100,
+     "page": 152
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Luke 22:17-20",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 111,
+     "page": 153
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Luke 22:19",
+   "count": 3,
+   "occurrences": [
+    {
+     "chapter": "p1c4",
+     "block": 22,
+     "page": 39
+    },
+    {
+     "chapter": "p1c4",
+     "block": 30,
+     "page": 40
+    },
+    {
+     "chapter": "p3c1",
+     "block": 261,
+     "page": 336
+    }
+   ],
+   "modules": [
+    "part1",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Luke 22:19,20",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 264,
+     "page": 337
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Luke 22:20",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 262,
+     "page": 337
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Luke 22:24-27",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c4",
+     "block": 52,
+     "page": 43
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Luke 22:29",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c7",
+     "block": 237,
+     "page": 72
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Luke 22:42",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 214,
+     "page": 158
+    },
+    {
+     "chapter": "p3c2",
+     "block": 24,
+     "page": 349
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Luke 24:39",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 108,
+     "page": 321
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Luke 24:49,53",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 103,
+     "page": 153
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Luke 24:51",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 119,
+     "page": 321
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Luke 2:21-24",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c5",
+     "block": 5,
+     "page": 45
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Luke 3:4",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 508,
+     "page": 172
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Luke 3:7-14",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 148,
+     "page": 324
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Luke 4:18",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p1c7",
+     "block": 75,
+     "page": 61
+    },
+    {
+     "chapter": "p3c1",
+     "block": 210,
+     "page": 330
+    }
+   ],
+   "modules": [
+    "part1",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Luke 4:18,19",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c6",
+     "block": 9,
+     "page": 141
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Luke 4:21",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c6",
+     "block": 10,
+     "page": 141
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Luke 5:20",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 214,
+     "page": 158
+    },
+    {
+     "chapter": "p3c2",
+     "block": 24,
+     "page": 349
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Luke 6:1-35",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c7",
+     "block": 191,
+     "page": 69
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Luke 6:36",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 414,
+     "page": 168
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Luke 7:36-50",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c4",
+     "block": 51,
+     "page": 43
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Malachi 3:10",
+   "count": 5,
+   "occurrences": [
+    {
+     "chapter": "p1c3",
+     "block": 81,
+     "page": 34
+    },
+    {
+     "chapter": "p1c5",
+     "block": 32,
+     "page": 48
+    },
+    {
+     "chapter": "p2c7",
+     "block": 113,
+     "page": 153
+    },
+    {
+     "chapter": "p2c11",
+     "block": 245,
+     "page": 275
+    },
+    {
+     "chapter": "p3c2",
+     "block": 6,
+     "page": 347
+    }
+   ],
+   "modules": [
+    "part1",
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Malachi 3:7-10",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c7",
+     "block": 145,
+     "page": 64
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Mark 10:2-12",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c2",
+     "block": 30,
+     "page": 350
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Mark 10:7",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 220,
+     "page": 158
+    },
+    {
+     "chapter": "p3c2",
+     "block": 30,
+     "page": 350
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Mark 11:17",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 360,
+     "page": 166
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Mark 12:1317",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 244,
+     "page": 160
+    },
+    {
+     "chapter": "p3c2",
+     "block": 53,
+     "page": 352
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Mark 14:22",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 261,
+     "page": 336
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Mark 14:22-25",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 264,
+     "page": 337
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Mark 14:23,24",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 262,
+     "page": 337
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Mark 14:25",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 264,
+     "page": 337
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Mark 16:15",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c8",
+     "block": 465,
+     "page": 206
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Mark 16:15-18",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 384,
+     "page": 167
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Mark 16:17-20",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 108,
+     "page": 153
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Mark 1:11",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 59,
+     "page": 317
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Mark 1:15",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 95,
+     "page": 152
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Mark 1:9,10",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 101,
+     "page": 153
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Mark 2:22",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c3",
+     "block": 24,
+     "page": 31
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Mark 2:27",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c7",
+     "block": 190,
+     "page": 69
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Mark 2:5-10",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 81,
+     "page": 318
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Mark 2:9",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 159,
+     "page": 325
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Mark 3:13-15",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 406,
+     "page": 168
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Mark 3:29",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 118,
+     "page": 153
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Mark 6:12",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 150,
+     "page": 324
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Mark 6:34",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 214,
+     "page": 158
+    },
+    {
+     "chapter": "p3c2",
+     "block": 24,
+     "page": 349
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Matthew 10:20",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 210,
+     "page": 330
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Matthew 12:47-49",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 195,
+     "page": 156
+    },
+    {
+     "chapter": "p3c2",
+     "block": 6,
+     "page": 347
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Matthew 16:13-19",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 106,
+     "page": 153
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Matthew 16:18",
+   "count": 5,
+   "occurrences": [
+    {
+     "chapter": "p1c7",
+     "block": 79,
+     "page": 61
+    },
+    {
+     "chapter": "p1c7",
+     "block": 243,
+     "page": 72
+    },
+    {
+     "chapter": "p2c1",
+     "block": 13,
+     "page": 90
+    },
+    {
+     "chapter": "p2c5",
+     "block": 167,
+     "page": 138
+    },
+    {
+     "chapter": "p2c7",
+     "block": 397,
+     "page": 167
+    }
+   ],
+   "modules": [
+    "part1",
+    "part2"
+   ]
+  },
+  {
+   "ref": "Matthew 16:18,19",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c7",
+     "block": 278,
+     "page": 76
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Matthew 16:24-27",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c2",
+     "block": 68,
+     "page": 25
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Matthew 18:12,13",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c1",
+     "block": 104,
+     "page": 18
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Matthew 18:15-17",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c9",
+     "block": 326,
+     "page": 241
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Matthew 18:15-20",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c9",
+     "block": 242,
+     "page": 235
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Matthew 18:20",
+   "count": 3,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 195,
+     "page": 156
+    },
+    {
+     "chapter": "p3c1",
+     "block": 81,
+     "page": 318
+    },
+    {
+     "chapter": "p3c2",
+     "block": 6,
+     "page": 347
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Matthew 18:21,22",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c9",
+     "block": 242,
+     "page": 235
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Matthew 19:6",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c5",
+     "block": 34,
+     "page": 48
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Matthew 19:7-9",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c2",
+     "block": 30,
+     "page": 350
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Matthew 20:25-28",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 195,
+     "page": 156
+    },
+    {
+     "chapter": "p3c2",
+     "block": 6,
+     "page": 347
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Matthew 20:27,28",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 492,
+     "page": 171
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Matthew 21:18",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 84,
+     "page": 319
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Matthew 22:36-40",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 530,
+     "page": 173
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Matthew 22:37-40",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 212,
+     "page": 158
+    },
+    {
+     "chapter": "p3c2",
+     "block": 22,
+     "page": 349
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Matthew 22:39",
+   "count": 4,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 230,
+     "page": 159
+    },
+    {
+     "chapter": "p2c7",
+     "block": 247,
+     "page": 161
+    },
+    {
+     "chapter": "p3c2",
+     "block": 38,
+     "page": 351
+    },
+    {
+     "chapter": "p3c2",
+     "block": 56,
+     "page": 353
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Matthew 23:23",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 195,
+     "page": 156
+    },
+    {
+     "chapter": "p3c2",
+     "block": 6,
+     "page": 347
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Matthew 24:30",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 286,
+     "page": 339
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Matthew 25:14-30",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 197,
+     "page": 156
+    },
+    {
+     "chapter": "p3c2",
+     "block": 8,
+     "page": 348
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Matthew 25:31-46",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 369,
+     "page": 167
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Matthew 25:34-36",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c2",
+     "block": 59,
+     "page": 25
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Matthew 25:41-46",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 118,
+     "page": 153
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Matthew 25:46",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 117,
+     "page": 153
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Matthew 26:26",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 261,
+     "page": 336
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Matthew 26:26-29",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 264,
+     "page": 337
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Matthew 26:27,28",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 262,
+     "page": 337
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Matthew 26:29",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 264,
+     "page": 337
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Matthew 26:30",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c4",
+     "block": 32,
+     "page": 40
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Matthew 28:1",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 195,
+     "page": 156
+    },
+    {
+     "chapter": "p3c2",
+     "block": 6,
+     "page": 347
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Matthew 28:18-20",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 377,
+     "page": 167
+    },
+    {
+     "chapter": "p2c8",
+     "block": 523,
+     "page": 208
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Matthew 28:19",
+   "count": 10,
+   "occurrences": [
+    {
+     "chapter": "p1c4",
+     "block": 34,
+     "page": 40
+    },
+    {
+     "chapter": "p1c4",
+     "block": 45,
+     "page": 42
+    },
+    {
+     "chapter": "p2c6",
+     "block": 6,
+     "page": 141
+    },
+    {
+     "chapter": "p2c7",
+     "block": 101,
+     "page": 153
+    },
+    {
+     "chapter": "p2c7",
+     "block": 268,
+     "page": 162
+    },
+    {
+     "chapter": "p2c8",
+     "block": 465,
+     "page": 206
+    },
+    {
+     "chapter": "p3c1",
+     "block": 65,
+     "page": 317
+    },
+    {
+     "chapter": "p3c1",
+     "block": 232,
+     "page": 333
+    },
+    {
+     "chapter": "p3c1",
+     "block": 238,
+     "page": 334
+    },
+    {
+     "chapter": "p3c1",
+     "block": 238,
+     "page": 334
+    }
+   ],
+   "modules": [
+    "part1",
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Matthew 28:19,20",
+   "count": 7,
+   "occurrences": [
+    {
+     "chapter": "p1c2",
+     "block": 56,
+     "page": 25
+    },
+    {
+     "chapter": "p2c7",
+     "block": 350,
+     "page": 166
+    },
+    {
+     "chapter": "p2c7",
+     "block": 584,
+     "page": 175
+    },
+    {
+     "chapter": "p2c8",
+     "block": 134,
+     "page": 187
+    },
+    {
+     "chapter": "p3c1",
+     "block": 229,
+     "page": 333
+    },
+    {
+     "chapter": "p3c1",
+     "block": 232,
+     "page": 333
+    },
+    {
+     "chapter": "p3c1",
+     "block": 233,
+     "page": 333
+    }
+   ],
+   "modules": [
+    "part1",
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Matthew 28:19-20",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 384,
+     "page": 167
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Matthew 3:11",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 103,
+     "page": 153
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Matthew 3:16",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 210,
+     "page": 330
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Matthew 3:2",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 150,
+     "page": 324
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Matthew 3:8",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 114,
+     "page": 153
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Matthew 5:16",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 210,
+     "page": 158
+    },
+    {
+     "chapter": "p3c2",
+     "block": 20,
+     "page": 349
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Matthew 5:32",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 220,
+     "page": 158
+    },
+    {
+     "chapter": "p3c2",
+     "block": 30,
+     "page": 350
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Matthew 5:34-37",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 209,
+     "page": 157
+    },
+    {
+     "chapter": "p3c2",
+     "block": 20,
+     "page": 349
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Matthew 5:37",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 209,
+     "page": 157
+    },
+    {
+     "chapter": "p3c2",
+     "block": 20,
+     "page": 349
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Matthew 5:43-48",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 455,
+     "page": 169
+    },
+    {
+     "chapter": "p3c2",
+     "block": 20,
+     "page": 349
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Matthew 6:12",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c4",
+     "block": 19,
+     "page": 39
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Matthew 6:16-18",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 193,
+     "page": 156
+    },
+    {
+     "chapter": "p3c2",
+     "block": 4,
+     "page": 347
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Matthew 6:19-23",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 197,
+     "page": 156
+    },
+    {
+     "chapter": "p3c2",
+     "block": 8,
+     "page": 348
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Matthew 6:5-15",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 192,
+     "page": 155
+    },
+    {
+     "chapter": "p3c2",
+     "block": 4,
+     "page": 347
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Matthew 7:11",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 197,
+     "page": 156
+    },
+    {
+     "chapter": "p3c2",
+     "block": 8,
+     "page": 348
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Matthew 7:16-20",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 212,
+     "page": 158
+    },
+    {
+     "chapter": "p3c2",
+     "block": 22,
+     "page": 349
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Matthew 8:16,17",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 243,
+     "page": 335
+    },
+    {
+     "chapter": "p3c1",
+     "block": 248,
+     "page": 335
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Matthew 8:17",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 110,
+     "page": 153
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Matthew 9:2",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 214,
+     "page": 158
+    },
+    {
+     "chapter": "p3c2",
+     "block": 24,
+     "page": 349
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Matthew 9:36",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 214,
+     "page": 158
+    },
+    {
+     "chapter": "p3c2",
+     "block": 24,
+     "page": 349
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Matthew 9:37-38",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 384,
+     "page": 167
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Micah 5:2",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 81,
+     "page": 318
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Micah 6:6-12",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 508,
+     "page": 172
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Numbers 11:16",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c4",
+     "block": 46,
+     "page": 122
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Numbers 6:24-26",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c3",
+     "block": 120,
+     "page": 36
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Philippians 1:11",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 109,
+     "page": 153
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Philippians 2:10,11",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 81,
+     "page": 318
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Philippians 2:17",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 492,
+     "page": 171
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Philippians 2:3",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 210,
+     "page": 158
+    },
+    {
+     "chapter": "p3c2",
+     "block": 20,
+     "page": 349
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Philippians 2:3-5",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 230,
+     "page": 159
+    },
+    {
+     "chapter": "p3c2",
+     "block": 38,
+     "page": 351
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Philippians 2:5-11",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 81,
+     "page": 318
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Philippians 2:8",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 84,
+     "page": 319
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Philippians 2:8-11",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c2",
+     "block": 55,
+     "page": 25
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Philippians 3:10",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p1c1",
+     "block": 101,
+     "page": 18
+    },
+    {
+     "chapter": "p2c7",
+     "block": 106,
+     "page": 153
+    }
+   ],
+   "modules": [
+    "part1",
+    "part2"
+   ]
+  },
+  {
+   "ref": "Philippians 3:12",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 169,
+     "page": 327
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Philippians 3:20,21",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 291,
+     "page": 340
+    },
+    {
+     "chapter": "p3c1",
+     "block": 320,
+     "page": 344
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Philippians 3:21",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 315,
+     "page": 343
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Philippians 4:1",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c1",
+     "block": 13,
+     "page": 14
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Philippians 4:1-3",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c8",
+     "block": 219,
+     "page": 192
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Philippians 4:5",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 228,
+     "page": 159
+    },
+    {
+     "chapter": "p3c2",
+     "block": 36,
+     "page": 351
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Philippians 4:6-9",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c2",
+     "block": 14,
+     "page": 22
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Philippians 4:8",
+   "count": 6,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 203,
+     "page": 157
+    },
+    {
+     "chapter": "p2c7",
+     "block": 228,
+     "page": 159
+    },
+    {
+     "chapter": "p2c7",
+     "block": 238,
+     "page": 160
+    },
+    {
+     "chapter": "p3c2",
+     "block": 14,
+     "page": 348
+    },
+    {
+     "chapter": "p3c2",
+     "block": 36,
+     "page": 351
+    },
+    {
+     "chapter": "p3c2",
+     "block": 47,
+     "page": 352
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Philippians 4:8,9",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c2",
+     "block": 35,
+     "page": 24
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Proverbs 11:14",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c8",
+     "block": 286,
+     "page": 196
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Proverbs 18:22",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 326,
+     "page": 165
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Proverbs 20:1",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 232,
+     "page": 159
+    },
+    {
+     "chapter": "p3c2",
+     "block": 40,
+     "page": 351
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Proverbs 22:28",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c2",
+     "block": 11,
+     "page": 94
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Proverbs 22:6",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c5",
+     "block": 13,
+     "page": 46
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Proverbs 29:18",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p1c7",
+     "block": 13,
+     "page": 57
+    },
+    {
+     "chapter": "p1c7",
+     "block": 32,
+     "page": 59
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Proverbs 3:9,10",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c3",
+     "block": 81,
+     "page": 34
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Psalm 103:1-3",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 247,
+     "page": 335
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Psalm 103:3",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 110,
+     "page": 153
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Psalm 107:20",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 246,
+     "page": 335
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Psalm 119:59",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 147,
+     "page": 324
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Psalm 126:5,6",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c1",
+     "block": 51,
+     "page": 17
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Psalm 127:3",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c5",
+     "block": 9,
+     "page": 45
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Psalm 14:1-3",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 141,
+     "page": 323
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Psalm 19:7",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 7,
+     "page": 313
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Psalm 1:1-3",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 212,
+     "page": 158
+    },
+    {
+     "chapter": "p3c2",
+     "block": 22,
+     "page": 349
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Psalm 1:2",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 193,
+     "page": 156
+    },
+    {
+     "chapter": "p3c2",
+     "block": 4,
+     "page": 347
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Psalm 22:22",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 106,
+     "page": 153
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Psalm 29:2",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 369,
+     "page": 167
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Psalm 31:14,15",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 249,
+     "page": 161
+    },
+    {
+     "chapter": "p3c2",
+     "block": 58,
+     "page": 353
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Psalm 45:6,7",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 46,
+     "page": 316
+    },
+    {
+     "chapter": "p3c1",
+     "block": 48,
+     "page": 317
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Psalm 51:7",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 182,
+     "page": 328
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Psalm 53:1-3",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 141,
+     "page": 323
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Psalm 8:4-6",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c1",
+     "block": 7,
+     "page": 13
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Psalms 147:1",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 468,
+     "page": 170
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Psalms 86:15",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 414,
+     "page": 168
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Revelation 11:16",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 468,
+     "page": 170
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Revelation 12:11",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c2",
+     "block": 4,
+     "page": 93
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Revelation 1:7",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 286,
+     "page": 339
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Revelation 20:10-15",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 118,
+     "page": 153
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Revelation 20:13",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 323,
+     "page": 345
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Revelation 20:14,15",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 325,
+     "page": 345
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Revelation 20:2,3",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 299,
+     "page": 341
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Revelation 20:4",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 300,
+     "page": 342
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Revelation 20:4-6",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 292,
+     "page": 340
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Revelation 20:5",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 323,
+     "page": 345
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Revelation 20:5,6",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 116,
+     "page": 153
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Revelation 20:5,6,12-15",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 325,
+     "page": 345
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Revelation 21:1-5",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c6",
+     "block": 50,
+     "page": 55
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Revelation 21:2,9",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 106,
+     "page": 153
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Revelation 21:8",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 201,
+     "page": 157
+    },
+    {
+     "chapter": "p3c2",
+     "block": 12,
+     "page": 348
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Revelation 22:17",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c3",
+     "block": 104,
+     "page": 35
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Revelation 2:7,11,17,29",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c8",
+     "block": 101,
+     "page": 185
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Revelation 3:19-22",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c9",
+     "block": 235,
+     "page": 235
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Revelation 5:10",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 115,
+     "page": 153
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Revelation 5:9",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 377,
+     "page": 167
+    },
+    {
+     "chapter": "p2c8",
+     "block": 523,
+     "page": 208
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Romans 10:13-15",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 384,
+     "page": 167
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Romans 10:17",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c3",
+     "block": 35,
+     "page": 32
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Romans 10:9",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c4",
+     "block": 47,
+     "page": 42
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Romans 12:1",
+   "count": 3,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 369,
+     "page": 167
+    },
+    {
+     "chapter": "p2c7",
+     "block": 505,
+     "page": 172
+    },
+    {
+     "chapter": "p3c1",
+     "block": 197,
+     "page": 329
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Romans 12:1,2",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c2",
+     "block": 12,
+     "page": 348
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Romans 12:1-2",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 455,
+     "page": 169
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Romans 12:10",
+   "count": 4,
+   "occurrences": [
+    {
+     "chapter": "p1c1",
+     "block": 139,
+     "page": 20
+    },
+    {
+     "chapter": "p1c1",
+     "block": 139,
+     "page": 20
+    },
+    {
+     "chapter": "p2c7",
+     "block": 210,
+     "page": 158
+    },
+    {
+     "chapter": "p3c2",
+     "block": 20,
+     "page": 349
+    }
+   ],
+   "modules": [
+    "part1",
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Romans 12:15",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c9",
+     "block": 229,
+     "page": 234
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Romans 12:15,16",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c1",
+     "block": 139,
+     "page": 20
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Romans 12:2",
+   "count": 4,
+   "occurrences": [
+    {
+     "chapter": "p1c2",
+     "block": 27,
+     "page": 24
+    },
+    {
+     "chapter": "p2c7",
+     "block": 238,
+     "page": 160
+    },
+    {
+     "chapter": "p2c7",
+     "block": 487,
+     "page": 171
+    },
+    {
+     "chapter": "p3c2",
+     "block": 47,
+     "page": 352
+    }
+   ],
+   "modules": [
+    "part1",
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Romans 12:3-8",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 197,
+     "page": 156
+    },
+    {
+     "chapter": "p3c2",
+     "block": 8,
+     "page": 348
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Romans 12:4-8",
+   "count": 3,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 469,
+     "page": 170
+    },
+    {
+     "chapter": "p2c9",
+     "block": 48,
+     "page": 223
+    },
+    {
+     "chapter": "p2c9",
+     "block": 63,
+     "page": 225
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Romans 12:8",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c2",
+     "block": 65,
+     "page": 25
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Romans 12:9-21",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 230,
+     "page": 159
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Romans 12:9-21,13",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c2",
+     "block": 38,
+     "page": 351
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Romans 13:1-7",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 244,
+     "page": 160
+    },
+    {
+     "chapter": "p3c2",
+     "block": 53,
+     "page": 352
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Romans 13:14",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 203,
+     "page": 157
+    },
+    {
+     "chapter": "p3c2",
+     "block": 14,
+     "page": 348
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Romans 13:7",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 499,
+     "page": 172
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Romans 13:8-10",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 247,
+     "page": 161
+    },
+    {
+     "chapter": "p3c2",
+     "block": 56,
+     "page": 353
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Romans 14:10",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 81,
+     "page": 318
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Romans 14:13-21",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 230,
+     "page": 159
+    },
+    {
+     "chapter": "p3c2",
+     "block": 38,
+     "page": 351
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Romans 14:16",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c10",
+     "block": 19,
+     "page": 248
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Romans 14:17",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c7",
+     "block": 234,
+     "page": 72
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Romans 14:2,3",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 230,
+     "page": 159
+    },
+    {
+     "chapter": "p3c2",
+     "block": 38,
+     "page": 351
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Romans 14:5,6",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 195,
+     "page": 156
+    },
+    {
+     "chapter": "p3c2",
+     "block": 6,
+     "page": 347
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Romans 15:18,19",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 108,
+     "page": 153
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Romans 15:19-24",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 377,
+     "page": 167
+    },
+    {
+     "chapter": "p2c8",
+     "block": 523,
+     "page": 208
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Romans 15:2",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c9",
+     "block": 203,
+     "page": 233
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Romans 15:7",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c1",
+     "block": 139,
+     "page": 20
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Romans 16:1,2",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c11",
+     "block": 58,
+     "page": 265
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Romans 16:1-7",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 489,
+     "page": 171
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Romans 1:16,17",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 145,
+     "page": 324
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Romans 1:24",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 201,
+     "page": 157
+    },
+    {
+     "chapter": "p3c2",
+     "block": 12,
+     "page": 348
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Romans 1:28",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c2",
+     "block": 24,
+     "page": 23
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Romans 1:3,4",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 114,
+     "page": 321
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Romans 1:4",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 319,
+     "page": 344
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Romans 1:6,7",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c1",
+     "block": 14,
+     "page": 14
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Romans 2:4",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 143,
+     "page": 323
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Romans 3:23",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 135,
+     "page": 322
+    },
+    {
+     "chapter": "p3c1",
+     "block": 138,
+     "page": 323
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Romans 3:24",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 158,
+     "page": 325
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Romans 3:9-18",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 141,
+     "page": 323
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Romans 4:23-25",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 92,
+     "page": 320
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Romans 5:1",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 96,
+     "page": 152
+    },
+    {
+     "chapter": "p3c1",
+     "block": 164,
+     "page": 326
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Romans 5:17-19",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 96,
+     "page": 320
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Romans 5:2",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 99,
+     "page": 152
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Romans 5:9",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p1c1",
+     "block": 32,
+     "page": 15
+    },
+    {
+     "chapter": "p3c1",
+     "block": 160,
+     "page": 325
+    }
+   ],
+   "modules": [
+    "part1",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Romans 5:9,10",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 94,
+     "page": 320
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Romans 6:1,2",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 196,
+     "page": 329
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Romans 6:1-10",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c4",
+     "block": 34,
+     "page": 40
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Romans 6:1-14",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c4",
+     "block": 40,
+     "page": 41
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Romans 6:1-6",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 199,
+     "page": 329
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Romans 6:11",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 191,
+     "page": 329
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Romans 6:11-16",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 199,
+     "page": 329
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Romans 6:13",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 205,
+     "page": 157
+    },
+    {
+     "chapter": "p3c2",
+     "block": 16,
+     "page": 349
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Romans 6:14",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 232,
+     "page": 159
+    },
+    {
+     "chapter": "p3c2",
+     "block": 40,
+     "page": 351
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Romans 6:16",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 147,
+     "page": 324
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Romans 6:17-19",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 148,
+     "page": 324
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Romans 6:22",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 109,
+     "page": 153
+    },
+    {
+     "chapter": "p2c7",
+     "block": 117,
+     "page": 153
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Romans 6:3-5",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 230,
+     "page": 333
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Romans 6:4",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p1c7",
+     "block": 210,
+     "page": 71
+    },
+    {
+     "chapter": "p3c1",
+     "block": 237,
+     "page": 334
+    }
+   ],
+   "modules": [
+    "part1",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Romans 6:4,5",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 235,
+     "page": 334
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Romans 6:6",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 188,
+     "page": 328
+    },
+    {
+     "chapter": "p3c1",
+     "block": 189,
+     "page": 328
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Romans 6:6-8",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 190,
+     "page": 328
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Romans 7:17",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 188,
+     "page": 328
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Romans 7:2,3",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 221,
+     "page": 158
+    },
+    {
+     "chapter": "p3c2",
+     "block": 30,
+     "page": 350
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Romans 7:24",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 188,
+     "page": 328
+    },
+    {
+     "chapter": "p3c1",
+     "block": 189,
+     "page": 328
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Romans 7:25",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 188,
+     "page": 328
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Romans 8:11",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 308,
+     "page": 343
+    },
+    {
+     "chapter": "p3c1",
+     "block": 319,
+     "page": 344
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Romans 8:12-14",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 212,
+     "page": 331
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Romans 8:13",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 201,
+     "page": 330
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Romans 8:14,16",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c1",
+     "block": 72,
+     "page": 17
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Romans 8:14-17",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 106,
+     "page": 153
+    },
+    {
+     "chapter": "p3c1",
+     "block": 165,
+     "page": 326
+    }
+   ],
+   "modules": [
+    "part2",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Romans 8:15",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 165,
+     "page": 326
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Romans 8:16,17,22,23",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 288,
+     "page": 339
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Romans 8:17",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 165,
+     "page": 326
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Romans 8:2",
+   "count": 3,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 188,
+     "page": 328
+    },
+    {
+     "chapter": "p3c1",
+     "block": 189,
+     "page": 328
+    },
+    {
+     "chapter": "p3c1",
+     "block": 201,
+     "page": 330
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Romans 8:2-4",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 213,
+     "page": 331
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Romans 8:22,23",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 310,
+     "page": 343
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Romans 8:27",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 61,
+     "page": 317
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Romans 8:3,4",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 201,
+     "page": 330
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Romans 8:33",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 158,
+     "page": 325
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Romans 8:6",
+   "count": 3,
+   "occurrences": [
+    {
+     "chapter": "p1c1",
+     "block": 23,
+     "page": 15
+    },
+    {
+     "chapter": "p1c2",
+     "block": 5,
+     "page": 21
+    },
+    {
+     "chapter": "p1c2",
+     "block": 33,
+     "page": 24
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Romans 8:6,7",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 189,
+     "page": 328
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Romans 8:7",
+   "count": 2,
+   "occurrences": [
+    {
+     "chapter": "p1c2",
+     "block": 24,
+     "page": 23
+    },
+    {
+     "chapter": "p3c1",
+     "block": 188,
+     "page": 328
+    }
+   ],
+   "modules": [
+    "part1",
+    "part3"
+   ]
+  },
+  {
+   "ref": "Romans 8:9",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 210,
+     "page": 330
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Romans 9:1-3",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c1",
+     "block": 51,
+     "page": 17
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Romans 9:2,3",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 507,
+     "page": 172
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Romans 9:5",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c1",
+     "block": 81,
+     "page": 318
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Titus 1:15",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c2",
+     "block": 24,
+     "page": 23
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Titus 1:4-9",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c9",
+     "block": 63,
+     "page": 225
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Titus 1:5",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 496,
+     "page": 172
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Titus 1:5-9",
+   "count": 3,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 470,
+     "page": 170
+    },
+    {
+     "chapter": "p2c7",
+     "block": 479,
+     "page": 171
+    },
+    {
+     "chapter": "p2c7",
+     "block": 492,
+     "page": 171
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Titus 1:6-9",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c11",
+     "block": 36,
+     "page": 263
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Titus 1:8",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 228,
+     "page": 159
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Titus 1:8,2",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p3c2",
+     "block": 36,
+     "page": 351
+    }
+   ],
+   "modules": [
+    "part3"
+   ]
+  },
+  {
+   "ref": "Titus 2:3-5",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 489,
+     "page": 171
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Titus 2:6-8",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p1c1",
+     "block": 124,
+     "page": 19
+    }
+   ],
+   "modules": [
+    "part1"
+   ]
+  },
+  {
+   "ref": "Titus 3:5",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 97,
+     "page": 152
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Titus 3:7",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 96,
+     "page": 152
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  },
+  {
+   "ref": "Zechariah 14:4",
+   "count": 1,
+   "occurrences": [
+    {
+     "chapter": "p2c7",
+     "block": 115,
+     "page": 153
+    }
+   ],
+   "modules": [
+    "part2"
+   ]
+  }
+ ]
+}
