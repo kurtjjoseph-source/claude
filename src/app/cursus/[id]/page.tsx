@@ -11,13 +11,13 @@ import { Badge } from "@/components/ui";
 export default async function ChapterPage(
   { params, searchParams }: {
     params: Promise<{ id: string }>;
-    searchParams: Promise<{ blok?: string }>;
+    searchParams: Promise<{ blok?: string; p?: string }>;
   },
 ) {
   const user = await currentUser();
   if (!user) redirect("/login");
   const { id } = await params;
-  const { blok } = await searchParams;
+  const { blok, p: printedPage } = await searchParams;
   const lang = await resolveLang(user);
   const T = translator(lang);
 
@@ -32,7 +32,12 @@ export default async function ChapterPage(
 
   const entry = user.progress.chapters[id];
   const examQuestions = examItemsForChapter(id);
-  const highlight = blok !== undefined && blok !== "" ? Number(blok) : undefined;
+  // ?blok= highlights a specific block; ?p= opens at a printed page of the guide.
+  let highlight = blok !== undefined && blok !== "" ? Number(blok) : undefined;
+  if (highlight === undefined && printedPage) {
+    const first = chapter.blocks.find((b) => b.page === Number(printedPage));
+    if (first) highlight = first.index;
+  }
 
   return (
     <div className="space-y-6">
@@ -75,7 +80,7 @@ export default async function ChapterPage(
       )}
 
       <Reader chapterId={chapter.id} blocks={chapter.blocks} lang={lang}
-              bilingual={user.settings.bilingual}
+              bilingual={user.settings.bilingual} paged={user.settings.paged ?? true}
               alreadyRead={entry?.read ?? []} done={entry?.done ?? false}
               highlight={Number.isFinite(highlight) ? highlight : undefined} />
 

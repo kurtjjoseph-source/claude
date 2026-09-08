@@ -91,6 +91,14 @@ const STRINGS = {
 
   // misc
   settings:       { nl: "Instellingen",     en: "Settings" },
+  typeface:       { nl: "Lettertype",       en: "Typeface" },
+  serifFont:      { nl: "Schreef (Literata) — rustig lezen",
+                    en: "Serif (Literata) — easy on the eye" },
+  sansFont:       { nl: "Schreefloos (Inter) — strak op scherm",
+                    en: "Sans (Inter) — crisp on screen" },
+  pagedReading:   { nl: "Lees per pagina",  en: "Read page by page" },
+  pagedHint:      { nl: "Toont één pagina van de studiegids tegelijk, met dezelfde paginanummers als het boek. Uit: het hele hoofdstuk als doorlopende tekst.",
+                    en: "Shows one page of the study guide at a time, numbered as in the book. Off: the whole chapter as one continuous text." },
   language:       { nl: "Taal",             en: "Language" },
   theme:          { nl: "Thema",            en: "Theme" },
   textSize:       { nl: "Tekstgrootte",     en: "Text size" },

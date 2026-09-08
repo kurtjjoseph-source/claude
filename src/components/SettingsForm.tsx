@@ -52,6 +52,29 @@ export function SettingsForm({ settings, lang }: { settings: Settings; lang: Lan
       </label>
 
       <label className={row}>
+        <span>
+          <span className="font-medium">{T("typeface")}</span>
+          <span className="mt-0.5 block text-xs text-[var(--color-muted)]">
+            {values.typeface === "sans" ? T("sansFont") : T("serifFont")}
+          </span>
+        </span>
+        <select className={select} value={values.typeface}
+                onChange={(e) => update({ typeface: e.target.value as Settings["typeface"] })}>
+          <option value="serif">Literata</option>
+          <option value="sans">Inter</option>
+        </select>
+      </label>
+
+      <label className={row}>
+        <span>
+          <span className="font-medium">{T("pagedReading")}</span>
+          <span className="mt-0.5 block text-xs text-[var(--color-muted)]">{T("pagedHint")}</span>
+        </span>
+        <input type="checkbox" checked={values.paged} className="size-4"
+               onChange={(e) => update({ paged: e.target.checked })} />
+      </label>
+
+      <label className={row}>
         <span className="font-medium">{T("theme")}</span>
         <select className={select} value={values.theme}
                 onChange={(e) => update({ theme: e.target.value as Settings["theme"] })}>

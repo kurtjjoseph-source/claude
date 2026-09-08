@@ -8,6 +8,8 @@ const Body = z.object({
   bilingual: z.boolean().optional(),
   theme: z.enum(["light", "dark", "system"]).optional(),
   fontScale: z.number().min(0.8).max(1.6).optional(),
+  typeface: z.enum(["serif", "sans"]).optional(),
+  paged: z.boolean().optional(),
 });
 
 /** Settings changes are also allowed while signed out; they just do nothing. */

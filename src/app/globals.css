@@ -1,8 +1,9 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  --font-serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  --font-sans: var(--font-reading-sans), ui-sans-serif, system-ui, -apple-system,
+               "Segoe UI", Roboto, sans-serif;
+  --font-serif: var(--font-reading-serif), Charter, "Bitstream Charter", Georgia, serif;
 
   --color-ink: oklch(0.22 0.012 260);
   --color-paper: oklch(0.985 0.004 90);
@@ -44,9 +45,24 @@ body {
   font-size: calc(1rem * var(--font-scale, 1));
 }
 
-/* The reading column: serif, generous measure, book-like rhythm. */
-.prose-course { font-family: var(--font-serif); line-height: 1.62; }
-.prose-course p { margin-block: 0.75em; }
+/* The reading column. The measure is capped near 62 characters and the leading
+   is loose, because this is studied for an hour at a time, not skimmed. */
+.prose-course {
+  font-family: var(--font-serif);
+  font-size: 1.075rem;
+  line-height: 1.75;
+  letter-spacing: 0.003em;
+  text-wrap: pretty;
+  hyphens: auto;
+}
+html[data-typeface="sans"] .prose-course {
+  font-family: var(--font-sans);
+  font-size: 1.02rem;
+  line-height: 1.72;
+  letter-spacing: 0;
+}
+.prose-course p { margin-block: 0.85em; }
+.prose-course h2, .prose-course h3, .prose-course h4 { line-height: 1.3; }
 .prose-course .quote {
   border-left: 3px solid var(--color-accent-soft);
   padding-left: 1rem; font-size: 0.96em;
@@ -56,6 +72,15 @@ body {
   padding: 0.05em 0.15em; border-radius: 2px;
 }
 .block-target { animation: flash 2.4s ease-out 1; scroll-margin-top: 6rem; }
+/* A page turn should feel like a turn, not a repaint. */
+.page-enter { animation: pagein 0.22s ease-out 1; }
+@keyframes pagein {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .page-enter, .block-target { animation: none; }
+}
 @keyframes flash {
   0%, 55% { background: var(--color-mark); }
   100% { background: transparent; }

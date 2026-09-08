@@ -59,7 +59,9 @@ export default async function PrintPage(
                   </p>
                   {c.blocks.map((b) => {
                     const text = lang === "nl" ? (b.nl ?? b.en) : b.en;
-                    const style = { marginLeft: `${Math.min(b.indent, 4) * 0.8}rem` };
+                    const indented = b.type === "p" || b.type === "quote" || b.type === "note";
+                    const style = indented
+                      ? { marginLeft: `${Math.min(b.indent, 4) * 0.8}rem` } : undefined;
                     switch (b.type) {
                       case "h1": return <h4 key={b.index} style={style}
                         className="mt-8 text-lg font-semibold">{text}</h4>;

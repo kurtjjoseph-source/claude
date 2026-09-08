@@ -53,6 +53,10 @@ export type Settings = {
   bilingual: boolean;
   theme: "light" | "dark" | "system";
   fontScale: number;   // 1 = default
+  /** Reading typeface for the course text. */
+  typeface: "serif" | "sans";
+  /** Show one printed page of the guide at a time, rather than the whole chapter. */
+  paged: boolean;
 };
 
 export type User = {
@@ -105,4 +109,5 @@ export const emptyProgress = (): Progress => ({
 
 export const defaultSettings = (): Settings => ({
   lang: "nl", bilingual: false, theme: "system", fontScale: 1,
+  typeface: "serif", paged: true,
 });
