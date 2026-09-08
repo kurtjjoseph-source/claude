@@ -147,6 +147,21 @@ with `#<block index>` lines followed by the Dutch text, then run
 `npm run build` after `python3 scripts/merge-nl.py`. Or translate in place from
 **Beheer → Errata**, which needs no checkout.
 
+## Where this lives
+
+Canonical home: **`kurtjjoseph-source/exhorter`** (private), on `main`.
+
+Two things that have caught a session out before:
+
+- A Claude Code session resets `origin` to the repository it was started from at
+  the beginning of every turn, so `git remote set-url` does not stick. Push to
+  this project explicitly:
+  `git push https://github.com/kurtjjoseph-source/exhorter.git HEAD:main`
+- The site is **not** built from the repo. Deploys upload this directory
+  straight to Netlify site `776cda50-382c-4e6b-9a13-72f27269628f`, so a push
+  alone changes nothing that is live, and a deploy works even with the repo
+  untouched.
+
 ## Running it
 
 ```bash
